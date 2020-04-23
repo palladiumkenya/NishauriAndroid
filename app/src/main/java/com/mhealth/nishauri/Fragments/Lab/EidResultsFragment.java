@@ -1,4 +1,4 @@
-package com.mhealth.nishauri.Fragments.Chat;
+package com.mhealth.nishauri.Fragments.Lab;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.mhealth.nishauri.R;
@@ -18,8 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public class ChatFragment extends Fragment {
-
+public class EidResultsFragment extends Fragment {
 
     private Unbinder unbinder;
     private View root;
@@ -49,8 +49,9 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_chat, container, false);
+        root = inflater.inflate(R.layout.fragment_eid_results, container, false);
         unbinder = ButterKnife.bind(this, root);
+
 
 
         return root;

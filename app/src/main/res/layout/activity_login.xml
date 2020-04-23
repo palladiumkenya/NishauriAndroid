@@ -60,7 +60,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:endIconMode="clear_text"
-                        app:startIconDrawable="@drawable/ic_user">
+                        app:startIconDrawable="@drawable/ic_phone"
+                        >
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -73,7 +74,7 @@
                             android:maxLines="1"
                             android:singleLine="true"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                            android:textColor="@color/blue_600"
+                            
                             />
 
                     </com.google.android.material.textfield.TextInputLayout>

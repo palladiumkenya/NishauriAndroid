@@ -1,4 +1,4 @@
-package com.mhealth.nishauri.Fragments.Chat;
+package com.mhealth.nishauri.Fragments.Appointment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public class ChatFragment extends Fragment {
+public class UpcomingAppointmentsFragment extends Fragment {
 
 
     private Unbinder unbinder;
@@ -49,13 +49,12 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_chat, container, false);
-        unbinder = ButterKnife.bind(this, root);
-
+        root = inflater.inflate(R.layout.fragment_upcoming_appointments, container, false);
+        unbinder = ButterKnife.bind(this,root);
 
         return root;
-    }
 
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
