@@ -214,7 +214,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:text="EID"
-                                android:textAlignment="center"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                 android:textColor="@color/colorAccent" />
 
@@ -223,7 +222,15 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:text="1000"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                                android:textColor="@color/grey_90" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:text="copies/mL."
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                                 android:textColor="@color/grey_90" />
 
                         </LinearLayout>
@@ -276,6 +283,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center"
                                 android:text="Viral Load"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                 android:textColor="@color/colorAccent" />
@@ -286,6 +294,14 @@
                                 android:layout_gravity="center"
                                 android:text="1200"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                                android:textColor="@color/grey_90" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:text="copies/mL."
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                                 android:textColor="@color/grey_90" />
 
                         </LinearLayout>
@@ -328,60 +344,28 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/spacing_medium"
-                            android:layout_marginTop="@dimen/spacing_large"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="@dimen/spacing_xlarge"
-                                android:layout_height="@dimen/spacing_xlarge"
-                                android:foreground="@color/overlay_light_20"
-                                android:src="@drawable/ic_user" />
-
-                            <View
-                                android:layout_width="@dimen/spacing_large"
-                                android:layout_height="0dp" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center_vertical"
-                                    android:text="Homer J. Allen "
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                                    android:textColor="@color/colorAccent"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/spacing_small"
-                                    android:gravity="center_vertical"
-                                    android:text="10.15 am yesterday"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                                    android:textColor="@color/grey_20" />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="Date: 25/04/2020"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/colorAccent"
+                            android:textStyle="bold" />
+
+
+
+                        <TextView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/spacing_large"
                             android:layout_marginTop="@dimen/spacing_medium"
+                            android:layout_weight="1"
                             android:lineSpacingExtra="4dp"
-                            android:text="trial text for later"
+                            android:text="@string/appointment"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                             android:textColor="@color/grey_60" />
 
@@ -395,60 +379,63 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/spacing_medium"
-                            android:layout_marginTop="@dimen/spacing_middle"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="@dimen/spacing_xlarge"
-                                android:layout_height="@dimen/spacing_xlarge"
-                                android:foreground="@color/overlay_light_20"
-                                android:src="@drawable/ic_user" />
-
-                            <View
-                                android:layout_width="@dimen/spacing_large"
-                                android:layout_height="0dp" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center_vertical"
-                                    android:text="Taylor W "
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                                    android:textColor="@color/colorAccent"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/spacing_small"
-                                    android:gravity="center_vertical"
-                                    android:text="just now"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                                    android:textColor="@color/grey_20" />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="Date: 25/04/2020"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/colorAccent"
+                            android:textStyle="bold" />
+
+
+
+                        <TextView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/spacing_large"
                             android:layout_marginTop="@dimen/spacing_medium"
+                            android:layout_weight="1"
                             android:lineSpacingExtra="4dp"
-                            android:text="trial text for later"
+                            android:text="Refill"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/grey_60" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/grey_20" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="Date: 25/04/2020"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/colorAccent"
+                            android:textStyle="bold" />
+
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/spacing_large"
+                            android:layout_marginTop="@dimen/spacing_medium"
+                            android:layout_weight="1"
+                            android:lineSpacingExtra="4dp"
+                            android:text="@string/appointment"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                             android:textColor="@color/grey_60" />
 

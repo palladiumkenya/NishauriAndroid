@@ -9,50 +9,102 @@
     android:orientation="vertical"
     tools:context=".Fragments.Lab.EidResultsFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="@dimen/spacing_middle">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HEI Number:  "
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/colorAccent"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="123-7654/2020" />
+
+    </LinearLayout>
+
+
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator_lyt"
         android:layout_width="match_parent"
+        android:layout_margin="@dimen/spacing_large"
         android:layout_height="match_parent">
 
-        <FrameLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/shimmer_my_container"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                shimmer:duration="800">
-                <LinearLayout
-                    android:id="@+id/shimmerInnerLayout"
+                android:orientation="vertical">
+
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <include layout="@layout/lab_placeholder_item" />
-                </LinearLayout>
+                    android:layout_height="wrap_content">
 
-            </com.facebook.shimmer.ShimmerFrameLayout>
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmer_my_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        shimmer:duration="800">
+                        <LinearLayout
+                            android:id="@+id/shimmerInnerLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <include layout="@layout/lab_placeholder_item" />
+                        </LinearLayout>
 
-
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:visibility="gone"
-                android:scrollingCache="true" />
-
+                    </com.facebook.shimmer.ShimmerFrameLayout>
 
 
-        </FrameLayout>
 
 
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbars="vertical"
+                        android:layout_marginTop="@dimen/spacing_large"
+                        android:visibility="gone"
+                        android:scrollingCache="true" />
+
+
+
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <include
+            layout="@layout/layout_lab_request"
+            android:layout_gravity="bottom|end|right"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_xxlarge"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+
+
+
+
+
+
 
 
 
