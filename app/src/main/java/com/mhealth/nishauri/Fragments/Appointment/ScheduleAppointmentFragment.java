@@ -1,6 +1,5 @@
 package com.mhealth.nishauri.Fragments.Appointment;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,19 +10,16 @@ import android.view.ViewGroup;
 
 import com.mhealth.nishauri.R;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+public class ScheduleAppointmentFragment extends Fragment {
 
-public class RescheduleAppointmentFragment extends Fragment {
+    public ScheduleAppointmentFragment() {
+        // Required empty public constructor
+    }
 
-    private Unbinder unbinder;
-    private View root;
-    private Context context;
+    public static ScheduleAppointmentFragment newInstance(String param1, String param2) {
+        ScheduleAppointmentFragment fragment = new ScheduleAppointmentFragment();
 
-    @Override
-    public void onAttach(Context ctx) {
-        super.onAttach(ctx);
-        this.context = ctx;
+        return fragment;
     }
 
     @Override
@@ -36,9 +32,6 @@ public class RescheduleAppointmentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_reschedule_appointment, container, false);
-        unbinder = ButterKnife.bind(this, root);
-
-        return root;
+        return inflater.inflate(R.layout.fragment_schedule_appointment, container, false);
     }
 }

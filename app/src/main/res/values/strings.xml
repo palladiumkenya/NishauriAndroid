@@ -22,4 +22,8 @@
     <string name="logout">Log out</string>
     <string name="phone_number">Phone Number</string>
     <string name="request_results">Request Results</string>
+    <string name="login">Login</string>
+    <string name="treatments">Treatments</string>
+    <string name="schedule_appointment">Schedule Appointment</string>
+    <string name="new_appointment">New Appointment</string>
 </resources>

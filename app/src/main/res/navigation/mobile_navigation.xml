@@ -5,7 +5,6 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@id/nav_home">
 
-
     <fragment
         android:id="@+id/nav_gallery"
         android:name="com.mhealth.nishauri.ui.gallery.GalleryFragment"
@@ -17,23 +16,41 @@
         android:name="com.mhealth.nishauri.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
     <fragment
         android:id="@+id/nav_appointment"
         android:name="com.mhealth.nishauri.Fragments.Appointment.AppointmentsFragment"
         android:label="@string/appointment"
         tools:layout="@layout/fragment_appointments" />
+
     <fragment
         android:id="@+id/nav_chat"
         android:name="com.mhealth.nishauri.Fragments.Chat.ChatFragment"
         android:label="@string/chat"
         tools:layout="@layout/fragment_chat" />
+
     <fragment
         android:id="@+id/nav_lab"
         android:name="com.mhealth.nishauri.Fragments.Lab.LabResultsFragment"
         android:label="@string/lab"
         tools:layout="@layout/fragment_lab_results" />
+
     <fragment
         android:id="@+id/nav_home"
         android:name="com.mhealth.nishauri.Fragments.HomeFragment"
-        android:label="Home" />
+        android:label="Home"
+        tools:layout="@layout/fragment_home"/>
+
+    <fragment
+        android:id="@+id/nav_treatment"
+        android:name="com.mhealth.nishauri.Fragments.Treatment.TreatmentsFragment"
+        android:label="Treatments"
+        tools:layout="@layout/fragment_treatments"/>
+
+    <fragment
+        android:id="@+id/nav_schedule_appointment"
+        android:name="com.mhealth.nishauri.Fragments.Appointment.ScheduleAppointmentFragment"
+        android:label="Schedule Appointment"
+        tools:layout="@layout/fragment_schedule_appointment"/>
+
 </navigation>

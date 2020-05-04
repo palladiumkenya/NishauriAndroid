@@ -18,11 +18,11 @@
             android:layout_height="wrap_content"
             app:tabGravity="fill"
             app:tabIndicatorColor="@android:color/white"
-            app:tabIndicatorHeight="3dp"
+            app:tabIndicatorHeight="5dp"
             app:tabMode="auto"
             app:tabSelectedTextColor="@android:color/white"
             app:tabTextAppearance="@style/TextAppearance.Design.Tab"
-            app:tabTextColor="@color/grey_20" />
+            app:tabTextColor="@color/grey_500" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -32,5 +32,15 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_appointment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_gravity="bottom|end|right"
+        android:contentDescription="@string/request_results"
+        android:text="@string/new_appointment"
+        app:icon="@drawable/ic_appointment"
+        app:layout_anchorGravity="bottom|right|end"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

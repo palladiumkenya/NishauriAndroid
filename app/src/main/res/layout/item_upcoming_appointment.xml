@@ -98,7 +98,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginHorizontal="@dimen/spacing_middle"
-                android:text="Reshedule" />
+                android:background="@color/grey_300"
+                android:text="Reshedule"
+                style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_confirm_app"
@@ -107,7 +109,8 @@
                 android:layout_weight="1"
                 android:layout_marginHorizontal="@dimen/spacing_middle"
                 android:background="@color/colorAccent"
-                android:text="Confirm" />
+                android:text="Confirm"
+                android:textColor="@color/white_greyish"/>
 
 
 

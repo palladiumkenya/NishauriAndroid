@@ -15,15 +15,15 @@
 
 
 
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/fabReport"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:contentDescription="@string/request_results"
-            android:text="@string/request_results"
-            app:icon="@drawable/ic_refresh"
-            app:layout_anchorGravity="bottom|right|end"/>
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_appointment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:contentDescription="@string/request_results"
+        android:text="@string/new_appointment"
+        app:icon="@drawable/ic_appointment"
+        app:layout_anchorGravity="bottom|right|end"/>
 
 
 

@@ -1,4 +1,4 @@
-package com.mhealth.nishauri.Fragments.Appointment;
+package com.mhealth.nishauri.Fragments.Treatment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,18 +6,14 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
-import com.mhealth.nishauri.Activities.MainActivity;
+import com.mhealth.nishauri.Fragments.Appointment.AppointmentsFragment;
 import com.mhealth.nishauri.R;
 
 import java.util.ArrayList;
@@ -27,8 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-
-public class AppointmentsFragment extends Fragment {
+public class TreatmentsFragment extends Fragment {
 
 
     private Unbinder unbinder;
@@ -40,9 +35,6 @@ public class AppointmentsFragment extends Fragment {
 
     @BindView(R.id.view_pager)
     ViewPager view_pager;
-
-    @BindView(R.id.fab_appointment)
-    ExtendedFloatingActionButton fab_appointment;
 
 
     @Override
@@ -62,19 +54,11 @@ public class AppointmentsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_appointments, container, false);
+        root =inflater.inflate(R.layout.fragment_treatments, container, false);
         unbinder = ButterKnife.bind(this, root);
 
         setupViewPager(view_pager);
         tab_layout.setupWithViewPager(view_pager);
-
-        fab_appointment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(AppointmentsFragment.this).navigate(R.id.nav_schedule_appointment);
-            }
-        });
-
 
         return root;
     }
@@ -83,13 +67,12 @@ public class AppointmentsFragment extends Fragment {
 
 
         AppointmentsFragment.Adapter adapter = new AppointmentsFragment.Adapter(getChildFragmentManager());
-        adapter.addFragment(new UpcomingAppointmentsFragment(), "Upcoming Appointments");
-        adapter.addFragment(new PreviousAppointmentsFragment(), "Previous Appointments");
-//        adapter.addFragment(new ProtocolsTabFragment(), hcw == null ? "Facility" : hcw.getFacility_name());
+        adapter.addFragment(new CurrentArtFragment(), "Current ART");
+        adapter.addFragment(new PreviousArtFragment(), "Previous ART");
         viewPager.setAdapter(adapter);
     }
 
-    public static class Adapter extends FragmentPagerAdapter {
+    static class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 

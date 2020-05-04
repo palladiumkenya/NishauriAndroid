@@ -52,4 +52,8 @@ dependencies {
 
     //spinner
     implementation 'com.weiwangcn.betterspinner:library-material:1.1.0'
+
+    //country code piker
+    implementation 'com.hbb20:ccp:2.2.3'
+
 }

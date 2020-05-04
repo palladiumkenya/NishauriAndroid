@@ -3,45 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".Fragments.Appointment.RescheduleAppointmentFragment">
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="@dimen/spacing_middle"
         app:cardElevation="3dp"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
             android:orientation="vertical"
             android:padding="@dimen/spacing_large">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/bt_close"
-                    android:layout_width="?attr/actionBarSize"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:tint="@color/colorPrimary"
-                    android:src="@drawable/ic_arrow_back" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-
 
 
             <LinearLayout
@@ -57,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_large"
                     android:layout_gravity="center"
-                    android:text="Reschedule Appointment?"
+                    android:text="Schedule Appointment."
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold" />
@@ -67,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_large"
                     android:paddingVertical="@dimen/spacing_medium"
-                    android:text="Date to reschedule to: "
+                    android:text="Date to schedule to: "
                     android:textSize="@dimen/spacing_mlarge"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@color/grey_80"
@@ -77,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="@dimen/spacing_medium"
-                    android:text="Select new date here..."
+                    android:text="Select date and time here..."
                     android:textSize="@dimen/spacing_large"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:clickable="true" />
@@ -86,7 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="@dimen/spacing_medium"
-                    android:text="What is the reason for rescheduling?"
+                    android:text="What is the reason for scheduling?"
                     android:textSize="@dimen/spacing_mlarge"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
@@ -97,27 +77,19 @@
                     android:hint="Pick reason here..."
                     app:met_floatingLabel="normal" />
 
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:paddingVertical="@dimen/spacing_medium"
-                    android:text="Notify Doctor/facility Personally."
-                    android:checked="true" />
-
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_report"
+                    android:id="@+id/btn_submit"
+                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:layout_marginBottom="@dimen/spacing_middle"
-                    android:text="Continue"
+                    android:text="submit"
+                    android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textColor="@android:color/white"
-                    android:textAlignment="center"
-                    android:textSize="20sp"
-                    style="@style/Widget.MaterialComponents.Button"/>
+                    android:textSize="20sp" />
 
 
                 <View

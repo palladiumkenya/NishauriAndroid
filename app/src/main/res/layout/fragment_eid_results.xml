@@ -18,8 +18,9 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="HEI Number:  "
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textColor="@color/colorAccent"/>
 
         <com.google.android.material.textview.MaterialTextView
@@ -27,6 +28,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="123-7654/2020" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Change"
+            style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
 
     </LinearLayout>
 
@@ -89,11 +98,7 @@
         </androidx.core.widget.NestedScrollView>
 
         <include
-            layout="@layout/layout_lab_request"
-            android:layout_gravity="bottom|end|right"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_xxlarge"/>
+            layout="@layout/layout_lab_request" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

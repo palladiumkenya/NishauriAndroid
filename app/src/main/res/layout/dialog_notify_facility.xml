@@ -134,10 +134,14 @@
                     android:layout_weight="1"
                     android:text="Text"
                     android:textAllCaps="true"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/colorAccent"
                     android:textAlignment="center"
                     android:textSize="22sp"
-                    style="@style/Widget.MaterialComponents.Button"/>
+                    style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+                <View
+                    android:layout_width="@dimen/spacing_large"
+                    android:layout_height="0dp" />
 
                 <Button
                     android:id="@+id/btn_call"

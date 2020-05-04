@@ -8,14 +8,21 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
             android:title="@string/menu_home" />
+
         <item
             android:id="@+id/nav_lab"
             android:icon="@drawable/ic_lab"
             android:title="@string/lab" />
+
         <item
             android:id="@+id/nav_appointment"
             android:icon="@drawable/ic_appointment"
             android:title="@string/appointment" />
+
+        <item
+            android:id="@+id/nav_treatment"
+            android:icon="@drawable/ic_treatment"
+            android:title="@string/treatments" />
 
         <item
             android:id="@+id/nav_chat"

@@ -35,6 +35,7 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="android:actionModeBackground">@color/blue_grey_600</item>
         <item name="android:dialogTheme">@style/Dialog.Theme</item>
+
     </style>
 
     <style name="Dialog.Theme" parent="Theme.AppCompat.Light.Dialog">
