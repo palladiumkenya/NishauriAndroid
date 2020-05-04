@@ -144,7 +144,6 @@
                             android:inputType="textPassword"
                             android:hint="Password"
                             android:maxLength="26"
-                            android:marqueeRepeatLimit="marquee_forever"
                             android:maxLines="1"
                             android:singleLine="true"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"

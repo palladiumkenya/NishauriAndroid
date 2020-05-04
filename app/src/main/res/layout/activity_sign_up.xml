@@ -67,7 +67,7 @@
                         android:background="@drawable/shape_round_solid"
                         android:gravity="center">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="1"
@@ -94,7 +94,7 @@
                     android:minHeight="?attr/actionBarSize"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_label_title"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/spacing_xlarge"
@@ -102,7 +102,7 @@
                         android:onClick="clickLabel"
                         android:paddingLeft="@dimen/spacing_small"
                         android:paddingRight="@dimen/spacing_small"
-                        android:text="Title"
+                        android:text="CCC Number Details"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/grey_90" />
 
@@ -113,13 +113,43 @@
                         android:layout_marginBottom="@dimen/spacing_large"
                         android:orientation="vertical">
 
-                        <androidx.appcompat.widget.AppCompatEditText
-                            android:id="@+id/et_title"
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Event title" />
+                            app:startIconDrawable="@drawable/ic_hospital"
+                            app:endIconMode="clear_text"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-                        <Button
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/txt_ccc_no"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Enter CCC Number"
+                                android:inputType="number"
+                                android:maxLength="10"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:startIconDrawable="@drawable/ic_phone"
+                            app:endIconMode="clear_text"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/txt_phone_no"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Enter Phone Number"
+                                android:inputType="phone"
+                                android:maxLength="12"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/bt_continue_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -127,7 +157,7 @@
                             android:minWidth="0dp"
                             android:onClick="clickAction"
                             android:text="CONTINUE"
-                             />
+                            style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
                     </LinearLayout>
 
@@ -189,7 +219,7 @@
                         android:onClick="clickLabel"
                         android:paddingLeft="@dimen/spacing_small"
                         android:paddingRight="@dimen/spacing_small"
-                        android:text="Description"
+                        android:text="Security Question Details"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/grey_90" />
 
@@ -200,15 +230,31 @@
                         android:layout_marginBottom="@dimen/spacing_large"
                         android:orientation="vertical">
 
-                        <androidx.appcompat.widget.AppCompatEditText
-                            android:id="@+id/et_description"
+                        <androidx.appcompat.widget.AppCompatSpinner
+                            android:id="@+id/sequrity_question"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/spacing_xxlarge"
+                            android:drawSelectorOnTop="true"
+                            android:entries="@array/security_question"/>
+
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="top"
-                            android:hint="Event description"
-                            android:lines="4" />
+                            app:passwordToggleEnabled="true"
+                            app:startIconDrawable="@drawable/ic_password"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-                        <Button
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/txt_security_answer"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Enter your answer"
+                                android:inputType="textPassword"
+                                android:maxLength="10"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/bt_continue_description"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -216,6 +262,7 @@
                             android:minWidth="0dp"
                             android:onClick="clickAction"
                             android:text="CONTINUE"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
                              />
 
                     </LinearLayout>
@@ -278,7 +325,7 @@
                         android:onClick="clickLabel"
                         android:paddingLeft="@dimen/spacing_small"
                         android:paddingRight="@dimen/spacing_small"
-                        android:text="Time"
+                        android:text="Password Details"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/grey_90" />
 
@@ -289,17 +336,41 @@
                         android:layout_marginBottom="@dimen/spacing_large"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tv_time"
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="?attr/selectableItemBackground"
-                            android:clickable="true"
-                            android:text="00:00"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-                            android:textColor="@color/grey_60" />
+                            app:passwordToggleEnabled="true"
+                            app:startIconDrawable="@drawable/ic_password"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-                        <Button
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/txt_password"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Enter a Password"
+                                android:inputType="textPassword"
+                                android:maxLength="10"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:passwordToggleEnabled="true"
+                            app:startIconDrawable="@drawable/ic_password"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/txt_repassword"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Re-Enter your password"
+                                android:inputType="textPassword"
+                                android:maxLength="10"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/bt_continue_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -307,7 +378,7 @@
                             android:minWidth="0dp"
                             android:onClick="clickAction"
                             android:text="CONTINUE"
-                            />
+                            style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
                     </LinearLayout>
 
@@ -315,96 +386,7 @@
 
             </LinearLayout>
 
-            <!--section date-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:id="@+id/step_date"
-                        android:layout_width="@dimen/spacing_xlarge"
-                        android:layout_height="@dimen/spacing_xlarge"
-                        android:background="@drawable/shape_round_solid"
-                        android:gravity="center">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="4"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                            android:textColor="@android:color/white" />
-
-                    </RelativeLayout>
-
-                    <View
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/grey_10" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="@dimen/spacing_large"
-                    android:layout_height="0dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="?attr/actionBarSize"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv_label_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xlarge"
-                        android:gravity="center_vertical"
-                        android:onClick="clickLabel"
-                        android:paddingLeft="@dimen/spacing_small"
-                        android:paddingRight="@dimen/spacing_small"
-                        android:text="Date"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/grey_90" />
-
-                    <LinearLayout
-                        android:id="@+id/lyt_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/spacing_large"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tv_date"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="?attr/selectableItemBackground"
-                            android:clickable="true"
-                            android:text="01 Jan 2000"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                            android:textColor="@color/grey_60" />
-
-                        <Button
-                            android:id="@+id/bt_continue_date"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:minWidth="0dp"
-                            android:onClick="clickAction"
-                            android:text="CONTINUE"
-                            />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
 
             <!--section confirmation-->
 
@@ -429,7 +411,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="5"
+                            android:text="4"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@android:color/white" />
 
@@ -471,14 +453,21 @@
                         android:layout_marginBottom="@dimen/spacing_large"
                         android:orientation="vertical">
 
-                        <Button
+                        <com.google.android.material.checkbox.MaterialCheckBox
+                            android:id="@+id/terms"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/terms_and_conditions" />
+
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/bt_add_event"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:minWidth="0dp"
                             android:onClick="clickAction"
-                            android:text="ADD EVENT"
+                            android:text="SIGN UP"
                             />
 
 

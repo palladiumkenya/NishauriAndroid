@@ -3,11 +3,10 @@ package com.mhealth.nishauri.Activities.Auth;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.app.TimePickerDialog;
+
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -19,11 +18,9 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.R;
-import com.mhealth.nishauri.utils.Tools;
 import com.mhealth.nishauri.utils.ViewAnimation;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -64,14 +61,12 @@ public class SignUpActivity extends AppCompatActivity {
         view_list.add(findViewById(R.id.lyt_title));
         view_list.add(findViewById(R.id.lyt_description));
         view_list.add(findViewById(R.id.lyt_time));
-        view_list.add(findViewById(R.id.lyt_date));
         view_list.add(findViewById(R.id.lyt_confirmation));
 
         // populate view step (circle in left)
         step_view_list.add(((RelativeLayout) findViewById(R.id.step_title)));
         step_view_list.add(((RelativeLayout) findViewById(R.id.step_description)));
         step_view_list.add(((RelativeLayout) findViewById(R.id.step_time)));
-        step_view_list.add(((RelativeLayout) findViewById(R.id.step_date)));
         step_view_list.add(((RelativeLayout) findViewById(R.id.step_confirmation)));
 
         for (View v : view_list) {
@@ -81,19 +76,8 @@ public class SignUpActivity extends AppCompatActivity {
         view_list.get(0).setVisibility(View.VISIBLE);
         hideSoftKeyboard();
 
-        ((TextView) findViewById(R.id.tv_time)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
 
-        ((TextView) findViewById(R.id.tv_date)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     public void clickAction(View view) {
@@ -101,8 +85,12 @@ public class SignUpActivity extends AppCompatActivity {
         switch (id) {
             case R.id.bt_continue_title:
                 // validate input user here
-                if (((EditText) findViewById(R.id.et_title)).getText().toString().trim().equals("")) {
-                    Snackbar.make(parent_view, "Title cannot empty", Snackbar.LENGTH_SHORT).show();
+                if (((EditText) findViewById(R.id.txt_ccc_no)).getText().toString().trim().equals("") ) {
+                    Snackbar.make(parent_view, "Please provide your CCC Number.", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                if (((EditText) findViewById(R.id.txt_phone_no)).getText().toString().trim().equals("") ) {
+                    Snackbar.make(parent_view, "Please provide your Phone Number.", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -110,8 +98,8 @@ public class SignUpActivity extends AppCompatActivity {
                 break;
             case R.id.bt_continue_description:
                 // validate input user here
-                if (((EditText) findViewById(R.id.et_description)).getText().toString().trim().equals("")) {
-                    Snackbar.make(parent_view, "Description cannot empty", Snackbar.LENGTH_SHORT).show();
+                if (((EditText) findViewById(R.id.txt_security_answer)).getText().toString().trim().equals("")) {
+                    Snackbar.make(parent_view, "Please provide an answer to you question.", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -119,20 +107,15 @@ public class SignUpActivity extends AppCompatActivity {
                 break;
             case R.id.bt_continue_time:
                 // validate input user here
-                if (time == null) {
-                    Snackbar.make(parent_view, "Please set event time", Snackbar.LENGTH_SHORT).show();
+                if (((EditText) findViewById(R.id.txt_password)).getText().toString().trim().equals("")) {
+                    Snackbar.make(parent_view, "Please provide a password.", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                if (((EditText) findViewById(R.id.txt_repassword)).getText().toString().trim().equals("")) {
+                    Snackbar.make(parent_view, "Please provide the password.", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
                 collapseAndContinue(2);
-                break;
-            case R.id.bt_continue_date:
-                // validate input user here
-                if (date == null) {
-                    Snackbar.make(parent_view, "Please set event date", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-
-                collapseAndContinue(3);
                 break;
             case R.id.bt_add_event:
                 // validate input user here
@@ -163,13 +146,6 @@ public class SignUpActivity extends AppCompatActivity {
                     current_step = 2;
                     collapseAll();
                     ViewAnimation.expand(view_list.get(2));
-                }
-                break;
-            case R.id.tv_label_date:
-                if (success_step >= 3 && current_step != 3) {
-                    current_step = 3;
-                    collapseAll();
-                    ViewAnimation.expand(view_list.get(3));
                 }
                 break;
             case R.id.tv_label_confirmation:
