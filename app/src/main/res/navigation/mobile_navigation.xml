@@ -52,5 +52,13 @@
         android:name="com.mhealth.nishauri.Fragments.Appointment.ScheduleAppointmentFragment"
         android:label="Schedule Appointment"
         tools:layout="@layout/fragment_schedule_appointment"/>
+    <fragment
+        android:id="@+id/nav_dependant"
+        android:name="com.mhealth.nishauri.Fragments.Dependants.DependantsFragment"
+        android:label="@string/depentant" />
+    <fragment
+        android:id="@+id/nav_add_dependant"
+        android:name="com.mhealth.nishauri.Fragments.Dependants.AddDependantFragment"
+        android:label="Add Dependant" />
 
 </navigation>

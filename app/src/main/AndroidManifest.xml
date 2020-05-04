@@ -9,14 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Activities.Auth.SignUpActivity"></activity>
         <activity
-            android:name=".Activities.LoginActivity"
-            android:label="@string/login"
-            />
+            android:name=".Activities.Auth.LoginActivity"
+            android:label="@string/login" />
         <activity
             android:name=".Activities.SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="locked">
+            android:screenOrientation="locked"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

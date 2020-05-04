@@ -25,6 +25,11 @@
             android:title="@string/treatments" />
 
         <item
+            android:id="@+id/nav_dependant"
+            android:icon="@drawable/ic_dependant"
+            android:title="@string/depentant" />
+
+        <item
             android:id="@+id/nav_chat"
             android:icon="@drawable/ic_chat"
             android:title="@string/chat" />

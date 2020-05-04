@@ -26,4 +26,6 @@
     <string name="treatments">Treatments</string>
     <string name="schedule_appointment">Schedule Appointment</string>
     <string name="new_appointment">New Appointment</string>
+    <string name="depentant">Depentant(s)</string>
+    <string name="new_dependant">New Dependant</string>
 </resources>

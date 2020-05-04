@@ -2,4 +2,6 @@
 <resources>
     <string name="login">Login</string>
     <string name="treatments">Treatments</string>
+    <string name="depentant">Depentant(s)</string>
+    <string name="new_dependant">New Dependant</string>
 </resources>
