@@ -61,7 +61,7 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
-                        android:id="@+id/step_title"
+                        android:id="@+id/step_ccc_no"
                         android:layout_width="@dimen/spacing_xlarge"
                         android:layout_height="@dimen/spacing_xlarge"
                         android:background="@drawable/shape_round_solid"
@@ -95,7 +95,7 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tv_label_title"
+                        android:id="@+id/txt_ccc"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/spacing_xlarge"
                         android:gravity="center_vertical"
@@ -107,7 +107,7 @@
                         android:textColor="@color/grey_90" />
 
                     <LinearLayout
-                        android:id="@+id/lyt_title"
+                        android:id="@+id/lyt_ccc_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_large"
@@ -150,7 +150,7 @@
 
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/bt_continue_title"
+                            android:id="@+id/bt_continue_ccc_no"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -179,7 +179,7 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
-                        android:id="@+id/step_description"
+                        android:id="@+id/step_security_question"
                         android:layout_width="@dimen/spacing_xlarge"
                         android:layout_height="@dimen/spacing_xlarge"
                         android:background="@drawable/shape_round_solid"
@@ -212,7 +212,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_label_description"
+                        android:id="@+id/txt_security"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/spacing_xlarge"
                         android:gravity="center_vertical"
@@ -224,7 +224,7 @@
                         android:textColor="@color/grey_90" />
 
                     <LinearLayout
-                        android:id="@+id/lyt_description"
+                        android:id="@+id/lyt_sequrity_question"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_large"
@@ -255,7 +255,7 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/bt_continue_description"
+                            android:id="@+id/bt_continue_security_question"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -285,7 +285,7 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
-                        android:id="@+id/step_time"
+                        android:id="@+id/step_password"
                         android:layout_width="@dimen/spacing_xlarge"
                         android:layout_height="@dimen/spacing_xlarge"
                         android:background="@drawable/shape_round_solid"
@@ -318,7 +318,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_label_time"
+                        android:id="@+id/txt_pass"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/spacing_xlarge"
                         android:gravity="center_vertical"
@@ -330,7 +330,7 @@
                         android:textColor="@color/grey_90" />
 
                     <LinearLayout
-                        android:id="@+id/lyt_time"
+                        android:id="@+id/lyt_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_large"
@@ -371,7 +371,7 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/bt_continue_time"
+                            android:id="@+id/bt_continue_password"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -435,7 +435,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_label_confirmation"
+                        android:id="@+id/txt_confirmation"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/spacing_xlarge"
                         android:gravity="center_vertical"
@@ -457,11 +457,11 @@
                             android:id="@+id/terms"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:checked="true"
+                            android:checked="false"
                             android:text="@string/terms_and_conditions" />
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/bt_add_event"
+                            android:id="@+id/bt_sign_up"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"

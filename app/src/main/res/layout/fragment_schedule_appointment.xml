@@ -54,13 +54,16 @@
                     />
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_date_time_appointment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="@dimen/spacing_medium"
+                    android:paddingVertical="@dimen/spacing_large"
+                    android:layout_marginHorizontal="@dimen/spacing_large"
                     android:text="Select date and time here..."
                     android:textSize="@dimen/spacing_large"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:clickable="true" />
+                    android:textColor="@color/colorAccent"
+                    android:textAppearance="@style/AppTextAppearance.Button"
+                    android:clickable="true"/>
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"

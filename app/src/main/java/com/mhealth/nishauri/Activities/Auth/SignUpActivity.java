@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -58,15 +59,15 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void initComponent() {
         // populate layout field
-        view_list.add(findViewById(R.id.lyt_title));
-        view_list.add(findViewById(R.id.lyt_description));
-        view_list.add(findViewById(R.id.lyt_time));
+        view_list.add(findViewById(R.id.lyt_ccc_no));
+        view_list.add(findViewById(R.id.lyt_sequrity_question));
+        view_list.add(findViewById(R.id.lyt_password));
         view_list.add(findViewById(R.id.lyt_confirmation));
 
         // populate view step (circle in left)
-        step_view_list.add(((RelativeLayout) findViewById(R.id.step_title)));
-        step_view_list.add(((RelativeLayout) findViewById(R.id.step_description)));
-        step_view_list.add(((RelativeLayout) findViewById(R.id.step_time)));
+        step_view_list.add(((RelativeLayout) findViewById(R.id.step_ccc_no)));
+        step_view_list.add(((RelativeLayout) findViewById(R.id.step_security_question)));
+        step_view_list.add(((RelativeLayout) findViewById(R.id.step_password)));
         step_view_list.add(((RelativeLayout) findViewById(R.id.step_confirmation)));
 
         for (View v : view_list) {
@@ -83,7 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
     public void clickAction(View view) {
         int id = view.getId();
         switch (id) {
-            case R.id.bt_continue_title:
+            case R.id.bt_continue_ccc_no:
                 // validate input user here
                 if (((EditText) findViewById(R.id.txt_ccc_no)).getText().toString().trim().equals("") ) {
                     Snackbar.make(parent_view, "Please provide your CCC Number.", Snackbar.LENGTH_SHORT).show();
@@ -96,7 +97,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 collapseAndContinue(0);
                 break;
-            case R.id.bt_continue_description:
+            case R.id.bt_continue_security_question:
                 // validate input user here
                 if (((EditText) findViewById(R.id.txt_security_answer)).getText().toString().trim().equals("")) {
                     Snackbar.make(parent_view, "Please provide an answer to you question.", Snackbar.LENGTH_SHORT).show();
@@ -105,7 +106,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 collapseAndContinue(1);
                 break;
-            case R.id.bt_continue_time:
+            case R.id.bt_continue_password:
                 // validate input user here
                 if (((EditText) findViewById(R.id.txt_password)).getText().toString().trim().equals("")) {
                     Snackbar.make(parent_view, "Please provide a password.", Snackbar.LENGTH_SHORT).show();
@@ -117,9 +118,15 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 collapseAndContinue(2);
                 break;
-            case R.id.bt_add_event:
+            case R.id.bt_sign_up:
                 // validate input user here
-                finish();
+                if (((CheckBox) findViewById(R.id.terms)).isChecked()){
+                    Snackbar.make(parent_view, "You have successfully Signed up.", Snackbar.LENGTH_SHORT).show();
+                    finish();
+                }else {
+                    Snackbar.make(parent_view, "Please confirm terms and condition.", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
                 break;
         }
     }
@@ -127,32 +134,32 @@ public class SignUpActivity extends AppCompatActivity {
     public void clickLabel(View view) {
         int id = view.getId();
         switch (id) {
-            case R.id.tv_label_title:
+            case R.id.txt_ccc:
                 if (success_step >= 0 && current_step != 0) {
                     current_step = 0;
                     collapseAll();
                     ViewAnimation.expand(view_list.get(0));
                 }
                 break;
-            case R.id.tv_label_description:
+            case R.id.txt_security:
                 if (success_step >= 1 && current_step != 1) {
                     current_step = 1;
                     collapseAll();
                     ViewAnimation.expand(view_list.get(1));
                 }
                 break;
-            case R.id.tv_label_time:
+            case R.id.txt_pass:
                 if (success_step >= 2 && current_step != 2) {
                     current_step = 2;
                     collapseAll();
                     ViewAnimation.expand(view_list.get(2));
                 }
                 break;
-            case R.id.tv_label_confirmation:
-                if (success_step >= 4 && current_step != 4) {
-                    current_step = 4;
+            case R.id.txt_confirmation:
+                if (success_step >= 3 && current_step != 3) {
+                    current_step = 3;
                     collapseAll();
-                    ViewAnimation.expand(view_list.get(4));
+                    ViewAnimation.expand(view_list.get(3));
                 }
                 break;
         }
