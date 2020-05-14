@@ -24,7 +24,7 @@
         android:id="@+id/full_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hugh Ndegwa"
+        android:text="John Doe"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
@@ -43,7 +43,7 @@
             android:id="@+id/cc_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=" 123-4567/2020">
+            android:text=" 1234567890">
 
         </com.google.android.material.textview.MaterialTextView>
 

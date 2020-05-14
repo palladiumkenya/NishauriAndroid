@@ -37,7 +37,7 @@ public class RescheduleAppointmentFragment extends Fragment {
 
 
     @BindView(R.id.txt_reschedule_appointmet)
-    TextView txt_redchedule_appointment;
+    TextView txt_reschedule_appointment;
 
     @BindView(R.id.btn_report)
     Button btn_continue;
@@ -61,7 +61,7 @@ public class RescheduleAppointmentFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_reschedule_appointment, container, false);
         unbinder = ButterKnife.bind(this, root);
 
-        txt_redchedule_appointment.setOnClickListener(new View.OnClickListener() {
+        txt_reschedule_appointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                getRescheduledDate();
@@ -117,7 +117,7 @@ public class RescheduleAppointmentFragment extends Fragment {
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                 RESHEDULED_DATE ="New Date & Time: " + RESHEDULED_DATE + " " + selectedHour + ":" + selectedMinute;
 
-                txt_redchedule_appointment.setText(RESHEDULED_DATE);
+                txt_reschedule_appointment.setText(RESHEDULED_DATE);
 //
             }
         }, hour, minute, true);//Yes 24 hour time

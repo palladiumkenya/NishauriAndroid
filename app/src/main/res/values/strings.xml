@@ -29,4 +29,9 @@
     <string name="depentant">Depentant(s)</string>
     <string name="new_dependant">New Dependant</string>
     <string name="terms_and_conditions">I have read the Terms and Contions.</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="update_dependant">Update Dependant</string>
+    <string name="settings">Settings</string>
+    <string name="category_profile">Profile</string>
+    <string name="about_app_category">About App</string>
 </resources>

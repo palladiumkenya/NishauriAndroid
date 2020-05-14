@@ -60,5 +60,29 @@
         android:id="@+id/nav_add_dependant"
         android:name="com.mhealth.nishauri.Fragments.Dependants.AddDependantFragment"
         android:label="Add Dependant" />
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.mhealth.nishauri.Fragments.Settings.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/nav_update_profile"
+        android:name="com.mhealth.nishauri.Fragments.Profile.UpdateProfileFragment"
+        android:label="Update Profile"
+        tools:layout="@layout/fragment_update_profile"/>
+    <fragment
+        android:id="@+id/nav_update_user"
+        android:name="com.mhealth.nishauri.Fragments.Profile.UpdateUserFragment"
+        android:label="Update User"
+        tools:layout="@layout/fragment_update_user" />
+    <fragment
+        android:id="@+id/nav_update_dependants"
+        android:name="com.mhealth.nishauri.Fragments.Profile.UpdateDependantsFragment"
+        android:label="Update Dependant"
+        tools:layout="@layout/fragment_update_dependants" />
+    <fragment
+        android:id="@+id/nav_about_app"
+        android:name="com.mhealth.nishauri.Fragments.Settings.AboutAppFragment"
+        android:label="About" />
 
 </navigation>
