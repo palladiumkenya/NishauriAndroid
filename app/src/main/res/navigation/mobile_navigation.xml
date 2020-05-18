@@ -73,8 +73,7 @@
     <fragment
         android:id="@+id/nav_update_user"
         android:name="com.mhealth.nishauri.Fragments.Profile.UpdateUserFragment"
-        android:label="Update User"
-        tools:layout="@layout/fragment_update_user" />
+        android:label="Update User" />
     <fragment
         android:id="@+id/nav_update_dependants"
         android:name="com.mhealth.nishauri.Fragments.Profile.UpdateDependantsFragment"
@@ -83,6 +82,12 @@
     <fragment
         android:id="@+id/nav_about_app"
         android:name="com.mhealth.nishauri.Fragments.Settings.AboutAppFragment"
-        android:label="About" />
+        android:label="About"
+        tools:layout="@layout/fragment_about_app"/>
+    <fragment
+        android:id="@+id/nav_language"
+        android:name="com.mhealth.nishauri.Fragments.Settings.LanguageFragment"
+        android:label="Language"
+        tools:layout="@layout/fragment_language" />
 
 </navigation>

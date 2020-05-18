@@ -17,7 +17,6 @@
     <string name="appointments">Appointments</string>
     <string name="chat">Chat</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="logout">Log out</string>
     <string name="phone_number">Phone Number</string>
@@ -26,7 +25,7 @@
     <string name="treatments">Treatments</string>
     <string name="schedule_appointment">Schedule Appointment</string>
     <string name="new_appointment">New Appointment</string>
-    <string name="depentant">Depentant(s)</string>
+    <string name="depentant">Dependant(s)</string>
     <string name="new_dependant">New Dependant</string>
     <string name="terms_and_conditions">I have read the Terms and Contions.</string>
     <string name="update_profile">Update Profile</string>

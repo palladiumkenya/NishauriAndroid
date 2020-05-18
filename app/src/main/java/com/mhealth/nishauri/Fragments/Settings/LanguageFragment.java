@@ -9,8 +9,12 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.Button;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+import com.mhealth.nishauri.Fragments.Dependants.AddDependantFragment;
 import com.mhealth.nishauri.R;
 
 import butterknife.BindView;
@@ -18,22 +22,21 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public class SettingsFragment extends Fragment {
-
-    @BindView(R.id.faqs)
-    LinearLayout faqs;
-
-    @BindView(R.id.language)
-    LinearLayout language;
-
-    @BindView(R.id.about_app)
-    LinearLayout about_app;
-
+public class LanguageFragment extends Fragment {
 
 
     private Unbinder unbinder;
     private View root;
     private Context context;
+
+    @BindView(R.id.btn_cancel)
+    Button btn_cancel;
+
+    @BindView(R.id.btn_save_language)
+    Button btn_complete;
+
+    @BindView(R.id.languageRadioGroup)
+    RadioGroup languageSelected;
 
     public void onAttach(Context ctx) {
         super.onAttach(ctx);
@@ -50,28 +53,30 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_settings, container, false);
+        root = inflater.inflate(R.layout.fragment_language, container, false);
         unbinder = ButterKnife.bind(this, root);
 
-
-        language.setOnClickListener(new View.OnClickListener() {
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                NavHostFragment.findNavController(SettingsFragment.this).navigate(R.id.nav_language);
+            public void onClick(View view) {
+                Toast.makeText(context, "Cancel button clicked!", Toast.LENGTH_SHORT).show();
+                NavHostFragment.findNavController(LanguageFragment.this).navigate(R.id.nav_settings);
             }
         });
 
-        about_app.setOnClickListener(new View.OnClickListener() {
+        btn_complete.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                NavHostFragment.findNavController(SettingsFragment.this).navigate(R.id.nav_about_app);
+            public void onClick(View view) {
+                Toast.makeText(context, "Language saved!", Toast.LENGTH_SHORT).show();
+                NavHostFragment.findNavController(LanguageFragment.this).navigate(R.id.nav_settings);
+
             }
         });
-
 
 
         return root;
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

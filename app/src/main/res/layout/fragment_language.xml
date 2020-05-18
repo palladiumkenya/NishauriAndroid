@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/language"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.Settings.LanguageFragment">
+
+   <com.google.android.material.card.MaterialCardView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_margin="@dimen/spacing_middle"
+       android:layout_gravity="center">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:padding="@dimen/spacing_large"
+           android:layout_margin="@dimen/spacing_large"
+           android:orientation="vertical">
+
+           <com.google.android.material.textview.MaterialTextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:padding="@dimen/spacing_middle"
+               android:text="Please select the language to recieve notifications in:"
+               style="@style/TextAppearance.AppCompat.Title"/>
+
+           <RadioGroup
+               android:id="@+id/languageRadioGroup"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:padding="@dimen/spacing_large"
+               android:orientation="vertical">
+
+               <RadioButton
+                   android:id="@+id/englishLanguage"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:padding="10dp"
+                   android:checked="true"
+                   android:text="English"/>
+
+               <RadioButton
+                   android:id="@+id/kiswahiliLanguage"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:padding="10dp"
+                   android:text="Kiswahili" />
+           </RadioGroup>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_weight="2"
+               android:padding="@dimen/spacing_large"
+               android:orientation="horizontal">
+
+               <com.google.android.material.button.MaterialButton
+                   android:id="@+id/btn_cancel"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:text="Cancel"
+                   style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+               <com.google.android.material.button.MaterialButton
+                   android:id="@+id/btn_save_language"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:text="Save" />
+
+           </LinearLayout>
+
+       </LinearLayout>
+
+   </com.google.android.material.card.MaterialCardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -2,8 +2,8 @@
 <resources>
     <string name="login">Login</string>
     <string name="treatments">Treatments</string>
-    <string name="depentant">Depentant(s)</string>
+    <string name="depentant">Dependant(s)</string>
     <string name="new_dependant">New Dependant</string>
-    <string name="terms_and_conditions">I have read the Terms and Contions.</string>
+    <string name="terms_and_conditions">I have consented to use the app.</string>
     <string name="about_app_category">About App</string>
 </resources>

@@ -49,6 +49,7 @@ public class UpdateProfileFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_update_profile, container, false);
         unbinder = ButterKnife.bind(this, root);
 
+        /*Edit user details here...*/
         btn_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,6 +60,7 @@ public class UpdateProfileFragment extends Fragment {
             }
         });
 
+        /*Edit dependant details here...*/
         btn_dependant1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
