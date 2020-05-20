@@ -60,15 +60,14 @@
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_gravity="center_horizontal"
-
                 android:layout_marginTop="@dimen/actionBarSize"
+                android:layout_marginBottom="@dimen/spacing_middle"
                 android:src="@drawable/folder"
                 />
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/spacing_middle"
                 android:visibility="visible"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp">
@@ -96,29 +95,28 @@
                         android:layout_weight="2"
                         android:orientation="horizontal">
 
-<!--                        <com.hbb20.CountryCodePicker-->
-<!--                            android:id="@+id/ccp"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_weight="2"-->
-<!--                            app:ccp_autoDetectCountry="true"-->
-<!--                            app:ccp_showFlag="true" />-->
+                        <com.hbb20.CountryCodePicker
+                            android:id="@+id/ccp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:ccp_autoDetectCountry="true"
+                            app:ccp_showFlag="false" />
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             app:endIconMode="clear_text"
-                            app:startIconDrawable="@drawable/ic_phone"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                             <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/phone_number"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:inputType="phone"
                                 android:hint="@string/phone_number"
-                                android:maxLength="10"
+                                android:maxLength="9"
                                 android:maxLines="1"
                                 android:singleLine="true"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
@@ -200,7 +198,7 @@
                                     </LinearLayout>
 
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <View
                 android:layout_width="0dp"

@@ -53,6 +53,13 @@ public class SettingsFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_settings, container, false);
         unbinder = ButterKnife.bind(this, root);
 
+        faqs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(SettingsFragment.this).navigate(R.id.nav_faqs);
+            }
+        });
+
 
         language.setOnClickListener(new View.OnClickListener() {
             @Override

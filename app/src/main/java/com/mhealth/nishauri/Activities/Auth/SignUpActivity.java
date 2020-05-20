@@ -32,8 +32,6 @@ public class SignUpActivity extends AppCompatActivity {
     private int success_step = 0;
     private int current_step = 0;
     private View parent_view;
-    private Date date = null;
-    private String time = null;
     private Toolbar toolbar;
 
     @Override

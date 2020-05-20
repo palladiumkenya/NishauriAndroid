@@ -36,7 +36,7 @@ public class RescheduleAppointmentFragment extends Fragment {
     private String RESHEDULED_DATE = "";
 
 
-    @BindView(R.id.txt_reschedule_appointmet)
+    @BindView(R.id.txt_reschedule_appointment)
     TextView txt_reschedule_appointment;
 
     @BindView(R.id.btn_report)

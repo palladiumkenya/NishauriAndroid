@@ -89,5 +89,9 @@
         android:name="com.mhealth.nishauri.Fragments.Settings.LanguageFragment"
         android:label="Language"
         tools:layout="@layout/fragment_language" />
+    <fragment
+        android:id="@+id/nav_faqs"
+        android:name="com.mhealth.nishauri.Fragments.Settings.FaqsFragment"
+        android:label="FAQs" />
 
 </navigation>
