@@ -73,12 +73,11 @@
                     android:textSize="@dimen/spacing_mlarge"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-                    android:id="@+id/pep_initiated"
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/reason_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Pick reason here..."
-                    app:met_floatingLabel="normal" />
+                    android:hint="Pick reason here..." />
 
 
                 <com.google.android.material.button.MaterialButton

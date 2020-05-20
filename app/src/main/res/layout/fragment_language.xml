@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.Settings.LanguageFragment">
 
-   <com.google.android.material.card.MaterialCardView
+   <androidx.cardview.widget.CardView
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:layout_margin="@dimen/spacing_middle"
@@ -37,7 +37,7 @@
                android:padding="@dimen/spacing_large"
                android:orientation="vertical">
 
-               <RadioButton
+               <com.google.android.material.radiobutton.MaterialRadioButton
                    android:id="@+id/englishLanguage"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
@@ -45,12 +45,13 @@
                    android:checked="true"
                    android:text="English"/>
 
-               <RadioButton
+               <com.google.android.material.radiobutton.MaterialRadioButton
                    android:id="@+id/kiswahiliLanguage"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:padding="10dp"
                    android:text="Kiswahili" />
+
            </RadioGroup>
 
            <LinearLayout
@@ -79,6 +80,6 @@
 
        </LinearLayout>
 
-   </com.google.android.material.card.MaterialCardView>
+   </androidx.cardview.widget.CardView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

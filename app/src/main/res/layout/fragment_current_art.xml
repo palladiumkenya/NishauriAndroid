@@ -24,18 +24,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 shimmer:duration="800">
+
                 <LinearLayout
                     android:id="@+id/shimmerInnerLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <include layout="@layout/lab_placeholder_item" />
+
                 </LinearLayout>
 
             </com.facebook.shimmer.ShimmerFrameLayout>
-
-
-
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
@@ -46,14 +46,8 @@
                 android:visibility="gone"
                 android:scrollingCache="true" />
 
-
-
         </FrameLayout>
 
-
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
 
 </LinearLayout>

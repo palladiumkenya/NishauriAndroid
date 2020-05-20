@@ -16,7 +16,6 @@
         android:orientation="horizontal"
         android:focusable="true">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,7 +36,7 @@
                     android:paddingBottom="@dimen/spacing_middle"
                     android:paddingTop="@dimen/spacing_middle">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/spacing_middle"
@@ -46,7 +45,7 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/grey_90" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -58,9 +57,8 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/grey_40" />
 
-
-
                 </LinearLayout>
+
                 <View
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -74,7 +72,6 @@
                     android:tint="@color/grey_60"
                    android:src="@drawable/ic_arrow_right" />
             </LinearLayout>
-
 
             <View
                 android:layout_width="match_parent"
@@ -94,7 +91,7 @@
                     android:paddingBottom="@dimen/spacing_middle"
                     android:paddingTop="@dimen/spacing_middle">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/spacing_middle"
@@ -103,7 +100,7 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/grey_90" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/spacing_middle"
@@ -113,8 +110,6 @@
                         android:text="Choice of preference in receiving notifications"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/grey_40" />
-
-
 
                 </LinearLayout>
 
@@ -130,6 +125,7 @@
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:tint="@color/grey_60"
                     android:src="@drawable/ic_arrow_right" />
+
             </LinearLayout>
 
             <View
@@ -151,7 +147,7 @@
                     android:paddingBottom="@dimen/spacing_middle"
                     android:paddingTop="@dimen/spacing_middle">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/spacing_middle"
@@ -160,7 +156,7 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/grey_90" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/spacing_middle"
@@ -171,10 +167,7 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         android:textColor="@color/grey_40" />
 
-
-
                 </LinearLayout>
-
 
                 <View
                     android:layout_width="0dp"
@@ -189,20 +182,16 @@
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_arrow_right"
                     android:tint="@color/grey_60" />
-            </LinearLayout>
 
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/grey_10" />
 
-
-
         </LinearLayout>
 
-
     </LinearLayout>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

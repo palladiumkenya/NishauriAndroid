@@ -69,13 +69,12 @@
                     app:cardCornerRadius="40dp"
                     app:cardElevation="3dp">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/spacing_xsmall"
-                        android:src="@drawable/ic_patient"
-                        />
+                        android:src="@drawable/ic_patient" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -105,7 +104,7 @@
                             android:gravity="center"
                             android:orientation="vertical">
 
-                            <TextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/card_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -120,7 +119,7 @@
                                 android:gravity="center"
                                 android:orientation="horizontal">
 
-                                <ImageView
+                                <androidx.appcompat.widget.AppCompatImageView
                                     android:layout_width="@dimen/spacing_large"
                                     android:layout_height="@dimen/spacing_large"
                                     android:layout_marginEnd="@dimen/spacing_medium"
@@ -128,7 +127,7 @@
                                     android:tint="@color/grey_20"
                                     android:src="@drawable/ic_phone" />
 
-                                <TextView
+                                <com.google.android.material.textview.MaterialTextView
                                     android:id="@+id/card_phone"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -137,7 +136,6 @@
                             </LinearLayout>
 
                         </LinearLayout>
-
 
                     </LinearLayout>
 
@@ -162,7 +160,7 @@
                     android:orientation="vertical"
                     android:padding="@dimen/spacing_large">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="About you"
@@ -255,7 +253,7 @@
                     android:orientation="vertical"
                     android:padding="@dimen/spacing_large">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Facility details"
@@ -267,6 +265,7 @@
                         android:layout_height="wrap_content"
                         app:endIconMode="clear_text"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ccc_no"
                             android:layout_width="match_parent"
@@ -275,13 +274,13 @@
                             android:inputType="phone"
                             android:maxLength="10"
                             android:hint="CCC Number"/>
+
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/grey_5" />
-
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/facilitySpinner"
@@ -315,7 +314,7 @@
                     android:orientation="vertical"
                     android:padding="@dimen/spacing_large">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Password"
@@ -397,8 +396,7 @@
                     android:text="@string/update_profile"
                     android:textColor="@android:color/white"
                     android:textAlignment="center"
-                    android:textSize="18sp"
-                   />
+                    android:textSize="18sp" />
 
             </LinearLayout>
 

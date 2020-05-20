@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Activities.SplashActivity">
 
-
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/logo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,6 +15,5 @@
         android:paddingRight="40dp"
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

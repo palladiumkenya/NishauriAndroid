@@ -49,32 +49,7 @@
 
             </FrameLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:tint="@android:color/white"
-                    android:src="@drawable/ic_patient" />
-
-                <View
-                    android:layout_width="@dimen/spacing_middle"
-                    android:layout_height="0dp" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/textView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Profile"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                    android:textColor="@android:color/white" />
-
-            </LinearLayout>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -154,8 +129,6 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                             android:textColor="@color/grey_60" />
 
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -163,7 +136,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:orientation="horizontal">
-
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="match_parent"
@@ -174,7 +146,6 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                             android:textStyle="bold"
                             android:textColor="@color/grey_90" />
-
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="match_parent"
@@ -187,8 +158,6 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                             android:textColor="@color/grey_60" />
 
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -196,7 +165,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:orientation="horizontal">
-
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="match_parent"
@@ -208,7 +176,6 @@
                             android:textStyle="bold"
                             android:textColor="@color/grey_90" />
 
-
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -219,8 +186,6 @@
                             android:text="Kenyatta National Hospital"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                             android:textColor="@color/grey_60" />
-
-
 
                     </LinearLayout>
 
@@ -280,8 +245,7 @@
                         android:layout_weight="3"
                         android:orientation="horizontal">
 
-
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -291,8 +255,7 @@
                             android:textStyle="bold"
                             android:textColor="@color/grey_90" />
 
-
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/spacing_large"
@@ -326,8 +289,7 @@
                         android:layout_weight="4"
                         android:orientation="horizontal">
 
-
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -337,8 +299,7 @@
                             android:textStyle="bold"
                             android:textColor="@color/grey_90" />
 
-
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/spacing_large"
@@ -372,8 +333,7 @@
                         android:layout_weight="4"
                         android:orientation="horizontal">
 
-
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -383,8 +343,7 @@
                             android:textStyle="bold"
                             android:textColor="@color/grey_90" />
 
-
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/spacing_large"
@@ -418,8 +377,7 @@
                         android:layout_weight="4"
                         android:orientation="horizontal">
 
-
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -429,8 +387,7 @@
                             android:textStyle="bold"
                             android:textColor="@color/grey_90" />
 
-
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/spacing_large"
@@ -460,8 +417,6 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_large" />
-
-
 
         </LinearLayout>
 

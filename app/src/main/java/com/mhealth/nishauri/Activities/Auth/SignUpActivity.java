@@ -122,7 +122,7 @@ public class SignUpActivity extends AppCompatActivity {
                     Snackbar.make(parent_view, "You have successfully Signed up.", Snackbar.LENGTH_SHORT).show();
                     finish();
                 }else {
-                    Snackbar.make(parent_view, "Please confirm terms and condition.", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(parent_view, "Please confirm consent to NiShauri.", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
                 break;

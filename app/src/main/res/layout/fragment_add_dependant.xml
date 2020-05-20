@@ -7,7 +7,6 @@
     android:layout_gravity="center"
     android:orientation="vertical">
 
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -39,7 +38,6 @@
                     android:layout_marginTop="@dimen/spacing_large"
                     android:orientation="vertical">
 
-
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -62,12 +60,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="First Name"
-                            android:inputType="textCapWords"
-                            />
+                            android:inputType="textCapWords" />
 
                     </com.google.android.material.textfield.TextInputLayout>
-
-
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
@@ -78,8 +73,7 @@
                         android:paddingLeft="@dimen/spacing_medium"
                         android:paddingRight="@dimen/spacing_large"
                         android:text="Please select the date of birth for the dependant"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/txt_dob"
@@ -94,10 +88,7 @@
                         android:textAppearance="@style/AppTextAppearance.Button"
                         android:clickable="true" />
 
-
-
-
-                    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                    <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/pep_initiated"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -105,9 +96,7 @@
                         android:layout_marginVertical="@dimen/spacing_middle"
                         android:paddingLeft="@dimen/spacing_large"
                         android:paddingRight="@dimen/spacing_large"
-                        android:hint="Select your gender here..."
-                        app:met_floatingLabel="normal" />
-
+                        android:hint="Select your gender here..." />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -141,8 +130,6 @@
 
                     </LinearLayout>
 
-
-
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
@@ -150,6 +137,5 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

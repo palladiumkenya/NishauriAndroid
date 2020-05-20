@@ -7,7 +7,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -17,6 +16,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/spacing_large"
                 android:orientation="vertical">
+
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -29,8 +29,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="@dimen/spacing_xmedium">
-
-
 
                         <View
                             android:layout_width="0dp"
@@ -73,12 +71,9 @@
                         android:scrollbars="vertical"
                         android:scrollingCache="true" />
 
-
-
                 </LinearLayout>
 
             </LinearLayout>
-
 
         </androidx.core.widget.NestedScrollView>
 
