@@ -10,14 +10,17 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.ViewAnimation;
 
@@ -33,6 +36,16 @@ public class SignUpActivity extends AppCompatActivity {
     private int current_step = 0;
     private View parent_view;
     private Toolbar toolbar;
+
+    private EditText ccc_no;
+    private EditText msisdn;
+    private Spinner security_question;
+    private EditText security_answer;
+    private EditText password;
+    private EditText repassword;
+    private CheckBox consent ;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +81,17 @@ public class SignUpActivity extends AppCompatActivity {
         step_view_list.add(((RelativeLayout) findViewById(R.id.step_password)));
         step_view_list.add(((RelativeLayout) findViewById(R.id.step_confirmation)));
 
+        //components for input
+        ccc_no = (EditText) findViewById(R.id.txt_ccc_no);
+        msisdn = (EditText) findViewById(R.id.txt_phone_no);
+        security_question = (Spinner) findViewById(R.id.security_question);
+        security_answer = (EditText) findViewById(R.id.txt_security_answer);
+        password = (EditText) findViewById(R.id.txt_password);
+        repassword = (EditText) findViewById(R.id.txt_repassword);
+        consent = (CheckBox) findViewById(R.id.terms);
+
+
+
         for (View v : view_list) {
             v.setVisibility(View.GONE);
         }
@@ -84,11 +108,13 @@ public class SignUpActivity extends AppCompatActivity {
         switch (id) {
             case R.id.bt_continue_ccc_no:
                 // validate input user here
-                if (((EditText) findViewById(R.id.txt_ccc_no)).getText().toString().trim().equals("") ) {
+                if (ccc_no.getText().toString().trim().equals("")) {
                     Snackbar.make(parent_view, "Please provide your CCC Number.", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
-                if (((EditText) findViewById(R.id.txt_phone_no)).getText().toString().trim().equals("") ) {
+
+
+                if (msisdn.getText().toString().trim().equals("") ) {
                     Snackbar.make(parent_view, "Please provide your Phone Number.", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
@@ -97,7 +123,13 @@ public class SignUpActivity extends AppCompatActivity {
                 break;
             case R.id.bt_continue_security_question:
                 // validate input user here
-                if (((EditText) findViewById(R.id.txt_security_answer)).getText().toString().trim().equals("")) {
+                if(security_question.getSelectedItem().toString().equals("Select your security question."))
+                {
+                    Snackbar.make(parent_view, "Please select a security question.", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (security_answer.getText().toString().trim().equals("")) {
                     Snackbar.make(parent_view, "Please provide an answer to you question.", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
@@ -106,19 +138,20 @@ public class SignUpActivity extends AppCompatActivity {
                 break;
             case R.id.bt_continue_password:
                 // validate input user here
-                if (((EditText) findViewById(R.id.txt_password)).getText().toString().trim().equals("")) {
+                if (password.getText().toString().trim().equals("")) {
                     Snackbar.make(parent_view, "Please provide a password.", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
-                if (((EditText) findViewById(R.id.txt_repassword)).getText().toString().trim().equals("")) {
-                    Snackbar.make(parent_view, "Please provide the password.", Snackbar.LENGTH_SHORT).show();
+                if(!password.getText().toString().equals(repassword.getText().toString()))
+                {
+                    repassword.setError(getString(R.string.must_match));
                     return;
                 }
                 collapseAndContinue(2);
                 break;
             case R.id.bt_sign_up:
                 // validate input user here
-                if (((CheckBox) findViewById(R.id.terms)).isChecked()){
+                if (consent.isChecked()){
                     Snackbar.make(parent_view, "You have successfully Signed up.", Snackbar.LENGTH_SHORT).show();
                     finish();
                 }else {

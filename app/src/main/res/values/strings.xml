@@ -33,4 +33,17 @@
     <string name="settings">Settings</string>
     <string name="category_profile">Profile</string>
     <string name="about_app_category">About App</string>
+
+<!--    error messages-->
+    <string name="must_match">Both passwords must match</string>
+
+<!--    spinner choices-->
+    <string-array name="security_question">
+        <item> Select your security question.</item>
+        <item> What is your favorite song?</item>
+        <item> What was the name of you first pet?</item>
+        <item> What is the name of your favourite movie?</item>
+        <item> What is the name of your favourite book?</item>
+        <item> What is your mother maiden name?</item>
+    </string-array>
 </resources>

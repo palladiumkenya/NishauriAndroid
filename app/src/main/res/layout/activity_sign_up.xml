@@ -231,7 +231,7 @@
                         android:orientation="vertical">
 
                         <androidx.appcompat.widget.AppCompatSpinner
-                            android:id="@+id/sequrity_question"
+                            android:id="@+id/security_question"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/spacing_xxlarge"
                             android:drawSelectorOnTop="true"
