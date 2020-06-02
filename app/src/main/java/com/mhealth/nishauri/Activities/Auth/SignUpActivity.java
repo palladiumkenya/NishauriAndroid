@@ -4,31 +4,54 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.android.volley.DefaultRetryPolicy;
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONArrayRequestListener;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.mhealth.nishauri.Activities.MainActivity;
 import com.mhealth.nishauri.R;
+import com.mhealth.nishauri.interfaces.NavigationHost;
+import com.mhealth.nishauri.utils.Constants;
 import com.mhealth.nishauri.utils.ViewAnimation;
 
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import static com.mhealth.nishauri.utils.AppController.TAG;
+
 
 public class SignUpActivity extends AppCompatActivity {
+
 
     private List<View> view_list = new ArrayList<>();
     private List<RelativeLayout> step_view_list = new ArrayList<>();
@@ -37,13 +60,20 @@ public class SignUpActivity extends AppCompatActivity {
     private View parent_view;
     private Toolbar toolbar;
 
+    private TextInputLayout til_ccc;
+    TextInputLayout til_phone;
+    private TextInputLayout til_password;
+    private TextInputLayout til_repass;
+
     private EditText ccc_no;
     private EditText msisdn;
     private Spinner security_question;
     private EditText security_answer;
     private EditText password;
     private EditText repassword;
-    private CheckBox consent ;
+    private CheckBox consent;
+
+
 
 
 
@@ -52,11 +82,13 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        AndroidNetworking.initialize(getApplicationContext());
+
         parent_view = findViewById(android.R.id.content);
 
         initToolbar();
         initComponent();
-
+        checkNulls();
 
     }
 
@@ -90,6 +122,11 @@ public class SignUpActivity extends AppCompatActivity {
         repassword = (EditText) findViewById(R.id.txt_repassword);
         consent = (CheckBox) findViewById(R.id.terms);
 
+//        TextInputLayout for errors
+        til_ccc = (TextInputLayout) findViewById(R.id.til_ccc);
+        til_phone = (TextInputLayout) findViewById(R.id.til_phone);
+        til_password = (TextInputLayout) findViewById(R.id.til_password);
+        til_repass = (TextInputLayout) findViewById(R.id.til_repass);
 
 
         for (View v : view_list) {
@@ -100,6 +137,97 @@ public class SignUpActivity extends AppCompatActivity {
         hideSoftKeyboard();
 
 
+    }
+
+    private void checkNulls() {
+
+        ccc_no.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (ccc_no.length() < 10) {
+                    til_ccc.setError("Please provide a complete CCC No");
+                } else {
+                    til_ccc.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        msisdn.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int a, int a1, int a2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int a, int a1, int a2) {
+
+                if (msisdn.length() < 10) {
+                    til_phone.setError("Complete your phone number");
+                } else {
+                    til_phone.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int b, int b1, int b2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int b, int b1, int b2) {
+                if (password.length() < 8) {
+                    til_password.setError("Password should be 8 characters long");
+                } else {
+                    til_password.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        repassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int c, int c1, int c2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int c, int c1, int c2) {
+                if (repassword.length() < 8) {
+                    til_repass.setError("Password should be 8 characters long");
+                } else if (!password.getText().toString().equals(repassword.getText().toString())) {
+                    til_repass.setError(getString(R.string.must_match));
+
+                } else {
+                    til_repass.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
     }
 
@@ -110,11 +238,12 @@ public class SignUpActivity extends AppCompatActivity {
                 // validate input user here
                 if (ccc_no.getText().toString().trim().equals("")) {
                     Snackbar.make(parent_view, "Please provide your CCC Number.", Snackbar.LENGTH_SHORT).show();
+
                     return;
                 }
 
 
-                if (msisdn.getText().toString().trim().equals("") ) {
+                if (msisdn.getText().toString().trim().equals("")) {
                     Snackbar.make(parent_view, "Please provide your Phone Number.", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
@@ -123,8 +252,7 @@ public class SignUpActivity extends AppCompatActivity {
                 break;
             case R.id.bt_continue_security_question:
                 // validate input user here
-                if(security_question.getSelectedItem().toString().equals("Select your security question."))
-                {
+                if (security_question.getSelectedItem().toString().equals("Select your security question.")) {
                     Snackbar.make(parent_view, "Please select a security question.", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
@@ -142,19 +270,18 @@ public class SignUpActivity extends AppCompatActivity {
                     Snackbar.make(parent_view, "Please provide a password.", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
-                if(!password.getText().toString().equals(repassword.getText().toString()))
-                {
-                    repassword.setError(getString(R.string.must_match));
-                    return;
-                }
+
                 collapseAndContinue(2);
                 break;
             case R.id.bt_sign_up:
                 // validate input user here
-                if (consent.isChecked()){
+                if (consent.isChecked()) {
                     Snackbar.make(parent_view, "You have successfully Signed up.", Snackbar.LENGTH_SHORT).show();
+                    sendData(ccc_no.getText().toString(), security_question.getSelectedItem().toString(), security_answer.getText().toString(), msisdn.getText().toString(),
+                             password.getText().toString(), repassword.getText().toString());
                     finish();
-                }else {
+
+                } else {
                     Snackbar.make(parent_view, "Please confirm consent to NiShauri.", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
@@ -236,5 +363,60 @@ public class SignUpActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
+    private void sendData(String ccc_no, String security_question, String security_answer, String msisdn, String password, String repassword) {
 
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("CCCNo", ccc_no);
+            jsonObject.put("securityQuestion", security_question);
+            jsonObject.put("securityAnswer", security_answer);
+            jsonObject.put("msisdn", msisdn);
+            jsonObject.put("password", password);
+            jsonObject.put("re_password", repassword);
+            jsonObject.put("termsAccepted", consent.isChecked() ? "true" : "false");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        AndroidNetworking.post(Constants.REGISTER)
+                .addHeaders("Accept", "*/*")
+                .addHeaders("Accept", "gzip, deflate, br")
+                .addHeaders("Connection","keep-alive")
+                .setContentType("application.json")
+                .setMaxAgeCacheControl(300000, TimeUnit.MILLISECONDS)
+                .addJSONObjectBody(jsonObject) // posting json
+        /*.setRetryPolicy(new DefaultRetryPolicy(
+                30000, //for 30 Seconds
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT))*/
+
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener(){
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e(TAG, response.toString());
+                        if (response.has("id")){
+
+                            Intent mint = new Intent(SignUpActivity.this, LoginActivity.class);
+                            Toast.makeText(SignUpActivity.this, "Successful SignUp", Toast.LENGTH_SHORT).show();
+                            mint.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(mint);
+
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                        Log.e(TAG, error.getErrorBody());
+                        Snackbar.make(findViewById(R.id.signup_layout), "Server Error! Please try again!", Snackbar.LENGTH_LONG).show();
+                    }
+                });
+
+
+    }
 }

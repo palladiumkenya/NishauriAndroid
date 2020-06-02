@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/login_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -84,23 +85,13 @@
                         android:textColor="@color/colorAccent"
                         android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:orientation="horizontal">
-
-                        <com.hbb20.CountryCodePicker
-                            android:id="@+id/ccp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:ccp_autoDetectCountry="true"
-                            app:ccp_showFlag="false" />
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_phone_no"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            app:startIconDrawable="@drawable/ic_phone"
                             app:endIconMode="clear_text"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -111,20 +102,21 @@
                                 android:layout_weight="1"
                                 android:inputType="phone"
                                 android:hint="@string/phone_number"
-                                android:maxLength="9"
+                                android:maxLength="10"
                                 android:maxLines="1"
                                 android:singleLine="true"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
-                    </LinearLayout>
+
 
                     <View
                         android:layout_width="0dp"
                         android:layout_height="@dimen/spacing_mlarge" />
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_pass"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:passwordToggleEnabled="true"
@@ -132,6 +124,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textPassword"

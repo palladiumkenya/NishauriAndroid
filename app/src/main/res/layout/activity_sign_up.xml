@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/signup_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -114,8 +115,10 @@
                         android:orientation="vertical">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_ccc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/spacing_medium"
                             app:startIconDrawable="@drawable/ic_hospital"
                             app:endIconMode="clear_text"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -131,8 +134,10 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_phone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/spacing_medium"
                             app:startIconDrawable="@drawable/ic_phone"
                             app:endIconMode="clear_text"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -143,7 +148,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="Enter Phone Number"
                                 android:inputType="phone"
-                                android:maxLength="9"/>
+                                android:maxLength="10"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -238,6 +243,7 @@
                             android:entries="@array/security_question"/>
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_security_answer"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:passwordToggleEnabled="true"
@@ -337,8 +343,10 @@
                         android:orientation="vertical">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/spacing_medium"
                             app:passwordToggleEnabled="true"
                             app:startIconDrawable="@drawable/ic_password"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -354,6 +362,7 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_repass"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:passwordToggleEnabled="true"
@@ -364,6 +373,7 @@
                                 android:id="@+id/txt_repassword"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/spacing_medium"
                                 android:hint="Re-Enter your password"
                                 android:inputType="textPassword"
                                 android:maxLength="10"/>
