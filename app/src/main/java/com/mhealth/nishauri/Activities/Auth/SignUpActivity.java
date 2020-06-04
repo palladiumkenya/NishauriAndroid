@@ -18,11 +18,13 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.DefaultRetryPolicy;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -59,6 +61,7 @@ public class SignUpActivity extends AppCompatActivity {
     private int current_step = 0;
     private View parent_view;
     private Toolbar toolbar;
+    private LottieAnimationView animationView;
 
     private TextInputLayout til_ccc;
     TextInputLayout til_phone;
@@ -127,6 +130,7 @@ public class SignUpActivity extends AppCompatActivity {
         til_phone = (TextInputLayout) findViewById(R.id.til_phone);
         til_password = (TextInputLayout) findViewById(R.id.til_password);
         til_repass = (TextInputLayout) findViewById(R.id.til_repass);
+        animationView = findViewById(R.id.animationView);
 
 
         for (View v : view_list) {
@@ -276,10 +280,9 @@ public class SignUpActivity extends AppCompatActivity {
             case R.id.bt_sign_up:
                 // validate input user here
                 if (consent.isChecked()) {
-                    Snackbar.make(parent_view, "You have successfully Signed up.", Snackbar.LENGTH_SHORT).show();
                     sendData(ccc_no.getText().toString(), security_question.getSelectedItem().toString(), security_answer.getText().toString(), msisdn.getText().toString(),
                              password.getText().toString(), repassword.getText().toString());
-                    finish();
+                    animationView.setVisibility(View.VISIBLE);
 
                 } else {
                     Snackbar.make(parent_view, "Please confirm consent to NiShauri.", Snackbar.LENGTH_SHORT).show();
@@ -397,6 +400,9 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.e(TAG, response.toString());
+
+                        animationView.setVisibility(View.GONE);
+
                         if (response.has("id")){
 
                             Intent mint = new Intent(SignUpActivity.this, LoginActivity.class);
@@ -413,6 +419,9 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onError(ANError error) {
                         // handle error
                         Log.e(TAG, error.getErrorBody());
+
+                        animationView.setVisibility(View.GONE);
+
                         Snackbar.make(findViewById(R.id.signup_layout), "Server Error! Please try again!", Snackbar.LENGTH_LONG).show();
                     }
                 });

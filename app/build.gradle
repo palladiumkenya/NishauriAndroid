@@ -68,5 +68,7 @@ dependencies {
 
     implementation 'com.amitshekhar.android:android-networking:1.0.2'
 
+    implementation 'com.airbnb.android:lottie:3.4.0'
+
 
 }

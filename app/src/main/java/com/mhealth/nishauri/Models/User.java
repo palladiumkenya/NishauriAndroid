@@ -6,8 +6,11 @@ public class User {
 
 
 
+
+
     public User(String auth_token) {
         this.auth_token = auth_token;
+
 
 
     }
@@ -16,8 +19,8 @@ public class User {
         return auth_token;
     }
 
-    public void setAuth_token(String access_token) {
-        this.auth_token = access_token;
+    public void setAuth_token(String auth_token) {
+        this.auth_token = auth_token;
     }
 
 

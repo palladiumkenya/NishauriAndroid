@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Menu;
 
+import com.fxn.stash.Stash;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.mhealth.nishauri.Activities.Auth.LoginActivity;
 import com.mhealth.nishauri.R;
+import com.mhealth.nishauri.utils.Constants;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -71,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logout(){
+
+        String endPoint = Stash.getString(Constants.AUTH_TOKEN);
+        Stash.clearAll();
+
+        Stash.put(Constants.AUTH_TOKEN, endPoint);
 
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -141,6 +141,18 @@
                         android:layout_width="0dp"
                         android:layout_height="@dimen/spacing_mlarge" />
 
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/animationView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:lottie_url="https://assets9.lottiefiles.com/packages/lf20_Stt1R6.json"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        android:visibility="gone"/>
+
+
+
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_login"
                         android:layout_width="match_parent"

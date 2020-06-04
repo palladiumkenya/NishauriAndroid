@@ -9,7 +9,10 @@ public class Constants {
     /*auth*/
     public static String REGISTER = "http://nishauri-api.mhealthkenya.co.ke/api/users/";
     public static String LOGIN = "http://nishauri-api.mhealthkenya.co.ke/api/token/login/";
-    public static String GET_PROFILE = "http://nishauri-api.mhealthkenya.co.ke/api/users/me/";
+    public static String CURRENT_USER = "http://nishauri-api.mhealthkenya.co.ke/api/users/me/";
+    public static String ADD_DEPENDANT = "http://nishauri-api.mhealthkenya.co.ke/api/dependants/";
+    public static String AUTH_TOKEN = "";
+
 
 
 

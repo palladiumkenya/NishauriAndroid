@@ -64,37 +64,12 @@ public class DependantsFragment extends Fragment {
         fab_dependant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialogHEI();
+                NavHostFragment.findNavController(DependantsFragment.this).navigate(R.id.nav_add_dependant);
             }
         });
 
 
         return root;
-    }
-
-
-    private void showDialogHEI() {
-        final Dialog dialog = new Dialog(context);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
-        dialog.setContentView(R.layout.dialog_eid_number);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.setCancelable(true);
-        (dialog.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        (dialog.findViewById(R.id.btn_continue)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                NavHostFragment.findNavController(DependantsFragment.this).navigate(R.id.nav_add_dependant);
-            }
-        });
-
-        dialog.show();
     }
 
     @Override

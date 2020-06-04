@@ -20,11 +20,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/spacing_middle"
                 app:cardBackgroundColor="@android:color/white"
@@ -53,6 +54,26 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/spacing_middle"
                         android:layout_marginVertical="@dimen/spacing_middle"
+                        android:layout_marginTop="@dimen/spacing_middle"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/hei_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/spacing_xsmall"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:maxLength="10"
+                            android:hint="HEI Number" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/spacing_middle"
+                        android:layout_marginVertical="@dimen/spacing_middle"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -64,7 +85,40 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textview.MaterialTextView
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/spacing_middle"
+                        android:layout_marginVertical="@dimen/spacing_middle"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/surname"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Surname"
+                            android:inputType="textCapWords" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/spacing_middle"
+                        android:layout_marginVertical="@dimen/spacing_middle"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txt_dob"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Date of Birth"
+                            android:inputType="text"
+                            android:clickable="true"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!--<com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/spacing_middle"
@@ -86,17 +140,27 @@
                         android:text="Select date of birth here..."
                         android:textColor="@color/colorAccent"
                         android:textAppearance="@style/AppTextAppearance.Button"
-                        android:clickable="true" />
+                        android:clickable="true" />-->
 
-                    <androidx.appcompat.widget.AppCompatSpinner
-                        android:id="@+id/pep_initiated"
+                   <!-- <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/gender"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/spacing_middle"
                         android:layout_marginVertical="@dimen/spacing_middle"
                         android:paddingLeft="@dimen/spacing_large"
                         android:paddingRight="@dimen/spacing_large"
-                        android:hint="Select your gender here..." />
+                        android:hint="Select your gender here..." />-->
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/animationView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:lottie_url="https://assets9.lottiefiles.com/packages/lf20_Stt1R6.json"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        android:visibility="gone"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -132,7 +196,7 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 

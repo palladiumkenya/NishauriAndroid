@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -13,25 +14,27 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.mhealth.nishauri.Activities.MainActivity;
+import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
 
-import org.json.JSONObject;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.json.JSONException;
-import org.json.JSONStringer;
-import org.json.JSONTokener.*;
+
 
 
 import static com.mhealth.nishauri.utils.AppController.TAG;
@@ -47,12 +50,15 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextInputLayout til_phone_no;
     private TextInputLayout til_password;
+    private LottieAnimationView animationView;
+
 
     Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Stash.init(this);
         setContentView(R.layout.activity_login);
 
         toolbar = findViewById(R.id.toolbar);
@@ -66,6 +72,8 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         til_phone_no = findViewById(R.id.til_phone_no);
         til_password = findViewById(R.id.til_pass);
+        animationView = findViewById(R.id.animationView);
+
 
 
         phone.addTextChangedListener(new TextWatcher() {
@@ -130,6 +138,8 @@ public class LoginActivity extends AppCompatActivity {
                }
                else {
                    sendLoginRequest(password.getText().toString(),phone.getText().toString());
+                   animationView.setVisibility(View.VISIBLE);
+
 
 
                }
@@ -168,6 +178,20 @@ public class LoginActivity extends AppCompatActivity {
 
                         Log.e(TAG, response.toString());
 
+                        try {
+                            String auth_token = response.has("auth_token") ? response.getString("auth_token") : "";
+                            User newUser = new User(auth_token);
+
+                            Stash.put(Constants.AUTH_TOKEN, newUser);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                        animationView.setVisibility(View.GONE);
+
                         if (response.has("auth_token")){
 
                             Intent mint = new Intent(LoginActivity.this, MainActivity.class);
@@ -177,17 +201,17 @@ public class LoginActivity extends AppCompatActivity {
 
                         }
 
-
-
-
-
                     }
 
                     @Override
                     public void onError(ANError error) {
                         // handle error
                         Log.e(TAG, error.getErrorBody());
-                        Snackbar.make(findViewById(R.id.login_layout), "Server Error! Please try again!", Snackbar.LENGTH_LONG).show();
+
+                        animationView.setVisibility(View.GONE);
+
+
+                        Snackbar.make(findViewById(R.id.login_layout), "" + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
                     }
                 });
 
