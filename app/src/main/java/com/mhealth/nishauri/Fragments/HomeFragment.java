@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -26,11 +27,13 @@ import com.fxn.stash.Stash;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Fragments.Dependants.DependantsFragment;
+import com.mhealth.nishauri.Models.Profile;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.BindView;
@@ -46,11 +49,15 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.btn_add_dependant)
     Button btn_add_dependant;
 
+    @BindView(R.id.msisdn)
+    TextView txt_msisdn;
+
     private Unbinder unbinder;
     private View root;
     private Context context;
 
     private User loggedInUser;
+    private Profile currentProfile;
 
 
     @Override
@@ -75,9 +82,9 @@ public class HomeFragment extends Fragment {
         unbinder = ButterKnife.bind(this, root);
 
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
+        currentProfile = (Profile) Stash.getObject(Constants.PROFILE, Profile.class);
 
         String auth_token = loggedInUser.getAuth_token();
-
 
 
         AndroidNetworking.get(Constants.CURRENT_USER)
@@ -94,7 +101,27 @@ public class HomeFragment extends Fragment {
                         // do anything with response
                         Log.e(TAG, response.toString());
 
-                        Snackbar.make(root.findViewById(R.id.frag_home), "User Found! " , Snackbar.LENGTH_LONG).show();
+                        try {
+
+                            JSONObject data = response.getJSONObject("");
+
+
+                            String ccc_no = data.has("CCCNo") ? data.getString("CCCNo") : "";
+                            String security_question = data.has("securityQuestion") ? data.getString("securityQuestion") : "";
+                            String security_answer = data.has("securityAnswer") ? data.getString("securityAnswer") : "";
+                            String  terms_accepted = data.has("termAccepted") ? data.getString("termAccepted"): "";
+                            String id = data.has("id") ? data.getString("id") : "";
+                            String msisdn = data.has("msisdn") ? data.getString("msisdn") : "";
+
+                            Profile newProfile = new Profile(ccc_no, security_question,security_answer,terms_accepted,id,msisdn);
+                            Stash.put(Constants.PROFILE, newProfile);
+
+                            txt_msisdn.setText(currentProfile.getMsisdn());
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                     }
                     @Override
                     public void onError(ANError error) {
@@ -105,6 +132,8 @@ public class HomeFragment extends Fragment {
 
                     }
                 });
+
+
 
         btn_add_dependant.setOnClickListener(new View.OnClickListener() {
             @Override

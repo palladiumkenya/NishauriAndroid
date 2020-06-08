@@ -40,7 +40,7 @@
             android:text="CCC No:"/>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/cc_no"
+            android:id="@+id/ccc_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=" 1234567890">

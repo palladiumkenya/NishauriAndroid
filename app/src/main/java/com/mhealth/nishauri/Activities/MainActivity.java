@@ -4,11 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
 
 import com.fxn.stash.Stash;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.mhealth.nishauri.Activities.Auth.LoginActivity;
+import com.mhealth.nishauri.Models.Profile;
+import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
 
@@ -24,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
+
+    private Profile currentProfile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +38,15 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        currentProfile = (Profile) Stash.getObject(Constants.PROFILE, Profile.class);
+
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        View headerLayout = navigationView.getHeaderView(0); // 0-index header
+        TextView drawer_cccno = (TextView) headerLayout.findViewById(R.id.ccc_no);
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -45,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
+
+        if (currentProfile != null){
+            drawer_cccno.setText(currentProfile.getCcc_no());
+
+        }
     }
 
     @Override

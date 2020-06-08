@@ -11,8 +11,6 @@ public class User {
     public User(String auth_token) {
         this.auth_token = auth_token;
 
-
-
     }
 
     public String getAuth_token() {
