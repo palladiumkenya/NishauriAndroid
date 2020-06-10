@@ -62,9 +62,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/spacing_xsmall"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:maxLines="1"
-                            android:maxLength="10"
+                            android:maxLength="20"
                             android:hint="HEI Number" />
 
                     </com.google.android.material.textfield.TextInputLayout>

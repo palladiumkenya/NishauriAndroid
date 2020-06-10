@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/spacing_middle"
-                    android:text="Viral Load:"
+                    android:text="EID Result:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
                     android:textColor="@color/colorAccent"/>
 
@@ -62,6 +62,33 @@
                     android:padding="@dimen/spacing_middle"
                     android:text=" 900 copies/mL"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_hei"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_middle"
+                    android:text="HEI NUMBER:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
+                    android:textColor="@color/colorAccent"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_hei_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="@dimen/spacing_middle"
+                    android:text="1234/5678"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
 
             </LinearLayout>

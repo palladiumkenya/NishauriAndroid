@@ -64,13 +64,11 @@ public class DependantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             OriginalViewHolder view = (OriginalViewHolder) holder;
 
             view.dependant.setText(obj.getFirst_name()+ " " + obj.getSurname());
-            view.age.setText("Date Of Birth: "+obj.getDob());
-            view.approved.setText(obj.getApproved());
+            view.age.setText("Age: " +obj.getDob() + " Months");
+            view.approved.setText("Approved: " +obj.getApproved());
 
         }
     }
-
-
 
 
     @Override

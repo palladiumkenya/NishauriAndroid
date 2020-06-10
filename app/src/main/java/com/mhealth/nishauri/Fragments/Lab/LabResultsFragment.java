@@ -73,8 +73,8 @@ public class LabResultsFragment extends Fragment {
 
 
         Adapter adapter = new Adapter(getChildFragmentManager());
-        adapter.addFragment(new EidResultsFragment(), "EID Results");
         adapter.addFragment(new ViralLoadResultsFragment(), "Viral Load Results");
+        adapter.addFragment(new EidResultsFragment(), "EID Results");
 //        adapter.addFragment(new ProtocolsTabFragment(), hcw == null ? "Facility" : hcw.getFacility_name());
         viewPager.setAdapter(adapter);
     }

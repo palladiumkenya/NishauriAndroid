@@ -4,19 +4,41 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.fxn.stash.Stash;
+import com.google.android.material.snackbar.Snackbar;
+import com.mhealth.nishauri.Models.EID;
+import com.mhealth.nishauri.Models.User;
+import com.mhealth.nishauri.Models.ViralLoad;
 import com.mhealth.nishauri.R;
+import com.mhealth.nishauri.adapters.EIDAdapter;
+import com.mhealth.nishauri.adapters.ViralLoadAdapter;
+import com.mhealth.nishauri.utils.Constants;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+
+import static com.mhealth.nishauri.utils.AppController.TAG;
 
 
 public class EidResultsFragment extends Fragment {
@@ -24,6 +46,10 @@ public class EidResultsFragment extends Fragment {
     private Unbinder unbinder;
     private View root;
     private Context context;
+
+    private User loggedInUser;
+    private EIDAdapter mAdapter;
+    private ArrayList<EID> eidArrayList;
 
 
 
@@ -52,6 +78,21 @@ public class EidResultsFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_eid_results, container, false);
         unbinder = ButterKnife.bind(this, root);
 
+        loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
+
+
+        eidArrayList = new ArrayList<>();
+        mAdapter = new EIDAdapter(context, eidArrayList);
+
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false));
+        recyclerView.setHasFixedSize(true);
+
+        //set data and list adapter
+        recyclerView.setAdapter(mAdapter);
+
+        loadEid();
+
 
 
         return root;
@@ -74,5 +115,87 @@ public class EidResultsFragment extends Fragment {
     public void onPause() {
         shimmer_my_container.stopShimmerAnimation();
         super.onPause();
+    }
+
+    private void loadEid() {
+
+        String auth_token = loggedInUser.getAuth_token();
+
+
+        AndroidNetworking.get(Constants.EID)
+                .addHeaders("Authorization","Token "+ auth_token)
+                .addHeaders("Content-Type", "application.json")
+                .addHeaders("Accept", "*/*")
+                .addHeaders("Accept", "gzip, deflate, br")
+                .addHeaders("Connection","keep-alive")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+                        Log.e(TAG, response.toString());
+
+                       eidArrayList.clear();
+
+                        if (recyclerView!=null)
+                            recyclerView.setVisibility(View.VISIBLE);
+
+                        if (shimmer_my_container!=null){
+                            shimmer_my_container.stopShimmerAnimation();
+                            shimmer_my_container.setVisibility(View.GONE);
+                        }
+
+                        try {
+
+                            JSONArray myArray = response.getJSONArray("data");
+                            JSONArray myArray1 = myArray.getJSONArray(0);
+
+                            if (myArray1.length() > 0){
+
+
+                                for (int i = 0; i < myArray1.length(); i++) {
+
+                                    JSONObject item = (JSONObject) myArray1.get(i);
+
+
+                                    int  id = item.has("id") ? item.getInt("id") : 0;
+                                    String r_id = item.has("r_id") ? item.getString("r_id") : "";
+                                    String result_type = item.has("result_type") ? item.getString("result_type") : "";
+                                    String result_content = item.has("result_content") ? item.getString("result_content") : "";
+                                    String date_collected = item.has("date_collected") ? item.getString("date_collected") : "";
+                                    String lab_name = item.has("lab_name") ? item.getString("lab_name") : "";
+                                    String hei_number = item.has("dependant") ? item.getString("dependant") : "";
+
+
+
+                                    EID newResult = new EID(id,r_id,result_type,result_content,date_collected,lab_name,hei_number);
+
+                                    eidArrayList.add(newResult);
+                                    mAdapter.notifyDataSetChanged();
+
+                                }
+
+                            }else {
+                                //not data found
+                                Snackbar.make(root.findViewById(R.id.frag_eid_results), "No results found" , Snackbar.LENGTH_LONG).show();
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                        Log.e(TAG, error.getErrorBody());
+
+                        Snackbar.make(root.findViewById(R.id.frag_eid_results), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+
+                    }
+                });
     }
 }

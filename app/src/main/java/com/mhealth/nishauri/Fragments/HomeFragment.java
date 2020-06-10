@@ -57,7 +57,6 @@ public class HomeFragment extends Fragment {
     private Context context;
 
     private User loggedInUser;
-    private Profile currentProfile;
 
 
     @Override
@@ -82,7 +81,6 @@ public class HomeFragment extends Fragment {
         unbinder = ButterKnife.bind(this, root);
 
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
-        currentProfile = (Profile) Stash.getObject(Constants.PROFILE, Profile.class);
 
         String auth_token = loggedInUser.getAuth_token();
 
@@ -103,20 +101,15 @@ public class HomeFragment extends Fragment {
 
                         try {
 
-                            JSONObject data = response.getJSONObject("");
 
+                            String ccc_no = response.has("CCCNo") ? response.getString("CCCNo") : "";
+                            String security_question = response.has("securityQuestion") ? response.getString("securityQuestion") : "";
+                            String security_answer = response.has("securityAnswer") ? response.getString("securityAnswer") : "";
+                            String  terms_accepted = response.has("termAccepted") ? response.getString("termAccepted"): "";
+                            String id = response.has("id") ? response.getString("id") : "";
+                            String msisdn = response.has("msisdn") ? response.getString("msisdn") : "";
 
-                            String ccc_no = data.has("CCCNo") ? data.getString("CCCNo") : "";
-                            String security_question = data.has("securityQuestion") ? data.getString("securityQuestion") : "";
-                            String security_answer = data.has("securityAnswer") ? data.getString("securityAnswer") : "";
-                            String  terms_accepted = data.has("termAccepted") ? data.getString("termAccepted"): "";
-                            String id = data.has("id") ? data.getString("id") : "";
-                            String msisdn = data.has("msisdn") ? data.getString("msisdn") : "";
-
-                            Profile newProfile = new Profile(ccc_no, security_question,security_answer,terms_accepted,id,msisdn);
-                            Stash.put(Constants.PROFILE, newProfile);
-
-                            txt_msisdn.setText(currentProfile.getMsisdn());
+                            txt_msisdn.setText(msisdn);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
