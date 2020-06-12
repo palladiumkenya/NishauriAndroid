@@ -1,8 +1,6 @@
 package com.mhealth.nishauri.Fragments.Dependants;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,15 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
@@ -31,9 +21,8 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.fxn.stash.Stash;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.mhealth.nishauri.Fragments.Appointment.AppointmentsFragment;
+
 import com.mhealth.nishauri.Models.Dependant;
-import com.mhealth.nishauri.Models.Profile;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.adapters.DependantAdapter;
@@ -44,9 +33,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -116,7 +102,7 @@ public class DependantsFragment extends Fragment {
         //set data and list adapter
         recyclerView.setAdapter(mAdapter);
 
-        loadImmunizations();
+        loadDependants();
 
 
         mAdapter.setOnItemClickListener(new DependantAdapter.OnItemClickListener() {
@@ -150,7 +136,7 @@ public class DependantsFragment extends Fragment {
         super.onPause();
     }
 
-    private void loadImmunizations() {
+    private void loadDependants() {
 
         String auth_token = loggedInUser.getAuth_token();
 

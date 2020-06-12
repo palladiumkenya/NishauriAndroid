@@ -8,18 +8,18 @@ public class EID {
     private String result_content;
     private String date_collected;
     private String lab_name;
-    private String hei_number;
+    private String dependant_name;
 
 
 
-    public EID(int id, String r_id, String result_type, String result_content, String date_collected, String lab_name, String hei_number) {
+    public EID(int id, String r_id, String result_type, String result_content, String date_collected, String lab_name, String dependant_name) {
         this.id = id;
         this.r_id = r_id;
         this.result_type = result_type;
         this.result_content = result_content;
         this.date_collected = date_collected;
         this.lab_name = lab_name;
-        this.hei_number = hei_number;
+        this.dependant_name = dependant_name;
 
     }
 
@@ -71,11 +71,11 @@ public class EID {
         this.lab_name = lab_name;
     }
 
-    public String getHei_number() {
-        return hei_number;
+    public String getDependant_name() {
+        return dependant_name;
     }
 
-    public void setHei_number(String hei_number) {
-        this.hei_number = hei_number;
+    public void setDependant_name(String dependant_name) {
+        this.dependant_name = dependant_name;
     }
 }

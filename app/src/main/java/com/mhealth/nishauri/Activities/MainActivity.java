@@ -15,9 +15,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.fxn.stash.Stash;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Activities.Auth.LoginActivity;
-import com.mhealth.nishauri.Models.Profile;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
@@ -30,6 +28,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -56,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
 
         View headerLayout = navigationView.getHeaderView(0); // 0-index header
         TextView drawer_cccno = (TextView) headerLayout.findViewById(R.id.ccc_no);
+        TextView drawer_name = (TextView) headerLayout.findViewById(R.id.full_name);
+
+
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -91,11 +93,28 @@ public class MainActivity extends AppCompatActivity {
 
                         try {
 
+                            JSONArray myArray = response.getJSONArray("data");
 
-                            String ccc_no = response.has("CCCNo") ? response.getString("CCCNo") : "";
+                            if (myArray.length() > 0){
 
 
-                            drawer_cccno.setText(ccc_no);
+                                for (int i = 0; i < myArray.length(); i++) {
+
+                                    JSONObject item = (JSONObject) myArray.get(i);
+
+
+                                    String first_name = item.has("first_name") ? item.getString("first_name") : "";
+                                    String last_name = item.has("last_name") ? item.getString("last_name") : "";
+                                    String CCCNo = item.has("CCCNo") ? item.getString("CCCNo") : "";
+
+                                    drawer_cccno.setText(CCCNo);
+                                    drawer_name.setText(first_name + " " + last_name);
+
+                                }
+
+                            }
+
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();

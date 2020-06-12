@@ -14,38 +14,37 @@ import com.mhealth.nishauri.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DependantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class DependantHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Dependant> items = new ArrayList<>();
 
     private Context context;
-    private DependantAdapter.OnItemClickListener onItemClickListener;
+    private DependantHomeAdapter.OnItemClickListener onItemClickListener;
 
     public interface OnItemClickListener{
         void onItemClick(int position);
     }
-    public void setOnItemClickListener(DependantAdapter.OnItemClickListener onItemClickListener) {
+
+    public void setOnItemClickListener(DependantHomeAdapter.OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public DependantAdapter(Context context, List<Dependant> items) {
+    public DependantHomeAdapter(Context context, List<Dependant> items) {
         this.items = items;
         this.context = context;
     }
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
         public TextView dependant;
-        public TextView hei_number;
         public TextView age;
         public TextView status;
 
 
         public OriginalViewHolder(View v) {
             super(v);
-            dependant = (TextView) v.findViewById(R.id.txt_dependant_name);
-            hei_number = (TextView) v.findViewById(R.id.txt_dependant_number);
-            age = (TextView) v.findViewById(R.id.txt_age);
-            status = (TextView) v.findViewById(R.id.txt_approval_status);
+            dependant = (TextView) v.findViewById(R.id.txt_dependant_names);
+            age = (TextView) v.findViewById(R.id.txt_dependant_age);
+            status = (TextView) v.findViewById(R.id.txt_status);
 
         }
     }
@@ -53,8 +52,8 @@ public class DependantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_dependant, parent, false);
-        vh = new OriginalViewHolder(v);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_dependant_home, parent, false);
+        vh = new DependantHomeAdapter.OriginalViewHolder(v);
         return vh;
     }
 
@@ -62,11 +61,10 @@ public class DependantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         Dependant obj = items.get(position);
-        if (holder instanceof OriginalViewHolder) {
-            OriginalViewHolder view = (OriginalViewHolder) holder;
+        if (holder instanceof DependantHomeAdapter.OriginalViewHolder) {
+            DependantHomeAdapter.OriginalViewHolder view = (DependantHomeAdapter.OriginalViewHolder) holder;
 
-            view.dependant.setText(obj.getFirst_name()+ " " + obj.getSurname());
-            view.hei_number.setText(obj.getHeiNumber());
+            view.dependant.setText(obj.getFirst_name());
             view.age.setText("Age: " +obj.getDob() + " Months");
 
             if (obj.getApproved().equals("true")){

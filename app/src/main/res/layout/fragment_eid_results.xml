@@ -62,8 +62,16 @@
 
         </androidx.core.widget.NestedScrollView>
 
-        <include
-            layout="@layout/layout_lab_request" />
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fab_request_eid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end|right"
+            android:layout_margin="8dp"
+            android:contentDescription="@string/request_results"
+            android:text="@string/request_results"
+            app:icon="@drawable/ic_refresh"
+            app:layout_anchorGravity="bottom|right|end"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

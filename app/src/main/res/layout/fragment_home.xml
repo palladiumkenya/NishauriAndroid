@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/tools"
     android:id="@+id/frag_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -169,6 +170,7 @@
             </RelativeLayout>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_appointments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/spacing_large"
@@ -292,6 +294,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_treatments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/spacing_large"
@@ -415,7 +418,7 @@
 
             </androidx.cardview.widget.CardView>
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -553,7 +556,7 @@
 
                 </androidx.cardview.widget.CardView>
 
-            </LinearLayout>
+            </LinearLayout>-->
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -580,159 +583,59 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/grey_90" />
 
-                    <LinearLayout
+                    <androidx.coordinatorlayout.widget.CoordinatorLayout
+                        android:id="@+id/coordinator_lyt"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent">
 
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_margin="@dimen/spacing_small"
-                            android:layout_centerInParent="true"
-                            android:tint="@color/colorAccent"
-                            android:src="@drawable/ic_child" />
-
-                        <com.google.android.material.textview.MaterialTextView
+                        <androidx.core.widget.NestedScrollView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:text="Dependant 1"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textStyle="bold"
-                            android:textColor="@color/grey_90" />
+                            android:layout_height="wrap_content">
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/spacing_large"
-                            android:layout_marginTop="@dimen/spacing_medium"
-                            android:layout_weight="1"
-                            android:lineSpacingExtra="4dp"
-                            android:text="6 months"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/grey_60" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/spacing_large"
-                            android:layout_marginTop="@dimen/spacing_medium"
-                            android:layout_weight="1"
-                            android:lineSpacingExtra="4dp"
-                            android:text="Approved"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/grey_60" />
+                                <FrameLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
 
-                    </LinearLayout>
+                                    <com.facebook.shimmer.ShimmerFrameLayout
+                                        android:id="@+id/shimmer_my_container"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        shimmer:duration="800">
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey_20" />
+                                        <LinearLayout
+                                            android:id="@+id/shimmerInnerLayout"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:orientation="horizontal">
+                                            <include layout="@layout/lab_placeholder_item" />
 
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_margin="@dimen/spacing_small"
-                            android:layout_centerInParent="true"
-                            android:tint="@color/colorAccent"
-                            android:src="@drawable/ic_child" />
+                                        </LinearLayout>
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:text="Dependant 2"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textStyle="bold"
-                            android:textColor="@color/grey_90" />
+                                    </com.facebook.shimmer.ShimmerFrameLayout>
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/spacing_large"
-                            android:layout_marginTop="@dimen/spacing_medium"
-                            android:layout_weight="1"
-                            android:lineSpacingExtra="4dp"
-                            android:text="6 months"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/grey_60" />
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/recyclerView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:scrollbars="vertical"
+                                        android:layout_marginTop="@dimen/spacing_large"
+                                        android:visibility="gone"
+                                        android:scrollingCache="true" />
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/spacing_large"
-                            android:layout_marginTop="@dimen/spacing_medium"
-                            android:layout_weight="1"
-                            android:lineSpacingExtra="4dp"
-                            android:text="Approved"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/grey_60" />
+                                </FrameLayout>
 
-                    </LinearLayout>
+                            </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey_20" />
+                        </androidx.core.widget.NestedScrollView>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:orientation="horizontal">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_margin="@dimen/spacing_small"
-                            android:layout_centerInParent="true"
-                            android:tint="@color/colorAccent"
-                            android:src="@drawable/ic_child" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:text="Dependant 3"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textStyle="bold"
-                            android:textColor="@color/grey_90" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/spacing_large"
-                            android:layout_marginTop="@dimen/spacing_medium"
-                            android:layout_weight="1"
-                            android:lineSpacingExtra="4dp"
-                            android:text="10 months"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/grey_60" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/spacing_large"
-                            android:layout_marginTop="@dimen/spacing_medium"
-                            android:layout_weight="1"
-                            android:lineSpacingExtra="4dp"
-                            android:text="Pending"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/grey_60" />
-
-                    </LinearLayout>
+                    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_add_dependant"

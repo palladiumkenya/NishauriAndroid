@@ -36,7 +36,7 @@ public class EIDAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
         public TextView result_date;
         public TextView result;
-        public TextView hei_no;
+        public TextView dependant;
         public TextView lab;
 
 
@@ -45,7 +45,7 @@ public class EIDAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(v);
             result_date = (TextView) v.findViewById(R.id.txt_result_date);
             result = (TextView) v.findViewById(R.id.txt_viral_load_result);
-            hei_no = (TextView) v.findViewById(R.id.txt_hei_number);
+            dependant = (TextView) v.findViewById(R.id.txt_dependant);
             lab = (TextView) v.findViewById(R.id.txt_lab_name);
 
 
@@ -69,7 +69,7 @@ public class EIDAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             view.result_date.setText(obj.getDate_collected());
             view.result.setText(obj.getResult_content());
-            view.hei_no.setText(obj.getHei_number());
+            view.dependant.setText(obj.getDependant_name());
             view.lab.setText(obj.getLab_name());
 
 

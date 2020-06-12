@@ -2,26 +2,17 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="4"
-        android:layout_margin="@dimen/spacing_medium"
+        android:layout_marginHorizontal="@dimen/spacing_large"
+        android:layout_weight="3"
         android:orientation="horizontal">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="@dimen/spacing_small"
-            android:layout_centerInParent="true"
-            android:tint="@color/colorAccent"
-            android:src="@drawable/ic_child" />
-
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/txt_dependant_names"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -32,28 +23,25 @@
             android:textColor="@color/grey_90" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/txt_dependant_age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_large"
             android:layout_marginTop="@dimen/spacing_medium"
             android:layout_weight="1"
             android:lineSpacingExtra="4dp"
-            android:text="6 months"
+            android:text="Approved"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/grey_60" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/txt_status"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_update_dependant1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_large"
-            android:layout_marginTop="@dimen/spacing_medium"
             android:layout_weight="1"
-            android:lineSpacingExtra="4dp"
-            android:text="Status: Approved"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@color/grey_60" />
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:text="Edit">
+
+        </com.google.android.material.button.MaterialButton>
 
     </LinearLayout>
 

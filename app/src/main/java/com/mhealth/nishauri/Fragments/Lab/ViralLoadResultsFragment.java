@@ -19,6 +19,7 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.fxn.stash.Stash;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Models.Dependant;
 import com.mhealth.nishauri.Models.User;
@@ -52,16 +53,14 @@ public class ViralLoadResultsFragment extends Fragment {
     private ViralLoadAdapter mAdapter;
     private ArrayList<ViralLoad> viralLoadArrayList;
 
-
-
     @BindView(R.id.shimmer_my_container)
     ShimmerFrameLayout shimmer_my_container;
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    /*@BindView(R.id.txt_result_guideline)
-    TextView result_guideline;*/
+    @BindView(R.id.fab_request_viral)
+    ExtendedFloatingActionButton fab_request_viral_results;
 
     @Override
     public void onAttach(Context ctx) {
@@ -95,14 +94,18 @@ public class ViralLoadResultsFragment extends Fragment {
         //set data and list adapter
         recyclerView.setAdapter(mAdapter);
 
-        loadViralLoad();
-
-
         mAdapter.setOnItemClickListener(new ViralLoadAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 ViralLoad clickedItem = viralLoadArrayList.get(position);
 
+            }
+        });
+
+        fab_request_viral_results.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadViralLoad();
             }
         });
 
@@ -183,9 +186,7 @@ public class ViralLoadResultsFragment extends Fragment {
                                     viralLoadArrayList.add(newResult);
                                     mAdapter.notifyDataSetChanged();
 
-                                    /*if (result_content.equals("Negative")){
-                                        result_guideline.setVisibility(View.VISIBLE);
-                                    }*/
+
 
                                 }
 

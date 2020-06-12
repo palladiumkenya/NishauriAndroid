@@ -19,6 +19,7 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.fxn.stash.Stash;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Models.EID;
 import com.mhealth.nishauri.Models.User;
@@ -59,6 +60,9 @@ public class EidResultsFragment extends Fragment {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
+    @BindView(R.id.fab_request_eid)
+    ExtendedFloatingActionButton fab_request_eid_results;
+
     @Override
     public void onAttach(Context ctx) {
         super.onAttach(ctx);
@@ -91,9 +95,12 @@ public class EidResultsFragment extends Fragment {
         //set data and list adapter
         recyclerView.setAdapter(mAdapter);
 
-        loadEid();
-
-
+        fab_request_eid_results.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadEid();
+            }
+        });
 
         return root;
     }
@@ -149,14 +156,13 @@ public class EidResultsFragment extends Fragment {
                         try {
 
                             JSONArray myArray = response.getJSONArray("data");
-                            JSONArray myArray1 = myArray.getJSONArray(0);
 
-                            if (myArray1.length() > 0){
+                            if (myArray.length() > 0){
 
 
-                                for (int i = 0; i < myArray1.length(); i++) {
+                                for (int i = 0; i < myArray.length(); i++) {
 
-                                    JSONObject item = (JSONObject) myArray1.get(i);
+                                    JSONObject item = (JSONObject) myArray.get(i);
 
 
                                     int  id = item.has("id") ? item.getInt("id") : 0;
@@ -165,11 +171,11 @@ public class EidResultsFragment extends Fragment {
                                     String result_content = item.has("result_content") ? item.getString("result_content") : "";
                                     String date_collected = item.has("date_collected") ? item.getString("date_collected") : "";
                                     String lab_name = item.has("lab_name") ? item.getString("lab_name") : "";
-                                    String hei_number = item.has("dependant") ? item.getString("dependant") : "";
+                                    String dependant_name = item.has("dependant") ? item.getString("dependant") : "";
 
 
 
-                                    EID newResult = new EID(id,r_id,result_type,result_content,date_collected,lab_name,hei_number);
+                                    EID newResult = new EID(id,r_id,result_type,result_content,date_collected,lab_name,dependant_name);
 
                                     eidArrayList.add(newResult);
                                     mAdapter.notifyDataSetChanged();
