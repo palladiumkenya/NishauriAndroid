@@ -210,7 +210,7 @@
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
+           <!-- <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/spacing_large"
@@ -259,88 +259,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/grey_5" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <!--<androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_large"
-                android:layout_marginRight="@dimen/spacing_large"
-                android:layout_marginTop="@dimen/spacing_middle"
-                android:background="@android:color/white"
-                app:cardCornerRadius="2dp"
-                android:visibility="gone"
-                app:cardElevation="2dp"
-                app:cardUseCompatPadding="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/spacing_large">
-
-                   &lt;!&ndash; <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Password"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/grey_90" />&ndash;&gt;
-
-                    &lt;!&ndash; <LinearLayout
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginTop="@dimen/spacing_middle"
-                         android:orientation="vertical">
-
-                         <com.google.android.material.textfield.TextInputLayout
-                             android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                             app:passwordToggleEnabled="true"
-                             android:paddingLeft="@dimen/spacing_large"
-                             android:paddingRight="@dimen/spacing_large">
-                             <com.google.android.material.textfield.TextInputEditText
-                                 android:id="@+id/old_password"
-                                 android:layout_width="match_parent"
-                                 android:layout_height="wrap_content"
-                                 style="@style/EditText.Flat.Grey"
-                                 android:inputType="textPassword"
-                                 android:hint="@string/old_password"/>
-                         </com.google.android.material.textfield.TextInputLayout>
-
-                         <com.google.android.material.textfield.TextInputLayout
-                             android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                             app:passwordToggleEnabled="true"
-                             android:paddingLeft="@dimen/spacing_large"
-                             android:paddingRight="@dimen/spacing_large">
-                             <com.google.android.material.textfield.TextInputEditText
-                                 android:id="@+id/input_password"
-                                 android:layout_width="match_parent"
-                                 android:layout_height="wrap_content"
-
-                                 android:inputType="textPassword"
-                                 android:hint="@string/password"/>
-                         </com.google.android.material.textfield.TextInputLayout>
-
-                         <com.google.android.material.textfield.TextInputLayout
-                             android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                             app:passwordToggleEnabled="true"
-                             android:paddingLeft="@dimen/spacing_large"
-                             android:paddingRight="@dimen/spacing_large">
-                             <com.google.android.material.textfield.TextInputEditText
-                                 android:id="@+id/input_confirm_password"
-                                 android:layout_width="match_parent"
-                                 android:layout_height="wrap_content"
-                                 android:inputType="textPassword"
-                                 android:hint="@string/confirm_password"/>
-                         </com.google.android.material.textfield.TextInputLayout>
-
-
-                     </LinearLayout>&ndash;&gt;
 
                 </LinearLayout>
 

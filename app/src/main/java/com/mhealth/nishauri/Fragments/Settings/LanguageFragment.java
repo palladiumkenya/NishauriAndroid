@@ -13,8 +13,6 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.mhealth.nishauri.Fragments.Dependants.AddDependantFragment;
 import com.mhealth.nishauri.R;
 
 import butterknife.BindView;

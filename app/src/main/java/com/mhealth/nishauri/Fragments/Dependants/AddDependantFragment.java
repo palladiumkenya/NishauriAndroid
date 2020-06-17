@@ -112,7 +112,7 @@ public class AddDependantFragment extends Fragment {
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Cancel button clicked!", Toast.LENGTH_SHORT).show();
+
                 NavHostFragment.findNavController(AddDependantFragment.this).navigate(R.id.nav_dependant);
             }
         });

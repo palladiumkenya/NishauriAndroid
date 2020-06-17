@@ -13,6 +13,7 @@
         android:orientation="horizontal">
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txt_dependant_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -23,6 +24,7 @@
             android:textColor="@color/grey_90" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txt_approval"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_large"
@@ -34,7 +36,7 @@
             android:textColor="@color/grey_60" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_update_dependant1"
+            android:id="@+id/btn_update_dependant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

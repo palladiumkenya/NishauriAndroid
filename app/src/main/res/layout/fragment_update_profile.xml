@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frag_update_profile"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -119,6 +120,7 @@
 
 
                         <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/txt_names"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/spacing_large"
@@ -148,6 +150,7 @@
                             android:textColor="@color/grey_90" />
 
                         <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/txt_ccc_number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/spacing_large"
@@ -160,38 +163,7 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:orientation="horizontal">
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:text="Facility: "
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textStyle="bold"
-                            android:textColor="@color/grey_90" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/spacing_large"
-                            android:layout_marginTop="@dimen/spacing_medium"
-                            android:layout_weight="1"
-                            android:lineSpacingExtra="4dp"
-                            android:text="Kenyatta National Hospital"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/grey_60" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="3dp" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_update_user"

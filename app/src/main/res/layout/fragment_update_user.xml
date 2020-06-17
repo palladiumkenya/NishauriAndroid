@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/update_user"
+    android:id="@+id/frag_update_user"
     android:background="@color/grey_5"
     android:fitsSystemWindows="true">
 
@@ -174,12 +174,13 @@
                         android:orientation="vertical">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_first_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:endIconMode="clear_text"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/first_name"
+                                android:id="@+id/etxt_first_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 style="@style/EditText.Flat.Grey"
@@ -188,12 +189,14 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_surname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:endIconMode="clear_text"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/sur_name"
+                                android:id="@+id/etxt_surname"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 style="@style/EditText.Flat.Grey"
@@ -202,33 +205,22 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_phone_number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:endIconMode="clear_text"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/email"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                style="@style/EditText.Flat.Grey"
-                                android:inputType="textEmailAddress"
-                                android:hint="Email"/>
-                        </com.google.android.material.textfield.TextInputLayout>
 
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:endIconMode="clear_text"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/phone_number"
+                                android:id="@+id/etxt_phone_number"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 style="@style/EditText.Flat.Grey"
                                 android:inputType="phone"
-                                android:hint="@string/phone_number"/>
+                                android:hint="Phone Number"/>
                         </com.google.android.material.textfield.TextInputLayout>
+
+
 
                     </LinearLayout>
 
@@ -256,70 +248,34 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Facility details"
+                        android:text="Security question details"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/grey_90" />
 
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/security_question_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/spacing_xxlarge"
+                        android:drawSelectorOnTop="true"
+                        android:entries="@array/security_question"/>
+
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_security_answer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:endIconMode="clear_text"
+                        app:passwordToggleEnabled="true"
+                        app:startIconDrawable="@drawable/ic_password"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/ccc_no"
+                            android:id="@+id/etxt_security_answer"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            style="@style/EditText.Flat.Grey"
-                            android:inputType="phone"
-                            android:maxLength="10"
-                            android:hint="CCC Number"/>
+                            android:hint="Enter your answer"
+                            android:inputType="textPassword"
+                            android:maxLength="10"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey_5" />
-
-                    <androidx.appcompat.widget.AppCompatSpinner
-                        android:id="@+id/facilitySpinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xxlarge" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey_5" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_large"
-                android:layout_marginRight="@dimen/spacing_large"
-                android:layout_marginTop="@dimen/spacing_middle"
-                android:background="@android:color/white"
-                app:cardCornerRadius="2dp"
-                android:visibility="gone"
-                app:cardElevation="2dp"
-                app:cardUseCompatPadding="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/spacing_large">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Password"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/grey_90" />
 
                    <!-- <LinearLayout
                         android:layout_width="match_parent"
