@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_bright"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+
+  <!--<Spinner-->
+      <!--android:id="@+id/spinner1"-->
+      <!--android:layout_width="match_parent"-->
+      <!--android:layout_height="wrap_content">-->
+
+  <!--</Spinner>-->
+
+    <!--<EditText-->
+        <!--android:id="@+id/noOfCalls"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:ems="10"-->
+        <!--android:visibility="gone"-->
+        <!--android:hint="enter number of calls placed"-->
+        <!--android:inputType="textPersonName"-->
+        <!--/>-->
+
+    <!--<EditText-->
+        <!--android:id="@+id/calloutcome"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:ems="10"-->
+        <!--android:visibility="gone"-->
+
+        <!--android:hint="enter the outcome of the call"-->
+        <!--android:inputType="textPersonName"-->
+        <!--/>-->
+
+    <!--<EditText-->
+        <!--android:id="@+id/noOfVisit"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:visibility="gone"-->
+
+        <!--android:ems="10"-->
+        <!--android:inputType="textPersonName"-->
+        <!--android:hint="enter number of home visits placed"/>-->
+
+    <!--<EditText-->
+        <!--android:id="@+id/visitoutcome"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:visibility="gone"-->
+
+        <!--android:layout_height="wrap_content"-->
+        <!--android:ems="10"-->
+        <!--android:inputType="textPersonName"-->
+        <!--android:hint="enter the outcome of the home visit" />-->
+
+
+  <Button
+      android:id="@+id/button3"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Place a CALL" />
+
+  <Button
+      android:id="@+id/button4"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="PHYSICAL TRACKING" />
+</LinearLayout>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_bright"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/datecalled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:hint="Date client was contacted"
+        android:inputType="text"
+        android:maxLength="24"
+
+        android:textColorHint="#000"
+        android:textSize="12dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="Select Outcome" />
+
+
+
+        <Spinner
+            android:id="@+id/gender_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    <EditText
+        android:id="@+id/rescheduledateone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:hint="Reschedule date"
+        android:focusable="false"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/final_spinner"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/rescheduledate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:hint="Reschedule date"
+        android:focusable="false"
+        android:visibility="gone"/>
+
+    <EditText
+        android:id="@+id/clientreturndate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Client return date"
+        android:focusable="false"
+        android:visibility="gone"/>
+
+    <EditText
+
+        android:id="@+id/other"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="specify other"
+        android:visibility="gone"
+
+        />
+
+
+    <EditText
+        android:id="@+id/adate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:hint="Next Appointment date"
+        android:inputType="text"
+        android:maxLength="24"
+        android:visibility="gone"
+
+        android:textColorHint="#000"
+        android:textSize="12dp" />
+
+   <TextView
+       android:id="@+id/newappspinner"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:visibility="gone"
+       android:text="Select new appointment type"
+      />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/newapptype"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/missedvisitOther"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:hint="Specify Other"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/missedvisitTracer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="Tracers name"/>
+
+    <EditText
+        android:id="@+id/missedvisitTraceCost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="Tracing Cost"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_weight="1"
+            android:text="cancel" />
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="submit" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

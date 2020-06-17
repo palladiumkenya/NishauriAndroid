@@ -1,0 +1,80 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#00CED1">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginTop="40dp"
+        >
+
+        <!--<Button-->
+            <!--android:id="@+id/btnRegister"-->
+            <!--android:onClick="signIn"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:textColor="#fff"-->
+            <!--android:text="@string/register"-->
+            <!--android:drawableTop="@mipmap/person"-->
+            <!--style="?android:attr/borderlessButtonStyle"-->
+
+            <!--/>-->
+
+
+        <Button
+            android:id="@+id/btnAppointment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Appointment"
+            android:layout_weight="1"
+            android:textColor="#fff"
+            android:drawableTop="@mipmap/expo"
+            style="?android:attr/borderlessButtonStyle"
+            />
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        >
+
+        <Button
+            android:onClick="Register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#fff"
+            android:text="Register"
+            android:drawableTop="@mipmap/faqasset"
+            style="?android:attr/borderlessButtonStyle"
+            />
+
+
+        <Button
+            android:onClick="clientTransfer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#fff"
+            android:text="Broadcast"
+            android:drawableTop="@mipmap/webasset"
+            style="?android:attr/borderlessButtonStyle"
+            />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
+

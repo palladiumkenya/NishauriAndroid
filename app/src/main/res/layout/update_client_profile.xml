@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_alignParentBottom="true"
+    android:background="#fffff0">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
+
+        <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar"-->
+        <!--android:layout_width="267dp"-->
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--android:background="@drawable/reg"-->
+        <!--app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />-->
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <ImageView
+                android:id="@+id/tv_header_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:src="@drawable/reg" />
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_alignParentTop="true"
+        >
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:focusableInTouchMode="true"
+                android:id="@+id/mydetailsll"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Select Marital Status"/>
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10sp"
+                    android:id="@+id/updateprof_marital_spinner"
+                    android:layout_marginBottom="5sp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Select Treatment Category"/>
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10sp"
+                    android:id="@+id/updateprof_treatment_spinner"
+                    android:layout_marginBottom="5sp"
+                    android:layout_height="wrap_content"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Select Preferred text time"/>
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10sp"
+                    android:id="@+id/updateprof_texttime_spinner"
+                    android:layout_marginBottom="5sp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Select Language"/>
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10sp"
+                    android:id="@+id/updateprof_language_spinner"
+                    android:layout_marginBottom="5sp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Enable Sms"/>
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10sp"
+                    android:id="@+id/updateprof_enablesms_spinner"
+                    android:layout_marginBottom="5sp"
+                    android:layout_height="wrap_content"/>
+
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Update Profile"
+                    android:onClick="updateClicked"
+                    android:id="@+id/btnupdate"
+                    android:fontFamily="serif"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/button"
+                    android:layout_marginTop="4dp"
+                    />
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

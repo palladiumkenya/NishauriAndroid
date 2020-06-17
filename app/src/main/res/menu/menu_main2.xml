@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainOptions">
+
+    <item
+        android:id="@+id/action_search2"
+        android:title="search"
+        android:icon="@mipmap/search"
+        android:orderInCategory="200"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/logout"
+        android:orderInCategory="100"
+        android:title="Logout"
+        app:showAsAction="never" />
+</menu>

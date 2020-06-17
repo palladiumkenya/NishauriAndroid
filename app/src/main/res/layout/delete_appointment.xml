@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_bright"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/actualdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:hint="Actual Date"
+        android:inputType="text"
+        android:maxLength="24"
+        android:textColorHint="#000"
+        android:textSize="12dp" />
+
+
+
+
+    <EditText
+        android:id="@+id/nextappdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Next appointment date"
+        android:focusable="false"
+       />
+
+   <TextView
+       android:id="@+id/newappspinner"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="Select new appointment type"
+      />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/newapptype"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/newappOther"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:hint="Specify Other"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_weight="1"
+            android:text="cancel" />
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="submit" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

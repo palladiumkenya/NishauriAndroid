@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.mhealth.appointment_diary">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name="com.orm.SugarApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+        <meta-data
+            android:name="DATABASE"
+            android:value="ushauridb.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="23" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="com.example.mhealth.appointment_diary" />
+
+
+        <!--start sms retriever details here-->
+
+        <service android:name=".Smsretrieverapi.BackgroundService" />
+
+        <activity android:name=".Smsretrieverapi.TestClass">
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN"/>-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <receiver
+            android:name=".Smsretrieverapi.SmsReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED"/>
+            </intent-filter>
+        </receiver>
+        <!--end sms retriever details here-->
+
+        <activity
+            android:name=".loginmodule.LoginActivity"
+            android:configChanges="orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainOptions"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".loginmodule.MainActivity2"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".loginmodule.Registration"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".defaulters_diary.DefaulterMainActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Defaulter Diary"
+            android:parentActivityName=".MainOptions">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainOptions" />
+        </activity>
+        <activity
+            android:name=".wellnesstab.WellnesTabs"
+            android:configChanges="orientation|screenSize"
+            android:label="Wellness Messages"
+            android:parentActivityName=".MainOptions">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainOptions" />
+        </activity>
+        <activity
+            android:name=".appointment_diary.TodaysAppointment"
+            android:configChanges="orientation|screenSize"
+            android:label="Appointment Diary"
+            android:parentActivityName=".MainOptions"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainOptions" />
+        </activity>
+        <activity
+            android:name=".utilitymodules.Appointment"
+            android:configChanges="orientation|screenSize"
+            android:label="Schedule Appointments"
+            android:parentActivityName=".appointment_diary.TodaysAppointment"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".appointment_diary.TodaysAppointment" />
+        </activity>
+        <activity
+            android:name=".utilitymodules.Broadcast"
+            android:configChanges="orientation|screenSize"
+            android:label="Broadcast"
+            android:parentActivityName=".appointment_diary.TodaysAppointment"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".appointment_diary.TodaysAppointment" />
+        </activity>
+        <activity
+            android:name=".utilitymodules.ClientTransfer"
+            android:configChanges="orientation|screenSize"
+            android:label="Client Transfer"
+            android:parentActivityName=".appointment_diary.TodaysAppointment"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".appointment_diary.TodaysAppointment" />
+        </activity>
+        <activity
+            android:name=".utilitymodules.Consent"
+            android:configChanges="orientation|screenSize"
+            android:label="Client Consent"
+            android:parentActivityName=".appointment_diary.TodaysAppointment"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".appointment_diary.TodaysAppointment" />
+        </activity>
+        <activity
+            android:name=".utilitymodules.TransitClient"
+            android:configChanges="orientation|screenSize"
+            android:label="Transit Client"
+            android:parentActivityName=".appointment_diary.TodaysAppointment"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".appointment_diary.TodaysAppointment" />
+        </activity>
+        <activity
+            android:name=".utilitymodules.ClinicMovement"
+            android:configChanges="orientation|screenSize"
+            android:label="Clinic Movement"
+            android:parentActivityName=".appointment_diary.TodaysAppointment"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".appointment_diary.TodaysAppointment" />
+        </activity>
+        <activity
+            android:name=".utilitymodules.Registration"
+            android:configChanges="orientation|screenSize"
+            android:label="Client Registration"
+            android:parentActivityName=".appointment_diary.TodaysAppointment"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".appointment_diary.TodaysAppointment" />
+        </activity>
+        <activity android:name=".report.Report" />
+
+        <receiver
+            android:name=".SmsBroadcastReceiver"
+            android:exported="true">
+            <!--<intent-filter android:priority="999">-->
+                <!--<action android:name="android.provider.Telephony.SMS_RECEIVED" />-->
+                <!--<action android:name="android.provider.Telephony.SMS_DELIVER" />-->
+
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
+        </receiver>
+
+
+    </application>
+
+</manifest>

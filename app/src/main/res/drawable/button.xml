@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:state_pressed="true" >
+        <shape android:shape="rectangle"  >
+            <corners android:radius="3dip" />
+            <stroke android:width="1dip" android:color="#b666d2" />
+            <gradient android:angle="-90" android:startColor="#b666d2" android:endColor="#b666d2"  />
+        </shape>
+    </item>
+    <item android:state_focused="true">
+        <shape android:shape="rectangle"  >
+            <corners android:radius="3dip" />
+            <stroke android:width="1dip" android:color="#b666d2" />
+            <solid android:color="#b666d2"/>
+        </shape>
+    </item>
+    <item >
+        <shape android:shape="rectangle"  >
+            <corners android:radius="3dip" />
+            <stroke android:width="1dip" android:color="#b666d2" />
+            <gradient android:angle="-90"
+                android:startColor="#b666d2" android:endColor="#b666d2" />
+        </shape>
+    </item>
+</selector>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<shape xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:shape="rectangle">-->
+    <!--<corners android:radius="14dp" />-->
+    <!--<gradient-->
+    <!--android:angle="45"-->
+    <!--android:centerColor="#091EED"-->
+    <!--android:centerX="35%"-->
+    <!--android:endColor="#091EED"-->
+    <!--android:startColor="#091EED"-->
+    <!--android:type="linear" />-->
+    <!--<padding-->
+    <!--android:bottom="0dp"-->
+    <!--android:left="0dp"-->
+    <!--android:right="0dp"-->
+    <!--android:top="0dp" />-->
+    <!--<size-->
+    <!--android:width="270dp"-->
+    <!--android:height="60dp" />-->
+    <!--<stroke-->
+    <!--android:width="3dp"-->
+    <!--android:color="#000000" />-->

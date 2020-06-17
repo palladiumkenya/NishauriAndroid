@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Adding Badge (Item Count)/Notification Count to Android Button-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="380dp"
+        android:layout_height="150dp"
+        >
+
+        <ImageView
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="0dp"
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:srcCompat="@mipmap/ic_launcher"
+            />
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/appointment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="210dp"
+        android:background="@drawable/mybutton"
+        android:padding="10dp"
+        android:text="Appointment Diary"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/defaulters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="270dp"
+        android:background="@drawable/mybutton"
+        android:padding="10dp"
+        android:text="defaulter diary"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/mlab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="325dp"
+        android:background="@drawable/mybutton"
+        android:padding="10dp"
+        android:text="mlab"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/web"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="380dp"
+        android:background="@drawable/mybutton"
+        android:padding="10dp"
+        android:text="web dashboard"
+        android:textColor="#ffffff" />
+
+
+    <Button
+        android:id="@+id/report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="440dp"
+        android:background="@drawable/mybutton"
+        android:padding="10dp"
+        android:text="report"
+        android:textColor="#ffffff" />
+
+
+
+    <Button
+        android:id="@+id/wellnessMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="440dp"
+        android:background="@drawable/mybutton"
+        android:padding="10dp"
+        android:text="Wellness Responses"
+        android:textColor="#ffffff" />
+</RelativeLayout>

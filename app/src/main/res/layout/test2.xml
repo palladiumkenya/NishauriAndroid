@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/badge4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
+
+        <RelativeLayout
+            android:id="@+id/relative_layout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="65dip"
+                android:background="#4169E1"
+                android:elevation="4dp"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:text="Notification"
+                android:textColor="#fff"
+                />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/badge_notification_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/relative_layout3"
+            android:background="@drawable/item_count"
+            android:textColor="#FFF"
+            android:text="427"
+            android:textSize="16sp"
+            android:textStyle="bold"
+
+            />
+
+    </RelativeLayout>
+</RelativeLayout>

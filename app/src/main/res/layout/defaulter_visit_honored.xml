@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/holo_blue_bright"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/defvisdatecalled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:hint="Date client was visited"
+        android:inputType="text"
+        android:maxLength="24"
+
+        android:textColorHint="#000"
+        android:textSize="12dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="Select Outcome" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/defvisgender_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/defvisrescheduledateone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:hint="Reschedule date"
+        android:focusable="false"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/defvisfinal_spinner"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+
+    <!--<EditText-->
+        <!--android:id="@+id/defvisrescheduledate"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+
+        <!--android:hint="Reschedule date"-->
+        <!--android:focusable="false"-->
+        <!--android:visibility="gone"/>-->
+
+    <EditText
+        android:id="@+id/clientreturndate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Client return date"
+        android:focusable="false"
+        android:visibility="gone"/>
+
+    <EditText
+        android:id="@+id/defvisother"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:hint="specify other"
+        android:visibility="gone"/>
+
+
+    <EditText
+        android:id="@+id/defvisadate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:hint="Next Appointment date"
+        android:inputType="text"
+        android:maxLength="24"
+        android:visibility="gone"
+
+        android:textColorHint="#000"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/defvismissedvisitnewapptypetextview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="Select new appointment type"
+       />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/defvismissedvisitnewapptype"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/defaulteredvisitOther"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:hint="Specify Other"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/defvismissedvisitTracer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+
+        android:hint="Tracers name"/>
+
+    <EditText
+        android:id="@+id/defvismissedvisitTracingcost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+
+
+        android:hint="Tracing cost"/>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="2"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/defviscancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="cancel" />
+
+    <Button
+        android:id="@+id/defvissubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="submit" />
+
+</LinearLayout>
+
+</LinearLayout>

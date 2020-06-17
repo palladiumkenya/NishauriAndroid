@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_alignParentBottom="true"
+    android:background="#fffff0">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_alignParentTop="true"
+        >
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Report an Exposure"
+                android:textStyle="bold"
+                android:id="@+id/tv4"
+                android:fontFamily="serif"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="A.Where did the exposure occur?"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:id="@+id/textView3"
+                android:layout_below="@+id/tv4"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="368dp"
+                android:layout_below="@+id/lblTitle"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="99dp" />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="B.What caused the exposure?"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:id="@+id/exp"
+                android:layout_below="@+id/report"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="368dp"
+                android:layout_below="@+id/lblTitle"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="99dp" />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="C.Number of hours after exposure"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:id="@+id/textView6"
+                android:layout_below="@+id/txtEType"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignRight="@+id/txtEType"
+                android:layout_alignEnd="@+id/txtEType" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="Number of hours after exposure"
+                android:ems="10"
+                android:digits="1234567890"
+                android:maxLength="3"
+                android:textSize="12dp"
+                android:textColorHint="#000"
+                android:id="@+id/txtEHour"
+                android:layout_below="@+id/textView6"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:id="@+id/btnSSubmit"
+                android:onClick="submiting"
+                android:layout_below="@+id/txtEHour"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:paddingTop="2dp"
+                android:padding="2dp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button"
+                android:layout_marginBottom="4dp"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

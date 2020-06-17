@@ -1,0 +1,264 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#e0e0d1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.40"
+            android:gravity="left"
+            android:textStyle="bold"
+
+            android:text="CCC Number"
+            android:padding="5dp"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/ccnumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:padding="5dp"
+            android:text="CCC number"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.39"
+            android:gravity="left"
+            android:textStyle="bold"
+
+            android:padding="5dp"
+            android:text="Name"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/appname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:padding="5dp"
+            android:text="Name"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.39"
+            android:gravity="left"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:text="Appointment Type"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/apptype"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:padding="5dp"
+            android:text="AppType"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.38"
+            android:gravity="left"
+            android:textStyle="bold"
+
+            android:padding="5dp"
+            android:text="Phone number"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:padding="5dp"
+            android:text="Phone"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.39"
+            android:gravity="left"
+            android:padding="5dp"
+            android:textStyle="bold"
+
+            android:text="Date"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:padding="5dp"
+            android:text="Date"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.39"
+            android:gravity="left"
+            android:padding="5dp"
+            android:textStyle="bold"
+
+            android:text="File Serial Number"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/missedcallfileserial"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:padding="5dp"
+            android:text="file serial"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5sp"
+        android:weightSum="6">
+        <Button
+            android:id="@+id/call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="1"
+            android:background="@drawable/mybutton"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="call"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/callinformant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_weight="1"
+            android:background="@drawable/mybutton"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="call informant"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/honored"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/mybutton"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="confirm"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/trace"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/mybutton"
+            android:gravity="center"
+            android:padding="5dp"
+            android:visibility="gone"
+            android:text="Trace"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/delbtn"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/mybutton"
+            android:gravity="center"
+            android:padding="5dp"
+            android:visibility="gone"
+            android:text="Delete"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/notdefbtn"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/mybutton"
+            android:gravity="center"
+            android:padding="5dp"
+            android:visibility="gone"
+            android:text="Not a defaulter"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+</LinearLayout>

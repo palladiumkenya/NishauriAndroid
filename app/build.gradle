@@ -1,0 +1,87 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion '28.0.3'
+    defaultConfig {
+
+        applicationId "com.mhealth.ushauriv2"
+        minSdkVersion 15
+        targetSdkVersion 29 //should be 29 but this is a hack for defaulter diary
+        versionCode 27
+        versionName "3.1.3"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    lintOptions {
+
+        checkReleaseBuilds false
+
+    }
+
+    signingConfigs {
+        release {
+            storeFile rootProject.file('signing/key.jks')
+            storePassword 'Mhealth12345'
+            keyAlias 'mhealth'
+            keyPassword 'Mhealth12345'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+}
+
+repositories {
+
+    mavenCentral()
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    //noinspection GradleCompatible
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.intuit.sdp:sdp-android:1.0.4'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.github.satyan:sugar:1.4'
+    implementation 'com.github.mHealthKenya:SegmentedButton:v2.0.2'
+
+
+
+//    implementation 'com.github.ceryle:SegmentedButton:v1.0'
+//    implementation 'com.github.ceryle:SegmentedButton:v2.0.2'
+
+    implementation 'com.tapadoo.android:alerter:2.0.4'
+    implementation 'com.android.volley:volley:1.1.0'
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'com.github.MdFarhanRaja:SearchableSpinner:1.9'
+    implementation 'com.weiwangcn.betterspinner:library-material:1.1.0'
+    implementation 'com.github.f0ris.sweetalert:library:1.5.2'
+    implementation 'com.github.d-max:spots-dialog:0.7@aar'
+    //    start sms retriever api implementation
+    implementation 'com.google.android.gms:play-services-base:16.0.1'
+    implementation 'com.google.android.gms:play-services-identity:16.0.0'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:16.0.0'
+    //    end sms retriever api implementation
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+
+}
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Adding Badge (Item Count)/Notification Count to Android Button-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+
+
+    <RelativeLayout
+        android:id="@+id/badge4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
+        <RelativeLayout
+            android:id="@+id/relative_layout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/myButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="65dip"
+                android:background="#4169E1"
+                android:elevation="4dp"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:text="Clients Registered"
+                android:textColor="#fff" />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/badge_notification_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/relative_layout3"
+            android:background="@drawable/item_count"
+            android:text="427"
+            android:textColor="#FFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/badge5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp">
+        <RelativeLayout
+            android:id="@+id/relative_layout4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/myButton5"
+                android:layout_width="wrap_content"
+                android:layout_height="65dip"
+                android:background="#4169E1"
+                android:elevation="4dp"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:text="Booked Appointments"
+                android:textColor="#fff" />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/badge_notification_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/relative_layout4"
+            android:background="@drawable/item_count"
+            android:text="427"
+            android:textColor="#FFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+</RelativeLayout>
