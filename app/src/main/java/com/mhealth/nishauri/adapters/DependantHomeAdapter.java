@@ -65,13 +65,13 @@ public class DependantHomeAdapter extends RecyclerView.Adapter<RecyclerView.View
             DependantHomeAdapter.OriginalViewHolder view = (DependantHomeAdapter.OriginalViewHolder) holder;
 
             view.dependant.setText(obj.getFirst_name());
-            view.age.setText("Age: " +obj.getDob() + " Months");
+            view.age.setText(obj.getDob() + " Months");
 
             if (obj.getApproved().equals("true")){
-                view.status.setText("Status: Approved");
+                view.status.setText("Approved");
             }
             if (obj.getApproved().equals("false")){
-                view.status.setText("Status: Pending");
+                view.status.setText("Pending");
             }
 
         }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:shimmer="http://schemas.android.com/tools"
     android:id="@+id/frag_update_profile"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -211,176 +212,59 @@
                         android:layout_width="match_parent"
                         android:layout_height="3dp" />
 
-                    <LinearLayout
+                    <androidx.coordinatorlayout.widget.CoordinatorLayout
+                        android:id="@+id/coordinator_lyt"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent">
 
-                        <com.google.android.material.textview.MaterialTextView
+                        <androidx.core.widget.NestedScrollView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:text="Dependant 1"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textStyle="bold"
-                            android:textColor="@color/grey_90" />
+                            android:layout_height="wrap_content">
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/spacing_large"
-                            android:layout_marginTop="@dimen/spacing_medium"
-                            android:layout_weight="1"
-                            android:lineSpacingExtra="4dp"
-                            android:text="Approved"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/grey_60" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btn_update_dependant1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/Widget.MaterialComponents.Button.TextButton"
-                            android:text="Edit">
+                                <FrameLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
 
-                        </com.google.android.material.button.MaterialButton>
+                                    <com.facebook.shimmer.ShimmerFrameLayout
+                                        android:id="@+id/shimmer_my_container"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        shimmer:duration="800">
 
-                    </LinearLayout>
+                                        <LinearLayout
+                                            android:id="@+id/shimmerInnerLayout"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey_20" />
+                                            <include layout="@layout/lab_placeholder_item" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:orientation="horizontal">
+                                        </LinearLayout>
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:text="Dependant 2"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textStyle="bold"
-                            android:textColor="@color/grey_90" />
+                                    </com.facebook.shimmer.ShimmerFrameLayout>
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/spacing_large"
-                            android:layout_marginTop="@dimen/spacing_medium"
-                            android:layout_weight="1"
-                            android:lineSpacingExtra="4dp"
-                            android:text="Approved"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/grey_60" />
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/recyclerView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:scrollbars="vertical"
+                                        android:layout_marginTop="@dimen/spacing_large"
+                                        android:visibility="gone"
+                                        android:scrollingCache="true" />
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btn_update_dependant2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/Widget.MaterialComponents.Button.TextButton"
-                            android:text="Edit">
+                                </FrameLayout>
 
-                        </com.google.android.material.button.MaterialButton>
+                            </LinearLayout>
 
-                    </LinearLayout>
+                        </androidx.core.widget.NestedScrollView>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey_20" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:text="Dependant 3"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textStyle="bold"
-                            android:textColor="@color/grey_90" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/spacing_large"
-                            android:layout_marginTop="@dimen/spacing_medium"
-                            android:layout_weight="1"
-                            android:lineSpacingExtra="4dp"
-                            android:text="Approved"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/grey_60" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btn_update_dependant3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/Widget.MaterialComponents.Button.TextButton"
-                            android:text="Edit">
-
-                        </com.google.android.material.button.MaterialButton>
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey_20" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:text="Dependant 4"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textStyle="bold"
-                            android:textColor="@color/grey_90" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/spacing_large"
-                            android:layout_marginTop="@dimen/spacing_medium"
-                            android:layout_weight="1"
-                            android:lineSpacingExtra="4dp"
-                            android:text="Approved"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/grey_60" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btn_update_dependant4"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/Widget.MaterialComponents.Button.TextButton"
-                            android:text="Edit">
-
-                        </com.google.android.material.button.MaterialButton>
-
-                    </LinearLayout>
+                    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
                 </LinearLayout>
 

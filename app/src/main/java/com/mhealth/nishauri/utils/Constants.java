@@ -1,5 +1,7 @@
 package com.mhealth.nishauri.utils;
 
+import com.mhealth.nishauri.Models.Dependant;
+
 public class Constants {
 
     /*ENDPOINTS*/
@@ -9,6 +11,8 @@ public class Constants {
     public static String UPDATE_USER = "http://nishauri-api.mhealthkenya.co.ke/api/user/update";
     public static String ADD_DEPENDANT = "http://nishauri-api.mhealthkenya.co.ke/api/dependants/";
     public static String DEPENTANTS= "http://nishauri-api.mhealthkenya.co.ke/api/dependants/";
+    public static String DEPENTANT= "http://nishauri-api.mhealthkenya.co.ke/api//dependant/";
+    public static String UPDATE_DEPENDANT = "http://nishauri-api.mhealthkenya.co.ke/api/dependant/update";
     public static String VIRAL_LOAD= "http://nishauri-api.mhealthkenya.co.ke/api/lab/vload";
     public static String EID= "http://nishauri-api.mhealthkenya.co.ke/api/lab/eid";
 

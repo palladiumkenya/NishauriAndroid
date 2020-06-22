@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
@@ -71,7 +72,10 @@ public class EditDependantAdapter extends RecyclerView.Adapter<RecyclerView.View
                 @Override
                 public void onClick(View v) {
 
-                    items.get(position);
+                    if (items.get(position) != null){
+                        Navigation.findNavController(v).navigate(R.id.nav_update_dependants);
+                    }
+
                 }
             });
 
