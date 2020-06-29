@@ -373,7 +373,7 @@ public class SignUpActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        AndroidNetworking.post(Constants.REGISTER)
+        AndroidNetworking.post(Constants.ENDPOINT+Constants.REGISTER)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")

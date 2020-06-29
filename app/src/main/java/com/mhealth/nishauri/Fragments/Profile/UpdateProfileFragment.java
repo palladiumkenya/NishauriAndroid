@@ -98,7 +98,6 @@ public class UpdateProfileFragment extends Fragment {
         recyclerView.setAdapter(mAdapter);
 
         loadCurrentUser();
-//        loadDependants();
 
         /*Edit user details here...*/
         btn_user.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +125,7 @@ public class UpdateProfileFragment extends Fragment {
         String auth_token = loggedInUser.getAuth_token();
 
 
-        AndroidNetworking.get(Constants.CURRENT_USER)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_USER)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

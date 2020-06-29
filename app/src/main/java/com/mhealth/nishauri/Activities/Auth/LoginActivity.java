@@ -158,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        AndroidNetworking.post(Constants.LOGIN)
+        AndroidNetworking.post(Constants.ENDPOINT+Constants.LOGIN)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")

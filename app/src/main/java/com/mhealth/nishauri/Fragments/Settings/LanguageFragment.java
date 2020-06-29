@@ -57,7 +57,7 @@ public class LanguageFragment extends Fragment {
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Cancel button clicked!", Toast.LENGTH_SHORT).show();
+
                 NavHostFragment.findNavController(LanguageFragment.this).navigate(R.id.nav_settings);
             }
         });
@@ -65,7 +65,7 @@ public class LanguageFragment extends Fragment {
         btn_complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Language saved!", Toast.LENGTH_SHORT).show();
+
                 NavHostFragment.findNavController(LanguageFragment.this).navigate(R.id.nav_settings);
 
             }

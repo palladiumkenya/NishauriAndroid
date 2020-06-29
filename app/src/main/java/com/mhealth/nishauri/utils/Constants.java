@@ -3,18 +3,26 @@ package com.mhealth.nishauri.utils;
 import com.mhealth.nishauri.Models.Dependant;
 
 public class Constants {
+    /*ENDPOINT*/
+    public static String ENDPOINT = "http://nishauri-api.mhealthkenya.co.ke/api/";
 
-    /*ENDPOINTS*/
-    public static String REGISTER = "http://nishauri-api.mhealthkenya.co.ke/api/users/";
-    public static String LOGIN = "http://nishauri-api.mhealthkenya.co.ke/api/token/login/";
-    public static String CURRENT_USER = "http://nishauri-api.mhealthkenya.co.ke/api/user/auth";
-    public static String UPDATE_USER = "http://nishauri-api.mhealthkenya.co.ke/api/user/update";
-    public static String ADD_DEPENDANT = "http://nishauri-api.mhealthkenya.co.ke/api/dependants/";
-    public static String DEPENTANTS= "http://nishauri-api.mhealthkenya.co.ke/api/dependants/";
-    public static String DEPENTANT= "http://nishauri-api.mhealthkenya.co.ke/api//dependant/";
-    public static String UPDATE_DEPENDANT = "http://nishauri-api.mhealthkenya.co.ke/api/dependant/update";
-    public static String VIRAL_LOAD= "http://nishauri-api.mhealthkenya.co.ke/api/lab/vload";
-    public static String EID= "http://nishauri-api.mhealthkenya.co.ke/api/lab/eid";
+    //AUTH
+    public static String REGISTER = "users/";
+    public static String LOGIN = "token/login/";
+
+    //USER
+    public static String CURRENT_USER = "user/auth";
+    public static String UPDATE_USER = "user/update";
+
+    //DEPENDANT
+    public static String ADD_DEPENDANT = "dependants/";
+    public static String DEPENTANTS= "dependants/";
+    public static String DEPENTANT= "dependant/";
+    public static String UPDATE_DEPENDANT = "dependant/update";
+
+    //LAB
+    public static String VIRAL_LOAD= "lab/vload";
+    public static String EID= "lab/eid";
 
     /*MODELS*/
     public static String AUTH_TOKEN = "";

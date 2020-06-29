@@ -92,6 +92,8 @@ public class HomeFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, root);
 
+
+
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
         dependantArrayList = new ArrayList<>();
@@ -130,7 +132,7 @@ public class HomeFragment extends Fragment {
         String auth_token = loggedInUser.getAuth_token();
 
 
-        AndroidNetworking.get(Constants.CURRENT_USER)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_USER)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -193,7 +195,7 @@ public class HomeFragment extends Fragment {
         String auth_token = loggedInUser.getAuth_token();
 
 
-        AndroidNetworking.get(Constants.DEPENTANTS)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.DEPENTANTS)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

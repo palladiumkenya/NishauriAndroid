@@ -190,7 +190,7 @@ public class UpdateDependantsFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        AndroidNetworking.put(Constants.UPDATE_DEPENDANT)
+        AndroidNetworking.put(Constants.ENDPOINT+Constants.UPDATE_DEPENDANT)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addJSONObjectBody(jsonObject) // posting json
                 .build()

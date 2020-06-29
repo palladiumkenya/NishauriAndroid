@@ -27,7 +27,7 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:padding="@dimen/spacing_middle"
-               android:text="Please select the language to recieve notifications in:"
+               android:text="Please select the language to receive notifications in:"
                style="@style/TextAppearance.AppCompat.Title"/>
 
            <RadioGroup

@@ -209,7 +209,7 @@ public class AddDependantFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        AndroidNetworking.post(Constants.ADD_DEPENDANT)
+        AndroidNetworking.post(Constants.ENDPOINT+Constants.ADD_DEPENDANT)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

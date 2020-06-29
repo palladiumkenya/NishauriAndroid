@@ -129,7 +129,7 @@ public class EidResultsFragment extends Fragment {
         String auth_token = loggedInUser.getAuth_token();
 
 
-        AndroidNetworking.get(Constants.EID)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.EID)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

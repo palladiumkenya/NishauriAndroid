@@ -136,7 +136,7 @@ public class ViralLoadResultsFragment extends Fragment {
         String auth_token = loggedInUser.getAuth_token();
 
 
-        AndroidNetworking.get(Constants.VIRAL_LOAD)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.VIRAL_LOAD)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
