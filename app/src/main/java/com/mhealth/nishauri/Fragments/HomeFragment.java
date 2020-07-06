@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.androidnetworking.AndroidNetworking;
@@ -48,6 +49,12 @@ public class HomeFragment extends Fragment {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+
+    @BindView(R.id.no_dependant_lyt)
+    LinearLayout no_dependant_lyt;
+
+    @BindView(R.id.error_lyt)
+    LinearLayout error_lyt;
 
     @BindView(R.id.btn_add_dependant)
     Button btn_add_dependant;
@@ -249,7 +256,8 @@ public class HomeFragment extends Fragment {
 
                             }else {
                                 //not data found
-                                Snackbar.make(root.findViewById(R.id.frag_home), "No dependants found" , Snackbar.LENGTH_LONG).show();
+
+                                no_dependant_lyt.setVisibility(View.VISIBLE);
 
                             }
 
@@ -262,6 +270,17 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onError(ANError error) {
                         // handle error
+
+                        if (recyclerView!=null)
+                            recyclerView.setVisibility(View.VISIBLE);
+
+                        if (shimmer_my_container!=null){
+                            shimmer_my_container.stopShimmerAnimation();
+                            shimmer_my_container.setVisibility(View.GONE);
+                        }
+
+                        error_lyt.setVisibility(View.VISIBLE);
+
                         Log.e(TAG, error.getErrorBody());
 
                         Snackbar.make(root.findViewById(R.id.frag_home), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();

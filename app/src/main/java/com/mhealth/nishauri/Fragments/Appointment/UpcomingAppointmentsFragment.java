@@ -182,7 +182,6 @@ public class UpcomingAppointmentsFragment extends Fragment {
 
                                 no_appointment_lyt.setVisibility(View.VISIBLE);
 
-
                             }
 
 
