@@ -109,7 +109,7 @@
                                 android:id="@+id/txt_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="John Doe"
+                                android:text=""
                                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                                 android:textColor="@color/colorAccent"
                                 app:fontFamily="sans-serif-medium" />
@@ -133,7 +133,7 @@
                                     android:id="@+id/msisdn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="+254722000000"
+                                    android:text=""
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textColor="@color/grey_40" />
                             </LinearLayout>

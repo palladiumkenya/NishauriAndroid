@@ -13,12 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioGroup;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.fxn.stash.Stash;
+import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -45,7 +47,6 @@ public class UpdateUserFragment extends Fragment {
     private Context context;
 
     private User loggedInUser;
-
 
     @BindView(R.id.card_name)
     MaterialTextView card_name;
@@ -79,6 +80,9 @@ public class UpdateUserFragment extends Fragment {
 
     @BindView(R.id.etxt_security_answer)
     TextInputEditText etxt_security_answer;
+
+    @BindView(R.id.language_spinner)
+    AppCompatSpinner language_spinner;
 
     @BindView(R.id.btn_update_profile)
     Button btn_profile;
@@ -167,6 +171,13 @@ public class UpdateUserFragment extends Fragment {
             valid = false;
             return valid;
         }
+
+        if (language_spinner.getSelectedItem().toString().equals("Select your preferred language.")) {
+            Snackbar.make(root.findViewById(R.id.frag_update_user), "Please select a notification language", Snackbar.LENGTH_SHORT).show();
+            valid = false;
+            return valid;
+        }
+
         return valid;
     }
 
@@ -180,6 +191,7 @@ public class UpdateUserFragment extends Fragment {
             jsonObject.put("msisdn", etxt_phone_number.getText().toString());
             jsonObject.put("securityQuestion", security_question_spinner.getSelectedItem().toString() );
             jsonObject.put("securityAnswer", etxt_security_answer.getText().toString());
+            jsonObject.put("language_preference", language_spinner.getSelectedItem().toString());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -254,7 +266,10 @@ public class UpdateUserFragment extends Fragment {
                                     String first_name = item.has("first_name") ? item.getString("first_name") : "";
                                     String last_name = item.has("last_name") ? item.getString("last_name") : "";
                                     String msisdn = item.has("msisdn") ? item.getString("msisdn") : "";
+                                    String securityQuestion = item.has("securityQuestion") ? item.getString("securityQuestion") : "";
                                     String securityAnswer = item.has("securityAnswer") ? item.getString("securityAnswer") : "";
+                                    String language_preference = item.has("language_preference") ? item.getString("language_preference") : "";
+
 
 
                                     card_name.setText(first_name + " " + last_name);
@@ -262,8 +277,31 @@ public class UpdateUserFragment extends Fragment {
                                     etxt_first_name.setText(first_name );
                                     etxt_surname.setText(last_name );
                                     etxt_phone_number.setText(msisdn);
-                                    security_question_spinner.setSelection(0);
                                     etxt_security_answer.setText(securityAnswer);
+
+
+                                    if (securityQuestion.contains("What is your favorite song?")){
+                                        security_question_spinner.setSelection(1);
+                                    }else if (securityQuestion.contains("What was the name of you first pet?")){
+                                        security_question_spinner.setSelection(2);
+                                    }else if (securityQuestion.contains("What is the name of your favourite movie?")){
+                                        security_question_spinner.setSelection(3);
+                                    }else if (securityQuestion.contains("What is the name of your favourite book?")){
+                                        security_question_spinner.setSelection(4);
+                                    }else if (securityQuestion.contains("What is your mother maiden name?")){
+                                        security_question_spinner.setSelection(5);
+                                    }else {
+                                        security_question_spinner.setSelection(0);
+                                    }
+
+                                    if (language_preference.contains("English")){
+                                        language_spinner.setSelection(1);
+                                    }else if (language_preference.contains("Kiswahili")){
+                                        language_spinner.setSelection(2);
+                                    }else {
+                                        language_spinner.setSelection(0);
+                                    }
+
 
                                 }
 

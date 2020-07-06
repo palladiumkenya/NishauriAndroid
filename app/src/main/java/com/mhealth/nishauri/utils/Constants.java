@@ -24,6 +24,12 @@ public class Constants {
     public static String VIRAL_LOAD= "lab/vload";
     public static String EID= "lab/eid";
 
+    //APPOINTMENT
+    public static String UPCOMING_APPOINTMENT = "appointments/user/upcoming";
+    public static String PASSED_APPOINTMENT = "appointments/user/past";
+    public static String APPOINTMENT = "http://ushaurinode.mhealthkenya.org/api/mlab/get/appointments";
+
+
     /*MODELS*/
     public static String AUTH_TOKEN = "";
 

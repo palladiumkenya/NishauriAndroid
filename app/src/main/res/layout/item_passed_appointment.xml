@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
+    android:layout_marginHorizontal="@dimen/spacing_large"
+    android:layout_marginTop="@dimen/spacing_medium"
     android:orientation="vertical">
 
     <LinearLayout
@@ -27,7 +29,7 @@
             android:layout_weight="2"
             android:text="Date: 25/03/2020"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/grey_80" />
+            android:textColor="@color/colorAccent" />
 
 
 
@@ -40,16 +42,6 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/grey_80" />
 
-
-
-
-        <ImageButton
-            android:id="@+id/bt_expand"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="@color/grey_60"
-            android:src="@drawable/ic_expand_arrow" />
 
     </LinearLayout>
 
@@ -75,12 +67,12 @@
 
 
             <TextView
+                android:id="@+id/txt_appointment_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_large"
                 android:layout_marginEnd="@dimen/spacing_large"
                 android:layout_marginBottom="@dimen/spacing_large"
-
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:text="Missed appointment" />
 

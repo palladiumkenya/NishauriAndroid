@@ -1,6 +1,8 @@
 package com.mhealth.nishauri.Fragments.Lab;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -52,6 +54,8 @@ public class EidResultsFragment extends Fragment {
     private EIDAdapter mAdapter;
     private ArrayList<EID> eidArrayList;
 
+    private ProgressDialog pDialog;
+
 
 
     @BindView(R.id.shimmer_my_container)
@@ -59,6 +63,15 @@ public class EidResultsFragment extends Fragment {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+
+    @BindView(R.id.request_lyt)
+    LinearLayout request_lyt;
+
+    @BindView(R.id.no_result_lyt)
+    LinearLayout no_result_lyt;
+
+    @BindView(R.id.error_lyt)
+    LinearLayout error_lyt;
 
     @BindView(R.id.fab_request_eid)
     ExtendedFloatingActionButton fab_request_eid_results;
@@ -82,6 +95,12 @@ public class EidResultsFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_eid_results, container, false);
         unbinder = ButterKnife.bind(this, root);
 
+        pDialog = new ProgressDialog(context);
+        pDialog.setTitle("Loading...");
+        pDialog.setMessage("Getting Results...");
+        pDialog.setCancelable(true);
+
+
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
 
@@ -98,6 +117,8 @@ public class EidResultsFragment extends Fragment {
         fab_request_eid_results.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                request_lyt.setVisibility(View.GONE);
+                pDialog.show();
                 loadEid();
             }
         });
@@ -143,6 +164,11 @@ public class EidResultsFragment extends Fragment {
                         // do anything with response
                         Log.e(TAG, response.toString());
 
+                        if (pDialog != null && pDialog.isShowing()) {
+                            pDialog.hide();
+                            pDialog.cancel();
+                        }
+
                        eidArrayList.clear();
 
                         if (recyclerView!=null)
@@ -184,20 +210,38 @@ public class EidResultsFragment extends Fragment {
 
                             }else {
                                 //not data found
-                                Snackbar.make(root.findViewById(R.id.frag_eid_results), "No results found" , Snackbar.LENGTH_LONG).show();
+                                if (pDialog != null && pDialog.isShowing()) {
+                                    pDialog.hide();
+                                    pDialog.cancel();
+                                }
 
+                                no_result_lyt.setVisibility(View.VISIBLE);
+
+                                Snackbar.make(root.findViewById(R.id.frag_eid_results), "No results found" , Snackbar.LENGTH_LONG).show();
                             }
 
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            if (pDialog != null && pDialog.isShowing()) {
+                                pDialog.hide();
+                                pDialog.cancel();
+                            }
                         }
 
                     }
                     @Override
                     public void onError(ANError error) {
                         // handle error
+                        if (pDialog != null && pDialog.isShowing()) {
+                            pDialog.hide();
+                            pDialog.cancel();
+                        }
+
+                        error_lyt.setVisibility(View.VISIBLE);
+
                         Log.e(TAG, error.getErrorBody());
+
 
                         Snackbar.make(root.findViewById(R.id.frag_eid_results), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
 

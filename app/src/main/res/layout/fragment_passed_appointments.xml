@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/frag_broadcasts"
+    android:id="@+id/frag_previous_appointment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:shimmer="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -48,6 +48,84 @@
 
         </FrameLayout>
 
+        <LinearLayout
+            android:id="@+id/no_appointment_lyt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:visibility="gone"
+            android:paddingBottom="80dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/lab_image"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:src="@drawable/ic_appointment" />
+
+            <TextView
+                android:id="@+id/no_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:text="No Appointments found."
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                android:textColor="@color/grey_60" />
+
+            <TextView
+                android:id="@+id/no_brief"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="Please schedule one with your HCW."
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/grey_40" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/error_lyt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:visibility="gone"
+            android:paddingBottom="80dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/lab_img"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:src="@drawable/ic_error_message" />
+
+            <TextView
+                android:id="@+id/error_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:text="An error occurred. "
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                android:textColor="@color/grey_60" />
+
+            <TextView
+                android:id="@+id/error_brief"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="Please try again later."
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/grey_40" />
+
+        </LinearLayout>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
 
 </LinearLayout>

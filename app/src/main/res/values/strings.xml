@@ -47,6 +47,12 @@
         <item> What is your mother maiden name?</item>
     </string-array>
 
+    <string-array name="language_choice">
+        <item> Select your preferred language.</item>
+        <item> English</item>
+        <item> Kiswahili</item>
+    </string-array>
+
 
     <string name="generic_server_down">Cannot Reach Server Using Device</string>
     <string name="connection">Please check your internet connection.</string>

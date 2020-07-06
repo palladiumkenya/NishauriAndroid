@@ -93,7 +93,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_reshedule_app"
+                android:id="@+id/btn_reshedule_appointment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -103,7 +103,7 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_confirm_app"
+                android:id="@+id/btn_confirm_appointment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

@@ -94,4 +94,9 @@
         android:name="com.mhealth.nishauri.Fragments.Settings.FaqsFragment"
         android:label="FAQs" />
 
+    <fragment
+        android:id="@+id/nav_reschedule_appointment"
+        android:name="com.mhealth.nishauri.Fragments.Appointment.RescheduleAppointmentFragment"
+        android:label="ReShedule Appointment" />
+
 </navigation>

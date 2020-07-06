@@ -15,6 +15,43 @@
         android:layout_margin="@dimen/spacing_large"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:id="@+id/request_lyt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingBottom="80dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:src="@drawable/ic_lab" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:text="Request Results."
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                android:textColor="@color/grey_60" />
+
+            <TextView
+                android:id="@+id/brief"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="Please press the request button to get results."
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/grey_40" />
+
+        </LinearLayout>
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -33,6 +70,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:visibility="gone"
                         shimmer:duration="800">
 
                         <LinearLayout
@@ -61,6 +99,83 @@
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/no_result_lyt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:visibility="gone"
+            android:paddingBottom="80dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/lab_image"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:src="@drawable/ic_laboratory_results" />
+
+            <TextView
+                android:id="@+id/no_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:text="No Results found."
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                android:textColor="@color/grey_60" />
+
+            <TextView
+                android:id="@+id/no_brief"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="Please press the request button to get results."
+                android:textAlignment="center"
+                android:visibility="gone"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/grey_40" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/error_lyt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:visibility="gone"
+            android:paddingBottom="80dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/lab_img"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:src="@drawable/ic_error_message" />
+
+            <TextView
+                android:id="@+id/error_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:text="An error occurred. "
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                android:textColor="@color/grey_60" />
+
+            <TextView
+                android:id="@+id/error_brief"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="Please try again later."
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/grey_40" />
+
+        </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fab_request_eid"
