@@ -40,6 +40,7 @@
                 android:layout_height="match_parent"
                 android:scrollbars="vertical"
                 android:layout_marginTop="@dimen/spacing_large"
+                android:layout_marginBottom="@dimen/spacing_large"
                 android:visibility="gone"
                 android:scrollingCache="true" />
 

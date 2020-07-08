@@ -159,14 +159,15 @@ public class PreviousAppointmentsFragment extends Fragment {
 
                                     JSONObject item = (JSONObject) myArray.get(i);
 
-
+                                    int id = item.has("id") ? item.getInt("id") : 0;
                                     String appntmnt_date = item.has("appntmnt_date") ? item.getString("appntmnt_date") : "";
                                     String app_status = item.has("app_status") ? item.getString("app_status") : "";
                                     String visit_type = item.has("visit_type") ? item.getString("visit_type") : "";
+                                    String app_type = item.has("app_type") ? item.getString("app_type") : "";
 
 
 
-                                    PreviousAppointment newPreviousAppointment = new PreviousAppointment(appntmnt_date,app_status,visit_type);
+                                    PreviousAppointment newPreviousAppointment = new PreviousAppointment(id,appntmnt_date,app_status,visit_type,app_type);
 
                                     previousAppointmentArrayList.add(newPreviousAppointment);
                                     mAdapter.notifyDataSetChanged();

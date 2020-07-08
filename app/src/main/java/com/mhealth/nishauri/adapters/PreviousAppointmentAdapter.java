@@ -72,7 +72,7 @@ public class PreviousAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
             PreviousAppointmentAdapter.OriginalViewHolder view = (PreviousAppointmentAdapter.OriginalViewHolder) holder;
 
             view.previous_appointment_date.setText("Date: "+obj.getAppntmnt_date());
-            view.appointmet_type.setText(obj.getApp_status());
+            view.appointmet_type.setText(obj.getApp_type());
             view.appointment_status.setText("Status: "+obj.getVisit_type());
 
 

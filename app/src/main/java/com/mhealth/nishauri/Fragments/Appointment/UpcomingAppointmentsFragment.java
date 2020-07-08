@@ -163,14 +163,13 @@ public class UpcomingAppointmentsFragment extends Fragment {
 
                                     JSONObject item = (JSONObject) myArray.get(i);
 
-
+                                    int id = item.has("id") ? item.getInt("id") : 0;
                                     String appntmnt_date = item.has("appntmnt_date") ? item.getString("appntmnt_date") : "";
                                     String app_status = item.has("app_status") ? item.getString("app_status") : "";
                                     String visit_type = item.has("visit_type") ? item.getString("visit_type") : "";
+                                    String app_type = item.has("app_type") ? item.getString("app_type") : "";
 
-
-
-                                    UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(appntmnt_date,app_status,visit_type);
+                                    UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(id,appntmnt_date,app_status,visit_type,app_type);
 
                                     upcomingAppointmentArrayList.add(newUpcomingAppointment);
                                     mAdapter.notifyDataSetChanged();
@@ -204,7 +203,7 @@ public class UpcomingAppointmentsFragment extends Fragment {
 
                         error_lyt.setVisibility(View.VISIBLE);
 
-                        Log.e(TAG, error.getErrorBody());
+                        Log.e(TAG, error.getErrorDetail());
 
                         Snackbar.make(root.findViewById(R.id.frag_upcoming_appointments), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
 

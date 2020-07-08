@@ -226,7 +226,6 @@ public class ViralLoadResultsFragment extends Fragment {
 
                                 no_result_lyt.setVisibility(View.VISIBLE);
 
-                                Snackbar.make(root.findViewById(R.id.frag_viral_load), "No results found" , Snackbar.LENGTH_LONG).show();
 
                             }
 

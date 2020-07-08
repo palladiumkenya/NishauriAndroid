@@ -217,7 +217,6 @@ public class EidResultsFragment extends Fragment {
 
                                 no_result_lyt.setVisibility(View.VISIBLE);
 
-                                Snackbar.make(root.findViewById(R.id.frag_eid_results), "No results found" , Snackbar.LENGTH_LONG).show();
                             }
 
 
