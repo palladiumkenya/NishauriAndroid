@@ -68,7 +68,7 @@ public class TreatmentsFragment extends Fragment {
 
         AppointmentsFragment.Adapter adapter = new AppointmentsFragment.Adapter(getChildFragmentManager());
         adapter.addFragment(new CurrentArtFragment(), "Current ART");
-        adapter.addFragment(new PreviousArtFragment(), "Previous ART");
+//        adapter.addFragment(new PreviousArtFragment(), "Previous ART");
         viewPager.setAdapter(adapter);
     }
 

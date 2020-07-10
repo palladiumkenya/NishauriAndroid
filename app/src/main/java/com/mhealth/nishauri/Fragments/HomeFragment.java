@@ -23,10 +23,12 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
+import com.mhealth.nishauri.Models.CurrentTreatment;
 import com.mhealth.nishauri.Models.Dependant;
 import com.mhealth.nishauri.Models.UpcomingAppointment;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
+import com.mhealth.nishauri.adapters.CurrentTreatmentAdapter;
 import com.mhealth.nishauri.adapters.DependantHomeAdapter;
 import com.mhealth.nishauri.adapters.AppointmentHomeAdapter;
 import com.mhealth.nishauri.utils.Constants;
@@ -59,6 +61,18 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.errors_lyt)
     LinearLayout errors_lyt;
 
+    @BindView(R.id.shimmerss_my_container)
+    ShimmerFrameLayout shimmerss_my_container;
+
+    @BindView(R.id.recycler_Views)
+    RecyclerView recycler_Views;
+
+    @BindView(R.id.no_treatment_lyt)
+    LinearLayout no_treatment_lyt;
+
+    @BindView(R.id.errorss_lyt)
+    LinearLayout errorss_lyt;
+
     @BindView(R.id.shimmer_my_container)
     ShimmerFrameLayout shimmer_my_container;
 
@@ -90,6 +104,8 @@ public class HomeFragment extends Fragment {
     private User loggedInUser;
     private DependantHomeAdapter mAdapter;
     private AppointmentHomeAdapter myAdapter;
+    private CurrentTreatmentAdapter mysAdapter;
+    private ArrayList<CurrentTreatment> currentTreatmentArrayList;
     private ArrayList<UpcomingAppointment> upcomingAppointmentArrayList;
     private ArrayList<Dependant> dependantArrayList;
 
@@ -115,9 +131,32 @@ public class HomeFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, root);
 
-
-
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
+
+        initialise();
+
+        loadCurrentUser();
+
+        loadDependants();
+
+        loadUpcomingAppointments();
+
+        loadCurrentTreatments();
+
+
+        btn_add_dependant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.nav_add_dependant);
+
+            }
+        });
+
+        return root;
+    }
+
+    private void initialise(){
 
         dependantArrayList = new ArrayList<>();
         mAdapter = new DependantHomeAdapter(context, dependantArrayList);
@@ -140,29 +179,17 @@ public class HomeFragment extends Fragment {
         //set data and list adapter
         recycler_view.setAdapter(myAdapter);
 
-
-        loadCurrentUser();
-
-        loadDependants();
-
-        loadUpcomingAppointments();
+        currentTreatmentArrayList = new ArrayList<>();
+        mysAdapter = new CurrentTreatmentAdapter(context, currentTreatmentArrayList);
 
 
+        recycler_Views.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false));
+        recycler_Views.setHasFixedSize(true);
 
+        //set data and list adapter
+        recycler_Views.setAdapter(mysAdapter);
 
-
-        btn_add_dependant.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.nav_add_dependant);
-
-            }
-        });
-
-        return root;
     }
-
 
     private void loadCurrentUser(){
 
@@ -413,5 +440,78 @@ public class HomeFragment extends Fragment {
                 });
     }
 
+    private void loadCurrentTreatments() {
+
+        String auth_token = loggedInUser.getAuth_token();
+
+
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURENT_TREATMENTS)
+                .addHeaders("Authorization","Token "+ auth_token)
+                .addHeaders("Content-Type", "application.json")
+                .addHeaders("Accept", "*/*")
+                .addHeaders("Accept", "gzip, deflate, br")
+                .addHeaders("Connection","keep-alive")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+                        Log.e(TAG, response.toString());
+
+                        currentTreatmentArrayList.clear();
+
+                        if (recycler_Views!=null)
+                            recycler_Views.setVisibility(View.VISIBLE);
+
+                        if (shimmerss_my_container!=null){
+                            shimmerss_my_container.stopShimmerAnimation();
+                            shimmerss_my_container.setVisibility(View.GONE);
+                        }
+
+                        try {
+
+                            if (response.has("treatment")){
+
+                                String treatment = response.has("treatment") ? response.getString("treatment") : "";
+
+                                CurrentTreatment newTreatment = new CurrentTreatment(treatment);
+
+                                currentTreatmentArrayList.add(newTreatment);
+                                mysAdapter.notifyDataSetChanged();
+                            }
+                            else {
+                                no_treatment_lyt.setVisibility(View.VISIBLE);
+                            }
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+
+                        if (recycler_Views!=null)
+                            recycler_Views.setVisibility(View.VISIBLE);
+
+                        if (shimmerss_my_container!=null){
+                            shimmerss_my_container.stopShimmerAnimation();
+                            shimmerss_my_container.setVisibility(View.GONE);
+                        }
+
+                        errorss_lyt.setVisibility(View.VISIBLE);
+
+                        Log.e(TAG, error.getErrorBody());
+
+                        Snackbar.make(root.findViewById(R.id.frag_home), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+
+                    }
+                });
+    }
 
 }

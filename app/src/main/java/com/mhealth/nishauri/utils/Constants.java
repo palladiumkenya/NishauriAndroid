@@ -30,6 +30,11 @@ public class Constants {
     public static String SCHEDULE_APPOINTMENT = "appointments/user/book";
     public static String RESCHEDULE_APPOINTMENT = "appointments/user/reschedule/";
 
+    //TREATMENTS
+    public static String CURENT_TREATMENTS = "user/treatment";
+    public static String PASSED_TREATMENTS = "user/treatment";
+
+
     /*MODELS*/
     public static String AUTH_TOKEN = "";
 
