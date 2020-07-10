@@ -3,7 +3,9 @@ package com.mhealth.nishauri.Fragments.Chat;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.R;
 
 import butterknife.BindView;
@@ -25,13 +28,14 @@ public class ChatFragment extends Fragment {
     private View root;
     private Context context;
 
+    @BindView(R.id.faq_card)
+    CardView faq_card;
 
+    @BindView(R.id.survey_card)
+    CardView survey_card;
 
-    @BindView(R.id.shimmer_my_container)
-    ShimmerFrameLayout shimmer_my_container;
-
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
+    @BindView(R.id.chat_card)
+    CardView chat_card;
 
     @Override
     public void onAttach(Context ctx) {
@@ -52,6 +56,36 @@ public class ChatFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_chat, container, false);
         unbinder = ButterKnife.bind(this, root);
 
+        faq_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                NavHostFragment.findNavController(ChatFragment.this).navigate(R.id.nav_faqs);
+
+            }
+        });
+
+        survey_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Snackbar.make(root.findViewById(R.id.frag_chat), "Client survey Coming Soon", Snackbar.LENGTH_LONG).show();
+
+
+            }
+        });
+
+        chat_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Snackbar.make(root.findViewById(R.id.frag_chat), "Chat Bot Coming Soon", Snackbar.LENGTH_LONG).show();
+
+
+
+            }
+        });
+
 
         return root;
     }
@@ -63,15 +97,4 @@ public class ChatFragment extends Fragment {
     }
 
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        shimmer_my_container.startShimmerAnimation();
-    }
-
-    @Override
-    public void onPause() {
-        shimmer_my_container.stopShimmerAnimation();
-        super.onPause();
-    }
 }

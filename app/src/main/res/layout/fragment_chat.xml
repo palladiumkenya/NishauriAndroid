@@ -1,53 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/frag_broadcasts"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:shimmer="http://schemas.android.com/tools"
+    android:id="@+id/frag_chat"
     android:orientation="vertical"
-    tools:context=".Fragments.Chat.ChatFragment">
+    tools:context=".Fragments.Chat.ChatFragment"
+    android:background="@color/grey_10">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinator_lyt"
+    <androidx.core.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/nested_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginEnd="@dimen/spacing_large"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:scrollbars="none"
+        android:scrollingCache="true">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/shimmer_my_container"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                shimmer:duration="800">
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:id="@+id/shimmerInnerLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/faq_card"
+                    android:layout_margin="@dimen/spacing_medium"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp">
 
-                    <include layout="@layout/lab_placeholder_item" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                </LinearLayout>
+                        <ImageView
+                            android:id="@+id/faq_imgview"
+                            android:layout_width="match_parent"
+                            android:layout_height="90dp"
+                            android:src="@drawable/ic_faq"
+                            android:paddingTop="@dimen/spacing_large"
+                            android:tint="@color/colorPrimary"
+                            android:scaleType="centerInside" />
 
-            </com.facebook.shimmer.ShimmerFrameLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/spacing_large">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:text="FAQs"
+                                    android:textColor="@color/grey_90" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Questions asked frequently by others." />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:visibility="gone"
-                android:scrollingCache="true" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        </FrameLayout>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/survey_card"
+                    android:layout_margin="@dimen/spacing_medium"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp">
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-</LinearLayout>
+                        <ImageView
+                            android:id="@+id/survey_imgview"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:paddingTop="@dimen/spacing_large"
+                            android:src="@drawable/ic_survey"
+                            android:tint="@color/colorPrimary"
+                            android:scaleType="centerInside" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/spacing_large">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:text="Client Survey"
+                                    android:textColor="@color/grey_90" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Survey clients status." />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chat_card"
+                    android:layout_margin="@dimen/spacing_medium"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/chat_imgview"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:paddingTop="@dimen/spacing_large"
+                            android:src="@drawable/ic_chat"
+                            android:tint="@color/colorPrimary"
+                            android:scaleType="centerInside" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/spacing_large">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:text="Start Chat"
+                                    android:textColor="@color/grey_90" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Chat with your HCW." />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

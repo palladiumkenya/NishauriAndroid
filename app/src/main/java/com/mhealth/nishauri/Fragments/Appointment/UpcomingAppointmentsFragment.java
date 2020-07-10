@@ -164,12 +164,18 @@ public class UpcomingAppointmentsFragment extends Fragment {
                                     JSONObject item = (JSONObject) myArray.get(i);
 
                                     int id = item.has("id") ? item.getInt("id") : 0;
+                                    String aid = item.has("aid") ? item.getString("aid") : "";
                                     String appntmnt_date = item.has("appntmnt_date") ? item.getString("appntmnt_date") : "";
                                     String app_status = item.has("app_status") ? item.getString("app_status") : "";
                                     String visit_type = item.has("visit_type") ? item.getString("visit_type") : "";
                                     String app_type = item.has("app_type") ? item.getString("app_type") : "";
+                                    String owner = item.has("owner") ? item.getString("owner") : "";
+                                    String dependant = item.has("dependant") ? item.getString("dependant") : "";
+                                    String created_at = item.has("created_at") ? item.getString("created_at") : "";
+                                    String updated_at = item.has("updated_at") ? item.getString("updated_at") : "";
+                                    String user = item.has("user") ? item.getString("user") : "";
 
-                                    UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(id,appntmnt_date,app_status,visit_type,app_type);
+                                    UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(id,aid,appntmnt_date,app_status,visit_type,app_type,owner,dependant,created_at,updated_at,user);
 
                                     upcomingAppointmentArrayList.add(newUpcomingAppointment);
                                     mAdapter.notifyDataSetChanged();

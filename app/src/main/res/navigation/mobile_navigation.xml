@@ -79,7 +79,7 @@
         android:id="@+id/nav_update_dependants"
         android:name="com.mhealth.nishauri.Fragments.Profile.UpdateDependantsFragment"
         android:label="Update Dependant"
-        tools:layout="@layout/fragment_update_dependants" />
+        tools:layout="@layout/fragment_update_dependant" />
     <fragment
         android:id="@+id/nav_about_app"
         android:name="com.mhealth.nishauri.Fragments.Settings.AboutAppFragment"
@@ -98,6 +98,6 @@
     <fragment
         android:id="@+id/nav_reschedule_appointment"
         android:name="com.mhealth.nishauri.Fragments.Appointment.RescheduleAppointmentFragment"
-        android:label="ReShedule Appointment" />
+        android:label="Reschedule Appointment" />
 
 </navigation>

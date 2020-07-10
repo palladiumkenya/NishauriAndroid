@@ -27,8 +27,8 @@ public class Constants {
     //APPOINTMENT
     public static String UPCOMING_APPOINTMENT = "appointments/user/upcoming";
     public static String PASSED_APPOINTMENT = "appointments/user/past";
-    public static String APPOINTMENT = "http://ushaurinode.mhealthkenya.org/api/mlab/get/appointments";
-
+    public static String SCHEDULE_APPOINTMENT = "appointments/user/book";
+    public static String RESCHEDULE_APPOINTMENT = "appointments/user/reschedule/";
 
     /*MODELS*/
     public static String AUTH_TOKEN = "";

@@ -41,8 +41,10 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
         public TextView appointment_date;
+        public TextView owner;
+        public TextView dependants;
         public TextView appointmet_type;
-        public TextView facility_name;
+        public TextView app_status;
         public ImageButton bt_expand;
         public MaterialButton confirm_appointment;
         public MaterialButton reschedule_appointment;
@@ -54,8 +56,10 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
         public OriginalViewHolder(View v) {
             super(v);
             appointment_date = (TextView) v.findViewById(R.id.date_of_appointment);
+            owner = (TextView) v.findViewById(R.id.txt_owner);
+            dependants = (TextView) v.findViewById(R.id.txt_dependants);
             appointmet_type = (TextView) v.findViewById(R.id.appointment_type);
-            facility_name = (TextView) v.findViewById(R.id.facility_name);
+            app_status = (TextView) v.findViewById(R.id.txt_app_status);
             bt_expand = (ImageButton) v.findViewById(R.id.bt_expand);
             confirm_appointment = (MaterialButton) v.findViewById(R.id.btn_confirm_appointment);
             reschedule_appointment = (MaterialButton) v.findViewById(R.id.btn_reshedule_appointment);
@@ -81,9 +85,20 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
         if (holder instanceof UpcomingAppointmentAdapter.OriginalViewHolder) {
             UpcomingAppointmentAdapter.OriginalViewHolder view = (UpcomingAppointmentAdapter.OriginalViewHolder) holder;
 
-            view.appointment_date.setText(obj.getAppntmnt_date());
-            view.appointmet_type.setText(obj.getApp_status());
-            view.facility_name.setText(obj.getVisit_type());
+            view.appointment_date.setText("Date: "+obj.getAppntmnt_date());
+            view.appointmet_type.setText("Type: "+obj.getApp_type());
+            view.owner.setText(obj.getOwner());
+            view.app_status.setText(obj.getVisit_type());
+
+            if (obj.getOwner().equals("Personal")){
+                view.owner.setVisibility(View.VISIBLE);
+                view.owner.setText("Owner: "+obj.getOwner());
+            }
+
+            if (!obj.getDependant().equals("null")){
+                view.dependants.setVisibility(View.VISIBLE);
+                view.dependants.setText("Owner: "+obj.getDependant());
+            }
 
 
 

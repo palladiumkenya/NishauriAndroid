@@ -7,7 +7,7 @@
     android:id="@+id/frag_update_dependant"
     android:background="@color/grey_5"
     android:fitsSystemWindows="true"
-    tools:context=".Fragments.Profile.UpdateDependantsFragment">
+    >
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
@@ -191,59 +191,59 @@
 
             </androidx.cardview.widget.CardView>
 
-           <!-- <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_large"
-                android:layout_marginRight="@dimen/spacing_large"
-                android:layout_marginTop="@dimen/spacing_middle"
-                android:background="@android:color/white"
-                app:cardCornerRadius="2dp"
-                app:cardElevation="2dp"
-                app:cardUseCompatPadding="true">
+            <!-- <androidx.cardview.widget.CardView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginLeft="@dimen/spacing_large"
+                 android:layout_marginRight="@dimen/spacing_large"
+                 android:layout_marginTop="@dimen/spacing_middle"
+                 android:background="@android:color/white"
+                 app:cardCornerRadius="2dp"
+                 app:cardElevation="2dp"
+                 app:cardUseCompatPadding="true">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/spacing_large">
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="vertical"
+                     android:padding="@dimen/spacing_large">
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Facility details"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/grey_90" />
+                     <com.google.android.material.textview.MaterialTextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="Facility details"
+                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                         android:textColor="@color/grey_90" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:endIconMode="clear_text"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/phone_number"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            style="@style/EditText.Flat.Grey"
-                            android:inputType="phone"
-                            android:maxLength="10"
-                            android:hint="HEI Number"/>
-                    </com.google.android.material.textfield.TextInputLayout>
+                     <com.google.android.material.textfield.TextInputLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         app:endIconMode="clear_text"
+                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                         <com.google.android.material.textfield.TextInputEditText
+                             android:id="@+id/phone_number"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             style="@style/EditText.Flat.Grey"
+                             android:inputType="phone"
+                             android:maxLength="10"
+                             android:hint="HEI Number"/>
+                     </com.google.android.material.textfield.TextInputLayout>
 
 
-                    <androidx.appcompat.widget.AppCompatSpinner
-                        android:id="@+id/facilitySpinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xxlarge" />
+                     <androidx.appcompat.widget.AppCompatSpinner
+                         android:id="@+id/facilitySpinner"
+                         android:layout_width="match_parent"
+                         android:layout_height="@dimen/spacing_xxlarge" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey_5" />
+                     <View
+                         android:layout_width="match_parent"
+                         android:layout_height="1dp"
+                         android:background="@color/grey_5" />
 
-                </LinearLayout>
+                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>-->
+             </androidx.cardview.widget.CardView>-->
 
 
             <View
@@ -257,7 +257,7 @@
                 android:layout_marginRight="@dimen/spacing_large">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_update_dependants"
+                    android:id="@+id/btn_update_dependant_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/spacing_middle"

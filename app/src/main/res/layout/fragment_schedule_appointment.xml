@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:id="@+id/frag_schedule_appointment"
     android:orientation="vertical"
-    tools:context=".Fragments.Appointment.RescheduleAppointmentFragment">
+    tools:context=".Fragments.Appointment.ScheduleAppointmentFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,15 +16,11 @@
         android:orientation="vertical"
         android:padding="@dimen/spacing_large">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity=""
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/spacing_mlarge"
-            android:paddingStart="@dimen/spacing_mlarge"
-            android:paddingEnd="@dimen/spacing_mlarge">
+            android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
@@ -47,20 +44,47 @@
                 android:text="Date to schedule to: "
                 android:textSize="@dimen/spacing_mlarge"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textColor="@color/grey_80"
-                />
+                android:textColor="@color/grey_80" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txt_date_time_appointment"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_appointment_datee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/spacing_large"
-                android:layout_marginHorizontal="@dimen/spacing_large"
-                android:text="Select date and time here..."
-                android:textSize="@dimen/spacing_large"
-                android:textColor="@color/colorAccent"
-                android:textAppearance="@style/AppTextAppearance.Button"
-                android:clickable="true"/>
+                android:layout_marginHorizontal="@dimen/spacing_middle"
+                android:layout_marginVertical="@dimen/spacing_middle"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_appointment_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Appointment date"
+                    android:inputType="text"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:clickable="true"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+           <!-- <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_appointment_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_middle"
+                android:layout_marginVertical="@dimen/spacing_middle"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_appointment_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Appointment time."
+                    android:inputType="text"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:clickable="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>-->
 
             <View
                 android:layout_width="5dp"
@@ -79,12 +103,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_medium"
-                android:entries="@array/schedule_reason"
-                />
+                android:entries="@array/schedule_reason" />
+
+            <LinearLayout
+                android:id="@+id/lyt_specific_reason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_specify_reason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_middle"
+                    android:layout_marginVertical="@dimen/spacing_middle"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/specify_reason_edtxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Please specify"
+                        android:inputType="textCapSentences"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="@dimen/spacing_xmlarge" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animationView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:lottie_url="https://assets9.lottiefiles.com/packages/lf20_Stt1R6.json"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                android:visibility="gone"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_submit"

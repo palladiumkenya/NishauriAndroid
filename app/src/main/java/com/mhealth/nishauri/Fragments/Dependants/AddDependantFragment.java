@@ -123,7 +123,7 @@ public class AddDependantFragment extends Fragment {
                 if (checkNulls()){
 
                     addDependant(hei_number.getText().toString(),first_name.getText().toString(),surname.getText().toString(), txt_dob.getText().toString());
-
+                    animationView.setVisibility(View.VISIBLE);
                 }
 
 

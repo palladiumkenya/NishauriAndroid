@@ -190,104 +190,128 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/spacing_middle"
+                        android:layout_marginBottom="@dimen/spacing_medium"
                         android:text="Upcoming Appointments"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/grey_90" />
 
-                    <LinearLayout
+                    <androidx.coordinatorlayout.widget.CoordinatorLayout
+                        android:id="@+id/appointment_lyt"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent">
 
-                        <com.google.android.material.textview.MaterialTextView
+                        <FrameLayout
                             android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <com.facebook.shimmer.ShimmerFrameLayout
+                                android:id="@+id/shimmers_my_container"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                shimmer:duration="800">
+
+                                <LinearLayout
+                                    android:id="@+id/shimmersInnerLayout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <include layout="@layout/lab_placeholder_item" />
+
+                                </LinearLayout>
+
+                            </com.facebook.shimmer.ShimmerFrameLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recycler_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scrollbars="vertical"
+                                android:layout_marginTop="@dimen/spacing_medium"
+                                android:visibility="gone"
+                                android:scrollingCache="true" />
+
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:id="@+id/no_appointment_lyt"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:text="Date: 25/04/2020"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/colorAccent"
-                            android:textStyle="bold" />
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:visibility="gone"
+                            android:paddingBottom="80dp"
+                            android:orientation="vertical">
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
+                            <ImageView
+                                android:id="@+id/appointment_img"
+                                android:layout_width="170dp"
+                                android:layout_height="170dp"
+                                android:src="@drawable/ic_appointment" />
+
+                            <TextView
+                                android:id="@+id/appointment_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_large"
+                                android:text="No appointments found."
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                                android:textColor="@color/grey_60" />
+
+                            <TextView
+                                android:id="@+id/appointment_brief"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_medium"
+                                android:text="Please schedule one with your HCW."
+                                android:textAlignment="center"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                android:textColor="@color/grey_40" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/errors_lyt"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/spacing_large"
-                            android:layout_marginTop="@dimen/spacing_medium"
-                            android:layout_weight="1"
-                            android:lineSpacingExtra="4dp"
-                            android:text="@string/appointment"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/grey_60" />
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:visibility="gone"
+                            android:paddingBottom="80dp"
+                            android:orientation="vertical">
 
-                    </LinearLayout>
+                            <ImageView
+                                android:id="@+id/errors_img"
+                                android:layout_width="170dp"
+                                android:layout_height="170dp"
+                                android:src="@drawable/ic_error_message" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey_20" />
+                            <TextView
+                                android:id="@+id/errors_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_large"
+                                android:text="An error occurred. "
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                                android:textColor="@color/grey_60" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/errors_brief"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_medium"
+                                android:text="Please try again later."
+                                android:textAlignment="center"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                android:textColor="@color/grey_40" />
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:text="Date: 25/04/2020"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/colorAccent"
-                            android:textStyle="bold" />
+                        </LinearLayout>
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/spacing_large"
-                            android:layout_marginTop="@dimen/spacing_medium"
-                            android:layout_weight="1"
-                            android:lineSpacingExtra="4dp"
-                            android:text="Refill"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/grey_60" />
+                    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/grey_20" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:text="Date: 25/04/2020"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/colorAccent"
-                            android:textStyle="bold" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/spacing_large"
-                            android:layout_marginTop="@dimen/spacing_medium"
-                            android:layout_weight="1"
-                            android:lineSpacingExtra="4dp"
-                            android:text="@string/appointment"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@color/grey_60" />
-
-                    </LinearLayout>
 
                 </LinearLayout>
 

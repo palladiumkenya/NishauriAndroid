@@ -22,12 +22,10 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
-import com.mhealth.nishauri.Models.Dependant;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -63,7 +61,7 @@ public class UpdateDependantsFragment extends Fragment {
     @BindView(R.id.etxt_dependant_surname)
     TextInputEditText etxt_dependant_surname;
 
-    @BindView(R.id.btn_update_dependants)
+    @BindView(R.id.btn_update_dependant)
     Button btn_update_dependant;
 
     @Override
@@ -82,7 +80,7 @@ public class UpdateDependantsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_update_dependants, container, false);
+        root = inflater.inflate(R.layout.fragment_update_dependant, container, false);
         unbinder = ButterKnife.bind(this, root);
 
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
