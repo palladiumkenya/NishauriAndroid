@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -58,6 +59,12 @@ public class UpdateProfileFragment extends Fragment {
     @BindView(R.id.txt_ccc_number)
     MaterialTextView txt_ccc_number;
 
+    @BindView(R.id.txt_initial_facility)
+    MaterialTextView txt_initial_facility;
+
+    @BindView(R.id.txt_current_facility)
+    MaterialTextView txt_current_facility;
+
     @BindView(R.id.btn_update_user)
     Button btn_user;
 
@@ -66,6 +73,12 @@ public class UpdateProfileFragment extends Fragment {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+
+    @BindView(R.id.no_dependant_lyt)
+    LinearLayout no_dependant_lyt;
+
+    @BindView(R.id.error_lyt)
+    LinearLayout error_lyt;
 
     public void onAttach(Context ctx) {
         super.onAttach(ctx);
@@ -165,6 +178,8 @@ public class UpdateProfileFragment extends Fragment {
                                     String CCCNo = item.has("CCCNo") ? item.getString("CCCNo") : "";
                                     String first_name = item.has("first_name") ? item.getString("first_name") : "";
                                     String last_name = item.has("last_name") ? item.getString("last_name") : "";
+                                    String current_facility = item.has("current_facility") ? item.getString("current_facility") : "";
+                                    String initial_facility = item.has("initial_facility") ? item.getString("initial_facility") : "";
 
                                     JSONArray dependants = item.has("dependants") ? item.getJSONArray("dependants"): null;
 
@@ -191,16 +206,22 @@ public class UpdateProfileFragment extends Fragment {
                                             mAdapter.notifyDataSetChanged();
 
                                         }
+                                    } else {
+                                        //not data found
+                                        no_dependant_lyt.setVisibility(View.VISIBLE);
                                     }
 
 
 
                                     txt_names.setText(first_name + " "+ last_name);
                                     txt_ccc_number.setText(CCCNo);
+                                    txt_initial_facility.setText(initial_facility);
+                                    txt_current_facility.setText(current_facility);
 
                                 }
 
                             }
+
 
 
 
@@ -213,6 +234,8 @@ public class UpdateProfileFragment extends Fragment {
                     public void onError(ANError error) {
                         // handle error
                         Log.e(TAG, error.getErrorBody());
+
+                        error_lyt.setVisibility(View.VISIBLE);
 
                         Snackbar.make(root.findViewById(R.id.frag_update_profile), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
 

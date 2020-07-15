@@ -28,6 +28,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
@@ -57,14 +58,17 @@ public class RescheduleAppointmentFragment extends Fragment {
     private String RESCHEDULED_DATE = "";
 
 
+    @BindView(R.id.til_reschedule_date)
+    TextInputLayout til_reschedule_date;
+
     @BindView(R.id.txt_reschedule_date)
     TextView txt_reschedule_appointment;
 
     @BindView(R.id.reason_spinner)
     AppCompatSpinner reason_spinner;
 
-    @BindView(R.id.lyt_specific_reason)
-    LinearLayout lyt_specific_reason;
+    @BindView(R.id.til_specify_reason)
+    TextInputLayout til_specify_reason;
 
     @BindView(R.id.specify_reason_edtxt)
     TextInputEditText specify_reason_edtxt;
@@ -109,11 +113,6 @@ public class RescheduleAppointmentFragment extends Fragment {
                 getRescheduledDate();
             }
         });
-
-        if (reason_spinner.getSelectedItem().toString().equals("Other")){
-            lyt_specific_reason.setVisibility(View.VISIBLE);
-        }
-
 
         btn_continue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,14 +160,21 @@ public class RescheduleAppointmentFragment extends Fragment {
 
         if(TextUtils.isEmpty(txt_reschedule_appointment.getText().toString()))
         {
-            Snackbar.make(root.findViewById(R.id.frag_schedule_appointment), "Please provide an new date.", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(root.findViewById(R.id.frag_reschedule_appointment), "Please provide an new date.", Snackbar.LENGTH_LONG).show();
             valid = false;
             return valid;
         }
 
         if(reason_spinner.getSelectedItem().toString().equals("Pick a reason here…"))
         {
-            Snackbar.make(root.findViewById(R.id.frag_schedule_appointment), "Please select a reason for the appointment.", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(root.findViewById(R.id.frag_reschedule_appointment), "Please select a reason for the appointment.", Snackbar.LENGTH_LONG).show();
+            valid = false;
+            return valid;
+        }
+
+        if(TextUtils.isEmpty(specify_reason_edtxt.getText().toString()))
+        {
+            Snackbar.make(root.findViewById(R.id.frag_reschedule_appointment), "Please specify a reason for rescheduling", Snackbar.LENGTH_LONG).show();
             valid = false;
             return valid;
         }
@@ -214,6 +220,10 @@ public class RescheduleAppointmentFragment extends Fragment {
 
                             NavHostFragment.findNavController(RescheduleAppointmentFragment.this).navigate(R.id.nav_appointment);
                         }
+                        else {
+                            Snackbar.make(root.findViewById(R.id.frag_schedule_appointment), "An Error occurred. Please try again later.", Snackbar.LENGTH_LONG).show();
+
+                        }
 
                     }
 
@@ -225,7 +235,7 @@ public class RescheduleAppointmentFragment extends Fragment {
                         animationView.setVisibility(View.GONE);
 
 
-                        Snackbar.make(root.findViewById(R.id.frag_schedule_appointment), "" + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(root.findViewById(R.id.frag_schedule_appointment), "An Error occurred. Please try again later." + error.getErrorDetail(), Snackbar.LENGTH_LONG).show();
                     }
                 });
 

@@ -20,11 +20,9 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
-import com.mhealth.nishauri.Models.EID;
 import com.mhealth.nishauri.Models.UpcomingAppointment;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
-import com.mhealth.nishauri.adapters.EIDAdapter;
 import com.mhealth.nishauri.adapters.UpcomingAppointmentAdapter;
 import com.mhealth.nishauri.utils.Constants;
 
@@ -51,6 +49,7 @@ public class UpcomingAppointmentsFragment extends Fragment {
     private User loggedInUser;
     private UpcomingAppointmentAdapter mAdapter;
     private ArrayList<UpcomingAppointment> upcomingAppointmentArrayList;
+
 
 
 
@@ -93,11 +92,13 @@ public class UpcomingAppointmentsFragment extends Fragment {
         mAdapter = new UpcomingAppointmentAdapter(context, upcomingAppointmentArrayList);
 
 
+
         recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false));
         recyclerView.setHasFixedSize(true);
 
         //set data and list adapter
         recyclerView.setAdapter(mAdapter);
+
 
         loadUpcomingAppointments();
 
@@ -156,6 +157,7 @@ public class UpcomingAppointmentsFragment extends Fragment {
 
                             JSONArray myArray = response.getJSONArray("data");
 
+
                             if (myArray.length() > 0){
 
 
@@ -175,6 +177,7 @@ public class UpcomingAppointmentsFragment extends Fragment {
                                     String updated_at = item.has("updated_at") ? item.getString("updated_at") : "";
                                     String user = item.has("user") ? item.getString("user") : "";
 
+
                                     UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(id,aid,appntmnt_date,app_status,visit_type,app_type,owner,dependant,created_at,updated_at,user);
 
                                     upcomingAppointmentArrayList.add(newUpcomingAppointment);
@@ -182,7 +185,8 @@ public class UpcomingAppointmentsFragment extends Fragment {
 
                                 }
 
-                            }else {
+                            }
+                            else {
                                 //not data found
 
                                 no_appointment_lyt.setVisibility(View.VISIBLE);
@@ -207,11 +211,20 @@ public class UpcomingAppointmentsFragment extends Fragment {
                             shimmer_my_container.setVisibility(View.GONE);
                         }
 
-                        error_lyt.setVisibility(View.VISIBLE);
 
-                        Log.e(TAG, error.getErrorDetail());
 
-                        Snackbar.make(root.findViewById(R.id.frag_upcoming_appointments), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+                        Log.e(TAG, String.valueOf(error.getErrorCode()));
+
+                        if (error.getErrorCode() == 0){
+                            no_appointment_lyt.setVisibility(View.VISIBLE);
+                        }
+                        else {
+
+                            error_lyt.setVisibility(View.VISIBLE);
+                            Snackbar.make(root.findViewById(R.id.frag_upcoming_appointments), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+
+                        }
+
 
                     }
                 });

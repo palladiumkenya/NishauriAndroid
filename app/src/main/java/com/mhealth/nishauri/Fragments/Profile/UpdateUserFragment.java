@@ -54,6 +54,9 @@ public class UpdateUserFragment extends Fragment {
     @BindView(R.id.card_phone)
     MaterialTextView card_phone;
 
+    @BindView(R.id.card_facility)
+    MaterialTextView card_facility;
+
     @BindView(R.id.til_first_name)
     TextInputLayout til_first_name;
 
@@ -235,7 +238,6 @@ public class UpdateUserFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-
         AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_USER)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
@@ -269,11 +271,13 @@ public class UpdateUserFragment extends Fragment {
                                     String securityQuestion = item.has("securityQuestion") ? item.getString("securityQuestion") : "";
                                     String securityAnswer = item.has("securityAnswer") ? item.getString("securityAnswer") : "";
                                     String language_preference = item.has("language_preference") ? item.getString("language_preference") : "";
+                                    String current_facility = item.has("current_facility") ? item.getString("current_facility") : "";
 
 
 
                                     card_name.setText(first_name + " " + last_name);
                                     card_phone.setText(msisdn);
+                                    card_facility.setText(current_facility);
                                     etxt_first_name.setText(first_name );
                                     etxt_surname.setText(last_name );
                                     etxt_phone_number.setText(msisdn);

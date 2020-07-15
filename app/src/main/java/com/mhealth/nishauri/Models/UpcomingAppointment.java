@@ -16,7 +16,7 @@ public class UpcomingAppointment {
     public boolean expanded = false;
     public boolean parent = false;
 
-    public UpcomingAppointment(int id,String aid,String appntmnt_date, String app_status, String visit_type, String app_type, String owner, String dependant, String created_at, String updated_at, String user) {
+    public UpcomingAppointment(int id, String aid, String appntmnt_date, String app_status, String visit_type, String app_type, String owner, String dependant, String created_at, String updated_at, String user) {
 
         this.id = id;
         this.aid = aid;

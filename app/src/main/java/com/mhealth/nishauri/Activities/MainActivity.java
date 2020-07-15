@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         View headerLayout = navigationView.getHeaderView(0); // 0-index header
         TextView drawer_cccno = (TextView) headerLayout.findViewById(R.id.ccc_no);
         TextView drawer_name = (TextView) headerLayout.findViewById(R.id.full_name);
+        TextView drawer_facility = (TextView) headerLayout.findViewById(R.id.current_facility);
 
 
 
@@ -106,7 +107,9 @@ public class MainActivity extends AppCompatActivity {
                                     String first_name = item.has("first_name") ? item.getString("first_name") : "";
                                     String last_name = item.has("last_name") ? item.getString("last_name") : "";
                                     String CCCNo = item.has("CCCNo") ? item.getString("CCCNo") : "";
+                                    String current_facility = item.has("current_facility") ? item.getString("current_facility") : "";
 
+                                    drawer_facility.setText(current_facility);
                                     drawer_cccno.setText(CCCNo);
                                     drawer_name.setText(first_name + " " + last_name);
 

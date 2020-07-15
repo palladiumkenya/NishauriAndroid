@@ -393,15 +393,29 @@ public class SignUpActivity extends AppCompatActivity {
 
                         animationView.setVisibility(View.GONE);
 
-                        if (response.has("id")){
+                        try {
 
-                            Intent mint = new Intent(SignUpActivity.this, LoginActivity.class);
-                            Toast.makeText(SignUpActivity.this, "Successful SignUp", Toast.LENGTH_SHORT).show();
-                            mint.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(mint);
+                            boolean  status = response.has("success") && response.getBoolean("success");
+                            String  errors = response.has("errors") ? response.getString("errors") : "" ;
 
+
+                            if (status){
+
+                                Intent mint = new Intent(SignUpActivity.this, LoginActivity.class);
+                                Toast.makeText(SignUpActivity.this, "User created", Toast.LENGTH_SHORT).show();
+                                mint.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(mint);
+
+                            }
+                            else{
+
+                                Toast.makeText(SignUpActivity.this, errors, Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-
 
                     }
 
@@ -412,7 +426,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                         animationView.setVisibility(View.GONE);
 
-                        Snackbar.make(findViewById(R.id.signup_layout), "Server Error! Please try again!", Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(findViewById(R.id.signup_layout), "Error: "+error.getErrorBody(), Snackbar.LENGTH_LONG).show();
                     }
                 });
 

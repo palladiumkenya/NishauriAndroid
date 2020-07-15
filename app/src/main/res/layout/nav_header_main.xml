@@ -24,7 +24,7 @@
         android:id="@+id/full_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="John Doe"
+        android:text=""
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
@@ -43,12 +43,31 @@
             android:id="@+id/ccc_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=" 1234567890">
+            android:text=" ">
 
         </com.google.android.material.textview.MaterialTextView>
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/facility_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current facility: "/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/current_facility"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+    </LinearLayout>
 
 </LinearLayout>

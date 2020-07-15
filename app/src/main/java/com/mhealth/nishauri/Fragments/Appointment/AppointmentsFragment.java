@@ -80,8 +80,9 @@ public class AppointmentsFragment extends Fragment {
 
 
         AppointmentsFragment.Adapter adapter = new AppointmentsFragment.Adapter(getChildFragmentManager());
-        adapter.addFragment(new UpcomingAppointmentsFragment(), "Upcoming Appointments");
-        adapter.addFragment(new PreviousAppointmentsFragment(), "Previous Appointments");
+        adapter.addFragment(new UpcomingAppointmentsFragment(), "Upcoming");
+        adapter.addFragment(new PendingAppointmentsFragment(), "Pending");
+        adapter.addFragment(new PreviousAppointmentsFragment(), "Previous");
 //        adapter.addFragment(new ProtocolsTabFragment(), hcw == null ? "Facility" : hcw.getFacility_name());
         viewPager.setAdapter(adapter);
     }

@@ -18,7 +18,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.fxn.stash.Stash;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.mhealth.nishauri.Models.UpcomingAppointment;
+import com.mhealth.nishauri.Models.PendingAppointment;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
@@ -32,23 +32,23 @@ import java.util.List;
 
 import static com.mhealth.nishauri.utils.AppController.TAG;
 
-public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class PendingAppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<UpcomingAppointment> items = new ArrayList<>();
+    private List<PendingAppointment> items = new ArrayList<>();
 
     private User loggedInUser;
     private Context context;
     private View root;
-    private UpcomingAppointmentAdapter.OnItemClickListener onItemClickListener;
+    private PendingAppointmentAdapter.OnItemClickListener onItemClickListener;
 
     public interface OnItemClickListener{
         void onItemClick(int position);
     }
-    public void setOnItemClickListener(UpcomingAppointmentAdapter.OnItemClickListener onItemClickListener) {
+    public void setOnItemClickListener(PendingAppointmentAdapter.OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public UpcomingAppointmentAdapter(Context context, List<UpcomingAppointment> items) {
+    public PendingAppointmentAdapter(Context context, List<PendingAppointment> items) {
         this.items = items;
         this.context = context;
     }
@@ -61,6 +61,7 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
         public TextView app_status;
         public ImageButton bt_expand;
         public MaterialButton confirm_appointment;
+        public MaterialButton confirmed_appointment;
         public MaterialButton reschedule_appointment;
         public View lyt_expand;
         public View lyt_parent;
@@ -70,12 +71,12 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
         public OriginalViewHolder(View v) {
             super(v);
             appointment_date = (TextView) v.findViewById(R.id.date_of_appointment);
-            owner = (TextView) v.findViewById(R.id.txt_owner);
             dependants = (TextView) v.findViewById(R.id.txt_dependants);
             appointmet_type = (TextView) v.findViewById(R.id.appointment_type);
             app_status = (TextView) v.findViewById(R.id.txt_app_status);
             bt_expand = (ImageButton) v.findViewById(R.id.bt_expand);
             confirm_appointment = (MaterialButton) v.findViewById(R.id.btn_confirm_appointment);
+            confirmed_appointment = (MaterialButton) v.findViewById(R.id.btn_confirmed_appointment);
             reschedule_appointment = (MaterialButton) v.findViewById(R.id.btn_reshedule_appointment);
             lyt_expand = (View) v.findViewById(R.id.lyt_expand);
             lyt_parent = (View) v.findViewById(R.id.lyt_parent);
@@ -87,31 +88,29 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_upcoming_appointment, parent, false);
-        vh = new UpcomingAppointmentAdapter.OriginalViewHolder(v);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pending_appointment, parent, false);
+        vh = new PendingAppointmentAdapter.OriginalViewHolder(v);
         return vh;
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        UpcomingAppointment obj = items.get(position);
-        if (holder instanceof UpcomingAppointmentAdapter.OriginalViewHolder) {
-            UpcomingAppointmentAdapter.OriginalViewHolder view = (UpcomingAppointmentAdapter.OriginalViewHolder) holder;
+        PendingAppointment obj = items.get(position);
+        if (holder instanceof PendingAppointmentAdapter.OriginalViewHolder) {
+            PendingAppointmentAdapter.OriginalViewHolder view = (PendingAppointmentAdapter.OriginalViewHolder) holder;
 
             view.appointment_date.setText("Date: "+obj.getAppntmnt_date());
             view.appointmet_type.setText("Type: "+obj.getApp_type());
-            view.owner.setText(obj.getOwner());
-            view.app_status.setText(obj.getVisit_type());
+            view.app_status.setText(obj.getBook_type());
 
-            if (obj.getOwner().equals("Personal")){
-                view.owner.setVisibility(View.VISIBLE);
-                view.owner.setText("Owner: "+obj.getOwner());
+            if (obj.getApproval_status().equals("Accepted")){
+                view.confirm_appointment.setVisibility(View.GONE);
+                view.confirmed_appointment.setVisibility(View.VISIBLE);
             }
-
-            if (!obj.getDependant().equals("null")){
-                view.dependants.setVisibility(View.VISIBLE);
-                view.dependants.setText("Owner: "+obj.getDependant());
+            else{
+                view.confirm_appointment.setVisibility(View.VISIBLE);
+                view.confirmed_appointment.setVisibility(View.GONE);
             }
 
 
@@ -151,12 +150,14 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
 
                                         if (response.has("accepted")){
 
-                                            Snackbar.make(root.findViewById(R.id.frag_upcoming_appointments), "Your appointment was confirmed! ", Snackbar.LENGTH_LONG).show();
+                                            Snackbar.make(root.findViewById(R.id.frag_pending_appointment), "Your appointment was confirmed! ", Snackbar.LENGTH_LONG).show();
+
+                                            view.confirmed_appointment.setVisibility(View.VISIBLE);
 
                                         }
                                         else{
 
-                                            Snackbar.make(root.findViewById(R.id.frag_upcoming_appointments), "Please try again later. ", Snackbar.LENGTH_LONG).show();
+                                            Snackbar.make(root.findViewById(R.id.frag_pending_appointment), "Please try again later. ", Snackbar.LENGTH_LONG).show();
 
 
                                         }
@@ -169,7 +170,7 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
 
                                         Log.e(TAG, error.getErrorBody());
 
-                                            Snackbar.make(root.findViewById(R.id.frag_upcoming_appointments), "Error: " + error.getErrorDetail(), Snackbar.LENGTH_LONG).show();
+                                        Snackbar.make(root.findViewById(R.id.frag_pending_appointment), "Error: " + error.getErrorDetail(), Snackbar.LENGTH_LONG).show();
 
 
 

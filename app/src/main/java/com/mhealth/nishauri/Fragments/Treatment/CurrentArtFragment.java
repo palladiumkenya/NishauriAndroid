@@ -184,11 +184,21 @@ public class CurrentArtFragment extends Fragment {
                             shimmer_my_container.setVisibility(View.GONE);
                         }
 
-                        error_lyt.setVisibility(View.VISIBLE);
+
 
                         Log.e(TAG, error.getErrorBody());
 
-                        Snackbar.make(root.findViewById(R.id.frag_previous_appointment), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+                        if (error.getErrorBody().contains("No treatments found")){
+                            no_treatment_lyt.setVisibility(View.VISIBLE);
+                        }
+                        else{
+
+                            error_lyt.setVisibility(View.VISIBLE);
+                            Snackbar.make(root.findViewById(R.id.frag_previous_appointment), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+
+
+                        }
+
 
                     }
                 });

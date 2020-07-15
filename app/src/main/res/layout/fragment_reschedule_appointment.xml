@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/frag_reschedule_appointment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".Fragments.Appointment.RescheduleAppointmentFragment">
@@ -73,10 +74,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:paddingVertical="@dimen/spacing_medium"
-                        android:text=" 20/04/2020 "
+                        android:text=" "
                         android:textSize="@dimen/spacing_large"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:clickable="true" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
                 </LinearLayout>
 
@@ -150,7 +150,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    >
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_specify_reason"

@@ -1,13 +1,13 @@
 package com.mhealth.nishauri.utils;
 
-import com.mhealth.nishauri.Models.Dependant;
+
 
 public class Constants {
     /*ENDPOINT*/
     public static String ENDPOINT = "http://nishauri-api.mhealthkenya.co.ke/api/";
 
     //AUTH
-    public static String REGISTER = "users/";
+    public static String REGISTER = "signup/";
     public static String LOGIN = "token/login/";
 
     //USER
@@ -26,9 +26,11 @@ public class Constants {
 
     //APPOINTMENT
     public static String UPCOMING_APPOINTMENT = "appointments/user/upcoming";
+    public static String PENDING_APPOINTMENT = "appointments/user/book";
     public static String PASSED_APPOINTMENT = "appointments/user/past";
     public static String SCHEDULE_APPOINTMENT = "appointments/user/book";
     public static String RESCHEDULE_APPOINTMENT = "appointments/user/reschedule/";
+    public static String CONFIRM_APPOINTMENT = "appointments/user/accept/";
 
     //TREATMENTS
     public static String CURENT_TREATMENTS = "user/treatment";

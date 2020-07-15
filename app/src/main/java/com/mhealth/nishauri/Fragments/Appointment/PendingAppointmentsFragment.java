@@ -1,8 +1,6 @@
-package com.mhealth.nishauri.Fragments.Lab;
+package com.mhealth.nishauri.Fragments.Appointment;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -22,14 +19,11 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.fxn.stash.Stash;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.mhealth.nishauri.Models.Dependant;
+import com.mhealth.nishauri.Models.PendingAppointment;
 import com.mhealth.nishauri.Models.User;
-import com.mhealth.nishauri.Models.ViralLoad;
 import com.mhealth.nishauri.R;
-import com.mhealth.nishauri.adapters.DependantAdapter;
-import com.mhealth.nishauri.adapters.ViralLoadAdapter;
+import com.mhealth.nishauri.adapters.PendingAppointmentAdapter;
 import com.mhealth.nishauri.utils.Constants;
 
 import org.json.JSONArray;
@@ -45,7 +39,7 @@ import butterknife.Unbinder;
 import static com.mhealth.nishauri.utils.AppController.TAG;
 
 
-public class ViralLoadResultsFragment extends Fragment {
+public class PendingAppointmentsFragment extends Fragment {
 
 
     private Unbinder unbinder;
@@ -53,10 +47,11 @@ public class ViralLoadResultsFragment extends Fragment {
     private Context context;
 
     private User loggedInUser;
-    private ViralLoadAdapter mAdapter;
-    private ArrayList<ViralLoad> viralLoadArrayList;
+    private PendingAppointmentAdapter mAdapter;
+    private ArrayList<PendingAppointment> pendingAppointmentArrayList;
 
-    private ProgressDialog pDialog;
+
+
 
     @BindView(R.id.shimmer_my_container)
     ShimmerFrameLayout shimmer_my_container;
@@ -64,23 +59,12 @@ public class ViralLoadResultsFragment extends Fragment {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    @BindView(R.id.request_lyt)
-    LinearLayout request_lyt;
-
-    @BindView(R.id.no_result_lyt)
-    LinearLayout no_result_lyt;
+    @BindView(R.id.no_appointment_lyt)
+    LinearLayout no_appointment_lyt;
 
     @BindView(R.id.error_lyt)
     LinearLayout error_lyt;
 
-    @BindView(R.id.fab_request_viral)
-    ExtendedFloatingActionButton fab_request_viral_results;
-
-    @Override
-    public void onAttach(Context ctx) {
-        super.onAttach(ctx);
-        this.context = ctx;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,22 +73,24 @@ public class ViralLoadResultsFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context ctx) {
+        super.onAttach(ctx);
+        this.context = ctx;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_viral_load_results, container, false);
-        unbinder = ButterKnife.bind(this, root);
-
-        pDialog = new ProgressDialog(context);
-        pDialog.setTitle("Loading...");
-        pDialog.setMessage("Getting Results...");
-        pDialog.setCancelable(true);
+        root = inflater.inflate(R.layout.fragment_pending_appointments, container, false);
+        unbinder = ButterKnife.bind(this,root);
 
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
 
-        viralLoadArrayList = new ArrayList<>();
-        mAdapter = new ViralLoadAdapter(context, viralLoadArrayList);
+        pendingAppointmentArrayList = new ArrayList<>();
+        mAdapter = new PendingAppointmentAdapter(context, pendingAppointmentArrayList);
+
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false));
@@ -113,22 +99,8 @@ public class ViralLoadResultsFragment extends Fragment {
         //set data and list adapter
         recyclerView.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener(new ViralLoadAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                ViralLoad clickedItem = viralLoadArrayList.get(position);
 
-            }
-        });
-
-        fab_request_viral_results.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                request_lyt.setVisibility(View.GONE);
-                pDialog.show();
-                loadViralLoad();
-            }
-        });
+        loadPendingAppointments();
 
         return root;
     }
@@ -152,12 +124,12 @@ public class ViralLoadResultsFragment extends Fragment {
         super.onPause();
     }
 
-    private void loadViralLoad() {
+    private void loadPendingAppointments() {
 
         String auth_token = loggedInUser.getAuth_token();
 
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.VIRAL_LOAD)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.PENDING_APPOINTMENT)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -171,12 +143,7 @@ public class ViralLoadResultsFragment extends Fragment {
                         // do anything with response
                         Log.e(TAG, response.toString());
 
-                        if (pDialog != null && pDialog.isShowing()) {
-                            pDialog.hide();
-                            pDialog.cancel();
-                        }
-
-                        viralLoadArrayList.clear();
+                        pendingAppointmentArrayList.clear();
 
                         if (recyclerView!=null)
                             recyclerView.setVisibility(View.VISIBLE);
@@ -190,6 +157,7 @@ public class ViralLoadResultsFragment extends Fragment {
 
                             JSONArray myArray = response.getJSONArray("data");
 
+
                             if (myArray.length() > 0){
 
 
@@ -197,45 +165,35 @@ public class ViralLoadResultsFragment extends Fragment {
 
                                     JSONObject item = (JSONObject) myArray.get(i);
 
+                                    int id = item.has("id") ? item.getInt("id") : 0;
+                                    String appntmnt_date = item.has("appntmnt_date") ? item.getString("appntmnt_date") : "";
+                                    String app_type = item.has("app_type") ? item.getString("app_type") : "";
+                                    String approval_status = item.has("approval_status") ? item.getString("approval_status") : "";
+                                    String book_type = item.has("book_type") ? item.getString("book_type") : "";
+                                    String reason = item.has("reason") ? item.getString("reason") : "";
+                                    String comments = item.has("comments") ? item.getString("comments") : "";
+                                    String user = item.has("user") ? item.getString("user") : "";
+                                    String book_id = item.has("book_id") ? item.getString("book_id") : "";
 
-                                    int  id = item.has("id") ? item.getInt("id") : 0;
-                                    String r_id = item.has("r_id") ? item.getString("r_id") : "";
-                                    String result_type = item.has("result_type") ? item.getString("result_type") : "";
-                                    String result_content = item.has("result_content") ? item.getString("result_content") : "";
-                                    String date_collected = item.has("date_collected") ? item.getString("date_collected") : "";
-                                    String lab_name = item.has("lab_name") ? item.getString("lab_name") : "";
-                                    int  user = item.has("user") ? item.getInt("user") : 0;
 
+                                    PendingAppointment newPendingAppointment = new PendingAppointment(id,appntmnt_date,app_type,approval_status,book_type,reason,comments,user,book_id);
 
-                                    ViralLoad newResult = new ViralLoad(id,r_id,result_type,result_content,date_collected,lab_name,user);
-
-                                    viralLoadArrayList.add(newResult);
+                                    pendingAppointmentArrayList.add(newPendingAppointment);
                                     mAdapter.notifyDataSetChanged();
 
-
-
                                 }
 
-                            }else {
+                            }
+                            else {
                                 //not data found
 
-                                if (pDialog != null && pDialog.isShowing()) {
-                                    pDialog.hide();
-                                    pDialog.cancel();
-                                }
-
-                                no_result_lyt.setVisibility(View.VISIBLE);
-
+                                no_appointment_lyt.setVisibility(View.VISIBLE);
 
                             }
 
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            if (pDialog != null && pDialog.isShowing()) {
-                                pDialog.hide();
-                                pDialog.cancel();
-                            }
                         }
 
                     }
@@ -243,21 +201,24 @@ public class ViralLoadResultsFragment extends Fragment {
                     public void onError(ANError error) {
                         // handle error
 
-                        if (pDialog != null && pDialog.isShowing()) {
-                            pDialog.hide();
-                            pDialog.cancel();
+                        if (recyclerView!=null)
+                            recyclerView.setVisibility(View.VISIBLE);
+
+                        if (shimmer_my_container!=null){
+                            shimmer_my_container.stopShimmerAnimation();
+                            shimmer_my_container.setVisibility(View.GONE);
                         }
 
+                        Log.e(TAG, error.getErrorBody());
 
-                        Log.e(TAG, String.valueOf(error.getErrorCode()));
-                        if (error.getErrorCode() == 0){
+                        if (error.getErrorBody().contains("No rescheduled appointments")){
+                            no_appointment_lyt.setVisibility(View.VISIBLE);
 
-                            no_result_lyt.setVisibility(View.VISIBLE);
                         }
-                        else{
-
+                        else {
                             error_lyt.setVisibility(View.VISIBLE);
-                            Snackbar.make(root.findViewById(R.id.frag_viral_load), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(root.findViewById(R.id.frag_pending_appointment), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+
 
                         }
 
@@ -265,4 +226,5 @@ public class ViralLoadResultsFragment extends Fragment {
                     }
                 });
     }
+
 }

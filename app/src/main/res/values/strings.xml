@@ -34,10 +34,10 @@
     <string name="category_profile">Profile</string>
     <string name="about_app_category">About App</string>
 
-<!--    error messages-->
+    <!--    error messages-->
     <string name="must_match">Both passwords must match</string>
 
-<!--    spinner choices-->
+    <!--    spinner choices-->
     <string-array name="security_question">
         <item> Select your security question.</item>
         <item> What is your favorite song?</item>

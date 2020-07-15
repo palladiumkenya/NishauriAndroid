@@ -94,6 +94,9 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.msisdn)
     TextView txt_msisdn;
 
+    @BindView(R.id.txt_facility)
+    TextView txt_facility;
+
 
 
 
@@ -226,10 +229,11 @@ public class HomeFragment extends Fragment {
                                     String first_name = item.has("first_name") ? item.getString("first_name") : "";
                                     String last_name = item.has("last_name") ? item.getString("last_name") : "";
                                     String msisdn = item.has("msisdn") ? item.getString("msisdn") : "";
-
+                                    String current_facility = item.has("current_facility") ? item.getString("current_facility") : "";
 
                                     txt_name.setText(first_name + " " + last_name);
                                     txt_msisdn.setText(msisdn);
+                                    txt_facility.setText(current_facility);
 
                                 }
 
@@ -430,11 +434,19 @@ public class HomeFragment extends Fragment {
                             shimmers_my_container.setVisibility(View.GONE);
                         }
 
-                        errors_lyt.setVisibility(View.VISIBLE);
 
-                        Log.e(TAG, error.getErrorDetail());
 
-                        Snackbar.make(root.findViewById(R.id.frag_home), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+                        Log.e(TAG, String.valueOf(error.getErrorCode()));
+
+                        if (error.getErrorCode() == 0){
+                            no_appointment_lyt.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            errors_lyt.setVisibility(View.VISIBLE);
+                            Snackbar.make(root.findViewById(R.id.frag_home), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+
+                        }
+
 
                     }
                 });
@@ -470,6 +482,8 @@ public class HomeFragment extends Fragment {
                         }
 
                         try {
+                            String  message = response.has("message") ? response.getString("message") : "" ;
+                            String  errors = response.has("errors") ? response.getString("errors") : "" ;
 
                             if (response.has("treatment")){
 
@@ -480,8 +494,11 @@ public class HomeFragment extends Fragment {
                                 currentTreatmentArrayList.add(newTreatment);
                                 mysAdapter.notifyDataSetChanged();
                             }
-                            else {
+                            else if (message.contains("No treatments found")){
                                 no_treatment_lyt.setVisibility(View.VISIBLE);
+                            }
+                            else if (errors.contains("No treatments found")){
+                                errorss_lyt.setVisibility(View.VISIBLE);
                             }
 
 
@@ -504,11 +521,19 @@ public class HomeFragment extends Fragment {
                             shimmerss_my_container.setVisibility(View.GONE);
                         }
 
-                        errorss_lyt.setVisibility(View.VISIBLE);
-
                         Log.e(TAG, error.getErrorBody());
 
-                        Snackbar.make(root.findViewById(R.id.frag_home), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+                            if (error.getErrorBody().contains("No treatments found")){
+
+                                no_treatment_lyt.setVisibility(View.VISIBLE);
+                            }
+                            else {
+
+                                errorss_lyt.setVisibility(View.VISIBLE);
+                                Snackbar.make(root.findViewById(R.id.frag_home), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+
+                            }
+
 
                     }
                 });

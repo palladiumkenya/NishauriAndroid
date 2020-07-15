@@ -4,16 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mhealth.nishauri.Models.PreviousAppointment;
-import com.mhealth.nishauri.Models.UpcomingAppointment;
 import com.mhealth.nishauri.R;
-import com.mhealth.nishauri.utils.Tools;
-import com.mhealth.nishauri.utils.ViewAnimation;
 
 import java.util.ArrayList;
 import java.util.List;
