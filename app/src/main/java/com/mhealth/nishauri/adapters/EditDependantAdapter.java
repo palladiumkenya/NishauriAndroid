@@ -73,6 +73,9 @@ public class EditDependantAdapter extends RecyclerView.Adapter<RecyclerView.View
                 public void onClick(View v) {
 
                     if (items.get(position) != null){
+                        if (onItemClickListener != null) {
+                            onItemClickListener.onItemClick(position);
+                        }
                         Navigation.findNavController(v).navigate(R.id.nav_update_dependants);
                     }
 

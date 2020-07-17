@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/spacing_middle"
-                    android:text="Viral Load:"
+                    android:text="VL:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
                     android:textColor="@color/colorAccent"/>
 
@@ -73,7 +73,8 @@
                 android:padding="@dimen/spacing_middle"
                 android:text="KEMRI, Nairobi"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                android:textColor="@color/grey_80" />
+                android:textColor="@color/grey_80"
+                android:visibility="gone"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txt_result_guideline"
@@ -83,7 +84,7 @@
                 android:text="Please visit your facility urgently."
                 android:textSize="@dimen/spacing_mlarge"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                android:textColor="@color/grey_80"
+                android:textColor="@color/red_500"
                 android:visibility="gone"/>
 
 

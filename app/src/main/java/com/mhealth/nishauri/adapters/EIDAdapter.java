@@ -37,7 +37,7 @@ public class EIDAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public TextView result_date;
         public TextView result;
         public TextView dependant;
-        public TextView lab;
+        public TextView result_guidline;
 
 
 
@@ -46,7 +46,7 @@ public class EIDAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             result_date = (TextView) v.findViewById(R.id.txt_result_date);
             result = (TextView) v.findViewById(R.id.txt_viral_load_result);
             dependant = (TextView) v.findViewById(R.id.txt_dependant);
-            lab = (TextView) v.findViewById(R.id.txt_lab_name);
+            result_guidline = (TextView) v.findViewById(R.id.txt_result_guideline);
 
 
         }
@@ -70,8 +70,12 @@ public class EIDAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             view.result_date.setText(obj.getDate_collected());
             view.result.setText(obj.getResult_content());
             view.dependant.setText(obj.getDependant_name());
-            view.lab.setText(obj.getLab_name());
 
+            if (obj.getResult_content().equals("Positive")){
+
+                view.result_guidline.setVisibility(View.VISIBLE);
+
+            }
 
         }
     }

@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/spacing_middle"
-                    android:text="EID Result:"
+                    android:text="Result:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
                     android:textColor="@color/colorAccent"/>
 
@@ -77,7 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/spacing_middle"
-                    android:text="Dependant Name:"
+                    android:text="HEI Number:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
                     android:textColor="@color/colorAccent"/>
 
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="@dimen/spacing_middle"
-                    android:text="Dependant 1"
+                    android:text=""
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
 
@@ -100,7 +100,8 @@
                 android:padding="@dimen/spacing_middle"
                 android:text="KEMRI, Nairobi"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                android:textColor="@color/grey_80" />
+                android:textColor="@color/grey_80"
+                android:visibility="gone"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txt_result_guideline"
@@ -110,8 +111,9 @@
                 android:text="Please visit your facility urgently."
                 android:textSize="@dimen/spacing_mlarge"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                android:textColor="@color/grey_80"
-                android:visibility="gone"/>
+                android:textColor="@color/red_500"
+                android:visibility="gone"
+                />
 
 
         </LinearLayout>

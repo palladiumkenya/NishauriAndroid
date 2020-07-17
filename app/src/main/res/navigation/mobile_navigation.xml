@@ -92,12 +92,27 @@
         tools:layout="@layout/fragment_language" />
     <fragment
         android:id="@+id/nav_faqs"
-        android:name="com.mhealth.nishauri.Fragments.Settings.FaqsFragment"
+        android:name="com.mhealth.nishauri.Fragments.Chat.FaqsFragment"
         android:label="FAQs" />
 
     <fragment
         android:id="@+id/nav_reschedule_appointment"
         android:name="com.mhealth.nishauri.Fragments.Appointment.RescheduleAppointmentFragment"
         android:label="Reschedule Appointment" />
+    <fragment
+        android:id="@+id/nav_client_survey"
+        android:name="com.mhealth.nishauri.Fragments.Chat.ClientSurveyFragment"
+        android:label="Client Survey"
+        tools:layout="@layout/fragment_client_survey" />
+    <fragment
+        android:id="@+id/nav_treatment_survey"
+        android:name="com.mhealth.nishauri.Fragments.Chat.TreatmentSurveyFragment"
+        android:label="Client Survey"
+        tools:layout="@layout/fragment_treatment_survey" />
+    <fragment
+        android:id="@+id/nav_result_survey"
+        android:name="com.mhealth.nishauri.Fragments.Chat.ResultsSurveyFragment"
+        android:label="Client Survey"
+        tools:layout="@layout/fragment_results_survey" />
 
 </navigation>

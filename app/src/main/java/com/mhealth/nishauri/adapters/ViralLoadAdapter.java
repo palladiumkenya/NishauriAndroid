@@ -36,7 +36,6 @@ public class ViralLoadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
         public TextView result_date;
         public TextView result;
-        public TextView lab;
 
 
 
@@ -44,8 +43,6 @@ public class ViralLoadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             super(v);
             result_date = (TextView) v.findViewById(R.id.txt_result_date);
             result = (TextView) v.findViewById(R.id.txt_viral_load_result);
-            lab = (TextView) v.findViewById(R.id.txt_lab_name);
-
 
         }
     }
@@ -67,10 +64,10 @@ public class ViralLoadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             view.result_date.setText(obj.getDate_collected());
             view.result.setText(obj.getResult_content() + " copies/mL");
-            view.lab.setText(obj.getLab_name());
-
 
         }
+
+
     }
 
 

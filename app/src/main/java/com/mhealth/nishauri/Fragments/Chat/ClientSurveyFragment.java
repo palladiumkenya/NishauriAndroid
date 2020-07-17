@@ -6,14 +6,12 @@ import android.os.Bundle;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.facebook.shimmer.ShimmerFrameLayout;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.button.MaterialButton;
 import com.mhealth.nishauri.R;
 
 import butterknife.BindView;
@@ -21,21 +19,15 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public class ChatFragment extends Fragment {
-
+public class ClientSurveyFragment extends Fragment {
 
     private Unbinder unbinder;
     private View root;
     private Context context;
 
-    @BindView(R.id.faq_card)
-    CardView faq_card;
+    @BindView(R.id.btn_continue_survey)
+    MaterialButton btn_continue_survey;
 
-    @BindView(R.id.survey_card)
-    CardView survey_card;
-
-    @BindView(R.id.chat_card)
-    CardView chat_card;
 
     @Override
     public void onAttach(Context ctx) {
@@ -53,33 +45,14 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_chat, container, false);
+        root= inflater.inflate(R.layout.fragment_client_survey, container, false);
         unbinder = ButterKnife.bind(this, root);
 
-        faq_card.setOnClickListener(new View.OnClickListener() {
+        btn_continue_survey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                NavHostFragment.findNavController(ChatFragment.this).navigate(R.id.nav_faqs);
-
-            }
-        });
-
-        survey_card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                NavHostFragment.findNavController(ChatFragment.this).navigate(R.id.nav_client_survey);
-            }
-        });
-
-        chat_card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Snackbar.make(root.findViewById(R.id.frag_chat), "Chat Bot Coming Soon", Snackbar.LENGTH_LONG).show();
-
-
+                NavHostFragment.findNavController(ClientSurveyFragment.this).navigate(R.id.nav_treatment_survey);
 
             }
         });
@@ -93,6 +66,4 @@ public class ChatFragment extends Fragment {
         super.onDestroyView();
         unbinder.unbind();
     }
-
-
 }

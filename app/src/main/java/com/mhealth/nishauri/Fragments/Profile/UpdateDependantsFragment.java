@@ -61,8 +61,8 @@ public class UpdateDependantsFragment extends Fragment {
     @BindView(R.id.etxt_dependant_surname)
     TextInputEditText etxt_dependant_surname;
 
-    @BindView(R.id.btn_update_dependant)
-    Button btn_update_dependant;
+    @BindView(R.id.btn_update_dependant_details)
+    Button btn_update_dependant_details;
 
     @Override
     public void onAttach(Context ctx) {
@@ -85,9 +85,8 @@ public class UpdateDependantsFragment extends Fragment {
 
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
-        loadDependant();
 
-        btn_update_dependant.setOnClickListener(new View.OnClickListener() {
+        btn_update_dependant_details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -105,52 +104,6 @@ public class UpdateDependantsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-    }
-
-    private void loadDependant(){
-
-        String auth_token = loggedInUser.getAuth_token();
-
-
-        AndroidNetworking.get(Constants.DEPENTANT)
-                .addHeaders("Authorization","Token "+ auth_token)
-                .addHeaders("Content-Type", "application.json")
-                .addHeaders("Accept", "*/*")
-                .addHeaders("Accept", "gzip, deflate, br")
-                .addHeaders("Connection","keep-alive")
-                .setPriority(Priority.LOW)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        // do anything with response
-                        Log.e(TAG, response.toString());
-                        try {
-
-                            String first_name = response.has("first_name") ? response.getString("first_name") : "";
-                            String last_name = response.has("last_name") ? response.getString("last_name") : "";
-                            String id = response.has("id") ? response.getString("id") : "";
-
-                            card_dependant_name.setText(first_name + " " + last_name);
-                            etxt_dependant_firstname.setText(first_name );
-                            etxt_dependant_surname.setText(last_name );
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-                    }
-                    @Override
-                    public void onError(ANError error) {
-                        // handle error
-                        Log.e(TAG, error.getErrorBody());
-
-                        Snackbar.make(root.findViewById(R.id.frag_update_user), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
-
-                    }
-                });
-
     }
 
     public boolean checkNulls(){

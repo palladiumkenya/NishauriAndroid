@@ -71,6 +71,40 @@
         <item> Other </item>
     </string-array>
 
+    <string-array name="regimen">
+        <item> Pick a regimen here…</item>
+        <item> TDF+ 3TC+ EFV </item>
+        <item> TDF+3TC+NVP </item>
+        <item> TDF+3TC+ DTG</item>
+        <item> AZT+3TC+NVP</item>
+        <item> AZT+3TC+EFV| </item>
+        <item> ABC+3TC+NVP</item>
+        <item> ABC+3TC+EFV </item>
+        <item> ABC+3TC+DTG</item>
+        <item> ABC+3TC+LPV/r|</item>
+        <item> AZT+3TC+LPV/r+ RTV </item>
+        <item> ART5TDF+3TC +ATV/r </item>
+        <item> ABC+3TC+DTG </item>
+        <item> ABC+3TC+ATV/r </item>
+        <item> AZT+3TC+ATV/r </item>
+        <item> AZT+3TC+DRV/r </item>
+
+    </string-array>
+
+    <string-array name="side_effects">
+        <item> Pick side effects here…</item>
+        <item> Weight loss</item>
+        <item> Head ache</item>
+        <item> Shivers</item>
+    </string-array>
+
+    <string-array name="result">
+        <item> Pick a result here…</item>
+        <item> High</item>
+        <item> Low</item>
+
+    </string-array>
+
 
     <string name="generic_server_down">Cannot Reach Server Using Device</string>
     <string name="connection">Please check your internet connection.</string>

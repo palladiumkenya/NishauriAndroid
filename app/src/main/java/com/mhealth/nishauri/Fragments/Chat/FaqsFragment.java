@@ -1,4 +1,4 @@
-package com.mhealth.nishauri.Fragments.Settings;
+package com.mhealth.nishauri.Fragments.Chat;
 
 import android.content.Context;
 import android.os.Bundle;

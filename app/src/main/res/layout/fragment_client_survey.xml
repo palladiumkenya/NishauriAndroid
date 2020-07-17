@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Fragments.Chat.ClientSurveyFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_medium"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/spacing_large"
+                android:src="@drawable/folder"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:gravity="center"
+                android:text="The following survey contains questions about treatments, appointments and results."
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:gravity="center"
+                android:text="The information provided will be used to better the service at your facility."
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_large"
+                android:gravity="center"
+                android:text="By clicking continue, you consent to undertaking this survey."
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_continue_survey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:text="Continue"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_cancel_survey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:text="Back"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
