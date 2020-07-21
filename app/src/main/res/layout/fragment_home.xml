@@ -218,7 +218,7 @@
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
 
-                                    <include layout="@layout/lab_placeholder_item" />
+                                    <include layout="@layout/app_home_placeholder_item" />
 
                                 </LinearLayout>
 
@@ -366,7 +366,7 @@
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
 
-                                    <include layout="@layout/lab_placeholder_item" />
+                                    <include layout="@layout/treatment_home_placeholder_item" />
 
                                 </LinearLayout>
 
@@ -663,7 +663,7 @@
                                             android:layout_height="wrap_content"
                                             android:orientation="vertical">
 
-                                            <include layout="@layout/lab_placeholder_item" />
+                                            <include layout="@layout/dependants_home_placeholder_item" />
 
                                         </LinearLayout>
 

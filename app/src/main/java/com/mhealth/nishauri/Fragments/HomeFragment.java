@@ -31,6 +31,7 @@ import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.adapters.CurrentTreatmentAdapter;
 import com.mhealth.nishauri.adapters.DependantHomeAdapter;
 import com.mhealth.nishauri.adapters.AppointmentHomeAdapter;
+import com.mhealth.nishauri.adapters.TreatmentHomeAdapter;
 import com.mhealth.nishauri.utils.Constants;
 
 import org.json.JSONArray;
@@ -107,7 +108,7 @@ public class HomeFragment extends Fragment {
     private User loggedInUser;
     private DependantHomeAdapter mAdapter;
     private AppointmentHomeAdapter myAdapter;
-    private CurrentTreatmentAdapter mysAdapter;
+    private TreatmentHomeAdapter mysAdapter;
     private ArrayList<CurrentTreatment> currentTreatmentArrayList;
     private ArrayList<UpcomingAppointment> upcomingAppointmentArrayList;
     private ArrayList<Dependant> dependantArrayList;
@@ -183,7 +184,7 @@ public class HomeFragment extends Fragment {
         recycler_view.setAdapter(myAdapter);
 
         currentTreatmentArrayList = new ArrayList<>();
-        mysAdapter = new CurrentTreatmentAdapter(context, currentTreatmentArrayList);
+        mysAdapter = new TreatmentHomeAdapter(context, currentTreatmentArrayList);
 
 
         recycler_Views.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false));
