@@ -73,9 +73,9 @@
 
     <string-array name="regimen">
         <item> Pick a regimen here…</item>
-        <item> TDF+ 3TC+ EFV </item>
+        <item> TDF+3TC+EFV </item>
         <item> TDF+3TC+NVP </item>
-        <item> TDF+3TC+ DTG</item>
+        <item> TDF+3TC+DTG</item>
         <item> AZT+3TC+NVP</item>
         <item> AZT+3TC+EFV| </item>
         <item> ABC+3TC+NVP</item>
@@ -134,4 +134,5 @@
     <string name="error_503">Service Unavailable</string>
     <string name="error_504">Gateway Timeout</string>
     <string name="error_505">HTTP Version Not Supported</string>
+    <string name="dashboard">Dashboard</string>
 </resources>

@@ -9,6 +9,7 @@ public class Constants {
     //AUTH
     public static String REGISTER = "signup/";
     public static String LOGIN = "token/login/";
+    public static String DASHBOARD = "auth/dashboard";
 
     //USER
     public static String CURRENT_USER = "user/auth";

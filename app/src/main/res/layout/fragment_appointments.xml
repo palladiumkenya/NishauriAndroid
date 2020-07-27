@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:layout_gravity="bottom|end|right"
-        android:contentDescription="@string/request_results"
+        android:contentDescription="@string/new_appointment"
         android:text="@string/new_appointment"
         app:icon="@drawable/ic_appointment"
         app:layout_anchorGravity="bottom|right|end"/>
