@@ -14,6 +14,8 @@ public class Constants {
     //USER
     public static String CURRENT_USER = "user/auth";
     public static String UPDATE_USER = "user/update";
+    public static String UPDATE_REGIMEN = "user/regiment";
+
 
     //DEPENDANT
     public static String ADD_DEPENDANT = "dependants/";

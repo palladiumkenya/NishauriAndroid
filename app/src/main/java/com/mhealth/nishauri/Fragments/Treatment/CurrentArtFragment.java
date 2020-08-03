@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -20,10 +21,11 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
+import com.mhealth.nishauri.Models.CurrentArt;
 import com.mhealth.nishauri.Models.CurrentTreatment;
-import com.mhealth.nishauri.Models.Dependant;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
+import com.mhealth.nishauri.adapters.CurrentArtAdapter;
 import com.mhealth.nishauri.adapters.CurrentTreatmentAdapter;
 import com.mhealth.nishauri.utils.Constants;
 
@@ -47,8 +49,8 @@ public class CurrentArtFragment extends Fragment {
     private Context context;
 
     private User loggedInUser;
-    private CurrentTreatmentAdapter mAdapter;
-    private ArrayList<CurrentTreatment> currentTreatmentArrayList;
+    private CurrentArtAdapter mAdapter;
+    private ArrayList<CurrentArt> currentArtArrayList;
 
 
 
@@ -86,8 +88,8 @@ public class CurrentArtFragment extends Fragment {
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
 
-        currentTreatmentArrayList = new ArrayList<>();
-        mAdapter = new CurrentTreatmentAdapter(context, currentTreatmentArrayList);
+        currentArtArrayList = new ArrayList<>();
+        mAdapter = new CurrentArtAdapter(context, currentArtArrayList);
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false));
@@ -96,7 +98,7 @@ public class CurrentArtFragment extends Fragment {
         //set data and list adapter
         recyclerView.setAdapter(mAdapter);
 
-        loadCurrentTreatments();
+        loadCurrentArt();
 
         return root;
     }
@@ -120,12 +122,12 @@ public class CurrentArtFragment extends Fragment {
         super.onPause();
     }
 
-    private void loadCurrentTreatments() {
+    private void loadCurrentArt() {
 
         String auth_token = loggedInUser.getAuth_token();
 
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURENT_TREATMENTS)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.UPDATE_REGIMEN)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -139,7 +141,7 @@ public class CurrentArtFragment extends Fragment {
                         // do anything with response
                         Log.e(TAG, response.toString());
 
-                        currentTreatmentArrayList.clear();
+                        currentArtArrayList.clear();
 
                         if (recyclerView!=null)
                             recyclerView.setVisibility(View.VISIBLE);
@@ -151,16 +153,27 @@ public class CurrentArtFragment extends Fragment {
 
                         try {
 
-                            if (response.has("treatment")){
+                            boolean  status = response.has("success") && response.getBoolean("success");
+                            String  message = response.has("data") ? response.getString("data") : "" ;
+                            String  errors = response.has("errors") ? response.getString("errors") : "" ;
 
-                                String treatment = response.has("treatment") ? response.getString("treatment") : "";
+                            if (status){
 
-                                CurrentTreatment newTreatment = new CurrentTreatment(treatment);
+                                JSONObject myObject = response.getJSONObject("current regiment");
 
-                                currentTreatmentArrayList.add(newTreatment);
+                                int id = myObject.has("id") ? myObject.getInt("id"): 0;
+                                String Regiment = myObject.has("Regiment") ? myObject.getString("Regiment") : "";
+                                String date_started = myObject.has("date_started") ? myObject.getString("date_started") : "";
+                                String user = myObject.has("user") ? myObject.getString("user") : "";
+
+
+                                CurrentArt newArt = new CurrentArt(id,Regiment,date_started,user);
+
+                                currentArtArrayList.add(newArt);
                                 mAdapter.notifyDataSetChanged();
                             }
                             else {
+                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                                 no_treatment_lyt.setVisibility(View.VISIBLE);
                             }
 

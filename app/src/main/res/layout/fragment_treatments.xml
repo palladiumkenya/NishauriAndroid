@@ -32,4 +32,15 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_treatment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_gravity="bottom|end|right"
+        android:contentDescription="@string/update_treatment"
+        android:text="@string/update_treatment"
+        app:icon="@drawable/ic_treatment"
+        app:layout_anchorGravity="bottom|right|end"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

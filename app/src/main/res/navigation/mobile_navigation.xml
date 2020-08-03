@@ -119,5 +119,10 @@
         android:name="com.mhealth.nishauri.Fragments.dashboard.DashboardFragment"
         android:label="Dashboard"
         tools:layout="@layout/fragment_dashboard"/>
+    <fragment
+        android:id="@+id/nav_update_treatment"
+        android:name="com.mhealth.nishauri.Fragments.Treatment.UpdateTreatmentFragment"
+        android:label="Update Treatments"
+        tools:layout="@layout/fragment_update_treatment" />
 
 </navigation>

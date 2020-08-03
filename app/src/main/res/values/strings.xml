@@ -135,4 +135,5 @@
     <string name="error_504">Gateway Timeout</string>
     <string name="error_505">HTTP Version Not Supported</string>
     <string name="dashboard">Dashboard</string>
+    <string name="update_treatment">Update Treatment</string>
 </resources>
