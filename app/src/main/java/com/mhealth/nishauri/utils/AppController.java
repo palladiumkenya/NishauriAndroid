@@ -6,9 +6,7 @@ import android.text.TextUtils;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
+
 import com.fxn.stash.Stash;
 
 public class AppController extends Application {
@@ -27,7 +25,7 @@ public class AppController extends Application {
         this.appContext = mAppContext;
     }
 
-    private RequestQueue mRequestQueue;
+
 
 
     @Override
@@ -42,33 +40,13 @@ public class AppController extends Application {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
 
-    public RequestQueue getRequestQueue() {
-        if (mRequestQueue == null) {
-            mRequestQueue = Volley.newRequestQueue(getApplicationContext());
-        }
 
-        return mRequestQueue;
-    }
 
     public static synchronized AppController getInstance() {
         return instance;
     }
 
 
-    public <T> void addToRequestQueue(Request<T> req, String tag) {
-        req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
-        getRequestQueue().add(req);
-    }
 
-    public <T> void addToRequestQueue(Request<T> req) {
-        req.setTag(TAG);
-        getRequestQueue().add(req);
-    }
-
-    public void cancelPendingRequests(Object tag) {
-        if (mRequestQueue != null) {
-            mRequestQueue.cancelAll(tag);
-        }
-    }
 
 }

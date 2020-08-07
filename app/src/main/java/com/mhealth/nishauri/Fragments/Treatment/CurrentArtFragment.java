@@ -22,11 +22,9 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Models.CurrentArt;
-import com.mhealth.nishauri.Models.CurrentTreatment;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.adapters.CurrentArtAdapter;
-import com.mhealth.nishauri.adapters.CurrentTreatmentAdapter;
 import com.mhealth.nishauri.utils.Constants;
 
 import org.json.JSONException;
@@ -127,7 +125,7 @@ public class CurrentArtFragment extends Fragment {
         String auth_token = loggedInUser.getAuth_token();
 
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.UPDATE_REGIMEN)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_REGIMEN)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

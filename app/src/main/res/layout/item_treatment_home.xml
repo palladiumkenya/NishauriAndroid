@@ -16,15 +16,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Current Treatment type: "
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="Current Regimen:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
             android:textColor="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/txt_treatment_nature"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:text="ART"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.R;
 
 import butterknife.BindView;
@@ -20,15 +21,14 @@ import butterknife.Unbinder;
 
 public class SettingsFragment extends Fragment {
 
-    @BindView(R.id.faqs)
-    LinearLayout faqs;
+    @BindView(R.id.terms_lyt)
+    LinearLayout terms_lyt;
 
-    @BindView(R.id.language)
-    LinearLayout language;
+    @BindView(R.id.privacy_lyt)
+    LinearLayout privacy_lyt;
 
     @BindView(R.id.about_app)
     LinearLayout about_app;
-
 
 
     private Unbinder unbinder;
@@ -53,18 +53,19 @@ public class SettingsFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_settings, container, false);
         unbinder = ButterKnife.bind(this, root);
 
-        faqs.setOnClickListener(new View.OnClickListener() {
+        terms_lyt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavHostFragment.findNavController(SettingsFragment.this).navigate(R.id.nav_faqs);
+
+                NavHostFragment.findNavController(SettingsFragment.this).navigate(R.id.nav_terms);
             }
         });
 
-
-        language.setOnClickListener(new View.OnClickListener() {
+        privacy_lyt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavHostFragment.findNavController(SettingsFragment.this).navigate(R.id.nav_language);
+
+                NavHostFragment.findNavController(SettingsFragment.this).navigate(R.id.nav_privacy);
             }
         });
 
@@ -76,9 +77,9 @@ public class SettingsFragment extends Fragment {
         });
 
 
-
         return root;
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

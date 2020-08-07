@@ -75,7 +75,7 @@ public class TreatmentSurveyFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                NavHostFragment.findNavController(TreatmentSurveyFragment.this).navigate(R.id.nav_result_survey);
+                NavHostFragment.findNavController(TreatmentSurveyFragment.this).navigate(R.id.nav_appointment_survey);
 
             }
         });

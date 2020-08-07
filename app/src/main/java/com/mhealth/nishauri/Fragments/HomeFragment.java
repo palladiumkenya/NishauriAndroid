@@ -23,12 +23,11 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
-import com.mhealth.nishauri.Models.CurrentTreatment;
+import com.mhealth.nishauri.Models.CurrentArt;
 import com.mhealth.nishauri.Models.Dependant;
 import com.mhealth.nishauri.Models.UpcomingAppointment;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
-import com.mhealth.nishauri.adapters.CurrentTreatmentAdapter;
 import com.mhealth.nishauri.adapters.DependantHomeAdapter;
 import com.mhealth.nishauri.adapters.AppointmentHomeAdapter;
 import com.mhealth.nishauri.adapters.TreatmentHomeAdapter;
@@ -109,7 +108,7 @@ public class HomeFragment extends Fragment {
     private DependantHomeAdapter mAdapter;
     private AppointmentHomeAdapter myAdapter;
     private TreatmentHomeAdapter mysAdapter;
-    private ArrayList<CurrentTreatment> currentTreatmentArrayList;
+    private ArrayList<CurrentArt> currentArtArrayList;
     private ArrayList<UpcomingAppointment> upcomingAppointmentArrayList;
     private ArrayList<Dependant> dependantArrayList;
 
@@ -183,8 +182,8 @@ public class HomeFragment extends Fragment {
         //set data and list adapter
         recycler_view.setAdapter(myAdapter);
 
-        currentTreatmentArrayList = new ArrayList<>();
-        mysAdapter = new TreatmentHomeAdapter(context, currentTreatmentArrayList);
+        currentArtArrayList = new ArrayList<>();
+        mysAdapter = new TreatmentHomeAdapter(context, currentArtArrayList);
 
 
         recycler_Views.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false));
@@ -230,9 +229,10 @@ public class HomeFragment extends Fragment {
                                     String first_name = item.has("first_name") ? item.getString("first_name") : "";
                                     String last_name = item.has("last_name") ? item.getString("last_name") : "";
                                     String msisdn = item.has("msisdn") ? item.getString("msisdn") : "";
+                                    String CCCNo = item.has("CCCNo") ? item.getString("CCCNo") : "";
                                     String current_facility = item.has("current_facility") ? item.getString("current_facility") : "";
 
-                                    txt_name.setText(first_name + " " + last_name);
+                                    txt_name.setText(CCCNo);
                                     txt_msisdn.setText(msisdn);
                                     txt_facility.setText(current_facility);
 
@@ -458,7 +458,7 @@ public class HomeFragment extends Fragment {
         String auth_token = loggedInUser.getAuth_token();
 
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURENT_TREATMENTS)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_REGIMEN)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -472,7 +472,7 @@ public class HomeFragment extends Fragment {
                         // do anything with response
                         Log.e(TAG, response.toString());
 
-                        currentTreatmentArrayList.clear();
+                        currentArtArrayList.clear();
 
                         if (recycler_Views!=null)
                             recycler_Views.setVisibility(View.VISIBLE);
@@ -483,16 +483,24 @@ public class HomeFragment extends Fragment {
                         }
 
                         try {
-                            String  message = response.has("message") ? response.getString("message") : "" ;
+                            boolean  status = response.has("success") && response.getBoolean("success");
+                            String  message = response.has("data") ? response.getString("data") : "" ;
                             String  errors = response.has("errors") ? response.getString("errors") : "" ;
 
-                            if (response.has("treatment")){
+                            if (status){
 
-                                String treatment = response.has("treatment") ? response.getString("treatment") : "";
 
-                                CurrentTreatment newTreatment = new CurrentTreatment(treatment);
+                                JSONObject myObject = response.getJSONObject("current regiment");
 
-                                currentTreatmentArrayList.add(newTreatment);
+                                int id = myObject.has("id") ? myObject.getInt("id"): 0;
+                                String Regiment = myObject.has("Regiment") ? myObject.getString("Regiment") : "";
+                                String date_started = myObject.has("date_started") ? myObject.getString("date_started") : "";
+                                String user = myObject.has("user") ? myObject.getString("user") : "";
+
+
+                                CurrentArt newArt = new CurrentArt(id,Regiment,date_started,user);
+
+                                currentArtArrayList.add(newArt);
                                 mysAdapter.notifyDataSetChanged();
                             }
                             else if (message.contains("No treatments found")){

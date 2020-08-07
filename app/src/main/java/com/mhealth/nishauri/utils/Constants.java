@@ -36,8 +36,11 @@ public class Constants {
     public static String CONFIRM_APPOINTMENT = "appointments/user/accept/";
 
     //TREATMENTS
-    public static String CURENT_TREATMENTS = "user/treatment";
-    public static String PASSED_TREATMENTS = "user/treatment";
+    public static String CURRENT_REGIMEN = "user/regiment";
+    public static String PREVIOUS_REGIMEN = "user/regiment";
+
+    //FACILITIES
+    public static String ALL_FACILITIES = "facilities/all ";
 
 
     /*MODELS*/

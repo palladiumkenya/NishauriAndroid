@@ -21,8 +21,6 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
-import com.mhealth.nishauri.Models.CurrentTreatment;
-import com.mhealth.nishauri.Models.Dependant;
 import com.mhealth.nishauri.Models.PreviousArt;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
@@ -126,7 +124,7 @@ public class PreviousArtFragment extends Fragment {
         String auth_token = loggedInUser.getAuth_token();
 
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.UPDATE_REGIMEN)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.PREVIOUS_REGIMEN)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

@@ -85,11 +85,7 @@
         android:name="com.mhealth.nishauri.Fragments.Settings.AboutAppFragment"
         android:label="About"
         tools:layout="@layout/fragment_about_app"/>
-    <fragment
-        android:id="@+id/nav_language"
-        android:name="com.mhealth.nishauri.Fragments.Settings.LanguageFragment"
-        android:label="Language"
-        tools:layout="@layout/fragment_language" />
+
     <fragment
         android:id="@+id/nav_faqs"
         android:name="com.mhealth.nishauri.Fragments.Chat.FaqsFragment"
@@ -124,5 +120,21 @@
         android:name="com.mhealth.nishauri.Fragments.Treatment.UpdateTreatmentFragment"
         android:label="Update Treatments"
         tools:layout="@layout/fragment_update_treatment" />
+    <fragment
+        android:id="@+id/nav_privacy"
+        android:name="com.mhealth.nishauri.Fragments.Settings.PrivacyFragment"
+        android:label="Privacy Information"
+        tools:layout="@layout/fragment_privacy" />
+    <fragment
+        android:id="@+id/nav_terms"
+        android:name="com.mhealth.nishauri.Fragments.Settings.TermsFragment"
+        android:label="Terms and Conditions"
+        tools:layout="@layout/fragment_terms" />
+    <fragment
+        android:id="@+id/nav_appointment_survey"
+        android:name="com.mhealth.nishauri.Fragments.Chat.AppointmentSurveyFragment"
+        android:label="Client Survey"
+        tools:layout="@layout/fragment_appointment_survey" />
+
 
 </navigation>

@@ -9,25 +9,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.textview.MaterialTextView;
-import com.mhealth.nishauri.BuildConfig;
 import com.mhealth.nishauri.R;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class AboutAppFragment extends Fragment {
+
+public class PrivacyFragment extends Fragment {
 
     private Unbinder unbinder;
     private View root;
     private Context context;
-
-    @BindView(R.id.txt_version_name)
-    MaterialTextView version_name;
-
-    @BindView(R.id.txt_version_code)
-    MaterialTextView version_code;
 
     public void onAttach(Context ctx) {
         super.onAttach(ctx);
@@ -40,18 +32,12 @@ public class AboutAppFragment extends Fragment {
 
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_about_app, container, false);
+        root = inflater.inflate(R.layout.fragment_privacy, container, false);
         unbinder = ButterKnife.bind(this, root);
-
-        version_name.setText(BuildConfig.VERSION_NAME);
-
-        version_code.setText(String.valueOf(BuildConfig.VERSION_CODE));
 
         return root;
     }
