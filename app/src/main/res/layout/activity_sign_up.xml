@@ -105,6 +105,7 @@
                         android:paddingRight="@dimen/spacing_small"
                         android:text="CCC Number Details"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textStyle="bold"
                         android:textColor="@color/grey_90" />
 
                     <LinearLayout
@@ -225,6 +226,7 @@
                         android:paddingLeft="@dimen/spacing_small"
                         android:paddingRight="@dimen/spacing_small"
                         android:text="Security Question Details"
+                        android:textStyle="bold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/grey_90" />
 
@@ -332,6 +334,7 @@
                         android:paddingLeft="@dimen/spacing_small"
                         android:paddingRight="@dimen/spacing_small"
                         android:text="Password Details"
+                        android:textStyle="bold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/grey_90" />
 
@@ -453,6 +456,7 @@
                         android:paddingLeft="@dimen/spacing_small"
                         android:paddingRight="@dimen/spacing_small"
                         android:text="Confirmation"
+                        android:textStyle="bold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/grey_90" />
 
@@ -462,6 +466,38 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_large"
                         android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/spacing_medium"
+                            android:text="@string/signup_confirmation_text"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"                            />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_terms"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/spacing_medium"
+                            android:text="Terms and Conditions"
+                            android:clickable="true"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/colorAccent"
+                            android:background="?attr/selectableItemBackground"
+                            />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_privacy"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/spacing_medium"
+                            android:text="User privacy information"
+                            android:clickable="true"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/colorAccent"
+                            android:background="?attr/selectableItemBackground"
+                            />
+
 
                         <com.google.android.material.checkbox.MaterialCheckBox
                             android:id="@+id/terms"
@@ -487,10 +523,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:minWidth="0dp"
                             android:onClick="clickAction"
-                            android:text="SIGN UP"
-                            />
+                            android:text="SIGN UP" />
 
 
                     </LinearLayout>

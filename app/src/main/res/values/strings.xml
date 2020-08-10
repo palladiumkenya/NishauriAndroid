@@ -27,7 +27,7 @@
     <string name="new_appointment">New Appointment</string>
     <string name="depentant">Dependant(s)</string>
     <string name="new_dependant">New Dependant</string>
-    <string name="terms_and_conditions">I have read the Terms and Contions.</string>
+    <string name="terms_and_conditions">I have consented to use the app.</string>
     <string name="update_profile">Update Profile</string>
     <string name="update_dependant">Update Dependant</string>
     <string name="settings">Settings</string>
@@ -106,34 +106,7 @@
     </string-array>
 
 
-    <string name="generic_server_down">Cannot Reach Server Using Device</string>
-    <string name="connection">Please check your internet connection.</string>
-    <string name="generic_error">Connection Not Established,Resend Request</string>
-    <string name="error_400">Connection Not Established Error 400</string>
-    <string name="error_401">Unauthorized Access</string>
-    <string name="error_402">Payment Required</string>
-    <string name="error_403">Forbidden Access</string>
-    <string name="error_404">Resource not Found</string>
-    <string name="error_405">Method Not Allowed</string>
-    <string name="error_406">Connection Not Established Error 406</string>
-    <string name="error_407">Proxy Authentication Required</string>
-    <string name="error_408">TimeOut Error, Resend Request</string>
-    <string name="error_409">Conflict in connection</string>
-    <string name="error_410">Connection Not Established Error 410</string>
-    <string name="error_411">Connection Not Established Error 411</string>
-    <string name="error_412">Connection Not Established Error 412</string>
-    <string name="error_413">Connection Not Established Error 413</string>
-    <string name="error_414">Connection Not Established Error 414</string>
-    <string name="error_415">Unsupported Media Type</string>
-    <string name="error_416">Requested Range Not Satisfiable</string>
-    <string name="error_417">Expectation Failed</string>
-    <string name="error_422">Unprocessable Entity</string>
-    <string name="error_500">Server Error</string>
-    <string name="error_501">Connection Not Established Error 501</string>
-    <string name="error_502">Bad Gateway</string>
-    <string name="error_503">Service Unavailable</string>
-    <string name="error_504">Gateway Timeout</string>
-    <string name="error_505">HTTP Version Not Supported</string>
+
     <string name="dashboard">Dashboard</string>
     <string name="update_treatment">Update Treatment</string>
 
@@ -211,8 +184,9 @@
     </string>
 
     <string name="privacy_information">
-      Please ensure the following is adhered to. It will help in securing your own data.\n\nMake sure the your password is not shared with other people.\nWhen setting a password, ensure it has a minimum of 8 Characters long.\nA password should contain numbers, lower and upper case letters and special characters.long.\nSharing of devices should be retained at a minimum to ensure you have control over information viewed by other people.
+      Please ensure the following is adhered to. It will help in securing your own data.\n\nMake sure the your password is not shared with other people.\nWhen setting a password, ensure it has a minimum of 8 Characters long.\nA password should contain numbers, lower and upper case letters and special characters.\nSharing of devices should be maintained at a minimum to ensure you have control over information viewed by other people.
 
     </string>
+    <string name="signup_confirmation_text">Ensure the information above is correct to avoid errors in displaying your information.\n\nPlease ensure that you have read the following information below before consenting to the use of the application.</string>
 
 </resources>

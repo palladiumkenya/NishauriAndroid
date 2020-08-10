@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 
+
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -13,6 +15,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -28,6 +31,8 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.textview.MaterialTextView;
+
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
 import com.mhealth.nishauri.utils.ViewAnimation;
@@ -54,7 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
     private LottieAnimationView animationView;
 
     private TextInputLayout til_ccc;
-    TextInputLayout til_phone;
+    private TextInputLayout til_phone;
     private TextInputLayout til_password;
     private TextInputLayout til_repass;
 
@@ -64,6 +69,8 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText security_answer;
     private EditText password;
     private EditText repassword;
+    private MaterialTextView terms;
+    private MaterialTextView privacy;
     private CheckBox consent;
 
 
@@ -82,6 +89,24 @@ public class SignUpActivity extends AppCompatActivity {
         initToolbar();
         initComponent();
         checkNulls();
+
+        terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showTermServicesDialog();
+
+            }
+        });
+
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showPrivacyDialog();
+
+            }
+        });
 
     }
 
@@ -113,6 +138,8 @@ public class SignUpActivity extends AppCompatActivity {
         security_answer = (EditText) findViewById(R.id.txt_security_answer);
         password = (EditText) findViewById(R.id.txt_password);
         repassword = (EditText) findViewById(R.id.txt_repassword);
+        terms = (MaterialTextView) findViewById(R.id.tv_terms);
+        privacy = (MaterialTextView) findViewById(R.id.tv_privacy);
         consent = (CheckBox) findViewById(R.id.terms);
 
 //        TextInputLayout for errors
@@ -356,6 +383,47 @@ public class SignUpActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
+    private void showTermServicesDialog() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        dialog.setContentView(R.layout.dialog_terms_conditions);
+        dialog.setCancelable(false);
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+
+        ((ImageButton) dialog.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+        dialog.getWindow().setAttributes(lp);
+    }
+
+    private void showPrivacyDialog() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        dialog.setContentView(R.layout.dialog_privacy);
+        dialog.setCancelable(false);
+
+
+
+        ((ImageButton) dialog.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+        dialog.getWindow();
+    }
+
     private void sendData(String ccc_no, String security_question, String security_answer, String msisdn, String password, String repassword) {
 
 
@@ -396,7 +464,7 @@ public class SignUpActivity extends AppCompatActivity {
                         try {
 
                             boolean  status = response.has("success") && response.getBoolean("success");
-                            String  errors = response.has("errors") ? response.getString("errors") : "" ;
+                            String  errors = response.has("error") ? response.getString("error") : "" ;
 
 
                             if (status){
