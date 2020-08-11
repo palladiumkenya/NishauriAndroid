@@ -382,6 +382,11 @@ public class HomeFragment extends Fragment {
 
                         try {
 
+                            String message = response.has("data") ? response.getString("data"): "";
+                            if (message.contains("No upcoming appointments")){
+                                no_appointment_lyt.setVisibility(View.VISIBLE);
+                            }
+
                             JSONArray myArray = response.getJSONArray("data");
 
                             if (myArray.length() > 0){
@@ -437,9 +442,12 @@ public class HomeFragment extends Fragment {
 
 
 
-                        Log.e(TAG, String.valueOf(error.getErrorCode()));
+                        Log.e(TAG, error.getErrorDetail());
 
                         if (error.getErrorCode() == 0){
+                            no_appointment_lyt.setVisibility(View.VISIBLE);
+                        }
+                        else if (error.getErrorCode() == 204){
                             no_appointment_lyt.setVisibility(View.VISIBLE);
                         }
                         else {
@@ -503,10 +511,10 @@ public class HomeFragment extends Fragment {
                                 currentArtArrayList.add(newArt);
                                 mysAdapter.notifyDataSetChanged();
                             }
-                            else if (message.contains("No treatments found")){
+                            else if (message.contains("No regiment data")){
                                 no_treatment_lyt.setVisibility(View.VISIBLE);
                             }
-                            else if (errors.contains("No treatments found")){
+                            else if (errors.contains("No regiment data")){
                                 errorss_lyt.setVisibility(View.VISIBLE);
                             }
 
@@ -532,7 +540,7 @@ public class HomeFragment extends Fragment {
 
                         Log.e(TAG, error.getErrorBody());
 
-                            if (error.getErrorBody().contains("No treatments found")){
+                            if (error.getErrorBody().contains("No regiment data")){
 
                                 no_treatment_lyt.setVisibility(View.VISIBLE);
                             }

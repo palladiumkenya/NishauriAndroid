@@ -155,6 +155,14 @@ public class UpcomingAppointmentsFragment extends Fragment {
 
                         try {
 
+                            String  message = response.has("data") ? response.getString("data") : "" ;
+
+
+                            if (message.contains("No upcoming appointments")){
+                                no_appointment_lyt.setVisibility(View.VISIBLE);
+                            }
+
+
                             JSONArray myArray = response.getJSONArray("data");
 
 

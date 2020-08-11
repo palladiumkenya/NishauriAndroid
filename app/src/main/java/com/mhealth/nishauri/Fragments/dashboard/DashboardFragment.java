@@ -154,9 +154,25 @@ public class DashboardFragment extends Fragment {
                                 String days_unsuppressed = myObject.has("days unsuppressed") ? myObject.getString("days unsuppressed") : "";
                                 String current_status = myObject.has("current status") ? myObject.getString("current status") : "";
 
-                                tv_unsuppressed_days.setText(days_unsuppressed);
-                                tv_suppressed_days.setText(days_suppressed);
-                                tv_current_status_text.setText(current_status);
+
+                                if (days_suppressed.equals("")){
+                                    tv_suppressed_days.setText("0");
+                                }
+                                else {
+                                    tv_suppressed_days.setText(days_suppressed);
+                                }
+
+                                if (days_unsuppressed.equals("")){
+                                    tv_unsuppressed_days.setText("0");
+                                } else {
+                                    tv_unsuppressed_days.setText(days_unsuppressed);
+                                }
+
+                                if (current_status.equals("")){
+                                    tv_current_status_text.setText("Not Available");
+                                } else {
+                                    tv_current_status_text.setText(current_status);
+                                }
 
                                 JSONObject all_appointments = myObject.has("all apointments") ? myObject.getJSONObject("all apointments"): null;
 
@@ -166,15 +182,48 @@ public class DashboardFragment extends Fragment {
                                 String missed_appointment = all_appointments.has("missed appointment") ? all_appointments.getString("missed appointment") : "";
                                 String total = all_appointments.has("total") ? all_appointments.getString("total") : "";
 
-                                tv_booked_appointments.setText(booked);
-                                tv_notified_appointment.setText(notified);
-                                tv_kept_appointments.setText(kept_appointment);
-                                tv_missed_appointments.setText(missed_appointment);
+                                if (booked.equals("")){
+                                    tv_booked_appointments.setText("0");
+                                }
+                                else {
+                                    tv_booked_appointments.setText(booked);
+                                }
 
-                                txt_total.setText(total);
-                                txt_total_app.setText(total);
-                                txt_total_appointment.setText(total);
-                                txt_total_apps.setText(total);
+                                if (notified.equals("")){
+                                    tv_notified_appointment.setText("0");
+                                }
+                                else {
+                                    tv_notified_appointment.setText(notified);
+                                }
+
+                                if (kept_appointment.equals("")){
+                                    tv_kept_appointments.setText("0");
+                                }
+                                else {
+                                    tv_kept_appointments.setText(kept_appointment);
+                                }
+
+                                if (missed_appointment.equals("")){
+                                    tv_missed_appointments.setText("0");
+                                }
+                                else {
+                                    tv_missed_appointments.setText(missed_appointment);
+                                }
+
+
+                                if (total.equals("")){
+                                    txt_total.setText("0");
+                                    txt_total_app.setText("0");
+                                    txt_total_appointment.setText("0");
+                                    txt_total_apps.setText("0");
+                                }
+                                else {
+                                    txt_total.setText(total);
+                                    txt_total_app.setText(total);
+                                    txt_total_appointment.setText(total);
+                                    txt_total_apps.setText(total);
+                                }
+
 
                                 JSONObject missed_appointments = myObject.has("missed per type") ? myObject.getJSONObject("missed per type"): null;
 
@@ -187,12 +236,47 @@ public class DashboardFragment extends Fragment {
                                 String total_missed = missed_appointments.has("total missed") ? missed_appointments.getString("total missed") : "";
 
 
-                                tv_refill_number.setText(re_fill);
-                                tv_clinical_review_number.setText(clinical_review);
-                                tv_enhanced_adherence_number.setText(enhanced_adherence);
-                                tv_lab_investigation_number.setText(lab_investigation);
-                                tv_viral_load_number.setText(viral_load);
-                                tv_others_number.setText(others);
+                                if (re_fill.equals("")){
+                                    tv_refill_number.setText("0");
+                                }
+                                else {
+                                    tv_refill_number.setText(re_fill);
+                                }
+
+                                if (clinical_review.equals("")){
+                                    tv_clinical_review_number.setText("0");
+                                }
+                                else {
+                                    tv_clinical_review_number.setText(clinical_review);
+                                }
+
+                                if (enhanced_adherence.equals("")){
+                                    tv_enhanced_adherence_number.setText("0");
+                                }
+                                else {
+                                    tv_enhanced_adherence_number.setText(enhanced_adherence);
+                                }
+
+                                if (lab_investigation.equals("")){
+                                    tv_lab_investigation_number.setText("0");
+                                }
+                                else {
+                                    tv_lab_investigation_number.setText(lab_investigation);
+                                }
+
+                                if (viral_load.equals("")){
+                                    tv_viral_load_number.setText("0");
+                                }
+                                else {
+                                    tv_viral_load_number.setText(viral_load);
+                                }
+
+                                if (others.equals("")){
+                                    tv_others_number.setText("0");
+                                }
+                                else {
+                                    tv_others_number.setText(others);
+                                }
 
                             }
                             else {

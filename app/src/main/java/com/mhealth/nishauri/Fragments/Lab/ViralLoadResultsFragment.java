@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -42,6 +43,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+import static android.content.Context.RECEIVER_VISIBLE_TO_INSTANT_APPS;
 import static com.mhealth.nishauri.utils.AppController.TAG;
 
 
@@ -187,6 +189,19 @@ public class ViralLoadResultsFragment extends Fragment {
                         }
 
                         try {
+
+
+
+                            JSONObject myObject = response.getJSONObject("data");
+
+                            String message = myObject.has("message") ? myObject.getString("message") : "";
+
+                            if (message.contains("No results for the given CCC Number were found")){
+
+                                no_result_lyt.setVisibility(View.VISIBLE);
+                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                            }
+
 
                             JSONArray myArray = response.getJSONArray("data");
 

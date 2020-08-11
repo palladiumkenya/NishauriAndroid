@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey_10"
-    android:fitsSystemWindows="true"
-    >
+    android:fitsSystemWindows="true">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested_scroll_view"
@@ -562,7 +561,7 @@
                                 android:id="@+id/tv_refill_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=""
+                                android:text="0"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/grey_40" />
 
@@ -594,7 +593,7 @@
                                 android:id="@+id/tv_clinical_review_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=""
+                                android:text="0"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/grey_40" />
 
@@ -626,7 +625,7 @@
                                 android:id="@+id/tv_enhanced_adherence_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=""
+                                android:text="0"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/grey_40" />
 
@@ -658,7 +657,7 @@
                                 android:id="@+id/tv_lab_investigation_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=""
+                                android:text="0"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/grey_40" />
 
@@ -690,7 +689,7 @@
                                 android:id="@+id/tv_viral_load_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=""
+                                android:text="0"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/grey_40" />
 
@@ -722,7 +721,7 @@
                                 android:id="@+id/tv_others_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=""
+                                android:text="0"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/grey_40" />
 
@@ -849,7 +848,7 @@
                                 android:id="@+id/tv_current_status_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=""
+                                android:text="Not Available"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/colorPrimaryDark" />
 
@@ -881,7 +880,7 @@
                                 android:id="@+id/tv_suppressed_days"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=""
+                                android:text="0"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/grey_40" />
 
@@ -913,7 +912,7 @@
                                 android:id="@+id/tv_unsuppressed_days"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=""
+                                android:text="0"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                                 android:textColor="@color/grey_40" />
 

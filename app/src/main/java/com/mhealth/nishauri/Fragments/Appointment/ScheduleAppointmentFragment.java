@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
@@ -115,11 +116,32 @@ public class ScheduleAppointmentFragment extends Fragment {
             }
         });
 
-        if (reason_spinner.getSelectedItem().toString().equals("Other")){
+        reason_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            lyt_specific_reason.setVisibility(View.VISIBLE);
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
 
-        }
+                if (reason_spinner.getSelectedItem().toString().equals("Other")){
+
+                    lyt_specific_reason.setVisibility(View.VISIBLE);
+
+                }
+                else {
+                    lyt_specific_reason.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+
+            }
+
+        });
+
+
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
