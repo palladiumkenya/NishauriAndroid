@@ -211,7 +211,7 @@ public class UpdateUserFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         // do anything with response
 
-                        Log.e(TAG, response.toString());
+//                        Log.e(TAG, response.toString());
 
 
 
@@ -225,7 +225,7 @@ public class UpdateUserFragment extends Fragment {
                     @Override
                     public void onError(ANError error) {
                         // handle error
-                        Log.e(TAG, error.getErrorBody());
+//                        Log.e(TAG, error.getErrorBody());
 
 
                         Snackbar.make(root.findViewById(R.id.frag_update_user), "" + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
@@ -250,7 +250,7 @@ public class UpdateUserFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-                        Log.e(TAG, response.toString());
+//                        Log.e(TAG, response.toString());
 
                         try {
 
@@ -321,7 +321,7 @@ public class UpdateUserFragment extends Fragment {
                     @Override
                     public void onError(ANError error) {
                         // handle error
-                        Log.e(TAG, error.getErrorBody());
+//                        Log.e(TAG, error.getErrorBody());
 
                         Snackbar.make(root.findViewById(R.id.frag_update_user), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
 

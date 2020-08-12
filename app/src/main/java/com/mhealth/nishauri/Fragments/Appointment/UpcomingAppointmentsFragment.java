@@ -141,7 +141,7 @@ public class UpcomingAppointmentsFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-                        Log.e(TAG, response.toString());
+//                        Log.e(TAG, response.toString());
 
                         upcomingAppointmentArrayList.clear();
 
@@ -155,11 +155,17 @@ public class UpcomingAppointmentsFragment extends Fragment {
 
                         try {
 
-                            String  message = response.has("data") ? response.getString("data") : "" ;
+                            String  message = response.has("message") ? response.getString("message") : "" ;
 
 
-                            if (message.contains("No upcoming appointments")){
+                            if (message.contains("There are no appointments for this client")){
                                 no_appointment_lyt.setVisibility(View.VISIBLE);
+                                Snackbar.make(root.findViewById(R.id.frag_upcoming_appointments),message, Snackbar.LENGTH_LONG).show();
+
+                            } else if (message.contains("Client does not exist in the system")){
+                                no_appointment_lyt.setVisibility(View.VISIBLE);
+                                Snackbar.make(root.findViewById(R.id.frag_upcoming_appointments),message, Snackbar.LENGTH_LONG).show();
+
                             }
 
 
@@ -221,7 +227,7 @@ public class UpcomingAppointmentsFragment extends Fragment {
 
 
 
-                        Log.e(TAG, String.valueOf(error.getErrorCode()));
+//                        Log.e(TAG, String.valueOf(error.getErrorCode()));
 
                         if (error.getErrorCode() == 0){
                             no_appointment_lyt.setVisibility(View.VISIBLE);

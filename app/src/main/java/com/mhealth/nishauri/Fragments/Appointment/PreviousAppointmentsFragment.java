@@ -136,7 +136,8 @@ public class PreviousAppointmentsFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-                        Log.e(TAG, response.toString());
+
+//                        Log.e(TAG, response.toString());
 
                         previousAppointmentArrayList.clear();
 
@@ -203,7 +204,7 @@ public class PreviousAppointmentsFragment extends Fragment {
                             shimmer_my_container.setVisibility(View.GONE);
                         }
 
-                        Log.e(TAG, String.valueOf(error.getErrorCode()));
+//                        Log.e(TAG, String.valueOf(error.getErrorCode()));
 
                         if (error.getErrorCode() == 0){
 

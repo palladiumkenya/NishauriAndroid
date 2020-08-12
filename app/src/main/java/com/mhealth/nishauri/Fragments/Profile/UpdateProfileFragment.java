@@ -150,7 +150,7 @@ public class UpdateProfileFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-                        Log.e(TAG, response.toString());
+//                        Log.e(TAG, response.toString());
 
                         dependantArrayList.clear();
 
@@ -233,7 +233,7 @@ public class UpdateProfileFragment extends Fragment {
                     @Override
                     public void onError(ANError error) {
                         // handle error
-                        Log.e(TAG, error.getErrorBody());
+//                        Log.e(TAG, error.getErrorBody());
 
                         error_lyt.setVisibility(View.VISIBLE);
 

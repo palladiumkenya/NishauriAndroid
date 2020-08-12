@@ -141,7 +141,7 @@ public class PendingAppointmentsFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-                        Log.e(TAG, response.toString());
+//                        Log.e(TAG, response.toString());
 
                         pendingAppointmentArrayList.clear();
 
@@ -209,7 +209,7 @@ public class PendingAppointmentsFragment extends Fragment {
                             shimmer_my_container.setVisibility(View.GONE);
                         }
 
-                        Log.e(TAG, error.getErrorBody());
+//                        Log.e(TAG, error.getErrorBody());
 
                         if (error.getErrorBody().contains("No rescheduled appointments")){
                             no_appointment_lyt.setVisibility(View.VISIBLE);

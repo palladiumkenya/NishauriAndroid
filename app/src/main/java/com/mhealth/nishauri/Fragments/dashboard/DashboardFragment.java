@@ -135,7 +135,7 @@ public class DashboardFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-                        Log.e(TAG, response.toString());
+//                        Log.e(TAG, response.toString());
 
 
                         try {
@@ -294,7 +294,7 @@ public class DashboardFragment extends Fragment {
                         // handle error
 
 
-                        Log.e(TAG, error.getErrorBody());
+//                        Log.e(TAG, error.getErrorBody());
 
                         Snackbar.make(root.findViewById(R.id.frag_dashboard),  error.getErrorBody(), Snackbar.LENGTH_LONG).show();
 

@@ -211,7 +211,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-                        Log.e(TAG, response.toString());
+//                        Log.e(TAG, response.toString());
 
                         try {
 
@@ -250,7 +250,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onError(ANError error) {
                         // handle error
-                        Log.e(TAG, error.getErrorBody());
+//                        Log.e(TAG, error.getErrorBody());
 
                         Snackbar.make(root.findViewById(R.id.frag_home), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
 
@@ -276,7 +276,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-                        Log.e(TAG, response.toString());
+//                        Log.e(TAG, response.toString());
 
                         dependantArrayList.clear();
 
@@ -343,7 +343,7 @@ public class HomeFragment extends Fragment {
 
                         error_lyt.setVisibility(View.VISIBLE);
 
-                        Log.e(TAG, error.getErrorBody());
+//                        Log.e(TAG, error.getErrorBody());
 
                         Snackbar.make(root.findViewById(R.id.frag_home), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
 
@@ -368,7 +368,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-                        Log.e(TAG, response.toString());
+//                        Log.e(TAG, response.toString());
 
                         upcomingAppointmentArrayList.clear();
 
@@ -382,9 +382,15 @@ public class HomeFragment extends Fragment {
 
                         try {
 
-                            String message = response.has("data") ? response.getString("data"): "";
-                            if (message.contains("No upcoming appointments")){
+                            String message = response.has("message") ? response.getString("message"): "";
+                            if (message.contains("There are no appointments for this client")){
                                 no_appointment_lyt.setVisibility(View.VISIBLE);
+                                Snackbar.make(root.findViewById(R.id.frag_home),message, Snackbar.LENGTH_LONG).show();
+
+                            } else if (message.contains("Client does not exist in the system")){
+                                no_appointment_lyt.setVisibility(View.VISIBLE);
+                                Snackbar.make(root.findViewById(R.id.frag_home),message, Snackbar.LENGTH_LONG).show();
+
                             }
 
                             JSONArray myArray = response.getJSONArray("data");
@@ -442,7 +448,7 @@ public class HomeFragment extends Fragment {
 
 
 
-                        Log.e(TAG, error.getErrorDetail());
+//                        Log.e(TAG, error.getErrorDetail());
 
                         if (error.getErrorCode() == 0){
                             no_appointment_lyt.setVisibility(View.VISIBLE);
@@ -478,7 +484,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-                        Log.e(TAG, response.toString());
+//                        Log.e(TAG, response.toString());
 
                         currentArtArrayList.clear();
 
@@ -538,7 +544,7 @@ public class HomeFragment extends Fragment {
                             shimmerss_my_container.setVisibility(View.GONE);
                         }
 
-                        Log.e(TAG, error.getErrorBody());
+//                        Log.e(TAG, error.getErrorBody());
 
                             if (error.getErrorBody().contains("No regiment data")){
 

@@ -197,7 +197,7 @@ public class UpdateTreatmentFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         // do anything with response
 
-                        Log.e(TAG, response.toString());
+//                        Log.e(TAG, response.toString());
 
                         try {
 
@@ -229,7 +229,7 @@ public class UpdateTreatmentFragment extends Fragment {
                     @Override
                     public void onError(ANError error) {
                         // handle error
-                        Log.e(TAG, error.getErrorBody());
+//                        Log.e(TAG, error.getErrorBody());
 
                         Snackbar.make(root.findViewById(R.id.frag_update_treatment), "" + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
                     }

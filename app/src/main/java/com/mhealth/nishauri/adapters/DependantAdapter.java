@@ -68,13 +68,14 @@ public class DependantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             view.dependant.setText(obj.getFirst_name()+ " " + obj.getSurname());
             view.hei_number.setText(obj.getHeiNumber());
             view.age.setText("Age: " +obj.getDob() + " Months");
+            view.status.setText("Status: "+obj.getApproved());
 
-            if (obj.getApproved().equals("true")){
+           /* if (obj.getApproved().equals("true")){
                 view.status.setText("Status: Approved");
             }
             if (obj.getApproved().equals("false")){
                 view.status.setText("Status: Pending");
-            }
+            }*/
 
         }
     }

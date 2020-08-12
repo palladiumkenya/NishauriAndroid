@@ -68,6 +68,7 @@ public class EditDependantAdapter extends RecyclerView.Adapter<RecyclerView.View
             EditDependantAdapter.OriginalViewHolder view = (EditDependantAdapter.OriginalViewHolder) holder;
 
             view.dependant.setText(obj.getFirst_name());
+            view.status.setText(obj.getApproved());
             view.editDependant.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -82,12 +83,12 @@ public class EditDependantAdapter extends RecyclerView.Adapter<RecyclerView.View
                 }
             });
 
-            if (obj.getApproved().equals("true")){
+            /*if (obj.getApproved().equals("true")){
                 view.status.setText("Approved");
             }
             if (obj.getApproved().equals("false")){
                 view.status.setText("Pending");
-            }
+            }*/
 
         }
     }

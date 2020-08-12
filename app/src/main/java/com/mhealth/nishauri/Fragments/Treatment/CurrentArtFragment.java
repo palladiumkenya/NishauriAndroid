@@ -137,7 +137,7 @@ public class CurrentArtFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-                        Log.e(TAG, response.toString());
+//                        Log.e(TAG, response.toString());
 
                         currentArtArrayList.clear();
 
@@ -197,7 +197,7 @@ public class CurrentArtFragment extends Fragment {
 
 
 
-                        Log.e(TAG, error.getErrorBody());
+//                        Log.e(TAG, error.getErrorBody());
 
                         if (error.getErrorBody().contains("No treatments found")){
                             no_treatment_lyt.setVisibility(View.VISIBLE);

@@ -457,7 +457,7 @@ public class SignUpActivity extends AppCompatActivity {
                 .getAsJSONObject(new JSONObjectRequestListener(){
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.e(TAG, response.toString());
+//                        Log.e(TAG, response.toString());
 
                         animationView.setVisibility(View.GONE);
 
@@ -490,7 +490,7 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onError(ANError error) {
                         // handle error
-                        Log.e(TAG, error.getErrorBody());
+//                        Log.e(TAG, error.getErrorBody());
 
                         animationView.setVisibility(View.GONE);
 

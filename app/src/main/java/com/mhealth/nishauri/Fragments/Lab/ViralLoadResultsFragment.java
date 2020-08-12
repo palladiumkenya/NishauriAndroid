@@ -178,6 +178,8 @@ public class ViralLoadResultsFragment extends Fragment {
                             pDialog.cancel();
                         }
 
+
+
                         viralLoadArrayList.clear();
 
                         if (recyclerView!=null)
@@ -190,20 +192,16 @@ public class ViralLoadResultsFragment extends Fragment {
 
                         try {
 
+                            String  message = response.has("message") ? response.getString("message") : "" ;
 
-
-                            JSONObject myObject = response.getJSONObject("data");
-
-                            String message = myObject.has("message") ? myObject.getString("message") : "";
 
                             if (message.contains("No results for the given CCC Number were found")){
-
                                 no_result_lyt.setVisibility(View.VISIBLE);
-                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                                Snackbar.make(root.findViewById(R.id.frag_viral_load),message, Snackbar.LENGTH_LONG).show();
+
                             }
-
-
                             JSONArray myArray = response.getJSONArray("data");
+
 
                             if (myArray.length() > 0){
 
@@ -231,7 +229,7 @@ public class ViralLoadResultsFragment extends Fragment {
 
                                 }
 
-                            }else {
+                            }else if (response.getJSONObject("data").has("message")){
                                 //not data found
 
                                 if (pDialog != null && pDialog.isShowing()) {
@@ -239,7 +237,7 @@ public class ViralLoadResultsFragment extends Fragment {
                                     pDialog.cancel();
                                 }
 
-                                no_result_lyt.setVisibility(View.VISIBLE);
+                                Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
 
 
                             }

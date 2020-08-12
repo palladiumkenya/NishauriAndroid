@@ -117,8 +117,10 @@ public class LoginActivity extends AppCompatActivity {
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent mint = new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(mint);
+
             }
         });
 
@@ -126,16 +128,17 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                if (TextUtils.isEmpty(phone.getText().toString())){
+
                    Snackbar.make(findViewById(R.id.login_layout), "Please enter your phone number", Snackbar.LENGTH_LONG).show();
                }
                else if (TextUtils.isEmpty(password.getText().toString())) {
+
                    Snackbar.make(findViewById(R.id.login_layout), "Please enter your password", Snackbar.LENGTH_LONG).show();
                }
                else {
+
                    sendLoginRequest(password.getText().toString(),phone.getText().toString());
                    animationView.setVisibility(View.VISIBLE);
-
-
 
                }
 
@@ -171,7 +174,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         // do anything with response
 
-                        Log.e(TAG, response.toString());
+//                        Log.e(TAG, response.toString());
 
                         try {
                             String auth_token = response.has("auth_token") ? response.getString("auth_token") : "";
@@ -201,12 +204,24 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onError(ANError error) {
                         // handle error
-                        Log.e(TAG, error.getErrorBody());
+//                        Log.e(TAG, error.getErrorBody());
 
                         animationView.setVisibility(View.GONE);
 
+                        if (error.getErrorBody().contains("Unable to log in with provided credentials.")){
 
-                        Snackbar.make(findViewById(R.id.login_layout), "" + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(findViewById(R.id.login_layout), "Invalid phone number or password." , Snackbar.LENGTH_LONG).show();
+
+
+                        }
+                        else {
+
+                            Snackbar.make(findViewById(R.id.login_layout), "" + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+
+
+                        }
+
+
                     }
                 });
 

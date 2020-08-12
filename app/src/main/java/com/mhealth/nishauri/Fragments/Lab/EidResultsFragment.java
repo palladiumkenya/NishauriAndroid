@@ -162,7 +162,7 @@ public class EidResultsFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-                        Log.e(TAG, response.toString());
+//                        Log.e(TAG, response.toString());
 
                         if (pDialog != null && pDialog.isShowing()) {
                             pDialog.hide();
@@ -239,7 +239,7 @@ public class EidResultsFragment extends Fragment {
 
                         error_lyt.setVisibility(View.VISIBLE);
 
-                        Log.e(TAG, error.getErrorBody());
+//                        Log.e(TAG, error.getErrorBody());
 
 
                         Snackbar.make(root.findViewById(R.id.frag_eid_results), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();

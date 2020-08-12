@@ -160,7 +160,7 @@ public class DependantsFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-                        Log.e(TAG, response.toString());
+//                        Log.e(TAG, response.toString());
 
                         dependantArrayList.clear();
 
@@ -225,7 +225,7 @@ public class DependantsFragment extends Fragment {
 
                         error_lyt.setVisibility(View.VISIBLE);
 
-                        Log.e(TAG, error.getErrorBody());
+//                        Log.e(TAG, error.getErrorBody());
 
                         Snackbar.make(root.findViewById(R.id.frag_dependant), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
 

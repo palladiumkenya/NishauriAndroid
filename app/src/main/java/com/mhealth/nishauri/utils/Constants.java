@@ -20,7 +20,7 @@ public class Constants {
     //DEPENDANT
     public static String ADD_DEPENDANT = "dependants/";
     public static String DEPENTANTS= "dependants/";
-    public static String DEPENTANT= "dependant/";
+    public static String DEPENTANT= "dependant/single";
     public static String UPDATE_DEPENDANT = "dependant/update";
 
     //LAB

@@ -235,7 +235,7 @@ public class ScheduleAppointmentFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         // do anything with response
 
-                        Log.e(TAG, response.toString());
+//                        Log.e(TAG, response.toString());
 
 
                         animationView.setVisibility(View.GONE);
@@ -250,7 +250,7 @@ public class ScheduleAppointmentFragment extends Fragment {
                     @Override
                     public void onError(ANError error) {
                         // handle error
-                        Log.e(TAG, error.getErrorBody());
+//                        Log.e(TAG, error.getErrorBody());
 
                         animationView.setVisibility(View.GONE);
 
