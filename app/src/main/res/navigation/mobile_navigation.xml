@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.mhealthkenya.psurvey.fragments.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_questionnaire"
+        android:name="com.mhealthkenya.psurvey.fragments.QuestionnairesFragment"
+        android:label="Questionnaires"
+        tools:layout="@layout/fragment_questionnaires" />
+    <fragment
+        android:id="@+id/nav_start_survey"
+        android:name="com.mhealthkenya.psurvey.fragments.survey.StartSurveyFragment"
+        android:label="Start Survey"
+        tools:layout="@layout/fragment_start_survey" />
+    <fragment
+        android:id="@+id/nav_patient_consent"
+        android:name="com.mhealthkenya.psurvey.fragments.survey.PatientConsentFragment"
+        android:label="Patient Consent"
+        tools:layout="@layout/fragment_patient_consent" />
+    <fragment
+        android:id="@+id/nav_select_survey"
+        android:name="com.mhealthkenya.psurvey.fragments.survey.SelectSurveyFragment"
+        android:label="Select Survey"
+        tools:layout="@layout/fragment_select_survey" />
+    <fragment
+        android:id="@+id/nav_questions"
+        android:name="com.mhealthkenya.psurvey.fragments.survey.QuestionsFragment"
+        android:label="Survey"
+        tools:layout="@layout/fragment_questions" />
+    <fragment
+        android:id="@+id/nav_complete_survey"
+        android:name="com.mhealthkenya.psurvey.fragments.survey.CompleteSurveyFragment"
+        android:label="fragment_complete_survey"
+        tools:layout="@layout/fragment_complete_survey" />
+
+</navigation>
