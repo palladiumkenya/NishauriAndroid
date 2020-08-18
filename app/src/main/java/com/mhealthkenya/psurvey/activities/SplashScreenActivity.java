@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.mhealthkenya.psurvey.R;
+import com.mhealthkenya.psurvey.activities.auth.LoginActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -20,7 +21,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 try {
                     Thread.sleep(1000);
 
-                    startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+                    startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
                     finish();
                 }catch (Exception e){
                     e.printStackTrace();

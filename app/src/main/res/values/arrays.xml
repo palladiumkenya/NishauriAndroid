@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="designation">
+        <item> Select your designation.</item>
+        <item> Doctor</item>
+        <item> Clinical Officer</item>
+        <item> Nurse</item>
+        <item> Student</item>
+        <item> Other-Specify</item>
+    </string-array>
+
+    <string-array name="facility">
+        <item> Select your facility.</item>
+        <item> Training Facility</item>
+        <item> Kenyatta National Hospital</item>
+        <item> Nairobi Hospital</item>
+        <item> Kenyatta University Referral hospital</item>
+        <item> Other-Specify</item>
+    </string-array>
+</resources>

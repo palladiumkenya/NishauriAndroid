@@ -88,7 +88,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_medium"
                     android:layout_weight="1"
-                    android:text="@string/new_survey"/>
+                    android:text="@string/new_survey"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_done"

@@ -38,7 +38,7 @@
     <fragment
         android:id="@+id/nav_complete_survey"
         android:name="com.mhealthkenya.psurvey.fragments.survey.CompleteSurveyFragment"
-        android:label="fragment_complete_survey"
+        android:label="Complete Survey"
         tools:layout="@layout/fragment_complete_survey" />
 
 </navigation>
