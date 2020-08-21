@@ -383,11 +383,21 @@ public class HomeFragment extends Fragment {
                         try {
 
                             String message = response.has("message") ? response.getString("message"): "";
-                            if (message.contains("There are no appointments for this client")){
+
+                            /*if (message.contains("There are no appointments for this client")){
                                 no_appointment_lyt.setVisibility(View.VISIBLE);
                                 Snackbar.make(root.findViewById(R.id.frag_home),message, Snackbar.LENGTH_LONG).show();
 
                             } else if (message.contains("Client does not exist in the system")){
+                                no_appointment_lyt.setVisibility(View.VISIBLE);
+                                Snackbar.make(root.findViewById(R.id.frag_home),message, Snackbar.LENGTH_LONG).show();
+
+                            } else if (message.contains("No upcoming appointments")){
+                                no_appointment_lyt.setVisibility(View.VISIBLE);
+                                Snackbar.make(root.findViewById(R.id.frag_home),message,Snackbar.LENGTH_LONG).show();
+                            }*/
+
+                            if (!message.isEmpty()){
                                 no_appointment_lyt.setVisibility(View.VISIBLE);
                                 Snackbar.make(root.findViewById(R.id.frag_home),message, Snackbar.LENGTH_LONG).show();
 

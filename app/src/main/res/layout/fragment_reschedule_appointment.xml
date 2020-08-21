@@ -16,144 +16,88 @@
         app:cardElevation="3dp"
         app:cardUseCompatPadding="true">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="@dimen/spacing_large">
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:scrollingCache="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/spacing_mlarge"
-                android:paddingStart="@dimen/spacing_mlarge"
-                android:paddingEnd="@dimen/spacing_mlarge">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:layout_gravity="center"
-                    android:text="Reschedule Appointment?"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                    android:textColor="@color/colorAccent"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:paddingVertical="@dimen/spacing_medium"
-                    android:text="Current scheduled date: "
-                    android:textSize="@dimen/spacing_mlarge"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="@color/grey_80" />
+                android:padding="@dimen/spacing_large">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/txt_scheduled_appointment"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingVertical="@dimen/spacing_medium"
-                        android:text="Current Date: "
-                        android:textSize="@dimen/spacing_large"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:clickable="true" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/txt_scheduled_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingVertical="@dimen/spacing_medium"
-                        android:text=" "
-                        android:textSize="@dimen/spacing_large"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-                </LinearLayout>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:paddingVertical="@dimen/spacing_medium"
-                    android:text="Date to reschedule to: "
-                    android:textSize="@dimen/spacing_mlarge"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="@color/grey_80" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_reschedule_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/spacing_middle"
-                    android:layout_marginVertical="@dimen/spacing_middle"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/txt_reschedule_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="New date"
-                        android:inputType="text"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:clickable="true"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- <com.google.android.material.textfield.TextInputLayout
-                     android:id="@+id/til_reschedule_time"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:layout_marginHorizontal="@dimen/spacing_middle"
-                     android:layout_marginVertical="@dimen/spacing_middle"
-                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                     <com.google.android.material.textfield.TextInputEditText
-                         android:id="@+id/txt_reschedule_time"
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:hint="New time."
-                         android:inputType="text"
-                         android:focusable="false"
-                         android:focusableInTouchMode="false"
-                         android:clickable="true" />
-
-                 </com.google.android.material.textfield.TextInputLayout>-->
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="@dimen/spacing_medium"
-                    android:text="What is the reason for rescheduling?"
-                    android:textSize="@dimen/spacing_mlarge"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/reason_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/spacing_medium"
-                    android:entries="@array/reschedule_reason" />
-
-                <LinearLayout
-                    android:id="@+id/lyt_specific_reason"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    >
+                    android:paddingBottom="@dimen/spacing_mlarge"
+                    android:paddingStart="@dimen/spacing_mlarge"
+                    android:paddingEnd="@dimen/spacing_mlarge">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_large"
+                        android:layout_gravity="center"
+                        android:text="Reschedule Appointment?"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_large"
+                        android:paddingVertical="@dimen/spacing_medium"
+                        android:text="Current scheduled date: "
+                        android:textSize="@dimen/spacing_mlarge"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/grey_80" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/txt_scheduled_appointment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingVertical="@dimen/spacing_medium"
+                            android:text="Current Date: "
+                            android:textSize="@dimen/spacing_large"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            android:clickable="true" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/txt_scheduled_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingVertical="@dimen/spacing_medium"
+                            android:text=" "
+                            android:textSize="@dimen/spacing_large"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_large"
+                        android:paddingVertical="@dimen/spacing_medium"
+                        android:text="Date to reschedule to: "
+                        android:textSize="@dimen/spacing_mlarge"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/grey_80" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_specify_reason"
+                        android:id="@+id/til_reschedule_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/spacing_middle"
@@ -161,57 +105,123 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/specify_reason_edtxt"
+                            android:id="@+id/txt_reschedule_date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Please specify"
-                            android:inputType="textCapSentences"
-                            />
+                            android:hint="New date"
+                            android:inputType="text"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:clickable="true"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <!-- <com.google.android.material.textfield.TextInputLayout
+                         android:id="@+id/til_reschedule_time"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_marginHorizontal="@dimen/spacing_middle"
+                         android:layout_marginVertical="@dimen/spacing_middle"
+                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                         <com.google.android.material.textfield.TextInputEditText
+                             android:id="@+id/txt_reschedule_time"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:hint="New time."
+                             android:inputType="text"
+                             android:focusable="false"
+                             android:focusableInTouchMode="false"
+                             android:clickable="true" />
+
+                     </com.google.android.material.textfield.TextInputLayout>-->
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="@dimen/spacing_medium"
+                        android:text="What is the reason for rescheduling?"
+                        android:textSize="@dimen/spacing_mlarge"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/reason_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/spacing_medium"
+                        android:entries="@array/reschedule_reason" />
+
+                    <LinearLayout
+                        android:id="@+id/lyt_specific_reason"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_specify_reason"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/spacing_middle"
+                            android:layout_marginVertical="@dimen/spacing_middle"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/specify_reason_edtxt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Please specify"
+                                android:inputType="textCapSentences"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                    </LinearLayout>
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingVertical="@dimen/spacing_medium"
+                        android:text="Notify Doctor/facility Personally."
+                        android:checked="false" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/animationView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:lottie_url="https://assets9.lottiefiles.com/packages/lf20_Stt1R6.json"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        android:visibility="gone"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_report"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_middle"
+                        android:layout_marginBottom="@dimen/spacing_middle"
+                        android:text="Continue"
+                        android:textAllCaps="true"
+                        android:textColor="@android:color/white"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        style="@style/Widget.MaterialComponents.Button"/>
+
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/spacing_large" />
 
                 </LinearLayout>
 
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:paddingVertical="@dimen/spacing_medium"
-                    android:text="Notify Doctor/facility Personally."
-                    android:checked="false" />
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/animationView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    app:lottie_url="https://assets9.lottiefiles.com/packages/lf20_Stt1R6.json"
-                    app:lottie_autoPlay="true"
-                    app:lottie_loop="true"
-                    android:visibility="gone"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_report"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_middle"
-                    android:layout_marginBottom="@dimen/spacing_middle"
-                    android:text="Continue"
-                    android:textAllCaps="true"
-                    android:textColor="@android:color/white"
-                    android:textAlignment="center"
-                    android:textSize="20sp"
-                    style="@style/Widget.MaterialComponents.Button"/>
-
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/spacing_large" />
-
             </LinearLayout>
 
-        </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
 
     </com.google.android.material.card.MaterialCardView>
 
