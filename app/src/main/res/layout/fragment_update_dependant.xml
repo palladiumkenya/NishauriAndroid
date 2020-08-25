@@ -69,7 +69,7 @@
                     android:layout_centerHorizontal="true"
                     app:cardBackgroundColor="@color/grey_10"
                     app:cardCornerRadius="40dp"
-                    app:cardElevation="3dp">
+                    app:cardElevation="10dp">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/image"
@@ -88,8 +88,8 @@
                     android:layout_marginRight="@dimen/spacing_large"
                     android:layout_marginTop="40dp"
                     android:background="@android:color/white"
-                    app:cardCornerRadius="2dp"
-                    app:cardElevation="2dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp"
                     app:cardUseCompatPadding="true">
 
                     <LinearLayout
@@ -132,8 +132,8 @@
                 android:layout_marginRight="@dimen/spacing_large"
                 android:layout_marginTop="@dimen/spacing_middle"
                 android:background="@android:color/white"
-                app:cardCornerRadius="2dp"
-                app:cardElevation="2dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout
