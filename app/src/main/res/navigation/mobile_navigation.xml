@@ -40,5 +40,10 @@
         android:name="com.mhealthkenya.psurvey.fragments.survey.CompleteSurveyFragment"
         android:label="Complete Survey"
         tools:layout="@layout/fragment_complete_survey" />
+    <fragment
+        android:id="@+id/nav_edit_profile"
+        android:name="com.mhealthkenya.psurvey.fragments.EditProfileFragment"
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_edit_profile" />
 
 </navigation>

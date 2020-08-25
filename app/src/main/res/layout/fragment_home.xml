@@ -129,7 +129,7 @@
                                     android:layout_height="@dimen/spacing_large"
                                     android:layout_marginEnd="@dimen/spacing_medium"
                                     android:layout_marginRight="@dimen/spacing_medium"
-                                    android:src="@drawable/ic_home" />
+                                    android:src="@drawable/ic_hospital" />
 
                                 <com.google.android.material.textview.MaterialTextView
                                     android:id="@+id/tv_facility"

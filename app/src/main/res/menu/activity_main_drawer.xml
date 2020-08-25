@@ -16,5 +16,10 @@
             android:id="@+id/nav_questionnaire"
             android:icon="@drawable/ic_questionnaire"
             android:title="@string/questionnaires" />
+
+        <item
+            android:id="@+id/nav_edit_profile"
+            android:icon="@drawable/ic_edit_profile"
+            android:title="@string/edit_profile" />
     </group>
 </menu>

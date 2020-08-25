@@ -13,7 +13,10 @@
             android:name=".activities.auth.SignUpActivity"
             android:label="@string/sign_up"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".activities.auth.LoginActivity" />
+
+        <activity android:name=".activities.auth.LoginActivity"
+            android:screenOrientation="locked"/>
+
         <activity
             android:name=".activities.SplashScreenActivity"
             android:screenOrientation="locked"
@@ -24,6 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/menu_home"
