@@ -15,7 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
         <meta-data
             android:name="DATABASE"
             android:value="ushauridb.db" />
@@ -27,19 +31,17 @@
             android:value="true" />
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
-            android:value="com.example.mhealth.appointment_diary" />
-
-
-        <!--start sms retriever details here-->
-
+            android:value="com.example.mhealth.appointment_diary" /> <!-- start sms retriever details here -->
         <service android:name=".Smsretrieverapi.BackgroundService" />
 
         <activity android:name=".Smsretrieverapi.TestClass">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN"/>-->
 
-            <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
         </activity>
 
         <receiver
@@ -47,11 +49,9 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED"/>
+                <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED" />
             </intent-filter>
-        </receiver>
-        <!--end sms retriever details here-->
-
+        </receiver> <!-- end sms retriever details here -->
         <activity
             android:name=".loginmodule.LoginActivity"
             android:configChanges="orientation|screenSize">
@@ -170,18 +170,30 @@
         </activity>
         <activity android:name=".report.Report" />
 
+
+        <activity android:name=".DCMActivity"
+            android:parentActivityName=".appointment_diary.TodaysAppointment"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="orientation|screenSize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".appointment_diary.TodaysAppointment" />
+
+        </activity>
+
+
         <receiver
             android:name=".SmsBroadcastReceiver"
             android:exported="true">
-            <!--<intent-filter android:priority="999">-->
-                <!--<action android:name="android.provider.Telephony.SMS_RECEIVED" />-->
-                <!--<action android:name="android.provider.Telephony.SMS_DELIVER" />-->
 
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter android:priority="999"> -->
+            <!-- <action android:name="android.provider.Telephony.SMS_RECEIVED" /> -->
+            <!-- <action android:name="android.provider.Telephony.SMS_DELIVER" /> -->
+
+
+            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+            <!-- </intent-filter> -->
         </receiver>
-
-
     </application>
 
 </manifest>

@@ -16,6 +16,8 @@ import android.os.Parcelable;
 import android.os.SystemClock;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+
+import com.example.mhealth.appointment_diary.DCMActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -379,7 +381,7 @@ public class TodaysAppointment extends AppCompatActivity implements SmsReceiver.
 
             broadcast.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), Broadcast.class);
+                    Intent intent = new Intent(getApplicationContext(), DCMActivity.class);
                     startActivity(intent);
                 }
             });
