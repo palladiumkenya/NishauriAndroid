@@ -52,6 +52,9 @@ public class Config {
     public static final int MISSEDVISITENDPERIOD=3;
     public static final int LOSTTOFOLLOWUPPERIOD=30;
 
+    public static final String GET_ENROLLMENT_DURATION = "http://ushaurinode.mhealthkenya.org/api/process_dfc/check/enrollment/duration";
+    public static final String WELL_ADVANCED_BOOKING = "http://ushaurinode.mhealthkenya.org/api/process_dfc/well/advanced/booking";
+
 
 
 

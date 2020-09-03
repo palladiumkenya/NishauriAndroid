@@ -291,10 +291,10 @@
                         android:layout_height="wrap_content"
                         android:focusable="false"
                         android:hint="Appointment date"
-                        android:inputType="text"
+                        android:inputType="date"
                         android:maxLength="24"
                         android:textColorHint="#000"
-                        android:textSize="12dp" />
+                        android:textSize="12sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -308,14 +308,6 @@
                     android:layout_marginBottom="20sp"
                     android:orientation="horizontal">
 
-                    <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Select your Marital Status"-->
-                    <!--android:fontFamily="serif"-->
-
-                    <!--android:textColor="#000"-->
-                    <!--/>-->
 
                     <Spinner
                         android:id="@+id/appointment_type_spinner"
@@ -326,7 +318,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:orientation="vertical"
-                    android:id="@+id/aotherll"
+                    android:id="@+id/other_layout"
                     android:visibility="gone"
                     android:layout_height="wrap_content">
 
@@ -335,7 +327,7 @@
                         android:layout_height="wrap_content">
 
                         <EditText
-                            android:id="@+id/aother"
+                            android:id="@+id/other_et"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Specify other"
@@ -345,31 +337,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Was previous appointment kept?" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20sp"
-                    android:orientation="horizontal">
-
-                    <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Select your Marital Status"-->
-                    <!--android:fontFamily="serif"-->
-
-                    <!--android:textColor="#000"-->
-                    <!--/>-->
-
-                    <Spinner
-                        android:id="@+id/previous_appointment_spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
 
                 <Button
                     android:id="@+id/btn_submit_apt"

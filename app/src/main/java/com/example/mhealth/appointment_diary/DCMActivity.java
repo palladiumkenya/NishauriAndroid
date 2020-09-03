@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,20 +15,41 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.mhealth.appointment_diary.Dialogs.ErrorMessage;
+import com.example.mhealth.appointment_diary.config.Config;
+import com.example.mhealth.appointment_diary.config.VolleyErrors;
+import com.example.mhealth.appointment_diary.tables.Activelogin;
+import com.example.mhealth.appointment_diary.tables.Registrationtable;
 import com.example.mhealth.appointment_diary.utilitymodules.Appointment;
 import com.example.mhealth.appointment_diary.utilitymodules.SpinnerAdapter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DCMActivity extends AppCompatActivity {
 
     private Spinner wellness_level_spinner,stability_level_spinner,on_dcm_spinner,facility_community_spinner,facility_based_model_spinner,
-            community_based_model_spinner,appointment_type_spinner,previous_appointment_spinner;
-    private EditText mfl_code,ccc_no,stable_appointment_date,clinical_review_date,appointment_date;
+            community_based_model_spinner,appointment_type_spinner;
+    private EditText mfl_code,ccc_no,stable_appointment_date,clinical_review_date,appointment_date,other_et;
     private LinearLayout wellness_level_layout,stability_layout,on_dcm_layout,facility_community_layout,facility_based_model_layout,community_based_model_layout,
-            dcm_submit_layout,normal_tca_layout;
+            dcm_submit_layout,normal_tca_layout,other_layout;
     private Button btn_check,btn_submit_apt,btn_dcm_submit_apt;
 
 
@@ -35,6 +57,7 @@ public class DCMActivity extends AppCompatActivity {
 
 
     private String WELLNESS_LEVEL = "";
+    private String APT_TYPE = "";
     private String STABILITY_LEVEL = "";
     private String ON_DCM_STATUS = "";
     private String FACILITY_BASED_MODEL = "";
@@ -44,13 +67,14 @@ public class DCMActivity extends AppCompatActivity {
     private String CLINICAL_REVIEW_DATE = "";
     private String APPOINTMENT_DATE = "";
 
-    private boolean isGreaterThanYear = true;
+    private int months = 0;
+    private String phone_no;
 
+    RequestQueue queue;
 
 
 
     String[] appnment = {"Please select appointment type","Re-Fill","Clinical review","Enhanced Adherence counseling","Lab investigation","VL Booking","Other"};
-    String[] previous = {"Was previous appointment kept?","Yes","No","Not Applicable"};
     String[] wellness = {"Please select wellness level","Well","Advanced"};
     String[] stability = {"Please select stability level","Stable","Unstable"};
     String[] on_dcm = {"Please select if on DCM","On DCM","NOT on DCM"};
@@ -72,6 +96,18 @@ public class DCMActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("DCM Clients");
+
+        List<Activelogin> myl=Activelogin.findWithQuery(Activelogin.class,"select * from Activelogin");
+
+        for(int x=0;x<myl.size();x++){
+            String un=myl.get(x).getUname();
+            List<Registrationtable> myl2=Registrationtable.findWithQuery(Registrationtable.class,"select * from Registrationtable where username=? limit 1",un);
+            for(int y=0;y<myl2.size();y++){
+                phone_no=myl2.get(y).getPhone();
+            }
+        }
+
+        queue = Volley.newRequestQueue(this); // this = context
 
         initViews();
 
@@ -201,6 +237,25 @@ public class DCMActivity extends AppCompatActivity {
             }
         });
 
+        appointment_type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                APT_TYPE = appnment[position];
+
+                if (APT_TYPE.equals("Other")){
+                    other_layout.setVisibility(View.VISIBLE);
+                }else {
+                    other_layout.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         btn_check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -209,21 +264,312 @@ public class DCMActivity extends AppCompatActivity {
                 }else if (TextUtils.isEmpty(ccc_no.getText().toString())){
                     ccc_no.setError("Please enter CCC Number");
                 }else {
-                    if (isGreaterThanYear){
-                        wellness_level_layout.setVisibility(View.GONE);
-                        stability_layout.setVisibility(View.VISIBLE);
-                    }else {
-                        wellness_level_layout.setVisibility(View.VISIBLE);
-                        stability_layout.setVisibility(View.GONE);
-                    }
+                    wellness_level_layout.setVisibility(View.GONE);
+                    stability_layout.setVisibility(View.GONE);
+                    on_dcm_layout.setVisibility(View.GONE);
+                    facility_community_layout.setVisibility(View.GONE);
+                    facility_based_model_layout.setVisibility(View.GONE);
+                    community_based_model_layout.setVisibility(View.GONE);
+                    dcm_submit_layout.setVisibility(View.GONE);
+                    normal_tca_layout.setVisibility(View.GONE);
+
+                    wellness_level_spinner.setSelection(0);
+                    stability_level_spinner.setSelection(0);
+                    on_dcm_spinner.setSelection(0);
+                    facility_community_spinner.setSelection(0);
+                    facility_based_model_spinner.setSelection(0);
+                    community_based_model_spinner.setSelection(0);
+                    appointment_type_spinner.setSelection(0);
+
+                    stable_appointment_date.getText().clear();
+                    clinical_review_date.getText().clear();
+                    appointment_date.getText().clear();
+                    other_et.getText().clear();
+
+                    getDuration();
                 }
             }
         });
 
+        btn_submit_apt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (months >= 12) {
+
+                }else {
+                    if (validateWellAdvanced())
+                        bookWellAdvanced();
+                }
+            }
+        });
+
+    }
+
+    private boolean validateWellAdvanced() {
+        boolean valid = true;
+
+        if (TextUtils.isEmpty(mfl_code.getText().toString())) {
+            mfl_code.setError(getString(R.string.mfl_code_required));
+            valid = false;
+            return valid;
+        }
+
+        if (TextUtils.isEmpty(ccc_no.getText().toString())) {
+            ccc_no.setError(getString(R.string.ccc_required));
+            valid = false;
+            return valid;
+        }
 
 
 
+        if (WELLNESS_LEVEL.equals("") || WELLNESS_LEVEL.equals("Please select wellness level")) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select wellness level",DCMActivity.this);
+            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
 
+        if (TextUtils.isEmpty(appointment_date.getText().toString())) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select appointment date",DCMActivity.this);
+            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
+
+        if (APT_TYPE.equals("") || APT_TYPE.equals("Please select appointment type")) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select appointment type",DCMActivity.this);
+            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
+
+        if (APT_TYPE.equals("Other") && TextUtils.isEmpty(other_et.getText().toString())) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please specify other",DCMActivity.this);
+            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
+
+        return valid;
+    }
+
+
+    private void bookWellAdvanced() {
+        JSONObject payload = new JSONObject();
+        try {
+            payload.put("clinic_number", mfl_code.getText().toString()+ccc_no.getText().toString());
+            payload.put("phone_no", phone_no);
+            payload.put("appointment_date", APPOINTMENT_DATE);
+            payload.put("appointment_type", java.util.Arrays.asList(appnment).indexOf(APT_TYPE));
+            payload.put("appointment_other", TextUtils.isEmpty(other_et.getText().toString()) ? -1 : other_et.getText().toString());
+            payload.put("category_type", java.util.Arrays.asList(wellness).indexOf(WELLNESS_LEVEL));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("payload: ", payload.toString());
+
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                Config.WELL_ADVANCED_BOOKING, payload, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.e("Response: ", response.toString());
+                try {
+                    boolean success = response.has("success") && response.getBoolean("success");
+                    String message = response.has("message") ? response.getString("message") : "";
+
+                    if (success) {
+                        ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Success",message,DCMActivity.this);
+                        bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+
+                        //reset views
+                        wellness_level_layout.setVisibility(View.GONE);
+                        stability_layout.setVisibility(View.GONE);
+                        on_dcm_layout.setVisibility(View.GONE);
+                        facility_community_layout.setVisibility(View.GONE);
+                        facility_based_model_layout.setVisibility(View.GONE);
+                        community_based_model_layout.setVisibility(View.GONE);
+                        dcm_submit_layout.setVisibility(View.GONE);
+                        normal_tca_layout.setVisibility(View.GONE);
+
+                        wellness_level_spinner.setSelection(0);
+                        stability_level_spinner.setSelection(0);
+                        on_dcm_spinner.setSelection(0);
+                        facility_community_spinner.setSelection(0);
+                        facility_based_model_spinner.setSelection(0);
+                        community_based_model_spinner.setSelection(0);
+                        appointment_type_spinner.setSelection(0);
+
+                        mfl_code.getText().clear();
+                        ccc_no.getText().clear();
+                        stable_appointment_date.getText().clear();
+                        clinical_review_date.getText().clear();
+                        appointment_date.getText().clear();
+                        other_et.getText().clear();
+
+
+
+                    } else {
+                        ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Failed",message,DCMActivity.this);
+                        bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                NetworkResponse response = error.networkResponse;
+                if(response != null && response.data != null){
+                    String body;
+                    //get status code here
+                    String statusCode = String.valueOf(error.networkResponse.statusCode);
+                    //get response body and parse with appropriate encoding
+                    if(error.networkResponse.data!=null) {
+                        try {
+                            body = new String(error.networkResponse.data,"UTF-8");
+
+                            JSONObject json = new JSONObject(body);
+                            //                            Log.e("error response : ", json.toString());
+
+
+                            String message = json.has("message") ? json.getString("message") : "";
+                            String reason = json.has("reason") ? json.getString("reason") : "";
+
+                            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance(message,reason,DCMActivity.this);
+                            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+
+                        } catch (UnsupportedEncodingException | JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }else {
+
+                    Log.e("VOlley error :", error.getLocalizedMessage()+" message:"+error.getMessage());
+                    Toast.makeText(DCMActivity.this, VolleyErrors.getVolleyErrorMessages(error, DCMActivity.this),Toast.LENGTH_LONG).show();
+                }
+
+//             Log.e(TAG, "Error: " + error.getMessage());
+            }
+        }){
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+        };
+
+        queue.add(jsonObjReq);
+    }
+
+    private void getDuration() {
+        JSONObject payload = new JSONObject();
+        try {
+            payload.put("clinic_number", mfl_code.getText().toString()+ccc_no.getText().toString());
+            payload.put("phone_no", phone_no);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("payload: ", payload.toString());
+
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                Config.GET_ENROLLMENT_DURATION, payload, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.e("Response: ", response.toString());
+                try {
+                    boolean success = response.has("success") && response.getBoolean("success");
+                    String message = response.has("message") ? response.getString("message") : "";
+                    months = response.has("months") ? response.getInt("months") : 0;
+
+                    if (success) {
+
+                        if (months >= 12) {
+                            wellness_level_layout.setVisibility(View.GONE);
+                            stability_layout.setVisibility(View.VISIBLE);
+                        }else {
+                            wellness_level_layout.setVisibility(View.VISIBLE);
+                            stability_layout.setVisibility(View.GONE);
+                        }
+                    } else {
+
+                        ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Invalid",message,DCMActivity.this);
+                        bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                NetworkResponse response = error.networkResponse;
+                if(response != null && response.data != null){
+                    String body;
+                    //get status code here
+                    String statusCode = String.valueOf(error.networkResponse.statusCode);
+                    //get response body and parse with appropriate encoding
+                    if(error.networkResponse.data!=null) {
+                        try {
+                            body = new String(error.networkResponse.data,"UTF-8");
+
+                            JSONObject json = new JSONObject(body);
+                            //                            Log.e("error response : ", json.toString());
+
+
+                            String message = json.has("message") ? json.getString("message") : "";
+                            String reason = json.has("reason") ? json.getString("reason") : "";
+
+                            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance(message,reason,DCMActivity.this);
+                            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+
+                        } catch (UnsupportedEncodingException | JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }else {
+
+                    Log.e("VOlley error :", error.getLocalizedMessage()+" message:"+error.getMessage());
+                    Toast.makeText(DCMActivity.this, VolleyErrors.getVolleyErrorMessages(error, DCMActivity.this),Toast.LENGTH_LONG).show();
+                }
+
+//             Log.e(TAG, "Error: " + error.getMessage());
+            }
+        }){
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+        };
+
+        queue.add(jsonObjReq);
     }
 
     void initViews(){
@@ -244,7 +590,6 @@ public class DCMActivity extends AppCompatActivity {
 
 
         appointment_type_spinner=(Spinner) findViewById(R.id.appointment_type_spinner);
-        previous_appointment_spinner=(Spinner) findViewById(R.id.previous_appointment_spinner);
         wellness_level_spinner=(Spinner) findViewById(R.id.wellness_level_spinner);
         stability_level_spinner=(Spinner) findViewById(R.id.stability_level_spinner);
         on_dcm_spinner=(Spinner) findViewById(R.id.on_dcm_spinner);
@@ -258,16 +603,13 @@ public class DCMActivity extends AppCompatActivity {
         stable_appointment_date= findViewById(R.id.stable_appointment_date);
         appointment_date= findViewById(R.id.appointment_date);
 
+        other_et= findViewById(R.id.other_et);
+        other_layout= findViewById(R.id.other_layout);
 
-//        SpinnerAdapter customAdapter=new SpinnerAdapter(getApplicationContext(),appnment);
+
         ArrayAdapter<String> customAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, appnment);
         customAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         appointment_type_spinner.setAdapter(customAdapter);
-
-//        SpinnerAdapter previousAdapter=new SpinnerAdapter(getApplicationContext(),previous);
-        ArrayAdapter<String> previousAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, previous);
-        previousAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        previous_appointment_spinner.setAdapter(previousAdapter);
 
 
         ArrayAdapter<String> wellnessAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, wellness);
