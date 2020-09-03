@@ -2,19 +2,14 @@
 <resources>
     <string-array name="designation">
         <item> Select your designation.</item>
-        <item> Doctor</item>
-        <item> Clinical Officer</item>
-        <item> Nurse</item>
-        <item> Student</item>
-        <item> Other-Specify</item>
+        <item> HTS Counsellor</item>
+        <item> HRIO </item>
+        <item> Clinician </item>
+        <item> Adherence Officer </item>
+        <item> Peer Educator </item>
+        <item> Nurse </item>
+
     </string-array>
 
-    <string-array name="facility">
-        <item> Select your facility.</item>
-        <item> Training Facility</item>
-        <item> Kenyatta National Hospital</item>
-        <item> Nairobi Hospital</item>
-        <item> Kenyatta University Referral hospital</item>
-        <item> Other-Specify</item>
-    </string-array>
+
 </resources>

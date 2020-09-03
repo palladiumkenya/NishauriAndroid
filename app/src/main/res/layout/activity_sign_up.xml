@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/signup_lyt"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
@@ -79,6 +80,7 @@
 
                     <EditText
                         style="@style/EditText.Flat.Grey"
+                        android:id="@+id/edtxt_msisn"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/spacing_xxlarge"
                         android:background="@android:color/transparent"
@@ -97,6 +99,7 @@
 
                     <EditText
                         style="@style/EditText.Flat.Grey"
+                        android:id="@+id/edtxt_email"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/spacing_xxlarge"
                         android:background="@android:color/transparent"
@@ -116,6 +119,7 @@
 
                     <EditText
                         style="@style/EditText.Flat.Grey"
+                        android:id="@+id/edtxt_password"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/spacing_xxlarge"
                         android:background="@android:color/transparent"
@@ -134,6 +138,7 @@
 
                     <EditText
                         style="@style/EditText.Flat.Grey"
+                        android:id="@+id/edtxt_repassword"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/spacing_xxlarge"
                         android:background="@android:color/transparent"
@@ -191,6 +196,7 @@
 
                     <EditText
                         style="@style/EditText.Flat.Grey"
+                        android:id="@+id/edtxt_fname"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/spacing_xxlarge"
                         android:background="@android:color/transparent"
@@ -209,6 +215,7 @@
 
                     <EditText
                         style="@style/EditText.Flat.Grey"
+                        android:id="@+id/edtxt_lname"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/spacing_xxlarge"
                         android:background="@android:color/transparent"
@@ -226,28 +233,28 @@
                         android:background="@color/grey_5" />
 
 
-                    <androidx.appcompat.widget.AppCompatSpinner
-                        android:id="@+id/designation_spinner"
+                    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                        android:id="@+id/designation_Spinner"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/spacing_xxlarge"
-                        android:entries="@array/designation"
                         android:minHeight="@dimen/spacing_xmlarge"
                         android:paddingLeft="@dimen/spacing_large"
-                        android:paddingRight="@dimen/spacing_large" />
+                        android:paddingRight="@dimen/spacing_large"
+                        android:drawSelectorOnTop="true" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/grey_5" />
 
-                    <androidx.appcompat.widget.AppCompatSpinner
-                        android:id="@+id/facility_spinner"
+                    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                        android:id="@+id/facility_Spinner"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/spacing_xxlarge"
-                        android:entries="@array/facility"
                         android:minHeight="@dimen/spacing_xmlarge"
                         android:paddingLeft="@dimen/spacing_large"
-                        android:paddingRight="@dimen/spacing_large" />
+                        android:paddingRight="@dimen/spacing_large"
+                        android:drawSelectorOnTop="true" />
 
                     <View
                         android:layout_width="match_parent"

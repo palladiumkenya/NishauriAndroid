@@ -11,9 +11,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.fxn.stash.Stash;
+import com.google.android.material.snackbar.Snackbar;
 import com.mhealthkenya.psurvey.R;
+import com.mhealthkenya.psurvey.depedancies.Constants;
+import com.mhealthkenya.psurvey.models.auth;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,6 +38,14 @@ public class HomeFragment extends Fragment {
     private Unbinder unbinder;
     private View root;
     private Context context;
+
+    private auth loggedInUser;
+
+    @BindView(R.id.tv_name)
+    TextView txt_name;
+
+    @BindView(R.id.tv_email)
+    TextView txt_email;
 
     @BindView(R.id.shimmer_my_container)
     ShimmerFrameLayout shimmer_my_container;
@@ -55,6 +76,10 @@ public class HomeFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, root);
 
+        loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN, auth.class);
+
+        loadCurrentUser();
+
         btn_questionnaire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,6 +90,56 @@ public class HomeFragment extends Fragment {
         });
 
         return root;
+    }
+
+    private void loadCurrentUser(){
+
+        String auth_token = loggedInUser.getAuth_token();
+
+
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_USER)
+                .addHeaders("Authorization","Token "+ auth_token)
+                .addHeaders("Content-Type", "application.json")
+                .addHeaders("Accept", "*/*")
+                .addHeaders("Accept", "gzip, deflate, br")
+                .addHeaders("Connection","keep-alive")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+//                        Log.e(TAG, response.toString());
+
+                        try {
+
+                            String first_name = response.has("f_name") ? response.getString("f_name") : "";
+                            String last_name = response.has("l_name") ? response.getString("l_name") : "";
+                            String email = response.has("email") ? response.getString("email") : "";
+
+                            txt_name.setText(first_name + " " + last_name);
+                            txt_email.setText(email);
+
+
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+//                        Log.e(TAG, error.getErrorBody());
+
+                        Snackbar.make(root.findViewById(R.id.frag_home), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+
+                    }
+                });
+
     }
 
     @Override

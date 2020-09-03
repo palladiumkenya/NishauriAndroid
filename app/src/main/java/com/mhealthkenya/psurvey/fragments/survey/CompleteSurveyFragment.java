@@ -63,7 +63,7 @@ public class CompleteSurveyFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                NavHostFragment.findNavController(CompleteSurveyFragment.this).navigate(R.id.nav_select_survey);
+                NavHostFragment.findNavController(CompleteSurveyFragment.this).navigate(R.id.nav_start_survey);
 
             }
         });

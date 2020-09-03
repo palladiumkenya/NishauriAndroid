@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/login_lyt"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
@@ -80,6 +81,7 @@
                             android:textColor="@color/grey_40" />
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_phone_no"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:startIconDrawable="@drawable/ic_telephone"
@@ -87,6 +89,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                             <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edtxt_phone_no"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="4dp"
@@ -113,6 +116,7 @@
                             android:textColor="@color/grey_40" />
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_pass"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:passwordToggleEnabled="true"
@@ -120,6 +124,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                             <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edtxt_pass"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="4dp"

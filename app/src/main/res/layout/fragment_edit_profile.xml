@@ -141,7 +141,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/spacing_medium"
                                 android:gravity="center"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:visibility="gone">
 
                                 <androidx.appcompat.widget.AppCompatImageView
                                     android:layout_width="@dimen/spacing_large"
@@ -202,6 +203,8 @@
                             android:id="@+id/til_first_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_medium"
+                            android:layout_marginBottom="@dimen/spacing_small"
                             app:endIconMode="clear_text"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                             <com.google.android.material.textfield.TextInputEditText
@@ -214,25 +217,27 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/til_surname"
+                            android:id="@+id/til_lastname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/spacing_medium"
                             app:endIconMode="clear_text"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                             <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/etxt_surname"
+                                android:id="@+id/etxt_lastname"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 style="@style/EditText.Flat.Grey"
                                 android:inputType="text"
-                                android:hint="Surname"/>
+                                android:hint="Last Name"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/til_phone_number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/spacing_medium"
                             app:endIconMode="clear_text"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -249,6 +254,7 @@
                             android:id="@+id/til_email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/spacing_medium"
                             app:endIconMode="clear_text"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -260,6 +266,16 @@
                                 android:inputType="textEmailAddress"
                                 android:hint="Email address"/>
                         </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/facility_Spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/spacing_xxlarge"
+                            android:layout_marginBottom="@dimen/spacing_medium"
+                            android:minHeight="@dimen/spacing_xmlarge"
+                            android:paddingLeft="@dimen/spacing_large"
+                            android:paddingRight="@dimen/spacing_large"
+                            android:drawSelectorOnTop="true" />
 
 
                     </LinearLayout>

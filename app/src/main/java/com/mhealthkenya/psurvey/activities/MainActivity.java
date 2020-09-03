@@ -3,26 +3,28 @@ package com.mhealthkenya.psurvey.activities;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.fxn.stash.Stash;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.mhealthkenya.psurvey.BuildConfig;
 import com.mhealthkenya.psurvey.R;
 import com.mhealthkenya.psurvey.activities.auth.LoginActivity;
-import com.mhealthkenya.psurvey.depedancies.Tools;
+import com.mhealthkenya.psurvey.depedancies.Constants;
+import com.mhealthkenya.psurvey.models.auth;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -32,9 +34,16 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import static com.mhealthkenya.psurvey.depedancies.AppController.TAG;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+
+    private auth loggedInUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +54,11 @@ public class MainActivity extends AppCompatActivity {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        View headerLayout = navigationView.getHeaderView(0);
+        TextView drawer_phone = (TextView) headerLayout.findViewById(R.id.drawer_phone);
+        TextView drawer_name = (TextView) headerLayout.findViewById(R.id.drawer_name);
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -57,6 +71,52 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
+
+        loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN, auth.class);
+
+        String auth_token = loggedInUser.getAuth_token();
+
+
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_USER)
+                .addHeaders("Authorization","Token "+ auth_token)
+                .addHeaders("Content-Type", "application.json")
+                .addHeaders("Accept", "*/*")
+                .addHeaders("Accept", "gzip, deflate, br")
+                .addHeaders("Connection","keep-alive")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+//                        Log.e(TAG, response.toString());
+
+                        try {
+
+                            String first_name = response.has("f_name") ? response.getString("f_name") : "";
+                            String last_name = response.has("l_name") ? response.getString("l_name") : "";
+                            String phoneNumber = response.has("msisdn") ? response.getString("msisdn") : "";
+
+                            drawer_phone.setText(phoneNumber);
+                            drawer_name.setText(first_name + " " + last_name);
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+//                        Log.e(TAG, error.getErrorBody());
+
+
+                    }
+                });
+
+
     }
 
     @Override
@@ -92,10 +152,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void logout(){
 
+        String endPoint = Stash.getString(Constants.AUTH_TOKEN);
+        Stash.put(Constants.AUTH_TOKEN, endPoint);
+        Stash.clearAll();
+
+
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
+
     }
 
     public void aboutAppDialog(){

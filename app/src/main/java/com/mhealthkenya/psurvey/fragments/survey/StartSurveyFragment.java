@@ -51,7 +51,7 @@ public class StartSurveyFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                NavHostFragment.findNavController(StartSurveyFragment.this).navigate(R.id.nav_patient_consent);
+                NavHostFragment.findNavController(StartSurveyFragment.this).navigate(R.id.nav_select_survey);
 
             }
         });

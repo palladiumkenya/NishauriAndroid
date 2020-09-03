@@ -60,7 +60,7 @@ public class SelectSurveyFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                NavHostFragment.findNavController(SelectSurveyFragment.this).navigate(R.id.nav_questions);
+                NavHostFragment.findNavController(SelectSurveyFragment.this).navigate(R.id.nav_patient_consent);
 
             }
         });
