@@ -95,7 +95,7 @@ public class DCMActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("DCM Clients");
+        getSupportActionBar().setTitle("DSD Clients");
 
         List<Activelogin> myl=Activelogin.findWithQuery(Activelogin.class,"select * from Activelogin");
 
@@ -144,9 +144,18 @@ public class DCMActivity extends AppCompatActivity {
                     STABILITY_LEVEL = stability[position];
                     normal_tca_layout.setVisibility(View.VISIBLE);
                     on_dcm_layout.setVisibility(View.GONE);
+                    dcm_submit_layout.setVisibility(View.GONE);
+                    facility_community_layout.setVisibility(View.GONE);
+                    facility_based_model_layout.setVisibility(View.GONE);
+                    community_based_model_layout.setVisibility(View.GONE);
                 }else {
                     normal_tca_layout.setVisibility(View.GONE);
                     on_dcm_layout.setVisibility(View.GONE);
+                    dcm_submit_layout.setVisibility(View.GONE);
+                    facility_community_layout.setVisibility(View.GONE);
+                    facility_based_model_layout.setVisibility(View.GONE);
+                    community_based_model_layout.setVisibility(View.GONE);
+
                 }
 
             }
@@ -161,12 +170,14 @@ public class DCMActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 1){ //on DCM
-                    ON_DCM_STATUS = stability[position];
+                    ON_DCM_STATUS = on_dcm[position];
                     facility_community_layout.setVisibility(View.VISIBLE);
                     normal_tca_layout.setVisibility(View.GONE);
                 }else if (position == 2){ //not on DCM
-                    ON_DCM_STATUS = stability[position];
+                    ON_DCM_STATUS = on_dcm[position];
                     facility_community_layout.setVisibility(View.GONE);
+                    facility_based_model_layout.setVisibility(View.GONE);
+                    dcm_submit_layout.setVisibility(View.GONE);
                     normal_tca_layout.setVisibility(View.VISIBLE);
                 }else {
                     facility_community_layout.setVisibility(View.GONE);
@@ -291,11 +302,62 @@ public class DCMActivity extends AppCompatActivity {
             }
         });
 
+        btn_dcm_submit_apt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("months:", String.valueOf(months));
+                if (months >= 12) {
+                    Log.e("Stability level: ", STABILITY_LEVEL);
+                    if(STABILITY_LEVEL.equals("Stable")){
+                        //continue with stable logic
+                        Log.e("On DCM status: ", ON_DCM_STATUS);
+                        if (ON_DCM_STATUS.equals("On DCM")){
+                            //validate and post on DCM
+                            if (validateOnDcm())
+                                bookOnDcm();
+
+                        }else if (ON_DCM_STATUS.equals("NOT on DCM")){
+
+                        }else {
+                            //invalid
+                        }
+                    }else if (STABILITY_LEVEL.equals("Unstable")){
+                        //continue with unstable logic
+                    }else {
+                        //invalid
+                    }
+                }else {
+                    if (validateWellAdvanced())
+                        bookWellAdvanced();
+                }
+            }
+        });
+
+
         btn_submit_apt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("months:", String.valueOf(months));
                 if (months >= 12) {
+                    Log.e("Stability level: ", STABILITY_LEVEL);
+                    if(STABILITY_LEVEL.equals("Stable")){
+                        //continue with stable logic
+                        Log.e("On DCM status: ", ON_DCM_STATUS);
+                        if (ON_DCM_STATUS.equals("On DCM")){
+                            //validate and post on DCM
+                            if (validateOnDcm())
+                                bookOnDcm();
 
+                        }else if (ON_DCM_STATUS.equals("NOT on DCM")){
+
+                        }else {
+                            //invalid
+                        }
+                    }else if (STABILITY_LEVEL.equals("Unstable")){
+                        //continue with unstable logic
+                    }else {
+                        //invalid
+                    }
                 }else {
                     if (validateWellAdvanced())
                         bookWellAdvanced();
@@ -353,6 +415,56 @@ public class DCMActivity extends AppCompatActivity {
         return valid;
     }
 
+    private boolean validateOnDcm() {
+        boolean valid = true;
+
+        if (TextUtils.isEmpty(mfl_code.getText().toString())) {
+            mfl_code.setError(getString(R.string.mfl_code_required));
+            valid = false;
+            return valid;
+        }
+
+        if (TextUtils.isEmpty(ccc_no.getText().toString())) {
+            ccc_no.setError(getString(R.string.ccc_required));
+            valid = false;
+            return valid;
+        }
+
+
+
+        if (STABILITY_LEVEL.equals("") || STABILITY_LEVEL.equals("Please select stability level")) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select stability level",DCMActivity.this);
+            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
+
+        if (ON_DCM_STATUS.equals("") || ON_DCM_STATUS.equals("Please select if on DCM")) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select if on DCM",DCMActivity.this);
+            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
+
+
+        if (TextUtils.isEmpty(stable_appointment_date.getText().toString())) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select appointment date",DCMActivity.this);
+            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
+
+        if (TextUtils.isEmpty(clinical_review_date.getText().toString())) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select clinical review date",DCMActivity.this);
+            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
+
+
+
+        return valid;
+    }
 
     private void bookWellAdvanced() {
         JSONObject payload = new JSONObject();
@@ -372,6 +484,128 @@ public class DCMActivity extends AppCompatActivity {
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                 Config.WELL_ADVANCED_BOOKING, payload, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.e("Response: ", response.toString());
+                try {
+                    boolean success = response.has("success") && response.getBoolean("success");
+                    String message = response.has("message") ? response.getString("message") : "";
+
+                    if (success) {
+                        ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Success",message,DCMActivity.this);
+                        bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+
+                        //reset views
+                        wellness_level_layout.setVisibility(View.GONE);
+                        stability_layout.setVisibility(View.GONE);
+                        on_dcm_layout.setVisibility(View.GONE);
+                        facility_community_layout.setVisibility(View.GONE);
+                        facility_based_model_layout.setVisibility(View.GONE);
+                        community_based_model_layout.setVisibility(View.GONE);
+                        dcm_submit_layout.setVisibility(View.GONE);
+                        normal_tca_layout.setVisibility(View.GONE);
+
+                        wellness_level_spinner.setSelection(0);
+                        stability_level_spinner.setSelection(0);
+                        on_dcm_spinner.setSelection(0);
+                        facility_community_spinner.setSelection(0);
+                        facility_based_model_spinner.setSelection(0);
+                        community_based_model_spinner.setSelection(0);
+                        appointment_type_spinner.setSelection(0);
+
+                        mfl_code.getText().clear();
+                        ccc_no.getText().clear();
+                        stable_appointment_date.getText().clear();
+                        clinical_review_date.getText().clear();
+                        appointment_date.getText().clear();
+                        other_et.getText().clear();
+
+
+
+                    } else {
+                        ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Failed",message,DCMActivity.this);
+                        bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                NetworkResponse response = error.networkResponse;
+                if(response != null && response.data != null){
+                    String body;
+                    //get status code here
+                    String statusCode = String.valueOf(error.networkResponse.statusCode);
+                    //get response body and parse with appropriate encoding
+                    if(error.networkResponse.data!=null) {
+                        try {
+                            body = new String(error.networkResponse.data,"UTF-8");
+
+                            JSONObject json = new JSONObject(body);
+                            //                            Log.e("error response : ", json.toString());
+
+
+                            String message = json.has("message") ? json.getString("message") : "";
+                            String reason = json.has("reason") ? json.getString("reason") : "";
+
+                            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance(message,reason,DCMActivity.this);
+                            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+
+                        } catch (UnsupportedEncodingException | JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }else {
+
+                    Log.e("VOlley error :", error.getLocalizedMessage()+" message:"+error.getMessage());
+                    Toast.makeText(DCMActivity.this, VolleyErrors.getVolleyErrorMessages(error, DCMActivity.this),Toast.LENGTH_LONG).show();
+                }
+
+//             Log.e(TAG, "Error: " + error.getMessage());
+            }
+        }){
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+        };
+
+        queue.add(jsonObjReq);
+    }
+
+    private void bookOnDcm() {
+
+        JSONObject payload = new JSONObject();
+        try {
+            payload.put("clinic_number", mfl_code.getText().toString()+ccc_no.getText().toString());
+            payload.put("phone_no", phone_no);
+            payload.put("refill_date", STABLE_REFILL_DATE);
+            payload.put("review_date", CLINICAL_REVIEW_DATE);
+            payload.put("facility", FACILITY_BASED_MODEL.equals("") ? -1 :  java.util.Arrays.asList(facility_based_model).indexOf(FACILITY_BASED_MODEL));
+            payload.put("community", COMMUNITY_BASED_MODEL.equals("") ? -1 :  java.util.Arrays.asList(community_based_model).indexOf(COMMUNITY_BASED_MODEL));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("payload: ", payload.toString());
+
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                Config.ON_DCM_BOOKING, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
