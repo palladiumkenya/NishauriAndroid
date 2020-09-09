@@ -317,18 +317,16 @@ public class DCMActivity extends AppCompatActivity {
                                 bookOnDcm();
 
                         }else if (ON_DCM_STATUS.equals("NOT on DCM")){
-
-                        }else {
-                            //invalid
+                            if (validateNotOnDcm())
+                                bookNormalTca(Config.NOT_ON_DCM_BOOKING);
                         }
                     }else if (STABILITY_LEVEL.equals("Unstable")){
-                        //continue with unstable logic
-                    }else {
-                        //invalid
+                        if (validateUnstable())
+                            bookNormalTca(Config.UNSTABLE_BOOKING);
                     }
                 }else {
                     if (validateWellAdvanced())
-                        bookWellAdvanced();
+                        bookNormalTca(Config.WELL_ADVANCED_BOOKING);
                 }
             }
         });
@@ -349,18 +347,17 @@ public class DCMActivity extends AppCompatActivity {
                                 bookOnDcm();
 
                         }else if (ON_DCM_STATUS.equals("NOT on DCM")){
+                            if (validateNotOnDcm())
+                                bookNormalTca(Config.NOT_ON_DCM_BOOKING);
 
-                        }else {
-                            //invalid
                         }
                     }else if (STABILITY_LEVEL.equals("Unstable")){
-                        //continue with unstable logic
-                    }else {
-                        //invalid
+                        if (validateUnstable())
+                            bookNormalTca(Config.UNSTABLE_BOOKING);
                     }
                 }else {
                     if (validateWellAdvanced())
-                        bookWellAdvanced();
+                        bookNormalTca(Config.NOT_ON_DCM_BOOKING);
                 }
             }
         });
@@ -466,7 +463,117 @@ public class DCMActivity extends AppCompatActivity {
         return valid;
     }
 
-    private void bookWellAdvanced() {
+    private boolean validateNotOnDcm() {
+        boolean valid = true;
+
+        if (TextUtils.isEmpty(mfl_code.getText().toString())) {
+            mfl_code.setError(getString(R.string.mfl_code_required));
+            valid = false;
+            return valid;
+        }
+
+        if (TextUtils.isEmpty(ccc_no.getText().toString())) {
+            ccc_no.setError(getString(R.string.ccc_required));
+            valid = false;
+            return valid;
+        }
+
+
+
+        if (STABILITY_LEVEL.equals("") || STABILITY_LEVEL.equals("Please select stability level")) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select stability level",DCMActivity.this);
+            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
+
+        if (ON_DCM_STATUS.equals("") || ON_DCM_STATUS.equals("Please select if on DCM")) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select if on DCM",DCMActivity.this);
+            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
+
+
+        if (TextUtils.isEmpty(appointment_date.getText().toString())) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select appointment date",DCMActivity.this);
+            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
+
+        if (APT_TYPE.equals("") || APT_TYPE.equals("Please select appointment type")) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select appointment type",DCMActivity.this);
+            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
+
+        if (APT_TYPE.equals("Other") && TextUtils.isEmpty(other_et.getText().toString())) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please specify other",DCMActivity.this);
+            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
+
+
+
+        return valid;
+    }
+
+    private boolean validateUnstable() {
+        boolean valid = true;
+
+        if (TextUtils.isEmpty(mfl_code.getText().toString())) {
+            mfl_code.setError(getString(R.string.mfl_code_required));
+            valid = false;
+            return valid;
+        }
+
+        if (TextUtils.isEmpty(ccc_no.getText().toString())) {
+            ccc_no.setError(getString(R.string.ccc_required));
+            valid = false;
+            return valid;
+        }
+
+
+
+        if (STABILITY_LEVEL.equals("") || STABILITY_LEVEL.equals("Please select stability level")) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select stability level",DCMActivity.this);
+            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
+
+
+        if (TextUtils.isEmpty(appointment_date.getText().toString())) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select appointment date",DCMActivity.this);
+            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
+
+        if (APT_TYPE.equals("") || APT_TYPE.equals("Please select appointment type")) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select appointment type",DCMActivity.this);
+            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
+
+        if (APT_TYPE.equals("Other") && TextUtils.isEmpty(other_et.getText().toString())) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please specify other",DCMActivity.this);
+            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
+
+
+
+        return valid;
+    }
+
+
+    private void bookNormalTca(String endpoint) {
         JSONObject payload = new JSONObject();
         try {
             payload.put("clinic_number", mfl_code.getText().toString()+ccc_no.getText().toString());
@@ -483,7 +590,7 @@ public class DCMActivity extends AppCompatActivity {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.WELL_ADVANCED_BOOKING, payload, new Response.Listener<JSONObject>() {
+                endpoint, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

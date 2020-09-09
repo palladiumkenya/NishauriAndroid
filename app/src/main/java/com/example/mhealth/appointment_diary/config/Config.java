@@ -55,6 +55,8 @@ public class Config {
     public static final String GET_ENROLLMENT_DURATION = "http://ushaurinode.mhealthkenya.org/api/process_dfc/check/enrollment/duration";
     public static final String WELL_ADVANCED_BOOKING = "http://ushaurinode.mhealthkenya.org/api/process_dfc/well/advanced/booking";
     public static final String ON_DCM_BOOKING = "http://ushaurinode.mhealthkenya.org/api/process_dfc/client/dcm/create";
+    public static final String NOT_ON_DCM_BOOKING = "http://ushaurinode.mhealthkenya.org/api/process_dfc/client/not/dcm";
+    public static final String UNSTABLE_BOOKING = "http://ushaurinode.mhealthkenya.org/api/process_dfc/unstable/client/booking";
 
 
 
