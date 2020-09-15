@@ -5,12 +5,14 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.androidnetworking.AndroidNetworking;
@@ -21,12 +23,18 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
 import com.mhealthkenya.psurvey.R;
+import com.mhealthkenya.psurvey.adapters.activeSurveyAdapter;
+import com.mhealthkenya.psurvey.adapters.questionnairesAdapter;
 import com.mhealthkenya.psurvey.depedancies.Constants;
+import com.mhealthkenya.psurvey.models.ActiveSurveys;
+import com.mhealthkenya.psurvey.models.Questionnaires;
 import com.mhealthkenya.psurvey.models.auth;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,6 +48,8 @@ public class HomeFragment extends Fragment {
     private Context context;
 
     private auth loggedInUser;
+    private activeSurveyAdapter mAdapter;
+    private ArrayList<ActiveSurveys> activeSurveysArrayList;
 
     @BindView(R.id.tv_name)
     TextView txt_name;
@@ -52,6 +62,12 @@ public class HomeFragment extends Fragment {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+
+    @BindView(R.id.no_active_survey_lyt)
+    LinearLayout no_active_survey_lyt;
+
+    @BindView(R.id.error_lyt)
+    LinearLayout error_lyt;
 
     @BindView(R.id.btn_questionnaires)
     Button btn_questionnaire;
@@ -78,7 +94,18 @@ public class HomeFragment extends Fragment {
 
         loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN, auth.class);
 
+        activeSurveysArrayList = new ArrayList<>();
+        mAdapter = new activeSurveyAdapter(context, activeSurveysArrayList);
+
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false));
+        recyclerView.setHasFixedSize(true);
+
+        //set data and list adapter
+        recyclerView.setAdapter(mAdapter);
+
         loadCurrentUser();
+        loadActiveSurveys();
 
         btn_questionnaire.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,5 +185,92 @@ public class HomeFragment extends Fragment {
     public void onPause() {
         shimmer_my_container.stopShimmerAnimation();
         super.onPause();
+    }
+
+    private void loadActiveSurveys() {
+
+        String auth_token = loggedInUser.getAuth_token();
+
+
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.ACTIVE_SURVEYS)
+                .addHeaders("Authorization","Token "+ auth_token)
+                .addHeaders("Content-Type", "application.json")
+                .addHeaders("Accept", "*/*")
+                .addHeaders("Accept", "gzip, deflate, br")
+                .addHeaders("Connection","keep-alive")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+//                        Log.e(TAG, response.toString());
+
+                        activeSurveysArrayList.clear();
+
+                        if (recyclerView!=null)
+                            recyclerView.setVisibility(View.VISIBLE);
+
+                        if (shimmer_my_container!=null){
+                            shimmer_my_container.stopShimmerAnimation();
+                            shimmer_my_container.setVisibility(View.GONE);
+                        }
+
+                        try {
+
+                            JSONArray myArray = response.getJSONArray("data");
+
+                            if (myArray.length() > 0){
+
+
+                                for (int i = 0; i < myArray.length(); i++) {
+
+                                    JSONObject item = (JSONObject) myArray.get(i);
+
+
+                                    int  id = item.has("id") ? item.getInt("id") : 0;
+                                    String survey_title = item.has("first_name") ? item.getString("first_name") : "";
+                                    String survey_description = item.has("surname") ? item.getString("surname") : "";
+
+
+
+                                    ActiveSurveys newActiveSurvey = new ActiveSurveys(id,survey_title,survey_description);
+
+                                    activeSurveysArrayList.add(newActiveSurvey);
+                                    mAdapter.notifyDataSetChanged();
+
+                                }
+
+                            }else {
+                                //not data found
+                                no_active_survey_lyt.setVisibility(View.VISIBLE);
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                        if (recyclerView!=null)
+                            recyclerView.setVisibility(View.VISIBLE);
+
+                        if (shimmer_my_container!=null){
+                            shimmer_my_container.stopShimmerAnimation();
+                            shimmer_my_container.setVisibility(View.GONE);
+                        }
+
+                        error_lyt.setVisibility(View.VISIBLE);
+
+//                        Log.e(TAG, error.getErrorBody());
+
+                        Snackbar.make(root.findViewById(R.id.frag_home), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+
+                    }
+                });
     }
 }

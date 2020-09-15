@@ -23,6 +23,12 @@ public class Constants {
     public static String DESIGNATION = "api/designation";
 
 
+    //QUESTIONNAIRES
+    public static String ACTIVE_SURVEYS = "api/questionnaire/active";
+    public static String ALL_QUESTIONNAIRES = "api/questionnaire/all";
+
+
+
 
     /*MODELS*/
     public static String AUTH_TOKEN = "";

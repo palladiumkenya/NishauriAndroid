@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frag_questionnaires"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -30,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_medium"
                 android:text="All questionnaires"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@color/grey_90" />
 
             <androidx.core.widget.NestedScrollView
@@ -78,7 +79,7 @@
                     </FrameLayout>
 
                     <LinearLayout
-                        android:id="@+id/no_active_survey_lyt"
+                        android:id="@+id/no_questionnaires_lyt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -92,14 +93,15 @@
                             android:id="@+id/lab_image"
                             android:layout_width="170dp"
                             android:layout_height="170dp"
-                            android:src="@drawable/ic_completed_surveys" />
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:src="@drawable/ic_no_survey" />
 
                         <TextView
                             android:id="@+id/no_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/spacing_large"
-                            android:text="No dependants found."
+                            android:text="No questionnaires found."
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
                             android:textColor="@color/grey_60" />
 
@@ -108,11 +110,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/spacing_medium"
-                            android:text="Please schedule one with your HCW."
-                            android:textAlignment="center"
+                            android:text="Please consult your facility admin."
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                             android:textColor="@color/grey_40"
-                            android:visibility="gone"/>
+                            />
 
                     </LinearLayout>
 

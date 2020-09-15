@@ -301,6 +301,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_middle"
+                android:layout_marginBottom="@dimen/actionBarSize"
                 android:background="@android:color/white"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp"
@@ -317,7 +318,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_medium"
                         android:text="Active Surveys"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
                         android:textColor="@color/grey_90" />
 
                     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -357,6 +358,83 @@
                                 android:scrollingCache="true" />
 
                         </FrameLayout>
+
+                        <LinearLayout
+                            android:id="@+id/no_active_survey_lyt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:visibility="gone"
+                            android:paddingBottom="80dp"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/lab_image"
+                                android:layout_width="170dp"
+                                android:layout_height="170dp"
+                                android:layout_marginTop="@dimen/spacing_large"
+                                android:src="@drawable/ic_no_survey" />
+
+                            <TextView
+                                android:id="@+id/no_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_large"
+                                android:text="No active surveys found."
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                                android:textColor="@color/grey_60" />
+
+                            <TextView
+                                android:id="@+id/no_brief"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_medium"
+                                android:text="Please consult your facility admin."
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                android:textColor="@color/grey_40"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/error_lyt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:visibility="gone"
+                            android:paddingBottom="80dp"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/lab_img"
+                                android:layout_width="170dp"
+                                android:layout_height="170dp"
+                                android:src="@drawable/ic_error_message" />
+
+                            <TextView
+                                android:id="@+id/error_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_large"
+                                android:text="An error occurred. "
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                                android:textColor="@color/grey_60" />
+
+                            <TextView
+                                android:id="@+id/error_brief"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_medium"
+                                android:text="Please try again later."
+                                android:textAlignment="center"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                android:textColor="@color/grey_40" />
+
+                        </LinearLayout>
 
 
                     </androidx.coordinatorlayout.widget.CoordinatorLayout>

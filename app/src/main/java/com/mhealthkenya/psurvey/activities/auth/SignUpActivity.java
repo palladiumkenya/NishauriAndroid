@@ -1,7 +1,6 @@
 package com.mhealthkenya.psurvey.activities.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
