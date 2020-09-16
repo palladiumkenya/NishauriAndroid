@@ -59,11 +59,11 @@ public class activeSurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         ActiveSurveys obj = items.get(position);
-        if (holder instanceof questionnairesAdapter.OriginalViewHolder) {
+        if (holder instanceof activeSurveyAdapter.OriginalViewHolder) {
             activeSurveyAdapter.OriginalViewHolder view = (activeSurveyAdapter.OriginalViewHolder) holder;
 
-            view.surveyTitle.setText(obj.getSurveyTitle());
-            view.surveyDescription.setText(obj.getSurveyDescription());
+            view.surveyTitle.setText(obj.getName());
+            view.surveyDescription.setText(obj.getDescription());
 
 
         }

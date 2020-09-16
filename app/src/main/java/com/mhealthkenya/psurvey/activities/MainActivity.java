@@ -177,7 +177,9 @@ public class MainActivity extends AppCompatActivity {
         lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-        ((TextView) dialog.findViewById(R.id.tv_version)).setText("Version " + BuildConfig.VERSION_NAME);
+        ((TextView) dialog.findViewById(R.id.tv_version)).setText("Version: " + BuildConfig.VERSION_NAME);
+
+        ((TextView) dialog.findViewById(R.id.tv_build)).setText("Build: " + String.valueOf(BuildConfig.VERSION_CODE));
 
         ((ImageButton) dialog.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -36,12 +36,14 @@ public class questionnairesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
         public TextView questionnaireTitle;
         public TextView questionnaireDescription;
+        public TextView questionnaireStatus;
 
 
 
         public OriginalViewHolder(View v) {
             super(v);
             questionnaireTitle = (TextView) v.findViewById(R.id.tv_questionnaire_title);
+            questionnaireStatus = (TextView) v.findViewById(R.id.tv_questionnaire_status);
             questionnaireDescription = (TextView) v.findViewById(R.id.tv_questionnaire_description);
 
         }
@@ -62,8 +64,15 @@ public class questionnairesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         if (holder instanceof OriginalViewHolder) {
             OriginalViewHolder view = (OriginalViewHolder) holder;
 
-            view.questionnaireTitle.setText(obj.getQuestionnaireTitle());
-            view.questionnaireDescription.setText(obj.getQuestionnaireDescription());
+            view.questionnaireTitle.setText(obj.getName());
+            view.questionnaireDescription.setText(obj.getDescription());
+
+            if (obj.getIs_active().equals("true")){
+                view.questionnaireStatus.setText("Status: Active");
+            }
+            else {
+                view.questionnaireStatus.setText("Status: Inactive");
+            }
 
 
         }

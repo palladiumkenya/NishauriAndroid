@@ -8,6 +8,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+import static com.mhealthkenya.psurvey.depedancies.AppController.TAG;
 
 public class HomeFragment extends Fragment {
 
@@ -204,7 +206,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-//                        Log.e(TAG, response.toString());
+                        Log.e(TAG, response.toString());
 
                         activeSurveysArrayList.clear();
 
@@ -229,12 +231,15 @@ public class HomeFragment extends Fragment {
 
 
                                     int  id = item.has("id") ? item.getInt("id") : 0;
-                                    String survey_title = item.has("first_name") ? item.getString("first_name") : "";
-                                    String survey_description = item.has("surname") ? item.getString("surname") : "";
+                                    String survey_title = item.has("name") ? item.getString("name") : "";
+                                    String survey_description = item.has("description") ? item.getString("description") : "";
+                                    String status = item.has("is_active") ? item.getString("is_active") : "";
+                                    String created_at = item.has("created_at") ? item.getString("created_at") : "";
+                                    String active_till = item.has("active_till") ? item.getString("active_till") : "";
+                                    int  created_by = item.has("created_by") ? item.getInt("created_by") : 0;
 
 
-
-                                    ActiveSurveys newActiveSurvey = new ActiveSurveys(id,survey_title,survey_description);
+                                    ActiveSurveys newActiveSurvey = new ActiveSurveys(id,survey_title,survey_description,status,created_at,active_till,created_by);
 
                                     activeSurveysArrayList.add(newActiveSurvey);
                                     mAdapter.notifyDataSetChanged();

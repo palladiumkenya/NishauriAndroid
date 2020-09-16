@@ -319,7 +319,7 @@
                         android:layout_marginBottom="@dimen/spacing_medium"
                         android:text="Active Surveys"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        android:textColor="@color/grey_90" />
+                        android:textColor="@color/colorPrimary" />
 
                     <androidx.coordinatorlayout.widget.CoordinatorLayout
                         android:id="@+id/coordinator_lyt"
@@ -353,7 +353,6 @@
                                 android:layout_height="match_parent"
                                 android:scrollbars="vertical"
                                 android:layout_marginTop="@dimen/spacing_large"
-                                android:layout_marginBottom="@dimen/actionBarSize"
                                 android:visibility="gone"
                                 android:scrollingCache="true" />
 

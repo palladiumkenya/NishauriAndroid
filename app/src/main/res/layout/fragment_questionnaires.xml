@@ -9,159 +9,196 @@
     android:background="@color/grey_5"
     tools:context=".fragments.QuestionnairesFragment">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_appointments"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/spacing_medium"
-        android:layout_marginTop="@dimen/spacing_middle"
-        android:background="@android:color/white"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="5dp"
-        app:cardUseCompatPadding="true">
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:scrollingCache="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/spacing_large">
+            android:orientation="vertical">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium"
-                android:text="All questionnaires"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textColor="@color/grey_90" />
-
-            <androidx.core.widget.NestedScrollView
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_description"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical"
-                android:scrollingCache="true">
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:background="@android:color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
 
-                <androidx.coordinatorlayout.widget.CoordinatorLayout
-                    android:id="@+id/coordinator_lyt"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_large">
 
-                    <FrameLayout
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:srcCompat="@drawable/logo" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_medium"
+                        android:text="All questionnaires"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/colorPrimary" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_medium"
+                        android:text="The questionnaires listed below are from your facility. "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_large">
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+                    android:scrollingCache="true">
+
+                    <androidx.coordinatorlayout.widget.CoordinatorLayout
+                        android:id="@+id/coordinator_lyt"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <com.facebook.shimmer.ShimmerFrameLayout
-                            android:id="@+id/shimmer_my_container"
+                        <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            shimmer:duration="800">
+                            android:layout_height="match_parent">
 
-                            <LinearLayout
-                                android:id="@+id/shimmerInnerLayout"
+                            <com.facebook.shimmer.ShimmerFrameLayout
+                                android:id="@+id/shimmer_my_container"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
-                                <include layout="@layout/placeholder_item" />
-                            </LinearLayout>
+                                android:orientation="vertical"
+                                shimmer:duration="800">
 
-                        </com.facebook.shimmer.ShimmerFrameLayout>
+                                <LinearLayout
+                                    android:id="@+id/shimmerInnerLayout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+                                    <include layout="@layout/placeholder_item" />
+                                </LinearLayout>
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recyclerView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scrollbars="vertical"
-                            android:layout_marginTop="@dimen/spacing_large"
-                            android:layout_marginBottom="@dimen/actionBarSize"
+                            </com.facebook.shimmer.ShimmerFrameLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scrollbars="vertical"
+                                android:layout_marginTop="@dimen/spacing_large"
+                                android:layout_marginBottom="@dimen/actionBarSize"
+                                android:visibility="gone"
+                                android:scrollingCache="true" />
+
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:id="@+id/no_questionnaires_lyt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:visibility="gone"
-                            android:scrollingCache="true" />
+                            android:paddingBottom="80dp"
+                            android:orientation="vertical">
 
-                    </FrameLayout>
+                            <ImageView
+                                android:id="@+id/lab_image"
+                                android:layout_width="170dp"
+                                android:layout_height="170dp"
+                                android:layout_marginTop="@dimen/spacing_large"
+                                android:src="@drawable/ic_no_survey" />
 
-                    <LinearLayout
-                        android:id="@+id/no_questionnaires_lyt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:visibility="gone"
-                        android:paddingBottom="80dp"
-                        android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/no_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_large"
+                                android:text="No questionnaires found."
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                                android:textColor="@color/grey_60" />
 
-                        <ImageView
-                            android:id="@+id/lab_image"
-                            android:layout_width="170dp"
-                            android:layout_height="170dp"
-                            android:layout_marginTop="@dimen/spacing_large"
-                            android:src="@drawable/ic_no_survey" />
+                            <TextView
+                                android:id="@+id/no_brief"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_medium"
+                                android:text="Please consult your facility admin."
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                android:textColor="@color/grey_40"
+                                />
 
-                        <TextView
-                            android:id="@+id/no_title"
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/error_lyt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/spacing_large"
-                            android:text="No questionnaires found."
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-                            android:textColor="@color/grey_60" />
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:visibility="gone"
+                            android:paddingBottom="80dp"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/no_brief"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/spacing_medium"
-                            android:text="Please consult your facility admin."
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                            android:textColor="@color/grey_40"
-                            />
+                            <ImageView
+                                android:id="@+id/lab_img"
+                                android:layout_width="170dp"
+                                android:layout_height="170dp"
+                                android:src="@drawable/ic_error_message" />
 
-                    </LinearLayout>
+                            <TextView
+                                android:id="@+id/error_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_large"
+                                android:text="An error occurred. "
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                                android:textColor="@color/grey_60" />
 
-                    <LinearLayout
-                        android:id="@+id/error_lyt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:visibility="gone"
-                        android:paddingBottom="80dp"
-                        android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/error_brief"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_medium"
+                                android:text="Please try again later."
+                                android:textAlignment="center"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                android:textColor="@color/grey_40" />
 
-                        <ImageView
-                            android:id="@+id/lab_img"
-                            android:layout_width="170dp"
-                            android:layout_height="170dp"
-                            android:src="@drawable/ic_error_message" />
-
-                        <TextView
-                            android:id="@+id/error_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/spacing_large"
-                            android:text="An error occurred. "
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-                            android:textColor="@color/grey_60" />
-
-                        <TextView
-                            android:id="@+id/error_brief"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/spacing_medium"
-                            android:text="Please try again later."
-                            android:textAlignment="center"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                            android:textColor="@color/grey_40" />
-
-                    </LinearLayout>
+                        </LinearLayout>
 
 
-                </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-            </androidx.core.widget.NestedScrollView>
+                </androidx.core.widget.NestedScrollView>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </androidx.core.widget.NestedScrollView>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

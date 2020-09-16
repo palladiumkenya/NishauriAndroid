@@ -35,6 +35,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+import static com.mhealthkenya.psurvey.depedancies.AppController.TAG;
+
 
 public class QuestionnairesFragment extends Fragment {
 
@@ -157,12 +159,16 @@ public class QuestionnairesFragment extends Fragment {
 
 
                                     int  id = item.has("id") ? item.getInt("id") : 0;
-                                    String questionnaire_title = item.has("first_name") ? item.getString("first_name") : "";
-                                    String questionnaire_description = item.has("surname") ? item.getString("surname") : "";
+                                    String questionnaire_title = item.has("name") ? item.getString("name") : "";
+                                    String questionnaire_description = item.has("description") ? item.getString("description") : "";
+                                    String status = item.has("is_active") ? item.getString("is_active") : "";
+                                    String created_at = item.has("created_at") ? item.getString("created_at") : "";
+                                    String active_till = item.has("active_till") ? item.getString("active_till") : "";
+                                    int  created_by = item.has("created_by") ? item.getInt("created_by") : 0;
 
 
 
-                                    Questionnaires newQuestionnaires = new Questionnaires(id,questionnaire_title,questionnaire_description);
+                                    Questionnaires newQuestionnaires = new Questionnaires(id,questionnaire_title,questionnaire_description,status,created_at,active_till,created_by);
 
                                     questionnairesArrayList.add(newQuestionnaires);
                                     mAdapter.notifyDataSetChanged();
