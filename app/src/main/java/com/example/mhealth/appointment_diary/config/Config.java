@@ -59,6 +59,10 @@ public class Config {
     public static final String UNSTABLE_BOOKING = "http://ushaurinode.mhealthkenya.org/api/process_dfc/unstable/client/booking";
 
 
+    public static final String CHECK_PMTCT = "http://ushaurinode.mhealthkenya.org/api/process_pmtct/check/pmtct/clinic";
+    public static final String REGISTER_HEI = "http://ushaurinode.mhealthkenya.org/api/process_pmtct/register/hei/client";
+
+
 
 
 }

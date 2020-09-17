@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
 public class MainOptions extends AppCompatActivity {
 
     long  diffdate;
-    Button appointmentbtn, defaultersbtn, mlabbtn, webbtn, reportbtn, welnessbtn;
+    Button appointmentbtn, defaultersbtn, mlabbtn, webbtn, reportbtn, welnessbtn, pmtct;
     LoadMessages lm;
     String passedUname,passedPassword;
 
@@ -55,6 +55,14 @@ public class MainOptions extends AppCompatActivity {
         goToReport();
         goToWeb();
         goToWellness();
+
+        pmtct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainOptions.this, PmtctActivity.class);
+                startActivity(i);
+            }
+        });
 
 
 
@@ -254,6 +262,7 @@ public class MainOptions extends AppCompatActivity {
             passedUname="";
             appointmentbtn = (Button)findViewById(R.id.appointment);
             defaultersbtn = (Button)findViewById(R.id.defaulters);
+            pmtct = (Button)findViewById(R.id.pmtct);
             mlabbtn = (Button)findViewById(R.id.mlab);
             webbtn = (Button)findViewById(R.id.web);
             reportbtn = (Button)findViewById(R.id.report);

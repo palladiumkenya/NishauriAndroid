@@ -33,5 +33,13 @@
     <string name="mfl_code_required">MFL code is required</string>
     <string name="ccc_required">CCC no. is required</string>
     <string name="apt_date_req">Appointment date is required</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="first_name">First Name</string>
+    <string name="middle_name">Middle Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="submit">Submit</string>
+    <string name="select_gender">Select Gender</string>
+    <string name="is_the_appointment_for_mother_or_child">Is the appointment for mother or child?</string>
+    <string name="are_you_breastfeeding">Are you breastfeeding?</string>
 
 </resources>

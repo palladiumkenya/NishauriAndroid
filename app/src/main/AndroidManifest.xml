@@ -16,6 +16,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
+        <activity android:name=".PmtctActivity"
+            android:label="PMTCT"
+            android:parentActivityName=".MainOptions">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainOptions" />
+        </activity>
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -170,18 +177,15 @@
                 android:value=".appointment_diary.TodaysAppointment" />
         </activity>
         <activity android:name=".report.Report" />
-
-
-        <activity android:name=".DCMActivity"
+        <activity
+            android:name=".DCMActivity"
+            android:configChanges="orientation|screenSize"
             android:parentActivityName=".appointment_diary.TodaysAppointment"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation|screenSize">
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".appointment_diary.TodaysAppointment" />
-
         </activity>
-
 
         <receiver
             android:name=".SmsBroadcastReceiver"
