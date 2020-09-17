@@ -405,8 +405,6 @@ public class PmtctRegistrationFragment extends Fragment {
                     if (success) {
 
                         breastfeeding_layout.setVisibility(View.VISIBLE);
-
-                        breastfeeding_layout.setVisibility(View.VISIBLE);
                         btn_submit_no_hei.setVisibility(View.GONE);
                         register_layout.setVisibility(View.GONE);
 

@@ -61,6 +61,8 @@ public class Config {
 
     public static final String CHECK_PMTCT = "http://ushaurinode.mhealthkenya.org/api/process_pmtct/check/pmtct/clinic";
     public static final String REGISTER_HEI = "http://ushaurinode.mhealthkenya.org/api/process_pmtct/register/hei/client";
+    public static final String GET_ATTACHED_HEIS = "http://ushaurinode.mhealthkenya.org/api/process_pmtct/check/attached/heis";
+    public static final String BOOK_HEI_APT = "http://ushaurinode.mhealthkenya.org/api/process_pmtct/book/client/appointment";
 
 
 

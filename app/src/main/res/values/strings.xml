@@ -41,5 +41,6 @@
     <string name="select_gender">Select Gender</string>
     <string name="is_the_appointment_for_mother_or_child">Is the appointment for mother or child?</string>
     <string name="are_you_breastfeeding">Are you breastfeeding?</string>
+    <string name="select_hei_to_schedule_appointment">Select HEI to schedule appointment</string>
 
 </resources>
