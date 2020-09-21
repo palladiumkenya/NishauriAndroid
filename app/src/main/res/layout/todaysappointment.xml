@@ -93,7 +93,7 @@
 
         <ImageButton
             android:id="@+id/broadcast"
-            android:layout_width="0dp"
+            android:layout_width="50dp"
             android:background="@android:color/background_light"
             android:layout_height="30dp"
             android:layout_weight="1"

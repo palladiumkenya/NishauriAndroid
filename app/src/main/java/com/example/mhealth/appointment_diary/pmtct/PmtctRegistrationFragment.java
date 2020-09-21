@@ -271,8 +271,8 @@ public class PmtctRegistrationFragment extends Fragment {
                 }else if (TextUtils.isEmpty(ccc_no.getText().toString())){
                     ccc_no.setError("Please enter CCC Number");
                 }else {
-                    breastfeeding_layout.setVisibility(View.GONE);
-                    btn_submit_no_hei.setVisibility(View.GONE);
+//                    breastfeeding_layout.setVisibility(View.GONE);
+//                    btn_submit_no_hei.setVisibility(View.GONE);
                     register_layout.setVisibility(View.GONE);
 
                     breastfeeding_spinner.setSelection(0);
@@ -502,6 +502,111 @@ public class PmtctRegistrationFragment extends Fragment {
     }
 
     private void submitNoHei(){
+
+        JSONObject payload = new JSONObject();
+        try {
+            payload.put("clinic_number", mfl_code.getText().toString()+ccc_no.getText().toString());
+            payload.put("phone_no", phone_no);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("payload: ", payload.toString());
+
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                Config.REGISTER_NON_BREASTFEEDING, payload, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.e("Response: ", response.toString());
+                try {
+                    boolean success = response.has("success") && response.getBoolean("success");
+                    String message = response.has("message") ? response.getString("message") : "";
+
+
+                    breastfeeding_layout.setVisibility(View.GONE);
+                    btn_submit_no_hei.setVisibility(View.GONE);
+                    register_layout.setVisibility(View.GONE);
+
+                    breastfeeding_spinner.setSelection(0);
+                    gender_spinner.setSelection(0);
+
+                    hei_no.getText().clear();
+                    first_name.getText().clear();
+                    middle_name.getText().clear();
+                    last_name.getText().clear();
+                    dob.getText().clear();
+                    HEI_DOB = "";
+
+
+                    if (success) {
+                        ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Success",message, context);
+                        bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
+
+                    } else {
+
+                        ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Duplicate",message, context);
+                        bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                NetworkResponse response = error.networkResponse;
+                if(response != null && response.data != null){
+                    String body;
+                    //get status code here
+                    String statusCode = String.valueOf(error.networkResponse.statusCode);
+                    //get response body and parse with appropriate encoding
+                    if(error.networkResponse.data!=null) {
+                        try {
+                            body = new String(error.networkResponse.data,"UTF-8");
+
+                            JSONObject json = new JSONObject(body);
+                            //                            Log.e("error response : ", json.toString());
+
+
+                            String message = json.has("message") ? json.getString("message") : "";
+                            String reason = json.has("reason") ? json.getString("reason") : "";
+
+                            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance(message,reason,context);
+                            bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
+
+                        } catch (UnsupportedEncodingException | JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }else {
+
+                    Log.e("VOlley error :", error.getLocalizedMessage()+" message:"+error.getMessage());
+                    Toast.makeText(context, VolleyErrors.getVolleyErrorMessages(error, context),Toast.LENGTH_LONG).show();
+                }
+
+//             Log.e(TAG, "Error: " + error.getMessage());
+            }
+        }){
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+        };
+
+        queue.add(jsonObjReq);
 
     }
 
