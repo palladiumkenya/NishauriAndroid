@@ -25,10 +25,8 @@ import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
 import com.mhealthkenya.psurvey.R;
 import com.mhealthkenya.psurvey.adapters.activeSurveyAdapter;
-import com.mhealthkenya.psurvey.adapters.questionnairesAdapter;
 import com.mhealthkenya.psurvey.depedancies.Constants;
 import com.mhealthkenya.psurvey.models.ActiveSurveys;
-import com.mhealthkenya.psurvey.models.Questionnaires;
 import com.mhealthkenya.psurvey.models.auth;
 
 import org.json.JSONArray;
@@ -58,6 +56,15 @@ public class HomeFragment extends Fragment {
 
     @BindView(R.id.tv_email)
     TextView txt_email;
+
+    @BindView(R.id.tv_facility)
+    TextView tv_facility;
+
+    @BindView(R.id.tv_active_surveys)
+    TextView tv_active_surveys;
+
+    @BindView(R.id.tv_completed_surveys)
+    TextView tv_completed_surveys;
 
     @BindView(R.id.shimmer_my_container)
     ShimmerFrameLayout shimmer_my_container;
@@ -126,7 +133,7 @@ public class HomeFragment extends Fragment {
         String auth_token = loggedInUser.getAuth_token();
 
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_USER)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_USER_DETAILED)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -142,15 +149,35 @@ public class HomeFragment extends Fragment {
 
                         try {
 
-                            String first_name = response.has("f_name") ? response.getString("f_name") : "";
-                            String last_name = response.has("l_name") ? response.getString("l_name") : "";
-                            String email = response.has("email") ? response.getString("email") : "";
+                            JSONObject user = response.getJSONObject("user");
 
-                            txt_name.setText(first_name + " " + last_name);
+                            int id = user.has("id") ? user.getInt("id"): 0;
+                            String msisdn = user.has("msisdn") ? user.getString("msisdn") : "";
+                            String email = user.has("email") ? user.getString("email") : "";
+                            String firstName = user.has("f_name") ? user.getString("f_name") : "";
+                            String lastName = user.has("l_name") ? user.getString("l_name") : "";
+                            JSONObject designation = user.getJSONObject("designation");
+
+                            int designationId = designation.has("id") ? designation.getInt("id"): 0;
+                            String designationName = designation.has("name") ? designation.getString("name") : "";
+
+                            JSONObject facility = user.getJSONObject("facility");
+
+                            int facilityId = facility.has("id") ? facility.getInt("id"): 0;
+                            int mflCode = facility.has("mfl_code") ? facility.getInt("mfl_code"): 0;
+                            String facilityName = facility.has("name") ? facility.getString("name") : "";
+                            String county = facility.has("county") ? facility.getString("county") : "";
+                            String subCounty = facility.has("sub_county") ? facility.getString("sub_county") : "";
+
+                            String activeQuestionnaires = response.has("Active_questionnaires") ? response.getString("Active_questionnaires") : "";
+                            String completedSurveys = response.has("Completed_surveys") ? response.getString("Completed_surveys") : "";
+
+
+                            txt_name.setText(firstName + " " + lastName);
                             txt_email.setText(email);
-
-
-
+                            tv_facility.setText(facilityName);
+                            tv_active_surveys.setText(activeQuestionnaires);
+                            tv_completed_surveys.setText(completedSurveys);
 
 
 

@@ -32,4 +32,8 @@
     <string name="about_app">About App</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="about_text">pSurvey is a questionnaire administering tool that is to be used by HCWs to their clients. \n\n The app will help gain insight on the issues that are heard.</string>
+    <string name="back">Back</string>
+    <string name="consent_yes">Yes</string>
+    <string name="consent_no">No</string>
+    <string name="details">Type here ...</string>
 </resources>

@@ -4,14 +4,8 @@
     android:id="@+id/lyt_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
-    android:orientation="horizontal">
-
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:src="@drawable/ic_questionnaires" />
+    android:orientation="vertical"
+    android:layout_margin="@dimen/spacing_medium">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,11 +13,18 @@
         android:padding="@dimen/spacing_large"
         android:background="@android:color/white"
         android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_questionnaires" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
@@ -34,14 +35,7 @@
                 android:textSize="22sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_questionnaire_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="This is the description text for the survey."
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                android:textColor="@color/grey_80" />
+
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_questionnaire_status"
@@ -55,12 +49,47 @@
 
         </LinearLayout>
 
+        <ImageButton
+            android:id="@+id/bt_expand"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="@color/grey_60"
+            android:src="@drawable/ic_expand_arrow" />
 
-        <View
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lyt_expand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/grey_20"
-            android:visibility="gone"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:minHeight="?attr/actionBarSize"
+            android:paddingBottom="@dimen/spacing_large"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_questionnaire_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:padding="@dimen/spacing_large"
+                android:text="This is the description text for the survey."
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/grey_80" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

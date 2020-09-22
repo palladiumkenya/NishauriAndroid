@@ -123,7 +123,7 @@
                                 android:layout_marginTop="@dimen/spacing_medium"
                                 android:gravity="center"
                                 android:orientation="horizontal"
-                                android:visibility="gone">
+                                >
 
                                 <androidx.appcompat.widget.AppCompatImageView
                                     android:layout_width="@dimen/spacing_large"
@@ -136,7 +136,7 @@
                                     android:id="@+id/tv_facility"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Kenyatta National Hospial"
+                                    android:text=""
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textColor="@color/grey_40" />
                             </LinearLayout>
@@ -213,6 +213,7 @@
 
 
                             <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tv_active_surveys"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -271,6 +272,7 @@
                             android:orientation="vertical">
 
                             <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tv_completed_surveys"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"

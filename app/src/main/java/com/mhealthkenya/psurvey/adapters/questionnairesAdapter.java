@@ -4,11 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mhealthkenya.psurvey.R;
+import com.mhealthkenya.psurvey.depedancies.Tools;
+import com.mhealthkenya.psurvey.depedancies.ViewAnimation;
 import com.mhealthkenya.psurvey.models.Questionnaires;
 
 import java.util.ArrayList;
@@ -37,6 +40,9 @@ public class questionnairesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         public TextView questionnaireTitle;
         public TextView questionnaireDescription;
         public TextView questionnaireStatus;
+        public ImageButton bt_expand;
+        public View lyt_expand;
+        public View lyt_parent;
 
 
 
@@ -45,6 +51,9 @@ public class questionnairesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             questionnaireTitle = (TextView) v.findViewById(R.id.tv_questionnaire_title);
             questionnaireStatus = (TextView) v.findViewById(R.id.tv_questionnaire_status);
             questionnaireDescription = (TextView) v.findViewById(R.id.tv_questionnaire_description);
+            bt_expand = (ImageButton) v.findViewById(R.id.bt_expand);
+            lyt_expand = (View) v.findViewById(R.id.lyt_expand);
+            lyt_parent = (View) v.findViewById(R.id.lyt_parent);
 
         }
     }
@@ -67,6 +76,22 @@ public class questionnairesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             view.questionnaireTitle.setText(obj.getName());
             view.questionnaireDescription.setText(obj.getDescription());
 
+            view.bt_expand.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean show = toggleLayoutExpand(!obj.expanded, v, view.lyt_expand);
+                    items.get(position).expanded = show;
+                }
+            });
+
+
+            if(obj.expanded){
+                view.lyt_expand.setVisibility(View.VISIBLE);
+            } else {
+                view.lyt_expand.setVisibility(View.GONE);
+            }
+            Tools.toggleArrow(obj.expanded, view.bt_expand, false);
+
             if (obj.getIs_active().equals("true")){
                 view.questionnaireStatus.setText("Status: Active");
             }
@@ -76,6 +101,16 @@ public class questionnairesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
 
         }
+    }
+
+    private boolean toggleLayoutExpand(boolean show, View view, View lyt_expand) {
+        Tools.toggleArrow(show, view);
+        if (show) {
+            ViewAnimation.expand(lyt_expand);
+        } else {
+            ViewAnimation.collapse(lyt_expand);
+        }
+        return show;
     }
 
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frag_start_survey"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey_5"
@@ -49,7 +50,6 @@
                     android:text="Please follow the steps until you complete the survey. "
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
-
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -74,7 +74,6 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/spacing_medium"
                     android:text="Patient Information"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
@@ -89,6 +88,7 @@
                     android:textColor="@color/grey_90" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_ccc_no"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/spacing_middle"
@@ -97,18 +97,19 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/hei_number"
+                        android:id="@+id/etxt_ccc_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/spacing_xsmall"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:maxLines="1"
-                        android:maxLength="20"
+                        android:maxLength="10"
                         android:hint="Enter CCC Number" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_f_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/spacing_middle"
@@ -116,7 +117,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/first_name"
+                        android:id="@+id/etxt_first_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Enter First Name"
@@ -124,20 +125,16 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-
-
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_patient_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/submit"/>
 
-
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
     </LinearLayout>
-
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

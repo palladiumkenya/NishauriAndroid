@@ -28,8 +28,10 @@ import com.mhealthkenya.psurvey.R;
 import com.mhealthkenya.psurvey.activities.auth.LoginActivity;
 import com.mhealthkenya.psurvey.activities.auth.SignUpActivity;
 import com.mhealthkenya.psurvey.depedancies.Constants;
+import com.mhealthkenya.psurvey.models.ActiveSurveys;
 import com.mhealthkenya.psurvey.models.Designation;
 import com.mhealthkenya.psurvey.models.Facility;
+import com.mhealthkenya.psurvey.models.User;
 import com.mhealthkenya.psurvey.models.auth;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
@@ -54,6 +56,8 @@ public class EditProfileFragment extends Fragment {
     private Context context;
 
     private auth loggedInUser;
+    private User user;
+
 
     private int facilityID = 0;
     private int designationID = 0;
@@ -121,6 +125,7 @@ public class EditProfileFragment extends Fragment {
 
         loadCurrentUser();
 
+
         btn_update_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,12 +165,18 @@ public class EditProfileFragment extends Fragment {
 
                         try {
 
+                            int id = response.has("id") ? response.getInt("id") : 0;
                             String first_name = response.has("f_name") ? response.getString("f_name") : "";
                             String last_name = response.has("l_name") ? response.getString("l_name") : "";
                             String email = response.has("email") ? response.getString("email") : "";
                             String phone_no = response.has("msisdn") ? response.getString("msisdn") : "";
                             int designation = response.has("designation") ? response.getInt("designation") : 0;
                             int facility = response.has("facility") ? response.getInt("facility") : 0;
+
+                            User newUser = new User(id,first_name,last_name,email,phone_no,facility,designation);
+
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("user", newUser);
 
                             card_name.setText(first_name+" "+last_name);
                             card_phone.setText(phone_no);
@@ -176,10 +187,11 @@ public class EditProfileFragment extends Fragment {
                             etxt_phone_number.setText(phone_no);
 
                             facilityID = facility;
-                            getFacilities();
-
                             designationID = designation;
+
+                            getFacilities();
                             getDesignation();
+
 
 
 
@@ -246,6 +258,7 @@ public class EditProfileFragment extends Fragment {
                                 facilities.add(newFacility);
                                 facilitiesList.add(newFacility.getName());
                             }
+
 
                             facilities.add(new Facility(0,"Select your facility.","Select your facility.","--select--","--select--"));
                             facilitiesList.add("Select your facility.");
@@ -344,6 +357,8 @@ public class EditProfileFragment extends Fragment {
 
                                 designations.add(newDesignation);
                                 designationList.add(newDesignation.getName());
+
+
                             }
 
                             designations.add(new Designation(0,"Select your designation."));

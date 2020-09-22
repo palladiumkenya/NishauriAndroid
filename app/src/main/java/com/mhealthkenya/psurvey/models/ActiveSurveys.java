@@ -1,6 +1,8 @@
 package com.mhealthkenya.psurvey.models;
 
-public class ActiveSurveys {
+import java.io.Serializable;
+
+public class ActiveSurveys implements Serializable {
 
     private int id;
     private String name;
@@ -9,6 +11,8 @@ public class ActiveSurveys {
     private String created_at;
     private String active_till;
     private int created_by;
+    public boolean expanded = false;
+    public boolean parent = false;
 
 
 

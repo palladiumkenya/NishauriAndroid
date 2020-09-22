@@ -9,6 +9,8 @@ public class Questionnaires {
     private String created_at;
     private String active_till;
     private int created_by;
+    public boolean expanded = false;
+    public boolean parent = false;
 
 
     public Questionnaires(int id, String name,String description,String is_active,String created_at, String active_till, int created_by) {
