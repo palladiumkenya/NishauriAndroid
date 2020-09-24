@@ -35,5 +35,5 @@
     <string name="back">Back</string>
     <string name="consent_yes">Yes</string>
     <string name="consent_no">No</string>
-    <string name="details">Type here ...</string>
+    <string name="details">Type your answer here …</string>
 </resources>

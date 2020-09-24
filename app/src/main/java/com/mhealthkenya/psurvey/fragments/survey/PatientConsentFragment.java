@@ -149,59 +149,20 @@ public class PatientConsentFragment extends Fragment {
                 .getAsJSONObject(new JSONObjectRequestListener(){
                     @Override
                     public void onResponse(JSONObject response) {
-//                        Log.e(TAG, response.toString());
+                        Log.e(TAG, response.toString());
 
                         try {
 
-                            boolean  success = response.has("success") && response.getBoolean("success");
                             String  errors = response.has("error") ? response.getString("error") : "" ;
 
 
-                            if (response.has("Question")){
+                            if (response.has("link")){
 
-                                JSONObject question = response.getJSONObject("Question");
-
-                                int questionId = question.has("id") ? question.getInt("id"): 0;
-                                String questionName = question.has("question") ? question.getString("question") : "";
-                                int questionType = question.has("question_type") ? question.getInt("question_type") : 0;
-                                String createdAt = question.has("created_at") ? question.getString("created_at") : "";
-                                int questionnaire = question.has("questionnaire") ? question.getInt("questionnaire") : 0;
-                                int createdBy = question.has("created_by") ? question.getInt("created_by") : 0;
-
+                                String link = response.has("link") ? response.getString("link") : "";
+                                int sessionId = response.has("session") ? response.getInt("session") : 0;
 
                                 Bundle bundle = new Bundle();
-
-
-                                JSONArray ans = response.getJSONArray("Ans");
-
-                                if (ans.length() > 0){
-
-
-                                    for (int i = 0; i < ans.length(); i++) {
-
-                                        JSONObject item = (JSONObject) ans.get(i);
-
-
-                                        int  ansID = item.has("id") ? item.getInt("id") : 0;
-                                        String option = item.has("option") ? item.getString("option") : "";
-                                        String created_at = item.has("created_at") ? item.getString("created_at") : "";
-                                        int  questionid = item.has("question") ? item.getInt("question") : 0;
-                                        int  created_by = item.has("created_by") ? item.getInt("created_by") : 0;
-
-                                        Answer newAnswer = new Answer(ansID,option,created_at,questionid,created_by);
-                                        bundle.putSerializable("surveyAns",newAnswer);
-
-                                    }
-
-                                }
-
-                                Question newQuestion = new Question(questionId,questionName,questionType,createdAt,questionnaire,createdBy);
-
-
-                                int sessionId = response.has("session_id") ? response.getInt("session_id") : 0;
-
-
-                                bundle.putSerializable("surveyQuestion",newQuestion);
+                                bundle.putString("questionLink",link);
                                 bundle.putInt("sessionID",sessionId);
                                 Navigation.findNavController(root).navigate(R.id.nav_questions, bundle);
 

@@ -15,12 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -31,7 +33,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.mhealthkenya.psurvey.R;
 import com.mhealthkenya.psurvey.depedancies.Constants;
-import com.mhealthkenya.psurvey.models.ActiveSurveys;
 import com.mhealthkenya.psurvey.models.Answer;
 import com.mhealthkenya.psurvey.models.Question;
 import com.mhealthkenya.psurvey.models.auth;
@@ -40,6 +41,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -55,16 +57,23 @@ public class QuestionsFragment extends Fragment {
     private View root;
     private Context context;
 
+    private String openText = "";
+    private String sentData = "";
+    private String questionLink;
+    private int sessionID;
+
+    private CheckBox checkBox;
+
     private auth loggedInUser;
     private Question questions;
     private Answer answers;
-    private List<Answer> answerList;
+    private List<Answer> answerList = new ArrayList<>();
+    private List<String> multiAnswerList = new ArrayList<>();
+
+
 
     @BindView(R.id.tv_survey_question)
     MaterialTextView surveyQuestion;
-
-    @BindView(R.id.tv_answer_id)
-    MaterialTextView answerID;
 
     @BindView(R.id.til_open_text)
     TextInputLayout openTextTil;
@@ -112,49 +121,84 @@ public class QuestionsFragment extends Fragment {
 
         loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN, auth.class);
 
+
+
         assert getArguments() != null;
-        questions = (Question) getArguments().getSerializable("surveyQuestion");
-        answers = (Answer) getArguments().getSerializable("surveyAns");
-        int sessionID=  getArguments().getInt("sessionID");
+        questionLink = getArguments().getString("questionLink");
 
-        surveyQuestion.setText(questions.getQuestion());
+        assert getArguments() != null;
+        sessionID=  getArguments().getInt("sessionID");
 
-        if (questions.getQuestion_type() == 1){
-            openTextTil.setVisibility(View.VISIBLE);
-        }
-        else if (questions.getQuestion_type() == 2){
-            singleChoiceRadioGroup.setVisibility(View.VISIBLE);
 
-            RadioButton rbn = new RadioButton(context);
-            rbn.setId(View.generateViewId());
-            rbn.setText(answers.getOption());
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
-            rbn.setLayoutParams(params);
-            singleChoiceRadioGroup.addView(rbn);
+        loadQuestion();
 
-        }
-        else if (questions.getQuestion_type() == 3){
 
-            openTextTil.setVisibility(View.GONE);
-            singleChoiceRadioGroup.setVisibility(View.GONE);
-            multipleChoiceAns.setVisibility(View.VISIBLE);
-
-            CheckBox checkBox = new CheckBox(context);
-            checkBox.setId(View.generateViewId());
-            checkBox.setText(answers.getOption());
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
-            checkBox.setLayoutParams(params);
-
-        }
-        else {
-            Toast.makeText(context, "No answers found for this question", Toast.LENGTH_SHORT).show();
-        }
 
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                confirmConsent(sessionID,questions.getId(),answers.getId());
+                if (questions.getQuestion_type() == 1){
+
+                    provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), openTextEtxt.getText().toString());
+
+
+                }
+                else if (questions.getQuestion_type() == 2){
+
+                    int radioButtonID = singleChoiceRadioGroup.getCheckedRadioButtonId();
+
+
+                    if (radioButtonID == -1){
+
+                        Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+
+                    }else {
+                        View radioButton = singleChoiceRadioGroup.findViewById(radioButtonID);
+                        int idx = singleChoiceRadioGroup.indexOfChild(radioButton);
+
+
+                        provideAnswers(sessionID,questions.getId(),String.valueOf(answerList.get(idx).getId()), openText);
+                    }
+
+                }
+                else if (questions.getQuestion_type() == 3){
+
+//                    Toast.makeText(context, checkBox.getText(), Toast.LENGTH_SHORT).show();
+
+
+                    checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                        @Override
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                            sentData = String.valueOf(checkBox.getId());
+
+                            /*if (checkBox.isChecked()){
+
+
+
+                            }
+*/
+
+
+
+                        }
+                    });
+
+
+
+                    provideAnswers(sessionID,questions.getId(),sentData, openText);
+
+
+
+
+                }
+
+                else {
+                    Toast.makeText(context, "Answer the question", Toast.LENGTH_SHORT).show();
+                }
+
 
 
 
@@ -164,14 +208,14 @@ public class QuestionsFragment extends Fragment {
         return root;
     }
 
-    private void confirmConsent(int sessionID,int questionNumber,int answer) {
+    private void provideAnswers(int sessionID, int questionNumber, String answer, String openText) {
 
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("session", sessionID );
             jsonObject.put("question", questionNumber);
             jsonObject.put("answer", answer);
-            jsonObject.put("open_text", openTextEtxt.getText().toString());
+            jsonObject.put("open_text", openText);
 
 
         } catch (JSONException e) {
@@ -195,71 +239,30 @@ public class QuestionsFragment extends Fragment {
 
                         try {
 
-                            boolean  success = response.has("success") && response.getBoolean("success");
-                            String  errors = response.has("error") ? response.getString("error") : "" ;
-                            String  message = response.has("Message") ? response.getString("Message") : "" ;
+                            String  message = response.has("Message") ? response.getString("Message") : "";
 
+                            if (response.has("link")){
 
-                            if (success){
-
-
-                                JSONObject question = response.getJSONObject("Question");
-
-                                int questionId = question.has("id") ? question.getInt("id"): 0;
-                                String questionName = question.has("question") ? question.getString("question") : "";
-                                int questionType = question.has("question_type") ? question.getInt("question_type") : 0;
-                                String createdAt = question.has("created_at") ? question.getString("created_at") : "";
-                                int questionnaire = question.has("questionnaire") ? question.getInt("questionnaire") : 0;
-                                int createdBy = question.has("created_by") ? question.getInt("created_by") : 0;
-
-                                Question newQuestion = new Question(questionId,questionName,questionType,createdAt,questionnaire,createdBy);
-
-                                Bundle bundle = new Bundle();
-                                bundle.putSerializable("surveyQuestion",newQuestion);
-
-                                JSONArray ans = response.getJSONArray("Ans");
-
-                                if (ans.length() > 0){
-
-
-                                    for (int i = 0; i < ans.length(); i++) {
-
-                                        JSONObject item = (JSONObject) ans.get(i);
-
-
-                                        int  ansID = item.has("id") ? item.getInt("id") : 0;
-                                        String option = item.has("option") ? item.getString("option") : "";
-                                        String created_at = item.has("created_at") ? item.getString("created_at") : "";
-                                        int  questionid = item.has("question") ? item.getInt("question") : 0;
-                                        int  created_by = item.has("created_by") ? item.getInt("created_by") : 0;
-
-                                        Answer newAnswer = new Answer(ansID,option,created_at,questionid,created_by);
-
-
-                                        bundle.putSerializable("surveyAns",newAnswer);
-
-                                    }
-
-                                }
-
+                                String link = response.has("link") ? response.getString("link") : "";
                                 int sessionId = response.has("session_id") ? response.getInt("session_id") : 0;
 
 
-
+                                Bundle bundle = new Bundle();
+                                bundle.putString("questionLink",link);
                                 bundle.putInt("sessionID",sessionId);
                                 Navigation.findNavController(root).navigate(R.id.nav_questions, bundle);
 
+
                             }
-                            else if (success && response.has("Questionnaire complete, Thank You!")){
+                            else if (message.contains("Questionnaire complete")){
 
                                 NavHostFragment.findNavController(QuestionsFragment.this).navigate(R.id.nav_complete_survey);
                                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                             }
-                            else{
 
-                                Snackbar.make(root.findViewById(R.id.frag_questions), errors, Snackbar.LENGTH_LONG).show();
 
-                            }
+
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -278,6 +281,142 @@ public class QuestionsFragment extends Fragment {
                     }
                 });
 
+    }
+
+    private void loadQuestion() {
+
+        String auth_token = loggedInUser.getAuth_token();
+
+
+        AndroidNetworking.get(questionLink)
+                .addHeaders("Authorization","Token "+ auth_token)
+                .addHeaders("Content-Type", "application.json")
+                .addHeaders("Accept", "*/*")
+                .addHeaders("Accept", "gzip, deflate, br")
+                .addHeaders("Connection","keep-alive")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+                        Log.e(TAG, response.toString());
+
+
+                        try {
+
+                            String  errors = response.has("error") ? response.getString("error") : "" ;
+                            String  message = response.has("Message") ? response.getString("Message") : "" ;
+
+
+                            if (response.has("Question")){
+
+                                JSONObject question = response.getJSONObject("Question");
+
+                                int questionId = question.has("id") ? question.getInt("id"): 0;
+                                String questionName = question.has("question") ? question.getString("question") : "";
+                                int questionType = question.has("question_type") ? question.getInt("question_type") : 0;
+                                String createdAt = question.has("created_at") ? question.getString("created_at") : "";
+                                int questionnaire = question.has("questionnaire") ? question.getInt("questionnaire") : 0;
+                                int createdBy = question.has("created_by") ? question.getInt("created_by") : 0;
+
+                                questions = new Question(questionId,questionName,questionType,createdAt,questionnaire,createdBy);
+
+
+                                JSONArray ans = response.getJSONArray("Ans");
+
+                                if (ans.length() > 0){
+
+
+                                    for (int i = 0; i < ans.length(); i++) {
+
+                                        JSONObject item = (JSONObject) ans.get(i);
+
+
+                                        int  ansID = item.has("id") ? item.getInt("id") : 0;
+                                        String option = item.has("option") ? item.getString("option") : "";
+                                        String created_at = item.has("created_at") ? item.getString("created_at") : "";
+                                        int  questionID = item.has("question") ? item.getInt("question") : 0;
+                                        int  created_by = item.has("created_by") ? item.getInt("created_by") : 0;
+
+
+                                        answers = new Answer(ansID,option,created_at,questionID,created_by);
+                                        answerList.add(answers);
+
+
+                                        if (questions.getQuestion_type() == 1){
+                                            openTextTil.setVisibility(View.VISIBLE);
+                                        }
+                                        else if (questions.getQuestion_type() == 2){
+                                            singleChoiceRadioGroup.setVisibility(View.VISIBLE);
+
+                                            RadioButton rbn = new RadioButton(context);
+                                            rbn.setId(View.generateViewId());
+                                            rbn.setText(answers.getOption());
+                                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
+                                            rbn.setLayoutParams(params);
+                                            singleChoiceRadioGroup.addView(rbn);
+
+
+                                        }
+                                        else if (questions.getQuestion_type() == 3){
+
+                                            openTextTil.setVisibility(View.GONE);
+                                            singleChoiceRadioGroup.setVisibility(View.GONE);
+                                            multipleChoiceAns.setVisibility(View.VISIBLE);
+
+                                            checkBox = new CheckBox(context);
+                                            checkBox.setId(answers.getId());
+                                            checkBox.setText(answers.getOption());
+                                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
+                                            checkBox.setLayoutParams(params);
+                                            multipleChoiceAns.addView(checkBox);
+
+                                            checkBox.isChecked();
+
+                                        }
+
+                                        else {
+                                            Toast.makeText(context, "No answers found for this question", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                    }
+
+                                }
+
+                                surveyQuestion.setText(questions.getQuestion());
+
+
+
+
+                            }
+                            else if (message.contains("Questionnaire complete")){
+
+                                NavHostFragment.findNavController(QuestionsFragment.this).navigate(R.id.nav_complete_survey);
+                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+
+                                Snackbar.make(root.findViewById(R.id.frag_questions), errors, Snackbar.LENGTH_LONG).show();
+
+                            }
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                    @Override
+                    public void onError(ANError error) {
+
+                        Log.e(TAG, error.getErrorBody());
+
+                        Snackbar.make(root.findViewById(R.id.frag_questions), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+
+                    }
+                });
     }
 
     @Override

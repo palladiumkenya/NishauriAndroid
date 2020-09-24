@@ -27,11 +27,7 @@ public class CompleteSurveyFragment extends Fragment {
     private View root;
     private Context context;
 
-    @BindView(R.id.shimmer_my_container)
-    ShimmerFrameLayout shimmer_my_container;
 
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
 
     @BindView(R.id.btn_new_survey)
     Button btn_new_survey;
@@ -73,7 +69,6 @@ public class CompleteSurveyFragment extends Fragment {
             public void onClick(View view) {
 
                 NavHostFragment.findNavController(CompleteSurveyFragment.this).navigate(R.id.nav_home);
-                Toast.makeText(context, "You have completed your survey!", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -87,15 +82,5 @@ public class CompleteSurveyFragment extends Fragment {
         unbinder.unbind();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        shimmer_my_container.startShimmerAnimation();
-    }
 
-    @Override
-    public void onPause() {
-        shimmer_my_container.stopShimmerAnimation();
-        super.onPause();
-    }
 }
