@@ -387,7 +387,6 @@ public class EditProfileFragment extends Fragment {
 
                                         designationID = designations.get(position).getId();
 
-
                                     }
 
                                     @Override

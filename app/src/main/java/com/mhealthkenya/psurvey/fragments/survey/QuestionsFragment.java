@@ -9,6 +9,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -67,8 +69,8 @@ public class QuestionsFragment extends Fragment {
     private auth loggedInUser;
     private Question questions;
     private Answer answers;
-    private List<Answer> answerList = new ArrayList<>();
-    private List<String> multiAnswerList = new ArrayList<>();
+    private ArrayList<Answer> answerList = new ArrayList<>();
+    private List<Integer> multiAnswerList = new ArrayList<>();
 
 
 
@@ -95,6 +97,12 @@ public class QuestionsFragment extends Fragment {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+
+    @BindView(R.id.no_active_survey_lyt)
+    LinearLayout no_active_survey_lyt;
+
+    @BindView(R.id.error_lyt)
+    LinearLayout error_lyt;
 
     @BindView(R.id.btn_next)
     Button btn_next;
@@ -164,32 +172,23 @@ public class QuestionsFragment extends Fragment {
                 }
                 else if (questions.getQuestion_type() == 3){
 
-//                    Toast.makeText(context, checkBox.getText(), Toast.LENGTH_SHORT).show();
 
+                    for(int i=0; i<multipleChoiceAns.getChildCount(); i++) {
+                        View nextChild = multipleChoiceAns.getChildAt(i);
 
-                    checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                            sentData = String.valueOf(checkBox.getId());
-
-                            /*if (checkBox.isChecked()){
-
-
-
+                        if(nextChild instanceof CheckBox)
+                        {
+                            checkBox = (CheckBox) nextChild;
+                            if (checkBox.isChecked()) {
+                                multiAnswerList.add(checkBox.getId());
                             }
-*/
-
-
-
                         }
-                    });
 
+                    }
 
+                    provideAnswers(sessionID,questions.getId(),String.valueOf(multiAnswerList), openText);
 
-                    provideAnswers(sessionID,questions.getId(),sentData, openText);
-
+//                    Toast.makeText(context, String.valueOf(multiAnswerList), Toast.LENGTH_SHORT).show();
 
 
 
@@ -199,15 +198,28 @@ public class QuestionsFragment extends Fragment {
                     Toast.makeText(context, "Answer the question", Toast.LENGTH_SHORT).show();
                 }
 
-
-
-
             }
         });
 
         return root;
     }
 
+    /*public boolean checkNulls(){
+        boolean valid = true;
+
+
+        if(TextUtils.isEmpty(openTextEtxt.getText().toString()))
+        {
+            Snackbar.make(root.findViewById(R.id.frag_update_user), "Please enter your answer", Snackbar.LENGTH_LONG).show();
+            valid = false;
+            return valid;
+        }
+
+
+
+        return valid;
+    }
+*/
     private void provideAnswers(int sessionID, int questionNumber, String answer, String openText) {
 
         JSONObject jsonObject = new JSONObject();
@@ -261,9 +273,6 @@ public class QuestionsFragment extends Fragment {
                             }
 
 
-
-
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -274,7 +283,6 @@ public class QuestionsFragment extends Fragment {
                     public void onError(ANError error) {
                         // handle error
                         Log.e(TAG, error.getErrorBody());
-
 
                         Snackbar.make(root.findViewById(R.id.frag_questions), "Error: "+error.getErrorBody(), Snackbar.LENGTH_LONG).show();
 
@@ -372,7 +380,7 @@ public class QuestionsFragment extends Fragment {
                                             checkBox.setLayoutParams(params);
                                             multipleChoiceAns.addView(checkBox);
 
-                                            checkBox.isChecked();
+
 
                                         }
 
@@ -397,10 +405,10 @@ public class QuestionsFragment extends Fragment {
                             }
                             else {
 
+                                no_active_survey_lyt.setVisibility(View.VISIBLE);
                                 Snackbar.make(root.findViewById(R.id.frag_questions), errors, Snackbar.LENGTH_LONG).show();
 
                             }
-
 
 
                         } catch (JSONException e) {
@@ -412,6 +420,8 @@ public class QuestionsFragment extends Fragment {
                     public void onError(ANError error) {
 
                         Log.e(TAG, error.getErrorBody());
+
+                        error_lyt.setVisibility(View.VISIBLE);
 
                         Snackbar.make(root.findViewById(R.id.frag_questions), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
 

@@ -148,13 +148,22 @@ public class SelectSurveyFragment extends Fragment {
 
             }
         });
+
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                NavHostFragment.findNavController(SelectSurveyFragment.this).navigate(R.id.nav_home);
+
+            }
+        });
+
         return root;
     }
 
     private void loadActiveSurveys() {
 
         String auth_token = loggedInUser.getAuth_token();
-
 
         AndroidNetworking.get(Constants.ENDPOINT+Constants.ACTIVE_SURVEYS)
                 .addHeaders("Authorization","Token "+ auth_token)
