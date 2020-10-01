@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,7 +52,8 @@ public class UpdateProfileFragment extends Fragment {
 
     private User loggedInUser;
     private EditDependantAdapter mAdapter;
-    private ArrayList<Dependant> dependantArrayList;
+    private ArrayList<Dependant> dependantArrayList = new ArrayList<>();
+    private Dependant newDependant;
 
     @BindView(R.id.txt_names)
     MaterialTextView txt_names;
@@ -103,6 +105,19 @@ public class UpdateProfileFragment extends Fragment {
         dependantArrayList = new ArrayList<>();
         mAdapter = new EditDependantAdapter(context, dependantArrayList);
 
+        /*mAdapter.setOnItemClickListener(new EditDependantAdapter.OnItemClickListener() {
+           @Override
+           public void onItemClick(int position) {
+
+               Dependant clickedItem = dependantArrayList.get(position);
+
+               Bundle bundle = new Bundle();
+               bundle.putSerializable("dependant", clickedItem);
+               Navigation.findNavController(root).navigate(R.id.nav_update_dependants);
+
+            }
+        });*/
+
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false));
         recyclerView.setHasFixedSize(true);
@@ -110,7 +125,10 @@ public class UpdateProfileFragment extends Fragment {
         //set data and list adapter
         recyclerView.setAdapter(mAdapter);
 
+
+
         loadCurrentUser();
+
 
         /*Edit user details here...*/
         btn_user.setOnClickListener(new View.OnClickListener() {
@@ -200,7 +218,7 @@ public class UpdateProfileFragment extends Fragment {
                                             int user = dependant.has("user") ? dependant.getInt("user") : 0;
 
 
-                                            Dependant newDependant = new Dependant(id, firstname, surname, heiNumber, dob, approved, user);
+                                            newDependant = new Dependant(id, firstname, surname, heiNumber, dob, approved, user);
 
                                             dependantArrayList.add(newDependant);
                                             mAdapter.notifyDataSetChanged();

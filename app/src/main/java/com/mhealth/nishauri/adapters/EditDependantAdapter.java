@@ -1,6 +1,7 @@
 package com.mhealth.nishauri.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,8 @@ import java.util.List;
 
 public class EditDependantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Dependant> items = new ArrayList<>();
+    private List<Dependant> items;
+
 
     private Context context;
     private EditDependantAdapter.OnItemClickListener onItemClickListener;
@@ -74,10 +76,11 @@ public class EditDependantAdapter extends RecyclerView.Adapter<RecyclerView.View
                 public void onClick(View v) {
 
                     if (items.get(position) != null){
-                        if (onItemClickListener != null) {
-                            onItemClickListener.onItemClick(position);
-                        }
-                        Navigation.findNavController(v).navigate(R.id.nav_update_dependants);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("dependant", String.valueOf(obj.getId()));
+                        Navigation.findNavController(v).navigate(R.id.nav_update_dependants, bundle);
+
                     }
 
                 }

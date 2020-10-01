@@ -71,7 +71,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_centerInParent="true"
-                                android:tint="@color/red_500"
+                                app:tint="@color/red_500"
                                 android:src="@drawable/ic_missed_appointment" />
 
 
@@ -89,12 +89,10 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:padding="@dimen/spacing_medium"
+                                android:padding="@dimen/spacing_small"
                                 android:orientation="horizontal">
 
-                                <View
-                                    android:layout_width="@dimen/spacing_middle"
-                                    android:layout_height="0dp" />
+
 
                                 <TextView
                                     android:id="@+id/tv_missed_appointments"
@@ -105,9 +103,6 @@
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                     android:textColor="@color/red_500"
                                     android:textStyle="bold" />
-                                <View
-                                    android:layout_width="@dimen/spacing_middle"
-                                    android:layout_height="0dp" />
 
                                 <TextView
                                     android:layout_width="0dp"
@@ -118,9 +113,6 @@
                                     android:textColor="@color/grey_60"
                                     android:textStyle="bold" />
 
-                                <View
-                                    android:layout_width="@dimen/spacing_middle"
-                                    android:layout_height="0dp" />
 
                                 <TextView
                                     android:id="@+id/txt_total"
@@ -177,7 +169,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_centerInParent="true"
-                                android:tint="@color/green_500"
+                                app:tint="@color/green_500"
                                 android:src="@drawable/ic_kept_appointment" />
 
 
@@ -190,7 +182,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/spacing_medium"
+                            android:padding="@dimen/spacing_small"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -198,9 +190,6 @@
                                 android:layout_height="match_parent"
                                 android:orientation="horizontal">
 
-                                <View
-                                    android:layout_width="@dimen/spacing_middle"
-                                    android:layout_height="0dp" />
 
                                 <TextView
                                     android:id="@+id/tv_kept_appointments"
@@ -211,9 +200,6 @@
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                     android:textColor="@color/green_500"
                                     android:textStyle="bold" />
-                                <View
-                                    android:layout_width="@dimen/spacing_middle"
-                                    android:layout_height="0dp" />
 
                                 <TextView
                                     android:layout_width="0dp"
@@ -224,9 +210,6 @@
                                     android:textColor="@color/grey_60"
                                     android:textStyle="bold" />
 
-                                <View
-                                    android:layout_width="@dimen/spacing_middle"
-                                    android:layout_height="0dp" />
 
                                 <TextView
                                     android:id="@+id/txt_total_appointment"
@@ -292,7 +275,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_centerInParent="true"
-                                android:tint="@color/colorAccent"
+                                app:tint="@color/colorAccent"
                                 android:src="@drawable/ic_appointment" />
 
                         </RelativeLayout>
@@ -309,12 +292,9 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:padding="@dimen/spacing_medium"
+                                android:padding="@dimen/spacing_small"
                                 android:orientation="horizontal">
 
-                                <View
-                                    android:layout_width="@dimen/spacing_middle"
-                                    android:layout_height="0dp" />
 
                                 <TextView
                                     android:id="@+id/tv_booked_appointments"
@@ -325,9 +305,6 @@
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                     android:textColor="@color/colorAccent"
                                     android:textStyle="bold" />
-                                <View
-                                    android:layout_width="@dimen/spacing_middle"
-                                    android:layout_height="0dp" />
 
                                 <TextView
                                     android:layout_width="0dp"
@@ -338,9 +315,6 @@
                                     android:textColor="@color/grey_60"
                                     android:textStyle="bold" />
 
-                                <View
-                                    android:layout_width="@dimen/spacing_middle"
-                                    android:layout_height="0dp" />
 
                                 <TextView
                                     android:id="@+id/txt_total_app"
@@ -398,7 +372,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_centerVertical="true"
                                 android:src="@drawable/ic_notified_appointment"
-                                android:tint="@color/colorPrimaryDark" />
+                                app:tint="@color/colorPrimaryDark" />
 
 
                         </RelativeLayout>
@@ -415,12 +389,9 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:padding="@dimen/spacing_medium"
+                                android:padding="@dimen/spacing_small"
                                 android:orientation="horizontal">
 
-                                <View
-                                    android:layout_width="@dimen/spacing_middle"
-                                    android:layout_height="0dp" />
 
                                 <TextView
                                     android:id="@+id/tv_notified_appointment"
@@ -431,9 +402,6 @@
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textStyle="bold" />
-                                <View
-                                    android:layout_width="@dimen/spacing_middle"
-                                    android:layout_height="0dp" />
 
                                 <TextView
                                     android:layout_width="0dp"
@@ -444,9 +412,6 @@
                                     android:textColor="@color/grey_60"
                                     android:textStyle="bold" />
 
-                                <View
-                                    android:layout_width="@dimen/spacing_middle"
-                                    android:layout_height="0dp" />
 
                                 <TextView
                                     android:id="@+id/txt_total_apps"

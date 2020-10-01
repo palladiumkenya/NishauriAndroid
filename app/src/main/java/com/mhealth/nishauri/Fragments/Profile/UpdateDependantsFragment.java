@@ -22,10 +22,12 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
+import com.mhealth.nishauri.Models.Dependant;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -44,6 +46,7 @@ public class UpdateDependantsFragment extends Fragment {
     private Context context;
 
     private User loggedInUser;
+    private Dependant clickedDependant;
 
 
     @BindView(R.id.card_dependant_name)
@@ -85,6 +88,16 @@ public class UpdateDependantsFragment extends Fragment {
 
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
+        assert getArguments() != null;
+        String dependant=  getArguments().getString("dependant");
+
+        loadDependant(dependant);
+
+
+        /*card_dependant_name.setText(clickedDependant.getFirst_name() + clickedDependant.getSurname());
+        etxt_dependant_firstname.setText(clickedDependant.getFirst_name());
+        etxt_dependant_surname.setText(clickedDependant.getSurname());*/
+
 
         btn_update_dependant_details.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +105,7 @@ public class UpdateDependantsFragment extends Fragment {
 
                 if (checkNulls()){
 
-                    updateDependant();
+                    updateDependant(dependant);
 
                 }
             }
@@ -126,13 +139,14 @@ public class UpdateDependantsFragment extends Fragment {
         return valid;
     }
 
-    public  void updateDependant(){
+    public  void updateDependant(String dependantId){
 
 
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("id", dependantId);
             jsonObject.put("first_name", etxt_dependant_firstname.getText().toString());
-            jsonObject.put("last_name", etxt_dependant_surname.getText().toString());
+            jsonObject.put("surname", etxt_dependant_surname.getText().toString());
 
 
         } catch (JSONException e) {
@@ -172,5 +186,71 @@ public class UpdateDependantsFragment extends Fragment {
                 });
 
     }
+
+    public  void loadDependant(String dependant){
+
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id", dependant);
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String auth_token = loggedInUser.getAuth_token();
+
+        AndroidNetworking.post(Constants.ENDPOINT+Constants.DEPENTANT)
+                .addHeaders("Authorization","Token "+ auth_token)
+                .addJSONObjectBody(jsonObject) // posting json
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+
+                        Log.e(TAG, response.toString());
+
+
+
+                        try {
+                            int id = response.has("id") ? response.getInt("id") : 0;
+                            String ccc_no = response.has("CCCNo") ? response.getString("CCCNo") : "";
+                            String first_name = response.has("first_name") ? response.getString("first_name") : "";
+                            String surname = response.has("surname") ? response.getString("surname") : "";
+                            String heiNumber = response.has("heiNumber") ? response.getString("heiNumber") : "";
+                            String dob = response.has("dob") ? response.getString("dob") : "";
+                            String approved = response.has("approved") ? response.getString("approved") : "";
+                            int  user = response.has("user") ? response.getInt("user") : 0;
+                            String age = response.has("age") ? response.getString("age") : "";
+
+
+                            card_dependant_name.setText(first_name +" "+ surname);
+                            etxt_dependant_firstname.setText(first_name);
+                            etxt_dependant_surname.setText(surname);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                        Log.e(TAG, error.getErrorBody());
+
+
+                        Snackbar.make(root.findViewById(R.id.frag_update_dependant), "" + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+                    }
+                });
+
+    }
+
+
 
 }

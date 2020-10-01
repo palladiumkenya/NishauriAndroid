@@ -175,6 +175,10 @@ public class UpcomingAppointmentsFragment extends Fragment {
                                 no_appointment_lyt.setVisibility(View.VISIBLE);
                                 Snackbar.make(root.findViewById(R.id.frag_upcoming_appointments),message, Snackbar.LENGTH_LONG).show();
 
+                            } else if (response.has("data") && response.has("No upcoming appointments")){
+
+                                no_appointment_lyt.setVisibility(View.VISIBLE);
+
                             }
 
 

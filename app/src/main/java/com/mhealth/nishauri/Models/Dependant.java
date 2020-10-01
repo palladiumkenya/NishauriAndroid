@@ -1,7 +1,9 @@
 package com.mhealth.nishauri.Models;
 
 
-public class Dependant {
+import java.io.Serializable;
+
+public class Dependant implements Serializable {
 
     private int id;
     private String first_name;
