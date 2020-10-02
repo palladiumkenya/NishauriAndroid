@@ -29,6 +29,8 @@ import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.textview.MaterialTextView;
+import com.mhealth.nishauri.Models.UpcomingAppointment;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
@@ -54,6 +56,7 @@ public class RescheduleAppointmentFragment extends Fragment {
     private Context context;
 
     private User loggedInUser;
+    private UpcomingAppointment upcomingAppointment;
 
     private String RESCHEDULED_DATE = "";
 
@@ -63,6 +66,9 @@ public class RescheduleAppointmentFragment extends Fragment {
 
     @BindView(R.id.txt_reschedule_date)
     TextView txt_reschedule_appointment;
+
+    @BindView(R.id.txt_scheduled_date)
+    TextView txt_scheduled_date;
 
     @BindView(R.id.reason_spinner)
     AppCompatSpinner reason_spinner;
@@ -98,9 +104,26 @@ public class RescheduleAppointmentFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_reschedule_appointment, container, false);
         unbinder = ButterKnife.bind(this, root);
 
+        assert getArguments() != null;
+        upcomingAppointment = (UpcomingAppointment) getArguments().getSerializable("Appointment");
+
+        txt_scheduled_date.setText(upcomingAppointment.getAppntmnt_date());
+
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
         initialise();
+
+        btn_continue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkNulls()){
+
+                    rescheduleAppointment(upcomingAppointment.getId());
+                }
+
+            }
+
+        });
 
         return root;
     }
@@ -114,16 +137,7 @@ public class RescheduleAppointmentFragment extends Fragment {
             }
         });
 
-        btn_continue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (checkNulls()){
-                    rescheduleAppointment();
-                }
 
-            }
-
-        });
 
     }
 
@@ -182,13 +196,14 @@ public class RescheduleAppointmentFragment extends Fragment {
 
     }
 
-    private void rescheduleAppointment(){
+    private void rescheduleAppointment(int appointmentId){
+
 
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("appntmnt_date", txt_reschedule_appointment.getText().toString());
             jsonObject.put("reason", reason_spinner.getSelectedItem().toString());
             jsonObject.put("comments", specify_reason_edtxt.getText().toString());
-            jsonObject.put("appntmnt_date", txt_reschedule_appointment.getText().toString());
 
 
         } catch (JSONException e) {
@@ -197,7 +212,8 @@ public class RescheduleAppointmentFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        AndroidNetworking.post(Constants.ENDPOINT+Constants.RESCHEDULE_APPOINTMENT)
+
+        AndroidNetworking.post(Constants.ENDPOINT+Constants.RESCHEDULE_APPOINTMENT+appointmentId)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -235,7 +251,7 @@ public class RescheduleAppointmentFragment extends Fragment {
                         animationView.setVisibility(View.GONE);
 
 
-                        Snackbar.make(root.findViewById(R.id.frag_schedule_appointment), "An Error occurred. Please try again later." + error.getErrorDetail(), Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(root.findViewById(R.id.frag_reschedule_appointment), "An Error occurred. Please try again later." + error.getErrorDetail(), Snackbar.LENGTH_LONG).show();
                     }
                 });
 

@@ -148,11 +148,12 @@ public class PendingAppointmentAdapter extends RecyclerView.Adapter<RecyclerView
                                         // do anything with response
                                         Log.e(TAG, response.toString());
 
-                                        if (response.has("accepted")){
+                                        if (response.has("Accepted")){
 
                                             Snackbar.make(root.findViewById(R.id.frag_pending_appointment), "Your appointment was confirmed! ", Snackbar.LENGTH_LONG).show();
 
                                             view.confirmed_appointment.setVisibility(View.VISIBLE);
+                                            view.confirm_appointment.setVisibility(View.GONE);
 
                                         }
                                         else{

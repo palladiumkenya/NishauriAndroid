@@ -1,6 +1,8 @@
 package com.mhealth.nishauri.Models;
 
-public class UpcomingAppointment {
+import java.io.Serializable;
+
+public class UpcomingAppointment implements Serializable {
 
     private int id;
     private String aid;

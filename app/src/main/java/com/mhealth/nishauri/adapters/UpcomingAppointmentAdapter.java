@@ -1,6 +1,7 @@
 package com.mhealth.nishauri.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -149,7 +150,7 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
                                         // do anything with response
                                         Log.e(TAG, response.toString());
 
-                                        if (response.has("accepted")){
+                                        if (response.has("Accepted")){
 
                                             Snackbar.make(root.findViewById(R.id.frag_upcoming_appointments), "Your appointment was confirmed! ", Snackbar.LENGTH_LONG).show();
 
@@ -187,9 +188,10 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
 
                     if (items.get(position) != null){
 
-
-
-                        Navigation.findNavController(v).navigate(R.id.nav_reschedule_appointment);
+                        UpcomingAppointment clickedItem = items.get(position);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("Appointment", clickedItem);
+                        Navigation.findNavController(v).navigate(R.id.nav_reschedule_appointment,bundle);
                     }
 
                 }
