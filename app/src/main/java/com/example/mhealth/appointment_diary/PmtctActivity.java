@@ -10,7 +10,9 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 import com.example.mhealth.appointment_diary.pmtct.PmtctBookAptFragment;
+import com.example.mhealth.appointment_diary.pmtct.PmtctHeiAptFragment;
 import com.example.mhealth.appointment_diary.pmtct.PmtctRegistrationFragment;
+import com.example.mhealth.appointment_diary.pmtct.PmtctUnscheduledHeiAptFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -43,7 +45,9 @@ public class PmtctActivity extends AppCompatActivity {
 
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new PmtctRegistrationFragment(), "REGISTRATION");
-        adapter.addFragment(new PmtctBookAptFragment(), "BOOK APPOINTMENT");
+        adapter.addFragment(new PmtctBookAptFragment(), "MOTHER APPOINTMENT");
+        adapter.addFragment(new PmtctHeiAptFragment(), "HEI APPOINTMENT");
+        adapter.addFragment(new PmtctUnscheduledHeiAptFragment(), "UNSCHEDULED HEI APPOINTMENT");
         viewPager.setAdapter(adapter);
     }
 
