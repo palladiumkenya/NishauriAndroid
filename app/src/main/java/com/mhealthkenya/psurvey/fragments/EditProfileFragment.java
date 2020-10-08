@@ -124,6 +124,9 @@ public class EditProfileFragment extends Fragment {
         designation_Spinner.setPositiveButton("OK");
 
         loadCurrentUser();
+        getFacilities();
+        getDesignation();
+
 
 
         btn_update_profile.setOnClickListener(new View.OnClickListener() {
@@ -188,11 +191,6 @@ public class EditProfileFragment extends Fragment {
 
                             facilityID = facility;
                             designationID = designation;
-
-                            getFacilities();
-                            getDesignation();
-
-
 
 
                         } catch (JSONException e) {
@@ -276,7 +274,7 @@ public class EditProfileFragment extends Fragment {
 
                             if (facility_Spinner != null){
                                 facility_Spinner.setAdapter(aa);
-                                facility_Spinner.setSelection(aa.getCount()-1);
+                                facility_Spinner.setSelection(facilityID-1);
 
                                 facilityID = facilities.get(aa.getCount()-1).getId();
 
@@ -364,6 +362,9 @@ public class EditProfileFragment extends Fragment {
                             designations.add(new Designation(0,"Select your designation."));
                             designationList.add("Select your designation.");
 
+
+
+
                             ArrayAdapter<String> aa=new ArrayAdapter<String>(context,
                                     android.R.layout.simple_spinner_dropdown_item,
                                     designationList){
@@ -377,7 +378,7 @@ public class EditProfileFragment extends Fragment {
 
                             if (designation_Spinner != null){
                                 designation_Spinner.setAdapter(aa);
-                                designation_Spinner.setSelection(aa.getCount()-1);
+                                designation_Spinner.setSelection(designationID-1);
 
                                 designationID = designations.get(aa.getCount()-1).getId();
 
@@ -440,7 +441,6 @@ public class EditProfileFragment extends Fragment {
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")
                 .setContentType("application.json")
-                .setMaxAgeCacheControl(300000, TimeUnit.MILLISECONDS)
                 .addJSONObjectBody(jsonObject) // posting json
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener(){

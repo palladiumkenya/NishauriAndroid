@@ -240,6 +240,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/spacing_medium"
                             app:endIconMode="clear_text"
+                            android:visibility="gone"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -248,7 +249,8 @@
                                 android:layout_height="wrap_content"
                                 style="@style/EditText.Flat.Grey"
                                 android:inputType="phone"
-                                android:hint="Phone Number"/>
+                                android:hint="Phone Number"
+                                />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
@@ -154,6 +155,7 @@ public class PatientConsentFragment extends Fragment {
                         try {
 
                             String  errors = response.has("error") ? response.getString("error") : "" ;
+                            String  message = response.has("message") ? response.getString("message") : "" ;
 
 
                             if (response.has("link")){
@@ -166,6 +168,11 @@ public class PatientConsentFragment extends Fragment {
                                 bundle.putInt("sessionID",sessionId);
                                 Navigation.findNavController(root).navigate(R.id.nav_questions, bundle);
 
+                            }
+                            else if (message.contains("client verification failed")){
+
+                                Navigation.findNavController(root).navigate(R.id.nav_home);
+                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                             }
                             else{
 

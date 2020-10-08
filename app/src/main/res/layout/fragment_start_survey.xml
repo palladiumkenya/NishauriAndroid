@@ -4,6 +4,7 @@
     android:id="@+id/frag_start_survey"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/actionBarSize"
     android:background="@color/grey_5"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.survey.StartSurveyFragment">

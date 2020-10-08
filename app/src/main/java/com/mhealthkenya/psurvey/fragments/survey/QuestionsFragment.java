@@ -60,7 +60,6 @@ public class QuestionsFragment extends Fragment {
     private Context context;
 
     private String openText = "";
-    private String sentData = "";
     private String questionLink;
     private int sessionID;
 
@@ -190,8 +189,6 @@ public class QuestionsFragment extends Fragment {
 
 //                    Toast.makeText(context, String.valueOf(multiAnswerList), Toast.LENGTH_SHORT).show();
 
-
-
                 }
 
                 else {
@@ -220,6 +217,7 @@ public class QuestionsFragment extends Fragment {
         return valid;
     }
 */
+
     private void provideAnswers(int sessionID, int questionNumber, String answer, String openText) {
 
         JSONObject jsonObject = new JSONObject();
@@ -380,8 +378,6 @@ public class QuestionsFragment extends Fragment {
                                             checkBox.setLayoutParams(params);
                                             multipleChoiceAns.addView(checkBox);
 
-
-
                                         }
 
                                         else {
@@ -393,9 +389,6 @@ public class QuestionsFragment extends Fragment {
                                 }
 
                                 surveyQuestion.setText(questions.getQuestion());
-
-
-
 
                             }
                             else if (message.contains("Questionnaire complete")){
@@ -421,7 +414,11 @@ public class QuestionsFragment extends Fragment {
 
                         Log.e(TAG, error.getErrorBody());
 
-                        error_lyt.setVisibility(View.VISIBLE);
+                        if (error.getErrorDetail().equals("connectionError")){
+
+                            error_lyt.setVisibility(View.VISIBLE);
+
+                        }
 
                         Snackbar.make(root.findViewById(R.id.frag_questions), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
 
