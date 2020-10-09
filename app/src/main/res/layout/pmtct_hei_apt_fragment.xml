@@ -36,7 +36,6 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/hei_number"
                         android:inputType="number"
-                        android:maxLength="5"
                         android:textColorHint="#000"
                         android:textSize="12sp" />
                 </com.google.android.material.textfield.TextInputLayout>

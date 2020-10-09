@@ -130,7 +130,8 @@ public class HeiAptDialog extends BottomSheetDialogFragment {
 
 
 
-        titleTextView.setText("Book appointment for "+hei.getHei_first_name()+" "+hei.getHei_last_name());
+        titleTextView.setText("Book appointment for "+clinicNumber);
+//        titleTextView.setText("Book appointment for "+hei.getHei_first_name()+" "+hei.getHei_last_name());
 
         appointment_date.setOnClickListener(new View.OnClickListener() {
             @Override
