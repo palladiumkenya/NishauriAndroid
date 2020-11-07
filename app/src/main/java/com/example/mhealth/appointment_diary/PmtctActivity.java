@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 import com.example.mhealth.appointment_diary.pmtct.PmtctBookAptFragment;
+import com.example.mhealth.appointment_diary.pmtct.PmtctCaregiverRegistrationFragment;
 import com.example.mhealth.appointment_diary.pmtct.PmtctHeiAptFragment;
 import com.example.mhealth.appointment_diary.pmtct.PmtctRegistrationFragment;
 import com.example.mhealth.appointment_diary.pmtct.PmtctUnscheduledHeiAptFragment;
@@ -44,10 +45,11 @@ public class PmtctActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
 
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new PmtctRegistrationFragment(), "REGISTRATION");
-        adapter.addFragment(new PmtctBookAptFragment(), "MOTHER APPOINTMENT");
-        adapter.addFragment(new PmtctHeiAptFragment(), "HEI APPOINTMENT");
-        adapter.addFragment(new PmtctUnscheduledHeiAptFragment(), "UNSCHEDULED HEI APPOINTMENT");
+        adapter.addFragment(new PmtctRegistrationFragment(), "HEI REGISTRATION");
+        adapter.addFragment(new PmtctCaregiverRegistrationFragment(), "CAREGIVER REGISTRATION");
+        adapter.addFragment(new PmtctBookAptFragment(), "MOTHER APT");
+        adapter.addFragment(new PmtctHeiAptFragment(), "HEI APT");
+        adapter.addFragment(new PmtctUnscheduledHeiAptFragment(), "UNSCHEDULED HEI APT");
         viewPager.setAdapter(adapter);
     }
 
