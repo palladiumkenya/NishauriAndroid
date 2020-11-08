@@ -235,7 +235,7 @@
                             android:id="@+id/stable_appointment_date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Appointment Date"
+                            android:hint="Refill Date"
                             android:inputType="text"
                             android:focusable="false"
                             android:maxLength="24"
