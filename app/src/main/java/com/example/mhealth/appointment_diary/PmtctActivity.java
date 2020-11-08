@@ -14,6 +14,7 @@ import com.example.mhealth.appointment_diary.pmtct.PmtctCaregiverRegistrationFra
 import com.example.mhealth.appointment_diary.pmtct.PmtctHeiAptFragment;
 import com.example.mhealth.appointment_diary.pmtct.PmtctRegistrationFragment;
 import com.example.mhealth.appointment_diary.pmtct.PmtctUnscheduledHeiAptFragment;
+import com.example.mhealth.appointment_diary.pmtct.PmtctUpdateHeiFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ public class PmtctActivity extends AppCompatActivity {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new PmtctRegistrationFragment(), "HEI REGISTRATION");
         adapter.addFragment(new PmtctCaregiverRegistrationFragment(), "CAREGIVER REGISTRATION");
+        adapter.addFragment(new PmtctUpdateHeiFragment(), "UPDATE HEI");
         adapter.addFragment(new PmtctBookAptFragment(), "MOTHER APT");
         adapter.addFragment(new PmtctHeiAptFragment(), "HEI APT");
         adapter.addFragment(new PmtctUnscheduledHeiAptFragment(), "UNSCHEDULED HEI APT");

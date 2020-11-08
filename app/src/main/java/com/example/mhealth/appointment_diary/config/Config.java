@@ -67,6 +67,8 @@ public class Config {
     public static final String REGISTER_NON_BREASTFEEDING = "http://ushaurinode.mhealthkenya.org/api/process_pmtct/register/non/breastfeeding";
     public static final String BOOK_HEI_ONLY_APT = "http://ushaurinode.mhealthkenya.org/api/process_pmtct/book/hei/appointment";
     public static final String BOOK_UNSCHEDULED_HEI_ONLY_APT = "http://ushaurinode.mhealthkenya.org/api/process_pmtct/book/hei/unscheduled";
+    public static final String SEARCH_HEI = "http://ushaurinode.mhealthkenya.org/api/process_pmtct/get/hei/details";
+    public static final String UPDATE_HEI = "http://ushaurinode.mhealthkenya.org/api/process_pmtct/update/hei/details/";
 
 
 
