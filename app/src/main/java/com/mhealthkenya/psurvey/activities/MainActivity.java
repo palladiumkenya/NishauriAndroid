@@ -2,6 +2,8 @@ package com.mhealthkenya.psurvey.activities;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +22,6 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.fxn.stash.Stash;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-import com.mhealthkenya.psurvey.BuildConfig;
 import com.mhealthkenya.psurvey.R;
 import com.mhealthkenya.psurvey.activities.auth.LoginActivity;
 import com.mhealthkenya.psurvey.depedancies.Constants;
@@ -117,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
 
+
     }
 
     @Override
@@ -177,9 +179,19 @@ public class MainActivity extends AppCompatActivity {
         lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-        ((TextView) dialog.findViewById(R.id.tv_version)).setText("Version: " + BuildConfig.VERSION_NAME);
+        try {
+            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            String version = pInfo.versionName;//Version Name
+            int verCode = pInfo.versionCode;//Version Code
 
-        ((TextView) dialog.findViewById(R.id.tv_build)).setText("Build: " + String.valueOf(BuildConfig.VERSION_CODE));
+            ((TextView) dialog.findViewById(R.id.tv_version)).setText("Version: " + version);
+
+            ((TextView) dialog.findViewById(R.id.tv_build)).setText("Build: " + String.valueOf(verCode));
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
 
         ((ImageButton) dialog.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
             @Override
