@@ -70,7 +70,7 @@ public class PmtctRegistrationFragment extends Fragment {
 
 
     String[] gender_list = {"Please select gender","Female","Male"};
-    String[] yes_no = {"Please select if breastfeeding","Yes","No"};
+    String[] yes_no = {"Type of caregiver","Breastfeeding - Yes","Breastfeeding - No", "Pregnant"};
 
 
     private String BREASTFEEDING = "";
@@ -231,11 +231,11 @@ public class PmtctRegistrationFragment extends Fragment {
 
                 BREASTFEEDING = yes_no[position];
 
-                if (BREASTFEEDING.equals("Yes")){
+                if (BREASTFEEDING.equals("Breastfeeding - Yes") || BREASTFEEDING.equals("Breastfeeding - No")){
                     register_layout.setVisibility(View.VISIBLE);
                     btn_submit_no_hei.setVisibility(View.GONE);
 
-                }else if (BREASTFEEDING.equals("No")){
+                }else if (BREASTFEEDING.equals("Pregnant")){
                     btn_submit_no_hei.setVisibility(View.VISIBLE);
                     register_layout.setVisibility(View.GONE);
                 }else {
@@ -617,6 +617,7 @@ public class PmtctRegistrationFragment extends Fragment {
             payload.put("phone_no", phone_no);
             payload.put("hei_no", hei_no.getText().toString());
             payload.put("hei_gender", java.util.Arrays.asList(gender_list).indexOf(GENDER));
+            payload.put("breastfeeding", java.util.Arrays.asList(yes_no).indexOf(BREASTFEEDING));
             payload.put("hei_dob", HEI_DOB);
             payload.put("hei_first_name", first_name.getText().toString());
             payload.put("hei_middle_name", middle_name.getText().toString());
