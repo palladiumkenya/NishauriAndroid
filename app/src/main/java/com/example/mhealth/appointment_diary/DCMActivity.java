@@ -45,7 +45,7 @@ import java.util.Map;
 
 public class DCMActivity extends AppCompatActivity {
 
-    private Spinner wellness_level_spinner,stability_level_spinner,on_dcm_spinner,facility_community_spinner,facility_based_model_spinner,
+    private Spinner wellness_level_spinner,stability_level_spinner,on_dcm_spinner,new_continuing_dcm,facility_community_spinner,facility_based_model_spinner,
             community_based_model_spinner,appointment_type_spinner;
     private EditText mfl_code,ccc_no,stable_appointment_date,clinical_review_date,appointment_date,other_et;
     private LinearLayout wellness_level_layout,stability_layout,on_dcm_layout,facility_community_layout,facility_based_model_layout,community_based_model_layout,
@@ -60,11 +60,12 @@ public class DCMActivity extends AppCompatActivity {
     private String APT_TYPE = "";
     private String STABILITY_LEVEL = "";
     private String ON_DCM_STATUS = "";
+    private int NEW_CONTINUING_DCM = 0;
     private String FACILITY_BASED_MODEL = "";
     private String COMMUNITY_BASED_MODEL = "";
 
-    private String STABLE_REFILL_DATE = "";
-    private String CLINICAL_REVIEW_DATE = "";
+    private String STABLE_REFILL_DATE = "-1";
+    private String CLINICAL_REVIEW_DATE = "-1";
     private String APPOINTMENT_DATE = "";
 
     private int months = 0;
@@ -78,9 +79,10 @@ public class DCMActivity extends AppCompatActivity {
     String[] wellness = {"Please select wellness level","Well","Advanced"};
     String[] stability = {"Please select stability level","Stable","Unstable"};
     String[] on_dcm = {"Please select if on DCM","On DCM","NOT on DCM"};
+    String[] new_continuing_dcm_choice = {"Please select if new of continuing on DCM","New On DCM","Continuing on DCM"};
     String[] facility_community = {"Please select DCM mode","Facility based","Community based"};
     String[] facility_based_model = {"Please select facility model","Fast track Model","Facility based Adherence clubs/ Support group"};
-    String[] community_based_model = {"Please select community model","Peer Led Community ART group","Health provider led Community ART group","Community ART distribution point","Individual patient ART Distribution in the community"};
+    String[] community_based_model = {"Please select community model","Peer Led Community ART group","Health provider led Community ART group","Community ART distribution point","Individual patient ART Distribution in the community", "Home based re-fill", "School based re-fill"};
 
 
     @Override
@@ -171,7 +173,7 @@ public class DCMActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 1){ //on DCM
                     ON_DCM_STATUS = on_dcm[position];
-                    facility_community_layout.setVisibility(View.VISIBLE);
+                    new_continuing_dcm.setVisibility(View.VISIBLE);
                     normal_tca_layout.setVisibility(View.GONE);
                 }else if (position == 2){ //not on DCM
                     ON_DCM_STATUS = on_dcm[position];
@@ -186,6 +188,23 @@ public class DCMActivity extends AppCompatActivity {
 
             }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        new_continuing_dcm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                NEW_CONTINUING_DCM = position;
+                if (position==1){ //new on dcm
+                    facility_community_layout.setVisibility(View.VISIBLE);
+                }else if (position==2){ //continuinig on dcm
+                    facility_community_layout.setVisibility(View.VISIBLE);
+                }
+
+            }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -443,19 +462,34 @@ public class DCMActivity extends AppCompatActivity {
             return valid;
         }
 
-
-        if (TextUtils.isEmpty(stable_appointment_date.getText().toString())) {
-            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select appointment date",DCMActivity.this);
+        if (TextUtils.isEmpty(stable_appointment_date.getText().toString()) && TextUtils.isEmpty(clinical_review_date.getText().toString()) && NEW_CONTINUING_DCM == 2) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select either appointment date or clinical review date",DCMActivity.this);
             bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
             valid = false;
             return valid;
         }
 
+        if (TextUtils.isEmpty(stable_appointment_date.getText().toString())) {
+            if (NEW_CONTINUING_DCM == 2){ //continuinng
+                return  valid;
+            }else {
+                ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select appointment date",DCMActivity.this);
+                bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+                valid = false;
+                return valid;
+            }
+        }
+
         if (TextUtils.isEmpty(clinical_review_date.getText().toString())) {
-            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select clinical review date",DCMActivity.this);
-            bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
-            valid = false;
-            return valid;
+            if (NEW_CONTINUING_DCM == 2){ //continuinng
+                return  valid;
+            }else {
+                ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select clinical review date",DCMActivity.this);
+                bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+                valid = false;
+                return valid;
+            }
+
         }
 
 
@@ -934,6 +968,7 @@ public class DCMActivity extends AppCompatActivity {
         wellness_level_spinner=(Spinner) findViewById(R.id.wellness_level_spinner);
         stability_level_spinner=(Spinner) findViewById(R.id.stability_level_spinner);
         on_dcm_spinner=(Spinner) findViewById(R.id.on_dcm_spinner);
+        new_continuing_dcm=(Spinner) findViewById(R.id.new_continuing_dcm);
         facility_community_spinner=(Spinner) findViewById(R.id.facility_community_spinner);
         facility_based_model_spinner=(Spinner) findViewById(R.id.facility_based_model_spinner);
         community_based_model_spinner=(Spinner) findViewById(R.id.community_based_model_spinner);
@@ -964,6 +999,10 @@ public class DCMActivity extends AppCompatActivity {
         ArrayAdapter<String> on_dcmAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, on_dcm);
         on_dcmAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         on_dcm_spinner.setAdapter(on_dcmAdapter);
+
+        ArrayAdapter<String> new_continuing_dcmAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, new_continuing_dcm_choice);
+        on_dcmAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        new_continuing_dcm.setAdapter(new_continuing_dcmAdapter);
 
         ArrayAdapter<String> facility_communityAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, facility_community);
         facility_communityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
