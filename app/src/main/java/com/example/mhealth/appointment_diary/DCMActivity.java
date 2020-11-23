@@ -1001,7 +1001,7 @@ public class DCMActivity extends AppCompatActivity {
         on_dcm_spinner.setAdapter(on_dcmAdapter);
 
         ArrayAdapter<String> new_continuing_dcmAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, new_continuing_dcm_choice);
-        on_dcmAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        new_continuing_dcmAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         new_continuing_dcm.setAdapter(new_continuing_dcmAdapter);
 
         ArrayAdapter<String> facility_communityAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, facility_community);

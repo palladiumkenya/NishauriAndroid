@@ -60,11 +60,13 @@ public class PmtctHeiAptFragment extends Fragment {
     private String phone_no;
 
 
-    String[] appnment = {"Please select appointment type","Re-Fill","Clinical review","Enhanced Adherence counseling","Lab investigation","VL Booking","Other"};
+    String[] appnment = {"Please select appointment type","Re-Fill","Clinical review","Enhanced Adherence counseling","Lab investigation","VL Booking","Other","PCR"};
+    String[] pcr_taken = {"Has PCR been taken?","YES","NO"};
 
 
 
     private String APT_TYPE = "";
+    private String PCR_TAKEN = "";
     private String APPOINTMENT_DATE = "";
 
 
@@ -83,6 +85,9 @@ public class PmtctHeiAptFragment extends Fragment {
 
     @BindView(R.id.appointment_type_spinner)
     Spinner appointment_type_spinner;
+
+    @BindView(R.id.pcr_taken_spinner)
+    Spinner pcr_taken_spinner;
 
 
     @BindView(R.id.other_et)
@@ -132,6 +137,26 @@ public class PmtctHeiAptFragment extends Fragment {
         ArrayAdapter<String> customAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, appnment);
         customAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         appointment_type_spinner.setAdapter(customAdapter);
+
+
+        ArrayAdapter<String> pcrAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, pcr_taken);
+        pcrAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        pcr_taken_spinner.setAdapter(pcrAdapter);
+
+
+        pcr_taken_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                PCR_TAKEN = pcr_taken[position];
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         appointment_type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -243,6 +268,13 @@ public class PmtctHeiAptFragment extends Fragment {
             return valid;
         }
 
+        if (PCR_TAKEN.equals("") || PCR_TAKEN.equals("Has PCR been taken?")) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select if PCR was taken",context);
+            bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
+
 
         return valid;
     }
@@ -256,6 +288,8 @@ public class PmtctHeiAptFragment extends Fragment {
             payload.put("appointment_date", APPOINTMENT_DATE);
             payload.put("appointment_type", java.util.Arrays.asList(appnment).indexOf(APT_TYPE));
             payload.put("appointment_other", TextUtils.isEmpty(other_et.getText().toString()) ? -1 : other_et.getText().toString());
+            payload.put("pcr_taken", PCR_TAKEN);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

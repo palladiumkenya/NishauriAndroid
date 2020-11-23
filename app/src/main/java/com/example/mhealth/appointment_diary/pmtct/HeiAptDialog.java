@@ -58,12 +58,13 @@ public class HeiAptDialog extends BottomSheetDialogFragment {
     private Unbinder unbinder;
     private String clinicNumber;
     private String phone_no;
+    private String PCR_TAKEN = "";
 
     RequestQueue queue;
 
 
-
-    String[] appnment = {"Please select appointment type","Re-Fill","Clinical review","Enhanced Adherence counseling","Lab investigation","VL Booking","Other"};
+    String[] pcr_taken = {"Has PCR been taken?","YES","NO"};
+    String[] appnment = {"Please select appointment type","Re-Fill","Clinical review","Enhanced Adherence counseling","Lab investigation","VL Booking","Other", "PCR"};
 
 
     private String APPOINTMENT_DATE = "";
@@ -89,6 +90,9 @@ public class HeiAptDialog extends BottomSheetDialogFragment {
 
     @BindView(R.id.other_layout)
     LinearLayout other_layout;
+
+    @BindView(R.id.pcr_taken_spinner)
+    Spinner pcr_taken_spinner;
 
     public HeiAptDialog() {
         // Required empty public constructor
@@ -129,6 +133,23 @@ public class HeiAptDialog extends BottomSheetDialogFragment {
         queue = Volley.newRequestQueue(context); // this = context
 
 
+        ArrayAdapter<String> pcrAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, pcr_taken);
+        pcrAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        pcr_taken_spinner.setAdapter(pcrAdapter);
+
+
+        pcr_taken_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                PCR_TAKEN = pcr_taken[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         titleTextView.setText("Book appointment for "+clinicNumber);
 //        titleTextView.setText("Book appointment for "+hei.getHei_first_name()+" "+hei.getHei_last_name());
@@ -210,6 +231,13 @@ public class HeiAptDialog extends BottomSheetDialogFragment {
     private boolean validateHei() {
         boolean valid = true;
 
+        if (PCR_TAKEN.equals("") || PCR_TAKEN.equals("Has PCR been taken?")) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select if PCR has been taken",context);
+            bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
+
         if (TextUtils.isEmpty(appointment_date.getText().toString())) {
             ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select appointment date",context);
             bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
@@ -223,6 +251,7 @@ public class HeiAptDialog extends BottomSheetDialogFragment {
             valid = false;
             return valid;
         }
+
 
         if (APT_TYPE.equals("Other") && TextUtils.isEmpty(other_et.getText().toString())) {
             ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please specify other",context);
@@ -244,6 +273,7 @@ public class HeiAptDialog extends BottomSheetDialogFragment {
             payload.put("appointment_type", java.util.Arrays.asList(appnment).indexOf(APT_TYPE));
             payload.put("appointment_other", TextUtils.isEmpty(other_et.getText().toString()) ? -1 : other_et.getText().toString());
             payload.put("hei_number", hei.getHei_no());
+            payload.put("pcr_taken", PCR_TAKEN);
         } catch (JSONException e) {
             e.printStackTrace();
         }
