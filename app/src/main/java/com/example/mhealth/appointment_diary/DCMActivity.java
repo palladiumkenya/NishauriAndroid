@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -25,8 +26,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mhealth.appointment_diary.Dialogs.ErrorMessage;
+import com.example.mhealth.appointment_diary.appointment_diary.TodaysAppointment;
 import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.config.VolleyErrors;
+import com.example.mhealth.appointment_diary.defaulters_diary.DefaulterMainActivity;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
 import com.example.mhealth.appointment_diary.utilitymodules.Appointment;
@@ -43,6 +46,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class DCMActivity extends AppCompatActivity {
 
     private Spinner wellness_level_spinner,stability_level_spinner,on_dcm_spinner,new_continuing_dcm,facility_community_spinner,facility_based_model_spinner,
@@ -51,6 +56,8 @@ public class DCMActivity extends AppCompatActivity {
     private LinearLayout wellness_level_layout,stability_layout,on_dcm_layout,facility_community_layout,facility_based_model_layout,community_based_model_layout,
             dcm_submit_layout,normal_tca_layout,other_layout;
     private Button btn_check,btn_submit_apt,btn_dcm_submit_apt;
+
+    SweetAlertDialog mdialog;
 
 
 
@@ -72,6 +79,7 @@ public class DCMActivity extends AppCompatActivity {
     private String phone_no;
 
     RequestQueue queue;
+
 
 
 
@@ -632,6 +640,7 @@ public class DCMActivity extends AppCompatActivity {
                 try {
                     boolean success = response.has("success") && response.getBoolean("success");
                     String message = response.has("message") ? response.getString("message") : "";
+                    String status = response.has("status") ? response.getString("status") : "";
 
                     if (success) {
                         ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Success",message,DCMActivity.this);
@@ -663,10 +672,26 @@ public class DCMActivity extends AppCompatActivity {
                         other_et.getText().clear();
 
 
-
                     } else {
-                        ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Failed",message,DCMActivity.this);
-                        bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+//                        ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Failed",message,DCMActivity.this);
+//                        bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+
+                        mdialog= new SweetAlertDialog(DCMActivity.this, SweetAlertDialog.ERROR_TYPE);
+                        mdialog.setTitleText(message);
+//                        mdialog.setContentText(message);
+                        mdialog.setCancelable(false);
+                        mdialog.setConfirmButton("OK",new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                if (status.equals("Defaulter")){
+                                    startActivity(new Intent(DCMActivity.this, DefaulterMainActivity.class));
+                                }else if (status.equals("Appointment")){
+                                    startActivity(new Intent(DCMActivity.this, TodaysAppointment.class));
+                                }
+                            }
+                        });
+                        mdialog.show();
+
                     }
 
                 } catch (Exception e) {
@@ -754,6 +779,7 @@ public class DCMActivity extends AppCompatActivity {
                 try {
                     boolean success = response.has("success") && response.getBoolean("success");
                     String message = response.has("message") ? response.getString("message") : "";
+                    String status = response.has("status") ? response.getString("status") : "";
 
                     if (success) {
                         ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Success",message,DCMActivity.this);
@@ -784,11 +810,42 @@ public class DCMActivity extends AppCompatActivity {
                         appointment_date.getText().clear();
                         other_et.getText().clear();
 
+//                        mdialog= new SweetAlertDialog(DCMActivity.this, SweetAlertDialog.ERROR_TYPE);
+//                        mdialog.setTitleText("Success");
+//                        mdialog.setContentText(message);
+//                        mdialog.setCancelable(false);
+//                        mdialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                            @Override
+//                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+//                                if (status.equals("Defaulter")){
+//                                    startActivity(new Intent(DCMActivity.this, DefaulterMainActivity.class));
+//                                }else if (status.equals("Appointment")){
+//                                    startActivity(new Intent(DCMActivity.this, TodaysAppointment.class));
+//                                }
+//                            }
+//                        });
+//                        mdialog.show();
 
 
                     } else {
-                        ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Failed",message,DCMActivity.this);
-                        bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+//                        ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Failed",message,DCMActivity.this);
+//                        bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
+
+                        mdialog= new SweetAlertDialog(DCMActivity.this, SweetAlertDialog.ERROR_TYPE);
+                        mdialog.setTitleText(message);
+//                        mdialog.setContentText(message);
+                        mdialog.setCancelable(false);
+                        mdialog.setConfirmButton("OK",new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                if (status.equals("Defaulter")){
+                                    startActivity(new Intent(DCMActivity.this, DefaulterMainActivity.class));
+                                }else if (status.equals("Appointment")){
+                                    startActivity(new Intent(DCMActivity.this, TodaysAppointment.class));
+                                }
+                            }
+                        });
+                        mdialog.show();
                     }
 
                 } catch (Exception e) {
