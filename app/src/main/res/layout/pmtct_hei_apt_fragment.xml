@@ -75,6 +75,25 @@
                 </LinearLayout>
 
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/was_pcr_taken" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp"
+                    android:orientation="horizontal">
+
+
+                    <Spinner
+                        android:id="@+id/pcr_taken_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -460,8 +460,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="80dp"
                             android:paddingTop="@dimen/spacing_large"
-                            app:srcCompat="@drawable/ic_calendar"
-                            android:tint="@color/colorPrimary"
+                            app:srcCompat="@drawable/ic_blood_test"
                             android:scaleType="centerInside" />
 
                         <LinearLayout
