@@ -41,7 +41,8 @@ public class PmtctActivity extends AppCompatActivity {
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.book_mother_apt, R.id.caregiver_reg,
-                R.id.hei_reg, R.id.update_hei, R.id.hei_apt, R.id.unscheduled_hei_apt)
+                R.id.hei_reg, R.id.update_hei, R.id.hei_apt, R.id.unscheduled_hei_apt,
+                R.id.pcr_positive_enrollment)
                 //.setDrawerLayout(drawer)
                 .build();
 

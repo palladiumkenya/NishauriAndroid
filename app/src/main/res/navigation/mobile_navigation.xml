@@ -34,6 +34,9 @@
         android:id="@+id/unscheduled_hei_apt"
         android:name="com.example.mhealth.appointment_diary.pmtct.PmtctUnscheduledHeiAptFragment"
         android:label="Unscheduled Hei Appointment" />
-
+    <fragment
+        android:id="@+id/pcr_positive_enrollment"
+        android:name="com.example.mhealth.appointment_diary.pmtct.PcrPositiveEnrollmentFragment"
+        android:label="Pcr Positive Enrollment" />
 
 </navigation>
