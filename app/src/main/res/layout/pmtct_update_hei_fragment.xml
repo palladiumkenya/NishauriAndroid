@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.mhealth.appointment_diary.DCMActivity">
+    tools:context="com.example.mhealth.appointment_diary.PmtctActivity">
 
 
     <androidx.core.widget.NestedScrollView
@@ -74,12 +74,7 @@
                     android:text="@string/hei_details" />
 
 
-                <TextView
-                    android:id="@+id/hei_no_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:text="HEI NO.: " />
+
 
                 <TextView
                     android:id="@+id/clinic_id_tv"
@@ -110,6 +105,19 @@
                         android:layout_marginBottom="20sp" />
 
                 </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/hei_no_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hei_number"
+                        android:inputType="number"
+                        android:textColorHint="#000" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"

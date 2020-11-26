@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_home">
+
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.mhealth.appointment_diary.pmtct.HomeFragment"
+        android:label="PMTCT" />
+    <fragment
+        android:id="@+id/book_mother_apt"
+        android:name="com.example.mhealth.appointment_diary.pmtct.PmtctBookAptFragment"
+        android:label="Book Mother Appointment" />
+    <fragment
+        android:id="@+id/caregiver_reg"
+        android:name="com.example.mhealth.appointment_diary.pmtct.PmtctCaregiverRegistrationFragment"
+        android:label="Caregiver Registration" />
+    <fragment
+        android:id="@+id/hei_reg"
+        android:name="com.example.mhealth.appointment_diary.pmtct.PmtctRegistrationFragment"
+        android:label="HEI Registration" />
+    <fragment
+        android:id="@+id/update_hei"
+        android:name="com.example.mhealth.appointment_diary.pmtct.PmtctUpdateHeiFragment"
+        android:label="Update HEI" />
+    <fragment
+        android:id="@+id/hei_apt"
+        android:name="com.example.mhealth.appointment_diary.pmtct.PmtctHeiAptFragment"
+        android:label="HEI Appointment" />
+    <fragment
+        android:id="@+id/unscheduled_hei_apt"
+        android:name="com.example.mhealth.appointment_diary.pmtct.PmtctUnscheduledHeiAptFragment"
+        android:label="Unscheduled Hei Appointment" />
+
+
+</navigation>

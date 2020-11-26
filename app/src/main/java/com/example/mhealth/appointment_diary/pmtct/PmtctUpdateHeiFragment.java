@@ -60,6 +60,7 @@ public class PmtctUpdateHeiFragment extends Fragment {
     RequestQueue queue;
 
     private String phone_no;
+    private int HEI_PRIM_KEY = 0;
 
 
     String[] gender_list = {"Please select gender","Female","Male"};
@@ -84,8 +85,8 @@ public class PmtctUpdateHeiFragment extends Fragment {
     @BindView(R.id.btn_search)
     Button btn_search;
 
-    @BindView(R.id.hei_no_tv)
-    TextView hei_no_tv;
+    @BindView(R.id.hei_no_et)
+    EditText hei_no_et;
 
     @BindView(R.id.clinic_id_tv)
     TextView clinic_id_tv;
@@ -259,6 +260,13 @@ public class PmtctUpdateHeiFragment extends Fragment {
             return valid;
         }
 
+        if (TextUtils.isEmpty(hei_no_et.getText().toString())) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please enter HEI number",context);
+            bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
+            valid = false;
+            return valid;
+        }
+
         if (TextUtils.isEmpty(phone_no_et.getText().toString())) {
             ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please enter phone number",context);
             bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
@@ -329,6 +337,7 @@ public class PmtctUpdateHeiFragment extends Fragment {
                             int gender = hei_data.has("gender") ? hei_data.getInt("gender") : 0;
                             int language_id = hei_data.has("language_id") ? hei_data.getInt("language_id") : 0;
                             int mfl_code = hei_data.has("mfl_code") ? hei_data.getInt("mfl_code") : 0;
+                            int hei_prim_key = hei_data.has("hei_prim_key") ? hei_data.getInt("hei_prim_key") : 0;
 
                             CLINIC_ID = clinic_id;
                             LANGAUAGE_ID = language_id;
@@ -344,7 +353,9 @@ public class PmtctUpdateHeiFragment extends Fragment {
                             hei_gender_spinner.setSelection(gender);
                             phone_no_et.setText(phone_no_str);
 
-                            hei_no_tv.setText("HEI NO.: "+hei_no);
+                            HEI_PRIM_KEY = hei_prim_key;
+
+                            hei_no_et.setText(hei_no);
                             clinic_id_tv.setText("CLINIC ID: "+clinic_id);
 
                         }else {
@@ -364,7 +375,7 @@ public class PmtctUpdateHeiFragment extends Fragment {
                             last_name.clearComposingText();
                             hei_gender_spinner.setSelection(0);
 
-                            hei_no_tv.setText("HEI NO.: ");
+                            hei_no_et.clearComposingText();
                             clinic_id_tv.setText("CLINIC ID: ");
 
                             ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Error","Fatal system error occurred. Please contact admin",context);
@@ -456,7 +467,8 @@ public class PmtctUpdateHeiFragment extends Fragment {
             payload.put("mfl_code", MFL_CODE);
             payload.put("gender", java.util.Arrays.asList(gender_list).indexOf(HEI_GENDER));
             payload.put("clinic_id", CLINIC_ID);
-            payload.put("hei_no", HEI_NO);
+            payload.put("hei_no", hei_no_et.getText().toString());
+            payload.put("hei_prim_key", HEI_PRIM_KEY);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -496,7 +508,7 @@ public class PmtctUpdateHeiFragment extends Fragment {
                         last_name.clearComposingText();
                         hei_gender_spinner.setSelection(0);
 
-                        hei_no_tv.setText("HEI NO.: ");
+                        hei_no_et.clearComposingText();
                         clinic_id_tv.setText("CLINIC ID: ");
 
 

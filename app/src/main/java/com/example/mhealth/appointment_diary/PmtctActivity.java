@@ -2,9 +2,14 @@ package com.example.mhealth.appointment_diary;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
@@ -15,6 +20,7 @@ import com.example.mhealth.appointment_diary.pmtct.PmtctHeiAptFragment;
 import com.example.mhealth.appointment_diary.pmtct.PmtctRegistrationFragment;
 import com.example.mhealth.appointment_diary.pmtct.PmtctUnscheduledHeiAptFragment;
 import com.example.mhealth.appointment_diary.pmtct.PmtctUpdateHeiFragment;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -22,68 +28,32 @@ import java.util.List;
 
 public class PmtctActivity extends AppCompatActivity {
 
-    private ViewPager view_pager;
-    private TabLayout tab_layout;
+
+    private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pmtct);
 
-
-        view_pager = findViewById(R.id.view_pager);
-        tab_layout = findViewById(R.id.tab_layout);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        setupViewPager(view_pager);
-        tab_layout.setupWithViewPager(view_pager);
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_home, R.id.book_mother_apt, R.id.caregiver_reg,
+                R.id.hei_reg, R.id.update_hei, R.id.hei_apt, R.id.unscheduled_hei_apt)
+                //.setDrawerLayout(drawer)
+                .build();
+
+
+
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+
+
 
 
     }
-
-
-    // Add Fragments to Tabs
-    private void setupViewPager(ViewPager viewPager) {
-
-        Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new PmtctRegistrationFragment(), "HEI REGISTRATION");
-        adapter.addFragment(new PmtctCaregiverRegistrationFragment(), "CAREGIVER REGISTRATION");
-        adapter.addFragment(new PmtctUpdateHeiFragment(), "UPDATE HEI");
-        adapter.addFragment(new PmtctBookAptFragment(), "MOTHER APT");
-        adapter.addFragment(new PmtctHeiAptFragment(), "HEI APT");
-        adapter.addFragment(new PmtctUnscheduledHeiAptFragment(), "UNSCHEDULED HEI APT");
-        viewPager.setAdapter(adapter);
-    }
-
-    static class Adapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public Adapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
-
 
 
 }
