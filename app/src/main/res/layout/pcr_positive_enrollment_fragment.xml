@@ -34,7 +34,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="HEI NUMBER "
-                        android:inputType="number"
+                        android:inputType="none"
+                        android:focusable="false"
                         android:textColorHint="#000"
                         android:textSize="12sp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -63,7 +64,7 @@
             <LinearLayout
                 android:id="@+id/pcr_details_layout"
                 android:layout_width="match_parent"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
@@ -97,19 +98,18 @@
                         android:textSize="12sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                    <EditText
-                        android:id="@+id/client_status"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/client_status"
-                        android:inputType="text"
-                        android:textColorHint="#000"
-                        android:textSize="12sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_client_status" />
+
+                <Spinner
+                    android:id="@+id/client_status_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -168,7 +168,7 @@
                         android:layout_height="wrap_content"
                         android:focusable="false"
                         android:hint="@string/date_of_birth"
-                        android:inputType="date"
+                        android:inputType="none"
                         android:maxLength="24"
                         android:textColorHint="#000"
                         android:textSize="12sp" />

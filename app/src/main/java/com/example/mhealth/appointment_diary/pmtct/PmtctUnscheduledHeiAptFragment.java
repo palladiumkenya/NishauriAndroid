@@ -112,7 +112,7 @@ public class PmtctUnscheduledHeiAptFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        root =  inflater.inflate(R.layout.pmtct_hei_apt_fragment, container, false);
+        root =  inflater.inflate(R.layout.pmtct_hei_unscheduled_apt_fragment, container, false);
         unbinder = ButterKnife.bind(this, root);
 
         List<Activelogin> myl=Activelogin.findWithQuery(Activelogin.class,"select * from Activelogin");

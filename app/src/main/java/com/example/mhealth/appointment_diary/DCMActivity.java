@@ -86,8 +86,8 @@ public class DCMActivity extends AppCompatActivity {
     String[] appnment = {"Please select appointment type","Re-Fill","Clinical review","Enhanced Adherence counseling","Lab investigation","VL Booking","Other"};
     String[] wellness = {"Please select wellness level","Well","Advanced"};
     String[] stability = {"Please select stability level","Stable","Unstable"};
-    String[] on_dcm = {"Please select if on DCM","On DCM","NOT on DCM"};
-    String[] new_continuing_dcm_choice = {"Please select if new of continuing on DCM","New On DCM","Continuing on DCM"};
+    String[] on_dcm = {"Please select if on DSD","On DSD","NOT on DSD"};
+    String[] new_continuing_dcm_choice = {"Please select if new or continuing on DSD","New On DSD","Continuing on DSD"};
     String[] facility_community = {"Please select DCM mode","Facility based","Community based"};
     String[] facility_based_model = {"Please select facility model","Fast track Model","Facility based Adherence clubs/ Support group"};
     String[] community_based_model = {"Please select community model","Peer Led Community ART group","Health provider led Community ART group","Community ART distribution point","Individual patient ART Distribution in the community", "Home based re-fill", "School based re-fill"};
@@ -338,12 +338,12 @@ public class DCMActivity extends AppCompatActivity {
                     if(STABILITY_LEVEL.equals("Stable")){
                         //continue with stable logic
                         Log.e("On DCM status: ", ON_DCM_STATUS);
-                        if (ON_DCM_STATUS.equals("On DCM")){
+                        if (ON_DCM_STATUS.equals("On DSD")){
                             //validate and post on DCM
                             if (validateOnDcm())
                                 bookOnDcm();
 
-                        }else if (ON_DCM_STATUS.equals("NOT on DCM")){
+                        }else if (ON_DCM_STATUS.equals("NOT on DSD")){
                             if (validateNotOnDcm())
                                 bookNormalTca(Config.NOT_ON_DCM_BOOKING);
                         }
@@ -368,12 +368,12 @@ public class DCMActivity extends AppCompatActivity {
                     if(STABILITY_LEVEL.equals("Stable")){
                         //continue with stable logic
                         Log.e("On DCM status: ", ON_DCM_STATUS);
-                        if (ON_DCM_STATUS.equals("On DCM")){
+                        if (ON_DCM_STATUS.equals("On DSD")){
                             //validate and post on DCM
                             if (validateOnDcm())
                                 bookOnDcm();
 
-                        }else if (ON_DCM_STATUS.equals("NOT on DCM")){
+                        }else if (ON_DCM_STATUS.equals("NOT on DSD")){
                             if (validateNotOnDcm())
                                 bookNormalTca(Config.NOT_ON_DCM_BOOKING);
 
@@ -463,8 +463,8 @@ public class DCMActivity extends AppCompatActivity {
             return valid;
         }
 
-        if (ON_DCM_STATUS.equals("") || ON_DCM_STATUS.equals("Please select if on DCM")) {
-            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select if on DCM",DCMActivity.this);
+        if (ON_DCM_STATUS.equals("") || ON_DCM_STATUS.equals("Please select if on DSD")) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select if on DSD",DCMActivity.this);
             bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
             valid = false;
             return valid;
@@ -529,8 +529,8 @@ public class DCMActivity extends AppCompatActivity {
             return valid;
         }
 
-        if (ON_DCM_STATUS.equals("") || ON_DCM_STATUS.equals("Please select if on DCM")) {
-            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select if on DCM",DCMActivity.this);
+        if (ON_DCM_STATUS.equals("") || ON_DCM_STATUS.equals("Please select if on DSD")) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select if on DSD",DCMActivity.this);
             bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
             valid = false;
             return valid;

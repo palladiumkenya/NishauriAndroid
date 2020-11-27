@@ -69,6 +69,8 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
     private String DOB_DATE = "";
     private long DOB_DATE_MILLIS = 0;
 
+    private String CLIENT_STATUS = "";
+
     private int SRV_ID = 0;
     private String SRV_CLINIC_NUMBER = "";
     private String SRV_CLIENT_STATUS = "";
@@ -81,6 +83,7 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
 
 
     String[] yes_no = {"Enable motivation?","YES","NO"};
+    String[] client_status = {"Client status","ART","On Care","Pre-ART"};
 
 
     @BindView(R.id.search_hei_no)
@@ -104,8 +107,8 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
     @BindView(R.id.clinic_number)
     EditText clinic_number;
 
-    @BindView(R.id.client_status)
-    EditText client_status;
+    @BindView(R.id.client_status_spinner)
+    Spinner client_status_spinner;
 
     @BindView(R.id.file_no)
     EditText file_no;
@@ -164,11 +167,29 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
         motivation_spinner.setAdapter(pcrAdapter);
 
 
+        ArrayAdapter<String> statusAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, client_status);
+        statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        client_status_spinner.setAdapter(statusAdapter);
+
+
         motivation_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 MOTIVATION = yes_no[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        client_status_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                CLIENT_STATUS = client_status[position];
             }
 
             @Override
@@ -240,35 +261,35 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
         });
 
 
-        dob.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar cur_calender = Calendar.getInstance();
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(context,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                                Calendar calendar = Calendar.getInstance();
-                                calendar.set(Calendar.YEAR, year);
-                                calendar.set(Calendar.MONTH, month);
-                                calendar.set(Calendar.DAY_OF_MONTH, day);
-                                long date_ship_millis = calendar.getTimeInMillis();
-                                SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-                                DOB_DATE = newFormat.format(date_ship_millis);
-                                DOB_DATE_MILLIS = date_ship_millis;
-
-                                dob.setText(newFormat.format(date_ship_millis));
-                            }
-                        }, cur_calender.get(Calendar.YEAR),
-                        cur_calender.get(Calendar.MONTH),
-                        cur_calender.get(Calendar.DAY_OF_MONTH));
-
-               // datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
-                datePickerDialog.show();
-            }
-        });
+//        dob.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Calendar cur_calender = Calendar.getInstance();
+//
+//                DatePickerDialog datePickerDialog = new DatePickerDialog(context,
+//                        new DatePickerDialog.OnDateSetListener() {
+//                            @Override
+//                            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+//                                Calendar calendar = Calendar.getInstance();
+//                                calendar.set(Calendar.YEAR, year);
+//                                calendar.set(Calendar.MONTH, month);
+//                                calendar.set(Calendar.DAY_OF_MONTH, day);
+//                                long date_ship_millis = calendar.getTimeInMillis();
+//                                SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd");
+//
+//                                DOB_DATE = newFormat.format(date_ship_millis);
+//                                DOB_DATE_MILLIS = date_ship_millis;
+//
+//                                dob.setText(newFormat.format(date_ship_millis));
+//                            }
+//                        }, cur_calender.get(Calendar.YEAR),
+//                        cur_calender.get(Calendar.MONTH),
+//                        cur_calender.get(Calendar.DAY_OF_MONTH));
+//
+//               // datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+//                datePickerDialog.show();
+//            }
+//        });
 
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -334,8 +355,8 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
             return valid;
         }
 
-        if (TextUtils.isEmpty(client_status.getText().toString())) {
-            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please enter client status",context);
+        if (CLIENT_STATUS.equals("") || CLIENT_STATUS.equals("Client status")) {
+            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select Client status",context);
             bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
             valid = false;
             return valid;
@@ -458,9 +479,6 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
                             if (srv_file_no!=null)
                                 file_no.setText(srv_file_no);
 
-                            if (srv_client_status!=null)
-                                client_status.setText(srv_client_status);
-
                             if (srv_clinic_number!=null)
                                 clinic_number.setText(srv_clinic_number);
 
@@ -488,7 +506,6 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
                             hei_no.clearComposingText();
                             dob.clearComposingText();
                             file_no.clearComposingText();
-                            client_status.clearComposingText();
                             clinic_number.clearComposingText();
                             motivation_spinner.setSelection(0);
 
@@ -572,7 +589,7 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
             payload.put("hei_no", hei_no.getText().toString());
             payload.put("user_phone", phone_no);
             payload.put("clinic_number", clinic_number.getText().toString());
-            payload.put("client_status", client_status.getText().toString());
+            payload.put("client_status", CLIENT_STATUS);
             payload.put("enrollment_date", ENROLLMENT_DATE);
             payload.put("art_date", ART_DATE);
             payload.put("dob", DOB_DATE);
@@ -617,7 +634,6 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
                         hei_no.clearComposingText();
                         dob.clearComposingText();
                         file_no.clearComposingText();
-                        client_status.clearComposingText();
                         clinic_number.clearComposingText();
                         motivation_spinner.setSelection(0);
 
