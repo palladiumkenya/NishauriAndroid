@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.mhealth.appointment_diary.DCMActivity">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/search_hei_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="HEI NUMBER "
+                        android:inputType="number"
+                        android:textColorHint="#000"
+                        android:textSize="12sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/btn_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@color/colorPrimary"
+                        android:fontFamily="serif"
+                        android:text="Search"
+                        android:textColor="#FFFFFF" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/final_outcome_layout"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+
+
+                <TextView
+                    android:id="@+id/f_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="FIRST NAME:" />
+                <TextView
+                    android:id="@+id/m_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:text="MIDDLE NAME:" />
+
+                <TextView
+                    android:id="@+id/l_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:text="LAST NAME:" />
+
+                <TextView
+                    android:id="@+id/dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:text="DOB:" />
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:text="@string/final_outcome" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp"
+                    android:orientation="horizontal">
+
+
+                    <Spinner
+                        android:id="@+id/outcome_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/deceased_date_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <EditText
+                        android:id="@+id/deceased_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:hint="@string/deceased_date"
+                        android:inputType="date"
+                        android:maxLength="24"
+                        android:textColorHint="#000"
+                        android:textSize="12sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/to_date_input">
+
+                    <EditText
+                        android:id="@+id/to_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:hint="@string/to_date"
+                        android:inputType="date"
+                        android:maxLength="24"
+                        android:textColorHint="#000"
+                        android:textSize="12sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+                <Button
+                    android:id="@+id/btn_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@color/colorPrimary"
+                    app:fontFamily="serif"
+                    android:text="@string/submit"
+                    android:textColor="#FFFFFF" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</LinearLayout>

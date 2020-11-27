@@ -61,5 +61,8 @@
     <string name="client_status">Client Status</string>
     <string name="file_number">File Number</string>
     <string name="select_client_status">Select client status</string>
+    <string name="final_outcome">Final Outcome</string>
+    <string name="deceased_date">Deceased Date</string>
+    <string name="to_date">TO Date</string>
 
 </resources>

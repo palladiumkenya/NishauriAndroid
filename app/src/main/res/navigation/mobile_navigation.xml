@@ -38,5 +38,10 @@
         android:id="@+id/pcr_positive_enrollment"
         android:name="com.example.mhealth.appointment_diary.pmtct.PcrPositiveEnrollmentFragment"
         android:label="Pcr Positive Enrollment" />
+    <fragment
+        android:id="@+id/hei_final_outcome"
+        android:name="com.example.mhealth.appointment_diary.pmtct.HeiFinalOutcomeFragment"
+        android:label="HEI Final Outcome" />
+
 
 </navigation>

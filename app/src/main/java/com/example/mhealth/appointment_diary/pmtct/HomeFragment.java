@@ -53,6 +53,9 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.pcr_positive_enrollment)
     CardView pcr_positive_enrollment;
 
+    @BindView(R.id.final_outcome)
+    CardView final_outcome;
+
 
 
 
@@ -134,6 +137,16 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 //Navigation.findNavController(v).navigate(R.id.nav_feedback);
                 NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.pcr_positive_enrollment);
+
+            }
+        });
+
+
+        final_outcome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Navigation.findNavController(v).navigate(R.id.nav_feedback);
+                NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.hei_final_outcome);
 
             }
         });
