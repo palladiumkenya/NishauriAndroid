@@ -225,7 +225,7 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
                         cur_calender.get(Calendar.MONTH),
                         cur_calender.get(Calendar.DAY_OF_MONTH));
 
-                //datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                 datePickerDialog.show();
             }
         });
@@ -255,7 +255,7 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
                         cur_calender.get(Calendar.MONTH),
                         cur_calender.get(Calendar.DAY_OF_MONTH));
 
-                //datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                 datePickerDialog.show();
             }
         });
