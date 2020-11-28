@@ -66,6 +66,7 @@ public class HeiFinalOutcomeFragment extends Fragment {
     private String FINAL_OUTCOME = "";
     private String HEI_NO = "";
     private int ID = 0;
+    private int FINAL_OUTCOME_NUM = 0;
     private String DECEASED_DATE = "";
     private String TO_DATE = "";
 
@@ -348,16 +349,31 @@ public class HeiFinalOutcomeFragment extends Fragment {
 
                                         FINAL_OUTCOME = young_final_outcome[position];
 
-                                        if (FINAL_OUTCOME.equals("Dead"))
+                                        if (FINAL_OUTCOME.equals("Dead")){
                                             deceased_date_input.setVisibility(View.VISIBLE);
-                                        else
+
+                                            FINAL_OUTCOME_NUM = 1;
+                                            to_date_input.setVisibility(View.GONE);
+
+                                        } else if (FINAL_OUTCOME.equals("LTFU")){
+                                            to_date_input.setVisibility(View.VISIBLE);
+
+                                            FINAL_OUTCOME_NUM = 2;
+
+                                            deceased_date_input.setVisibility(View.GONE);
+                                            to_date_input.setVisibility(View.GONE);
+                                        } else if (FINAL_OUTCOME.equals("TO")){
+                                            to_date_input.setVisibility(View.VISIBLE);
+
+                                            FINAL_OUTCOME_NUM = 3;
+
                                             deceased_date_input.setVisibility(View.GONE);
 
-
-                                        if (FINAL_OUTCOME.equals("TO"))
-                                            to_date_input.setVisibility(View.VISIBLE);
-                                        else
+                                        }else{
                                             to_date_input.setVisibility(View.GONE);
+                                            deceased_date_input.setVisibility(View.GONE);
+                                        }
+
                                     }
 
                                     @Override
@@ -377,6 +393,16 @@ public class HeiFinalOutcomeFragment extends Fragment {
                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                                         FINAL_OUTCOME = old_final_outcome[position];
+
+                                        if (FINAL_OUTCOME.equals("Enroll to CCC")){
+
+                                            FINAL_OUTCOME_NUM = 4;
+
+                                        } else if (FINAL_OUTCOME.equals("Discharged from PMTCT")){
+
+                                            FINAL_OUTCOME_NUM = 5;
+
+                                        }
                                     }
 
                                     @Override
@@ -476,122 +502,107 @@ public class HeiFinalOutcomeFragment extends Fragment {
 
 
     private void updateFinalOutcome() {
-//        JSONObject payload = new JSONObject();
-//        try {
-//            payload.put("hei_no", hei_no.getText().toString());
-//            payload.put("user_phone", phone_no);
-//            payload.put("clinic_number", clinic_number.getText().toString());
-//            payload.put("client_status", CLIENT_STATUS);
-//            payload.put("enrollment_date", ENROLLMENT_DATE);
-//            payload.put("art_date", ART_DATE);
-//            payload.put("dob", DOB_DATE);
-//            payload.put("motivational_enable", MOTIVATION);
-//            payload.put("file_no", file_no.getText().toString());
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//        Log.e("payload: ", payload.toString());
-//
-//
-//        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PUT,
-//                Config.UPDATE_PCR+SRV_ID, payload, new Response.Listener<JSONObject>() {
-//
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                Log.e("Response: ", response.toString());
-//                try {
-//                    boolean success = response.has("success") && response.getBoolean("success");
-//                    String message = response.has("message") ? response.getString("message") : "";
-//
-//                    if (success) {
-//                        ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Success",message, context);
-//                        bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
-//
-//                        //reset views
-//                        pcr_details_layout.setVisibility(View.GONE);
-//
-//                        SRV_ID = 0;
-//                        SRV_CLINIC_NUMBER = "";
-//                        SRV_CLIENT_STATUS = "";
-//                        SRV_ENROLLMENT_DATE = "";
-//                        SRV_ART_DATE = "";
-//                        SRV_MOTIVATION_ENABLE = "";
-//                        SRV_FILE_NO = "";
-//                        SRV_HEI_NO = "";
-//                        SRV_DOB = "";
-//
-//                        search_hei_no.clearComposingText();
-//                        hei_no.clearComposingText();
-//                        dob.clearComposingText();
-//                        file_no.clearComposingText();
-//                        clinic_number.clearComposingText();
-//                        motivation_spinner.setSelection(0);
-//
-//
-//                    } else {
-//                        ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Failed",message,context);
-//                        bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
-//                    }
-//
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//        }, new Response.ErrorListener() {
-//
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//                NetworkResponse response = error.networkResponse;
-//                if(response != null && response.data != null){
-//                    String body;
-//                    //get status code here
-//                    String statusCode = String.valueOf(error.networkResponse.statusCode);
-//                    //get response body and parse with appropriate encoding
-//                    if(error.networkResponse.data!=null) {
-//                        try {
-//                            body = new String(error.networkResponse.data,"UTF-8");
-//
-//                            JSONObject json = new JSONObject(body);
-//                            //                            Log.e("error response : ", json.toString());
-//
-//
-//                            String message = json.has("message") ? json.getString("message") : "";
-//                            String reason = json.has("reason") ? json.getString("reason") : "";
-//
-//                            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance(message,reason,context);
-//                            bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
-//
-//                        } catch (UnsupportedEncodingException | JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//
-//                }else {
-//
-//                    Log.e("VOlley error :", error.getLocalizedMessage()+" message:"+error.getMessage());
-//                    Toast.makeText(context, VolleyErrors.getVolleyErrorMessages(error, context),Toast.LENGTH_LONG).show();
-//                }
-//
-////             Log.e(TAG, "Error: " + error.getMessage());
-//            }
-//        }){
-//            /**
-//             * Passing some request headers
-//             */
-//            @Override
-//            public Map<String, String> getHeaders() {
-//                HashMap<String, String> headers = new HashMap<String, String>();
-//                headers.put("Content-Type", "application/json");
-//                headers.put("Accept", "application/json");
-//                return headers;
-//            }
-//        };
-//
-//        queue.add(jsonObjReq);
+        JSONObject payload = new JSONObject();
+        try {
+            payload.put("hei_no", HEI_NO);
+            payload.put("phone_no", phone_no);
+            payload.put("outcome", FINAL_OUTCOME_NUM);
+            payload.put("date_deceased", DECEASED_DATE);
+            payload.put("date_transfer", TO_DATE);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("payload: ", payload.toString());
+
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                Config.POST_FINAL_OUTOME, payload, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.e("Response: ", response.toString());
+                try {
+                    boolean success = response.has("success") && response.getBoolean("success");
+                    String message = response.has("message") ? response.getString("message") : "";
+
+                    if (success) {
+                        ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Success",message, context);
+                        bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
+
+                        //reset views
+                        final_outcome_layout.setVisibility(View.GONE);
+
+                        FINAL_OUTCOME = "";
+                        FINAL_OUTCOME_NUM = 0;
+                        HEI_NO = "";
+                        search_hei_no.clearComposingText();
+
+
+                    } else {
+                        ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Failed",message,context);
+                        bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                NetworkResponse response = error.networkResponse;
+                if(response != null && response.data != null){
+                    String body;
+                    //get status code here
+                    String statusCode = String.valueOf(error.networkResponse.statusCode);
+                    //get response body and parse with appropriate encoding
+                    if(error.networkResponse.data!=null) {
+                        try {
+                            body = new String(error.networkResponse.data,"UTF-8");
+
+                            Log.e("error response : ", body.toString());
+                            JSONObject json = new JSONObject(body);
+
+
+
+                            String message = json.has("message") ? json.getString("message") : "";
+                            String reason = json.has("reason") ? json.getString("reason") : "";
+
+                            ErrorMessage bottomSheetFragment = ErrorMessage.newInstance(message,reason,context);
+                            bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
+
+                        } catch (UnsupportedEncodingException | JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }else {
+
+                    Log.e("VOlley error :", error.getLocalizedMessage()+" message:"+error.getMessage());
+                    Toast.makeText(context, VolleyErrors.getVolleyErrorMessages(error, context),Toast.LENGTH_LONG).show();
+                }
+
+//             Log.e(TAG, "Error: " + error.getMessage());
+            }
+        }){
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+        };
+
+        queue.add(jsonObjReq);
     }
 
 

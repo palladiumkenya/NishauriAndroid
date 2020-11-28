@@ -72,6 +72,7 @@ public class Config {
     public static final String SEARCH_PCR = "http://ushaurinode.mhealthkenya.org/api/process_pmtct/pcr/positive/details";
     public static final String UPDATE_PCR = "http://ushaurinode.mhealthkenya.org/api/process_pmtct/enroll/positive/pcr/";
     public static final String SEARCH_HEI_FINAL = "http://ushaurinode.mhealthkenya.org/api/process_pmtct/outcome/get/details";
+    public static final String POST_FINAL_OUTOME = "http://ushaurinode.mhealthkenya.org/api/process_pmtct/confirm/final/outcome";
 
 
 
