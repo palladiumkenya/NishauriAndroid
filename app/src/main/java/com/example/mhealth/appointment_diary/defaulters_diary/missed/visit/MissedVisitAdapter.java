@@ -65,8 +65,11 @@ public class MissedVisitAdapter extends BaseAdapter implements Filterable {
     String sendapptype = "-1";
     String gender_code = "";
 
+    String ON_DSD = "";
+    String ON_DSD_SERVER = "";
+
     String mysenddate;
-    Spinner myspinner, finalspinner;
+    Spinner myspinner, finalspinner,on_dsd_spinner;
     Spinner newapptypespinner;
 
     String first_outcome_code = "";
@@ -585,6 +588,9 @@ public class MissedVisitAdapter extends BaseAdapter implements Filterable {
                         dialog.setCanceledOnTouchOutside(true);
                         mywindow.setLayout(ActionBar.LayoutParams.FILL_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
 
+                        on_dsd_spinner = (Spinner) dialog.findViewById(R.id.on_dsd_spinner);
+
+                        on_dsd_spinner = (Spinner) dialog.findViewById(R.id.on_dsd_spinner);
                         myspinner = (Spinner) dialog.findViewById(R.id.gender_spinner);
                         finalspinner = (Spinner) dialog.findViewById(R.id.final_spinner);
                         newapptypespinner = (Spinner) dialog.findViewById(R.id.missedvisitnewapptype);
@@ -595,6 +601,10 @@ public class MissedVisitAdapter extends BaseAdapter implements Filterable {
                         rescheduledate1E = (EditText) dialog.findViewById(R.id.rescheduledateone);
                         clientreturndateE=(EditText) dialog.findViewById(R.id.clientreturndate);
                         final TextView myapp = (TextView) dialog.findViewById(R.id.missedvisitnewapptypetextview);
+
+
+                        String[] onDsdString={"Is the client on DSD or not?","On DSD","NOT on DSD"};
+
 
 //                    final String[] outcome={"Select outcome","Client contacted","Client not contacted","client found", "client not found", "client declined care", "rescheduling", "other"};
 //                    String[] finaloutcome={"Select final outcome","client declined care","rescheduling","Client Returned To Care","Self Transfer","Dead","Challenging Client","Client Too Sick To Attend Appointment","Other"};
@@ -609,6 +619,25 @@ public class MissedVisitAdapter extends BaseAdapter implements Filterable {
 
 //
                         String[] finalinformantoutcome={"Select final outcome","client declined care","Client Returned To Care","Self Transfer","Dead","Other"};
+
+
+
+                        final ArrayAdapter<String> dsdAdapter = new ArrayAdapter<String>(v.getContext() , android.R.layout.simple_spinner_dropdown_item,onDsdString);
+                        on_dsd_spinner.setAdapter(dsdAdapter);
+
+                        on_dsd_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+                        {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                            {
+                                ON_DSD =onDsdString[position];
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
 
 
 
@@ -941,8 +970,11 @@ public class MissedVisitAdapter extends BaseAdapter implements Filterable {
                             public void onClick(View v) {
 
 
-
-                                    if (dateclientcalled.isShown() && dateclientcalled.getText().toString().trim().isEmpty()) {
+                                    if (ON_DSD.contentEquals("Is the client on DSD or not?"))
+                                    {
+                                        Toast.makeText(v.getContext(), "Select if client is on DSD or not!", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else if (dateclientcalled.isShown() && dateclientcalled.getText().toString().trim().isEmpty()) {
                                         Toast.makeText(v.getContext(), "specify date", Toast.LENGTH_SHORT).show();
 
                                     } else if (mydate.isShown() && mydate.getText().toString().trim().isEmpty()) {
@@ -1165,7 +1197,13 @@ public class MissedVisitAdapter extends BaseAdapter implements Filterable {
                                         }
 
 
-                                        String sendSms = ccnumberS + "*" + sendapptype + "*" + new_appointment_type + "*"+otherappValue+"*"+ clientdatecalled + "*" + first_outcome_code + "*" + sendDate + "*" + getTracers + "*" + second_outcome_code + "*" + other + "*" + patientS+"*"+clientreturndateS+"*"+TracingCost;
+                                        if (ON_DSD.equals("On DSD"))
+                                            ON_DSD_SERVER = "YES";
+                                        else if ("Server response".equals("NOT on DSD"))
+                                            ON_DSD_SERVER = "NO";
+
+
+                                        String sendSms = ccnumberS + "*" + sendapptype + "*" + new_appointment_type + "*"+otherappValue+"*"+ clientdatecalled + "*" + first_outcome_code + "*" + sendDate + "*" + getTracers + "*" + second_outcome_code + "*" + other + "*" + patientS+"*"+clientreturndateS+"*"+TracingCost+"*"+ON_DSD_SERVER;
 
 
                                         try {
@@ -1186,7 +1224,7 @@ public class MissedVisitAdapter extends BaseAdapter implements Filterable {
 
                                                     String phne = myl2.get(y).getPhone();
 //                                acs.sendDetailsToDb("Reg*"+sendSms+"/"+phne);
-                                                    acs.sendDetailsToDbPost("MSDC*" + encrypted, phne);
+                                                    acs.sendConfirmToDbPost("MSDC*" + encrypted, phne, ON_DSD_SERVER);
                                                 }
                                             }
 

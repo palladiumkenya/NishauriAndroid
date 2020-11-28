@@ -66,10 +66,14 @@ public class DefaulteredVisitAdapter extends BaseAdapter implements Filterable {
     String sendapptype = "-1";
     String gender_code = "";
 
+    String ON_DSD = "";
+    String ON_DSD_SERVER = "";
+
+
     String sendDate;
 
     String mysenddate;
-    Spinner myspinner, finalspinner, newappspinner;
+    Spinner myspinner, finalspinner, newappspinner,on_dsd_spinner;
 
 
     String first_outcome_code = "";
@@ -579,6 +583,7 @@ public class DefaulteredVisitAdapter extends BaseAdapter implements Filterable {
                         dialog.setCanceledOnTouchOutside(true);
                         mywindow.setLayout(ActionBar.LayoutParams.FILL_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
 
+                        on_dsd_spinner = (Spinner)dialog.findViewById(R.id.on_dsd_spinner);
                         myspinner = (Spinner) dialog.findViewById(R.id.defvisgender_spinner);
                         finalspinner = (Spinner) dialog.findViewById(R.id.defvisfinal_spinner);
                         newappspinner = (Spinner) dialog.findViewById(R.id.defvismissedvisitnewapptype);
@@ -621,6 +626,30 @@ public class DefaulteredVisitAdapter extends BaseAdapter implements Filterable {
 //                    finalspinner.setAdapter(adapter2);
 
                         newappspinner.setAdapter(adapter3);
+
+
+                        String[] onDsdString={"Is the client on DSD or not?","On DSD","NOT on DSD"};
+
+
+                        final ArrayAdapter<String> dsdAdapter = new ArrayAdapter<String>(v.getContext() , android.R.layout.simple_spinner_dropdown_item,onDsdString);
+                        on_dsd_spinner.setAdapter(dsdAdapter);
+
+                        on_dsd_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+                        {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                            {
+                                ON_DSD =onDsdString[position];
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+
+
+
 
 
                         dialog.setCanceledOnTouchOutside(false);
@@ -1053,6 +1082,9 @@ public class DefaulteredVisitAdapter extends BaseAdapter implements Filterable {
                                 if (dateclientcalled.isShown() && dateclientcalled.getText().toString().trim().isEmpty()) {
                                     Toast.makeText(v.getContext(), "specify date", Toast.LENGTH_SHORT).show();
 
+                                }else if (ON_DSD.contentEquals("Is the client on DSD or not?"))
+                                {
+                                    Toast.makeText(v.getContext(), "Select if client is on DSD or not!", Toast.LENGTH_SHORT).show();
                                 } else if (mydate.isShown() && mydate.getText().toString().trim().isEmpty()) {
                                     Toast.makeText(v.getContext(), "specify next appointment date", Toast.LENGTH_SHORT).show();
                                 } else if (myspinner.isShown() && (first_outcome_code.trim().isEmpty() || first_outcome_code.contentEquals("0"))) {
@@ -1232,7 +1264,15 @@ public class DefaulteredVisitAdapter extends BaseAdapter implements Filterable {
                                     else{
                                         newappotherValue="-1";
                                     }
-                                    String sendSms = ccnumberS + "*" + sendapptype + "*"+new_appointment_type +"*"+newappotherValue+"*" + clientdatecalled + "*" + first_outcome_code + "*" + sendDate + "*" + getTracers + "*" + second_outcome_code + "*" + other + "*" + patientS+"*"+clientreturndateS+"*"+Tracingcost;
+
+
+                                    if (ON_DSD.equals("On DSD"))
+                                        ON_DSD_SERVER = "YES";
+                                    else if ("Server response".equals("NOT on DSD"))
+                                        ON_DSD_SERVER = "NO";
+
+
+                                    String sendSms = ccnumberS + "*" + sendapptype + "*"+new_appointment_type +"*"+newappotherValue+"*" + clientdatecalled + "*" + first_outcome_code + "*" + sendDate + "*" + getTracers + "*" + second_outcome_code + "*" + other + "*" + patientS+"*"+clientreturndateS+"*"+Tracingcost+"*"+ON_DSD_SERVER;
 
 
                                     try {
@@ -1252,7 +1292,7 @@ public class DefaulteredVisitAdapter extends BaseAdapter implements Filterable {
 
                                                 String phne = myl2.get(y).getPhone();
 //                                acs.sendDetailsToDb("Reg*"+sendSms+"/"+phne);
-                                                acs.sendDetailsToDbPost("MSDC*" + encrypted, phne);
+                                                acs.sendConfirmToDbPost("MSDC*" + encrypted, phne,ON_DSD_SERVER);
                                             }
                                         }
 

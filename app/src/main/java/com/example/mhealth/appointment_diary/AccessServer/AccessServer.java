@@ -4,6 +4,7 @@ package com.example.mhealth.appointment_diary.AccessServer;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mhealth.appointment_diary.DCMActivity;
 import com.example.mhealth.appointment_diary.Dialogs.Dialogs;
 import com.example.mhealth.appointment_diary.ProcessReceivedMessage.ProcessMessage;
 import com.example.mhealth.appointment_diary.Progress.Progress;
@@ -37,6 +39,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 import static com.android.volley.Request.Method.GET;
 import static com.android.volley.Request.Method.POST;
 
@@ -51,6 +55,9 @@ public class AccessServer {
     Progress pr;
     ProcessMessage pm;
     Dialogs dialogs;
+
+    SweetAlertDialog mdialog;
+
 
     Dialog mydialog;
     private JSONArray id_result;
@@ -152,6 +159,119 @@ public class AccessServer {
                         if(mStatusCode[0]==200){
 
                             dialogs.showSuccessDialog(response,"Server Response");
+
+                        }
+                        else{
+
+                            dialogs.showErrorDialog(response,"Server response");
+                        }
+
+
+
+
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        pr.dissmissProgress();
+
+                        try{
+
+                            byte[] htmlBodyBytes = error.networkResponse.data;
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                            dialogs.showErrorDialog(new String(htmlBodyBytes),"Server Response");
+
+                            pr.dissmissProgress();
+
+                        }
+                        catch(Exception e){
+
+
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                            dialogs.showErrorDialog("error occured, try again","Server Response");
+
+                            pr.dissmissProgress();
+
+
+                        }
+
+
+                    }
+                }) {
+
+
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                mStatusCode[0] = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+
+            @Override
+            protected VolleyError parseNetworkError(VolleyError volleyError) {
+                return super.parseNetworkError(volleyError);
+            }
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("msg",msg);
+                params.put("phone_no", phone);
+
+
+                return params;
+            }
+
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                800000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(ctx);
+        requestQueue.add(stringRequest);
+
+//        RequestQueue requestQueue = Volley.newRequestQueue(ctx);
+//        requestQueue.add(stringRequest);
+
+    }
+
+
+    public void sendConfirmToDbPost(final String msg, final String phone, final String ON_DSD) {
+
+        pr.showProgress("Sending message.....");
+        final int[] mStatusCode = new int[1];
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.SENDDATATODB_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+//                        Toast.makeText(ctx, "message "+response, Toast.LENGTH_SHORT).show();
+                        pr.dissmissProgress();
+
+
+                        if(mStatusCode[0]==200){
+
+                            mdialog= new SweetAlertDialog(ctx, SweetAlertDialog.SUCCESS_TYPE);
+                            mdialog.setTitleText(response);
+                            mdialog.setContentText("Server response");
+                            mdialog.setCancelable(false);
+                            mdialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                   if (ON_DSD.equals("YES"))
+                                       ctx.startActivity(new Intent(ctx, DCMActivity.class));
+                                   else
+                                       mdialog.dismiss();
+                                }
+                            });
+                            mdialog.show();
+
+//                            dialogs.showSuccessDialog(response,"Server Response");
 
                         }
                         else{

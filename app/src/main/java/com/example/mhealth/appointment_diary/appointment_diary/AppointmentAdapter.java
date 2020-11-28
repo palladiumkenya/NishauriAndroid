@@ -57,7 +57,10 @@ public class AppointmentAdapter extends BaseAdapter implements Filterable {
     private List<AppointmentModel> filterList;
     List<Appointments> books = null;
 
-    Spinner myspinner;
+    Spinner myspinner,on_dsd_spinner;
+
+    String ON_DSD = "";
+    String ON_DSD_SERVER = "";
 
     String itemselected;
 
@@ -168,11 +171,31 @@ public class AppointmentAdapter extends BaseAdapter implements Filterable {
                     Button submit = (Button)dialog.findViewById(R.id.submit);
 
                     myspinner = (Spinner)dialog.findViewById(R.id.gender_spinner);
+                    on_dsd_spinner = (Spinner)dialog.findViewById(R.id.on_dsd_spinner);
 
                     String[] nextapptype={"Select appointment type","Refill","Clinical review","Enhanced adherance","Lab investigation","VL Booking","Other"};
+                    String[] onDsdString={"Is the client on DSD or not?","On DSD","NOT on DSD"};
 
                     final ArrayAdapter<String> adapter = new ArrayAdapter<String>(v.getContext() , android.R.layout.simple_spinner_dropdown_item,nextapptype);
                     myspinner.setAdapter(adapter);
+
+                    final ArrayAdapter<String> dsdAdapter = new ArrayAdapter<String>(v.getContext() , android.R.layout.simple_spinner_dropdown_item,onDsdString);
+                    on_dsd_spinner.setAdapter(dsdAdapter);
+
+                    on_dsd_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+                    {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                        {
+                            ON_DSD =onDsdString[position];
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+
 
                     myspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
                     {
@@ -237,6 +260,10 @@ public class AppointmentAdapter extends BaseAdapter implements Filterable {
                           {
                               Toast.makeText(v.getContext(), "Select all fileds!", Toast.LENGTH_SHORT).show();
 
+                          }
+                          else if (ON_DSD.contentEquals("Is the client on DSD or not?"))
+                          {
+                              Toast.makeText(v.getContext(), "Select if client is on DSD or not!", Toast.LENGTH_SHORT).show();
                           }
                           else
                           {
@@ -310,17 +337,21 @@ public class AppointmentAdapter extends BaseAdapter implements Filterable {
                               {
                                   String mynumber = Config.mainShortcode;
 
+                                  if (ON_DSD.equals("On DSD"))
+                                      ON_DSD_SERVER = "YES";
+                                  else if ("Server response".equals("NOT on DSD"))
+                                      ON_DSD_SERVER = "NO";
 
                                   String sendSms="";
                                   if(appointmment_type_code.contentEquals("6")){
 
                                       String otherVal=myother.getText().toString();
-                                      sendSms= ccnumberS +"*" + sendDate + "*" + appointmment_type_code+"*"+otherVal+"*"+1 + "*" + appidS;
+                                      sendSms= ccnumberS +"*" + sendDate + "*" + appointmment_type_code+"*"+otherVal+"*"+1 + "*" + appidS +"*"+ON_DSD_SERVER;
 
                                   }
                                   else{
 
-                                      sendSms= ccnumberS +"*" + sendDate + "*" + appointmment_type_code+"*-1*"+1 + "*" + appidS;
+                                      sendSms= ccnumberS +"*" + sendDate + "*" + appointmment_type_code+"*-1*"+1 + "*" + appidS +"*"+ON_DSD_SERVER;
 
                                   }
 
@@ -351,7 +382,7 @@ public class AppointmentAdapter extends BaseAdapter implements Filterable {
                                           }
                                       }
 
-                                      acs.sendDetailsToDbPost("APP*"+encrypted,phne);
+                                      acs.sendConfirmToDbPost("APP*"+encrypted,phne, ON_DSD_SERVER);
 
 
 

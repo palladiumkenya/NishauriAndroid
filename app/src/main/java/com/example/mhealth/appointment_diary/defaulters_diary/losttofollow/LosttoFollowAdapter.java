@@ -55,7 +55,7 @@ public class LosttoFollowAdapter extends BaseAdapter implements Filterable {
     private List<LosttoFollowModel> filterList;
     List<Appointments> books =null;
 
-    Spinner myspinner,finalspinner;
+    Spinner myspinner,finalspinner, on_dsd_spinner;
     Spinner newapptypespinner;
 
 
@@ -64,6 +64,9 @@ public class LosttoFollowAdapter extends BaseAdapter implements Filterable {
 //    Spinner myspinner;
     EditText myother;
     String first_outcome_code = " ";
+
+    String ON_DSD = "";
+    String ON_DSD_SERVER = "";
 
     DatePickerDialog datePickerDialog;
 
@@ -553,6 +556,7 @@ public class LosttoFollowAdapter extends BaseAdapter implements Filterable {
                     dialog.setCanceledOnTouchOutside(true);
                     mywindow.setLayout(ActionBar.LayoutParams.FILL_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
 
+                    on_dsd_spinner = (Spinner)dialog.findViewById(R.id.on_dsd_spinner);
                     myspinner = (Spinner)dialog.findViewById(R.id.gender_spinner);
                     finalspinner = (Spinner)dialog.findViewById(R.id.final_spinner);
                     newapptypespinner = (Spinner)dialog.findViewById(R.id.newapptype);
@@ -592,6 +596,26 @@ public class LosttoFollowAdapter extends BaseAdapter implements Filterable {
 //                    finalspinner.setAdapter(adapter2);
                     newapptypespinner.setAdapter(adapter3);
 
+
+                    String[] onDsdString={"Is the client on DSD or not?","On DSD","NOT on DSD"};
+
+
+                    final ArrayAdapter<String> dsdAdapter = new ArrayAdapter<String>(v.getContext() , android.R.layout.simple_spinner_dropdown_item,onDsdString);
+                    on_dsd_spinner.setAdapter(dsdAdapter);
+
+                    on_dsd_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+                    {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+                        {
+                            ON_DSD =onDsdString[position];
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
 
 
 
@@ -939,6 +963,9 @@ public class LosttoFollowAdapter extends BaseAdapter implements Filterable {
                             if(dateclientcalled.isShown() && dateclientcalled.getText().toString().trim().isEmpty()){
                                 Toast.makeText(v.getContext(), "specify date", Toast.LENGTH_SHORT).show();
 
+                            }else if (ON_DSD.contentEquals("Is the client on DSD or not?"))
+                            {
+                                Toast.makeText(v.getContext(), "Select if client is on DSD or not!", Toast.LENGTH_SHORT).show();
                             }
                             else if(mydate.isShown() && mydate.getText().toString().trim().isEmpty() ){
                                 Toast.makeText(v.getContext(), "specify next appointment date", Toast.LENGTH_SHORT).show();
@@ -1159,7 +1186,13 @@ public class LosttoFollowAdapter extends BaseAdapter implements Filterable {
                                     otherNextAppValue="-1";
                                 }
 
-                                String sendSms = ccnumberS + "*" + sendapptype + "*" + new_appointment_type +"*"+otherNextAppValue +"*" + clientdatecalled + "*" + first_outcome_code + "*" + sendDate + "*" + getTracers + "*" + second_outcome_code + "*" + other + "*" + patientS+"*"+clientreturndateS+"*"+TracingCost;
+                                if (ON_DSD.equals("On DSD"))
+                                    ON_DSD_SERVER = "YES";
+                                else if ("Server response".equals("NOT on DSD"))
+                                    ON_DSD_SERVER = "NO";
+
+
+                                String sendSms = ccnumberS + "*" + sendapptype + "*" + new_appointment_type +"*"+otherNextAppValue +"*" + clientdatecalled + "*" + first_outcome_code + "*" + sendDate + "*" + getTracers + "*" + second_outcome_code + "*" + other + "*" + patientS+"*"+clientreturndateS+"*"+TracingCost+"*"+ON_DSD_SERVER;
 
 
 
@@ -1181,7 +1214,7 @@ public class LosttoFollowAdapter extends BaseAdapter implements Filterable {
 
                                             String phne=myl2.get(y).getPhone();
 //                                acs.sendDetailsToDb("Reg*"+sendSms+"/"+phne);
-                                            acs.sendDetailsToDbPost("LTFU*"+encrypted,phne);
+                                            acs.sendConfirmToDbPost("LTFU*"+encrypted,phne,ON_DSD_SERVER);
                                         }
                                     }
 
