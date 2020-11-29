@@ -73,6 +73,8 @@ public class Config {
     public static final String UPDATE_PCR = "http://ushaurinode.mhealthkenya.org/api/process_pmtct/enroll/positive/pcr/";
     public static final String SEARCH_HEI_FINAL = "http://ushaurinode.mhealthkenya.org/api/process_pmtct/outcome/get/details";
     public static final String POST_FINAL_OUTOME = "http://ushaurinode.mhealthkenya.org/api/process_pmtct/confirm/final/outcome";
+    public static final String SEARCH_RESCHEDULE_APT = "http://ushaurinode.mhealthkenya.org/api/edit_appointment/get/client/apps";
+    public static final String RESCHEDULE_APT = "http://ushaurinode.mhealthkenya.org/api/edit_appointment/edit/appointment/date/";
 
 
 

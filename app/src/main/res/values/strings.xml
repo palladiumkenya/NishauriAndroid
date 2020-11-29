@@ -64,5 +64,6 @@
     <string name="final_outcome">Final Outcome</string>
     <string name="deceased_date">Deceased Date</string>
     <string name="to_date">TO Date</string>
+    <string name="select_appointment_to_reschedule">Select Appointment to reschedule</string>
 
 </resources>
