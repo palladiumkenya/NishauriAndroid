@@ -1268,7 +1268,7 @@ public class DefaulteredVisitAdapter extends BaseAdapter implements Filterable {
 
                                     if (ON_DSD.equals("On DSD"))
                                         ON_DSD_SERVER = "YES";
-                                    else if ("Server response".equals("NOT on DSD"))
+                                    else if (ON_DSD.equals("NOT on DSD"))
                                         ON_DSD_SERVER = "NO";
 
 
