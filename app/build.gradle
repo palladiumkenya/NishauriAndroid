@@ -97,6 +97,10 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.2.2'
 
 
+    implementation 'com.mikhaellopez:circularimageview:3.2.0'          // circle image view
+
+
+
 }
 
 apply plugin: 'kotlin-android'

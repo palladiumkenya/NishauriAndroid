@@ -187,6 +187,16 @@
                 android:value=".appointment_diary.TodaysAppointment" />
         </activity>
 
+        <activity
+            android:name=".RescheduleActivity"
+            android:configChanges="orientation|screenSize"
+            android:parentActivityName=".MainOptions"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainOptions" />
+        </activity>
+
         <receiver
             android:name=".SmsBroadcastReceiver"
             android:exported="true">

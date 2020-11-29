@@ -3,11 +3,14 @@ package com.example.mhealth.appointment_diary;
 import android.content.Intent;
 import android.net.Uri;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mhealth.appointment_diary.LoadMessages.LoadMessages;
@@ -35,6 +38,9 @@ public class MainOptions extends AppCompatActivity {
     Button appointmentbtn, defaultersbtn, mlabbtn, webbtn, reportbtn, welnessbtn, pmtct;
     LoadMessages lm;
     String passedUname,passedPassword;
+    TextView title_header;
+
+    private CardView appointment_diary, defaulter_diary,pmtct_menu, mlab_menu, dashboard, wellness_menu, edit_appointments;
 
 
     @Override
@@ -56,6 +62,8 @@ public class MainOptions extends AppCompatActivity {
         goToWeb();
         goToWellness();
 
+
+
         pmtct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,6 +71,78 @@ public class MainOptions extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
+        appointment_diary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(), TodaysAppointment.class);
+                i.putExtra("username",passedUname);
+                i.putExtra("password",passedPassword);
+                startActivity(i);
+            }
+        });
+
+        defaulter_diary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainOptions.this, DefaulterMainActivity.class);
+                startActivity(i);
+            }
+        });
+
+        pmtct_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainOptions.this, PmtctActivity.class);
+                startActivity(i);
+            }
+        });
+
+        mlab_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getPackageManager().getLaunchIntentForPackage("com.mhealth.mLab");
+                if (intent != null) {
+                    // We found the activity now start the activity
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                } else {
+                    // Bring user to the market or let them choose an app?
+                    intent = new Intent(Intent.ACTION_VIEW);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setData(Uri.parse("market://details?id=" + "com.mhealth.mLab"));
+                    startActivity(intent);
+                }
+            }
+        });
+
+        dashboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://ushaurinew.mhealthkenya.co.ke/";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+
+        wellness_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myint=new Intent(getApplicationContext(), WellnesTabs.class);
+                startActivity(myint);
+            }
+        });
+
+        edit_appointments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myint=new Intent(getApplicationContext(), RescheduleActivity.class);
+                startActivity(myint);
+            }
+        });
+
 
 
 
@@ -268,6 +348,16 @@ public class MainOptions extends AppCompatActivity {
             reportbtn = (Button)findViewById(R.id.report);
             welnessbtn =(Button) findViewById(R.id.wellnessMessage);
             lm=new LoadMessages(MainOptions.this);
+
+            title_header = findViewById(R.id.title_header);
+            appointment_diary = findViewById(R.id.appointment_diary);
+            defaulter_diary = findViewById(R.id.defaulter_diary);
+            pmtct_menu = findViewById(R.id.pmtct_menu);
+            mlab_menu = findViewById(R.id.mlab_menu);
+            dashboard = findViewById(R.id.dashboard);
+            wellness_menu = findViewById(R.id.wellness_menu);
+            edit_appointments = findViewById(R.id.edit_appointments);
+
 
         }
         catch(Exception e){
