@@ -241,7 +241,7 @@ public class AccessServer {
     }
 
 
-    public void sendConfirmToDbPost(final String msg, final String phone, final String ON_DSD) {
+    public void sendConfirmToDbPost(final String msg, final String phone, final String ON_DSD, final String second_outcome_code ) {
 
         pr.showProgress("Sending message.....");
         final int[] mStatusCode = new int[1];
@@ -263,10 +263,13 @@ public class AccessServer {
                             mdialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                   if (ON_DSD.equals("YES"))
-                                       ctx.startActivity(new Intent(ctx, DCMActivity.class));
-                                   else
+                                   if (ON_DSD.equals("YES") && second_outcome_code.equals("2")){
                                        mdialog.dismiss();
+                                       ctx.startActivity(new Intent(ctx, DCMActivity.class));
+                                   }else {
+                                       mdialog.dismiss();
+                                   }
+
                                 }
                             });
                             mdialog.show();

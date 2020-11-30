@@ -1253,7 +1253,7 @@ public class DefaulteredCallAdapter extends BaseAdapter implements Filterable {
 
                                                 String phne=myl2.get(y).getPhone();
 //                                acs.sendDetailsToDb("Reg*"+sendSms+"/"+phne);
-                                                acs.sendConfirmToDbPost("MSDC*"+encrypted,phne,ON_DSD_SERVER);
+                                                acs.sendConfirmToDbPost("MSDC*"+encrypted,phne,ON_DSD_SERVER,second_outcome_code);
                                             }
                                         }
 
