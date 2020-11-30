@@ -687,6 +687,8 @@ public class DCMActivity extends AppCompatActivity {
                                     startActivity(new Intent(DCMActivity.this, DefaulterMainActivity.class));
                                 }else if (status.equals("Appointment")){
                                     startActivity(new Intent(DCMActivity.this, TodaysAppointment.class));
+                                }else {
+                                    mdialog.dismiss();
                                 }
                             }
                         });
@@ -842,6 +844,8 @@ public class DCMActivity extends AppCompatActivity {
                                     startActivity(new Intent(DCMActivity.this, DefaulterMainActivity.class));
                                 }else if (status.equals("Appointment")){
                                     startActivity(new Intent(DCMActivity.this, TodaysAppointment.class));
+                                }else {
+                                    mdialog.dismiss();
                                 }
                             }
                         });

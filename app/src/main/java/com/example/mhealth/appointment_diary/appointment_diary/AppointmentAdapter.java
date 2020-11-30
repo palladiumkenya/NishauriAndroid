@@ -382,7 +382,7 @@ public class AppointmentAdapter extends BaseAdapter implements Filterable {
                                           }
                                       }
 
-                                      acs.sendConfirmToDbPost("APP*"+encrypted,phne, ON_DSD_SERVER,"0");
+                                      acs.sendConfirmToDbPost("APP*"+encrypted,phne, ON_DSD_SERVER,"2");
 
 
 

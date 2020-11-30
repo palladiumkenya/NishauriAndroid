@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -640,8 +641,8 @@ public class PmtctRegistrationFragment extends Fragment {
                     String message = response.has("message") ? response.getString("message") : "";
 
                     if (success) {
-                        ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Success",message,context);
-                        bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
+//                        ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Success",message,context);
+//                        bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
 
                         //reset views
                         breastfeeding_layout.setVisibility(View.GONE);
@@ -661,6 +662,10 @@ public class PmtctRegistrationFragment extends Fragment {
 
                         mfl_code.getText().clear();
                         ccc_no.getText().clear();
+
+                        Toast.makeText(context,message, Toast.LENGTH_LONG).show();
+
+                        NavHostFragment.findNavController(PmtctRegistrationFragment.this).navigate(R.id.hei_apt);
 
 
 
