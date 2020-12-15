@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "516079290990",
+    "project_id": "psurvey-application",
+    "storage_bucket": "psurvey-application.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516079290990:android:9816b6f1283e2bd7fd347f",
+        "android_client_info": {
+          "package_name": "com.mhealthkenya.psurvey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "516079290990-7db1qgabhbbbnr5mqfvkapuhpvicbg18.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mhealthkenya.psurvey",
+            "certificate_hash": "ed25c4fcae299e4e9c10f854b6951124bb13800c"
+          }
+        },
+        {
+          "client_id": "516079290990-kvq5fajp0aukieq29e0449jrgns48uvm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnZUBHVcDHSg0NOzUVYXztruzS3U81cc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "516079290990-kvq5fajp0aukieq29e0449jrgns48uvm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
