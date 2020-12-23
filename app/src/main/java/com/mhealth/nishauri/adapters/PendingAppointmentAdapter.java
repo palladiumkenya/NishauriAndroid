@@ -1,6 +1,7 @@
 package com.mhealth.nishauri.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.fxn.stash.Stash;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Models.PendingAppointment;
+import com.mhealth.nishauri.Models.UpcomingAppointment;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
@@ -27,6 +29,7 @@ import com.mhealth.nishauri.utils.ViewAnimation;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -189,8 +192,9 @@ public class PendingAppointmentAdapter extends RecyclerView.Adapter<RecyclerView
 
                     if (items.get(position) != null){
 
-
-
+                        PendingAppointment clickedItem = items.get(position);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("Appointment", (Serializable) clickedItem);
                         Navigation.findNavController(v).navigate(R.id.nav_reschedule_appointment);
                     }
 

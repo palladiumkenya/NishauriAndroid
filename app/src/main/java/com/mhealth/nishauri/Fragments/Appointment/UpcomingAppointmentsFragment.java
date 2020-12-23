@@ -141,7 +141,7 @@ public class UpcomingAppointmentsFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-//                        Log.e(TAG, response.toString());
+                        Log.e(TAG, response.toString());
 
                         upcomingAppointmentArrayList.clear();
 
@@ -156,8 +156,7 @@ public class UpcomingAppointmentsFragment extends Fragment {
                         try {
 
                             String  message = response.has("message") ? response.getString("message") : "" ;
-
-
+                            
                             /*if (message.contains("There are no appointments for this client")){
                                 no_appointment_lyt.setVisibility(View.VISIBLE);
                                 Snackbar.make(root.findViewById(R.id.frag_upcoming_appointments),message, Snackbar.LENGTH_LONG).show();
@@ -175,49 +174,52 @@ public class UpcomingAppointmentsFragment extends Fragment {
                                 no_appointment_lyt.setVisibility(View.VISIBLE);
                                 Snackbar.make(root.findViewById(R.id.frag_upcoming_appointments),message, Snackbar.LENGTH_LONG).show();
 
-                            } else if (response.has("data") && response.has("No upcoming appointments")){
+                            } else if (message.contains("No upcoming appointments")){
 
                                 no_appointment_lyt.setVisibility(View.VISIBLE);
+                                Snackbar.make(root.findViewById(R.id.frag_upcoming_appointments),message, Snackbar.LENGTH_LONG).show();
 
-                            }
-
-
-                            JSONArray myArray = response.getJSONArray("data");
-
-
-                            if (myArray.length() > 0){
-
-
-                                for (int i = 0; i < myArray.length(); i++) {
-
-                                    JSONObject item = (JSONObject) myArray.get(i);
-
-                                    int id = item.has("id") ? item.getInt("id") : 0;
-                                    String aid = item.has("aid") ? item.getString("aid") : "";
-                                    String appntmnt_date = item.has("appntmnt_date") ? item.getString("appntmnt_date") : "";
-                                    String app_status = item.has("app_status") ? item.getString("app_status") : "";
-                                    String visit_type = item.has("visit_type") ? item.getString("visit_type") : "";
-                                    String app_type = item.has("app_type") ? item.getString("app_type") : "";
-                                    String owner = item.has("owner") ? item.getString("owner") : "";
-                                    String dependant = item.has("dependant") ? item.getString("dependant") : "";
-                                    String created_at = item.has("created_at") ? item.getString("created_at") : "";
-                                    String updated_at = item.has("updated_at") ? item.getString("updated_at") : "";
-                                    String user = item.has("user") ? item.getString("user") : "";
-
-
-                                    UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(id,aid,appntmnt_date,app_status,visit_type,app_type,owner,dependant,created_at,updated_at,user);
-
-                                    upcomingAppointmentArrayList.add(newUpcomingAppointment);
-                                    mAdapter.notifyDataSetChanged();
-
-                                }
 
                             }
                             else {
-                                //not data found
 
-                                no_appointment_lyt.setVisibility(View.VISIBLE);
 
+                                JSONArray myArray = response.getJSONArray("data");
+
+
+                                if (myArray.length() > 0) {
+
+
+                                    for (int i = 0; i < myArray.length(); i++) {
+
+                                        JSONObject item = (JSONObject) myArray.get(i);
+
+                                        int id = item.has("id") ? item.getInt("id") : 0;
+                                        String aid = item.has("aid") ? item.getString("aid") : "";
+                                        String appntmnt_date = item.has("appntmnt_date") ? item.getString("appntmnt_date") : "";
+                                        String app_status = item.has("app_status") ? item.getString("app_status") : "";
+                                        String visit_type = item.has("visit_type") ? item.getString("visit_type") : "";
+                                        String app_type = item.has("app_type") ? item.getString("app_type") : "";
+                                        String owner = item.has("owner") ? item.getString("owner") : "";
+                                        String dependant = item.has("dependant") ? item.getString("dependant") : "";
+                                        String created_at = item.has("created_at") ? item.getString("created_at") : "";
+                                        String updated_at = item.has("updated_at") ? item.getString("updated_at") : "";
+                                        String user = item.has("user") ? item.getString("user") : "";
+
+
+                                        UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(id, aid, appntmnt_date, app_status, visit_type, app_type, owner, dependant, created_at, updated_at, user);
+
+                                        upcomingAppointmentArrayList.add(newUpcomingAppointment);
+                                        mAdapter.notifyDataSetChanged();
+
+                                    }
+
+                                } else {
+                                    //not data found
+
+                                    no_appointment_lyt.setVisibility(View.VISIBLE);
+
+                                }
                             }
 
 
