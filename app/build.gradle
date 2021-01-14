@@ -8,8 +8,8 @@ android {
         applicationId "com.mhealth.ushauriv2"
         minSdkVersion 15
         targetSdkVersion 29 //should be 29 but this is a hack for defaulter diary
-        versionCode 28
-        versionName "3.1.4"
+        versionCode 29
+        versionName "3.1.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
@@ -55,7 +55,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     //noinspection GradleCompatible
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.intuit.sdp:sdp-android:1.0.4'

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -49,12 +49,12 @@
 
 
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
             android:focusable="false"
             android:id="@+id/affiliationnewspinner"
             android:hint="Select Affiliation"
-            android:drawableRight="@drawable/down_arrow"
+            app:drawableRightCompat="@drawable/down_arrow"
             android:layout_height="wrap_content" />
 
         <LinearLayout

@@ -159,7 +159,7 @@
         android:layout_gravity="end|bottom"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:src="@drawable/ic_refresh"
+        app:srcCompat="@drawable/ic_refresh"
         android:layout_margin="16dp" />
 
 
