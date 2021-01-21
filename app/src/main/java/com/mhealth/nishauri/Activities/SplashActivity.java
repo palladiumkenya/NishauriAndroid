@@ -8,6 +8,8 @@ import android.os.Bundle;
 import com.mhealth.nishauri.Activities.Auth.LoginActivity;
 import com.mhealth.nishauri.R;
 
+/*CREATED BY HUGH*/
+
 public class
 SplashActivity extends AppCompatActivity {
 

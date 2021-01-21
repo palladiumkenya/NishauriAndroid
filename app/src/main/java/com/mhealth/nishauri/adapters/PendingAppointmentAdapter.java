@@ -194,7 +194,7 @@ public class PendingAppointmentAdapter extends RecyclerView.Adapter<RecyclerView
 
                         PendingAppointment clickedItem = items.get(position);
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable("Appointment", (Serializable) clickedItem);
+                        bundle.putSerializable("Pending Appointment", (Serializable) clickedItem);
                         Navigation.findNavController(v).navigate(R.id.nav_reschedule_appointment);
                     }
 

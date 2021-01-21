@@ -17,8 +17,8 @@ android {
         applicationId "com.mhealth.nishauri"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 42
-        versionName "1.0.5 Beta"
+        versionCode 43
+        versionName "1.0.6 Beta"
 
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

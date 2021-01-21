@@ -278,10 +278,10 @@ public class AppointmentSurveyFragment extends Fragment {
 
                         try {
 
+
                             boolean  status = response.has("success") && response.getBoolean("success");
                             String  message = response.has("message") ? response.getString("message") : "" ;
                             String  errors = response.has("errors") ? response.getString("errors") : "" ;
-
 
                             if (status)
                             {

@@ -411,7 +411,10 @@ public class SignUpActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.dialog_privacy);
         dialog.setCancelable(false);
 
-
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
 
         ((ImageButton) dialog.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
             @Override

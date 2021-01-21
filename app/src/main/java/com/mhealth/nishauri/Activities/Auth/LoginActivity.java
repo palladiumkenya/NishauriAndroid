@@ -32,6 +32,8 @@ import com.mhealth.nishauri.utils.Constants;
 import org.json.JSONObject;
 import org.json.JSONException;
 
+import java.util.concurrent.TimeUnit;
+
 import static com.mhealth.nishauri.utils.AppController.TAG;
 
 
@@ -48,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
     private LottieAnimationView animationView;
 
 
-    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +143,6 @@ public class LoginActivity extends AppCompatActivity {
 
                }
 
-
             }
         });
 
@@ -166,6 +166,7 @@ public class LoginActivity extends AppCompatActivity {
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")
+                .setMaxAgeCacheControl(300000, TimeUnit.MILLISECONDS)
                 .addJSONObjectBody(jsonObject) // posting json
                 .setPriority(Priority.MEDIUM)
                 .build()
@@ -177,6 +178,7 @@ public class LoginActivity extends AppCompatActivity {
 //                        Log.e(TAG, response.toString());
 
                         try {
+
                             String auth_token = response.has("auth_token") ? response.getString("auth_token") : "";
                             User newUser = new User(auth_token);
 
@@ -204,7 +206,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onError(ANError error) {
                         // handle error
-//                        Log.e(TAG, error.getErrorBody());
+                        Log.e(TAG, String.valueOf(error.getErrorCode()));
 
                         animationView.setVisibility(View.GONE);
 
@@ -212,12 +214,20 @@ public class LoginActivity extends AppCompatActivity {
 
                             Snackbar.make(findViewById(R.id.login_layout), "Invalid phone number or password." , Snackbar.LENGTH_LONG).show();
 
+                        }
+                        else if (error.getErrorCode()==0){
+
+                            Snackbar.make(findViewById(R.id.login_layout), "Please retry later...", Snackbar.LENGTH_LONG).show();
+
+                        }
+                        else if(error.getErrorCode() == 500){
+
+                            Snackbar.make(findViewById(R.id.login_layout), "Internal Server Error. Please retry later!", Snackbar.LENGTH_LONG).show();
 
                         }
                         else {
 
                             Snackbar.make(findViewById(R.id.login_layout), "" + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
-
 
                         }
 
@@ -225,10 +235,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 
-
-
     }
-
-
 
 }
