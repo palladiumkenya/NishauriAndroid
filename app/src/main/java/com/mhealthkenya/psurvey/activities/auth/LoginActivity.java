@@ -3,6 +3,7 @@ package com.mhealthkenya.psurvey.activities.auth;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView forgot_password;
     private TextInputEditText phoneNumber;
     private TextInputEditText password;
+    private ProgressDialog pDialog;
 
 
     @Override
@@ -49,11 +51,17 @@ public class LoginActivity extends AppCompatActivity {
 
         initialise();
 
+        pDialog = new ProgressDialog(LoginActivity.this);
+        pDialog.setTitle("Signing In...");
+        pDialog.setMessage("Please wait...");
+        pDialog.setCancelable(false);
+
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                pDialog.show();
                 loginRequest();
 
             }
@@ -120,6 +128,11 @@ public class LoginActivity extends AppCompatActivity {
 
 //                        Log.e(TAG, response.toString());
 
+                        if (pDialog != null && pDialog.isShowing()) {
+                            pDialog.hide();
+                            pDialog.cancel();
+                        }
+
                         try {
                             String auth_token = response.has("auth_token") ? response.getString("auth_token") : "";
                             auth newUser = new auth(auth_token);
@@ -141,6 +154,14 @@ public class LoginActivity extends AppCompatActivity {
 
                             Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
                         }
+                        else {
+                            if (pDialog != null && pDialog.isShowing()) {
+                                pDialog.hide();
+                                pDialog.cancel();
+                            }
+
+                            Toast.makeText(LoginActivity.this, "Please Try again later!", Toast.LENGTH_SHORT).show();
+                        }
 
                     }
 
@@ -149,7 +170,10 @@ public class LoginActivity extends AppCompatActivity {
                         // handle error
                         Log.e(TAG, error.getErrorBody());
 
-
+                        if (pDialog != null && pDialog.isShowing()) {
+                            pDialog.hide();
+                            pDialog.cancel();
+                        }
 
                         if (error.getErrorBody().contains("Unable to log in with provided credentials.")){
 
