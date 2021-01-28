@@ -4,7 +4,7 @@ package com.mhealth.nishauri.utils;
 
 public class Constants {
     /*ENDPOINT*/
-    public static String ENDPOINT = "http://nishauri-api.mhealthkenya.co.ke/api/";
+    public static String ENDPOINT = "https://nishauri-api.mhealthkenya.co.ke/api/";
 
     //AUTH
     public static String REGISTER = "signup/";
