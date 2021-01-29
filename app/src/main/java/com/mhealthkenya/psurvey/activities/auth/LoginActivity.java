@@ -67,14 +67,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        forgot_password.setOnClickListener(new View.OnClickListener() {
+       /* forgot_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Toast.makeText(LoginActivity.this, "Forgot Password clicked!", Toast.LENGTH_SHORT).show();
 
             }
-        });
+        });*/
 
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
 
         btn_login = findViewById(R.id.btn_login);
         sign_up = (TextView) findViewById(R.id.tv_sign_up);
-        forgot_password = findViewById(R.id.tv_forgot_password);
+//        forgot_password = findViewById(R.id.tv_forgot_password);
 
         phoneNumber = (TextInputEditText) findViewById(R.id.edtxt_phone_no);
         password = (TextInputEditText) findViewById(R.id.edtxt_pass);
@@ -168,7 +168,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onError(ANError error) {
                         // handle error
-                        Log.e(TAG, error.getErrorBody());
+                        Log.e(TAG, String.valueOf(error.getErrorCode()));
 
                         if (pDialog != null && pDialog.isShowing()) {
                             pDialog.hide();

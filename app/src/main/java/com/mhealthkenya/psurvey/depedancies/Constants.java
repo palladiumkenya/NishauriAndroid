@@ -3,7 +3,7 @@ package com.mhealthkenya.psurvey.depedancies;
 public class Constants {
 
     /*ENDPOINT*/
-    public static String ENDPOINT = "http://psurvey-api.mhealthkenya.co.ke/";
+    public static String ENDPOINT = "https://psurvey-api.mhealthkenya.co.ke/";
 
     //AUTH
     public static String SIGNUP = "auth/users/";
