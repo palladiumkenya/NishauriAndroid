@@ -6,6 +6,7 @@ package com.example.mhealth.appointment_diary.SSLTrustCertificate;
 import com.example.mhealth.appointment_diary.config.Config;
 
 import java.security.SecureRandom;
+import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,8 +17,8 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-
 public class SSLTrust {
+
     protected static final String TAG = "NukeSSLCerts";
 
     public static void nuke() {
@@ -30,10 +31,24 @@ public class SSLTrust {
                         }
 
                         @Override
-                        public void checkClientTrusted(X509Certificate[] certs, String authType) {}
+                        public void checkClientTrusted(X509Certificate[] certs, String authType) throws CertificateException  {
+                            try {
+                                certs[0].checkValidity();
+                            } catch (Exception e) {
+                                throw new CertificateException("Certificate not valid or trusted.");
+                            }
+
+                        }
 
                         @Override
-                        public void checkServerTrusted(X509Certificate[] certs, String authType) {}
+                        public void checkServerTrusted(X509Certificate[] certs, String authType) throws CertificateException{
+                            try {
+                                certs[0].checkValidity();
+                            } catch (Exception e) {
+                                throw new CertificateException("Certificate not valid or trusted.");
+                            }
+
+                        }
                     }
             };
 
