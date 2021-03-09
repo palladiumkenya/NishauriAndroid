@@ -47,7 +47,7 @@
                 android:layout_marginTop="@dimen/spacing_xlarge"
                 android:background="@drawable/mybutton"
                 android:padding="10dp"
-                android:text="Appointment Diary"
+                android:text="@string/appointment_diary"
                 android:textColor="#ffffff" />
 
             <Button
@@ -59,7 +59,7 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@drawable/mybutton"
                 android:padding="10dp"
-                android:text="defaulter diary"
+                android:text="@string/defaulter_diary"
                 android:textColor="#ffffff" />
 
 
@@ -72,7 +72,7 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@drawable/mybutton"
                 android:padding="10dp"
-                android:text="pmtct"
+                android:text="@string/pmtct"
                 android:textColor="#ffffff" />
 
 
@@ -85,7 +85,7 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@drawable/mybutton"
                 android:padding="10dp"
-                android:text="mlab"
+                android:text="@string/mlab"
                 android:textColor="#ffffff" />
 
             <Button
@@ -97,7 +97,7 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@drawable/mybutton"
                 android:padding="10dp"
-                android:text="web dashboard"
+                android:text="@string/web_dashboard"
                 android:textColor="#ffffff" />
 
 
@@ -111,7 +111,7 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@drawable/mybutton"
                 android:padding="10dp"
-                android:text="report"
+                android:text="@string/report"
                 android:textColor="#ffffff" />
 
 
@@ -125,7 +125,7 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@drawable/mybutton"
                 android:padding="10dp"
-                android:text="Wellness Responses"
+                android:text="@string/wellness_responses"
                 android:textColor="#ffffff" />
         </LinearLayout>
 

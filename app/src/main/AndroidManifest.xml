@@ -6,8 +6,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-
-
     <application
         android:name="com.orm.SugarApp"
         android:allowBackup="true"
@@ -16,9 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-
         tools:replace="android:icon">
-        <activity android:name=".PmtctActivity"
+        <activity android:name=".privecy"></activity>
+        <activity
+            android:name=".PmtctActivity"
             android:label="PMTCT"
             android:parentActivityName=".MainOptions">
             <meta-data
@@ -188,7 +187,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".appointment_diary.TodaysAppointment" />
         </activity>
-
         <activity
             android:name=".RescheduleActivity"
             android:configChanges="orientation|screenSize"

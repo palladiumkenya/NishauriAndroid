@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.mhealth.appointment_diary.LoadMessages.LoadMessages;
 import com.example.mhealth.appointment_diary.MainOptions;
 import com.example.mhealth.appointment_diary.R;
+import com.example.mhealth.appointment_diary.privecy;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Myaffiliation;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
@@ -319,7 +320,8 @@ public class LoginActivity extends Activity {
 
                 Intent intent = new Intent("com.example.abdullahi.appointment_diary.SmsBroadcastReceiver");
                 sendBroadcast(intent);
-                Intent ii = new Intent(LoginActivity.this, MainOptions.class);
+                //Intent ii = new Intent(LoginActivity.this, MainOptions.class);
+                Intent ii = new Intent(LoginActivity.this, privecy.class);
 
                 startActivity(ii);
             }

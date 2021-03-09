@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 29
     buildToolsVersion '29.0.3'
     defaultConfig {
 
         applicationId "com.mhealth.ushauriv2"
-        minSdkVersion 15
-        targetSdkVersion 30 //should be 29 but this is a hack for defaulter diary
-        versionCode 30
+        minSdkVersion 16
+        targetSdkVersion 29 //should be 29 but this is a hack for defaulter diary
+        versionCode 32
         versionName "3.1.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -63,7 +63,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.intuit.sdp:sdp-android:1.0.4'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'junit:junit:4.13.2'
     implementation 'com.github.satyan:sugar:1.4'
     implementation 'com.github.mHealthKenya:SegmentedButton:v2.0.2'
 

@@ -5,7 +5,9 @@ import android.content.Context;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by root on 3/14/18.
@@ -27,7 +29,7 @@ public class DateCalculator {
 
         try{
 
-            DateFormat df=new SimpleDateFormat("dd/MM/yyyy");
+            DateFormat df=new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
             Date dt=new Date();
             String currentDate=df.format(dt).toString();
 
@@ -81,7 +83,8 @@ public class DateCalculator {
 
     public Long calculateDateDifference(String date1,String date2){
 
-        SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy", Locale.ENGLISH);
+
 
         Date d1 = null;
         Date d2 = null;

@@ -65,5 +65,14 @@
     <string name="deceased_date">Deceased Date</string>
     <string name="to_date">TO Date</string>
     <string name="select_appointment_to_reschedule">Select Appointment to reschedule</string>
+    <string name="decline">decline</string>
+    <string name="accept">accept</string>
+    <string name="appointment_diary">Appointment Diary</string>
+    <string name="defaulter_diary">defaulter diary</string>
+    <string name="pmtct">pmtct</string>
+    <string name="mlab">mlab</string>
+    <string name="web_dashboard">web dashboard</string>
+    <string name="report">report</string>
+    <string name="wellness_responses">Wellness Responses</string>
 
 </resources>

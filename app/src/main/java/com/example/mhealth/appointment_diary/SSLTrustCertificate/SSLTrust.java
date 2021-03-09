@@ -21,6 +21,7 @@ public class SSLTrust {
 
     protected static final String TAG = "NukeSSLCerts";
 
+
     public static void nuke() {
         try {
             TrustManager[] trustAllCerts = new TrustManager[] {
@@ -44,6 +45,7 @@ public class SSLTrust {
                         public void checkServerTrusted(X509Certificate[] certs, String authType) throws CertificateException{
                             try {
                                 certs[0].checkValidity();
+
                             } catch (Exception e) {
                                 throw new CertificateException("Certificate not valid or trusted.");
                             }
