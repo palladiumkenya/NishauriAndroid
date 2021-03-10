@@ -11,6 +11,7 @@
         android:id="@+id/privacyId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
         />
 
 
@@ -18,6 +19,7 @@
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:orientation="horizontal">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -25,20 +27,22 @@
             >
 
             <Button
-                android:layout_marginLeft="130dp"
+                android:layout_marginLeft="60dp"
                 android:id="@+id/decline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:textColor="@color/textColorPrimary"
+                android:background="@drawable/background_round_corner_privecy"
                 android:text="@string/decline"/>
 
             <Button
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-
+               android:layout_alignParentRight="true"
+                android:layout_marginRight="60dp"
                 android:id="@+id/accept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/textColorPrimary"
+                android:background="@drawable/background_round_corner_privecy"
                 android:text="@string/accept"/>
 
 
