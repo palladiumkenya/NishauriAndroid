@@ -29,7 +29,7 @@ import com.example.mhealth.appointment_diary.AccessServer.AccessServer;
 import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
 import com.example.mhealth.appointment_diary.MakeCalls.makeCalls;
 import com.example.mhealth.appointment_diary.R;
-import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
+//import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
 import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.encryption.Base64Encoder;
 import com.example.mhealth.appointment_diary.models.Appointments;
@@ -109,7 +109,7 @@ public class AppointmentAdapter extends BaseAdapter implements Filterable {
     public View getView(final int position, final View convertView, ViewGroup parent) {
         View v = View.inflate(mycont, R.layout.appointment_row, null);
 
-        SSLTrust.nuke();
+        //SSLTrust.nuke();
 
 
         try {

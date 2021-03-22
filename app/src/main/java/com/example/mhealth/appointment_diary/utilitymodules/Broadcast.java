@@ -20,7 +20,7 @@ import com.example.mhealth.appointment_diary.AccessServer.AccessServer;
 import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
 import com.example.mhealth.appointment_diary.R;
 
-import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
+//import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
 import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.encryption.Base64Encoder;
 import com.example.mhealth.appointment_diary.sendmessages.SendMessage;
@@ -62,7 +62,7 @@ public class Broadcast extends AppCompatActivity
 
          initialise();
 
-        SSLTrust.nuke();
+        //SSLTrust.nuke();
 
          setToolbar();
 

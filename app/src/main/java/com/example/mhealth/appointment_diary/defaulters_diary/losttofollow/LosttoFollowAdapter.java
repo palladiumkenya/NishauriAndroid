@@ -26,7 +26,7 @@ import com.example.mhealth.appointment_diary.DateTimePicker.DateTimePicker;
 import com.example.mhealth.appointment_diary.MakeCalls.makeCalls;
 import com.example.mhealth.appointment_diary.R;
 
-import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
+//import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
 import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.encryption.Base64Encoder;
 import com.example.mhealth.appointment_diary.models.Appointments;
@@ -128,7 +128,7 @@ public class LosttoFollowAdapter extends BaseAdapter implements Filterable {
             mc=new makeCalls(mycont);
             acs=new AccessServer(mycont);
 
-            SSLTrust.nuke();
+            //SSLTrust.nuke();
 
 //            TextView ccnumberT = (TextView) v.findViewById(R.id.ccnumber);
 //            TextView appnameT = (TextView) v.findViewById(R.id.appname);

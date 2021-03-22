@@ -43,7 +43,7 @@ import com.example.mhealth.appointment_diary.AccessServer.AccessServer;
 import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
 import com.example.mhealth.appointment_diary.ProcessReceivedMessage.ProcessMessage;
 import com.example.mhealth.appointment_diary.R;
-import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
+//import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
 import com.example.mhealth.appointment_diary.Smsretrieverapi.SmsReceiver;
 import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.loginmodule.LoginActivity;
@@ -224,7 +224,7 @@ public class TodaysAppointment extends AppCompatActivity implements SmsReceiver.
         setToolbar();
         initialise();
 
-        SSLTrust.nuke();
+        //SSLTrust.nuke();
 
         getPassedData();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

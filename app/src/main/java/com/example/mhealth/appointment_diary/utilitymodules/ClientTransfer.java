@@ -19,7 +19,7 @@ import com.example.mhealth.appointment_diary.AppendFunction.AppendFunction;
 import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
 import com.example.mhealth.appointment_diary.R;
 
-import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
+//import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
 import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.encryption.Base64Encoder;
 import com.example.mhealth.appointment_diary.sendmessages.SendMessage;
@@ -59,7 +59,7 @@ public class ClientTransfer extends AppCompatActivity{
 
         initialise();
 
-        SSLTrust.nuke();
+        //SSLTrust.nuke();
 
         final Context gratitude = this;
         final Button btnRSubmit = (Button) findViewById(R.id.btnRSubmit);

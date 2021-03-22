@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion '29.0.3'
+    compileSdkVersion 30
+    buildToolsVersion '30.0.3'
     defaultConfig {
 
         applicationId "com.mhealth.ushauriv2"
         minSdkVersion 16
-        targetSdkVersion 29 //should be 29 but this is a hack for defaulter diary
-        versionCode 32
-        versionName "3.1.5"
+        targetSdkVersion 30 //should be 29 but this is a hack for defaulter diary
+        versionCode 36
+        versionName "3.1.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
@@ -25,7 +25,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile rootProject.file('signing/key.jks')
+           // storeFile rootProject.file('signing/key.jks')
             storePassword 'Mhealth12345'
             keyAlias 'mhealth'
             keyPassword 'Mhealth12345'
@@ -69,14 +69,16 @@ dependencies {
 
 
 //    implementation 'com.github.ceryle:SegmentedButton:v1.0'
-//    implementation 'com.github.ceryle:SegmentedButton:v2.0.2'
+    //removed
+    //implementation 'com.github.ceryle:SegmentedButton:v2.0.2'
 
     implementation 'com.tapadoo.android:alerter:2.0.4'
-    implementation 'com.android.volley:volley:1.1.1'
+    implementation 'com.android.volley:volley:1.2.0'
     implementation 'com.facebook.stetho:stetho:1.5.0'
     implementation 'com.github.MdFarhanRaja:SearchableSpinner:1.9'
     implementation 'com.weiwangcn.betterspinner:library-material:1.1.0'
     implementation 'com.github.f0ris.sweetalert:library:1.5.2'
+   // removed
     implementation 'com.github.d-max:spots-dialog:0.7@aar'
     //    start sms retriever api implementation
     implementation 'com.google.android.gms:play-services-base:17.6.0'
@@ -87,7 +89,6 @@ dependencies {
    // implementation 'org.jetbrains.kotlin:kotlin-stdlib-jre7:1.4.10'
 
 
-    implementation 'com.android.volley:volley:1.1.1'
 
     //butterknife
     implementation 'com.jakewharton:butterknife:10.2.1'
@@ -96,8 +97,8 @@ dependencies {
 
     //implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10"
 
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.4'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.4'
 
 
     implementation 'com.mikhaellopez:circularimageview:3.2.0'          // circle image view

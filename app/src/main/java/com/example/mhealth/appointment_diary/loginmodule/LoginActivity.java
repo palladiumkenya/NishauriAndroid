@@ -112,7 +112,10 @@ public class LoginActivity extends Activity {
                 @Override
                 public void onClick(View v) {
 // TODO Auto-generated method stub
-                    Intent i=new Intent(LoginActivity.this,Registration.class);
+
+
+                   // Intent i=new Intent(LoginActivity.this,Registration.class);
+                    Intent i=new Intent(LoginActivity.this,privecy.class);
                     startActivity(i);
                 }
             });
@@ -320,8 +323,8 @@ public class LoginActivity extends Activity {
 
                 Intent intent = new Intent("com.example.abdullahi.appointment_diary.SmsBroadcastReceiver");
                 sendBroadcast(intent);
-                //Intent ii = new Intent(LoginActivity.this, MainOptions.class);
-                Intent ii = new Intent(LoginActivity.this, privecy.class);
+                Intent ii = new Intent(LoginActivity.this, MainOptions.class);
+               // Intent ii = new Intent(LoginActivity.this, privecy.class);
 
                 startActivity(ii);
             }

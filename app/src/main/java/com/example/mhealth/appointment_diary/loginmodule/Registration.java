@@ -28,7 +28,7 @@ import com.example.mhealth.appointment_diary.AccessServer.AccessServer;
 import com.example.mhealth.appointment_diary.GetRemoteData.GetRemoteData;
 import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.RequestPermissions.RequestPerms;
-import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
+//import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
 import com.example.mhealth.appointment_diary.sendmessages.SendMessage;
 import com.example.mhealth.appointment_diary.tables.Affiliationstable;
 import com.example.mhealth.appointment_diary.tables.Mflcode;
@@ -76,7 +76,7 @@ public class Registration extends Activity implements AdapterView.OnItemSelected
 
         addListenerOnChkTracer();
         requestNewPerms();
-        SSLTrust.nuke();
+        //SSLTrust.nuke();
 
         populateAffiliation();
         populateSecQn();

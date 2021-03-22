@@ -30,7 +30,7 @@ import com.example.mhealth.appointment_diary.AccessServer.AccessServer;
 import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
 import com.example.mhealth.appointment_diary.ProcessReceivedMessage.ProcessMessage;
 import com.example.mhealth.appointment_diary.R;
-import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
+//import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
 import com.example.mhealth.appointment_diary.Smsretrieverapi.SmsReceiver;
 import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.defaulters_diary.defaultered.DefaulterFragment;
@@ -103,7 +103,7 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
         setContentView(R.layout.defaultertab_mainactivity);
         Log.d(TAG, "onCreate: Starting.");
 
-        SSLTrust.nuke();
+        //SSLTrust.nuke();
 
         initialise();
         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());

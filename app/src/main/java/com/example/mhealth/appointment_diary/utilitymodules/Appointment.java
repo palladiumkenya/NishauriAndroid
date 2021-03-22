@@ -26,7 +26,7 @@ import com.example.mhealth.appointment_diary.AppendFunction.AppendFunction;
 import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
 import com.example.mhealth.appointment_diary.R;
 
-import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
+//import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
 import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.encryption.Base64Encoder;
 import com.example.mhealth.appointment_diary.sendmessages.SendMessage;
@@ -81,7 +81,7 @@ public class Appointment extends AppCompatActivity implements AdapterView.OnItem
 
 
         initialise();
-        SSLTrust.nuke();
+        //SSLTrust.nuke();
 
         AppointmentdateListener();
 

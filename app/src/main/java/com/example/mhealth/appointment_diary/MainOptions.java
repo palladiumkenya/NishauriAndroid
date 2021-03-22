@@ -64,13 +64,13 @@ public class MainOptions extends AppCompatActivity {
 
 
 
-        pmtct.setOnClickListener(new View.OnClickListener() {
+        /* pmtct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainOptions.this, PmtctActivity.class);
                 startActivity(i);
             }
-        });
+        });*/
 
 
         appointment_diary.setOnClickListener(new View.OnClickListener() {
@@ -94,8 +94,8 @@ public class MainOptions extends AppCompatActivity {
         pmtct_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainOptions.this, PmtctActivity.class);
-                startActivity(i);
+                Intent intent1 = new Intent(MainOptions.this, PmtctActivity.class);
+                startActivity(intent1);
             }
         });
 

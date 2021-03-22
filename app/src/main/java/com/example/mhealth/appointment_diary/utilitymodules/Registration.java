@@ -26,7 +26,7 @@ import com.example.mhealth.appointment_diary.AppendFunction.AppendFunction;
 import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
 import com.example.mhealth.appointment_diary.Mydates.MyDates;
 import com.example.mhealth.appointment_diary.R;
-import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
+//import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
 import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.encryption.Base64Encoder;
 import com.example.mhealth.appointment_diary.models.RegisterCounter;
@@ -101,7 +101,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
         initialise();
         populateSerialNumber();
-        SSLTrust.nuke();
+        //SSLTrust.nuke();
         displayAlternativeNumber();
 
 //        sendEncrypted();

@@ -9,6 +9,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 
 import com.example.mhealth.appointment_diary.loginmodule.LoginActivity;
+import com.example.mhealth.appointment_diary.loginmodule.Registration;
 
 public class privecy extends AppCompatActivity {
 
@@ -36,7 +37,7 @@ public class privecy extends AppCompatActivity {
         accept1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 =  new Intent(privecy.this, MainOptions.class);
+                Intent intent1 =  new Intent(privecy.this, Registration.class);
                 startActivity(intent1);
             }
         });
