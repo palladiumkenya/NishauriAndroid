@@ -74,5 +74,10 @@
     <string name="web_dashboard">web dashboard</string>
     <string name="report">report</string>
     <string name="wellness_responses">Wellness Responses</string>
+    <string name="cancel_defauter_visit_honored">cancel</string>
+    <string name="submit_defaulter_visit_honored">submit</string>
+    <string name="date_client_was_visited_defauter_visit_honored">Date client was visited</string>
+    <string name="cancel_defaulter_call_honored">cancel</string>
+    <string name="submit_defaulter_call_honored">submit</string>
 
 </resources>

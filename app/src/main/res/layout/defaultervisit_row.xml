@@ -1,6 +1,12 @@
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#e0e0d1"
     android:orientation="vertical">
@@ -255,3 +261,4 @@
 
     </LinearLayout>
 </LinearLayout>
+</ScrollView>
