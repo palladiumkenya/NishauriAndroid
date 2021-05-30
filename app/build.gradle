@@ -8,7 +8,7 @@ android {
         applicationId "com.mhealth.ushauriv2"
         minSdkVersion 16
         targetSdkVersion 30 //should be 29 but this is a hack for defaulter diary
-        versionCode 37
+        versionCode 42
         versionName "3.1.8"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true

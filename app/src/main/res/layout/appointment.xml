@@ -183,7 +183,7 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="4dp"
-                android:background="@drawable/button"
+                android:background="@color/colorPrimary"
                 android:fontFamily="serif"
                 android:onClick="submitClicked"
                 android:text="Submit"
