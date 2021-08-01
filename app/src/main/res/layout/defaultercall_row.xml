@@ -18,7 +18,7 @@
             android:gravity="left"
             android:textStyle="bold"
 
-            android:text="CCC Number"
+            android:text="KDOD Number"
             android:padding="5dp"
             android:textSize="13sp" />
 
@@ -166,7 +166,7 @@
             android:padding="5dp"
             android:textStyle="bold"
 
-            android:text="File serial Number"
+            android:text="Service number"
             android:textSize="13sp" />
 
         <TextView

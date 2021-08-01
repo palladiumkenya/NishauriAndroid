@@ -77,7 +77,7 @@
                         android:id="@+id/transupn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="CCC No"
+                        android:hint="KDOD No"
                         android:inputType="number"
                         android:maxLength="5"
                         android:textColorHint="#000"
@@ -96,7 +96,7 @@
                     android:id="@+id/transidno"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="ID/PASSPORT No"
+                    android:hint="ID/PASSPORT No/Service No"
                     android:inputType="text"
                     android:maxLength="15"
                     android:textColorHint="#000"
@@ -156,6 +156,10 @@
 
 
 
+
+
+            </LinearLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -168,11 +172,9 @@
                     android:hint="Specify other"
                     android:inputType="text"
                     android:textColorHint="#000"
-                     />
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            </LinearLayout>
 
 
 

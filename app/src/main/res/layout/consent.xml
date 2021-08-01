@@ -77,7 +77,7 @@
                         android:id="@+id/consentupn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="CCC No"
+                        android:hint="KDOD No"
                         android:inputType="number"
                         android:maxLength="5"
                         android:textColorHint="#000"

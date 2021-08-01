@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -21,6 +22,14 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mhealth.appointment_diary.AccessServer.AccessServer;
 import com.example.mhealth.appointment_diary.AppendFunction.AppendFunction;
 import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
@@ -37,25 +46,69 @@ import com.example.mhealth.appointment_diary.tables.Mflcode;
 import com.example.mhealth.appointment_diary.tables.Myaffiliation;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
 import com.facebook.stetho.Stetho;
+import com.google.android.material.snackbar.Snackbar;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import butterknife.BindView;
 
 /**
  * Created by DELL on 12/11/2015.
  */
 public class Registration extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    private RequestQueue rq;
+    ArrayList<String> servicesList;
+    ArrayList<Service> services;
 
-    LinearLayout smslayoutL, idnoL, orphanL, altphoneL, disableL,groupingL;
+    ArrayList<String> serviceUnitsList;
+    ArrayList<ServicesUnit> serviceUnits;
 
-    EditText cccE, upnE, fileserialE, f_nameE, s_nameE, o_nameE, dobE, enrollment_dateE, art_dateE, phoneE, buddyphoneE, idnoE, altphoneE,ageinyearsE,locatorcountyE,locatorsubcountyE,locatorlocationE,locatorwardE,locatorvillageE;
+    private int serviceID = 0;
+    private int serviceUnitID = 0;
+
+
+    String serviceValue= "";
+    String unitValue="";
+
+    //int serviceID;
+    //int serviceUnitID;
+
+
+
+    SearchableSpinner serviceSpin;
+    SearchableSpinner unitSpin;
+
+    ArrayList<String>servicesArray;
+    ArrayAdapter<String> AA;
+
+    ArrayList<String> ArmyList, AirwaysList, NavyList;
+    ArrayAdapter<String> AAList;
+
+
+
+
+    SearchableSpinner ServiceSpinner, serviceUnitSpinner;
+
+    LinearLayout smslayoutL, idnoL, orphanL, altphoneL, disableL, groupingL;
+
+    EditText cccE, upnE, fileserialE, f_nameE, s_nameE, o_nameE, dobE, enrollment_dateE, art_dateE, phoneE, email_address, idnoE, altphoneE, ageinyearsE, ServiceNo;
 
     Spinner genderS, maritalS, conditionS, enrollmentS, languageS, smsS, wklymotivation, messageTime, SelectstatusS, patientStatus, GroupingS, orphanS, schoolS, newGroupingS;
 
-    String gender_code, marital_code, condition_code,grouping_code,new_grouping_code, category_code, language_code, sms_code, Selectstatus_code, wklyMotivation_code, messageTime_code, patientStatus_code, school_code, orphan_code, idnoS,locatorcountyS,locatorsubcountyS,locatorlocationS,locatorwardS,locatorvillageS;
+    String gender_code, marital_code, condition_code, grouping_code, new_grouping_code, category_code, language_code, sms_code, Selectstatus_code, wklyMotivation_code, messageTime_code, patientStatus_code, school_code, orphan_code, idnoS;
+
 
     DatePickerDialog datePickerDialog;
     CheckInternet chkinternet;
@@ -63,11 +116,12 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     SendMessage sm;
 
     String[] genders = {"Please Select Gender", "Female", "Male"};
+    //String[] service = {"Please Select Service", "Kenya Army", "Kenya Air Force", "Kenya Navy"};
 
-    String[] newgroupings = {"Please Select Grouping", "Adolescent","PMTCT","TB","Adults","Peads","TB-HIV","HEI"};
+    String[] newgroupings = {"Please Select Grouping", "Adolescent", "PMTCT", "TB", "Adults", "Peads", "TB-HIV", "HEI"};
     String[] gendersUcsf = {"Please Select Sex", "Female", "Male"};
     String[] maritals = {"Please Select Marital Status", "Single", "Married Monogomaus", "Married Polygamous", "Divorced", "Widowed", "Cohabiting", "Not Applicable"};
-    String[] maritalsInfants = {"Please Select Marital Status", "Single","Not Applicable"};
+    String[] maritalsInfants = {"Please Select Marital Status", "Single", "Not Applicable"};
     String[] conditions = {"Please Select Condition", "ART", "Pre-Art"};
     String[] groups = {"Please Select Grouping", "peads", "adolescents", "PMTCT", "ART", "High VL (Suppressed & non suppressant)"};
     String[] languages = {"Please Select Language", "Swahili", "English"};
@@ -77,16 +131,37 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     String[] weeklymotivation = {"Enable weekly motivation alerts", "Yes", "No"};
     String[] msgtime = {"Please select preffered messaging time", "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "22:00", "23:00"};
     String[] pntstatus = {"Please select transaction type", "New", "Update", "Transfer Client In (This module allows transfer in of a client from a facility without ushauri system)"};
-    String[] statuss = {"Please Select Status", "Active", "Disabled", "Deceased","Transfer Out"};
+    String[] statuss = {"Please Select Status", "Active", "Disabled", "Deceased", "Transfer Out"};
     String[] statussnew = {"Please Select Status", "Active"};
 
 
     String counter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        rq = Volley.newRequestQueue(Registration.this);
+        serviceSpin = findViewById(R.id.services);
+        unitSpin = findViewById(R.id.unit);
+        //service and unit array
+        getServicesUnits();
+
+
+
+
+        /*ServiceSpinner = findViewById(R.id.ServiceSpinner);
+        serviceUnitSpinner = findViewById(R.id.serviceUnit);
+
+
+       ServiceSpinner.setTitle("Select Service");
+        ServiceSpinner.setPositiveButton("OK");
+        serviceUnitSpinner.setTitle("Select Unit");
+        serviceUnitSpinner.setPositiveButton("OK");*/
+
+
         // components from activity_registration.xml
 
         // Find the toolbar view inside the activity layout
@@ -127,6 +202,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
         setSpinnerListeners();
         setPrompts();
+       // getFacilities();
 
 
         final Context gratitude = this;
@@ -138,30 +214,111 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-    private void populateMflCode(){
+    private void getServicesUnits() {
+        servicesArray = new ArrayList<>();
+        servicesArray.add("Select Service");
+        servicesArray.add("Kenya Army");
+        servicesArray.add("Kenya Air Force");
+        servicesArray.add("Kenya Navy");
 
-        try{
+        AA =new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item,servicesArray);
 
-            List<Mflcode> myl=Mflcode.findWithQuery(Mflcode.class,"select * from Mflcode limit 1");
-            String mflcode="";
+        serviceSpin.setAdapter(AA);
 
-            for(int x=0;x<myl.size();x++){
+        //ArmyList
+        ArmyList = new ArrayList<>();
 
-                mflcode=myl.get(x).getMfl();
+        ArmyList.add("THIKA GARISSON");
+        ArmyList.add("EMBAKASI");
+
+
+        //AirwaysList
+        AirwaysList = new ArrayList<>();
+        AirwaysList.add("MAB");
+        AirwaysList.add("LAB");
+
+
+        //NavyList
+        NavyList = new ArrayList<>();
+        NavyList.add("MANDA REFILL CENTER");
+        NavyList.add("KENYA NAVY HOSPITAL");
+        NavyList.add("MUTONGWE MILITARY OUTREACH CLINIC");
+
+
+        serviceSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                //get value
+
+               // int getid = parent.getSelectedItemPosition();   ///get the selected element place id
+               // textView1.setText("Position of selected element: "+String.valueOf(getid));
+               // String getvalue = String.valueOf(parent.getItemAtPosition(position));   // getting the selected element value
+               // textView2.setText("Value of Selected Spinner : "+getvalue);
+                serviceValue = String.valueOf(parent.getItemAtPosition(position));
+                serviceID = parent.getSelectedItemPosition();
+
+                if (position==1){
+                    AAList = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, ArmyList);
+                }
+
+                if (position==2){
+                    AAList = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, AirwaysList);
+                }
+
+                if (position==3){
+                    AAList = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, NavyList);
+                }
+                unitSpin.setAdapter(AAList);
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        unitSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                unitValue = String.valueOf(parent.getItemAtPosition(position));
+
+                serviceUnitID = parent.getSelectedItemPosition();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+    }
+
+    private void populateMflCode() {
+
+        try {
+
+            List<Mflcode> myl = Mflcode.findWithQuery(Mflcode.class, "select * from Mflcode limit 1");
+            String mflcode = "";
+
+            for (int x = 0; x < myl.size(); x++) {
+
+                mflcode = myl.get(x).getMfl();
 
             }
             cccE.setText(mflcode);
 
-        }
-        catch(Exception e){
+        } catch (Exception e) {
 
             Toast.makeText(this, "error occured populating mflcode", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void populateSerialNumber(){
+    private void populateSerialNumber() {
 
-        try{
+        try {
 
             upnE.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -177,12 +334,11 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 @Override
                 public void afterTextChanged(Editable s) {
 
-                    fileserialE.setText(upnE.getText().toString());
+                   // fileserialE.setText(upnE.getText().toString());
 
                 }
             });
-        }
-        catch(Exception e){
+        } catch (Exception e) {
 
             Toast.makeText(this, "error setting serial number", Toast.LENGTH_SHORT).show();
         }
@@ -283,27 +439,27 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     public void initialise() {
 
         try {
-            ageinyearsE=(EditText) findViewById(R.id.ageinyears);
+            ageinyearsE = (EditText) findViewById(R.id.ageinyears);
             sm = new SendMessage(Registration.this);
             acs = new AccessServer(Registration.this);
             chkinternet = new CheckInternet(Registration.this);
             idnoE = (EditText) findViewById(R.id.idno);
             idnoS = "";
 
-            locatorcountyE= (EditText) findViewById(R.id.locatorcounty);
-            locatorsubcountyE= (EditText) findViewById(R.id.locatorsubcounty);
-            locatorlocationE= (EditText) findViewById(R.id.locatorlocation);
-            locatorwardE= (EditText) findViewById(R.id.locatorward);
-            locatorvillageE= (EditText) findViewById(R.id.locatorvillage);
+           /* locatorcountyE = (EditText) findViewById(R.id.locatorcounty);
+            locatorsubcountyE = (EditText) findViewById(R.id.locatorsubcounty);
+            locatorlocationE = (EditText) findViewById(R.id.locatorlocation);
+            locatorwardE = (EditText) findViewById(R.id.locatorward);
+            locatorvillageE = (EditText) findViewById(R.id.locatorvillage);*/
 
-            buddyphoneE = (EditText) findViewById(R.id.buddyphone);
+            email_address = (EditText) findViewById(R.id.Email);
             altphoneE = (EditText) findViewById(R.id.altphone);
             disableL = (LinearLayout) findViewById(R.id.disablell);
 
             altphoneL = (LinearLayout) findViewById(R.id.altphonell);
             orphanL = (LinearLayout) findViewById(R.id.orphanll);
             idnoL = (LinearLayout) findViewById(R.id.idnoll);
-            fileserialE = (EditText) findViewById(R.id.cfile);
+            // fileserialE = (EditText) findViewById(R.id.cfile);
             cccE = (EditText) findViewById(R.id.ccc);
             upnE = (EditText) findViewById(R.id.upn);
             smslayoutL = (LinearLayout) findViewById(R.id.smslayout);
@@ -315,6 +471,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             enrollment_dateE = (EditText) findViewById(R.id.enrollment_date);
             art_dateE = (EditText) findViewById(R.id.art_date);
             phoneE = (EditText) findViewById(R.id.phone);
+
+            //ServiceNo = findViewById()
 
 
             genderS = (Spinner) findViewById(R.id.gender_spinner);
@@ -331,12 +489,19 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             wklymotivation = (Spinner) findViewById(R.id.weekly_spinner);
             messageTime = (Spinner) findViewById(R.id.time_spinner);
             patientStatus = (Spinner) findViewById(R.id.Patientstatus_spinner);
+
+
+
+            //serviceS =(Spinner) findViewById(R.id.Service);
+            //unitS =(Spinner) findViewById(R.id.serviceUnit);
+
+
 //           GroupingS=(Spinner) findViewById(R.id.grouping_spinner);
 
 
             gender_code = "";
-            grouping_code="";
-            new_grouping_code="";
+            grouping_code = "";
+            new_grouping_code = "";
             marital_code = "";
             condition_code = "";
             category_code = "";
@@ -349,11 +514,11 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             orphan_code = "";
             school_code = "";
 
-            locatorcountyS="-1";
-            locatorsubcountyS="-1";
-            locatorlocationS="-1";
-            locatorwardS="-1";
-            locatorvillageS="-1";
+           /* locatorcountyS = "-1";
+            locatorsubcountyS = "-1";
+            locatorlocationS = "-1";
+            locatorwardS = "-1";
+            locatorvillageS = "-1";*/
 //           grouping_code="";
         } catch (Exception e) {
 
@@ -377,12 +542,13 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             art_dateE.setText("");
             phoneE.setText("");
             idnoE.setText("");
+           // email_address.setText("");
             if (altphoneE.isShown()) {
                 altphoneE.setText("");
             }
 
-            buddyphoneE.setText("");
-            fileserialE.setText("");
+            //email_address.setText("");
+            //fileserialE.setText("");
 
 
             populateCondition();
@@ -396,6 +562,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             populatemsg();
             populatepntstatus();
             populategrouping();
+            //getFacilities();
 
             gender_code = "";
             marital_code = "";
@@ -515,10 +682,10 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                     int mycurrentYear = Integer.parseInt(MyDates.getCurrentYear());
                                     int difference = mycurrentYear - year;
 
-                                    ageinyearsE.setText(difference+" Years");
+                                    ageinyearsE.setText(difference + " Years");
 
 
-                                    if (difference >= 18) {
+                                    /*if (difference >= 18) {
                                         idnoL.setVisibility(View.VISIBLE);
                                         if (isUcsf()) {
                                             orphanL.setVisibility(View.GONE);
@@ -539,15 +706,14 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                         }
 
 
-                                    }
+                                    }*/
 
-                                    if(difference<=12){
+                                    if (difference <= 12) {
 
 
                                         populateMaritalInfant();
 
-                                    }
-                                    else{
+                                    } else {
 
                                         populateMarital();
 
@@ -585,12 +751,11 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
             condition_code = Integer.toString(position);
 
-            if(position==2){
+            if (position == 2) {
 
                 art_dateE.setVisibility(View.GONE);
 
-            }
-            else{
+            } else {
 
                 art_dateE.setVisibility(View.VISIBLE);
             }
@@ -784,20 +949,19 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
-    private boolean displayGrouping(){
+    private boolean displayGrouping() {
 
-        boolean result=false;
+        boolean result = false;
 
-        if(isUcsf()){
+        if (isUcsf()) {
             groupingL.setVisibility(View.GONE);
-            result=false;
-        }
-        else{
+            result = false;
+        } else {
 
             groupingL.setVisibility(View.VISIBLE);
-            result=true;
+            result = true;
         }
-        return  result;
+        return result;
     }
 
 
@@ -814,12 +978,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 newGroupingS.setAdapter(customAdapter);
 
 
-
-
             } else {
-
-
-
 
 
             }
@@ -1052,6 +1211,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
 
         }
+
     }
 
 
@@ -1060,73 +1220,16 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         try {
 
 
-
             //start set locator information variables
 
 //            locatorsubcountyS,locatorlocationS,locatorwardS,locatorvillageS
 
-            if(locatorcountyE.getText().toString().trim().isEmpty()){
-
-                locatorcountyS="-1";
-
-            }
-            else{
-
-                locatorcountyS=locatorcountyE.getText().toString();
-
-            }
-
-            if(locatorsubcountyE.getText().toString().trim().isEmpty()){
-
-                locatorsubcountyS="-1";
-
-            }
-            else{
-
-                locatorsubcountyS=locatorsubcountyE.getText().toString();
-
-            }
-
-
-            if(locatorlocationE.getText().toString().trim().isEmpty()){
-
-                locatorlocationS="-1";
-
-            }
-            else{
-
-                locatorlocationS=locatorlocationE.getText().toString();
-
-            }
-
-
-            if(locatorwardE.getText().toString().trim().isEmpty()){
-
-                locatorwardS="-1";
-
-            }
-            else{
-
-                locatorwardS=locatorwardE.getText().toString();
-
-            }
-
-            if(locatorvillageE.getText().toString().trim().isEmpty()){
-
-                locatorvillageS="-1";
-
-            }
-            else{
-
-                locatorvillageS=locatorvillageE.getText().toString();
-
-            }
 
 
             //end set locator information variables
 
             String cccS = cccE.getText().toString();
-            String fileserialS = fileserialE.getText().toString();
+            //String fileserialS = fileserialE.getText().toString();
             String upnS = upnE.getText().toString();
             String f_nameS = f_nameE.getText().toString();
             String s_nameS = s_nameE.getText().toString();
@@ -1135,10 +1238,11 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             String enrollmentS = enrollment_dateE.getText().toString();
             String art_dateS = art_dateE.getText().toString();
             String phoneS = phoneE.getText().toString();
+            String emailS = email_address.getText().toString();
             String altphoneNumber = "-1";
             String buddyphoneNumber = "-1";
             String idNumber = "-1";
-
+            String Service_No = idnoE.getText().toString();
             String[] dobArray = new String[]{};
             String[] enrollmentArray = new String[]{};
             String[] artArray = new String[]{};
@@ -1233,11 +1337,14 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                 cccE.setError("mfl code is required");
 
-            } else if (upnS.trim().isEmpty()) {
-
-                upnE.setError("CCC No. required");
-
             }
+
+
+            /*else if (upnS.trim().isEmpty()) {
+
+                upnE.setError("KDOD No. required");
+
+            }*/
 //           else if(fileserialS.trim().isEmpty() && !patientStatus_code.contentEquals("2")){
 //
 //                fileserialE.setError("file serial number is required");
@@ -1503,33 +1610,36 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                     altphoneNumber = "-1";
                 }
 
-                if (buddyphoneE.isShown() && !buddyphoneE.getText().toString().isEmpty()) {
+                /*if (email_address.isShown() && !email_address.getText().toString().isEmpty()) {
 
                     buddyphoneNumber = altphoneE.getText().toString();
                 } else {
 
                     buddyphoneNumber = "-1";
+                }*/
+
+                if (!groupingL.isShown()) {
+
+                    new_grouping_code = "-1";
+
+
                 }
 
-                if(!groupingL.isShown()){
+                if (!art_dateE.isShown()) {
 
-                    new_grouping_code="-1";
-
-
-                }
-
-                if(!art_dateE.isShown()){
-
-                    art_dateS="-1";
+                    art_dateS = "-1";
 
                 }
 
 //*******check empty values and set them to -1***
 
                 String newupns = AppendFunction.AppendUniqueIdentifier(upnS);
-                String myccnumber = cccS + newupns;
+                //String myccnumber = cccS + newupns;
+                String myccnumber = cccS;
 
-                String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code+"*"+new_grouping_code+"*"+locatorcountyS+"*"+locatorsubcountyS+"*"+locatorlocationS+"*"+locatorwardS+"*"+locatorvillageS;
+                String sendSms = myccnumber +  "*" + Service_No+ "*"+ f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + emailS + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code + "*" + new_grouping_code + "*" +serviceID + "*" + serviceUnitID;
+                    //Service_No
+                //String sendSms =  f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + emailS + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code + "*" + new_grouping_code + "*" +serviceID + "*" + serviceUnitID;
 
 //                    String sendSms = "Reg*" + cccS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + language_code + "*" + sms_code + "*" +wkly_code+"*"+pnt_code+"*"+message_code+"*"+ status_code;
 
@@ -1558,7 +1668,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                     sm.sendMessageApi("Reg*" + encrypted, mynumber);
                     LogindisplayDialog("Client registered successfully, kindly confirm that you have received the client registration successful SMS before booking an appointment");
-
 
 
                 }
@@ -1668,6 +1777,21 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 //    }
 
 
+
+
+
+    //get facilities
+
+
+
+
+
+
+
+
+    //close facilities
+
+
     public void LogindisplayDialog(String message) {
 
         try {
@@ -1696,5 +1820,320 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
-}
+    //get Facilitiews
 
+    public void getFacilities(){
+
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                Config.GET_DOD_SERVICES, null, new Response.Listener<JSONObject>() {
+
+
+            @Override
+            public void onResponse(JSONObject response) {
+//                Log.d(TAG, response.toString());
+
+                // progressDialog.dismiss();
+
+                try {
+
+                    boolean  status = response.has("success") && response.getBoolean("success");
+                    String  message = response.has("message") ? response.getString("message") : "" ;
+                    String  errors = response.has("errors") ? response.getString("errors") : "" ;
+
+
+                    if (status)
+                    {
+//                        Stash.clear(Constants.DISTRICTS_ARRAYLIST);
+//                        Stash.clear(Constants.DISTRICTS_LIST);
+
+                        services = new ArrayList<Service>();
+                        servicesList = new ArrayList<String>();
+
+                        services.clear();
+                        servicesList.clear();
+
+                        JSONArray jsonArray = response.getJSONArray("data");
+
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject service = (JSONObject) jsonArray.get(i);
+
+                            int id = service.has("id") ? service.getInt("id") : 0;
+                            String name = service.has("Kenya Army") ? service.getString("Kenya Army") : "";
+                            String partner_type_id = service.has("partner_type_id") ? service.getString(null) : "" ;
+
+                            String phone_no = service.has("phone_no") ? service.getString(null) : "";
+                            String location = service.has("location") ? service.getString("Nairobi") : "";
+
+                            String created_by = service.has("created_by") ? service.getString(null) : "";
+
+                            String updated_by = service.has("updated_by") ? service.getString(null) : "";
+                            String createdAt = service.has("createdAt") ? service.getString("2021") : "";
+                            String updatedAt = service.has("updatedAt") ? service.getString(null) : "";
+                            String deletedAt = service.has("deletedAt") ? service.getString(null) : "";
+
+
+
+                            Service newService = new Service(id,name,partner_type_id,phone_no, location, created_by, updated_by, createdAt, updatedAt, deletedAt);
+
+                            services.add(newService);
+                            servicesList.add(newService.getName());
+                        }
+
+                        services.add(new Service(0,"--select service--",null, "--select service--","--select service--", null, null, "2021","--select--","--select--"));
+                        servicesList.add("--select service--");
+
+
+
+//                        Stash.put(Constants.DISTRICTS_ARRAYLIST, facilities);
+//                        Stash.put(Constants.DISTRICTS_LIST, facilitiesList);
+
+                        //progressBar.setVisibility(View.VISIBLE);
+
+
+
+
+                        ArrayAdapter<String> aa=new ArrayAdapter<String>(Registration.this,
+                                android.R.layout.simple_spinner_dropdown_item,
+                                servicesList)
+                        {
+                            @Override
+                            public int getCount() {
+                                return super.getCount(); // you dont display last item. It is used as hint.
+                            }
+                        };
+
+                        //progressBar.setVisibility(View.GONE);
+                        //progressDialog.dismiss();
+
+                        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                        if (ServiceSpinner != null){
+                            ServiceSpinner.setAdapter(aa);
+                            ServiceSpinner.setSelection(aa.getCount()-1);
+
+                            serviceID = services.get(aa.getCount()-1).getId();
+
+                            ServiceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+
+                                    serviceUnitSpinner.setAdapter(null);
+
+                                    serviceID = services.get(position).getId();
+
+//                                Toast.makeText(context,facilityID+"", Toast.LENGTH_LONG).show();
+
+                                    if (serviceID !=0)
+
+                                        Toast.makeText(Registration.this, "get departments", Toast.LENGTH_LONG).show();
+                                    getDepartments(serviceID);
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                }
+                            });
+
+                        }
+
+
+                    } else {
+                        // InfoMessage bottomSheetFragment = InfoMessage.newInstance(message,errors, context);
+                        //bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                    //  Snackbar.make(root.findViewById(R.id.fragment_create_profile), e.getMessage(), Snackbar.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // progressDialog.dismiss();
+
+                //VolleyLog.e(TAG, "Error: " + error.getMessage());
+                // Snackbar snackbar = Snackbar.make(root.findViewById(R.id.fragment_create_profile), VolleyErrors.getVolleyErrorMessages(error, getContext()), Snackbar.LENGTH_LONG);
+
+                Toast.makeText(Registration.this, "cant fetch", Toast.LENGTH_LONG).show();
+
+            }
+        }
+        )
+
+                {
+
+                    /**
+                     * Passing some request headers
+                     */
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                //headers.put("Authorization", loggedInUser.getToken_type()+" "+loggedInUser.getAccess_token());
+                headers.put("Content-Type", "application/json");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+
+                };
+
+
+                jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
+                        0,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                //AppController.getInstance().addToRequestQueue(jsonObjReq);
+                rq.add(jsonObjReq);
+
+            }
+
+
+            public void getDepartments(int id) {
+                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                        Config.GET_DOD_UNITS + id, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+//                Log.d(TAG, response.toString());
+
+                        try {
+
+                            boolean status = response.has("success") && response.getBoolean("success");
+                            String message = response.has("message") ? response.getString("message") : "";
+                            String errors = response.has("errors") ? response.getString("errors") : "";
+
+
+                            if (status) {
+//                        Stash.clear(Constants.DISTRICTS_ARRAYLIST);
+//                        Stash.clear(Constants.DISTRICTS_LIST);
+
+                                serviceUnits = new ArrayList<ServicesUnit>();
+                                serviceUnitsList = new ArrayList<String>();
+
+                                serviceUnits.clear();
+                                serviceUnitsList.clear();
+
+                                JSONArray jsonArray = response.getJSONArray("data");
+
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject serviceUnit = (JSONObject) jsonArray.get(i);
+
+                                    int id = serviceUnit.has("id") ? serviceUnit.getInt("id") : 0;
+                                    int service_id = serviceUnit.has("service_id") ? serviceUnit.getInt("service_id") : 0;
+                                    String unit_name = serviceUnit.has("unit_name") ? serviceUnit.getString("unit_name") : "";
+
+
+                                    ServicesUnit newServiceUnit = new ServicesUnit(id, service_id, unit_name);
+
+                                    serviceUnits.add(newServiceUnit);
+                                    serviceUnitsList.add(newServiceUnit.getUnit_name());
+                                }
+
+                                serviceUnits.add(new ServicesUnit(0, 0, "--select unit--"));
+                                serviceUnitsList.add("--select unit--");
+
+
+//                        Stash.put(Constants.DISTRICTS_ARRAYLIST, facilities);
+//                        Stash.put(Constants.DISTRICTS_LIST, facilitiesList);
+
+                                ArrayAdapter<String> aa = new ArrayAdapter<String>(Registration.this,
+                                        android.R.layout.simple_spinner_dropdown_item,
+                                        serviceUnitsList) {
+                                    @Override
+                                    public int getCount() {
+                                        return super.getCount(); // you dont display last item. It is used as hint.
+                                    }
+                                };
+
+                                aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                                serviceUnitSpinner.setAdapter(aa);
+                                serviceUnitSpinner.setSelection(aa.getCount() - 1);
+
+                                serviceUnitID = serviceUnits.get(aa.getCount() - 1).getId();
+
+                                serviceUnitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+
+                                        serviceUnitID = serviceUnits.get(position).getId();
+
+//                                Toast.makeText(context,facilityDepartments.get(position).getDepartment_name(), Toast.LENGTH_LONG).show();
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                    }
+                                });
+
+
+                            } else {
+                                //InfoMessage bottomSheetFragment = InfoMessage.newInstance(message,errors, context);
+                                //bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                            // Snackbar.make(root.findViewById(R.id.fragment_create_profile), e.getMessage(), Snackbar.LENGTH_LONG).show();
+                        }
+
+                    }
+                },
+                        new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                                //VolleyLog.e(TAG, "Error: " + error.getMessage());
+                                //Snackbar snackbar = Snackbar.make(root.findViewById(R.id.fragment_create_profile), VolleyErrors.getVolleyErrorMessages(error, getContext()), Snackbar.LENGTH_LONG);
+                                // snackbar.setAction("Ok", new View.OnClickListener() {
+                           /* @Override
+                            public void onClick(View view) {
+                                snackbar.dismiss();
+                            }
+                        }).show();*/
+
+
+                            }
+                        }) {
+
+                    /**
+                     * Passing some request headers
+                     */
+                    @Override
+                    public Map<String, String> getHeaders() {
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        //headers.put("Authorization", loggedInUser.getToken_type()+" "+loggedInUser.getAccess_token());
+                        headers.put("Content-Type", "application/json");
+                        headers.put("Accept", "application/json");
+                        return headers;
+                    }
+                };
+
+
+                jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
+                        0,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+               // AppController.getInstance().addToRequestQueue(jsonObjReq);
+                rq.add(jsonObjReq);
+
+            }
+
+
+            //END FACILITIES
+
+
+
+
+
+
+
+
+}
