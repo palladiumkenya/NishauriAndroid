@@ -109,10 +109,9 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/upn"
                             android:inputType="number"
-                            android:hint="KDOD No"
+                            android:hint="CCC No"
                             android:textColorHint="#000"
-
-
+                            android:maxLength="5"
                             android:textSize="12dp"
                             />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -120,26 +119,7 @@
                 </LinearLayout>
 
 
-
-                <!--<com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/serviceNo"
-                        android:inputType="text"
-                        android:hint="Enter service number "
-                        android:textColorHint="#000"
-                        android:maxLength="24"
-                        android:textSize="12dp"
-
-                        />
-                </com.google.android.material.textfield.TextInputLayout> -->
-
-
-               <!-- <com.google.android.material.textfield.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -154,35 +134,10 @@
                         android:textSize="12dp"
 
                         />
-                </com.google.android.material.textfield.TextInputLayout> -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:id="@+id/idnoll"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/idno"
-                            android:inputType="text"
-                            android:textStyle="bold"
-                            android:hint="Enter service number."
-                            android:textColorHint="#000"
-                            android:maxLength="24"
-                            android:textSize="12dp"
-                            />
-                    </com.google.android.material.textfield.TextInputLayout>
-                </LinearLayout>
-
-
-
-                <com.google.android.material.textfield.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -305,6 +260,33 @@
 
 
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/idnoll"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/idno"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter ID NO./Passport No."
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
 
             <TextView
                 android:id="@+id/textView11"
@@ -413,39 +395,6 @@
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:hint="Enter alternative phone number"
-                        android:fontFamily="serif"
-                        android:maxLength="10"
-                        android:id="@+id/Altphone"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:hint="Enter Email Address"
-                        android:fontFamily="serif"
-
-                        android:id="@+id/Email"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
-
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:orientation="vertical"
@@ -465,7 +414,7 @@
                             android:id="@+id/altphone"
                             android:inputType="number"
                             android:textStyle="bold"
-                            android:hint="Enter Alternative Phone number"
+                            android:hint="Alternative Phone number"
                             android:textColorHint="#000"
                             android:maxLength="10"
 
@@ -680,7 +629,8 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:id="@+id/disablereason"
-                        android:hint="Specify reason"                        android:layout_height="wrap_content" />
+                        android:hint="Specify reason"
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
 
 
@@ -694,18 +644,16 @@
 
 
 
-                <EditText
+                    <EditText
                         android:layout_width="match_parent"
                         android:id="@+id/locatorcounty"
                         android:hint="County"
-                        android:visibility="gone"
                         android:layout_height="wrap_content" />
 
                     <EditText
                         android:layout_width="match_parent"
                         android:id="@+id/locatorsubcounty"
                         android:hint="Sub County"
-                        android:visibility="gone"
                         android:layout_height="wrap_content" />
 
 
@@ -713,118 +661,24 @@
                         android:layout_width="match_parent"
                         android:id="@+id/locatorlocation"
                         android:hint="Location"
-                        android:visibility="gone"
                         android:layout_height="wrap_content" />
 
                     <EditText
                         android:layout_width="match_parent"
                         android:id="@+id/locatorward"
                         android:hint="Ward"
-                        android:visibility="gone"
                         android:layout_height="wrap_content" />
 
                     <EditText
                         android:layout_width="match_parent"
                         android:id="@+id/locatorvillage"
                         android:hint="Village"
-                        android:visibility="gone"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
-               <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="?attr/actionBarSize"
-                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/affiliation_facility"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xlarge"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="@dimen/spacing_small"
-                        android:paddingRight="@dimen/spacing_small"
-                        android:text="Services and Units details"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/grey_90" />
-
-                    <LinearLayout
-                        android:id="@+id/lyt_description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/spacing_large"
-                        android:orientation="vertical">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-
-
-                                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                                    android:id="@+id/services"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    />
-
-
-                                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                                    android:id="@+id/unit"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    />
-
-
-
-                                <!-- start searchspinner -->
-                               <!-- <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                                    android:id="@+id/ServiceSpinner"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                     />
-
-
-                                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                                    android:id="@+id/serviceUnit"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/spacing_xxlarge"
-                                    android:drawSelectorOnTop="true" />  -->
-
-                                <!-- end search spinner -->
-
-
-                             <!--   <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                                    android:id="@+id/partner"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/spacing_xxlarge"
-                                    android:drawSelectorOnTop="true" /> -->
-
-
-                            </LinearLayout>
-
-
-                        </androidx.cardview.widget.CardView>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-
-            <!--section time-->
-
-
-
-
-
-                <LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_marginBottom="20dp"

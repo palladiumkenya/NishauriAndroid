@@ -5,7 +5,6 @@ package com.example.mhealth.appointment_diary.AccessServer;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -62,7 +61,6 @@ public class AccessServer {
 
     Dialog mydialog;
     private JSONArray id_result;
-
 
 
 
@@ -431,7 +429,7 @@ public class AccessServer {
 
 
 //                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
-                               dialogs.showErrorDialog("error getting appointment, try again","Server Response");
+                                dialogs.showErrorDialog("error getting appointment, try again","Server Response");
 
                                 pr.dissmissProgress();
 

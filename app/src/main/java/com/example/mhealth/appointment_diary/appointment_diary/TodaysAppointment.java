@@ -103,6 +103,7 @@ public class TodaysAppointment extends AppCompatActivity implements SmsReceiver.
     private List<AppointmentModel> mymesslist;
 
 //    start sms retriever api
+
     @org.jetbrains.annotations.Nullable
     private GoogleApiClient mCredentialsApiClient;
 

@@ -55,7 +55,7 @@
                         android:id="@+id/ccc_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="KDOD No./HEI no."
+                        android:hint="CCC No./HEI no."
                         android:inputType="number"
                         android:textColorHint="#000"
                         android:textSize="12dp" />
