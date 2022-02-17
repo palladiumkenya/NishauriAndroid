@@ -322,6 +322,7 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
 //                    Toast.makeText(getApplicationContext(), "searching", Toast.LENGTH_SHORT).show();
                     doSearching(s);
+
                 }
 
                 @Override
@@ -345,7 +346,7 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
         }
     }
 
-    private void doSearching(CharSequence s){
+    public void doSearching(CharSequence s){
 
         try{
 
@@ -354,15 +355,15 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
             if(defaultB){
 //                Toast.makeText(this, "searching defaulters", Toast.LENGTH_SHORT).show();
                 defaultFrag.Dosearch(s);
+                //myadapt.getFilter().filter(s.toString());
             }
             else if(missedB){
                 missedFrag.Dosearch(s);
-//                Toast.makeText(this, "searching missed", Toast.LENGTH_SHORT).show();
+                //                Toast.makeText(this, "searching missed", Toast.LENGTH_SHORT).show();
 
 
             }
             else if(lostB){
-
                 lostFrag.doSearching(s);
 //                Toast.makeText(this, "searching lost", Toast.LENGTH_SHORT).show();
 

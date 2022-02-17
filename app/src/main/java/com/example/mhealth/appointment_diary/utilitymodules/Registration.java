@@ -296,6 +296,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             locatorwardE= (EditText) findViewById(R.id.locatorward);
             locatorvillageE= (EditText) findViewById(R.id.locatorvillage);
 
+
             buddyphoneE = (EditText) findViewById(R.id.buddyphone);
             altphoneE = (EditText) findViewById(R.id.altphone);
             disableL = (LinearLayout) findViewById(R.id.disablell);

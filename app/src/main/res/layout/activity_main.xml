@@ -37,7 +37,7 @@
             </LinearLayout>
 
 
-
+<!-- start here  -->
             <Button
                 android:id="@+id/appointment"
                 android:layout_width="match_parent"
@@ -130,7 +130,7 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-
+<!-- part 2 -->
 
 
     <androidx.core.widget.NestedScrollView
@@ -155,7 +155,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <androidx.cardview.widget.CardView
+               <androidx.cardview.widget.CardView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_alignParentEnd="true"
@@ -233,7 +233,15 @@
                                     android:text="Ushauri platform"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                     android:textColor="@color/grey_40" />
+
+
                             </LinearLayout>
+                           <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Help Desk: 0800722440"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                android:textColor="#00ced1" />
 
                         </LinearLayout>
 
@@ -243,7 +251,6 @@
                             android:layout_marginBottom="@dimen/spacing_large"
                             android:layout_marginTop="@dimen/spacing_large"
                             android:background="@color/grey_5" />
-
 
 
                         <LinearLayout
@@ -298,12 +305,21 @@
                                                     android:maxLines="1"
                                                     android:singleLine="true"
                                                     android:text="APPOINTMENT DIARY"
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"
+
                                                     android:textColor="@color/grey_90" />
 
                                                 <TextView
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:text="Manage appoitments" />
+                                                    android:text="Manage appoitments"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="10sp"
+                                                    android:autoSizeMaxTextSize="13sp"
+                                                    />
 
                                             </LinearLayout>
 
@@ -352,12 +368,22 @@
                                                     android:maxLines="1"
                                                     android:singleLine="true"
                                                     android:text="DEFAULTER DIARY"
-                                                    android:textColor="@color/grey_90" />
+                                                    android:textColor="@color/grey_90"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"/>
 
                                                 <TextView
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:text="Manage Defaulters" />
+                                                    android:text="Manage Defaulters"
+
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="10sp"
+                                                    android:autoSizeMaxTextSize="13sp"
+                                                    />
 
                                             </LinearLayout>
 
@@ -415,12 +441,21 @@
                                                     android:maxLines="1"
                                                     android:singleLine="true"
                                                     android:text="PMTCT"
+
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"
                                                     android:textColor="@color/grey_90" />
 
                                                 <TextView
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:text="Mother-child transmission prevention" />
+                                                    android:text="Mother-child transmission prevention"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="10sp"
+                                                    android:autoSizeMaxTextSize="13sp"/>
 
                                             </LinearLayout>
 
@@ -469,12 +504,20 @@
                                                     android:maxLines="1"
                                                     android:singleLine="true"
                                                     android:text="M-LAB"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"
                                                     android:textColor="@color/grey_90" />
 
                                                 <TextView
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:text="Open M-Lab app" />
+                                                    android:text="Open M-Lab app"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="10sp"
+                                                    android:autoSizeMaxTextSize="13sp"/>
 
                                             </LinearLayout>
 
@@ -533,12 +576,19 @@
                                                     android:maxLines="1"
                                                     android:singleLine="true"
                                                     android:text="WEB DASHBOARD"
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"
                                                     android:textColor="@color/grey_90" />
 
                                                 <TextView
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:text="Open ushauri dashboard" />
+                                                    android:text="Open ushauri dashboard"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="10sp"
+                                                    android:autoSizeMaxTextSize="13sp"/>
 
                                             </LinearLayout>
 
@@ -587,12 +637,20 @@
                                                     android:maxLines="1"
                                                     android:singleLine="true"
                                                     android:text="WELLNESS"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"
                                                     android:textColor="@color/grey_90" />
 
                                                 <TextView
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:text="Wellness responses" />
+                                                    android:text="Wellness responses"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="10sp"
+                                                    android:autoSizeMaxTextSize="13sp"/>
 
                                             </LinearLayout>
 
@@ -649,12 +707,20 @@
                                                     android:maxLines="1"
                                                     android:singleLine="true"
                                                     android:text="RESCHEDULE"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"
                                                     android:textColor="@color/grey_90" />
 
                                                 <TextView
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
-                                                    android:text="Edit/reschedule appointments" />
+                                                    android:text="Edit/reschedule appointments"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="10sp"
+                                                    android:autoSizeMaxTextSize="13sp"/>
 
                                             </LinearLayout>
 

@@ -6,7 +6,8 @@ public class Config {
 //    public static final String mainShortcode="40149";
 
 //    live shortcode
-    public static final String mainShortcode="40146";
+    //public static final String mainShortcode="40146"; CHANGED TO BELOW
+public static final String mainShortcode="40149";
 
     //***************test url********************************
 //    public static final String GETAFFILIATION_URL = "https://ushauritest.mhealthkenya.co.ke/chore/affiliation";

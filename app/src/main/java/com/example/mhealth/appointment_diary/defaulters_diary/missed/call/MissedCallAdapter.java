@@ -98,9 +98,10 @@ public class MissedCallAdapter extends BaseAdapter implements Filterable {
     DateTimePicker dtp;
 
 
-    public MissedCallAdapter(Context cont, List<MissedCallModel> mlist,Activity myact){
+    public MissedCallAdapter(Context cont, List<MissedCallModel> mlist, Activity myact){
 
         this.mycont=cont;
+        mylist1 = new ArrayList<>();
         this.mylist1=mlist;
         this.filterList=mlist;
         myactivity=myact;

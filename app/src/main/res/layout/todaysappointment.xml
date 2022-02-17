@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -28,139 +30,958 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/messages"
-        android:layout_marginTop="125dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/send"
-        android:layout_alignEnd="@+id/send"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="10.0sp"
-        android:background="#cdeede" />
 
-
-
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="50sp"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:padding="12dp">
 
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="7"
-
-        android:layout_height="wrap_content">
-
-
-
-        <ImageButton
-            android:id="@+id/btnRegister"
-            android:layout_width="50dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:background="@android:color/background_light"
-            app:srcCompat="@drawable/reg" />
-
-        <ImageButton
-            android:id="@+id/consent"
-            android:layout_width="50dp"
-            android:background="@android:color/background_light"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/consent" />
-
-
-
-        <ImageButton
-            android:id="@+id/bookedappointments"
-            android:layout_width="50dp"
-            android:background="@android:color/background_light"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/scheduler" />
-
-        <ImageButton
-            android:id="@+id/broadcast"
-            android:layout_width="50dp"
-            android:background="@android:color/background_light"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/couple"
-            />
-
-        <ImageButton
-            android:id="@+id/transfer"
-            android:layout_width="50dp"
-            android:background="@android:color/background_light"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/transfer" />
-
-
-
-        <ImageButton
-            android:id="@+id/transit"
-            android:layout_width="50dp"
-            android:background="@android:color/background_light"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/transitclient" />
-
-        <ImageButton
-            android:id="@+id/moveclinic"
-            android:layout_width="50dp"
-            android:background="@android:color/background_light"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/clinicmovement" />
-
-
-    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:textSize="18sp"
 
-                android:text="Total Number of Appointments =>"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:id="@+id/appointmentcount"
-                android:layout_weight="1"
-                android:text="0"
-                android:layout_height="wrap_content" />
+
+
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="@dimen/spacing_xlarge"
+                android:background="@drawable/mybutton"
+                android:padding="10dp"
+                android:text="Client Registration"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:id="@+id/consent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:background="@drawable/mybutton"
+                android:padding="10dp"
+                android:text="Consent client"
+                android:textColor="#ffffff" />
+
+
+            <Button
+                android:id="@+id/bookedappointments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:background="@drawable/mybutton"
+                android:padding="10dp"
+                android:text="Book Appointment"
+                android:textColor="#ffffff" />
+
+
+            <Button
+                android:id="@+id/broadcast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:background="@drawable/mybutton"
+                android:padding="10dp"
+                android:text="DSD client"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:id="@+id/transfer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:background="@drawable/mybutton"
+                android:padding="10dp"
+                android:text="Client Transfer In"
+                android:textColor="#ffffff" />
+
+
+            <Button
+                android:id="@+id/transit1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:background="@drawable/mybutton"
+                android:padding="10dp"
+                android:text="Transit Client"
+                android:textColor="#ffffff" />
+
+
+
+            <Button
+                android:id="@+id/moveclinic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:background="@drawable/mybutton"
+                android:padding="10dp"
+                android:text="Clinic Movement"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:id="@+id/appointments1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:background="@drawable/mybutton"
+                android:padding="10dp"
+                android:text="Today Appointment"
+                android:textColor="#ffffff" />
+
+
         </LinearLayout>
-    </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabtodays"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        app:srcCompat="@drawable/ic_refresh"
-        android:layout_margin="16dp" />
+    </androidx.core.widget.NestedScrollView>
 
 
-</RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fitsSystemWindows="true"
+        android:scrollbars="none"
+        android:scrollingCache="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_large" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+              <!--  <androidx.cardview.widget.CardView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="@dimen/spacing_xlarge"
+                    android:layout_marginRight="@dimen/spacing_xlarge"
+                    app:cardBackgroundColor="@color/grey_10"
+                    app:cardCornerRadius="40dp"
+                    app:cardElevation="3dp"> -->
+
+                   <!-- <com.mikhaellopez.circularimageview.CircularImageView
+                        android:id="@+id/image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/spacing_xsmall"
+                        android:src="@drawable/nascoplogo"
+                        app:civ_border="false"
+                        app:civ_border_width="0dp"
+                        app:civ_shadow="true"
+                        app:civ_shadow_radius="0" /> -->
+
+              <!--  </androidx.cardview.widget.CardView> -->
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:layout_marginRight="@dimen/spacing_large"
+                    android:background="@android:color/white"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/spacing_large"
+                        android:paddingTop="@dimen/spacing_large">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/spacing_smlarge"
+                            android:layout_marginRight="@dimen/spacing_smlarge"
+                            android:orientation="vertical">
+
+                           <!-- <TextView
+                                android:id="@+id/title_header"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Welcome"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textColor="@color/colorPrimary"
+                                app:fontFamily="sans-serif-medium" /> -->
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_medium"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <!--<ImageView
+                                    android:layout_width="@dimen/spacing_large"
+                                    android:layout_height="@dimen/spacing_large"
+                                    android:layout_marginEnd="@dimen/spacing_medium"
+                                    android:layout_marginRight="@dimen/spacing_medium"
+                                    app:srcCompat="@drawable/ic_hiv" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Ushauri platform"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                    android:textColor="@color/grey_40" />-->
+
+
+                            </LinearLayout>
+                           <!-- <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Help Desk: 070000000000"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                android:textColor="#00ced1" /> -->
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="@dimen/spacing_large"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:background="@color/grey_5" />
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/spacing_mlarge"
+                            android:layout_marginRight="@dimen/spacing_mlarge"
+                            android:orientation="vertical">
+                            <!-- try this  -->
+
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/card_todey"
+                                    android:layout_margin="@dimen/spacing_medium"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="2dp"
+                                    app:cardElevation="2dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="80dp"
+                                            android:paddingTop="@dimen/spacing_large"
+                                            android:scaleType="centerInside"
+                                            app:srcCompat="@drawable/ic_appointment" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:orientation="horizontal"
+                                            android:padding="@dimen/spacing_large">
+
+                                            <LinearLayout
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:orientation="vertical">
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:maxLines="1"
+                                                    android:singleLine="true"
+                                                    android:text="TODAY APPOINTMENTS"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"
+                                                    android:textAlignment="center"
+                                                    android:textColor="@color/grey_90"
+                                                    android:gravity="center_horizontal" />
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:textAlignment="center"
+                                                    android:text="Today's appointments"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="10sp"
+                                                    android:autoSizeMaxTextSize="13sp"
+                                                    android:gravity="center_horizontal" />
+
+
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+
+                         <!-- ttt -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/card_reg"
+                                    android:layout_margin="@dimen/spacing_medium"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="2dp"
+                                    app:cardElevation="2dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="80dp"
+                                            android:paddingTop="@dimen/spacing_large"
+                                            app:srcCompat="@drawable/client_reg2"
+                                            android:scaleType="centerInside" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:orientation="horizontal"
+                                            android:padding="@dimen/spacing_large">
+
+                                            <LinearLayout
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:orientation="vertical">
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:maxLines="1"
+                                                    android:singleLine="true"
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"
+                                                    android:text="CLIENT REGISTRATION"
+                                                    android:textColor="@color/grey_90" />
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Register clients"
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="10sp"
+                                                    android:autoSizeMaxTextSize="13sp"
+                                                    />
+
+
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/card_consen"
+                                    android:layout_margin="@dimen/spacing_medium"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="2dp"
+                                    app:cardElevation="2dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="80dp"
+                                            android:paddingTop="@dimen/spacing_large"
+                                            app:srcCompat="@drawable/regt"
+                                            android:scaleType="centerInside" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:orientation="horizontal"
+                                            android:padding="@dimen/spacing_large">
+
+                                            <LinearLayout
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:orientation="vertical">
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:maxLines="1"
+                                                    android:singleLine="true"
+                                                    android:text="CONSENT CLIENT"
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"
+
+                                                    android:textColor="@color/grey_90" />
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Consent client for SMS"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="10sp"
+                                                    android:autoSizeMaxTextSize="13sp"/>
+
+
+
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/card_bk"
+                                    android:layout_margin="@dimen/spacing_medium"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="2dp"
+                                    app:cardElevation="2dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="80dp"
+                                            android:paddingTop="@dimen/spacing_large"
+                                            app:srcCompat="@drawable/create_app2"
+                                            android:scaleType="centerInside" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:orientation="horizontal"
+                                            android:padding="@dimen/spacing_large">
+
+                                            <LinearLayout
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:orientation="vertical">
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:maxLines="1"
+                                                    android:singleLine="true"
+                                                    android:text="BOOK APPOINTMENT"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"
+                                                    android:textColor="@color/grey_90" />
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Book client for Appointment"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="10sp"
+                                                    android:autoSizeMaxTextSize="13sp"/>
+
+
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/card_ds"
+                                    android:layout_margin="@dimen/spacing_medium"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="2dp"
+                                    app:cardElevation="2dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="80dp"
+                                            android:paddingTop="@dimen/spacing_large"
+                                            app:srcCompat="@drawable/dsd_client2"
+                                            android:scaleType="centerInside" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:orientation="horizontal"
+                                            android:padding="@dimen/spacing_large">
+
+                                            <LinearLayout
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:orientation="vertical">
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:maxLines="1"
+                                                    android:singleLine="true"
+                                                    android:text="DSD CLIENTS"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"
+                                                    android:textColor="@color/grey_90" />
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Clients on Differentiated Service Delivery module"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="10sp"
+                                                    android:autoSizeMaxTextSize="13sp"
+                                                    />
+
+
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/card_transfe"
+                                    android:layout_margin="@dimen/spacing_medium"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="2dp"
+                                    app:cardElevation="2dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="80dp"
+                                            android:paddingTop="@dimen/spacing_large"
+                                            app:srcCompat="@drawable/transfer_in2"
+                                            android:scaleType="centerInside" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:orientation="horizontal"
+                                            android:padding="@dimen/spacing_large">
+
+                                            <LinearLayout
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:orientation="vertical">
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:maxLines="1"
+                                                    android:singleLine="true"
+                                                    android:text="CLIENT TRANSFER IN"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"
+                                                    android:textColor="@color/grey_90" />
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Client transfers to your clinic"
+
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="10sp"
+                                                    android:autoSizeMaxTextSize="13sp"/>
+
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/card_transi"
+                                    android:layout_margin="@dimen/spacing_medium"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="2dp"
+                                    app:cardElevation="2dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="80dp"
+                                            android:paddingTop="@dimen/spacing_large"
+                                            android:scaleType="centerInside"
+                                            app:srcCompat="@drawable/transit_client2" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:orientation="horizontal"
+                                            android:padding="@dimen/spacing_large">
+
+                                            <LinearLayout
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:orientation="vertical">
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:maxLines="1"
+                                                    android:singleLine="true"
+                                                    android:text="TRANSIT CLIENT"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"
+                                                    android:textColor="@color/grey_90" />
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Client on transit"
+
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="10sp"
+                                                    android:autoSizeMaxTextSize="13sp"/>
+
+
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/card_clin"
+                                    android:layout_margin="@dimen/spacing_medium"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="2dp"
+                                    app:cardElevation="2dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="80dp"
+                                            android:paddingTop="@dimen/spacing_large"
+                                            app:srcCompat="@drawable/clinic_mvt2"
+                                            android:scaleType="centerInside" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:orientation="horizontal"
+                                            android:padding="@dimen/spacing_large">
+
+                                            <LinearLayout
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:orientation="vertical">
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:maxLines="1"
+                                                    android:singleLine="true"
+                                                    android:text="CLINIC MOVEMENT"
+
+
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"
+                                                    android:gravity="center_horizontal"
+                                                    android:textColor="@color/grey_90" />
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:gravity="center_horizontal"
+                                                    android:text="Move client from one clinic to another"
+
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="10sp"
+                                                    android:autoSizeMaxTextSize="13sp"
+                                                    />
+
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+                              <!--  <androidx.cardview.widget.CardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/card_todey"
+                                    android:layout_margin="@dimen/spacing_medium"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="2dp"
+                                    app:cardElevation="2dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="80dp"
+                                            android:paddingTop="@dimen/spacing_large"
+                                            android:scaleType="centerInside"
+                                            app:srcCompat="@drawable/ic_appointment" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:orientation="horizontal"
+                                            android:padding="@dimen/spacing_large">
+
+                                            <LinearLayout
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:orientation="vertical">
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:maxLines="1"
+                                                    android:singleLine="true"
+                                                    android:text="TODAY APPOINTMENTS"
+                                                    android:textColor="@color/grey_90" />
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Today's appointments" />
+
+
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>-->
+
+                            </LinearLayout>
+
+
+                            <!--              <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+
+                                            <androidx.cardview.widget.CardView
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:id="@+id/edit_appointments"
+                                                android:layout_margin="@dimen/spacing_medium"
+                                                android:layout_weight="1"
+                                                app:cardCornerRadius="2dp"
+                                                app:cardElevation="2dp">
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="vertical">
+
+                                                    <ImageView
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="80dp"
+                                                        android:paddingTop="@dimen/spacing_large"
+                                                        android:scaleType="centerInside"
+                                                        app:srcCompat="@drawable/ic_mother" />
+
+                                                    <LinearLayout
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="wrap_content"
+                                                        android:gravity="center"
+                                                        android:orientation="horizontal"
+                                                        android:padding="@dimen/spacing_large">
+
+                                                        <LinearLayout
+                                                            android:layout_width="0dp"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_weight="1"
+                                                            android:orientation="vertical">
+
+                                                            <TextView
+                                                                android:layout_width="match_parent"
+                                                                android:layout_height="wrap_content"
+                                                                android:maxLines="1"
+                                                                android:singleLine="true"
+                                                                android:text="CLINIC MOVEMENT"
+                                                                android:textColor="@color/grey_90" />
+
+                                                        </LinearLayout>
+
+                                                    </LinearLayout>
+
+                                                </LinearLayout>
+                                            </androidx.cardview.widget.CardView>
+
+                                        </LinearLayout> -->
+
+
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="@dimen/spacing_large"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:background="@color/grey_5" />
+
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_large" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+</LinearLayout>

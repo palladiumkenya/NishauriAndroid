@@ -135,7 +135,7 @@ public class DefaulterVisitFragment extends Fragment {
                     diffdate = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 
                 } catch (ParseException e) {
-                    e.printStackTrace();
+                   e.printStackTrace();
                 }
 
 

@@ -88,6 +88,7 @@ public class DefaulteredCallAdapter extends BaseAdapter implements Filterable {
     public DefaulteredCallAdapter(Context cont, List<DefaulteredCallModel> mlist){
 
         this.mycont=cont;
+        mylist3 = new ArrayList<>();
         this.mylist3=mlist;
         this.filterList=mlist;
 

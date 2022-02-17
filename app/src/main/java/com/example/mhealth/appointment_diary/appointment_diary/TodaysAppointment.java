@@ -19,6 +19,8 @@ import androidx.annotation.RequiresApi;
 
 import com.example.mhealth.appointment_diary.DCMActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.appcompat.app.ActionBar;
@@ -82,259 +84,109 @@ import static com.example.mhealth.appointment_diary.StringSplitter.SplitString.s
  * Created by abdullahi on 11/12/2017.
  */
 
-public class TodaysAppointment extends AppCompatActivity implements SmsReceiver.MessageReceiveListener {
+public class TodaysAppointment extends AppCompatActivity {
 
-    private boolean isSearchOpened = false;
-    private EditText edtSeach;
-    String passedUname,passedPassword;
-    FloatingActionButton fab;
-    TextView appCounterTxtV;
-
-    ImageButton btnRegister, btnReport, bookedappointments, broadcast, transfer, consent,transitCl,moveClinic;
+    Button btnRegister, btnReport, bookedappointments, broadcast, transfer, consent,transitCl,moveClinic, todayapp;
+    CardView card_register, card_book, card_consent, card_dsd, card_transfer, card_transit, card_clinic, card_today;
     Button missed,honored;
-
-
-
-    private ProgressDialog progress;
-
-    long  diffdate;
-
-    private AppointmentAdapter myadapt;
-    private List<AppointmentModel> mymesslist;
-
-//    start sms retriever api
-
-    @org.jetbrains.annotations.Nullable
-    private GoogleApiClient mCredentialsApiClient;
-
-    private final int RC_HINT = 2;
-
-    ProcessMessage pm;
-
-    @NotNull
-    private final SmsReceiver smsBroadcast = new SmsReceiver();
-
-//    end sms retriever api
-
-    ArrayList<String> smsMessagesList = new ArrayList<>();
-    ListView messages;
-    ArrayAdapter arrayAdapter;
-    EditText input;
-    int appointmentCounter;
-    SmsManager smsManager = SmsManager.getDefault();
-    private static TodaysAppointment inst;
-
-    private static final int READ_SMS_PERMISSIONS_REQUEST = 1;
-
-    CheckInternet chkInternet;
-    AccessServer acs;
-    SendMessage sm;
-
-    public static TodaysAppointment instance() {
-        return inst;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        inst = this;
-    }
-
-    public void populateListView(){
-
-        try{
-
-            mymesslist=new ArrayList<>();
-            appointmentCounter=0;
-
-            List<Appointments> bdy = Appointments.findWithQuery(Appointments.class, "Select * from Appointments", null);
-
-            for(int x=0;x<bdy.size();x++)
-            {
-
-
-
-                String myccnumber=bdy.get(x).getCcnumber();
-                String myphone=bdy.get(x).getPhone();
-                String myname=bdy.get(x).getName();
-                String myapptype=bdy.get(x).getAppointmenttype();
-                String mydate=bdy.get(x).getDate();
-                String read = bdy.get(x).getRead();
-                String patientid=bdy.get(x).getAppointmentid();
-                String fileserial=bdy.get(x).getFileserial();
-
-
-
-                SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
-                Date date = new Date();
-                String inputString1 = mydate;
-                String inputString2 = myFormat.format(date);
-
-
-
-                try {
-                    Date date1 = myFormat.parse(inputString1);
-                    Date date2 = myFormat.parse(inputString2);
-                    long diff = date2.getTime() - date1.getTime();
-                    diffdate =TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-//                if(diffdate <2)
-                if(diffdate <1)
-                {
-                    if (read.equals("read")) {
-
-                    } else {
-                        appointmentCounter+=1;
-                        mymesslist.add(new AppointmentModel(myccnumber, myname, myphone, myapptype, mydate,read,patientid,fileserial));
-
-                    }
-                }
-                else
-                {
-
-                }
-
-
-            }
-
-            myadapt=new AppointmentAdapter(TodaysAppointment.this,mymesslist);
-            messages.setAdapter(myadapt);
-            myadapt.notifyDataSetChanged();
-            appCounterTxtV.setText(Integer.toString(appointmentCounter));
-
-
-        }
-        catch (Exception e){
-
-        }
-    }
-
+    String passedUname,passedPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.todaysappointment);
 
-
-
         setToolbar();
         initialise();
 
         //SSLTrust.nuke();
-
-        getPassedData();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions();
-        }
         setButtonListeners();
+        //setCardListeners();
 
+        card_register =(CardView) findViewById(R.id.card_reg);
+        card_book= (CardView)   findViewById(R.id.card_bk);
+        card_consent= (CardView)  findViewById(R.id.card_consen);
+        card_dsd= (CardView)  findViewById(R.id.card_ds);
+        card_transfer = (CardView) findViewById(R.id.card_transfe);
+        card_transit= (CardView) findViewById(R.id.card_transi);
+        card_clinic= (CardView)  findViewById(R.id.card_clin);
+        card_today= (CardView) findViewById(R.id.card_todey);
 
-        //sms retriever api
-
-//        listenForIncomingMessage();
-        refreshMessagesClicked();
-
-
-//        generateAppSignature();
-
-        initiateBackgroundService();
-
-        //sms retriver api
-
-        //        List<Appointments> myl = Appointments.listAll(Appointments.class);
-        List<Appointments> myl = Appointments.findWithQuery(Appointments.class, "Select * from Appointments", null);
-
-        if (myl.size() == 0) {
-
-
-//            populateListView();
-
-
-        } else {
-
-            populateListView();
-
-
-        }
-
-
-
-
-
-    }
-
-    private void refreshMessagesClicked(){
-
-        fab.setOnClickListener(new View.OnClickListener() {
+        card_register.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
-                if(chkInternet.isInternetAvailable()){
-
-                    Toast.makeText(TodaysAppointment.this, "going online", Toast.LENGTH_SHORT).show();
-                    loadMessagesOnline();
-
-//        triggerAppointmentMessages();
-
-
-
-                }
-                else{
-                    Toast.makeText(TodaysAppointment.this, "going offline", Toast.LENGTH_SHORT).show();
-                    sm.sendMessageApi(getUserPhoneNumber(), Config.mainShortcode);
-
-                    listenForIncomingMessage();
-                }
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Registration.class);
+                intent.putExtra("username",passedUname);
+                intent.putExtra("password",passedPassword);
+                startActivity(intent);
 
             }
         });
-    }
 
 
-
-    private String getUserPhoneNumber(){
-        String phone="";
-
-        List<Activelogin> al=Activelogin.findWithQuery(Activelogin.class,"select * from Activelogin limit 1");
-        for(int x=0;x<al.size();x++){
-            String myuname=al.get(x).getUname();
-            List<Registrationtable> myl=Registrationtable.findWithQuery(Registrationtable.class,"select * from Registrationtable where username=? limit 1",myuname);
-            for(int y=0;y<myl.size();y++){
-
-                phone=myl.get(y).getPhone();
+        card_transit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TransitClient.class);
+                startActivity(intent);
 
             }
-        }
-
-        return phone;
-    }
+        });
 
 
-    private void loadMessagesOnline(){
+        card_clinic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ClinicMovement.class);
+                startActivity(intent);
+            }
+        });
 
-        if(chkInternet.isInternetAvailable()){
 
-            acs.getTodaysAppointmentMessages(getUserPhoneNumber());
-            populateListView();
+        card_book.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),Appointment.class);
+                startActivity(intent);
+            }
+        });
 
-        }
-        else{
+        card_dsd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), DCMActivity.class);
+                startActivity(intent);
+            }
+        });
 
-        }
 
-        populateListView();
-    }
+        card_consent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Consent.class);
+                startActivity(intent);
+            }
+        });
 
-    @Override
-    protected void onResume() {
-        super.onResume();
 
-        listenForIncomingMessage();
-//        loadMessagesOnline();
+        card_transfer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ClientTransfer.class);
+                startActivity(intent);
+            }
+        });
+
+        card_today.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), FetchAppointment.class);
+                startActivity(intent);
+            }
+        });
+
+
+
     }
 
     public void getPassedData(){
@@ -342,7 +194,6 @@ public class TodaysAppointment extends AppCompatActivity implements SmsReceiver.
         passedUname=getIntent().getStringExtra("username");
         passedPassword=getIntent().getStringExtra("password");
     }
-
     public void setButtonListeners(){
 
         try{
@@ -400,12 +251,24 @@ public class TodaysAppointment extends AppCompatActivity implements SmsReceiver.
                 }
             });
 
+            todayapp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), FetchAppointment.class);
+                    startActivity(intent);
+                }
+            });
+
         }
         catch(Exception e){
 
 
         }
     }
+    //card listeners
+
+    //end card listeners
+
 
     public void setToolbar(){
         try{
@@ -425,26 +288,24 @@ public class TodaysAppointment extends AppCompatActivity implements SmsReceiver.
 
         try{
 
-            appCounterTxtV=(TextView) findViewById(R.id.appointmentcount);
-            chkInternet=new CheckInternet(TodaysAppointment.this);
-            appointmentCounter=0;
-            acs=new AccessServer(TodaysAppointment.this);
-            sm=new SendMessage(TodaysAppointment.this);
-            fab=(FloatingActionButton) findViewById(R.id.fabtodays);
+            //appCounterTxtV=(TextView) findViewById(R.id.appointmentcount);
 
-            pm=new ProcessMessage();
+            //fab=(FloatingActionButton) findViewById(R.id.fabtodays);
+
+
             passedUname="";
             passedPassword="";
-            messages = (ListView)findViewById(R.id.messages);
-            btnRegister = (ImageButton)findViewById(R.id.btnRegister);
-            bookedappointments = (ImageButton)findViewById(R.id.bookedappointments);
-            transitCl = (ImageButton)findViewById(R.id.transit);
-            moveClinic = (ImageButton)findViewById(R.id.moveclinic);
-            broadcast = (ImageButton)findViewById(R.id.broadcast);
-            consent = (ImageButton)findViewById(R.id.consent);
-            transfer = (ImageButton)findViewById(R.id.transfer);
-            messages = (ListView) findViewById(R.id.messages);
-            input = (EditText) findViewById(R.id.input);
+
+            btnRegister = (Button)findViewById(R.id.btnRegister);
+            bookedappointments = (Button)findViewById(R.id.bookedappointments);
+            transitCl = (Button)findViewById(R.id.transit1);
+            moveClinic = (Button)findViewById(R.id.moveclinic);
+            broadcast = (Button)findViewById(R.id.broadcast);
+            consent = (Button)findViewById(R.id.consent);
+            transfer = findViewById(R.id.transfer);
+            todayapp = findViewById(R.id.appointments1);
+
+
 
         }
         catch(Exception e){
@@ -452,292 +313,6 @@ public class TodaysAppointment extends AppCompatActivity implements SmsReceiver.
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public void requestPermissions(){
 
-        try{
-
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)
-                    != PackageManager.PERMISSION_GRANTED) {
-                getInternetPerms();
-            } else {
-
-            }
-        }
-        catch(Exception e){
-
-
-        }
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main2, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-
-        switch(id){
-            case R.id.action_search2:
-                handleMenuSearch();
-                return true;
-
-            case R.id.logout:
-                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                // Closing all the Activities
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                startActivity(i);
-                finish();
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    protected void handleMenuSearch(){
-        ActionBar action = getSupportActionBar(); //get the actionbar
-
-        if(isSearchOpened){ //test if the search is open
-
-            action.setDisplayShowCustomEnabled(false); //disable a custom view inside the actionbar
-            action.setDisplayShowTitleEnabled(true); //show the title in the action bar
-
-            //hides the keyboard
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(edtSeach.getWindowToken(), 0);
-
-            //add the search icon in the action bar
-//            mSearchAction.setIcon(getResources().getDrawable(R.mipmap.search));
-
-            isSearchOpened = false;
-        } else { //open the search entry
-
-            action.setDisplayShowCustomEnabled(true); //enable it to display a
-            // custom view in the action bar.
-            action.setCustomView(R.layout.search_bar);//add the custom view
-            action.setDisplayShowTitleEnabled(false); //hide the title
-
-            edtSeach = (EditText)action.getCustomView().findViewById(R.id.edtSearch); //the text editor
-
-            edtSeach.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                    Toast.makeText(getApplicationContext(), "searching", Toast.LENGTH_SHORT).show();
-                    doSearching(s);
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-
-                }
-            });
-
-            edtSeach.requestFocus();
-
-            //open the keyboard focused in the edtSearch
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(edtSeach, InputMethodManager.SHOW_IMPLICIT);
-
-
-            //add the close icon
-//            mSearchAction.setIcon(getResources().getDrawable(R.mipmap.cancel));
-
-            isSearchOpened = true;
-        }
-    }
-
-    public void doSearching(CharSequence s){
-        //refreshSmsInbox();
-        try {
-            myadapt.getFilter().filter(s.toString());
-        }
-        catch(Exception e){
-
-            Toast.makeText(getApplicationContext(), "unable to filter: "+e, Toast.LENGTH_SHORT).show();
-        }
-
-
-
-
-
-    }
-
-    public void updateInbox(final String smsMessage) {
-        arrayAdapter.insert(smsMessage, 0);
-        arrayAdapter.notifyDataSetChanged();
-    }
-
-//    public void onSendClick(View view) {
-//
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            getInternetPerms();
-//        } else {
-//            smsManager.sendTextMessage("07701056337", null, input.getText().toString(), null, null);
-//            Toast.makeText(this, "Message sent!", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public void getInternetPerms() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (shouldShowRequestPermissionRationale(
-                    Manifest.permission.INTERNET)) {
-                Toast.makeText(this, "Please allow permission!", Toast.LENGTH_SHORT).show();
-            }
-            requestPermissions(new String[]{Manifest.permission.INTERNET},
-                    READ_SMS_PERMISSIONS_REQUEST);
-        }
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String permissions[],
-                                           @NonNull int[] grantResults) {
-        // Make sure it's our original READ_CONTACTS request
-        if (requestCode == READ_SMS_PERMISSIONS_REQUEST) {
-            if (grantResults.length == 1 &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Read SMS permission granted", Toast.LENGTH_SHORT).show();
-
-            } else {
-                Toast.makeText(this, "Read SMS permission denied", Toast.LENGTH_SHORT).show();
-            }
-
-        } else {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-
-
-
-    }
-
-
-    /********************************************************************************/
-
-    //start sms retriever api functions
-
-    //function triggered when there is an incoming message from receiver
-    private void listenForIncomingMessage() {
-
-        this.mCredentialsApiClient = (new GoogleApiClient.Builder((Context) this)).addApi(Auth.CREDENTIALS_API).build();
-        this.startSMSListener();
-        this.smsBroadcast.initOTPListener((SmsReceiver.MessageReceiveListener) this);
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("com.google.android.gms.auth.api.phone.SMS_RETRIEVED");
-        this.getApplicationContext().registerReceiver((BroadcastReceiver) this.smsBroadcast, intentFilter);
-
-
-    }
-
-    //    function triggered when the application is in background or closed
-    private void initiateBackgroundService() {
-
-        //background code after every 5 seconds
-
-
-        Intent alarm = new Intent(TodaysAppointment.this, SmsReceiver.class);
-        boolean alarmRunning = (PendingIntent.getBroadcast(TodaysAppointment.this, 0, alarm, PendingIntent.FLAG_NO_CREATE) != null);
-        if (alarmRunning == false) {
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(TodaysAppointment.this, 0, alarm, 0);
-            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), 5000, pendingIntent);
-        }
-
-        //background code
-
-    }
-
-
-
-    //    function triggered when the actual message is received from our receiver
-    public void onMessageReceived(@NotNull String otp) {
-        Intrinsics.checkParameterIsNotNull(otp, "otp");
-        LocalBroadcastManager.getInstance((Context) this).unregisterReceiver((BroadcastReceiver) this.smsBroadcast);
-
-        saveReceivedMessage(splittedString(otp));
-        populateListView();
-
-        Toast.makeText(this, "" + splittedString(otp), Toast.LENGTH_LONG).show();
-    }
-
-    private void saveReceivedMessage(String str){
-
-        pm.processReceivedMessage(str);
-
-    }
-
-    public void onMessageTimeOut() {
-
-
-    }
-
-    private final void startSMSListener() {
-        SmsRetriever.getClient((Activity) this).startSmsRetriever().addOnSuccessListener((OnSuccessListener) (new OnSuccessListener() {
-
-            public void onSuccess(Object var1) {
-                this.onSuccess((Void) var1);
-            }
-
-            public final void onSuccess(Void it) {
-//                TextView otpTxtView = (TextView) findViewById(R.id.tv1);
-//                Intrinsics.checkExpressionValueIsNotNull(otpTxtView, "otpTxtView");
-//                otpTxtView.setText((CharSequence) "Waiting for message");
-
-//                Toast.makeText(getApplicationContext(), "SMS Retriever starts", Toast.LENGTH_SHORT).show();
-            }
-        })).addOnFailureListener((OnFailureListener) (new OnFailureListener() {
-            public final void onFailure(@NotNull Exception it) {
-                Intrinsics.checkParameterIsNotNull(it, "it");
-//                TextView otpTextView = (TextView) findViewById(R.id.tv1);
-//                Intrinsics.checkExpressionValueIsNotNull(otpTextView, "otpTxtView");
-//                otpTextView.setText((CharSequence) "Cannot Start SMS Retriever");
-
-                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
-            }
-        }));
-    }
-
-
-    protected void onActivityResult(int requestCode, int resultCode, @org.jetbrains.annotations.Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == this.RC_HINT && resultCode == -1) {
-
-            if (data == null) {
-                Intrinsics.throwNpe();
-            }
-
-            Parcelable credentials = data.getParcelableExtra("com.google.android.gms.credentials.Credential");
-            Intrinsics.checkExpressionValueIsNotNull(credentials, "data!!.getParcelableExtra(Credential.EXTRA_KEY)");
-            Credential credential = (Credential) credentials;
-            String credString = "credential : " + credential;
-            System.out.print(credString);
-        }
-
-    }
-
-    //end sms retriever api functions
-
-/************************************************************************************/
 
 }

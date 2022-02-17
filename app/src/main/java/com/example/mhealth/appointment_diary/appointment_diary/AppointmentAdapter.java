@@ -79,8 +79,11 @@ public class AppointmentAdapter extends BaseAdapter implements Filterable {
     public AppointmentAdapter(Context cont, List<AppointmentModel> mlist) {
 
         this.mycont = cont;
+        mylist = new ArrayList<>();
         this.mylist = mlist;
         this.filterList = mlist;
+
+
 
 
     }
@@ -509,8 +512,8 @@ public class AppointmentAdapter extends BaseAdapter implements Filterable {
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
 
-            mylist= (List<AppointmentModel>) results.values;
 
+            mylist= (List<AppointmentModel>) results.values;
             if(mylist.isEmpty())
             {
 

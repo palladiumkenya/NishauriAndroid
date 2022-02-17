@@ -52,7 +52,7 @@ public class MissedVisitAdapter extends BaseAdapter implements Filterable {
     private List<MissedVisitModel> mylist2;
     MissedVisitAdapter.CustomFilter filter;
     private List<MissedVisitModel> filterList;
-    List<Appointments> books = null;
+   List<Appointments> books = null;
     String other;
 
     AccessServer acs;
@@ -82,6 +82,7 @@ public class MissedVisitAdapter extends BaseAdapter implements Filterable {
     public MissedVisitAdapter(Context cont, List<MissedVisitModel> mlist) {
 
         this.mycont = cont;
+        mylist2 = new ArrayList<>();
         this.mylist2 = mlist;
         this.filterList = mlist;
 
@@ -91,6 +92,8 @@ public class MissedVisitAdapter extends BaseAdapter implements Filterable {
     @Override
     public int getCount() {
         return mylist2.size();
+
+
     }
 
 

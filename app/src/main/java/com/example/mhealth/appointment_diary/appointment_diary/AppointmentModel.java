@@ -1,5 +1,7 @@
 package com.example.mhealth.appointment_diary.appointment_diary;
 
+import java.util.List;
+
 /**
  * Created by abdullahi on 11/12/2017.
  */
@@ -8,6 +10,7 @@ public class AppointmentModel {
 
 
     String ccnumber,thename,phone,apptype,date,read,patientID,fileserial;
+    //private List<AppointmentModel>  = new ArrayList<>();
 
     public AppointmentModel() {
     }

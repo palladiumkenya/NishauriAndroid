@@ -79,5 +79,6 @@
     <string name="date_client_was_visited_defauter_visit_honored">Date client was visited</string>
     <string name="cancel_defaulter_call_honored">cancel</string>
     <string name="submit_defaulter_call_honored">submit</string>
+    <string name="client_registration1">Client Registration</string>
 
 </resources>

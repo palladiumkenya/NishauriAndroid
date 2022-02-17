@@ -178,7 +178,7 @@ public class MissedVisitFragment extends Fragment {
         //refreshSmsInbox();
         try {
             myadapt.getFilter().filter(s.toString());
-//            Toast.makeText(getActivity(), "searching defaulter call "+s.toString(), Toast.LENGTH_SHORT).show();
+           //Toast.makeText(getActivity(), "searching defaulter call "+s.toString(), Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
 
             Toast.makeText(getActivity(), "unable to filter: " + e, Toast.LENGTH_SHORT).show();

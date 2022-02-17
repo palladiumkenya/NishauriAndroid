@@ -90,6 +90,7 @@ public class LosttoFollowAdapter extends BaseAdapter implements Filterable {
     public LosttoFollowAdapter(Context cont, List<LosttoFollowModel> mlist){
 
         this.mycont=cont;
+        mylist5 = new ArrayList<>();
         this.mylist5=mlist;
         this.filterList=mlist;
 

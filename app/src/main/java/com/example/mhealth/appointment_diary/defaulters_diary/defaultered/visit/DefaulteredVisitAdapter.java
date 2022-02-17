@@ -89,6 +89,7 @@ public class DefaulteredVisitAdapter extends BaseAdapter implements Filterable {
     public DefaulteredVisitAdapter(Context cont, List<DefaulteredVisitModel> mlist) {
 
         this.mycont = cont;
+        mylist4 = new ArrayList<>();
         this.mylist4 = mlist;
         this.filterList = mlist;
 
