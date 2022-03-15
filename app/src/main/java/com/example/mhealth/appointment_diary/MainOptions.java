@@ -1,10 +1,14 @@
 package com.example.mhealth.appointment_diary;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,7 +42,7 @@ public class MainOptions extends AppCompatActivity {
     Button appointmentbtn, defaultersbtn, mlabbtn, webbtn, reportbtn, welnessbtn, pmtct;
     LoadMessages lm;
     String passedUname,passedPassword;
-    TextView title_header;
+    TextView title_header, help_desk;
 
     private CardView appointment_diary, defaulter_diary,pmtct_menu, mlab_menu, dashboard, wellness_menu, edit_appointments;
 
@@ -72,6 +76,22 @@ public class MainOptions extends AppCompatActivity {
             }
         });*/
 
+        help_desk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+ 0800722440));
+               // startActivity(intent);
+
+                HelpDeskCall();
+
+
+                //Intent callIntent = new Intent(Intent.ACTION_CALL);
+                //callIntent.setData(Uri.parse("tel: 0800722440"));//change the number
+                //startActivity(callIntent);
+
+
+            }
+        });
 
         appointment_diary.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -357,12 +377,38 @@ public class MainOptions extends AppCompatActivity {
             dashboard = findViewById(R.id.dashboard);
             wellness_menu = findViewById(R.id.wellness_menu);
             edit_appointments = findViewById(R.id.edit_appointments);
+            help_desk = findViewById(R.id.helpContact);
+
 
 
         }
         catch(Exception e){
 
 
+        }
+    }
+
+    public void HelpDeskCall(){
+
+        try {
+            if (Build.VERSION.SDK_INT>22){
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(MainOptions.this, new String[]{Manifest.permission.CALL_PHONE}, 101);
+                    return;
+                }
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + "0800722440"));
+                startActivity(callIntent);
+            }
+            else {
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + "0800722440"));
+                startActivity(callIntent);
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
         }
     }
 

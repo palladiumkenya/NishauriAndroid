@@ -236,10 +236,15 @@
 
 
                             </LinearLayout>
+
+
+
+
                            <TextView
+                               android:id="@+id/helpContact"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Help Desk: 0800722440"
+                                android:text="Call help desk: 0800722440"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                                 android:textColor="#00ced1" />
 
