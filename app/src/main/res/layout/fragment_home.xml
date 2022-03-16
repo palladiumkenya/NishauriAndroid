@@ -47,9 +47,9 @@
 
 
                     <ImageView
-                        android:layout_width="80dp"
+                        android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        app:srcCompat="@drawable/nascoplogo" />
+                        app:srcCompat="@drawable/nascoplogonew" />
 
                     <View
                         android:layout_width="0dp"
@@ -125,13 +125,19 @@
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
                                     android:singleLine="true"
+                                    android:autoSizeTextType="uniform"
+                                    android:autoSizeMinTextSize="8sp"
+                                    android:autoSizeMaxTextSize="11sp"
                                     android:text="HEI REGISTRATION"
                                     android:textColor="@color/grey_90" />
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Register new HEIs" />
+                                    android:text="Register new HEIs"
+                                    android:autoSizeTextType="uniform"
+                                    android:autoSizeMinTextSize="8sp"
+                                    android:autoSizeMaxTextSize="11sp"/>
 
                             </LinearLayout>
 
@@ -181,12 +187,18 @@
                                     android:maxLines="1"
                                     android:singleLine="true"
                                     android:text="REGISTER CAREGIVER"
-                                    android:textColor="@color/grey_90" />
+                                    android:textColor="@color/grey_90"
+                                    android:autoSizeTextType="uniform"
+                                    android:autoSizeMinTextSize="8sp"
+                                    android:autoSizeMaxTextSize="11sp"/>
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Register Caregivers" />
+                                    android:text="Register Caregivers"
+                                    android:autoSizeTextType="uniform"
+                                    android:autoSizeMinTextSize="8sp"
+                                    android:autoSizeMaxTextSize="11sp"/>
 
                             </LinearLayout>
 
@@ -245,12 +257,19 @@
                                     android:maxLines="1"
                                     android:singleLine="true"
                                     android:text="UPDATE HEI"
-                                    android:textColor="@color/grey_90" />
+                                    android:textColor="@color/grey_90"
+
+                                    android:autoSizeTextType="uniform"
+                                    android:autoSizeMinTextSize="8sp"
+                                    android:autoSizeMaxTextSize="11sp"/>
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Edit and update HEI details" />
+                                    android:text="Edit and update HEI details"
+                                    android:autoSizeTextType="uniform"
+                                    android:autoSizeMinTextSize="8sp"
+                                    android:autoSizeMaxTextSize="11sp"/>
 
                             </LinearLayout>
 
@@ -299,12 +318,20 @@
                                     android:maxLines="1"
                                     android:singleLine="true"
                                     android:text="MOTHER APT"
-                                    android:textColor="@color/grey_90" />
+                                    android:textColor="@color/grey_90"
+
+                                    android:autoSizeTextType="uniform"
+                                    android:autoSizeMinTextSize="8sp"
+                                    android:autoSizeMaxTextSize="11sp"/>
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Schedule mother appointments" />
+                                    android:text="Schedule mother appointments"
+
+                                    android:autoSizeTextType="uniform"
+                                    android:autoSizeMinTextSize="8sp"
+                                    android:autoSizeMaxTextSize="11sp"/>
 
                             </LinearLayout>
 
@@ -362,12 +389,19 @@
                                     android:maxLines="1"
                                     android:singleLine="true"
                                     android:text="HEI APT"
-                                    android:textColor="@color/grey_90" />
+                                    android:textColor="@color/grey_90"
+                                    android:autoSizeTextType="uniform"
+                                    android:autoSizeMinTextSize="8sp"
+                                    android:autoSizeMaxTextSize="11sp"/>
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Schedule HEI appointments" />
+                                    android:text="Schedule HEI appointments"
+
+                                    android:autoSizeTextType="uniform"
+                                    android:autoSizeMinTextSize="8sp"
+                                    android:autoSizeMaxTextSize="11sp"/>
 
                             </LinearLayout>
 
@@ -418,12 +452,20 @@
                                     android:maxLines="1"
                                     android:singleLine="true"
                                     android:text="UNSCHEDULED HEI APT"
-                                    android:textColor="@color/grey_90" />
+                                    android:textColor="@color/grey_90"
+
+                                    android:autoSizeTextType="uniform"
+                                    android:autoSizeMinTextSize="8sp"
+                                    android:autoSizeMaxTextSize="11sp"/>
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Unscheduled HEI appointments" />
+                                    android:text="Unscheduled HEI appointments"
+
+                                    android:autoSizeTextType="uniform"
+                                    android:autoSizeMinTextSize="8sp"
+                                    android:autoSizeMaxTextSize="11sp"/>
 
                             </LinearLayout>
 
@@ -482,12 +524,19 @@
                                     android:maxLines="1"
                                     android:singleLine="true"
                                     android:text="POSITIVE PCR ENROLLMENT"
-                                    android:textColor="@color/grey_90" />
+                                    android:textColor="@color/grey_90"
+                                    android:autoSizeTextType="uniform"
+                                    android:autoSizeMinTextSize="8sp"
+                                    android:autoSizeMaxTextSize="11sp"/>
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Enroll PCR positive cases" />
+                                    android:text="Enroll PCR positive cases"
+
+                                    android:autoSizeTextType="uniform"
+                                    android:autoSizeMinTextSize="8sp"
+                                    android:autoSizeMaxTextSize="11sp"/>
 
                             </LinearLayout>
 
@@ -536,12 +585,19 @@
                                     android:maxLines="1"
                                     android:singleLine="true"
                                     android:text="FINAL OUTCOME"
-                                    android:textColor="@color/grey_90" />
+                                    android:textColor="@color/grey_90"
+                                    android:autoSizeTextType="uniform"
+                                    android:autoSizeMinTextSize="8sp"
+                                    android:autoSizeMaxTextSize="11sp"/>
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="HEI final outcome" />
+                                    android:text="HEI final outcome"
+
+                                    android:autoSizeTextType="uniform"
+                                    android:autoSizeMinTextSize="8sp"
+                                    android:autoSizeMaxTextSize="11sp"/>
 
                             </LinearLayout>
 
