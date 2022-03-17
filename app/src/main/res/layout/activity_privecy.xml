@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/textColorPrimary"
                 android:background="@drawable/background_round_corner_privecy"
+                android:textAllCaps="true"
                 android:text="@string/decline"/>
 
             <Button
@@ -43,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/textColorPrimary"
                 android:background="@drawable/background_round_corner_privecy"
+                android:textAllCaps="true"
                 android:text="@string/accept"/>
 
 

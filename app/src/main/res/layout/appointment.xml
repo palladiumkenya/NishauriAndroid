@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:src="@drawable/scheduler" />
+                 />
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -183,11 +183,13 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="4dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/background_round_corner_button"
                 android:fontFamily="serif"
                 android:onClick="submitClicked"
                 android:text="Submit"
-                android:textColor="#FFFFFF" />
+                android:textAllCaps="true"
+                android:textColor="#FFFFFF"
+                 />
 
         </LinearLayout>
     </ScrollView>

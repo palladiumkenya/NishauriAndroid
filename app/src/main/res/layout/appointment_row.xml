@@ -227,7 +227,7 @@
             android:background="@drawable/mybutton"
             android:gravity="center"
             android:padding="5dp"
-            android:text="confirm"
+            android:text="Confirm"
             android:textSize="13sp" />
         <Button
             android:id="@+id/callclient"
@@ -237,7 +237,7 @@
             android:background="@drawable/mybutton"
             android:gravity="center"
             android:padding="5dp"
-            android:text="Contact Client"
+            android:text="Contact client"
             android:textSize="13sp" />
 
         <Button

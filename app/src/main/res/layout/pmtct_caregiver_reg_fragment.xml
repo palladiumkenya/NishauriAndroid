@@ -214,10 +214,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/background_round_corner_button"
                 android:fontFamily="serif"
                 android:text="@string/submit"
                 android:textSize="12sp"
+                android:textAllCaps="true"
                 android:textColor="#FFFFFF" />
 
         </LinearLayout>

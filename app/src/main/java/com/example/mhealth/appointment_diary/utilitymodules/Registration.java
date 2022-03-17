@@ -96,7 +96,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Client Registration");
+        getSupportActionBar().setTitle("Client registration");
 
 
         initialise();

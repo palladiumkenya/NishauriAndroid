@@ -124,6 +124,7 @@
         android:layout_alignTop="@+id/cancel"
         android:layout_marginEnd="35dp"
         android:layout_marginRight="35dp"
+
         android:text="@string/submit_defaulter_call_honored" />
 
 </RelativeLayout>

@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:src="@drawable/clinicmovement" />
+                />
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -61,7 +61,7 @@
                         android:id="@+id/transmfl"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="MFL Code"
+                        android:hint="MFL code"
                         android:inputType="number"
                         android:maxLength="5"
                         android:textColorHint="#000"
@@ -112,10 +112,11 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="4dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/background_round_corner_button"
                 android:fontFamily="serif"
                 android:onClick="moveclinic"
                 android:text="Submit"
+                android:textAllCaps="true"
                 android:textColor="#FFFFFF" />
 
         </LinearLayout>

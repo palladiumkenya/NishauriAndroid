@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:src="@drawable/reg" />
+                 />
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -653,7 +653,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:id="@+id/locatorsubcounty"
-                        android:hint="Sub County"
+                        android:hint="Sub county"
                         android:layout_height="wrap_content" />
 
 
@@ -704,7 +704,8 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:textColor="#FFFFFF"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/background_round_corner_button"
+                android:textAllCaps="true"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="10sp"
                 />
