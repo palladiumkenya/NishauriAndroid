@@ -63,7 +63,7 @@ public class Consent extends AppCompatActivity implements AdapterView.OnItemSele
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Consent Client");
+        getSupportActionBar().setTitle("Consent client");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

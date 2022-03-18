@@ -76,7 +76,7 @@ public class Appointment extends AppCompatActivity implements AdapterView.OnItem
         // Sets the Toolbar to act as the ActionBar for this Activity window.
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Book Appointment");
+        getSupportActionBar().setTitle("Book appointment");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

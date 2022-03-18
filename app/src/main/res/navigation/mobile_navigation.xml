@@ -13,15 +13,15 @@
     <fragment
         android:id="@+id/book_mother_apt"
         android:name="com.example.mhealth.appointment_diary.pmtct.PmtctBookAptFragment"
-        android:label="Book Mother Appointment" />
+        android:label="Book mother appointment" />
     <fragment
         android:id="@+id/caregiver_reg"
         android:name="com.example.mhealth.appointment_diary.pmtct.PmtctCaregiverRegistrationFragment"
-        android:label="Caregiver Registration" />
+        android:label="Caregiver registration" />
     <fragment
         android:id="@+id/hei_reg"
         android:name="com.example.mhealth.appointment_diary.pmtct.PmtctRegistrationFragment"
-        android:label="HEI Registration" />
+        android:label="HEI registration" />
     <fragment
         android:id="@+id/update_hei"
         android:name="com.example.mhealth.appointment_diary.pmtct.PmtctUpdateHeiFragment"
@@ -29,19 +29,19 @@
     <fragment
         android:id="@+id/hei_apt"
         android:name="com.example.mhealth.appointment_diary.pmtct.PmtctHeiAptFragment"
-        android:label="HEI Appointment" />
+        android:label="HEI appointment" />
     <fragment
         android:id="@+id/unscheduled_hei_apt"
         android:name="com.example.mhealth.appointment_diary.pmtct.PmtctUnscheduledHeiAptFragment"
-        android:label="Unscheduled Hei Appointment" />
+        android:label="Unscheduled HEI appointment" />
     <fragment
         android:id="@+id/pcr_positive_enrollment"
         android:name="com.example.mhealth.appointment_diary.pmtct.PcrPositiveEnrollmentFragment"
-        android:label="Pcr Positive Enrollment" />
+        android:label="Pcr positive enrollment" />
     <fragment
         android:id="@+id/hei_final_outcome"
         android:name="com.example.mhealth.appointment_diary.pmtct.HeiFinalOutcomeFragment"
-        android:label="HEI Final Outcome" />
+        android:label="HEI final outcome" />
 
 
 </navigation>

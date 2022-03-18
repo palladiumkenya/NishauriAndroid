@@ -53,7 +53,7 @@ public class ClientTransfer extends AppCompatActivity{
         // Sets the Toolbar to act as the ActionBar for this Activity window.
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Client Transfer In");
+        getSupportActionBar().setTitle("Client transfer in");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

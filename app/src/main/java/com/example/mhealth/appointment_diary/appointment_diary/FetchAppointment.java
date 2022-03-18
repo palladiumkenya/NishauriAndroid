@@ -62,6 +62,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import kotlin.jvm.internal.Intrinsics;
@@ -320,7 +321,7 @@ public class FetchAppointment extends AppCompatActivity implements SmsReceiver.M
 
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            Objects.requireNonNull(getSupportActionBar()).setTitle("Today appointments");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         catch(Exception e){

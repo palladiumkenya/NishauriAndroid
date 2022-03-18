@@ -75,7 +75,7 @@ public class RescheduleActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Reschedule Appointments");
+        getSupportActionBar().setTitle("Reschedule appointments");
 
 
         List<Activelogin> myl=Activelogin.findWithQuery(Activelogin.class,"select * from Activelogin");

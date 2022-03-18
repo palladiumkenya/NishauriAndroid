@@ -49,7 +49,7 @@ public class WellnesTabs extends AppCompatActivity {
 
         try{
 
-            getSupportActionBar().setTitle("Wellness Responses");
+            getSupportActionBar().setTitle("Wellness responses");
 //            final Drawable upArrow = getResources().getDrawable(R.drawable.ic_arrow_back);
 //            upArrow.setColorFilter(getResources().getColor(R.color.colorWhite), PorterDuff.Mode.SRC_ATOP);
 //            getSupportActionBar().setHomeAsUpIndicator(upArrow);
