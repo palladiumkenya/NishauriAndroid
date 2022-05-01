@@ -2,6 +2,9 @@ package com.mhealthkenya.psurvey.depedancies;
 
 public class Constants {
 
+
+    //public static int dataID;
+
     /*ENDPOINT*/
     public static String ENDPOINT = "https://psurvey-api.mhealthkenya.co.ke/";
 
@@ -27,7 +30,7 @@ public class Constants {
     public static String PATIENT_CONSENT = "api/questionnaire/start/";
     public static String PROVIDE_ANSWER = "api/questions/answer/";
     public static String INITIAL_CONFIRMATION = "api/initial/consent/";
-
+    public static String GET_PARTICIPANTS ="/api/questionnaire/participants/";
 
 
     /*MODELS*/

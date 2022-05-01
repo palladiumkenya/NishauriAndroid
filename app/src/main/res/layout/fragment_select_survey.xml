@@ -118,6 +118,21 @@
                         android:textColor="@color/grey_90"
                         android:visibility="gone"/>
 
+                    <!-- id view   -->
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/patient_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_medium"
+                        android:text="ID: "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/grey_90"
+                        android:visibility="gone"/>
+
+
+                    <!-- id view -->
+
                     <androidx.core.widget.NestedScrollView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

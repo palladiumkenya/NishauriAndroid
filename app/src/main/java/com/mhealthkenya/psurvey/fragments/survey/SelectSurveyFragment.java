@@ -81,6 +81,9 @@ public class SelectSurveyFragment extends Fragment {
     @BindView(R.id.tv_patient_number)
     MaterialTextView tv_patient_number;
 
+    @BindView(R.id.patient_id)
+    MaterialTextView patient_id;
+
 
     @Override
     public void onAttach(Context ctx) {
@@ -105,9 +108,14 @@ public class SelectSurveyFragment extends Fragment {
 
         String ccc_no=  getArguments().getString("ccc_no");
         String f_name=  getArguments().getString("f_name");
+       // int questionnaire_participant_id =getArguments().getInt("questionnaire_participant_id");
+
+        //String questionnaire_participant_id = getArguments().getString("questionnaire_participant_id");
 
         tv_patient_name.setText("Name: "+f_name);
         tv_patient_number.setText("CCC Number: " + ccc_no);
+
+        //patient_id.setText("patient id:"+ Integer.toString(questionnaire_participant_id));
 
 
 
@@ -136,6 +144,8 @@ public class SelectSurveyFragment extends Fragment {
                 bundle.putSerializable("questionnaire", clickedItem);
                 bundle.putSerializable("ccc_no", ccc_no);
                 bundle.putSerializable("f_name", f_name);
+               // bundle.putSerializable("questionnaire_participant_id", questionnaire_participant_id);
+
                 Navigation.findNavController(root).navigate(R.id.nav_patient_consent, bundle);
             }
         });

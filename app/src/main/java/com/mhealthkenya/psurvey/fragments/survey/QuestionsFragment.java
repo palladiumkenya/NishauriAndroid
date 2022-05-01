@@ -45,10 +45,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import okhttp3.OkHttpClient;
 
 import static com.mhealthkenya.psurvey.depedancies.AppController.TAG;
 
@@ -147,6 +149,7 @@ public class QuestionsFragment extends Fragment {
 
                 if (questions.getQuestion_type() == 1){
 
+
                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), openTextEtxt.getText().toString());
 
 
@@ -234,6 +237,13 @@ public class QuestionsFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
+        //add timeout
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+                .connectTimeout(600, TimeUnit.SECONDS)
+                .readTimeout(600, TimeUnit.SECONDS)
+                . writeTimeout(600, TimeUnit.SECONDS)
+                .build();
+
         AndroidNetworking.post(Constants.ENDPOINT+Constants.PROVIDE_ANSWER)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Accept", "*/*")
@@ -241,6 +251,7 @@ public class QuestionsFragment extends Fragment {
                 .addHeaders("Connection","keep-alive")
                 .setContentType("application.json")
                 .addJSONObjectBody(jsonObject) // posting json
+                .setOkHttpClient(okHttpClient)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener(){
                     @Override
@@ -293,6 +304,13 @@ public class QuestionsFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
+        //add timeout
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+                .connectTimeout(600, TimeUnit.SECONDS)
+                .readTimeout(600, TimeUnit.SECONDS)
+                . writeTimeout(600, TimeUnit.SECONDS)
+                .build();
+
 
         AndroidNetworking.get(questionLink)
                 .addHeaders("Authorization","Token "+ auth_token)
@@ -301,6 +319,7 @@ public class QuestionsFragment extends Fragment {
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")
                 .setPriority(Priority.LOW)
+                .setOkHttpClient(okHttpClient)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override

@@ -36,4 +36,5 @@
     <string name="consent_yes">Yes</string>
     <string name="consent_no">No</string>
     <string name="details">Type your answer here …</string>
+    <string name="InformedStatement">Statement by the interviewer/person taking consent I have accurately read out the informed consent and privacy to the potential participant, and to the best of my ability made sure that the participant understands the survey.</string>
 </resources>

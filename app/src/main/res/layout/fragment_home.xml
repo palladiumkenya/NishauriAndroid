@@ -54,6 +54,8 @@
         android:scrollingCache="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <!--  begin main tile -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -172,10 +174,13 @@
 
             </RelativeLayout>
 
+            <!-- begin 2 tiles -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -184,8 +189,10 @@
                     android:layout_marginHorizontal="@dimen/spacing_medium"
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@android:color/white"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="10dp"
                     app:cardUseCompatPadding="true">
 
                     <LinearLayout
@@ -194,7 +201,7 @@
                         android:orientation="horizontal"
                         android:padding="@dimen/spacing_large">
 
-                        <RelativeLayout
+                        <!--<RelativeLayout
                             android:layout_width="50dp"
                             android:layout_height="50dp">
 
@@ -204,12 +211,22 @@
                                 android:layout_centerInParent="true"
                                 android:src="@drawable/ic_all_survey" />
 
-                        </RelativeLayout>
+                        </RelativeLayout>-->
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:orientation="vertical">
+                            <!-- image   -->
+
+                            <!-- image end -->
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_all_survey" />
 
 
                             <com.google.android.material.textview.MaterialTextView
@@ -234,17 +251,19 @@
 
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>  <!-- end available survey -->
+
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginHorizontal="@dimen/spacing_medium"
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@android:color/white"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="10dp"
                     app:cardUseCompatPadding="true">
 
                     <LinearLayout
@@ -253,7 +272,7 @@
                         android:orientation="horizontal"
                         android:padding="@dimen/spacing_large">
 
-                        <RelativeLayout
+                       <!-- <RelativeLayout
                             android:layout_width="50dp"
                             android:layout_height="50dp">
 
@@ -263,13 +282,18 @@
                                 android:layout_centerInParent="true"
                                 android:src="@drawable/ic_completed_surveys" />
 
-                        </RelativeLayout>
+                        </RelativeLayout>-->
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                           android:layout_gravity="center"
                             android:orientation="vertical">
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_completed_surveys" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/tv_completed_surveys"
@@ -296,6 +320,7 @@
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>
+            <!-- end 2 tiles -->
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_active_survey"
@@ -307,6 +332,7 @@
                 android:background="@android:color/white"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp"
+                android:visibility="gone"
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout

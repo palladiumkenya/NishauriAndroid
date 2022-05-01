@@ -89,6 +89,13 @@
                     android:text="Select Human Subject"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@color/colorPrimary" />
+                <Spinner
+                    android:id="@+id/spinner_subjects"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dropdown"
+
+                    />
 
             </LinearLayout></androidx.cardview.widget.CardView>
          <!-- end user dropdown-->
