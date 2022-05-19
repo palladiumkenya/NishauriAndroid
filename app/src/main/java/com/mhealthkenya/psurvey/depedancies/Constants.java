@@ -6,7 +6,7 @@ public class Constants {
     //public static int dataID;
 
     /*ENDPOINT*/
-    public static String ENDPOINT = "https://psurvey-api.mhealthkenya.co.ke/";
+    public static String ENDPOINT = "https://psurveyapi.kenyahmis.org/";
 
 
     //AUTH
