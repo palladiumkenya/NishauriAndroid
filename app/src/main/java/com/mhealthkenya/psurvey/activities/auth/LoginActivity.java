@@ -33,11 +33,28 @@ import org.json.JSONObject;
 
 import static com.mhealthkenya.psurvey.depedancies.AppController.TAG;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.security.cert.X509Certificate;
+import java.util.Collections;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import okhttp3.CipherSuite;
+import okhttp3.ConnectionSpec;
+import okhttp3.OkHttpClient;
+import okhttp3.TlsVersion;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -57,40 +74,6 @@ public class LoginActivity extends AppCompatActivity {
         LoginActivity loginActivity =new LoginActivity();
         //loginActivity.
         setContentView(R.layout.activity_login);
-        ///ssl
-
-
-
-
-
-
-
-
-        ///ssl
-
-
-        SSLContext context = null;
-        try {
-            context = SSLContext.getInstance("TLS 1.2");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        try {
-            context.init(null, null, null);
-        } catch (KeyManagementException e) {
-            e.printStackTrace();
-        }
-       /*SSLSocketFactory noSSLv3Factory = null;
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
-            noSSLv3Factory = new TLSSocketFactory(sslContext.getSocketFactory());
-        } else {
-            noSSLv3Factory = sslContext.getSocketFactory();
-        }
-        connection.setSSLSocketFactory(noSSLv3Factory);*/
-
-
-
-        ///ssl
 
 
         Stash.init(this);
@@ -118,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         }catch (Exception e){
                             e.printStackTrace();
+
                         }
                     }
                 });
@@ -163,23 +147,27 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void loginRequest() {
+    private void loginRequest() throws KeyManagementException {
 
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("msisdn", phoneNumber.getText().toString());
-            jsonObject.put("password", password.getText().toString());
+            //jsonObject.put("msisdn", phoneNumber.getText().toString());
+            jsonObject.put("msisdn", "0712311264");
+            //jsonObject.put("password", password.getText().toString());
+            jsonObject.put("password", "12345678");
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+
+        AndroidNetworking.initialize(getApplicationContext(), myUnsafeHttpClient());
         AndroidNetworking.post(Constants.ENDPOINT+Constants.LOGIN)
                 .addHeaders("Content-Type", "application.json")
-                .addHeaders("Accept", "*/*")
-                .addHeaders("Accept", "gzip, deflate, br")
+               // .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")
+                .addHeaders("Accept", "application/json")
                 .addJSONObjectBody(jsonObject) // posting json
                 .setPriority(Priority.MEDIUM)
                 .build()
@@ -237,7 +225,7 @@ public class LoginActivity extends AppCompatActivity {
                             pDialog.cancel();
                         }
 
-                        if (error.getErrorBody().contains("Unable to log in with provided credentials.")){
+                        if (error.getErrorBody() != null && error.getErrorBody().contains("Unable to log in with provided credentials.")){
 
                             Snackbar.make(findViewById(R.id.login_lyt), "Invalid phone number or password." , Snackbar.LENGTH_LONG).show();
 
@@ -245,7 +233,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         else {
 
-                            Snackbar.make(findViewById(R.id.login_lyt), "" + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(findViewById(R.id.login_lyt), "Error: " + error.getErrorCode(), Snackbar.LENGTH_LONG).show();
 
 
                         }
@@ -253,6 +241,60 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    private OkHttpClient myUnsafeHttpClient() {
+        try {
+
+            // Create a trust manager that does not validate certificate chains
+            final TrustManager[] trustAllCerts = new TrustManager[] {
+
+                    new X509TrustManager() {
+
+                        @Override
+                        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) { }
+                        @Override
+                        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) {
+                        }
+                        @Override
+                        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                            return new java.security.cert.X509Certificate[]{};
+                        }
+                    }
+            };
+
+            //Using TLS 1_2 & 1_1 for HTTP/2 Server requests
+            // Note : Please change accordingly
+            ConnectionSpec spec = new ConnectionSpec.Builder(ConnectionSpec.COMPATIBLE_TLS)
+                    .tlsVersions(TlsVersion.TLS_1_2, TlsVersion.TLS_1_1, TlsVersion.TLS_1_0)
+                    .cipherSuites(
+                            CipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
+                            CipherSuite.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
+                            CipherSuite.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+                            CipherSuite.TLS_DHE_RSA_WITH_AES_256_GCM_SHA384,
+                            CipherSuite.TLS_DHE_RSA_WITH_AES_256_CBC_SHA,
+                            CipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
+                            CipherSuite.TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,
+                            CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+                            CipherSuite.TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,
+                            CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,
+                            CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA)
+                    .build();
+
+            // Install the all-trusting trust manager
+            final SSLContext sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+            // Create an ssl socket factory with our all-trusting manager
+            final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+
+            OkHttpClient.Builder builder = new OkHttpClient.Builder();
+            builder.sslSocketFactory(sslSocketFactory);
+            builder.connectionSpecs(Collections.singletonList(spec));
+            builder.hostnameVerifier((hostname, session) -> true);
+            return builder.build();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
