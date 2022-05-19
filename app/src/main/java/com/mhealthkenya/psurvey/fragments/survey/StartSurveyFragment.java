@@ -56,10 +56,8 @@ public class StartSurveyFragment extends Fragment {
     private Context context;
 
     private auth loggedInUser;
-
     ArrayList<String> dataList;
     ArrayList<data>  datas;
-
     public static int dataID;
 
 
@@ -110,10 +108,7 @@ public class StartSurveyFragment extends Fragment {
         btn_patient_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
-                    if (dataID==1 && TextUtils.isEmpty(etxt_ccc_no.getText().toString())){
+                if (dataID==1 && TextUtils.isEmpty(etxt_ccc_no.getText().toString())){
                         Snackbar.make(root.findViewById(R.id.frag_start_survey),"Enter Patient's CCC Number", Snackbar.LENGTH_SHORT).show();
                 }
                 else if (dataID==1 && TextUtils.isEmpty(etxt_first_name.getText().toString())){

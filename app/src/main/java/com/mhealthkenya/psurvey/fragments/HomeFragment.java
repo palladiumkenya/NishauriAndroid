@@ -120,7 +120,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.nav_questionnaire);
+              //  NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.nav_questionnaire);
 
             }
         });

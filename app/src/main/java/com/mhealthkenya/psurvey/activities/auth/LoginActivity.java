@@ -5,7 +5,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +33,12 @@ import org.json.JSONObject;
 
 import static com.mhealthkenya.psurvey.depedancies.AppController.TAG;
 
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+
 public class LoginActivity extends AppCompatActivity {
 
 
@@ -44,7 +53,45 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LoginActivity loginActivity =new LoginActivity();
+        //loginActivity.
         setContentView(R.layout.activity_login);
+        ///ssl
+
+
+
+
+
+
+
+
+        ///ssl
+
+
+        SSLContext context = null;
+        try {
+            context = SSLContext.getInstance("TLS 1.2");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        try {
+            context.init(null, null, null);
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        }
+       /*SSLSocketFactory noSSLv3Factory = null;
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
+            noSSLv3Factory = new TLSSocketFactory(sslContext.getSocketFactory());
+        } else {
+            noSSLv3Factory = sslContext.getSocketFactory();
+        }
+        connection.setSSLSocketFactory(noSSLv3Factory);*/
+
+
+
+        ///ssl
+
 
         Stash.init(this);
         setContentView(R.layout.activity_login);
@@ -61,8 +108,22 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                pDialog.show();
-                loginRequest();
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            pDialog.show();
+                            loginRequest();
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+                //pDialog.show();
+                //loginRequest();
 
             }
         });
@@ -107,8 +168,9 @@ public class LoginActivity extends AppCompatActivity {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("password", password.getText().toString());
             jsonObject.put("msisdn", phoneNumber.getText().toString());
+            jsonObject.put("password", password.getText().toString());
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

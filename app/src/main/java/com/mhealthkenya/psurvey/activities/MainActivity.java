@@ -65,15 +65,16 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_start_survey, R.id.nav_questionnaire, R.id.nav_edit_profile)
+               R.id.nav_home, R.id.nav_start_survey, R.id.nav_questionnaire, R.id.nav_edit_profile)
+
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
-        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+       BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+       NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
         loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN, auth.class);
 

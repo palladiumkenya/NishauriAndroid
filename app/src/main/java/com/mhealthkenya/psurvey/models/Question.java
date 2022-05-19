@@ -1,10 +1,19 @@
 package com.mhealthkenya.psurvey.models;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 
-public class Question implements Serializable {
 
+@Entity(tableName = "QuestionsTable")
+public class Question implements Serializable {
+    @PrimaryKey@NonNull
+    @ColumnInfo(name = "id")
     private int id;
+
     private String question;
     private int question_type;
     private String createdAt;

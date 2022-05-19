@@ -106,14 +106,14 @@ public class SelectSurveyFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_select_survey, container, false);
         unbinder = ButterKnife.bind(this, root);
 
-        String ccc_no=  getArguments().getString("ccc_no");
-        String f_name=  getArguments().getString("f_name");
+       /* String ccc_no=  getArguments().getString("ccc_no");
+        String f_name=  getArguments().getString("f_name");*/
        // int questionnaire_participant_id =getArguments().getInt("questionnaire_participant_id");
 
         //String questionnaire_participant_id = getArguments().getString("questionnaire_participant_id");
 
-        tv_patient_name.setText("Name: "+f_name);
-        tv_patient_number.setText("CCC Number: " + ccc_no);
+      /*  tv_patient_name.setText("Name: "+f_name);
+        tv_patient_number.setText("CCC Number: " + ccc_no);*/
 
         //patient_id.setText("patient id:"+ Integer.toString(questionnaire_participant_id));
 
@@ -142,11 +142,12 @@ public class SelectSurveyFragment extends Fragment {
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("questionnaire", clickedItem);
-                bundle.putSerializable("ccc_no", ccc_no);
-                bundle.putSerializable("f_name", f_name);
+                /*bundle.putSerializable("ccc_no", ccc_no);
+                bundle.putSerializable("f_name", f_name);*/
                // bundle.putSerializable("questionnaire_participant_id", questionnaire_participant_id);
 
                 Navigation.findNavController(root).navigate(R.id.nav_patient_consent, bundle);
+                //NavHostFragment.findNavController(SelectSurveyFragment.this).navigate(R.id.nav_patient_consent);
             }
         });
 
@@ -154,8 +155,8 @@ public class SelectSurveyFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+               // NavHostFragment.findNavController(SelectSurveyFragment.this).navigate(R.id.nav_patient_consent);
                 NavHostFragment.findNavController(SelectSurveyFragment.this).navigate(R.id.nav_patient_consent);
-
             }
         });
 
