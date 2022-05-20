@@ -147,6 +147,7 @@ public class SelectSurveyFragment extends Fragment {
                // bundle.putSerializable("questionnaire_participant_id", questionnaire_participant_id);
 
                 Navigation.findNavController(root).navigate(R.id.nav_patient_consent, bundle);
+                Navigation.findNavController(root).navigate(R.id.lastConsent2, bundle);
                 //NavHostFragment.findNavController(SelectSurveyFragment.this).navigate(R.id.nav_patient_consent);
             }
         });

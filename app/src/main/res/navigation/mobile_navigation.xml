@@ -17,6 +17,7 @@
         tools:layout="@layout/fragment_questionnaires" />
     <fragment
         android:id="@+id/nav_start_survey"
+
         android:name="com.mhealthkenya.psurvey.fragments.survey.StartSurveyFragment"
         android:label="Start Survey"
         tools:layout="@layout/fragment_start_survey" />
@@ -45,5 +46,10 @@
         android:name="com.mhealthkenya.psurvey.fragments.EditProfileFragment"
         android:label="Edit Profile"
         tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/lastConsent2"
+        android:name="com.mhealthkenya.psurvey.LastConsent"
+        android:label="fragment_last_consent"
+        tools:layout="@layout/fragment_last_consent" />
 
 </navigation>

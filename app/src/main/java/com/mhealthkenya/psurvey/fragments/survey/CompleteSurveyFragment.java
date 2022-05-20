@@ -1,6 +1,7 @@
 package com.mhealthkenya.psurvey.fragments.survey;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -59,7 +60,12 @@ public class CompleteSurveyFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                NavHostFragment.findNavController(CompleteSurveyFragment.this).navigate(R.id.nav_start_survey);
+                NavHostFragment.findNavController(CompleteSurveyFragment.this).navigate(R.id.nav_select_survey);
+               // NavHostFragment.findNavController(CompleteSurveyFragment.this).navigate(R.id.i);
+
+              //  Intent integer = new Intent(getContext(), InformedConsentFragment.class);
+                //startActivity(integer);
+
 
             }
         });
