@@ -41,10 +41,20 @@ import org.json.JSONObject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import okhttp3.CipherSuite;
+import okhttp3.ConnectionSpec;
+import okhttp3.OkHttpClient;
+import okhttp3.TlsVersion;
 
 import static com.mhealthkenya.psurvey.depedancies.AppController.TAG;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 
 public class StartSurveyFragment extends Fragment {
@@ -103,12 +113,12 @@ public class StartSurveyFragment extends Fragment {
         unbinder = ButterKnife.bind(this, root);
 
         loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN, auth.class);
-        getparticipant();
+       // getparticipant();
 
         btn_patient_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (dataID==1 && TextUtils.isEmpty(etxt_ccc_no.getText().toString())){
+                /*if (dataID==1 && TextUtils.isEmpty(etxt_ccc_no.getText().toString())){
                         Snackbar.make(root.findViewById(R.id.frag_start_survey),"Enter Patient's CCC Number", Snackbar.LENGTH_SHORT).show();
                 }
                 else if (dataID==1 && TextUtils.isEmpty(etxt_first_name.getText().toString())){
@@ -119,14 +129,14 @@ public class StartSurveyFragment extends Fragment {
                     else if (dataID!=1 &&dataID!=2){
                         Snackbar.make(root.findViewById(R.id.frag_start_survey), "Invalid", Snackbar.LENGTH_LONG).show();
 
-                    }
+                    }*/
 
 
 
-                    else{
+                  //  else{
 
                         confirmConsent(etxt_ccc_no.getText().toString(), etxt_first_name.getText().toString());
-                    }
+                   // }
 
 
             }
@@ -226,26 +236,21 @@ public class StartSurveyFragment extends Fragment {
 
     }
 
-    private void getparticipant(){
+    private void getparticipant() {
 
         String auth_token = loggedInUser.getAuth_token();
-        AndroidNetworking.get("https://psurvey-api.mhealthkenya.co.ke/api/questionnaire/participants/")
-                //.addQueryParameter("limit", "3")
-                //.addHeaders("token", "1234")
-
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.GET_PARTICIPANTS)
                 .addHeaders("Authorization","Token "+ auth_token)
-                .addHeaders("Accept", "*/*")
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")
-                .setPriority(Priority.LOW)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-                        //Toast.makeText(getContext(), "hello", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "hello", Toast.LENGTH_SHORT).show();
 
                         try {
 
@@ -346,4 +351,7 @@ public class StartSurveyFragment extends Fragment {
                     }
                 });
     }
+
+
+
 }

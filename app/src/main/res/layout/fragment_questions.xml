@@ -55,11 +55,12 @@
                         android:layout_marginBottom="@dimen/spacing_medium"
                         android:text="Please ensure you complete the survey to the end. "
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
-            <!-- Begin question -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_survey"
                 android:layout_width="match_parent"
@@ -69,7 +70,6 @@
                 android:background="@android:color/white"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp"
-
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout
@@ -156,16 +156,16 @@
                                 </com.facebook.shimmer.ShimmerFrameLayout>
 
                                 <androidx.recyclerview.widget.RecyclerView
-                                    android:id="@+id/recyclerView3"
+                                    android:id="@+id/recyclerView"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:scrollbars="vertical"
                                     android:layout_marginTop="@dimen/spacing_large"
-                                   android:visibility="invisible"
+                                    android:visibility="gone"
                                     android:scrollingCache="true" />
 
                             </FrameLayout>
-                            <!-- No active surveys -->
+
                             <LinearLayout
                                 android:id="@+id/no_active_survey_lyt"
                                 android:layout_width="wrap_content"
@@ -262,23 +262,9 @@
 
             </androidx.cardview.widget.CardView>
 
-            <!-- questions  -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical"
-                android:visibility="invisible"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:scrollingCache="true" />
-
-            <!-- end questions -->
-
-
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-
 
 
 

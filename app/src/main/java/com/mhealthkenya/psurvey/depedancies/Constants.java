@@ -31,7 +31,7 @@ public class Constants {
     public static String PATIENT_CONSENT = "api/questionnaire/start/";
     public static String PROVIDE_ANSWER = "api/questions/answer/";
     public static String INITIAL_CONFIRMATION = "api/initial/consent/";
-    public static String GET_PARTICIPANTS ="/api/questionnaire/participants/";
+    public static String GET_PARTICIPANTS ="api/questionnaire/participants/";
 
 
     /*MODELS*/

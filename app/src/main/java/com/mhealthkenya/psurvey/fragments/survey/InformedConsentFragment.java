@@ -75,7 +75,7 @@ public class InformedConsentFragment extends Fragment {
     private auth loggedInUser;
     private ActiveSurveys activeSurveys;
     private boolean informb, privacyb, stateb;
-   // private int questionnaire_participant_id;
+    private int questionnaire_participant_id;
 
     @BindView(R.id.tv_chosen_survey_title)
     MaterialTextView tv_chosen_survey_title;
@@ -267,7 +267,7 @@ public class InformedConsentFragment extends Fragment {
     }
 
    // private void confirmConsent(int questionnaireId, String ccc_no, String firstName,boolean informb, boolean privacyb, boolean stateb) {
-       private void confirmConsent(int questionnaireId, String ccc_no, String firstName, int dataID) {
+      private void confirmConsent(int questionnaireId, String ccc_no, String firstName, int dataID) {
 
 
            JSONObject jsonObject = new JSONObject();
@@ -296,16 +296,6 @@ public class InformedConsentFragment extends Fragment {
 
 
            String auth_token = loggedInUser.getAuth_token();
-        //https://psurvey-api.mhealthkenya.co.ke/api/initial/consent/
-
-
-           //add timeout
-           OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                   .connectTimeout(600, TimeUnit.SECONDS)
-                   .readTimeout(600, TimeUnit.SECONDS)
-                   . writeTimeout(600, TimeUnit.SECONDS)
-                   .build();
-
         AndroidNetworking.post(Constants.ENDPOINT+Constants.PATIENT_CONSENT)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Accept", "*/*")
@@ -313,7 +303,6 @@ public class InformedConsentFragment extends Fragment {
                 .addHeaders("Connection","keep-alive")
                 .setContentType("application.json")
                 .addJSONObjectBody(jsonObject) // posting json
-                .setOkHttpClient(okHttpClient)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener(){
                     @Override
@@ -336,7 +325,7 @@ public class InformedConsentFragment extends Fragment {
                                 bundle.putString("questionLink",link);
                                 bundle.putInt("sessionID",sessionId);
 
-                                bundle.putInt("questionnaire_id", questionnaireId);
+                               // bundle.putInt("questionnaire_id", questionnaireId);
                                 Navigation.findNavController(root).navigate(R.id.nav_questions, bundle);
 
                                 //Intent intent = new Intent(context, SingleQuestions.class);
@@ -395,7 +384,7 @@ public class InformedConsentFragment extends Fragment {
     private void getparticipant(){
 
         String auth_token = loggedInUser.getAuth_token();
-        AndroidNetworking.get("https://psurvey-api.mhealthkenya.co.ke/api/questionnaire/participants/")
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.GET_PARTICIPANTS)
                 //.addQueryParameter("limit", "3")
                 //.addHeaders("token", "1234")
 

@@ -152,10 +152,10 @@ public class LoginActivity extends AppCompatActivity {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            //jsonObject.put("msisdn", phoneNumber.getText().toString());
-            jsonObject.put("msisdn", "0712311264");
-            //jsonObject.put("password", password.getText().toString());
-            jsonObject.put("password", "12345678");
+            jsonObject.put("msisdn", phoneNumber.getText().toString());
+            //jsonObject.put("msisdn", "0712311264");
+            jsonObject.put("password", password.getText().toString());
+            //jsonObject.put("password", "12345678");
 
         } catch (JSONException e) {
             e.printStackTrace();
