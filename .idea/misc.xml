@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/This/AndroidStudioProjects/psurvey2.0/PsurveyAndroid/app/src/main/res/layout/all_questions.xml" value="0.1" />
+        <entry key="..\:/Users/This/AndroidStudioProjects/psurvey2.0/PsurveyAndroid/app/src/main/res/layout/fragment_informed_consent.xml" value="0.18704710144927536" />
+        <entry key="..\:/Users/This/AndroidStudioProjects/psurvey2.0/PsurveyAndroid/app/src/main/res/layout/fragment_last_consent.xml" value="0.18704710144927536" />
         <entry key="..\:/Users/This/AndroidStudioProjects/psurvey2.0/PsurveyAndroid/app/src/main/res/layout/fragment_questions.xml" value="0.1621376811594203" />
         <entry key="..\:/Users/vikog/AndroidStudioProjects/psurvey_android/app/src/main/res/drawable/ic_arrow_back.xml" value="0.1" />
         <entry key="..\:/Users/vikog/AndroidStudioProjects/psurvey_android/app/src/main/res/drawable/ic_password.xml" value="0.1" />
