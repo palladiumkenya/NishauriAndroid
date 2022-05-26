@@ -49,7 +49,7 @@
     <fragment
         android:id="@+id/lastConsent2"
         android:name="com.mhealthkenya.psurvey.LastConsent"
-        android:label="fragment_last_consent"
+        android:label="Consent"
         tools:layout="@layout/fragment_last_consent" />
 
 </navigation>

@@ -30,6 +30,7 @@ import com.mhealthkenya.psurvey.R;
 import com.mhealthkenya.psurvey.depedancies.Constants;
 import com.mhealthkenya.psurvey.models.Answer;
 import com.mhealthkenya.psurvey.models.Answers;
+import com.mhealthkenya.psurvey.models.Question;
 import com.mhealthkenya.psurvey.models.Questions;
 import com.mhealthkenya.psurvey.models.QuestionsList;
 import com.mhealthkenya.psurvey.models.auth;
@@ -52,40 +53,49 @@ public class questionsAdapter extends RecyclerView.Adapter<questionsAdapter.Ques
     //private List<Integer> multiAnswerList = new ArrayList<>();
 
 
-   private Answers answers2;
-   private  ArrayList<Answers> answersList2 =new ArrayList<>();
+    private Answers answers2;
+    private ArrayList<Answers> answersList2 = new ArrayList<>();
     private List<Integer> multiAnswerList2 = new ArrayList<>();
 
-   List<Questions> all =new ArrayList<>();
+    List<Questions> all = new ArrayList<>();
+    List<Question> question1 = new ArrayList<>();
+   Question question2;
 
     Context context;
 
 
-    public questionsAdapter(Context context,  List<Questions> all) {
+
+    public questionsAdapter(Context context, List<Question> question1) {
 
         this.context = context;
-        this.all = all;
+        // this.all = all;
+
+        this.question1 =question1;
     }
+
 
     @NonNull
     @Override
     public QuestionsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.all_questions, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_questions, parent, false);
         return new QuestionsViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull QuestionsViewHolder holder, int position) {
-        Questions obj = all.get(position);
+     //   Question obj = question1.ge;
+          Question obj1 =question1.get(position);
+        //if (obj.getQuestion_type()==1){
+        //  holder.openTextTil.setVisibility(View.VISIBLE);
+        //holder.surveyQuestion.setText(obj1);
 
-        if (obj.getQuestionType().equals("1")){
-            holder.openTextTil.setVisibility(View.VISIBLE);
-            holder.surveyQuestion.setText(obj.getQuestionName());
+
+        holder.surveyQuestion.setText(obj1.getQuestion());
 
 
-       }
-        else if(obj.getQuestionType().equals("2")){
+        // }
+       /* else if(obj.getQuestionType().equals("2")){
 
             auth loggedInUser;
             loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN, auth.class);
@@ -96,18 +106,18 @@ public class questionsAdapter extends RecyclerView.Adapter<questionsAdapter.Ques
                     .connectTimeout(600, TimeUnit.SECONDS)
                     .readTimeout(600, TimeUnit.SECONDS)
                     . writeTimeout(600, TimeUnit.SECONDS)
-                    .build();
+                    .build();*/
 
-            AndroidNetworking.get("https://psurvey-api.mhealthkenya.co.ke/api/answers_options/"+queryID)
+            /*AndroidNetworking.get("https://psurvey-api.mhealthkenya.co.ke/api/answers_options/"+queryID)
                     .addHeaders("Authorization","Token "+ auth_token)
                     .addHeaders("Content-Type", "application.json")
-                    .addHeaders("Accept", "*/*")
+
                     .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")
                 .setPriority(Priority.LOW)
                 .setOkHttpClient(okHttpClient)
-                .build().getAsJSONObject(new JSONObjectRequestListener() {
-            @Override
+                .build().getAsJSONObject(new JSONObjectRequestListener() {*/
+           /* @Override
             public void onResponse(JSONObject response) {
                 Log.e(TAG, response.toString());
                 try{
@@ -159,12 +169,12 @@ public class questionsAdapter extends RecyclerView.Adapter<questionsAdapter.Ques
 
 
             }
-        });
+        });*/
 
 
-        }
+        // }
 
-        else if(obj.getQuestionType().equals("3")){
+       /* else if(obj.getQuestionType().equals("3")){
            // Toast.makeText(context, "option 3", Toast.LENGTH_LONG).show();
             auth loggedInUser;
             loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN, auth.class);
@@ -180,9 +190,9 @@ public class questionsAdapter extends RecyclerView.Adapter<questionsAdapter.Ques
 
             AndroidNetworking.get("https://psurvey-api.mhealthkenya.co.ke/api/answers_options/"+queryID)
                     .addHeaders("Authorization","Token "+ auth_token)
-                    .addHeaders("Content-Type", "application.json")
-                    .addHeaders("Accept", "*/*")
-                    .addHeaders("Accept", "gzip, deflate, br")
+                    .addHeaders("Content-Type", "application.json")*/
+
+                   /* .addHeaders("Accept", "gzip, deflate, br")
                     .addHeaders("Connection","keep-alive")
                     .setPriority(Priority.LOW)
                     .setOkHttpClient(okHttpClient)
@@ -235,34 +245,32 @@ public class questionsAdapter extends RecyclerView.Adapter<questionsAdapter.Ques
 
                     Toast.makeText(context, "API err", Toast.LENGTH_LONG).show();
                 }
-            });
+            });*/
 
-        }
-        }
+    }
+    // }
 
 
     @Override
     public int getItemCount() {
-        //return all.size();
+        return question1.size();
 
-        int a ;
+       /* int a;
 
-        if(all != null && !all.isEmpty()) {
+        if (all != null && !all.isEmpty()) {
 
             a = all.size();
-        }
-        else {
+        } else {
 
             a = 0;
 
         }
 
-        return a;
+        return a;*/
     }
 
-    public void getAllDatass( ArrayList<Questions> all)
-    {
-      this.all =all;
+    public void getAllDatass(ArrayList<Questions> all) {
+        this.all = all;
     }
 
 
@@ -290,6 +298,6 @@ public class questionsAdapter extends RecyclerView.Adapter<questionsAdapter.Ques
             shimmer_my_container = itemView.findViewById(R.id.shimmer_my_container);
             no_active_survey_lyt = itemView.findViewById(R.id.no_active_survey_lyt);
             error_lyt = itemView.findViewById(R.id.error_lyt);
+        }
     }
-
-    }}
+}

@@ -1,5 +1,6 @@
 package com.mhealthkenya.psurvey.fragments.survey;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -15,12 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -58,6 +61,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,6 +98,8 @@ public class QuestionsFragment extends Fragment {
     private ArrayList<Answer> answerList = new ArrayList<>();
     private List<Integer> multiAnswerList = new ArrayList<>();
 
+    private int mYear, mMonth, mDay;
+
 
 
     @BindView(R.id.tv_survey_question)
@@ -104,6 +110,22 @@ public class QuestionsFragment extends Fragment {
 
     @BindView(R.id.etxt_open_text)
     TextInputEditText openTextEtxt;
+
+    @BindView(R.id.dateLayout)
+    TextInputLayout dateTextTil;
+
+    @BindView(R.id.dob)
+    TextInputEditText dobEditText;
+
+    @BindView(R.id.til_numeric_layout)
+    TextInputLayout numericText;
+
+    @BindView(R.id.etxt_numeric_text)
+    TextInputEditText numericEditText;
+
+
+
+
 
     @BindView(R.id.radio_group)
     RadioGroup singleChoiceRadioGroup;
@@ -161,7 +183,31 @@ public class QuestionsFragment extends Fragment {
 
 
         loadQuestion();
+        //set EditText type4 to accept numeric only
+        numericEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
 
+        //DatePicker
+        dobEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance ();
+                mYear = calendar.get ( Calendar.YEAR );
+                mMonth = calendar.get ( Calendar.MONTH );
+                mDay = calendar.get ( Calendar.DAY_OF_MONTH );
+
+                //show dialog
+                DatePickerDialog datePickerDialog = new DatePickerDialog ( context, new DatePickerDialog.OnDateSetListener () {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                       dobEditText.setText ( dayOfMonth + "/" + (month + 1) + "/" + year );
+                    }
+                }, mYear, mMonth, mDay );
+                datePickerDialog.show ();
+
+
+
+            }
+        });
 
 
         btn_next.setOnClickListener(new View.OnClickListener() {
@@ -175,6 +221,18 @@ public class QuestionsFragment extends Fragment {
 
 
                 }
+                else if (questions.getQuestion_type() == 4){
+
+                    provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), numericEditText.getText().toString());
+
+
+                }else if (questions.getQuestion_type() ==5 ){
+
+                    provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString());
+
+
+                }
+
                 else if (questions.getQuestion_type() == 2){
 
                     int radioButtonID = singleChoiceRadioGroup.getCheckedRadioButtonId();
@@ -377,6 +435,8 @@ public class QuestionsFragment extends Fragment {
 
                                         if (questions.getQuestion_type() == 1){
                                             openTextTil.setVisibility(View.VISIBLE);
+
+
                                         }
                                         else if (questions.getQuestion_type() == 2){
                                             singleChoiceRadioGroup.setVisibility(View.VISIBLE);
@@ -402,6 +462,16 @@ public class QuestionsFragment extends Fragment {
                                             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
                                             checkBox.setLayoutParams(params);
                                             multipleChoiceAns.addView(checkBox);
+
+                                        }
+                                        else if (questions.getQuestion_type()==4){
+                                            numericText.setVisibility(View.VISIBLE);
+                                            numericEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
+                                        }
+
+                                        else if (questions.getQuestion_type()==5){
+                                            dateTextTil.setVisibility(View.VISIBLE);
+
 
                                         }
 

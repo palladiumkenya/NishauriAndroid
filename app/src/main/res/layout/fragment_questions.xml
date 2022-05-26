@@ -19,6 +19,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <!-- logo -->
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_description"
                 android:layout_width="match_parent"
@@ -59,8 +61,9 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>  <!-- end logo -->
 
+            <!-- begin question -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_survey"
                 android:layout_width="match_parent"
@@ -81,11 +84,24 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_survey_question"
                         android:layout_width="wrap_content"
+
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_medium"
                         android:text=""
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
                         android:textColor="@color/grey_90" />
+
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView1"
+                        android:layout_width="wrap_content"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="vertical"
+                        android:layout_marginTop="@dimen/spacing_large"
+                        tools:listitem="@layout/all_questions"
+                        android:scrollingCache="true" />
 
                     <RadioGroup
                         android:id="@+id/radio_group"
@@ -111,6 +127,51 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etxt_open_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/grey_5"
+                            android:gravity="top"
+                            android:hint="@string/details"
+                            android:lines="5"
+                            android:padding="@dimen/spacing_middle"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <!-- date Edittext -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayout"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dob"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <!-- Numeric Edittext -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_numeric_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etxt_numeric_text"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/grey_5"
@@ -265,6 +326,7 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
 
 
 

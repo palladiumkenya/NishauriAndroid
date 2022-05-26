@@ -17,48 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <!-- please ensure
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_medium"
-                android:layout_marginTop="@dimen/spacing_middle"
-                android:background="@android:color/white"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="5dp"
-                app:cardUseCompatPadding="true">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/spacing_large">
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        app:srcCompat="@drawable/logo" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/spacing_medium"
-                        android:text="Survey"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        android:textColor="@color/colorPrimary" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/spacing_medium"
-                        android:text="Please ensure you complete the survey to the end. "
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>   -->
 
             <!-- Begin question -->
             <androidx.cardview.widget.CardView
@@ -91,7 +49,7 @@
                         android:id="@+id/radio_group"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"/>
+                        />
 
                     <LinearLayout
                         android:id="@+id/multiselect_lyt"
@@ -107,6 +65,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:visibility="gone"
+
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -244,6 +203,7 @@
                             </LinearLayout>
 
 
+
                         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
                     </androidx.core.widget.NestedScrollView>
@@ -270,6 +230,8 @@
             <!-- end questions -->
 
         </LinearLayout>
+
+
 
     </androidx.core.widget.NestedScrollView>
 
