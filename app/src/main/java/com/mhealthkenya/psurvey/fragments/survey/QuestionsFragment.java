@@ -214,63 +214,62 @@ public class QuestionsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                 if (questions.getQuestion_type() == 1 )
-                         //&& questions.isIs_required())
+                /* if (questions.getQuestion_type() == 1 )
                  {
-                     //if (openTextEtxt.getText().toString().equals("")){
-                         //Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                     provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString());
 
-                // }
-                     //else if (!openTextEtxt.getText().toString().equals("")) {
-                    // else if (questions.getQuestion_type() ==1 && !questions.isIs_required())
-                     //{
-                         provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString());
-                     //}
-                     //}
-                  /*else if (questions.getQuestion_type()==1 && !questions.isIs_required()){
-                         provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString());
-
-                     }*/
-
-
-                  //  provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), openTextEtxt.getText().toString());
-
-
-                }
-                 else if(questions.getQuestion_type()==1 && questions.isIs_required() && openTextEtxt.getText().toString().equals("")){
-                     Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                }*/
+                 if(questions.getQuestion_type()==1 && questions.isIs_required()){
+                    if(openTextEtxt.getText().toString().equals("")){
+                     Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();}else{
+                        provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString());
+                    }
 
                  }
+                else if (questions.getQuestion_type() == 1 )
+                {
+                    provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString());
 
-                else if (questions.getQuestion_type() == 4){
-                    //if (numericEditText.getText().toString().equals("")){
-                       // Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
-                   // }
-                    //else if (questions.getQuestion_type() ==4 && !questions.isIs_required()){
-                        provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), numericEditText.getText().toString());
-                   //
-                     //
-                     // }
                 }
+
+                /*else if (questions.getQuestion_type() == 4){
+
+                        provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), numericEditText.getText().toString());
+                }*/
 
                 else if (questions.getQuestion_type()==4 && questions.isIs_required()){
                      if (numericEditText.getText().toString().equals("")){
                           Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
-                         // }
-                 }}
+                         // }else{
+                     }else{provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), numericEditText.getText().toString());}
+                }
 
-                else if (questions.getQuestion_type() ==5 && questions.isIs_required()){
-                    if (dobEditText.getText().toString().equals("")){
+                 else if (questions.getQuestion_type() == 4){
+
+                     provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), numericEditText.getText().toString());
+                 }
+
+               /* else if (questions.getQuestion_type() ==5){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString());
+
+                 }*/
+
+                    /*if (dobEditText.getText().toString().equals("")){
                         Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
 
-                    }
-                    //else if (!dobEditText.getText().toString().equals("")){
-                    else if (questions.getQuestion_type() ==5 && !questions.isIs_required()){
-                    provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString());
-                    }
-                    //}
+                    }*/
+                    else if (questions.getQuestion_type()==5 && questions.isIs_required()){
+                         if(dobEditText.getText().toString().equals("")) {
+                             Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                         }else{
+                             provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString());
+                         }
 
                 }
+                 else if (questions.getQuestion_type() ==5){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString());
+
+                 }
 
                 else if (questions.getQuestion_type() == 2){
 
