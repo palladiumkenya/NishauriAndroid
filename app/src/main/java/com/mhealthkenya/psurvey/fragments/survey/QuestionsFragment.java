@@ -214,22 +214,61 @@ public class QuestionsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if (questions.getQuestion_type() == 1){
+                 if (questions.getQuestion_type() == 1 )
+                         //&& questions.isIs_required())
+                 {
+                     //if (openTextEtxt.getText().toString().equals("")){
+                         //Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+
+                // }
+                     //else if (!openTextEtxt.getText().toString().equals("")) {
+                    // else if (questions.getQuestion_type() ==1 && !questions.isIs_required())
+                     //{
+                         provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString());
+                     //}
+                     //}
+                  /*else if (questions.getQuestion_type()==1 && !questions.isIs_required()){
+                         provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString());
+
+                     }*/
 
 
-                    provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), openTextEtxt.getText().toString());
+                  //  provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), openTextEtxt.getText().toString());
 
 
                 }
+                 else if(questions.getQuestion_type()==1 && questions.isIs_required() && openTextEtxt.getText().toString().equals("")){
+                     Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+
+                 }
+
                 else if (questions.getQuestion_type() == 4){
+                    //if (numericEditText.getText().toString().equals("")){
+                       // Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                   // }
+                    //else if (questions.getQuestion_type() ==4 && !questions.isIs_required()){
+                        provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), numericEditText.getText().toString());
+                   //
+                     //
+                     // }
+                }
 
-                    provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), numericEditText.getText().toString());
+                else if (questions.getQuestion_type()==4 && questions.isIs_required()){
+                     if (numericEditText.getText().toString().equals("")){
+                          Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                         // }
+                 }}
 
+                else if (questions.getQuestion_type() ==5 && questions.isIs_required()){
+                    if (dobEditText.getText().toString().equals("")){
+                        Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
 
-                }else if (questions.getQuestion_type() ==5 ){
-
+                    }
+                    //else if (!dobEditText.getText().toString().equals("")){
+                    else if (questions.getQuestion_type() ==5 && !questions.isIs_required()){
                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString());
-
+                    }
+                    //}
 
                 }
 
@@ -408,8 +447,10 @@ public class QuestionsFragment extends Fragment {
                                 String createdAt = question.has("created_at") ? question.getString("created_at") : "";
                                 int questionnaire = question.has("questionnaire") ? question.getInt("questionnaire") : 0;
                                 int createdBy = question.has("created_by") ? question.getInt("created_by") : 0;
+                                boolean is_required = question.has("is_required") ? question.getBoolean("is_required") : Boolean.parseBoolean("");
 
-                                questions = new Question(questionId,questionName,questionType,createdAt,questionnaire,createdBy);
+
+                                questions = new Question(questionId,questionName,questionType,createdAt,questionnaire,createdBy, is_required);
 
 
                                 JSONArray ans = response.getJSONArray("Ans");

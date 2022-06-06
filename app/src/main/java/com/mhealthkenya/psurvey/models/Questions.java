@@ -1,12 +1,7 @@
 package com.mhealthkenya.psurvey.models;
 
-import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
 
 
 @Entity(tableName = "Questions")
@@ -18,6 +13,7 @@ public class Questions {
     private String QuestionOrder;
     private String QuestionType;
     private int questionnaire;
+
 
 
     public Questions() {

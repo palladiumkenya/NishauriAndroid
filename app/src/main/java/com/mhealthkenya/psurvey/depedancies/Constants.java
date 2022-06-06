@@ -7,7 +7,9 @@ public class Constants {
 
     /*ENDPOINT*/
     public static String ENDPOINT = "https://psurveyapi.kenyahmis.org/";
-    //public static String ENDPOINT="https://prod.kenyahmis.org:9000/";
+    //public static String ENDPOINT="https://prod.kenyahmis.org:9100/";
+
+
 
 
 
