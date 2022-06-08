@@ -135,6 +135,11 @@
         android:name="com.mhealth.nishauri.Fragments.Chat.AppointmentSurveyFragment"
         android:label="Client Survey"
         tools:layout="@layout/fragment_appointment_survey" />
+    <activity
+        android:id="@+id/chatInterface"
+        android:name="com.mhealth.nishauri.Activities.ChatInterface"
+        android:label="activity_chat_interface"
+        tools:layout="@layout/activity_chat_interface" />
 
 
 </navigation>

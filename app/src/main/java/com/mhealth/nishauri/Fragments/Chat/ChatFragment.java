@@ -1,6 +1,7 @@
 package com.mhealth.nishauri.Fragments.Chat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.snackbar.Snackbar;
+import com.mhealth.nishauri.Activities.ChatInterface;
 import com.mhealth.nishauri.R;
 
 import butterknife.BindView;
@@ -76,8 +78,12 @@ public class ChatFragment extends Fragment {
         chat_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                NavHostFragment.findNavController(ChatFragment.this).navigate(R.id.chatInterface);
 
-                Snackbar.make(root.findViewById(R.id.frag_chat), "Chat Bot Coming Soon", Snackbar.LENGTH_LONG).show();
+                /*Intent intent = new Intent(context, ChatInterface.class);
+                startActivity(intent);*/
+
+               // Snackbar.make(root.findViewById(R.id.frag_chat), "Chat Bot Coming Soon", Snackbar.LENGTH_LONG).show();
 
 
 
