@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -96,6 +99,10 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
+                            if (!isConnected(LoginActivity.this)){
+                                //Toast.makeText(LoginActivity.this, "Please connect to internet", Toast.LENGTH_LONG).show();
+                                Snackbar.make(findViewById(R.id.login_lyt), "Please connect to internet", Snackbar.LENGTH_LONG).show();
+                            }
                             pDialog.show();
                             loginRequest();
 
@@ -233,7 +240,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         else {
 
-                            Snackbar.make(findViewById(R.id.login_lyt), "Error: " + error.getErrorCode(), Snackbar.LENGTH_LONG).show();
+                           // Snackbar.make(findViewById(R.id.login_lyt), "Error: " + error.getErrorCode(), Snackbar.LENGTH_LONG).show();
 
 
                         }
@@ -295,6 +302,21 @@ public class LoginActivity extends AppCompatActivity {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private  boolean isConnected(Context context){
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo wifiInfo = connectivityManager.getNetworkInfo(connectivityManager.TYPE_WIFI);
+        NetworkInfo mobileInfo =connectivityManager.getNetworkInfo(connectivityManager.TYPE_MOBILE);
+
+        if((wifiInfo !=null && wifiInfo.isConnected())|| (mobileInfo !=null && mobileInfo.isConnected())){
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 
 }
