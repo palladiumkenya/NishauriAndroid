@@ -103,6 +103,11 @@ public class LoginActivity extends AppCompatActivity {
                                 //Toast.makeText(LoginActivity.this, "Please connect to internet", Toast.LENGTH_LONG).show();
                                 Snackbar.make(findViewById(R.id.login_lyt), "Please connect to internet", Snackbar.LENGTH_LONG).show();
                             }
+                            if(phoneNumber.getText().toString().equals("")){
+                                Snackbar.make(findViewById(R.id.login_lyt), "Please enter phone number", Snackbar.LENGTH_LONG).show();
+                            }else if(password.getText().toString().equals("")){
+                                Snackbar.make(findViewById(R.id.login_lyt), "Please enter password", Snackbar.LENGTH_LONG).show();
+                            }
                             pDialog.show();
                             loginRequest();
 
