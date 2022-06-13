@@ -160,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginRequest() throws KeyManagementException {
-
+        //private void loginRequest() {
 
         JSONObject jsonObject = new JSONObject();
         try {
