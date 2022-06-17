@@ -174,7 +174,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
-        AndroidNetworking.initialize(getApplicationContext(), myUnsafeHttpClient());
+       // AndroidNetworking.initialize(getApplicationContext(), myUnsafeHttpClient());
         AndroidNetworking.post(Constants.ENDPOINT+Constants.LOGIN)
                 .addHeaders("Content-Type", "application.json")
                // .addHeaders("Accept", "gzip, deflate, br")
@@ -255,7 +255,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private OkHttpClient myUnsafeHttpClient() {
+    /*private OkHttpClient myUnsafeHttpClient() {
         try {
 
             // Create a trust manager that does not validate certificate chains
@@ -273,11 +273,11 @@ public class LoginActivity extends AppCompatActivity {
                             return new java.security.cert.X509Certificate[]{};
                         }
                     }
-            };
+            };*/
 
             //Using TLS 1_2 & 1_1 for HTTP/2 Server requests
             // Note : Please change accordingly
-            ConnectionSpec spec = new ConnectionSpec.Builder(ConnectionSpec.COMPATIBLE_TLS)
+          /*  ConnectionSpec spec = new ConnectionSpec.Builder(ConnectionSpec.COMPATIBLE_TLS)
                     .tlsVersions(TlsVersion.TLS_1_2, TlsVersion.TLS_1_1, TlsVersion.TLS_1_0)
                     .cipherSuites(
                             CipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
@@ -291,13 +291,13 @@ public class LoginActivity extends AppCompatActivity {
                             CipherSuite.TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,
                             CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,
                             CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA)
-                    .build();
+                    .build();*/
 
             // Install the all-trusting trust manager
-            final SSLContext sslContext = SSLContext.getInstance("SSL");
-            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+            /*final SSLContext sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());*/
             // Create an ssl socket factory with our all-trusting manager
-            final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+            /*final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
 
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             builder.sslSocketFactory(sslSocketFactory);
@@ -307,7 +307,7 @@ public class LoginActivity extends AppCompatActivity {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     private  boolean isConnected(Context context){
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

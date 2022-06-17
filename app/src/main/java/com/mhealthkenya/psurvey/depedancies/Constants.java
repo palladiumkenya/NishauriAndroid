@@ -6,8 +6,10 @@ public class Constants {
     //public static int dataID;
 
     /*ENDPOINT*/
-    public static String ENDPOINT = "https://psurveyapi.kenyahmis.org/";
+    //public static String ENDPOINT = "https://psurveyapi.kenyahmis.org/";
     //public static String ENDPOINT="https://prod.kenyahmis.org:9100/";
+    public static String ENDPOINT = "https://psurvey-api.mhealthkenya.co.ke/";
+
 
 
 
