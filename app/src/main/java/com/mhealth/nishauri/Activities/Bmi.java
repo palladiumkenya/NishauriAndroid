@@ -2,9 +2,11 @@ package com.mhealth.nishauri.Activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +32,7 @@ public class Bmi extends AppCompatActivity {
 
     private Button btn_BMI;
     private TextView bmi;
+    private Toolbar toolbar;
 
     private TextInputEditText weightE;
     private TextInputEditText heightE;
@@ -41,6 +44,21 @@ public class Bmi extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bmi);
+
+
+
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Nutrition");
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Bmi.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
        // loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 

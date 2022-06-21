@@ -9,13 +9,20 @@ import com.mhealth.nishauri.R;
 
 public class ChatInterface extends AppCompatActivity {
 
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_interface);
 
-        Toolbar toolbar = findViewById(R.id.toolbarMsg);
+        toolbar = findViewById(R.id.toolbarMsg);
 
+
+        //toolbar = findViewById(R.id.toolbar);
+        /*toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Chatbot");
+        setSupportActionBar(toolbar);*/
     }
 }
