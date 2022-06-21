@@ -140,6 +140,11 @@
         android:name="com.mhealth.nishauri.Activities.ChatInterface"
         android:label="activity_chat_interface"
         tools:layout="@layout/activity_chat_interface" />
+    <activity
+        android:id="@+id/nav_bmi"
+        android:name="com.mhealth.nishauri.Activities.Bmi"
+        android:label="activity_bmi"
+        tools:layout="@layout/activity_bmi" />
 
 
 </navigation>

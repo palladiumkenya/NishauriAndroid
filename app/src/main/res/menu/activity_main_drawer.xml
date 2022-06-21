@@ -33,6 +33,15 @@
             android:id="@+id/nav_chat"
             android:icon="@drawable/ic_chat"
             android:title="@string/chat" />
+        <item
+            android:id="@+id/nav_bmi"
+            android:icon="@drawable/ic_food"
+            android:title="Nutrition"/>
+
+        <item
+            android:id="@+id/art"
+            android:icon="@drawable/ic_art"
+            android:title="ART director"/>
 
         <item
             android:id="@+id/nav_dashboard"

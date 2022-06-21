@@ -15,6 +15,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activities.Bmi"
+            android:exported="false" />
+        <activity
             android:name=".Activities.ChatInterface"
             android:exported="false" />
         <activity android:name=".Activities.Auth.SignUpActivity" />
