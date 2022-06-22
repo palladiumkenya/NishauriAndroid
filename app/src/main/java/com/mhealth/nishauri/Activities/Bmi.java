@@ -19,6 +19,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.fxn.stash.Stash;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mhealth.nishauri.Activities.Auth.LoginActivity;
 import com.mhealth.nishauri.Models.User;
@@ -72,6 +73,13 @@ public class Bmi extends AppCompatActivity {
         btn_BMI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(weightE.getText().toString().equals("")){
+                    Snackbar.make(findViewById(R.id.bmiL), "Please enter your weight", Snackbar.LENGTH_LONG).show();
+                }else if(heightE.getText().toString().equals("")){
+                    Snackbar.make(findViewById(R.id.bmiL), "Please enter your height", Snackbar.LENGTH_LONG).show();
+                }
+
+
                 getBMI();
 
             }

@@ -497,7 +497,17 @@ public class SignUpActivity extends AppCompatActivity {
 
                         animationView.setVisibility(View.GONE);
 
-                        Snackbar.make(findViewById(R.id.signup_layout), "Error: "+error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+                       // Snackbar.make(findViewById(R.id.signup_layout), "Error: "+error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+
+                        //JSONObject jsonObject = new JSONObject();
+                        int  errors = error.getErrorCode();
+                        if (errors==400){
+                            Snackbar.make(findViewById(R.id.signup_layout), " Invalid CCC number", Snackbar.LENGTH_LONG).show();
+                        }else {
+                            Snackbar.make(findViewById(R.id.signup_layout), "Error: " + error.getErrorDetail(), Snackbar.LENGTH_LONG).show();
+                        }
+
+
                     }
                 });
 
