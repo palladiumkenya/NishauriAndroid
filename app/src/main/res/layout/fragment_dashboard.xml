@@ -491,6 +491,7 @@
                                 android:layout_height="?attr/actionBarSize"
                                 android:background="?attr/selectableItemBackgroundBorderless"
                                 android:src="@drawable/ic_error_message"
+                                android:visibility="gone"
                                 android:clickable="false"/>
 
                         </LinearLayout>
