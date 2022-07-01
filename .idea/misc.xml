@@ -7,11 +7,16 @@
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout-v21/activity_chat_interface.xml" value="0.1625" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/activity_bmi.xml" value="0.17572463768115942" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/activity_chat_interface.xml" value="0.22" />
+        <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/activity_login.xml" value="0.11684782608695653" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/activity_main.xml" value="0.17572463768115942" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/activity_sign_up.xml" value="0.16354166666666667" />
+        <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/activity_splash_screen.xml" value="0.11684782608695653" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/app_bar_main.xml" value="0.17572463768115942" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/bot_msg.xml" value="0.25" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/content_main.xml" value="0.17572463768115942" />
+        <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/dependants_home_placeholder_item.xml" value="0.17481884057971014" />
+        <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/dialog_notify_facility.xml" value="0.17481884057971014" />
+        <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/fragment_appointment_survey.xml" value="0.17481884057971014" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/fragment_appointments.xml" value="0.1" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/fragment_dashboard.xml" value="0.12291666666666666" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/fragment_eid_results.xml" value="0.1" />
@@ -19,8 +24,11 @@
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/fragment_home.xml" value="0.12291666666666666" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/fragment_lab_results.xml" value="0.1" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/fragment_passed_appointments.xml" value="0.12291666666666666" />
+        <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/fragment_previous_art.xml" value="0.17481884057971014" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/fragment_schedule_appointment.xml" value="0.12291666666666666" />
+        <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/fragment_upcoming_appointments.xml" value="0.17481884057971014" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/item_appointment_home.xml" value="0.12291666666666666" />
+        <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/item_treatment_home.xml" value="0.17481884057971014" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/user_msg.xml" value="0.25" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/menu/activity_main_drawer.xml" value="0.14375" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/menu/main.xml" value="0.18854166666666666" />

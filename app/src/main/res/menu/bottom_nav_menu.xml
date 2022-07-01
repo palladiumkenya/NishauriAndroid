@@ -17,7 +17,11 @@
         android:title="@string/appointment"
         android:icon="@drawable/ic_appointment"/>
 
-    <item android:id="@+id/nav_chat"
+    <!--<item android:id="@+id/nav_chat"
         android:title="@string/chat"
-        android:icon="@drawable/ic_chat"/>
+        android:icon="@drawable/ic_chat"/> -->
+
+    <item android:id="@+id/nav_chat"
+        android:title="Resources"
+        android:icon="@drawable/resos"/>
 </menu>
