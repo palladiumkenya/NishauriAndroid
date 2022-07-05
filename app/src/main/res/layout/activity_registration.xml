@@ -64,7 +64,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Select transaction type"/>
+                    android:text="Select client type*"/>
 
                 <Spinner
                     android:layout_width="match_parent"
@@ -109,7 +109,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/upn"
                             android:inputType="number"
-                            android:hint="CCC No"
+                            android:hint="CCC No*"
                             android:textColorHint="#000"
                             android:maxLength="5"
                             android:textSize="12dp"
@@ -146,7 +146,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/f_name"
                     android:inputType="text"
-                    android:hint="Enter  first name"
+                    android:hint="Enter  first name*"
                     android:textColorHint="#000"
                     android:maxLength="24"
                     android:textSize="12dp"
@@ -164,7 +164,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/s_name"
                     android:inputType="text"
-                    android:hint="Enter middle name"
+                    android:hint="Enter middle name*"
                     android:textColorHint="#000"
                     android:maxLength="24"
                     android:textSize="12dp"
@@ -199,7 +199,7 @@
                     android:focusable="false"
                     android:inputType="text"
                     android:textStyle="bold"
-                    android:hint="Enter client date Of birth"
+                    android:hint="Enter client date Of birth*"
                     android:textColorHint="#000"
                     android:maxLength="24"
                     android:textSize="12dp"
@@ -357,7 +357,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusable="false"
-                    android:hint="CCC enrolment date"
+                    android:hint="CCC enrolment date*"
                     android:id="@+id/enrollment_date"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -371,7 +371,7 @@
                     android:layout_height="wrap_content"
                     android:focusable="false"
                     android:visibility="gone"
-                    android:hint="Date enrolled into HIV care"
+                    android:hint="Date enrolled into HIV care*"
                     android:id="@+id/art_date"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -388,7 +388,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:hint="Enter primary phone number"
+                    android:hint="Enter primary phone number*"
                     android:fontFamily="serif"
                     android:maxLength="10"
                     android:id="@+id/phone"

@@ -33,7 +33,7 @@
                 android:id="@+id/usr_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter phone number"
+                android:hint="Enter phone number*"
                 android:maxLength="10"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:focusable="false"
             android:id="@+id/affiliationnewspinner"
-            android:hint="Select Affiliation"
+            android:hint="Select Affiliation*"
             app:drawableRightCompat="@drawable/down_arrow"
             android:layout_height="wrap_content" />
 
@@ -101,7 +101,7 @@
                 android:id="@+id/username_edt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username"
+                android:hint="Username*"
                 android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -116,7 +116,7 @@
                 android:id="@+id/password_edt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="Password*"
                 android:inputType="textWebPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -132,7 +132,7 @@
                 android:id="@+id/repassword_edt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Confirm password"
+                android:hint="Confirm password*"
                 android:inputType="textWebPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -157,7 +157,7 @@
                 android:id="@+id/securityhint_edt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Security hint"
+                android:hint="Security hint*"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -185,7 +185,7 @@
                 android:id="@+id/securityanswer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter security answer"
+                android:hint="Enter security answer*"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
