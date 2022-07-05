@@ -98,7 +98,7 @@
                     android:id="@+id/care_giver_lname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Caregiver Last Name"
+                    android:hint="Caregiver Last Name*"
                     android:inputType="text"
                     android:textColorHint="#000"
                     />
@@ -123,7 +123,7 @@
                     android:id="@+id/hei_no"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="HEI Number"
+                    android:hint="HEI Number*"
                     android:inputType="number"
                     android:textColorHint="#000" />
             </com.google.android.material.textfield.TextInputLayout>
