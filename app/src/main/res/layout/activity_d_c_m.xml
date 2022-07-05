@@ -62,7 +62,7 @@
                         android:id="@+id/mfl_code"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="MFL Code"
+                        android:hint="MFL Code*"
                         android:inputType="number"
                         android:maxLength="5"
                         android:textColorHint="#000"
@@ -78,7 +78,7 @@
                         android:id="@+id/ccc_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="CCC No"
+                        android:hint="CCC No*"
                         android:inputType="number"
                         android:maxLength="5"
                         android:textColorHint="#000"
@@ -298,7 +298,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:focusable="false"
-                        android:hint="Appointment date"
+                        android:hint="Appointment date*"
                         android:inputType="date"
                         android:maxLength="24"
                         android:textColorHint="#000"
@@ -308,7 +308,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Select appointment type" />
+                    android:text="Select appointment type*" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

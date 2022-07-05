@@ -84,7 +84,7 @@ public class DCMActivity extends AppCompatActivity {
 
 
     String[] appnment = {"Please select appointment type","Re-Fill","Clinical review","Enhanced Adherence counseling","Lab investigation","VL Booking","Other"};
-    String[] wellness = {"Please select wellness level","Well","Advanced"};
+    String[] wellness = {"Please select wellness level*","Well","Advanced"};
     String[] stability = {"Please select stability level","Stable","Unstable"};
     String[] on_dcm = {"Please select if on DSD","On DSD","NOT on DSD"};
     String[] new_continuing_dcm_choice = {"Please select if new or continuing on DSD","New On DSD","Continuing on DSD"};
