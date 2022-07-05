@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="false"
-        android:hint="Date client was visited"
+        android:hint="Date client was visited*"
         android:inputType="text"
         android:maxLength="24"
 
@@ -28,7 +28,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select if client on DSD" />
+        android:text="Select if client on DSD*" />
 
     <Spinner
         android:id="@+id/on_dsd_spinner"
@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:text="Select Outcome" />
+        android:text="Select Outcome*" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -152,14 +152,14 @@
         android:layout_height="wrap_content"
         android:inputType="text"
 
-        android:hint="Tracers name"/>
+        android:hint="Tracers name*"/>
 
     <EditText
         android:id="@+id/missedvisitTraceCost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:hint="Tracing Cost"/>
+        android:hint="Tracing Cost*"/>
 
 <LinearLayout
     android:layout_width="match_parent"
