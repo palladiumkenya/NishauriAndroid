@@ -18,11 +18,9 @@ public class ChatInterface extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbarMsg);
 
-
-        //toolbar = findViewById(R.id.toolbar);
-        /*toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Chatbot");
-        setSupportActionBar(toolbar);*/
+        setSupportActionBar(toolbar);
     }
 }
