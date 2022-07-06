@@ -72,7 +72,7 @@ public class HeiFinalOutcomeFragment extends Fragment {
 
 
     String[] young_final_outcome = {"Select final outcome","Dead","LTFU", "TO"};
-    String[] old_final_outcome = {"Select final outcome","Enroll to CCC","Discharged from PMTCT"};
+    String[] old_final_outcome = {"Select final outcome*","Enroll to CCC","Discharged from PMTCT"};
 
 
     @BindView(R.id.search_hei_no)

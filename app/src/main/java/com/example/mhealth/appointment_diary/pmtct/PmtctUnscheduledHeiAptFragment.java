@@ -59,7 +59,7 @@ public class PmtctUnscheduledHeiAptFragment extends Fragment {
     private String phone_no;
 
 
-    String[] appnment = {"Please select appointment type","Re-Fill","Clinical review","Enhanced Adherence counseling","Lab investigation","VL Booking","Other"};
+    String[] appnment = {"Please select appointment type*","Re-Fill","Clinical review","Enhanced Adherence counseling","Lab investigation","VL Booking","Other"};
 
 
 

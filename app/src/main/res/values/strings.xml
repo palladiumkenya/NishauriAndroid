@@ -55,8 +55,8 @@
     <string name="caregiver_middle_name">Caregiver Middle Name</string>
     <string name="was_pcr_taken">Was PCR taken?</string>
     <string name="select_if_to_enable_motivation">Select if to enable motivation</string>
-    <string name="enrollment_date">Enrollment date</string>
-    <string name="art_date">ART date</string>
+    <string name="enrollment_date">Enrollment date*</string>
+    <string name="art_date">ART date*</string>
     <string name="clinic_number">Clinic Number</string>
     <string name="client_status">Client Status</string>
     <string name="file_number">File Number</string>

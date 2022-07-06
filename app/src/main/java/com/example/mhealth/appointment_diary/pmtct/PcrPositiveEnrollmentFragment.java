@@ -83,7 +83,7 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
 
 
     String[] yes_no = {"Enable motivation?","YES","NO"};
-    String[] client_status = {"Client status","ART","On Care","Pre-ART"};
+    String[] client_status = {"Client status*","ART","On Care","Pre-ART"};
 
 
     @BindView(R.id.search_hei_no)
