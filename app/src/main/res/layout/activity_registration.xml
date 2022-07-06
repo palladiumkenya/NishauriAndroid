@@ -92,7 +92,7 @@
                             android:id="@+id/ccc"
                             android:inputType="number"
 
-                            android:hint="MFL code"
+                            android:hint="MFL code*"
                             android:textColorHint="#000"
                             android:maxLength="5"
                             android:textSize="12dp"

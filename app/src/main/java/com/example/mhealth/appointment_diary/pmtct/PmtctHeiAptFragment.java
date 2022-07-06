@@ -60,8 +60,8 @@ public class PmtctHeiAptFragment extends Fragment {
     private String phone_no;
 
 
-    String[] appnment = {"Please select appointment type","Re-Fill","Clinical review","Enhanced Adherence counseling","Lab investigation","VL Booking","Other","PCR"};
-    String[] pcr_taken = {"Has PCR been taken?","YES","NO"};
+    String[] appnment = {"Please select appointment type*","Re-Fill","Clinical review","Enhanced Adherence counseling","Lab investigation","VL Booking","Other","PCR"};
+    String[] pcr_taken = {"Has PCR been taken?*","YES","NO"};
 
 
 

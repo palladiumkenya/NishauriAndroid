@@ -76,7 +76,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     String[] schoolOp = {"Are you in school", "Yes", "No"};
     String[] weeklymotivation = {"Enable weekly motivation alerts", "Yes", "No"};
     String[] msgtime = {"Please select preffered messaging time", "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "22:00", "23:00"};
-    String[] pntstatus = {"Please select transaction type", "New", "Update", "Transfer Client In (This module allows transfer in of a client from a facility without ushauri system)"};
+    String[] pntstatus = {"Please select client type", "New", "Update", "Transfer Client In (This module allows transfer in of a client from a facility without ushauri system)"};
     String[] statuss = {"Please Select Status*", "Active", "Disabled", "Deceased","Transfer Out"};
     String[] statussnew = {"Please Select Status", "Active"};
 
