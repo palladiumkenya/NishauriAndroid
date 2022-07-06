@@ -71,7 +71,7 @@ public class PmtctRegistrationFragment extends Fragment {
 
 
     String[] gender_list = {"Please select gender","Female","Male"};
-    String[] yes_no = {"Type of caregiver","Breastfeeding - Yes","Breastfeeding - No", "Pregnant"};
+    String[] yes_no = {"Type of caregiver","Breastfeeding - Yes","Breastfeeding - No", "Pregnant", "Not applicable" };
 
 
     private String BREASTFEEDING = "";
@@ -239,7 +239,13 @@ public class PmtctRegistrationFragment extends Fragment {
                 }else if (BREASTFEEDING.equals("Pregnant")){
                     btn_submit_no_hei.setVisibility(View.VISIBLE);
                     register_layout.setVisibility(View.GONE);
-                }else {
+                }else if (BREASTFEEDING.equals("Not applicable")){
+
+                    register_layout.setVisibility(View.VISIBLE);
+                    btn_submit_no_hei.setVisibility(View.GONE);
+                }
+
+                else {
                     btn_submit_no_hei.setVisibility(View.GONE);
                     register_layout.setVisibility(View.GONE);
                 }
