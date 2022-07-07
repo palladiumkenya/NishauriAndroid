@@ -136,9 +136,9 @@
         android:label="Client Survey"
         tools:layout="@layout/fragment_appointment_survey" />
     <activity
-        android:id="@+id/chatInterface"
+        android:id="@+id/nav_interface"
         android:name="com.mhealth.nishauri.Activities.ChatInterface"
-        android:label="activity_chat_interface"
+        android:label="Chat Bot"
         tools:layout="@layout/activity_chat_interface" />
     <activity
         android:id="@+id/nav_bmi"

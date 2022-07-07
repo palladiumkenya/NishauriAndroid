@@ -78,10 +78,7 @@ public class ChatFragment extends Fragment {
         chat_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // NavHostFragment.findNavController(ChatFragment.this).navigate(R.id.chatInterface);
-
-                Intent intent = new Intent(context, ChatInterface.class);
-                startActivity(intent);
+                NavHostFragment.findNavController(ChatFragment.this).navigate(R.id.nav_interface);
 
                 //Snackbar.make(root.findViewById(R.id.frag_chat), "Chat Bot Coming Soon", Snackbar.LENGTH_LONG).show();
 

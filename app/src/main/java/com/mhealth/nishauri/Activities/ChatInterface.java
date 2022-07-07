@@ -2,7 +2,9 @@ package com.mhealth.nishauri.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.fragment.NavHostFragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -28,7 +30,8 @@ public class ChatInterface extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(ChatInterface.this, ChatFragment.class);
+
+                Intent intent1 = new Intent(ChatInterface.this, MainActivity.class);
                 startActivity(intent1);
             }
         });
