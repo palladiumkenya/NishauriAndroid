@@ -73,6 +73,8 @@ dependencies {
 
     implementation 'com.airbnb.android:lottie:3.4.4'
 
+    implementation 'io.github.chaosleung:pinview:1.4.4'
+
     //Kommunicate sdk
         //implementation 'io.kommunicate.sdk:kommunicateui:2.4.1'
 
