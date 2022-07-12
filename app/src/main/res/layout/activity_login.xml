@@ -68,8 +68,8 @@
                         android:layout_marginTop="@dimen/spacing_middle"
                         android:text="The start of awesomeness"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                        android:textColor="@color/black_darker"
-                        android:textStyle="bold" />
+                        android:textSize="15sp"
+                        />
 
 
                     <!--  username -->
@@ -196,6 +196,7 @@
                         android:textAllCaps="true"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
+                        android:visibility="gone"
                         android:onClick="gotoHome" />
 
                     <LinearLayout
@@ -234,6 +235,18 @@
                                 android:textStyle="bold" />
 
                     </LinearLayout>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:fadingEdge="horizontal"
+                        android:text="Register"
+                        android:textSize="@dimen/spacing_mlarge"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+
+                        android:onClick="gotoHome" />
 
                 </LinearLayout>
 

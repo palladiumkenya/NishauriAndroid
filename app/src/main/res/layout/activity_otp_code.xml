@@ -68,6 +68,7 @@
                         android:layout_marginBottom="@dimen/spacing_xlarge"
                         android:layout_marginTop="@dimen/spacing_middle"
                         android:text="The start of awesomeness"
+                        android:visibility="gone"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                         android:textColor="@color/black_darker"
                         android:textStyle="bold" />
@@ -76,12 +77,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="@dimen/spacing_xlarge"
+                        android:layout_marginBottom="20dp"
                         android:layout_marginTop="5dp"
+                        android:textSize="15sp"
                         android:text="Please confirm your phone number by entering the code sent in your message app"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                         android:textColor="@color/black_darker"
-                        android:textStyle="bold" />
+                        />
 
                     <com.chaos.view.PinView
                         android:layout_width="match_parent"
@@ -90,31 +92,32 @@
                         android:cursorVisible="true"
                         android:inputType="number"
                         android:layout_gravity="center_horizontal"
-
+                        android:layout_marginLeft="20dp"
                         />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="@dimen/spacing_xlarge"
+                        android:layout_marginLeft="30dp"
+
                         android:layout_marginTop="5dp"
                         android:text="0:30 seconds"
+                        android:textSize="15sp"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                         android:textColor="@color/black_darker"
-                        android:textStyle="bold" />
+                         />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="@dimen/spacing_xlarge"
-                        android:layout_marginTop="1dp"
+                        android:layout_marginLeft="30dp"
+                        android:textSize="15sp"
                         android:text="Resend code"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                         android:textColor="@color/black_darker"
-                        android:textStyle="bold" />
-
+                         />
 
 
 
@@ -139,7 +142,7 @@
                         android:fadingEdge="horizontal"
                         android:text="Confirm number"
                         android:textSize="@dimen/spacing_mlarge"
-                        android:textAllCaps="true"
+                        android:textAllCaps="false"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
                         android:onClick="gotoHome" />
@@ -168,16 +171,6 @@
                             android:text="privacy, terms and conditions "
                             android:textColor="@color/colorPrimary" />
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/txt_sign_up"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:text="Sign Up"
-                            android:visibility="gone"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/colorPrimary"
-                            android:textStyle="bold" />
 
                     </LinearLayout>
 
