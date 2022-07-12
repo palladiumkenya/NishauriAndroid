@@ -22,5 +22,7 @@ public class ChatInterface extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Chatbot");
         setSupportActionBar(toolbar);
+
+
     }
 }

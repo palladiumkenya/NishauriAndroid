@@ -57,9 +57,14 @@ public class LoginActivity extends AppCompatActivity {
         Stash.init(this);
         setContentView(R.layout.activity_login);
 
-        toolbar = findViewById(R.id.toolbar);
+      /*  toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Sign In");
+        setSupportActionBar(toolbar);*/
+
+        toolbar = findViewById(R.id.toolbar);
+        //toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Nishauri");
 
 //        initialization of components
         btn_login = findViewById(R.id.btn_login);
