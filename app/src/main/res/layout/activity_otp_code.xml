@@ -85,15 +85,83 @@
                         android:textColor="@color/black_darker"
                         />
 
-                    <com.chaos.view.PinView
+                    <LinearLayout
+                        android:id="@+id/linearLayout3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:pinLength ="6"
-                        android:cursorVisible="true"
-                        android:inputType="number"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="20dp"
-                        />
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        >
+
+                        <EditText
+                            android:id="@+id/otp_edit_text1"
+                            android:layout_width="@dimen/et_otp_width"
+                            android:layout_height="@dimen/et_otp_height"
+                            android:layout_marginEnd="@dimen/margin_right_otp"
+                            android:background="@drawable/otp_edittext"
+                            android:inputType="number"
+                            android:maxLength="1"
+                            android:textAlignment="center"
+                            android:textColor="@color/trueBlack" />
+
+                        <EditText
+                            android:id="@+id/otp_edit_text2"
+                            android:layout_width="@dimen/et_otp_width"
+                            android:layout_height="@dimen/et_otp_height"
+                            android:layout_marginEnd="@dimen/margin_right_otp"
+                            android:background="@drawable/otp_edittext"
+                            android:inputType="number"
+                            android:maxLength="1"
+                            android:textAlignment="center"
+                            android:textColor="@color/trueBlack" />
+
+                        <EditText
+                            android:id="@+id/otp_edit_text3"
+                            android:layout_width="@dimen/et_otp_width"
+                            android:layout_height="@dimen/et_otp_height"
+                            android:layout_marginEnd="@dimen/margin_right_otp"
+                            android:background="@drawable/otp_edittext"
+                            android:inputType="number"
+                            android:maxLength="1"
+                            android:textAlignment="center"
+                            android:textColor="@color/trueBlack" />
+
+                        <EditText
+                            android:id="@+id/otp_edit_text4"
+                            android:layout_width="@dimen/et_otp_width"
+                            android:layout_height="@dimen/et_otp_height"
+                            android:layout_marginEnd="@dimen/margin_right_otp"
+                            android:background="@drawable/otp_edittext"
+                            android:imeOptions="actionDone"
+                            android:inputType="number"
+                            android:maxLength="1"
+                            android:textAlignment="center"
+                            android:textColor="@color/trueBlack" />
+
+                        <EditText
+                            android:id="@+id/otp_edit_text5"
+                            android:layout_width="@dimen/et_otp_width"
+                            android:layout_height="@dimen/et_otp_height"
+                            android:layout_marginEnd="@dimen/margin_right_otp"
+                            android:background="@drawable/otp_edittext"
+                            android:imeOptions="actionDone"
+                            android:inputType="number"
+                            android:maxLength="1"
+                            android:textAlignment="center"
+                            android:textColor="@color/trueBlack" />
+
+                        <EditText
+                            android:id="@+id/otp_edit_text6"
+                            android:layout_width="@dimen/et_otp_width"
+                            android:layout_height="@dimen/et_otp_height"
+                            android:background="@drawable/otp_edittext"
+                            android:imeOptions="actionDone"
+                            android:inputType="number"
+                            android:maxLength="1"
+                            android:textAlignment="center"
+                            android:textColor="@color/trueBlack" />
+                    </LinearLayout>
+
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
