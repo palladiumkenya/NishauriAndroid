@@ -26,7 +26,8 @@ import java.util.Objects;
 
 public class ClinicMovement extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
 
-    String[] Apptype={"Select Clinic*","PSC","PMTCT", "Adolescent Clinic","TB-HIV"};
+    String[] Apptype={"","PSC","PMTCT", "Adolescent Clinic","TB-HIV"};
+    //Select Clinic*
     Spinner clinicSpinner;
     String selectedClinic;
     EditText transmflE,transupnE;
