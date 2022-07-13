@@ -54,8 +54,10 @@ public class Appointment extends AppCompatActivity implements AdapterView.OnItem
     AccessServer acs;
     SendMessage sm;
 
-    String[] appnment = {"Please select appointment type","Re-Fill","Clinical review","Enhanced Adherence counseling","Lab investigation","VL Booking","Other"};
-    String[] previous = {"Was previous appointment kept","Yes","No","Not Applicable"};
+    String[] appnment = {"","Re-Fill","Clinical review","Enhanced Adherence counseling","Lab investigation","VL Booking","Other"};
+    //Please select appointment type
+    String[] previous = {"","Yes","No","Not Applicable"};
+   // Was previous appointment kept
 
 
     EditText cccE,upnE,adateE,aotherE;
