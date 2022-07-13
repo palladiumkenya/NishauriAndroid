@@ -574,15 +574,15 @@ public class LosttoFollowAdapter extends BaseAdapter implements Filterable {
 //                    String[] finaloutcome={"Select final outcome","client declined care","rescheduling","Client Returned To Care","Self Transfer","Dead","Challenging Client","Client Too Sick To Attend Appointment","Other"};
                     String[] newapptype={"Select new appointment type","Refill","Clinical review","Enhanced Adherance Counselling","Lab investigation","VL Booking","Other"};
 
-                    final String[] outcome={"Select outcome","Client contacted after lost to follow up","Client not contacted after lost to follow up","Informant contacted after lost to follow up", "Informant not contacted after lost to follow up"};
+                    final String[] outcome={"Select outcome","Client contacted","Client not contacted","Informant contacted ", "Informant not contacted"};
 
-                    String[] finaloutcome={"Select final outcome","client declined care after lost to follow up","Client Returned To Care after lost to follow up","Self Transfer after lost to follow up","Dead after lost to follow up","Other"};
+                    String[] finaloutcome={"Select final outcome","client declined care ","Client Returned To Care","Self Transfer","Dead after","Other"};
 
 
-                    String[] finalclientoutcome={"Select final outcome","client declined care after lost to follow up","Client Returned To Care after lost to follow up","Self Transfer after lost to follow up","Other"};
+                    String[] finalclientoutcome={"Select final outcome","client declined care","Client Returned To Care","Self Transfer","Other"};
 
 //
-                    String[] finalinformantoutcome={"Select final outcome","client declined care after lost to follow up","Client Returned To Care after lost to follow up","Self Transfer after lost to follow up","Dead after lost to follow up","Other"};
+                    String[] finalinformantoutcome={"Select final outcome","client declined care","Client Returned To Care","Self Transfer","Dead ","Other"};
 
 
                     final ArrayAdapter<String> adapter = new ArrayAdapter<String>(v.getContext() , android.R.layout.simple_spinner_dropdown_item,outcome);

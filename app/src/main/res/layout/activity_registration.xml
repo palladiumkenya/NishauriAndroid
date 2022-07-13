@@ -52,8 +52,6 @@
             android:layout_height="match_parent"
             >
 
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
@@ -61,17 +59,23 @@
                 android:id="@+id/mydetailsll"
                 android:layout_height="wrap_content">
 
+
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
+                    android:textStyle="bold"
                     android:text="Select client type*"/>
 
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_marginTop="10sp"
+
                     android:id="@+id/Patientstatus_spinner"
                     android:layout_marginBottom="5sp"
                     android:layout_height="wrap_content"/>
+
 
 
                 <LinearLayout
@@ -292,7 +296,9 @@
                 android:id="@+id/textView11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select sex" />
+                android:textStyle="bold"
+
+                android:text="Select sex*" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -311,6 +317,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="Select marital status"/>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -330,7 +337,8 @@
                 android:id="@+id/textView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select patient condition" />
+                android:textStyle="bold"
+                android:text="Select patient condition*" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -448,7 +456,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enable SMS"/>
+                android:textStyle="bold"
+                android:text="Enable SMS*"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
@@ -467,6 +476,7 @@
                 <Spinner
                     android:layout_width="match_parent"
                     android:id="@+id/sms_spinner"
+
                     android:layout_height="wrap_content"/>
             </LinearLayout>
 
@@ -482,6 +492,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     android:text="Select language"/>
 
 
@@ -509,7 +520,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Select preferred messaging time"/>
+                    android:textStyle="bold"
+                    android:text="Select preferred messaging time*"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -535,6 +547,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="Select motivational alerts"/>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -565,7 +578,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select status"/>
+                android:textStyle="bold"
+                android:text="Select status*"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
@@ -600,6 +614,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
                         android:text="Select Grouping*"/>
 
                     <!--<TextView-->

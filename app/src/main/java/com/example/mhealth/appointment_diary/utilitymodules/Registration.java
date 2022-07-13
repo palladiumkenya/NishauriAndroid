@@ -62,25 +62,39 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     AccessServer acs;
     SendMessage sm;
 
-    String[] genders = {"Please Select Gender*", "Female", "Male"};
+    String[] genders = {"", "Female", "Male"};
+   // Please Select Gender*
 
-    String[] newgroupings = {"Please Select Grouping", "Adolescent","PMTCT","TB","Adults","Peads","TB-HIV","HEI"};
-    String[] gendersUcsf = {"Please Select Sex", "Female", "Male"};
-    String[] maritals = {"Please Select Marital Status*", "Single", "Married Monogomaus", "Married Polygamous", "Divorced", "Widowed", "Cohabiting", "Not Applicable"};
-    String[] maritalsInfants = {"Please Select Marital Status", "Single","Not Applicable"};
-    String[] conditions = {"Please Select Condition*", "ART", "Pre-Art"};
-    String[] groups = {"Please Select Grouping", "peads", "adolescents", "PMTCT", "ART", "High VL (Suppressed & non suppressant)"};
-    String[] languages = {"Please Select Language", "Swahili", "English"};
-    String[] smss = {"Enable Sms*", "Yes", "No"};
-    String[] orphanOp = {"Are you an Orphan", "Yes", "No"};
-    String[] schoolOp = {"Are you in school", "Yes", "No"};
+    String[] newgroupings = {"", "Adolescent","PMTCT","TB","Adults","Peads","TB-HIV","HEI"};
+    //Please Select Grouping
+    String[] gendersUcsf = {"", "Female", "Male"};
+    //Please Select Sex
+    String[] maritals = {"", "Single", "Married Monogomaus", "Married Polygamous", "Divorced", "Widowed", "Cohabiting", "Not Applicable"};
+    //Please Select Marital Status*
+    String[] maritalsInfants = {"", "Single","Not Applicable"};
+    //Please Select Marital Status
+    String[] conditions = {"", "ART", "Pre-Art"};
+   // Please Select Condition*
+    String[] groups = {"", "peads", "adolescents", "PMTCT", "ART", "High VL (Suppressed & non suppressant)"};
+    //Please Select Grouping
+    String[] languages = {"", "Swahili", "English"};
+    //Please Select Language
+    String[] smss = {"", "Yes", "No"};
+   // "Enable Sms*",
+    String[] orphanOp = {"", "Yes", "No"};
+    //Are you an Orphan
+    String[] schoolOp = {"", "Yes", "No"};
+    //Are you in school
     String[] weeklymotivation = {"Enable weekly motivation alerts", "Yes", "No"};
     String[] msgtime = {"Please select preffered messaging time", "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "22:00", "23:00"};
-    String[] pntstatus = {"Please select client type", "New", "Update", "Transfer Client In (This module allows transfer in of a client from a facility without ushauri system)"};
-    String[] statuss = {"Please Select Status*", "Active", "Disabled", "Deceased","Transfer Out"};
-    String[] statussnew = {"Please Select Status", "Active"};
+    String[] pntstatus = {"", "New client", "Update client", "Transfer Client In (Transfer in of a client from a facility without ushauri system)"};
+    //Enable Sms
+    String[] statuss = {"", "Active", "Disabled", "Deceased","Transfer Out"};
+    //Please Select Status*
+    String[] statussnew = {"", "Active"};
+    //Please Select Status
 
-
+//"Please select client type"
     String counter;
 
     @Override
@@ -1227,7 +1241,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
             if (patientStatus_code.contentEquals("0")) {
 
-                Toast.makeText(this, "Please Select transaction type", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please Select client type", Toast.LENGTH_SHORT).show();
 
 
             } else if (cccS.trim().isEmpty()) {
