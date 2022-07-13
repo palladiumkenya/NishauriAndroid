@@ -137,7 +137,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select Appointment type"/>
+                android:textStyle="bold"
+                android:text="Select Appointment type*"/>
 
             <Spinner
                 android:layout_width="match_parent"

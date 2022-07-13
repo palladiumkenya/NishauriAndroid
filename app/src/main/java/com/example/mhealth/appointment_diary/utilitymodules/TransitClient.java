@@ -27,7 +27,8 @@ import java.util.List;
 public class TransitClient extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 //    String[] Apptype = {"Select Appointment Type", "Re-Fill", "Clinical review", "Enhanced adherence counseling", "Lab investigation","VL Booking", "Other"};
-    String[] Apptype = {"Select appointment type*", "Re-Fill"};
+    String[] Apptype = {"", "Re-Fill"};
+    //Select appointment type*
 
     Spinner apptypeSpinner;
     String selectedApptype;
