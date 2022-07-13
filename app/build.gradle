@@ -2,13 +2,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
     buildToolsVersion '30.0.3'
     defaultConfig {
 
         applicationId "com.mhealth.ushauriv2"
         minSdkVersion 16
-        targetSdkVersion 31 //should be 29 but this is a hack for defaulter diary
+        targetSdkVersion 32 //should be 29 but this is a hack for defaulter diary
         versionCode 42
         versionName "3.1.8"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
