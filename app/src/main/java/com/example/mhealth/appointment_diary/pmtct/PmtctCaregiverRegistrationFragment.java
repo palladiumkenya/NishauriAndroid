@@ -59,7 +59,8 @@ public class PmtctCaregiverRegistrationFragment extends Fragment {
     private String phone_no;
 
 
-    String[] gender_list = {"Please select gender","Female","Male"};
+    String[] gender_list = {"","Female","Male"};
+    //Please select gender
 
 
     private String HEI_GENDER = "";

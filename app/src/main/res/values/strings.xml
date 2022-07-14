@@ -49,7 +49,7 @@
     <string name="hei_required">HEI number is required</string>
     <string name="hei_details">HEI details</string>
     <string name="guardian_details">Caregiver Details</string>
-    <string name="phone_number">Phone Number</string>
+    <string name="phone_number">Phone Number*</string>
     <string name="caregiver_gender">Caregiver Gender*</string>
     <string name="caregiver_first_name">Caregiver First Name*</string>
     <string name="caregiver_middle_name">Caregiver Middle Name</string>

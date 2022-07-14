@@ -47,6 +47,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     android:text="@string/caregiver_gender" />
 
                 <Spinner
@@ -138,6 +139,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     android:text="@string/select_gender" />
 
                 <Spinner
