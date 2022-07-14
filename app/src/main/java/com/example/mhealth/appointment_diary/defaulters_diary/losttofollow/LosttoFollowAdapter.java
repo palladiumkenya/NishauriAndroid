@@ -574,8 +574,8 @@ public class LosttoFollowAdapter extends BaseAdapter implements Filterable {
 //                    String[] finaloutcome={"Select final outcome","client declined care","rescheduling","Client Returned To Care","Self Transfer","Dead","Challenging Client","Client Too Sick To Attend Appointment","Other"};
                     String[] newapptype={"Select new appointment type","Refill","Clinical review","Enhanced Adherance Counselling","Lab investigation","VL Booking","Other"};
 
-                    final String[] outcome={"Select outcome","Client contacted","Client not contacted","Informant contacted ", "Informant not contacted"};
-
+                    final String[] outcome={"","Client contacted","Client not contacted","Informant contacted ", "Informant not contacted"};
+                    //Select outcome
                     String[] finaloutcome={"Select final outcome","client declined care ","Client Returned To Care","Self Transfer","Dead after","Other"};
 
 
@@ -598,7 +598,8 @@ public class LosttoFollowAdapter extends BaseAdapter implements Filterable {
                     newapptypespinner.setAdapter(adapter3);
 
 
-                    String[] onDsdString={"Is the client on DSD or not?","On DSD","NOT on DSD"};
+                    String[] onDsdString={"","On DSD","NOT on DSD"};
+                   // Is the client on DSD or not?
 
 
                     final ArrayAdapter<String> dsdAdapter = new ArrayAdapter<String>(v.getContext() , android.R.layout.simple_spinner_dropdown_item,onDsdString);

@@ -606,15 +606,15 @@ public class MissedVisitAdapter extends BaseAdapter implements Filterable {
                         final TextView myapp = (TextView) dialog.findViewById(R.id.missedvisitnewapptypetextview);
 
 
-                        String[] onDsdString={"Is the client on DSD or not?","On DSD","NOT on DSD"};
-
+                        String[] onDsdString={"","On DSD","NOT on DSD"};
+//Is the client on DSD or not?
 
 //                    final String[] outcome={"Select outcome","Client contacted","Client not contacted","client found", "client not found", "client declined care", "rescheduling", "other"};
 //                    String[] finaloutcome={"Select final outcome","client declined care","rescheduling","Client Returned To Care","Self Transfer","Dead","Challenging Client","Client Too Sick To Attend Appointment","Other"};
                         String[] newapptype = {"Select new appointment type", "Refill", "Clinical review", "Enhanced Adherance", "Lab investigation","VL Booking","Other"};
 
-                        final String[] outcome = {"Select outcome", "Client contacted", "Client not contacted", "Informant contacted", "Informant not contacted"};
-
+                        final String[] outcome = {"", "Client contacted", "Client not contacted", "Informant contacted", "Informant not contacted"};
+                        //Select outcome
                         String[] finaloutcome={"Select final outcome","client declined care","Client Returned To Care","Self Transfer","Dead","Other"};
 
 
