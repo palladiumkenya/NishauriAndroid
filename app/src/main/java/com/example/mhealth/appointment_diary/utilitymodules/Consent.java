@@ -51,8 +51,10 @@ public class Consent extends AppCompatActivity implements AdapterView.OnItemSele
     Spinner languageS, weeklyS;
     String language_code, weekly_code;
 
-    String[] languages = {"Please Select Language*", "Swahili", "English"};
-    String[] weeklys = {"Enable weekly motivational alerts*", "Yes", "No"};
+    String[] languages = {"", "Swahili", "English"};
+    //Please Select Language*
+    String[] weeklys = {"", "Yes", "No"};
+    //Enable weekly motivational alerts*
 
 
     @Override
