@@ -60,8 +60,10 @@ public class PmtctHeiAptFragment extends Fragment {
     private String phone_no;
 
 
-    String[] appnment = {"Please select appointment type*","Re-Fill","Clinical review","Enhanced Adherence counseling","Lab investigation","VL Booking","Other","PCR"};
-    String[] pcr_taken = {"Has PCR been taken?*","YES","NO"};
+    String[] appnment = {"","Re-Fill","Clinical review","Enhanced Adherence counseling","Lab investigation","VL Booking","Other","PCR"};
+    //Please select appointment type
+    String[] pcr_taken = {"","YES","NO"};
+    //Has PCR been taken?*
 
 
 
@@ -261,14 +263,16 @@ public class PmtctHeiAptFragment extends Fragment {
             return valid;
         }
 
-        if (APT_TYPE.equals("") || APT_TYPE.equals("Please select appointment type")) {
+        //if (APT_TYPE.equals("") || APT_TYPE.equals("Please select appointment type")) {
+            if (APT_TYPE.equals("") || APT_TYPE.contentEquals("0")) {
             ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select appointment type",context);
             bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
             valid = false;
             return valid;
         }
 
-        if (PCR_TAKEN.equals("") || PCR_TAKEN.equals("Has PCR been taken?")) {
+           //if (PCR_TAKEN.equals("") || PCR_TAKEN.equals("Has PCR been taken?")) {
+            if (PCR_TAKEN.equals("") || PCR_TAKEN.contentEquals("0")) {
             ErrorMessage bottomSheetFragment = ErrorMessage.newInstance("Validation error","Please select if PCR was taken",context);
             bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
             valid = false;
