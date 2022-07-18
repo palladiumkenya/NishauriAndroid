@@ -196,7 +196,8 @@ public class ScheduleAppointmentFragment extends Fragment {
             return valid;
         }
 
-        if(reason_spinner.getSelectedItem().toString().equals("Pick a reason here…"))
+        //if(reason_spinner.getSelectedItem().toString().equals("Pick a reason here…"))
+            if(reason_spinner.getSelectedItem().toString().equals(""))
         {
             Snackbar.make(root.findViewById(R.id.frag_schedule_appointment), "Please select a reason for the appointment.", Snackbar.LENGTH_LONG).show();
             valid = false;

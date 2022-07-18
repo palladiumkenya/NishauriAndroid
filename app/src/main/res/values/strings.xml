@@ -39,7 +39,8 @@
 
     <!--    spinner choices-->
     <string-array name="security_question">
-        <item> Select your security question.</item>
+        <!--<item> Select your security question.</item>-->
+        <item>""</item>
         <item> What is your favorite song?</item>
         <item> What was the name of your first pet?</item>
         <item> What is the name of your favourite movie?</item>
@@ -54,7 +55,8 @@
     </string-array>
 
     <string-array name="schedule_reason">
-        <item> Pick a reason here…</item>
+       <!-- <item> Pick a reason here…</item>-->
+        <item>""</item>
         <item> Re-Fill</item>
         <item> Clinical Review</item>
         <item> Enhanced Adherence</item>
