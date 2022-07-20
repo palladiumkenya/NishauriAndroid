@@ -20,6 +20,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.os.SystemClock;
 import android.telephony.SmsManager;
@@ -531,12 +532,33 @@ public class FetchAppointment extends AppCompatActivity implements SmsReceiver.M
 
 
         Intent alarm = new Intent(FetchAppointment.this, SmsReceiver.class);
-        boolean alarmRunning = (PendingIntent.getBroadcast(FetchAppointment.this, 0, alarm, PendingIntent.FLAG_NO_CREATE) != null);
+
+      Handler handler = new Handler();
+        Runnable r = new Runnable() {
+            public void run() {
+                //tv.append("Hello World");
+
+                boolean alarmRunning = false;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                    alarmRunning = (PendingIntent.getBroadcast(FetchAppointment.this, 0, alarm, PendingIntent.FLAG_IMMUTABLE) != null);
+                }
+                //boolean alarmRunning = (PendingIntent.getBroadcast(FetchAppointment.this, 0, alarm, PendingIntent.FLAG_NO_CREATE) != null);
+
+                if (alarmRunning == false) {
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(FetchAppointment.this, 0, alarm, 0);
+                    AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                    alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), 5000, pendingIntent);
+                }
+            }
+        };
+        handler.postDelayed(r, 100);
+
+       /* boolean alarmRunning = (PendingIntent.getBroadcast(FetchAppointment.this, 0, alarm, PendingIntent.FLAG_NO_CREATE) != null);
         if (alarmRunning == false) {
             PendingIntent pendingIntent = PendingIntent.getBroadcast(FetchAppointment.this, 0, alarm, 0);
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), 5000, pendingIntent);
-        }
+        }*/
 
         //background code
 

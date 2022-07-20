@@ -493,7 +493,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:text="Select language"/>
+                    android:text="Select language*"/>
 
 
                 <LinearLayout
@@ -548,7 +548,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="Select motivational alerts"/>
+                android:text="Select motivational alerts*"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
@@ -615,7 +615,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:text="Select Grouping*"/>
+                        android:text="Select grouping*"/>
 
                     <!--<TextView-->
                     <!--android:layout_width="wrap_content"-->

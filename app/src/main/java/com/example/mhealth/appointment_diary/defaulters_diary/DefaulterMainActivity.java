@@ -458,7 +458,7 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
 
 
         Intent alarm = new Intent(DefaulterMainActivity.this, SmsReceiver.class);
-        boolean alarmRunning = (PendingIntent.getBroadcast(DefaulterMainActivity.this, 0, alarm, PendingIntent.FLAG_NO_CREATE) != null);
+        boolean alarmRunning = (PendingIntent.getBroadcast(DefaulterMainActivity.this, 0, alarm, PendingIntent.FLAG_IMMUTABLE) != null);
         if (!alarmRunning) {
             PendingIntent pendingIntent = PendingIntent.getBroadcast(DefaulterMainActivity.this, 0, alarm, 0);
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);

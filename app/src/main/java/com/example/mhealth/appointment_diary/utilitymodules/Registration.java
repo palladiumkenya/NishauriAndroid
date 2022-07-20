@@ -85,8 +85,10 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     //Are you an Orphan
     String[] schoolOp = {"", "Yes", "No"};
     //Are you in school
-    String[] weeklymotivation = {"Enable weekly motivation alerts", "Yes", "No"};
-    String[] msgtime = {"Please select preffered messaging time", "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "22:00", "23:00"};
+    String[] weeklymotivation = {"", "Yes", "No"};
+   // Enable weekly motivation alerts
+    String[] msgtime = {"", "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "22:00", "23:00"};
+    //Please select preffered messaging time
     String[] pntstatus = {"", "New client", "Update client", "Transfer Client In (Transfer in of a client from a facility without ushauri system)"};
     //Enable Sms
     String[] statuss = {"", "Active", "Disabled", "Deceased","Transfer Out"};
@@ -754,7 +756,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     public void actOnSelected() {
 
 //        Toast.makeText(this, "you selected "+selected_item+"the behind scene value is "+myselected, Toast.LENGTH_SHORT).show();
-//        Toast.makeText(this, "you selected "+selected_item2+"the behind scene value is "+myselected2, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "you selected "+sel ected_item2+"the behind scene value is "+myselected2, Toast.LENGTH_SHORT).show();
     }
 
     public void populategrouping() {

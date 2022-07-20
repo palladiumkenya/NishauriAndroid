@@ -2,15 +2,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
     buildToolsVersion '30.0.3'
     defaultConfig {
 
         applicationId "com.mhealth.ushauriv2"
         minSdkVersion 16
-        targetSdkVersion 32 //should be 29 but this is a hack for defaulter diary
+        targetSdkVersion 33
         versionCode 42
-        versionName "3.1.8"
+       // versionName "3.1.8"
+        versionName "4.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
@@ -59,11 +60,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     //noinspection GradleCompatible
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.intuit.sdp:sdp-android:1.0.4'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
     implementation 'com.github.satyan:sugar:1.5'
     implementation 'com.github.mHealthKenya:SegmentedButton:v2.0.2'
@@ -82,10 +83,10 @@ dependencies {
    // removed
     implementation 'com.github.d-max:spots-dialog:0.7@aar'
     //    start sms retriever api implementation
-    implementation 'com.google.android.gms:play-services-base:18.0.1'
-    implementation 'com.google.android.gms:play-services-identity:18.0.0'
-    implementation 'com.google.android.gms:play-services-auth:20.0.0'
-    implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.0'
+    implementation 'com.google.android.gms:play-services-base:18.1.0'
+    implementation 'com.google.android.gms:play-services-identity:18.0.1'
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.1'
     //    end sms retriever api implementation
    // implementation 'org.jetbrains.kotlin:kotlin-stdlib-jre7:1.4.10'
 
@@ -98,11 +99,13 @@ dependencies {
 
     //implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10"
 
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
 
 
     implementation 'com.mikhaellopez:circularimageview:3.2.0'          // circle image view
+
+    implementation 'androidx.work:work-runtime:2.8.0-alpha02'
 
 
 
