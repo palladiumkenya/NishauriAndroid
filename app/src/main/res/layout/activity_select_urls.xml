@@ -5,16 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:background="#FFFFFF"
-
     tools:context=".config.SelectUrls">
 
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="24dp"
+
         android:src="@drawable/nascoplogonew" />
 
 
@@ -23,16 +22,32 @@
         android:layout_height="wrap_content"
         android:textColor="#000"
         android:textSize="20sp"
-        android:layout_margin="10dp"
-        android:text="Select the baseURL to connect to"/>
+        android:textStyle="bold"
 
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Select the baseURL to connect to"/>
     <Spinner
         android:id="@+id/spCompany"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="100dp"
+        android:layout_height="145dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
 
        />
+
+    <Button
+        android:id="@+id/login_proceed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_round_corner_button"
+        android:textColor="#FFFFFF"
+        android:textAllCaps="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:text="Proceed" />
+
+
+
 </LinearLayout>

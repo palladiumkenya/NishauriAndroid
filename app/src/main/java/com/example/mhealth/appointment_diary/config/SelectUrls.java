@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -27,7 +29,7 @@ import static android.R.layout.simple_spinner_item;
 public class SelectUrls extends AppCompatActivity {
 
 
-    ArrayList<urlModel> urlModelArrayList;
+     ArrayList<urlModel> urlModelArrayList;
      ArrayList<String> names = new ArrayList<String>();
     Spinner spinner1;
 
@@ -70,11 +72,32 @@ public class SelectUrls extends AppCompatActivity {
                 }
                 for (int i = 0; i < urlModelArrayList.size(); i++){
                     names.add(urlModelArrayList.get(i).getUrl().toString());
+
+
                 }
+               // names.add("--Select baseURL--");
                 ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(SelectUrls.this, simple_spinner_item, names);
-               // spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+                spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
                 spinner1.setAdapter(spinnerArrayAdapter);
                 //removeSimpleProgressDialog();
+
+
+               //onSelct
+
+               spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                   @Override
+                   public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+
+
+                   }
+
+                   @Override
+                   public void onNothingSelected(AdapterView<?> adapterView) {
+
+                   }
+               });
 
 
             } catch (JSONException e) {

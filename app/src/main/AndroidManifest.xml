@@ -65,7 +65,7 @@
                 <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED" />
             </intent-filter>
         </receiver> <!-- end sms retriever details here -->
-       <activity
+       <!--<activity
             android:name=".loginmodule.LoginActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true">
@@ -78,6 +78,20 @@
 
         <activity
             android:name=".config.SelectUrls"
+            android:configChanges="orientation|screenSize"/>-->
+       <activity
+            android:name=".config.SelectUrls"
+            android:configChanges="orientation|screenSize"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".loginmodule.LoginActivity"
             android:configChanges="orientation|screenSize"/>
 
         <activity
