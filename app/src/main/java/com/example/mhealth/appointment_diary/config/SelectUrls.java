@@ -50,8 +50,10 @@ public class SelectUrls extends AppCompatActivity {
         public void onResponse(JSONArray response) {
 
             Log.d("", response.toString());
+           // Toast.makeText(SelectUrls.this, response.toString(), Toast.LENGTH_LONG).show();
 
-           /* try {
+           try {
+           urlModelArrayList = new ArrayList<>();
                 for (int i=0; i<response.length(); i++){
 
                     urlModel url_Model = new urlModel();
@@ -70,14 +72,14 @@ public class SelectUrls extends AppCompatActivity {
                     names.add(urlModelArrayList.get(i).getUrl().toString());
                 }
                 ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(SelectUrls.this, simple_spinner_item, names);
-                spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+               // spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
                 spinner1.setAdapter(spinnerArrayAdapter);
                 //removeSimpleProgressDialog();
 
 
             } catch (JSONException e) {
                 e.printStackTrace();
-            }*/
+            }
 
         }
     }, new Response.ErrorListener() {
