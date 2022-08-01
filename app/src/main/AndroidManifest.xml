@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name="com.orm.SugarApp"
@@ -17,7 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".appointment_diary.FetchAppointment"></activity>
+        <activity
+            android:name=".SelectUrls"
+            android:exported="false" />
+        <activity android:name=".appointment_diary.FetchAppointment" />
         <activity android:name=".privecy" />
         <activity
             android:name=".PmtctActivity"

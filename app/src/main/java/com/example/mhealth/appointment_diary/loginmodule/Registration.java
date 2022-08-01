@@ -438,11 +438,12 @@ public class Registration extends Activity implements AdapterView.OnItemSelected
 
                         Toast.makeText(getApplicationContext(), "Phonenumber is required", Toast.LENGTH_LONG).show();
 
-                    } else if (affiliationS.trim().isEmpty()) {
+                    }
+                    /*else if (affiliationS.trim().isEmpty()) {
 
                         Toast.makeText(getApplicationContext(), "Affiliation is required", Toast.LENGTH_LONG).show();
                         affiliationIds = "-1";
-                    }
+                    }*/
 
 
                     else if(mfllist.size()<1){
