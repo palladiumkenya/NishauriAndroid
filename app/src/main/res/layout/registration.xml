@@ -40,6 +40,7 @@
 
 
         <TextView
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
@@ -50,7 +51,7 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
-
+            android:visibility="gone"
             android:focusable="false"
             android:id="@+id/affiliationnewspinner"
             android:hint="Select Affiliation*"

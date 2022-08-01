@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.mhealth.appointment_diary.LoadMessages.LoadMessages;
 import com.example.mhealth.appointment_diary.MainOptions;
 import com.example.mhealth.appointment_diary.R;
+import com.example.mhealth.appointment_diary.config.SelectUrls;
 import com.example.mhealth.appointment_diary.privecy;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Myaffiliation;
@@ -115,7 +116,7 @@ public class LoginActivity extends Activity {
 
 
                    // Intent i=new Intent(LoginActivity.this,Registration.class);
-                    Intent i=new Intent(LoginActivity.this,privecy.class);
+                    Intent i=new Intent(LoginActivity.this, SelectUrls.class);
                     startActivity(i);
                 }
             });

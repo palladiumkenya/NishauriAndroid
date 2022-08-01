@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#FFFFFF"
+
     tools:context=".config.SelectUrls">
 
 
@@ -16,19 +17,22 @@
         android:layout_marginBottom="24dp"
         android:src="@drawable/nascoplogonew" />
 
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="Select affiliation" />
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:layout_margin="10dp"
+        android:text="Select the baseURL to connect to"/>
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <Spinner
+        android:id="@+id/spCompany"
         android:layout_width="match_parent"
-        android:focusable="false"
-        android:id="@+id/affiliationnewspinner"
-        android:hint="Select BaseURL*"
-        app:drawableRightCompat="@drawable/down_arrow"
-        android:layout_height="wrap_content" />
+        android:layout_height="75dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="100dp"
 
+       />
 </LinearLayout>
