@@ -20,7 +20,7 @@ public static final String mainShortcode="40149";
 //
 //    public static final String SENDDATATODB_URL2 = "https://ushauritest.mhealthkenya.co.ke/chore/receiver_post";
 
-//******************live url******************
+
     public static final String GETAFFILIATION_URL = "https://ushaurinew.mhealthkenya.co.ke/chore/affiliation";
 
     public static final String SENDDATATODB_URL = "https://ushaurinode.mhealthkenya.co.ke/receiver/";
