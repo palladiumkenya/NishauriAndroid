@@ -6,6 +6,16 @@ public class urlModel {
     private String stage;
     private String url;
 
+
+    public urlModel() {
+    }
+
+    public urlModel(int id, String stage, String url) {
+        this.id = id;
+        this.stage = stage;
+        this.url = url;
+    }
+
     public int getId() {
         return id;
     }

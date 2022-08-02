@@ -3,11 +3,13 @@ package com.example.mhealth.appointment_diary.config;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -29,14 +31,35 @@ import static android.R.layout.simple_spinner_item;
 public class SelectUrls extends AppCompatActivity {
 
 
-     ArrayList<urlModel> urlModelArrayList;
-     ArrayList<String> names = new ArrayList<String>();
+    /* ArrayList<urlModel> urlModelArrayList;
+    ArrayList<String> names;*/
+    urlModel url_Model;
+    ArrayList<String> urlModelArrayList;
+    ArrayList<urlModel> names;
+     //ArrayList<String> names = new ArrayList<String>();
     Spinner spinner1;
+
+    int dataId;
+
+    String base_url;
+
+    SharedPreferences sharedPreferences1;
+
+    Button btn_prcd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_urls);
+
+        btn_prcd = findViewById(R.id.login_proceed);
+
+        btn_prcd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
          spinner1 =findViewById(R.id.spCompany);
          getUrls();
@@ -56,39 +79,75 @@ public class SelectUrls extends AppCompatActivity {
 
            try {
            urlModelArrayList = new ArrayList<>();
+           names = new ArrayList<>();
+
+           urlModelArrayList.clear();
+           names.clear();
+
+
                 for (int i=0; i<response.length(); i++){
 
-                    urlModel url_Model = new urlModel();
+                   // urlModel url_Model = new urlModel();
                     JSONObject jsonObject =response.getJSONObject(i);
 
-                    url_Model.setUrl(jsonObject.getString("url"));
+                   /* url_Model.setUrl(jsonObject.getString("url"));
                     url_Model.setStage(jsonObject.getString("stage"));
-
-                    urlModelArrayList.add(url_Model);
-
+                    url_Model.setId(jsonObject.getInt("id"));*/
 
 
-                    //
+                    int url_id = jsonObject.getInt("id");
+                    String url_stage =jsonObject.getString("stage");
+                    String main_urls =jsonObject.getString("url");
+
+                   url_Model = new urlModel(url_id, url_stage, main_urls);
+                    //urlModelArrayList.add(url_Model);
+
+                    names.add(url_Model);
+                    urlModelArrayList.add(url_Model.getStage());
+
                 }
-                for (int i = 0; i < urlModelArrayList.size(); i++){
-                    names.add(urlModelArrayList.get(i).getUrl().toString());
+
+               names.add(new urlModel(0, "", "--select baseURL--"));
+               urlModelArrayList.add("--select baseURL--");
 
 
-                }
-               // names.add("--Select baseURL--");
-                ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(SelectUrls.this, simple_spinner_item, names);
+                ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(SelectUrls.this, simple_spinner_item, urlModelArrayList);
                 spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
                 spinner1.setAdapter(spinnerArrayAdapter);
                 //removeSimpleProgressDialog();
+
+               spinner1.setSelection(spinnerArrayAdapter.getCount()-1);
+               dataId =names.get(spinnerArrayAdapter.getCount()-1).getId();
+
+               //
+              /* ArrayList<String> dataList;   //names
+               ArrayList<data>  datas;      //urlModelArrayList
+               public static int dataID;*/
+
+               //
 
 
                //onSelct
 
                spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                    @Override
-                   public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                   public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                       dataId = names.get(position).getId();
+
+                       if (dataId==1){
+
+                           base_url = names.get(position).getUrl();
 
 
+                           Toast.makeText(SelectUrls.this, base_url, Toast.LENGTH_LONG).show();
+
+                          // Toast.makeText(SelectUrls.this, "zero", Toast.LENGTH_LONG).show();
+                       }
+                       else if(dataId==2){
+
+                         base_url = names.get(position).getUrl();
+                           Toast.makeText(SelectUrls.this, base_url, Toast.LENGTH_LONG).show();
+                       }
 
 
                    }
