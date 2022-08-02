@@ -1,6 +1,7 @@
 package com.example.mhealth.appointment_diary.config;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mhealth.appointment_diary.R;
@@ -100,13 +102,43 @@ public class Config extends AppCompatActivity {
         xx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Config.this, LoginActivity.class);
-                startActivity(intent);
+                getAlert();
+               /* Intent intent = new Intent(Config.this, LoginActivity.class);
+                startActivity(intent);*/
 
             }
         });
 
 
+    }
+
+    private void getAlert(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(Config.this);
+        builder1.setMessage("You have connected to"+ ""+ BASE_URL);
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Proceed",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        Intent intent = new Intent(Config.this, LoginActivity.class);
+                        startActivity(intent);
+
+                        //dialog.cancel();
+                    }
+                });
+
+        builder1.setNegativeButton(
+                "Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 
 
