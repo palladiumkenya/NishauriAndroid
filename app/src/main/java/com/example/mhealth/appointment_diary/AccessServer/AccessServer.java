@@ -97,7 +97,7 @@ public class AccessServer {
         pr.showProgress("Sending message...");
 
         //start url encoding the url to remove special characters
-        String urlStr = Config.SENDDATATODB_URL+message;
+        String urlStr = Config.BASE_URL+Config.SENDDATATODB_URL1+message;
         URL url= new URL(urlStr);
         URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
         urlStr=uri.toASCIIString();
@@ -148,7 +148,7 @@ public class AccessServer {
         pr.showProgress("Sending message.....");
         final int[] mStatusCode = new int[1];
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.SENDDATATODB_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.BASE_URL+Config.SENDDATATODB_URL1,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -246,7 +246,7 @@ public class AccessServer {
         pr.showProgress("Sending message.....");
         final int[] mStatusCode = new int[1];
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.SENDDATATODB_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.BASE_URL+Config.SENDDATATODB_URL1,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -370,7 +370,7 @@ public class AccessServer {
             final int[] mStatusCode = new int[1];
 
 
-            StringRequest stringRequest = new StringRequest(POST,Config.GETTODAYSAPPOINTMENT_URL,
+            StringRequest stringRequest = new StringRequest(POST,  Config.BASE_URL+Config.GETTODAYSAPPOINTMENT_URL1,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -536,7 +536,8 @@ public class AccessServer {
             final int[] mStatusCode = new int[1];
 
 
-            StringRequest stringRequest = new StringRequest(POST,Config.GETDEFAULTERSAPPOINTMENT_URL,
+            StringRequest stringRequest = new StringRequest(POST,  Config.BASE_URL+Config.GETDEFAULTERSAPPOINTMENT_URL1,
+
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -710,7 +711,8 @@ public class AccessServer {
             pr.showProgress("getting user mflcode...");
 
 
-            StringRequest stringRequest = new StringRequest(POST,Config.GETUSERMFLCODE_URL,
+           // StringRequest stringRequest = new StringRequest(POST,Config.GETUSERMFLCODE_URL,
+                    StringRequest stringRequest = new StringRequest(POST, Config.BASE_URL+Config.GETUSERMFLCODE_URL1,
                     new Response.Listener<String>() {
 
 
@@ -892,7 +894,7 @@ public class AccessServer {
         final int[] mStatusCode = new int[1];
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.SENDDATATODB_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.BASE_URL+Config.SENDDATATODB_URL1,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

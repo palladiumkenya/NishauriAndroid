@@ -75,11 +75,16 @@ public class SelectUrls extends AppCompatActivity {
                  String getValue = sharedPreferences.getString("keyName", "defaultValue");
 
                  // Toast.makeText(MainActivity.this, x, Toast.LENGTH_SHORT).show();
-                 //Toast.makeText(SelectUrls.this, getValue, Toast.LENGTH_LONG).show();
-                 Intent intent = new Intent(SelectUrls.this, Config.class);
-                 intent.putExtra("url", getValue);
-                 startActivity(intent);
 
+
+                 if (getValue.equals("defaultValue")){
+                     Toast.makeText(SelectUrls.this, "Invalid", Toast.LENGTH_LONG).show();
+                 }else {
+                     //Toast.makeText(SelectUrls.this, getValue, Toast.LENGTH_LONG).show();
+                     Intent intent = new Intent(SelectUrls.this, Config.class);
+                     intent.putExtra("url", getValue);
+                     startActivity(intent);
+                 }
 
 
 
@@ -161,14 +166,14 @@ public class SelectUrls extends AppCompatActivity {
                            base_url = names.get(position).getUrl();
 
 
-                           Toast.makeText(SelectUrls.this, base_url, Toast.LENGTH_LONG).show();
+                           //Toast.makeText(SelectUrls.this, base_url, Toast.LENGTH_LONG).show();
 
                           // Toast.makeText(SelectUrls.this, "zero", Toast.LENGTH_LONG).show();
                        }
                        else if(dataId==2){
 
                          base_url = names.get(position).getUrl();
-                           Toast.makeText(SelectUrls.this, base_url, Toast.LENGTH_LONG).show();
+                           //Toast.makeText(SelectUrls.this, base_url, Toast.LENGTH_LONG).show();
                        }
 
 

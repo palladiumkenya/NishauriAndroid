@@ -150,7 +150,7 @@ public class RescheduleActivity extends AppCompatActivity {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.SEARCH_RESCHEDULE_APT, payload, new Response.Listener<JSONObject>() {
+                Config.BASE_URL+Config.SEARCH_RESCHEDULE_APT1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

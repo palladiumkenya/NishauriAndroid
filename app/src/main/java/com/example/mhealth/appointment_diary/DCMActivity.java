@@ -345,15 +345,15 @@ public class DCMActivity extends AppCompatActivity {
 
                         }else if (ON_DCM_STATUS.equals("NOT on DSD")){
                             if (validateNotOnDcm())
-                                bookNormalTca(Config.NOT_ON_DCM_BOOKING);
+                                bookNormalTca(Config.BASE_URL+Config.NOT_ON_DCM_BOOKING1);
                         }
                     }else if (STABILITY_LEVEL.equals("Unstable")){
                         if (validateUnstable())
-                            bookNormalTca(Config.UNSTABLE_BOOKING);
+                            bookNormalTca(Config.BASE_URL+Config.UNSTABLE_BOOKING1);
                     }
                 }else {
                     if (validateWellAdvanced())
-                        bookNormalTca(Config.WELL_ADVANCED_BOOKING);
+                        bookNormalTca(Config.BASE_URL+Config.WELL_ADVANCED_BOOKING1);
                 }
             }
         });
@@ -375,16 +375,16 @@ public class DCMActivity extends AppCompatActivity {
 
                         }else if (ON_DCM_STATUS.equals("NOT on DSD")){
                             if (validateNotOnDcm())
-                                bookNormalTca(Config.NOT_ON_DCM_BOOKING);
+                                bookNormalTca(Config.BASE_URL+Config.NOT_ON_DCM_BOOKING1);
 
                         }
                     }else if (STABILITY_LEVEL.equals("Unstable")){
                         if (validateUnstable())
-                            bookNormalTca(Config.UNSTABLE_BOOKING);
+                            bookNormalTca(Config.BASE_URL+Config.UNSTABLE_BOOKING1);
                     }
                 }else {
                     if (validateWellAdvanced())
-                        bookNormalTca(Config.NOT_ON_DCM_BOOKING);
+                        bookNormalTca(Config.BASE_URL+Config.NOT_ON_DCM_BOOKING1);
                 }
             }
         });
@@ -773,7 +773,7 @@ public class DCMActivity extends AppCompatActivity {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.ON_DCM_BOOKING, payload, new Response.Listener<JSONObject>() {
+                Config.BASE_URL+Config.ON_DCM_BOOKING1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -924,7 +924,7 @@ public class DCMActivity extends AppCompatActivity {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.GET_ENROLLMENT_DURATION, payload, new Response.Listener<JSONObject>() {
+                Config.BASE_URL+Config.GET_ENROLLMENT_DURATION1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

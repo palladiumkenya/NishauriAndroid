@@ -1,37 +1,37 @@
 package com.example.mhealth.appointment_diary.config;
 
-public class Config {
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-//    test shortcode
-//    public static final String mainShortcode="40149";
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-//    live shortcode
+import com.example.mhealth.appointment_diary.R;
+import com.example.mhealth.appointment_diary.loginmodule.LoginActivity;
+
+public class Config extends AppCompatActivity {
+
+    public static String BASE_URL= "";
+
+
     //public static final String mainShortcode="40146"; CHANGED TO BELOW
-public static final String mainShortcode="40149";
+    public static final String mainShortcode="40149";
 
-    //***************test url********************************
-//    public static final String GETAFFILIATION_URL = "https://ushauritest.mhealthkenya.co.ke/chore/affiliation";
-//
-//    public static final String SENDDATATODB_URL = "https://ushauritest.mhealthkenya.co.ke/chore/receiver/";
-//
-//    public static final String GETTODAYSAPPOINTMENT_URL = "https://ushauritest.mhealthkenya.co.ke/chore/today_appointments";
-//    public static final String GETDEFAULTERSAPPOINTMENT_URL = "https://ushauritest.mhealthkenya.co.ke/chore/past_appointments";
-//
-//
-//    public static final String SENDDATATODB_URL2 = "https://ushauritest.mhealthkenya.co.ke/chore/receiver_post";
+//******************live url******************
 
+    //public static final String GETAFFILIATION_URL = "https://ushaurinew.mhealthkenya.co.ke/chore/affiliation";
+    public static final String GETAFFILIATION_URL1 = "/chore/affiliation";
+    public static final String SENDDATATODB_URL1 = "/receiver/";
 
-    public static final String GETAFFILIATION_URL = "https://ushaurinew.mhealthkenya.co.ke/chore/affiliation";
-
-    public static final String SENDDATATODB_URL = "https://ushaurinode.mhealthkenya.co.ke/receiver/";
-
-    public static final String GETTODAYSAPPOINTMENT_URL = "https://ushaurinode.mhealthkenya.co.ke/today_appointments";
-    public static final String GETUSERMFLCODE_URL = "https://ushaurinode.mhealthkenya.co.ke/verifyMFLCode";
-//    public static final String REMOVEFAKEDEFAULTER_URL = "https://ushaurinew.mhealthkenya.co.ke/chore/toda";
-    public static final String GETDEFAULTERSAPPOINTMENT_URL = "https://ushaurinode.mhealthkenya.co.ke/past_appointments";
-
-
-    public static final String SENDDATATODB_URL2 = "https://ushaurinew.mhealthkenya.co.ke/chore/receiver_post";
+    public static final String GETTODAYSAPPOINTMENT_URL1 = "/today_appointments";
+    public static final String GETUSERMFLCODE_URL1 = "/verifyMFLCode";
+    //  public static final String REMOVEFAKEDEFAULTER_URL = "https://ushaurinew.mhealthkenya.co.ke/chore/toda";
+    public static final String GETDEFAULTERSAPPOINTMENT_URL1 = "/past_appointments";
+    public static final String SENDDATATODB_URL2 = "/chore/receiver_post";
 
 
     public static final String JSON_ARRAYAFFILIATIONS = "affiliations";
@@ -53,29 +53,61 @@ public static final String mainShortcode="40149";
     public static final int MISSEDVISITENDPERIOD=3;
     public static final int LOSTTOFOLLOWUPPERIOD=30;
 
-    public static final String GET_ENROLLMENT_DURATION = "https://ushaurinode.mhealthkenya.co.ke/api/process_dfc/check/enrollment/duration";
-    public static final String WELL_ADVANCED_BOOKING = "https://ushaurinode.mhealthkenya.co.ke/api/process_dfc/well/advanced/booking";
-    public static final String ON_DCM_BOOKING = "https://ushaurinode.mhealthkenya.co.ke/api/process_dfc/client/dcm/create";
-    public static final String NOT_ON_DCM_BOOKING = "https://ushaurinode.mhealthkenya.co.ke/api/process_dfc/client/not/dcm";
-    public static final String UNSTABLE_BOOKING = "https://ushaurinode.mhealthkenya.co.ke/api/process_dfc/unstable/client/booking";
+    public static final String GET_ENROLLMENT_DURATION1 = "/api/process_dfc/check/enrollment/duration";
+    public static final String WELL_ADVANCED_BOOKING1 = "/api/process_dfc/well/advanced/booking";
+    public static final String ON_DCM_BOOKING1 = "/api/process_dfc/client/dcm/create";
+    public static final String NOT_ON_DCM_BOOKING1 = "/api/process_dfc/client/not/dcm";
+    public static final String UNSTABLE_BOOKING1 = "/api/process_dfc/unstable/client/booking";
 
 
-    public static final String CHECK_PMTCT = "https://ushaurinode.mhealthkenya.co.ke/api/process_pmtct/check/pmtct/clinic";
-    public static final String REGISTER_HEI = "https://ushaurinode.mhealthkenya.co.ke/api/process_pmtct/register/hei/client";
-    public static final String REGISTER_HEI_WITH_CAREGIVER = "https://ushaurinode.mhealthkenya.co.ke/api/process_pmtct/register/hei/with/caregiver";
-    public static final String GET_ATTACHED_HEIS = "https://ushaurinode.mhealthkenya.co.ke/api/process_pmtct/check/attached/heis";
-    public static final String BOOK_HEI_APT = "https://ushaurinode.mhealthkenya.co.ke/api/process_pmtct/book/client/appointment";
-    public static final String REGISTER_NON_BREASTFEEDING = "https://ushaurinode.mhealthkenya.co.ke/api/process_pmtct/register/non/breastfeeding";
-    public static final String BOOK_HEI_ONLY_APT = "https://ushaurinode.mhealthkenya.co.ke/api/process_pmtct/book/hei/appointment";
-    public static final String BOOK_UNSCHEDULED_HEI_ONLY_APT = "https://ushaurinode.mhealthkenya.co.ke/api/process_pmtct/book/hei/unscheduled";
-    public static final String SEARCH_HEI = "https://ushaurinode.mhealthkenya.co.ke/api/process_pmtct/get/hei/details";
-    public static final String UPDATE_HEI = "https://ushaurinode.mhealthkenya.co.ke/api/process_pmtct/update/hei/details/";
-    public static final String SEARCH_PCR = "https://ushaurinode.mhealthkenya.co.ke/api/process_pmtct/pcr/positive/details";
-    public static final String UPDATE_PCR = "https://ushaurinode.mhealthkenya.co.ke/api/process_pmtct/enroll/positive/pcr/";
-    public static final String SEARCH_HEI_FINAL = "https://ushaurinode.mhealthkenya.co.ke/api/process_pmtct/outcome/get/details";
-    public static final String POST_FINAL_OUTOME = "https://ushaurinode.mhealthkenya.co.ke/api/process_pmtct/confirm/final/outcome";
-    public static final String SEARCH_RESCHEDULE_APT = "https://ushaurinode.mhealthkenya.co.ke/api/edit_appointment/get/client/apps";
-    public static final String RESCHEDULE_APT = "https://ushaurinode.mhealthkenya.co.ke/api/edit_appointment/edit/appointment/date/";
+    public static final String CHECK_PMTCT1 = "/api/process_pmtct/check/pmtct/clinic";
+    public static final String REGISTER_HEI1 = "/api/process_pmtct/register/hei/client";
+    public static final String REGISTER_HEI_WITH_CAREGIVER1 = "/api/process_pmtct/register/hei/with/caregiver";
+    public static final String GET_ATTACHED_HEIS1 = "/api/process_pmtct/check/attached/heis";
+    public static final String BOOK_HEI_APT1 = "/api/process_pmtct/book/client/appointment";
+    public static final String REGISTER_NON_BREASTFEEDING1 = "/api/process_pmtct/register/non/breastfeeding";
+    public static final String BOOK_HEI_ONLY_APT1 = "/api/process_pmtct/book/hei/appointment";
+    public static final String BOOK_UNSCHEDULED_HEI_ONLY_APT1 = "/api/process_pmtct/book/hei/unscheduled";
+    public static final String SEARCH_HEI1 = "/api/process_pmtct/get/hei/details";
+    public static final String UPDATE_HEI1 = "/api/process_pmtct/update/hei/details/";
+    public static final String SEARCH_PCR1 = "/api/process_pmtct/pcr/positive/details";
+    public static final String UPDATE_PCR1 = "/api/process_pmtct/enroll/positive/pcr/";
+    public static final String SEARCH_HEI_FINAL1 = "/api/process_pmtct/outcome/get/details";
+    public static final String POST_FINAL_OUTOME1 = "/api/process_pmtct/confirm/final/outcome";
+    public static final String SEARCH_RESCHEDULE_APT1 = "/api/edit_appointment/get/client/apps";
+    public static final String RESCHEDULE_APT1 = "/api/edit_appointment/edit/appointment/date/";
+
+
+
+
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_config);
+
+
+        TextView x =findViewById(R.id.show);
+        Button xx =findViewById(R.id.show1);
+
+        //String z;
+
+        Bundle bundle =getIntent().getExtras();
+        BASE_URL= bundle.getString("url");
+
+        x.setText(BASE_URL);
+
+        xx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Config.this, LoginActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
+    }
 
 
 

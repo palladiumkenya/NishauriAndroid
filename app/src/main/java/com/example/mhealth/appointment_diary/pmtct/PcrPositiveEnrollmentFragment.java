@@ -428,7 +428,7 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.SEARCH_PCR, payload, new Response.Listener<JSONObject>() {
+                Config.BASE_URL+Config.SEARCH_PCR1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -604,7 +604,7 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PUT,
-                Config.UPDATE_PCR+SRV_ID, payload, new Response.Listener<JSONObject>() {
+                Config.BASE_URL+Config.UPDATE_PCR1+SRV_ID, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

@@ -18,6 +18,16 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
 
+        <activity
+            android:name=".config.Config"
+            android:exported="false" />
+
+        <activity
+            android:name=".config.TryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".config.URLActivity"
+            android:exported="false" />
         <activity android:name=".appointment_diary.FetchAppointment" />
         <activity android:name=".privecy" />
         <activity
@@ -65,7 +75,8 @@
                 <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED" />
             </intent-filter>
         </receiver> <!-- end sms retriever details here -->
-       <!--<activity
+        <!--
+<activity
             android:name=".loginmodule.LoginActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true">
@@ -78,22 +89,21 @@
 
         <activity
             android:name=".config.SelectUrls"
-            android:configChanges="orientation|screenSize"/>-->
-       <activity
-            android:name=".config.SelectUrls"
-            android:configChanges="orientation|screenSize"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".loginmodule.LoginActivity"
             android:configChanges="orientation|screenSize"/>
+        -->
+        <activity
+            android:name=".config.SelectUrls"
+            android:configChanges="orientation|screenSize"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".loginmodule.LoginActivity"
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".MainOptions"
             android:configChanges="orientation|screenSize" />

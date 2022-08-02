@@ -282,7 +282,7 @@ public class HeiAptDialog extends BottomSheetDialogFragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.BOOK_HEI_APT, payload, new Response.Listener<JSONObject>() {
+                Config.BASE_URL+Config.BOOK_HEI_APT1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

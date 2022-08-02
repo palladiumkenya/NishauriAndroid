@@ -116,7 +116,7 @@ public class LoginActivity extends Activity {
 
 
                    // Intent i=new Intent(LoginActivity.this,Registration.class);
-                    Intent i=new Intent(LoginActivity.this, SelectUrls.class);
+                    Intent i=new Intent(LoginActivity.this, Registration.class);
                     startActivity(i);
                 }
             });

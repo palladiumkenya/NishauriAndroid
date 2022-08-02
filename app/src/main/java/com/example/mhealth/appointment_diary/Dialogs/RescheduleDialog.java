@@ -183,7 +183,7 @@ public class RescheduleDialog extends BottomSheetDialogFragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PUT,
-                Config.RESCHEDULE_APT+appointment.getAppointment_id(), payload, new Response.Listener<JSONObject>() {
+                Config.BASE_URL+Config.RESCHEDULE_APT1+appointment.getAppointment_id(), payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

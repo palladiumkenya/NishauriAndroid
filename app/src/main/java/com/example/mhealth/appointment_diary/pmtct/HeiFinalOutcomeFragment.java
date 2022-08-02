@@ -303,7 +303,7 @@ public class HeiFinalOutcomeFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.SEARCH_HEI_FINAL, payload, new Response.Listener<JSONObject>() {
+                Config.BASE_URL+Config.SEARCH_HEI_FINAL1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -518,7 +518,7 @@ public class HeiFinalOutcomeFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.POST_FINAL_OUTOME, payload, new Response.Listener<JSONObject>() {
+                Config.BASE_URL+Config.POST_FINAL_OUTOME1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

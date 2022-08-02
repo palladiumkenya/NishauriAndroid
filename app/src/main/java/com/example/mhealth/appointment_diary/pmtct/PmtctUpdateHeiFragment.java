@@ -311,7 +311,7 @@ public class PmtctUpdateHeiFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.SEARCH_HEI, payload, new Response.Listener<JSONObject>() {
+                Config.BASE_URL+Config.SEARCH_HEI1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -477,7 +477,7 @@ public class PmtctUpdateHeiFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PUT,
-                Config.UPDATE_HEI+HEI_ID, payload, new Response.Listener<JSONObject>() {
+                Config.BASE_URL+Config.UPDATE_HEI1+HEI_ID, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

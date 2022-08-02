@@ -331,7 +331,7 @@ public class PmtctCaregiverRegistrationFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.REGISTER_HEI_WITH_CAREGIVER, payload, new Response.Listener<JSONObject>() {
+                Config.BASE_URL+Config.REGISTER_HEI_WITH_CAREGIVER1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

@@ -211,7 +211,7 @@ public class PmtctBookAptFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.GET_ATTACHED_HEIS, payload, new Response.Listener<JSONObject>() {
+                Config.BASE_URL+Config.GET_ATTACHED_HEIS1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

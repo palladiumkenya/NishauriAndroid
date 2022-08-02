@@ -263,7 +263,7 @@ public class PmtctUnscheduledHeiAptFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.BOOK_UNSCHEDULED_HEI_ONLY_APT, payload, new Response.Listener<JSONObject>() {
+                Config.BASE_URL+Config.BOOK_UNSCHEDULED_HEI_ONLY_APT1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

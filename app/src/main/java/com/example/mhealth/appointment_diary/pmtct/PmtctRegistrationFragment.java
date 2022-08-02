@@ -400,7 +400,7 @@ public class PmtctRegistrationFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.CHECK_PMTCT, payload, new Response.Listener<JSONObject>() {
+                Config.BASE_URL+Config.CHECK_PMTCT1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -522,7 +522,7 @@ public class PmtctRegistrationFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.REGISTER_NON_BREASTFEEDING, payload, new Response.Listener<JSONObject>() {
+                Config.BASE_URL+Config.REGISTER_NON_BREASTFEEDING1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -637,7 +637,7 @@ public class PmtctRegistrationFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.REGISTER_HEI, payload, new Response.Listener<JSONObject>() {
+                Config.BASE_URL+Config.REGISTER_HEI1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
