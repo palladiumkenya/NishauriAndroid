@@ -3,6 +3,8 @@ package com.example.mhealth.appointment_diary.config;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,17 +54,37 @@ public class SelectUrls extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_urls);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+
+
         btn_prcd = findViewById(R.id.login_proceed);
-
-        btn_prcd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
          spinner1 =findViewById(R.id.spCompany);
          getUrls();
+
+
+         btn_prcd.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 editor.putString("keyName", base_url);
+                 editor.apply();
+
+                 String getValue = sharedPreferences.getString("keyName", "defaultValue");
+
+                 // Toast.makeText(MainActivity.this, x, Toast.LENGTH_SHORT).show();
+                 //Toast.makeText(SelectUrls.this, getValue, Toast.LENGTH_LONG).show();
+                 Intent intent = new Intent(SelectUrls.this, Config.class);
+                 intent.putExtra("url", getValue);
+                 startActivity(intent);
+
+
+
+
+             }
+         });
 
 
 
