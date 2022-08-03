@@ -3,10 +3,12 @@ package com.example.mhealth.appointment_diary.config;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -19,13 +21,15 @@ public class Config extends AppCompatActivity {
 
     public static String BASE_URL= "";
 
+    public static String STAGE_NAME= "";
+
 
     //public static final String mainShortcode="40146"; CHANGED TO BELOW
     public static final String mainShortcode="40149";
 
 //******************live url******************
 
-    //public static final String GETAFFILIATION_URL = "https://ushaurinew.mhealthkenya.co.ke/chore/affiliation";
+    public static final String GETAFFILIATION_URL = "https://ushaurinew.mhealthkenya.co.ke/chore/affiliation";
     public static final String GETAFFILIATION_URL1 = "/chore/affiliation";
     public static final String SENDDATATODB_URL1 = "/receiver/";
 
@@ -96,9 +100,12 @@ public class Config extends AppCompatActivity {
 
         Bundle bundle =getIntent().getExtras();
         BASE_URL= bundle.getString("url");
+       // STAGE_NAME =bundle.getString("stage_key");
         getAlert();
 
-        x.setText("You are connected to" + " " +BASE_URL + " " + "Server");
+        x.setText("You are connected to" + " " +BASE_URL + " " + "Server!");
+        Toast.makeText(Config.this, BASE_URL, Toast.LENGTH_LONG).show();
+        x.setTextColor(Color.parseColor("#F32013"));
 
         //xx.setOnClickListener(new View.OnClickListener() {
          //   @Override
@@ -116,7 +123,7 @@ public class Config extends AppCompatActivity {
     private void getAlert(){
         AlertDialog.Builder builder1 = new AlertDialog.Builder(Config.this);
         builder1.setTitle("You are connected to");
-        builder1.setMessage( BASE_URL + " " + "Server");
+        builder1.setMessage( BASE_URL + " " + "Server!");
         builder1.setCancelable(true);
 
         builder1.setPositiveButton(

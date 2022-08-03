@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mhealth.appointment_diary.R;
+import com.example.mhealth.appointment_diary.loginmodule.LoginActivity;
 import com.example.mhealth.appointment_diary.tables.urlModel;
 
 import org.json.JSONArray;
@@ -45,6 +46,8 @@ public class SelectUrls extends AppCompatActivity {
 
     String base_url;
 
+    String stage_name;
+
     SharedPreferences sharedPreferences1;
 
     Button btn_prcd;
@@ -53,6 +56,7 @@ public class SelectUrls extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_urls);
+        //setScreen();
 
         SharedPreferences sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
 
@@ -83,6 +87,7 @@ public class SelectUrls extends AppCompatActivity {
                      //Toast.makeText(SelectUrls.this, getValue, Toast.LENGTH_LONG).show();
                      Intent intent = new Intent(SelectUrls.this, Config.class);
                      intent.putExtra("url", getValue);
+                     //intent.putExtra("stage_key", stage_name);
                      startActivity(intent);
                  }
 
@@ -165,6 +170,8 @@ public class SelectUrls extends AppCompatActivity {
 
                            base_url = names.get(position).getUrl();
 
+                           stage_name =names.get(position).getStage();
+
 
                            //Toast.makeText(SelectUrls.this, base_url, Toast.LENGTH_LONG).show();
 
@@ -173,6 +180,7 @@ public class SelectUrls extends AppCompatActivity {
                        else if(dataId==2){
 
                          base_url = names.get(position).getUrl();
+                           stage_name =names.get(position).getStage();
                            //Toast.makeText(SelectUrls.this, base_url, Toast.LENGTH_LONG).show();
                        }
 
@@ -200,5 +208,23 @@ public class SelectUrls extends AppCompatActivity {
     });
         RequestQueue requestQueue = Volley.newRequestQueue(SelectUrls.this);
      requestQueue.add(jsonArrayRequest);
+    }
+
+    private void setScreen(){
+        SharedPreferences preferencesS =getSharedPreferences("PREFERENCE", MODE_PRIVATE);
+
+        String FirstTime =preferencesS.getString("FirstTimeInstall", "");
+
+        if (FirstTime.equals("Yes")){
+          Intent intent1 =new Intent(SelectUrls.this, LoginActivity.class);
+          startActivity(intent1);
+
+        }else{
+            SharedPreferences.Editor editor =preferencesS.edit();
+            editor.putString("FirstTimeInstall", "Yes");
+            editor.apply();
+        }
+
+
     }
 }

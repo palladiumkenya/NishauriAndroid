@@ -47,7 +47,7 @@ public class GetRemoteData {
 
 
 
-            StringRequest stringRequest = new StringRequest(POST, Config.BASE_URL+Config.GETAFFILIATION_URL1,
+            StringRequest stringRequest = new StringRequest(POST, Config.GETAFFILIATION_URL,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

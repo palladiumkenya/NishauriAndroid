@@ -56,7 +56,7 @@ public class Registration extends Activity implements AdapterView.OnItemSelected
     private static final int PERMS_REQUEST_CODE = 12345;
     String selectedQn, selectedAffiliation;
     SpinnerDialog spinnerDialog;
-    GetRemoteData grd;
+    //GetRemoteData grd;
     RequestPerms requestPerms;
     private ArrayAdapter<String> arrayAdapterFacility;
     SendMessage sm;
@@ -164,17 +164,17 @@ public class Registration extends Activity implements AdapterView.OnItemSelected
     }
 
 
-    public void getRemoteData() {
+    /*public void getRemoteData() {
 
         try {
-//            Toast.makeText(this, "getting data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "getting data", Toast.LENGTH_SHORT).show();
 
             List<Affiliationstable> myl = Affiliationstable.findWithQuery(Affiliationstable.class, "select * from Affiliationstable");
             if (myl.size() > 0) {
 
 
             } else {
-                grd.getAffiliationData();
+                //grd.getAffiliationData();
 
             }
 
@@ -182,7 +182,7 @@ public class Registration extends Activity implements AdapterView.OnItemSelected
 
 
         }
-    }
+    }*/
 
     public void setFacilityAdapter() {
 
@@ -222,7 +222,7 @@ public class Registration extends Activity implements AdapterView.OnItemSelected
             password = (EditText) findViewById(R.id.password_edt);
             repassword = (EditText) findViewById(R.id.repassword_edt);
             securityanswerE = (EditText) findViewById(R.id.securityanswer);
-            grd = new GetRemoteData(Registration.this);
+            //grd = new GetRemoteData(Registration.this);
 
             securityhint = (EditText) findViewById(R.id.securityhint_edt);
             register = (Button) findViewById(R.id.register_btn);
@@ -246,7 +246,7 @@ public class Registration extends Activity implements AdapterView.OnItemSelected
     public void setAffiliationSpinner() {
 
         try {
-            getRemoteData();
+            //getRemoteData();
             setFacilityAdapter();
             addListenerToAffiliationSpinnerEdt();
 
@@ -495,12 +495,14 @@ public class Registration extends Activity implements AdapterView.OnItemSelected
                                 Toast.makeText(Registration.this, "the provided username already exists, try again", Toast.LENGTH_SHORT).show();
                             } else {
 
-                                List<Affiliationstable> affl = Affiliationstable.findWithQuery(Affiliationstable.class, "select * from Affiliationstable where affiliationname=? limit 1", affiliationS);
+                               // List<Affiliationstable> affl = Affiliationstable.findWithQuery(Affiliationstable.class, "select * from Affiliationstable where affiliationname=? limit 1", affiliationS);
+                                List<Affiliationstable> affl = Affiliationstable.findWithQuery(Affiliationstable.class, "select * from Affiliationstable where affiliationname=? limit 1");
                                 for (int y = 0; y < affl.size(); y++) {
 
                                     affiliationIds = affl.get(y).getAffiliationid();
                                 }
-                                Registrationtable rt = new Registrationtable(Uname, Pass, Secuhint, SecuanswerS, affiliationS, phonenum);
+                                //Registrationtable rt = new Registrationtable(Uname, Pass, Secuhint, SecuanswerS, affiliationS, phonenum);
+                                Registrationtable rt = new Registrationtable(Uname, Pass, Secuhint, SecuanswerS, phonenum);
                                 rt.save();
 
 
