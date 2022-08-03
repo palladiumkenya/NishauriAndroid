@@ -100,30 +100,20 @@ public class Config extends AppCompatActivity {
 
         Bundle bundle =getIntent().getExtras();
         BASE_URL= bundle.getString("url");
-       // STAGE_NAME =bundle.getString("stage_key");
+        STAGE_NAME =bundle.getString("stage_key");
         getAlert();
 
-        x.setText("You are connected to" + " " +BASE_URL + " " + "Server!");
-        Toast.makeText(Config.this, BASE_URL, Toast.LENGTH_LONG).show();
+        x.setText("You are connected to" + " " +STAGE_NAME + " " + "Server!");
+        //Toast.makeText(Config.this, BASE_URL, Toast.LENGTH_LONG).show();
         x.setTextColor(Color.parseColor("#F32013"));
-
-        //xx.setOnClickListener(new View.OnClickListener() {
-         //   @Override
-           // public void onClick(View view) {
-               // getAlert();
-               /* Intent intent = new Intent(Config.this, LoginActivity.class);
-                startActivity(intent);*/
-
-           // }
-        //});
-
 
     }
 
     private void getAlert(){
         AlertDialog.Builder builder1 = new AlertDialog.Builder(Config.this);
+        builder1.setIcon(android.R.drawable.ic_dialog_alert);
         builder1.setTitle("You are connected to");
-        builder1.setMessage( BASE_URL + " " + "Server!");
+        builder1.setMessage( STAGE_NAME + " " + "Server!");
         builder1.setCancelable(true);
 
         builder1.setPositiveButton(

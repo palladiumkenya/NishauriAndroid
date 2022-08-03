@@ -87,7 +87,7 @@ public class SelectUrls extends AppCompatActivity {
                      //Toast.makeText(SelectUrls.this, getValue, Toast.LENGTH_LONG).show();
                      Intent intent = new Intent(SelectUrls.this, Config.class);
                      intent.putExtra("url", getValue);
-                     //intent.putExtra("stage_key", stage_name);
+                     intent.putExtra("stage_key", stage_name);
                      startActivity(intent);
                  }
 
@@ -107,7 +107,6 @@ public class SelectUrls extends AppCompatActivity {
         public void onResponse(JSONArray response) {
 
             Log.d("", response.toString());
-           // Toast.makeText(SelectUrls.this, response.toString(), Toast.LENGTH_LONG).show();
 
            try {
            urlModelArrayList = new ArrayList<>();
@@ -119,28 +118,21 @@ public class SelectUrls extends AppCompatActivity {
 
                 for (int i=0; i<response.length(); i++){
 
-                   // urlModel url_Model = new urlModel();
+
                     JSONObject jsonObject =response.getJSONObject(i);
-
-                   /* url_Model.setUrl(jsonObject.getString("url"));
-                    url_Model.setStage(jsonObject.getString("stage"));
-                    url_Model.setId(jsonObject.getInt("id"));*/
-
 
                     int url_id = jsonObject.getInt("id");
                     String url_stage =jsonObject.getString("stage");
                     String main_urls =jsonObject.getString("url");
 
                    url_Model = new urlModel(url_id, url_stage, main_urls);
-                    //urlModelArrayList.add(url_Model);
-
                     names.add(url_Model);
                     urlModelArrayList.add(url_Model.getStage());
 
                 }
 
-               names.add(new urlModel(0, "", "--select baseURL--"));
-               urlModelArrayList.add("--select baseURL--");
+               names.add(new urlModel(0, "", "--Select the system to connect to--"));
+               urlModelArrayList.add("--Select the system to connect to--");
 
 
                 ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(SelectUrls.this, simple_spinner_item, urlModelArrayList);
