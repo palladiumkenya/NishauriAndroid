@@ -96,25 +96,27 @@ public class Config extends AppCompatActivity {
 
         Bundle bundle =getIntent().getExtras();
         BASE_URL= bundle.getString("url");
+        getAlert();
 
-        x.setText(BASE_URL);
+        x.setText("You are connected to" + " " +BASE_URL + " " + "Server");
 
-        xx.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getAlert();
+        //xx.setOnClickListener(new View.OnClickListener() {
+         //   @Override
+           // public void onClick(View view) {
+               // getAlert();
                /* Intent intent = new Intent(Config.this, LoginActivity.class);
                 startActivity(intent);*/
 
-            }
-        });
+           // }
+        //});
 
 
     }
 
     private void getAlert(){
         AlertDialog.Builder builder1 = new AlertDialog.Builder(Config.this);
-        builder1.setMessage("You have connected to"+ ""+ BASE_URL);
+        builder1.setTitle("You are connected to");
+        builder1.setMessage( BASE_URL + " " + "Server");
         builder1.setCancelable(true);
 
         builder1.setPositiveButton(
@@ -133,6 +135,9 @@ public class Config extends AppCompatActivity {
                 "Cancel",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+
+                        Intent intent = new Intent(Config.this, SelectUrls.class);
+                        startActivity(intent);
                         dialog.cancel();
                     }
                 });
