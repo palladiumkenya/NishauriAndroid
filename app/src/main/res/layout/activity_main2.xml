@@ -79,5 +79,23 @@
             android:gravity="center"
             android:text="No account yet? Create one"
             android:textSize="16dip" />
+
+        <TextView
+            android:id="@+id/connected_to"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:text=""
+            android:textSize="16dip" />
+
+        <!--<TextView
+            android:id="@+id/select_server"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:text="Want to select another server? Switch"
+            android:textSize="16dip" />-->
     </LinearLayout>
 </ScrollView>

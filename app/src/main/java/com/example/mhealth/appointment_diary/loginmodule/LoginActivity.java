@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.example.mhealth.appointment_diary.LoadMessages.LoadMessages;
 import com.example.mhealth.appointment_diary.MainOptions;
 import com.example.mhealth.appointment_diary.R;
+import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.config.SelectUrls;
 import com.example.mhealth.appointment_diary.privecy;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
@@ -37,7 +39,7 @@ import java.util.List;
 public class LoginActivity extends Activity {
 
 
-    TextView login;
+    TextView login, connect, selekt;
     TextView registerr;
     EditText enterpassword,enterusername;
     TextView forgetpass;
@@ -53,8 +55,18 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        connect =findViewById(R.id.connected_to);
+       // selekt =findViewById(R.id.select_server);
 
-
+        connect.setText("You are connected to" + " " + Config.STAGE_NAME + " " + "server");
+        connect.setTextColor(Color.parseColor("#F32013"));
+       /* selekt.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 =new Intent(LoginActivity.this, SelectUrls.class);
+                startActivity(intent1);
+            }
+        });*/
 
         initialise();
         getMessagesForTracer();

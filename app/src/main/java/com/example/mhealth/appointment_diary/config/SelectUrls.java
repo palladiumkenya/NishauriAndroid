@@ -52,11 +52,18 @@ public class SelectUrls extends AppCompatActivity {
 
     Button btn_prcd;
 
+   /* @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        finishAffinity();
+    }*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_urls);
         //setScreen();
+
 
         SharedPreferences sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
 
@@ -216,7 +223,5 @@ public class SelectUrls extends AppCompatActivity {
             editor.putString("FirstTimeInstall", "Yes");
             editor.apply();
         }
-
-
     }
 }

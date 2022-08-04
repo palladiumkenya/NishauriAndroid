@@ -84,13 +84,17 @@ public class Config extends AppCompatActivity {
     public static final String RESCHEDULE_APT1 = "/api/edit_appointment/edit/appointment/date/";
 
 
-
-
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config);
+
+
 
 
         TextView x =findViewById(R.id.show);
@@ -142,8 +146,6 @@ public class Config extends AppCompatActivity {
         AlertDialog alert11 = builder1.create();
         alert11.show();
     }
-
-
 
 
 }

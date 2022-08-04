@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.mhealth.appointment_diary.LoadMessages.LoadMessages;
 
 import com.example.mhealth.appointment_diary.appointment_diary.TodaysAppointment;
+import com.example.mhealth.appointment_diary.config.SelectUrls;
 import com.example.mhealth.appointment_diary.defaulters_diary.DefaulterMainActivity;
 import com.example.mhealth.appointment_diary.loginmodule.LoginActivity;
 import com.example.mhealth.appointment_diary.models.Appointments;
@@ -512,6 +513,20 @@ public class MainOptions extends AppCompatActivity {
             startActivity(i);
             finish();
             return true;
+        }
+
+        else if(id ==R.id.server){
+
+            Intent intent1 = new Intent(getApplicationContext(), SelectUrls.class);
+            // Closing all the Activities
+            intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            startActivity(intent1);
+            finish();
+            return true;
+
         }
 
         return super.onOptionsItemSelected(item);
