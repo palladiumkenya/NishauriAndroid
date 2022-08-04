@@ -11,7 +11,13 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -36,7 +42,7 @@ import java.util.List;
 //import android.support.v8.app.NotificationCompat;
 
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends AppCompatActivity {
 
 
     TextView login, connect, selekt;
@@ -55,10 +61,13 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+
         connect =findViewById(R.id.connected_to);
        // selekt =findViewById(R.id.select_server);
 
-        connect.setText("You are connected to" + " " + Config.STAGE_NAME + " " + "server");
+        //connect.setText("You are connected to" + " " + Config.STAGE_NAME + " " + "server");
+        connect.setText(Config.STAGE_NAME);
         connect.setTextColor(Color.parseColor("#F32013"));
        /* selekt.setOnClickListener(new OnClickListener() {
             @Override
@@ -411,4 +420,31 @@ public class LoginActivity extends Activity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.main_urls, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id =item.getItemId();
+         if(id ==R.id.server){
+
+            Intent intent1 = new Intent(getApplicationContext(), SelectUrls.class);
+            // Closing all the Activities
+            intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            startActivity(intent1);
+            finish();
+            return true;
+
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
 }
