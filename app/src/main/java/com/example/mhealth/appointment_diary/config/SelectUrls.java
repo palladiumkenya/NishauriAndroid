@@ -20,6 +20,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.loginmodule.LoginActivity;
@@ -74,7 +75,7 @@ public class SelectUrls extends AppCompatActivity {
         btn_prcd = findViewById(R.id.login_proceed);
 
          spinner1 =findViewById(R.id.spCompany);
-         getUrls();
+         geturls1();
 
 
          btn_prcd.setOnClickListener(new View.OnClickListener() {
@@ -223,5 +224,123 @@ public class SelectUrls extends AppCompatActivity {
             editor.putString("FirstTimeInstall", "Yes");
             editor.apply();
         }
+    }
+
+    public void geturls1(){
+        String URLstring = "https://ushaurinode.mhealthkenya.co.ke/config";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URLstring, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                Log.d("", response.toString());
+
+                try {
+                    urlModelArrayList = new ArrayList<>();
+                    names = new ArrayList<>();
+
+                    urlModelArrayList.clear();
+                    names.clear();
+
+
+                    JSONArray jsonArray =response.getJSONArray("USHAURI");
+
+                    for (int i =0; i<jsonArray.length(); i++){
+
+                        JSONObject jsonObject =jsonArray.getJSONObject(i);
+                        int url_id = jsonObject.getInt("id");
+                        String url_stage =jsonObject.getString("stage");
+                        String main_urls =jsonObject.getString("url");
+
+                        url_Model = new urlModel(url_id, url_stage, main_urls);
+                        names.add(url_Model);
+                        urlModelArrayList.add(url_Model.getStage());
+
+                    }
+
+
+                    /*for (int i=0; i<response.length(); i++){
+
+
+                        JSONObject jsonObject =response.getJSONObject(i);
+
+                        int url_id = jsonObject.getInt("id");
+                        String url_stage =jsonObject.getString("stage");
+                        String main_urls =jsonObject.getString("url");
+
+                        url_Model = new urlModel(url_id, url_stage, main_urls);
+                        names.add(url_Model);
+                        urlModelArrayList.add(url_Model.getStage());
+
+                    }*/
+
+                    names.add(new urlModel(0, "", "--Select the system to connect to--"));
+                    urlModelArrayList.add("--Select the system to connect to--");
+
+
+                    ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(SelectUrls.this, simple_spinner_item, urlModelArrayList);
+                    spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+                    spinner1.setAdapter(spinnerArrayAdapter);
+                    //removeSimpleProgressDialog();
+
+                    spinner1.setSelection(spinnerArrayAdapter.getCount()-1);
+                    dataId =names.get(spinnerArrayAdapter.getCount()-1).getId();
+
+                    //
+              /* ArrayList<String> dataList;   //names
+               ArrayList<data>  datas;      //urlModelArrayList
+               public static int dataID;*/
+
+                    //
+
+
+                    //onSelct
+
+                    spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                            dataId = names.get(position).getId();
+
+                            if (dataId==1){
+
+                                base_url = names.get(position).getUrl();
+
+                                stage_name =names.get(position).getStage();
+
+
+                                //Toast.makeText(SelectUrls.this, base_url, Toast.LENGTH_LONG).show();
+
+                                // Toast.makeText(SelectUrls.this, "zero", Toast.LENGTH_LONG).show();
+                            }
+                            else if(dataId==2){
+
+                                base_url = names.get(position).getUrl();
+                                stage_name =names.get(position).getStage();
+                                //Toast.makeText(SelectUrls.this, base_url, Toast.LENGTH_LONG).show();
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(SelectUrls.this);
+        requestQueue.add(jsonObjectRequest);
     }
 }

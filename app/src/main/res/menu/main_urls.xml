@@ -5,7 +5,7 @@
     <item
         android:id="@+id/server"
         android:orderInCategory="100"
-        android:title="Switch server"
+        android:title="Setup system"
         app:showAsAction="never" />
 
 
