@@ -20,6 +20,7 @@ import com.example.mhealth.appointment_diary.loginmodule.LoginActivity;
 public class Config extends AppCompatActivity {
 
     public static String BASE_URL= "";
+    //https://ushaurinode.mhealthkenya.co.ke
 
     public static String STAGE_NAME= "";
 

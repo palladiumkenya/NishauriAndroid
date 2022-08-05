@@ -58,9 +58,17 @@ public class LoginActivity extends AppCompatActivity {
     private static final int PERMS_REQUEST_CODE=12345;
 
     @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        finishAffinity();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+
 
 
         connect =findViewById(R.id.connected_to);
