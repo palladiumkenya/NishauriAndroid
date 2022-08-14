@@ -25,7 +25,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.mhealth.appointment_diary.AccessServer.AccessServer;
-import com.example.mhealth.appointment_diary.GetRemoteData.GetRemoteData;
 import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.RequestPermissions.RequestPerms;
 //import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
@@ -92,6 +91,7 @@ public class Registration extends Activity implements AdapterView.OnItemSelected
 
 
     private void getMflCode(){
+      //  HttpsTrustManager.allowAllSSL();
 
         try{
 

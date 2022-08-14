@@ -4,7 +4,9 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">ushaurinew.mhealthkenya.co.ke</domain>
         <domain includeSubdomains="true">ushaurinode.mhealthkenya.co.ke</domain>
+        <domain includeSubdomains="true">kenyahmis.org</domain>
        <!-- <trust-anchors>
+        android:networkSecurityConfig="@xml/network_config_file"
             <certificates src="@raw/ushaurinew"/>
             <certificates src="@raw/ushaurinode"/>
         </trust-anchors>-->

@@ -166,11 +166,6 @@ public class AccessServer {
                             dialogs.showErrorDialog(response,"Server response");
                         }
 
-
-
-
-
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -703,6 +698,8 @@ public class AccessServer {
 
     public void getUserMflCode(final String phone, final EditText phoneE){
 
+        //HttpsTrustManager.allowAllSSL();
+
 //        Toast.makeText(ctx, ""+phone, Toast.LENGTH_SHORT).show();
         final int[] mStatusCode = new int[1];
 
@@ -747,7 +744,7 @@ public class AccessServer {
                             else{
                                 System.out.println("***error 1****"+response);
 
-                                dialogs.showErrorDialog(response,"Server response");
+                                dialogs.showErrorDialog(response,"Server responses");
                             }
 
 
@@ -762,8 +759,9 @@ public class AccessServer {
                                 byte[] htmlBodyBytes = error.networkResponse.data;
 
 //                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
-                                dialogs.showErrorDialog(new String(htmlBodyBytes),"Server Response");
+                                dialogs.showErrorDialog(new String(htmlBodyBytes),"Server Responsess");
                                 System.out.println("***error 3****"+error.getMessage());
+                                //Toast.makeText(ctx, error.getMessage(), Toast.LENGTH_LONG).show();
 
                                 pr.dissmissProgress();
 
