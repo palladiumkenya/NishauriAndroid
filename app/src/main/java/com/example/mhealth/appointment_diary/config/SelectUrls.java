@@ -35,22 +35,15 @@ import static android.R.layout.simple_spinner_item;
 public class SelectUrls extends AppCompatActivity {
 
 
-    /* ArrayList<urlModel> urlModelArrayList;
-    ArrayList<String> names;*/
     urlModel url_Model;
     ArrayList<String> urlModelArrayList;
     ArrayList<urlModel> names;
-     //ArrayList<String> names = new ArrayList<String>();
     Spinner spinner1;
 
     int dataId;
-
     String base_url;
-
     String stage_name;
-
     SharedPreferences sharedPreferences1;
-
     Button btn_prcd;
 
    /* @Override
@@ -67,7 +60,6 @@ public class SelectUrls extends AppCompatActivity {
 
 
         SharedPreferences sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
-
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
 

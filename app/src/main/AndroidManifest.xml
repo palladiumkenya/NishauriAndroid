@@ -78,7 +78,7 @@
             </intent-filter>
         </receiver> <!-- end sms retriever details here -->
 
-<activity
+<!--<activity
             android:name=".loginmodule.LoginActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true">
@@ -91,9 +91,9 @@
 
         <activity
             android:name=".config.SelectUrls"
-            android:configChanges="orientation|screenSize"/>
+            android:configChanges="orientation|screenSize"/>-->
 
-        <!--<activity
+        <activity
             android:name=".config.SelectUrls"
             android:configChanges="orientation|screenSize"
             android:exported="true">
@@ -102,10 +102,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>-->
-       <!-- <activity
+        </activity>
+       <activity
             android:name=".loginmodule.LoginActivity"
-            android:configChanges="orientation|screenSize" /> -->
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".MainOptions"
             android:configChanges="orientation|screenSize" />

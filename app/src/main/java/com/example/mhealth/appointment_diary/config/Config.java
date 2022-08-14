@@ -95,9 +95,6 @@ public class Config extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config);
 
-
-
-
         TextView x =findViewById(R.id.show);
         Button xx =findViewById(R.id.show1);
 
