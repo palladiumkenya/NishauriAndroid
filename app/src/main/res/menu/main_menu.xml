@@ -10,11 +10,11 @@
         app:showAsAction="never" />
 
 
-    <item
+    <!--<item
         android:id="@+id/server"
         android:orderInCategory="100"
         android:title="Switch system"
-        app:showAsAction="never" />
+        app:showAsAction="never" /> -->
 
 
 </menu>
