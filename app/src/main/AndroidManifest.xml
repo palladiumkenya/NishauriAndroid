@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".OtpCodeActivity"
+            android:name=".Activities.Auth.OtpCodeActivity"
+            android:label="@string/app_name"
             android:exported="false" />
         <activity
             android:name=".Activities.Bmi"

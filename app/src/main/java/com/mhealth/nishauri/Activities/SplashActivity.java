@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.mhealth.nishauri.Activities.Auth.LoginActivity;
+import com.mhealth.nishauri.Activities.Auth.OtpCodeActivity;
 import com.mhealth.nishauri.R;
 
 /*CREATED BY HUGH*/
@@ -24,7 +25,7 @@ SplashActivity extends AppCompatActivity {
                 try {
                     Thread.sleep(1000);
 
-                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                    startActivity(new Intent(SplashActivity.this, OtpCodeActivity.class));
                     finish();
                 }catch (Exception e){
                     e.printStackTrace();
