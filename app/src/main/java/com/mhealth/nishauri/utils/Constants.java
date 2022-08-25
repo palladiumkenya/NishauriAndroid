@@ -6,6 +6,8 @@ public class Constants {
     /*ENDPOINT*/
     public static String ENDPOINT = "https://nishauri-api.mhealthkenya.co.ke/api/";
 
+    //https://nishauri-api.mhealthkenya.co.ke/api/signup/
+
     //AUTH
     public static String REGISTER = "signup/";
     public static String LOGIN = "token/login/";
