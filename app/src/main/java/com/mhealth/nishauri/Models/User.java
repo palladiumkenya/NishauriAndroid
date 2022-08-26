@@ -3,11 +3,6 @@ package com.mhealth.nishauri.Models;
 public class User {
     private String auth_token;
 
-
-
-
-
-
     public User(String auth_token) {
         this.auth_token = auth_token;
 

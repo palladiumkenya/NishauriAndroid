@@ -36,9 +36,11 @@
         <entry key="..\:/Users/This/NishauriNew/app/src/main/res/drawable/otp_edittext.xml" value="0.1" />
         <entry key="..\:/Users/This/NishauriNew/app/src/main/res/layout/activity_login.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/This/NishauriNew/app/src/main/res/layout/activity_login2.xml" value="0.17395833333333333" />
+        <entry key="..\:/Users/This/NishauriNew/app/src/main/res/layout/activity_main.xml" value="0.1046875" />
         <entry key="..\:/Users/This/NishauriNew/app/src/main/res/layout/activity_otp.xml" value="0.17395833333333333" />
         <entry key="..\:/Users/This/NishauriNew/app/src/main/res/layout/activity_patient.xml" value="0.17395833333333333" />
         <entry key="..\:/Users/This/NishauriNew/app/src/main/res/layout/activity_sign_up2.xml" value="0.18958333333333333" />
+        <entry key="..\:/Users/This/NishauriNew/app/src/main/res/layout/app_bar_main.xml" value="0.1046875" />
       </map>
     </option>
   </component>

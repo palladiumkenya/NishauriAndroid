@@ -6,9 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity2">
 
+
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="260dp"
+        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -35,6 +39,7 @@
             </FrameLayout>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
 
@@ -262,7 +267,7 @@
                         android:textStyle="bold"
                         />
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/txt_sign_up"
+                        android:id="@+id/txt_sign_up1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 

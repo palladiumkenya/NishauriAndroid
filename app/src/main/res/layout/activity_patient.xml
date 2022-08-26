@@ -42,7 +42,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-
+1````````````````
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -155,7 +155,7 @@
 
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_login"
+                        android:id="@+id/btn_login77"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:fadingEdge="horizontal"
@@ -164,7 +164,7 @@
                         android:textAllCaps="true"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
-                        android:onClick="gotoHome" />
+                        />
 
 
                     <com.google.android.material.button.MaterialButton
