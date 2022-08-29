@@ -33,7 +33,9 @@ import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.config.VolleyErrors;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
+import com.example.mhealth.appointment_diary.tables.UrlTable;
 import com.google.android.material.textfield.TextInputLayout;
+import com.orm.SugarRecord;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -291,6 +293,9 @@ public class HeiFinalOutcomeFragment extends Fragment {
     }
 
     private void searchHei() {
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;
+
         JSONObject payload = new JSONObject();
         try {
             payload.put("hei_no", search_hei_no.getText().toString());
@@ -303,7 +308,7 @@ public class HeiFinalOutcomeFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.BASE_URL+Config.SEARCH_HEI_FINAL1, payload, new Response.Listener<JSONObject>() {
+                z+Config.SEARCH_HEI_FINAL1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -502,6 +507,9 @@ public class HeiFinalOutcomeFragment extends Fragment {
 
 
     private void updateFinalOutcome() {
+
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;
         JSONObject payload = new JSONObject();
         try {
             payload.put("hei_no", HEI_NO);
@@ -518,7 +526,7 @@ public class HeiFinalOutcomeFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.BASE_URL+Config.POST_FINAL_OUTOME1, payload, new Response.Listener<JSONObject>() {
+                z+Config.POST_FINAL_OUTOME1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

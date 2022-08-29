@@ -35,7 +35,9 @@ import com.example.mhealth.appointment_diary.privecy;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Myaffiliation;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
+import com.example.mhealth.appointment_diary.tables.UrlTable;
 import com.facebook.stetho.Stetho;
+import com.orm.SugarRecord;
 
 import java.util.List;
 
@@ -51,6 +53,8 @@ public class LoginActivity extends AppCompatActivity {
     TextView forgetpass;
     LoadMessages lm;
     String myaff;
+
+    String z, zz;
 
 
     ProgressDialog progressDialog;
@@ -69,13 +73,23 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
 
+        /*UrlTable urlTable =new UrlTable(base_url, stage_name);
+        urlTable.save();*/
+
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        z= _url.base_url1;
+        zz =_url.stage_name1;
+
+        Toast.makeText(LoginActivity.this, zz, Toast.LENGTH_LONG).show();
+
+
 
 
         connect =findViewById(R.id.connected_to);
        // selekt =findViewById(R.id.select_server);
 
         //connect.setText("You are connected to" + " " + Config.STAGE_NAME + " " + "server");
-        connect.setText(Config.STAGE_NAME);
+        connect.setText(zz);
         connect.setTextColor(Color.parseColor("#F32013"));
        /* selekt.setOnClickListener(new OnClickListener() {
             @Override

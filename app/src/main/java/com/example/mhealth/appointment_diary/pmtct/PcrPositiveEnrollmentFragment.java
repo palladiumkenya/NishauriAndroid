@@ -32,6 +32,8 @@ import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.config.VolleyErrors;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
+import com.example.mhealth.appointment_diary.tables.UrlTable;
+import com.orm.SugarRecord;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -416,6 +418,9 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
     }
 
     private void searchPcr() {
+
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;
         JSONObject payload = new JSONObject();
         try {
             payload.put("hei_no", search_hei_no.getText().toString());
@@ -428,7 +433,7 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.BASE_URL+Config.SEARCH_PCR1, payload, new Response.Listener<JSONObject>() {
+                z+Config.SEARCH_PCR1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -584,6 +589,9 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
 
 
     private void updatePcr() {
+
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;
         JSONObject payload = new JSONObject();
         try {
             payload.put("hei_no", hei_no.getText().toString());
@@ -604,7 +612,7 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PUT,
-                Config.BASE_URL+Config.UPDATE_PCR1+SRV_ID, payload, new Response.Listener<JSONObject>() {
+                z+Config.UPDATE_PCR1+SRV_ID, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

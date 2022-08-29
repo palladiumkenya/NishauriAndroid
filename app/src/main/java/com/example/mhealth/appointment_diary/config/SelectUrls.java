@@ -24,7 +24,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.loginmodule.LoginActivity;
+import com.example.mhealth.appointment_diary.tables.UrlTable;
 import com.example.mhealth.appointment_diary.tables.urlModel;
+import com.orm.SugarRecord;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +41,8 @@ public class SelectUrls extends AppCompatActivity {
     ArrayList<String> urlModelArrayList;
     ArrayList<urlModel> names;
     Spinner spinner1;
+
+    public String z, zz;
 
     int dataId;
     String base_url;
@@ -73,21 +77,31 @@ public class SelectUrls extends AppCompatActivity {
          btn_prcd.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 editor.putString("keyName", base_url);
+
+                 UrlTable urlTable =new UrlTable(base_url, stage_name);
+                 urlTable.save();
+
+                 UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+                 z= _url.base_url1;
+                 zz =_url.stage_name1;
+
+
+
+                /* editor.putString("keyName", base_url);
                  editor.apply();
 
-                 String getValue = sharedPreferences.getString("keyName", "defaultValue");
+                 String getValue = sharedPreferences.getString("keyName", "defaultValue");*/
 
                  // Toast.makeText(MainActivity.this, x, Toast.LENGTH_SHORT).show();
 
 
-                 if (getValue.equals("defaultValue")){
+                 if (dataId!=1 && dataId!=2){
                      Toast.makeText(SelectUrls.this, "Invalid", Toast.LENGTH_LONG).show();
                  }else {
                      //Toast.makeText(SelectUrls.this, getValue, Toast.LENGTH_LONG).show();
                      Intent intent = new Intent(SelectUrls.this, Config.class);
-                     intent.putExtra("url", getValue);
-                     intent.putExtra("stage_key", stage_name);
+                     intent.putExtra("url", z);
+                     intent.putExtra("stage_key", zz);
                      startActivity(intent);
                  }
 

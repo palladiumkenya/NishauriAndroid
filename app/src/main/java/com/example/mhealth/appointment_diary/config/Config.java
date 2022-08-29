@@ -16,13 +16,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.loginmodule.LoginActivity;
+import com.example.mhealth.appointment_diary.tables.UrlTable;
+import com.orm.SugarRecord;
 
 public class Config extends AppCompatActivity {
 
-    public static String BASE_URL= "";
+   // public static String BASE_URL= "";
     //https://ushaurinode.mhealthkenya.co.ke
 
     public static String STAGE_NAME= "";
+    public static String z, zz;
 
 
     //public static final String mainShortcode="40146"; CHANGED TO BELOW
@@ -95,27 +98,35 @@ public class Config extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config);
 
+
+
+
+
         TextView x =findViewById(R.id.show);
         Button xx =findViewById(R.id.show1);
 
         //String z;
 
-        Bundle bundle =getIntent().getExtras();
-        BASE_URL= bundle.getString("url");
-        STAGE_NAME =bundle.getString("stage_key");
+       /* Bundle bundle =getIntent().getExtras();
+        z= bundle.getString("url");
+        zz =bundle.getString("stage_key");*/
         getAlert();
 
-        x.setText("You are connected to" + " " +STAGE_NAME);
+        x.setText("You are connected to" + " " +zz);
         //Toast.makeText(Config.this, BASE_URL, Toast.LENGTH_LONG).show();
         x.setTextColor(Color.parseColor("#F32013"));
 
     }
 
     private void getAlert(){
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        z= _url.base_url1;
+        zz=_url.stage_name1;
+
         AlertDialog.Builder builder1 = new AlertDialog.Builder(Config.this);
         builder1.setIcon(android.R.drawable.ic_dialog_alert);
         builder1.setTitle("You are connected to");
-        builder1.setMessage( STAGE_NAME);
+        builder1.setMessage( zz);
         builder1.setCancelable(false);
 
         builder1.setPositiveButton(

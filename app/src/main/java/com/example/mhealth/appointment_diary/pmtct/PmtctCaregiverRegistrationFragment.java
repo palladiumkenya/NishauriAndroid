@@ -32,6 +32,8 @@ import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.config.VolleyErrors;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
+import com.example.mhealth.appointment_diary.tables.UrlTable;
+import com.orm.SugarRecord;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -309,6 +311,8 @@ public class PmtctCaregiverRegistrationFragment extends Fragment {
 
 
     private void registerHei(){
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;
         JSONObject payload = new JSONObject();
         try {
             payload.put("phone_no", phone_no);
@@ -331,7 +335,7 @@ public class PmtctCaregiverRegistrationFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.BASE_URL+Config.REGISTER_HEI_WITH_CAREGIVER1, payload, new Response.Listener<JSONObject>() {
+                z+Config.REGISTER_HEI_WITH_CAREGIVER1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

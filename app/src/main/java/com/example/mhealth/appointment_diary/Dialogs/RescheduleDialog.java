@@ -33,7 +33,9 @@ import com.example.mhealth.appointment_diary.models.Appointment;
 import com.example.mhealth.appointment_diary.models.Hei;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
+import com.example.mhealth.appointment_diary.tables.UrlTable;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.orm.SugarRecord;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -169,6 +171,8 @@ public class RescheduleDialog extends BottomSheetDialogFragment {
 
 
     private void reschedule() {
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;
 
         JSONObject payload = new JSONObject();
         try {
@@ -183,7 +187,7 @@ public class RescheduleDialog extends BottomSheetDialogFragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PUT,
-                Config.BASE_URL+Config.RESCHEDULE_APT1+appointment.getAppointment_id(), payload, new Response.Listener<JSONObject>() {
+                z+Config.RESCHEDULE_APT1+appointment.getAppointment_id(), payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

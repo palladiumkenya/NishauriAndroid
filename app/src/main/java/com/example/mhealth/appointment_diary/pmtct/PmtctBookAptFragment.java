@@ -42,7 +42,9 @@ import com.example.mhealth.appointment_diary.config.VolleyErrors;
 import com.example.mhealth.appointment_diary.models.Hei;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
+import com.example.mhealth.appointment_diary.tables.UrlTable;
 import com.google.android.material.snackbar.Snackbar;
+import com.orm.SugarRecord;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -199,6 +201,9 @@ public class PmtctBookAptFragment extends Fragment {
     }
 
     private void getHeis() {
+
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;
         JSONObject payload = new JSONObject();
         try {
             payload.put("clinic_number", mfl_code.getText().toString()+ccc_no.getText().toString());
@@ -211,7 +216,7 @@ public class PmtctBookAptFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.BASE_URL+Config.GET_ATTACHED_HEIS1, payload, new Response.Listener<JSONObject>() {
+                z+Config.GET_ATTACHED_HEIS1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

@@ -94,7 +94,7 @@
             android:configChanges="orientation|screenSize"/>-->
 
         <activity
-            android:name=".config.SelectUrls"
+            android:name=".config.HelperActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true">
             <intent-filter>
@@ -103,6 +103,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".config.SelectUrls"
+            android:configChanges="orientation|screenSize" />
+
+
        <activity
             android:name=".loginmodule.LoginActivity"
             android:configChanges="orientation|screenSize" />

@@ -25,6 +25,8 @@ import com.example.mhealth.appointment_diary.Progress.Progress;
 import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.models.Appointments;
 import com.example.mhealth.appointment_diary.tables.Mflcode;
+import com.example.mhealth.appointment_diary.tables.UrlTable;
+import com.orm.SugarRecord;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,7 +49,7 @@ import static com.android.volley.Request.Method.POST;
 
 public class AccessServer {
 
-
+    public String z;
 
     Context ctx;
 
@@ -94,10 +96,14 @@ public class AccessServer {
 
     public void sendDetailsToDb(final String message) throws MalformedURLException, URISyntaxException {
 
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        z= _url.base_url1;
+        //zz =_url.stage_name1;
+
         pr.showProgress("Sending message...");
 
         //start url encoding the url to remove special characters
-        String urlStr = Config.BASE_URL+Config.SENDDATATODB_URL1+message;
+        String urlStr = z+Config.SENDDATATODB_URL1+message;
         URL url= new URL(urlStr);
         URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
         urlStr=uri.toASCIIString();
@@ -144,11 +150,13 @@ public class AccessServer {
 
 
     public void sendDetailsToDbPost(final String msg, final String phone) {
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        z= _url.base_url1;
 
         pr.showProgress("Sending message.....");
         final int[] mStatusCode = new int[1];
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.BASE_URL+Config.SENDDATATODB_URL1,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, z+Config.SENDDATATODB_URL1,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -237,11 +245,13 @@ public class AccessServer {
 
 
     public void sendConfirmToDbPost(final String msg, final String phone, final String ON_DSD, final String second_outcome_code ) {
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        z= _url.base_url1;
 
         pr.showProgress("Sending message.....");
         final int[] mStatusCode = new int[1];
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.BASE_URL+Config.SENDDATATODB_URL1,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, z+Config.SENDDATATODB_URL1,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -356,6 +366,8 @@ public class AccessServer {
 
 
     public void getTodaysAppointmentMessages(final String phone){
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        z= _url.base_url1;
 
         Toast.makeText(ctx, ""+phone, Toast.LENGTH_SHORT).show();
 
@@ -365,7 +377,7 @@ public class AccessServer {
             final int[] mStatusCode = new int[1];
 
 
-            StringRequest stringRequest = new StringRequest(POST,  Config.BASE_URL+Config.GETTODAYSAPPOINTMENT_URL1,
+            StringRequest stringRequest = new StringRequest(POST,  z+Config.GETTODAYSAPPOINTMENT_URL1,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -523,6 +535,8 @@ public class AccessServer {
     //start get defaulter messages
 
     public void getDefaultersAppointmentMessages(final String phone){
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        z= _url.base_url1;
 
 
         try{
@@ -531,7 +545,7 @@ public class AccessServer {
             final int[] mStatusCode = new int[1];
 
 
-            StringRequest stringRequest = new StringRequest(POST,  Config.BASE_URL+Config.GETDEFAULTERSAPPOINTMENT_URL1,
+            StringRequest stringRequest = new StringRequest(POST,  z+Config.GETDEFAULTERSAPPOINTMENT_URL1,
 
                     new Response.Listener<String>() {
                         @Override
@@ -697,6 +711,8 @@ public class AccessServer {
 
 
     public void getUserMflCode(final String phone, final EditText phoneE){
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        z= _url.base_url1;
 
         //HttpsTrustManager.allowAllSSL();
 
@@ -709,7 +725,7 @@ public class AccessServer {
 
 
            // StringRequest stringRequest = new StringRequest(POST,Config.GETUSERMFLCODE_URL,
-                    StringRequest stringRequest = new StringRequest(POST, Config.BASE_URL+Config.GETUSERMFLCODE_URL1,
+                    StringRequest stringRequest = new StringRequest(POST, z+Config.GETUSERMFLCODE_URL1,
                     new Response.Listener<String>() {
 
 
@@ -887,12 +903,14 @@ public class AccessServer {
    //start function to remove fake defaulters
 
     public void removeFakeDefaulter(final String msg, final String phone) {
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        z= _url.base_url1;
 
         pr.showProgress("Sending message.....");
         final int[] mStatusCode = new int[1];
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.BASE_URL+Config.SENDDATATODB_URL1,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, z+Config.SENDDATATODB_URL1,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

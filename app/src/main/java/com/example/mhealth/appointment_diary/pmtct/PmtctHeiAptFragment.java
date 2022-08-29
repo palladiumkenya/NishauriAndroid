@@ -33,6 +33,8 @@ import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.config.VolleyErrors;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
+import com.example.mhealth.appointment_diary.tables.UrlTable;
+import com.orm.SugarRecord;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -285,6 +287,8 @@ public class PmtctHeiAptFragment extends Fragment {
 
 
     private void bookNormalTca() {
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;
         JSONObject payload = new JSONObject();
         try {
             payload.put("hei_number", hei_no.getText().toString());
@@ -302,7 +306,7 @@ public class PmtctHeiAptFragment extends Fragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.BASE_URL+Config.BOOK_HEI_ONLY_APT1, payload, new Response.Listener<JSONObject>() {
+                z+Config.BOOK_HEI_ONLY_APT1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

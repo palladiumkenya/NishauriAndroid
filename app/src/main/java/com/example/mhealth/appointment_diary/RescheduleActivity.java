@@ -35,6 +35,8 @@ import com.example.mhealth.appointment_diary.models.Hei;
 import com.example.mhealth.appointment_diary.pmtct.HeiAptDialog;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
+import com.example.mhealth.appointment_diary.tables.UrlTable;
+import com.orm.SugarRecord;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -138,6 +140,9 @@ public class RescheduleActivity extends AppCompatActivity {
     }
 
     private void searchApt() {
+
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;
         JSONObject payload = new JSONObject();
         try {
             payload.put("clinic_number", ccc_no.getText().toString());
@@ -150,7 +155,7 @@ public class RescheduleActivity extends AppCompatActivity {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.BASE_URL+Config.SEARCH_RESCHEDULE_APT1, payload, new Response.Listener<JSONObject>() {
+                z+Config.SEARCH_RESCHEDULE_APT1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

@@ -32,8 +32,10 @@ import com.example.mhealth.appointment_diary.config.VolleyErrors;
 import com.example.mhealth.appointment_diary.defaulters_diary.DefaulterMainActivity;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
+import com.example.mhealth.appointment_diary.tables.UrlTable;
 import com.example.mhealth.appointment_diary.utilitymodules.Appointment;
 import com.example.mhealth.appointment_diary.utilitymodules.SpinnerAdapter;
+import com.orm.SugarRecord;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,6 +60,8 @@ public class DCMActivity extends AppCompatActivity {
     private Button btn_check,btn_submit_apt,btn_dcm_submit_apt;
 
     SweetAlertDialog mdialog;
+
+   // public String z;
 
 
 
@@ -330,6 +334,9 @@ public class DCMActivity extends AppCompatActivity {
         });
 
         btn_dcm_submit_apt.setOnClickListener(new View.OnClickListener() {
+
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+          String  z=  _url.base_url1;
             @Override
             public void onClick(View v) {
                 Log.e("months:", String.valueOf(months));
@@ -345,15 +352,15 @@ public class DCMActivity extends AppCompatActivity {
 
                         }else if (ON_DCM_STATUS.equals("NOT on DSD")){
                             if (validateNotOnDcm())
-                                bookNormalTca(Config.BASE_URL+Config.NOT_ON_DCM_BOOKING1);
+                                bookNormalTca(z+Config.NOT_ON_DCM_BOOKING1);
                         }
                     }else if (STABILITY_LEVEL.equals("Unstable")){
                         if (validateUnstable())
-                            bookNormalTca(Config.BASE_URL+Config.UNSTABLE_BOOKING1);
+                            bookNormalTca(z+Config.UNSTABLE_BOOKING1);
                     }
                 }else {
                     if (validateWellAdvanced())
-                        bookNormalTca(Config.BASE_URL+Config.WELL_ADVANCED_BOOKING1);
+                        bookNormalTca(z+Config.WELL_ADVANCED_BOOKING1);
                 }
             }
         });
@@ -374,17 +381,23 @@ public class DCMActivity extends AppCompatActivity {
                                 bookOnDcm();
 
                         }else if (ON_DCM_STATUS.equals("NOT on DSD")){
+                            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+                            String  z=  _url.base_url1;
                             if (validateNotOnDcm())
-                                bookNormalTca(Config.BASE_URL+Config.NOT_ON_DCM_BOOKING1);
+                                bookNormalTca(z+Config.NOT_ON_DCM_BOOKING1);
 
                         }
                     }else if (STABILITY_LEVEL.equals("Unstable")){
+                        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+                        String  z=  _url.base_url1;
                         if (validateUnstable())
-                            bookNormalTca(Config.BASE_URL+Config.UNSTABLE_BOOKING1);
+                            bookNormalTca(z+Config.UNSTABLE_BOOKING1);
                     }
                 }else {
+                    UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+                    String  z=  _url.base_url1;
                     if (validateWellAdvanced())
-                        bookNormalTca(Config.BASE_URL+Config.NOT_ON_DCM_BOOKING1);
+                        bookNormalTca(z+Config.NOT_ON_DCM_BOOKING1);
                 }
             }
         });
@@ -757,6 +770,9 @@ public class DCMActivity extends AppCompatActivity {
 
     private void bookOnDcm() {
 
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;
+
         JSONObject payload = new JSONObject();
         try {
             payload.put("clinic_number", mfl_code.getText().toString()+ccc_no.getText().toString());
@@ -773,7 +789,7 @@ public class DCMActivity extends AppCompatActivity {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.BASE_URL+Config.ON_DCM_BOOKING1, payload, new Response.Listener<JSONObject>() {
+                z+Config.ON_DCM_BOOKING1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -912,6 +928,9 @@ public class DCMActivity extends AppCompatActivity {
     }
 
     private void getDuration() {
+
+        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;
         JSONObject payload = new JSONObject();
         try {
             payload.put("clinic_number", mfl_code.getText().toString()+ccc_no.getText().toString());
@@ -924,7 +943,7 @@ public class DCMActivity extends AppCompatActivity {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                Config.BASE_URL+Config.GET_ENROLLMENT_DURATION1, payload, new Response.Listener<JSONObject>() {
+                z+Config.GET_ENROLLMENT_DURATION1, payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
