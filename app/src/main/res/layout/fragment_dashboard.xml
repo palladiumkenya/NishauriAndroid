@@ -353,7 +353,7 @@
                     android:layout_marginRight="@dimen/spacing_xsmall"
                     android:layout_marginTop="@dimen/spacing_xsmall"
                     android:layout_weight="1"
-                    android:visibility="visible"
+                    android:visibility="invisible"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp">
 
