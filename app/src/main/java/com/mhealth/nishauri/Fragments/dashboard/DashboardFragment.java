@@ -1,6 +1,8 @@
 package com.mhealth.nishauri.Fragments.dashboard;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,14 +12,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.fxn.stash.Stash;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Models.User;
+import com.mhealth.nishauri.Models.ViralLoad;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
 
@@ -31,8 +40,22 @@ import butterknife.Unbinder;
 
 import static com.mhealth.nishauri.utils.AppController.TAG;
 
+import java.util.ArrayList;
+
 
 public class DashboardFragment extends Fragment {
+
+    private ArrayList<ViralLoad> viralLoadArrayList;
+
+    private ProgressDialog pDialog;
+
+
+    ArrayList yAxis;
+    ArrayList yValues;
+    ArrayList xAxis1;
+    BarEntry values ;
+    //BarChart chart;
+    BarData data;
 
     private Unbinder unbinder;
     private View root;
@@ -91,6 +114,9 @@ public class DashboardFragment extends Fragment {
     @BindView(R.id.tv_unsuppressed_days)
     TextView tv_unsuppressed_days;
 
+    @BindView(R.id.chart1)
+    BarChart chart2;
+
 
     public void onAttach(Context ctx) {
         super.onAttach(ctx);
@@ -113,11 +139,230 @@ public class DashboardFragment extends Fragment {
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
         loadDashboardDetails();
+        pDialog = new ProgressDialog(context);
+        pDialog.setTitle("Loading...");
+        pDialog.setMessage("Getting Results...");
+        pDialog.setCancelable(true);
+
+        viralLoadArrayList = new ArrayList<>();
+        loadViralLoad();
 
         return root;
     }
 
+    //load vl
 
+    private void loadViralLoad() {
+
+       /* xAxis1 = new ArrayList();
+        yAxis = null;
+        yValues = new ArrayList();*/
+
+
+
+
+        String auth_token = loggedInUser.getAuth_token();
+
+
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.VIRAL_LOAD)
+                .addHeaders("Authorization","Token "+ auth_token)
+                .addHeaders("Content-Type", "application.json")
+                .addHeaders("Accept", "*/*")
+                .addHeaders("Accept", "gzip, deflate, br")
+                .addHeaders("Connection","keep-alive")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+                        Log.e(TAG, response.toString());
+
+
+
+                      //  viralLoadArrayList.clear();
+
+
+
+                        try {
+
+                            String  message = response.has("message") ? response.getString("message") : "" ;
+
+
+                            if (message.contains("No results for the given CCC Number were found")){
+                               // no_result_lyt.setVisibility(View.VISIBLE);
+                                Snackbar.make(root.findViewById(R.id.frag_dashboard),message, Snackbar.LENGTH_LONG).show();
+
+                            }
+                            JSONArray myArray = response.getJSONArray("data");
+
+
+                            if (myArray.length() > 0){
+
+
+                                for (int i = 0; i < myArray.length(); i++) {
+
+                                    JSONObject item = (JSONObject) myArray.get(i);
+
+
+                                    int  id = item.has("id") ? item.getInt("id") : 0;
+                                    String r_id = item.has("r_id") ? item.getString("r_id") : "";
+                                    String result_type = item.has("result_type") ? item.getString("result_type") : "";
+                                    String result_content = item.has("result_content") ? item.getString("result_content") : "";
+                                    String date_collected = item.has("date_collected") ? item.getString("date_collected") : "";
+                                    String lab_name = item.has("lab_name") ? item.getString("lab_name") : "";
+                                    int  user = item.has("user") ? item.getInt("user") : 0;
+
+
+                                    try {
+                                        //int x= Integer.parseInt(obj.getResult_content());
+                                        //if (x!= String)
+                                        //String sample = obj.getResult_content();
+                                        char[] chars = result_content.toCharArray();
+                                        StringBuilder sb = new StringBuilder();
+                                        for(char c : chars){
+                                            if(Character.isDigit(c)){
+                                                ArrayList<BarEntry> entries = new ArrayList<>();
+                                                entries.add(new BarEntry(Float.parseFloat(result_content), 0));
+                                                entries.add(new BarEntry(Float.parseFloat(result_content), 1));
+                                                entries.add(new BarEntry(Float.parseFloat(result_content), 2));
+
+                                                BarDataSet dataset = new BarDataSet(entries, "");
+
+                                                ArrayList<String> labels = new ArrayList<String>();
+                                                labels.add(date_collected);
+                                                labels.add(date_collected);
+                                                labels.add(date_collected);
+
+                                                BarData bardata = new BarData(labels, dataset);
+                                                dataset.setColors(ColorTemplate.JOYFUL_COLORS);
+                                                chart2.setData(bardata);
+                                                chart2.animateY(5000);
+                                                chart2.animateX(3000);
+
+
+                                            }
+
+                                        }
+
+
+                                    }catch (NumberFormatException e){
+                                        e.getStackTrace();
+
+                                    }
+
+
+
+
+
+                                   /* try {
+                                        //int x= Integer.parseInt(obj.getResult_content());
+                                        //if (x!= String)
+                                       // String sample = obj.getResult_content();
+                                        char[] chars = result_content.toCharArray();
+                                        StringBuilder sb = new StringBuilder();
+                                        for(char c : chars){
+                                            if(Character.isDigit(c)){
+
+
+                                                xAxis1.add(date_collected);
+
+                                                values = new BarEntry(Float.parseFloat(result_content), i);
+                                                yValues.add(values);
+                                            }
+
+                                        }
+
+
+                                    }catch (NumberFormatException e){
+                                        e.getStackTrace();
+
+                                    }*/
+
+
+                                    //ViralLoad newResult = new ViralLoad(id,r_id,result_type,result_content,date_collected,lab_name,user);
+
+                                  //  viralLoadArrayList.add(newResult);
+                                    //mAdapter.notifyDataSetChanged();
+
+
+
+                                   /* xAxis1.add(date_collected);
+
+                                    values = new BarEntry(Integer.parseInt(result_content),i);
+                                    yValues.add(values);*/
+
+
+
+                                }
+
+                            }else if (response.getJSONObject("data").has("message")){
+                                //not data found
+
+                               /* if (pDialog != null && pDialog.isShowing()) {
+                                    pDialog.hide();
+                                    pDialog.cancel();
+                                }*/
+
+                                Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                           /* if (pDialog != null && pDialog.isShowing()) {
+                                pDialog.hide();
+                                pDialog.cancel();
+                            }*/
+                        }
+
+                       // BarDataSet barDataSet1 = new BarDataSet(yValues, "Goals LaLiga 16/17");
+                       // barDataSet1.setColor(Color.rgb(0, 82, 159));
+
+                        /*yAxis = new ArrayList();
+                        yAxis.add(barDataSet1);
+                        String names[]= (String[]) xAxis1.toArray(new String[xAxis1.size()]);
+                        data = new BarData(names,yAxis);
+                        chart2.setData(data);
+                        chart2.setDescription("");
+                        chart2.animateXY(2000, 2000);
+                        chart2.invalidate();*/
+                        //pd.hide();
+
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+
+                        if (pDialog != null && pDialog.isShowing()) {
+                            pDialog.hide();
+                            pDialog.cancel();
+                        }
+
+
+                        Log.e(TAG, String.valueOf(error.getErrorCode()));
+                        if (error.getErrorCode() == 0){
+
+                           // no_result_lyt.setVisibility(View.VISIBLE);
+                        }
+                        else{
+
+                           // error_lyt.setVisibility(View.VISIBLE);
+                            Snackbar.make(root.findViewById(R.id.frag_dashboard), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+
+                        }
+
+
+                    }
+                });
+    }
+
+
+
+
+    //load dashboard data
     private void loadDashboardDetails(){
 
         String auth_token = loggedInUser.getAuth_token();

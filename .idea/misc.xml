@@ -33,7 +33,10 @@
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/menu/activity_main_drawer.xml" value="0.14375" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/menu/bottom_nav_menu.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/menu/main.xml" value="0.18854166666666666" />
-        <entry key="..\:/Users/This/Nishauri_1.1.1/app/src/main/res/layout/fragment_dashboard.xml" value="0.19479166666666667" />
+        <entry key="..\:/Users/This/Nishauri_1.1.1/app/src/main/res/layout/fragment_dashboard.xml" value="0.33" />
+        <entry key="..\:/Users/This/Nishauri_1.1.1/app/src/main/res/layout/fragment_viral_load_results.xml" value="0.2" />
+        <entry key="..\:/Users/This/Nishauri_1.1.1/app/src/main/res/layout/item_eid_results.xml" value="0.153125" />
+        <entry key="..\:/Users/This/Nishauri_1.1.1/app/src/main/res/layout/item_viral_load_results.xml" value="0.2" />
       </map>
     </option>
   </component>

@@ -43,17 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:orientation="horizontal">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txt_viral_load"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/spacing_middle"
-                    android:text="VL:"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
-                    android:textColor="@color/colorAccent"/>
-
+                android:orientation="vertical">
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txt_viral_load_result"
                     android:layout_width="wrap_content"
@@ -61,6 +51,47 @@
                     android:layout_weight="1"
                     android:padding="@dimen/spacing_middle"
                     android:text=" 900 copies/mL"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_viral_load"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_middle"
+                    android:text="Suppressed"
+                    android:visibility="gone"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
+                    android:textColor="@color/colorAccent"/>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_viral_load1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_middle"
+                    android:text="Unsupressed:"
+                    android:visibility="gone"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
+                    android:textColor="@color/colorAccent"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:visibility="gone"
+                    android:id="@+id/txt_viral_load_resultn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="@dimen/spacing_middle"
+                    android:text=" 900 copies/mL"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/Unsupressed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="@dimen/spacing_middle"
+                    android:visibility="gone"
+                    android:text="Unsupressed"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
 

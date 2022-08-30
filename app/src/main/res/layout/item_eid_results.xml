@@ -108,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_middle"
-                android:text="Please visit your facility urgently."
+                android:text="Kindly visit your doctor/healthcare provider as soon as possible."
                 android:textSize="@dimen/spacing_mlarge"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 android:textColor="@color/red_500"

@@ -1,6 +1,7 @@
 package com.mhealth.nishauri.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,7 @@ public class ViralLoadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
-        public TextView result_date;
+        public TextView result_date, sup, unsup;
         public TextView result;
 
 
@@ -43,6 +44,8 @@ public class ViralLoadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             super(v);
             result_date = (TextView) v.findViewById(R.id.txt_result_date);
             result = (TextView) v.findViewById(R.id.txt_viral_load_result);
+            unsup = (TextView) v.findViewById(R.id.txt_viral_load1);
+            sup = (TextView) v.findViewById(R.id.txt_viral_load);
 
         }
     }
@@ -64,6 +67,36 @@ public class ViralLoadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             view.result_date.setText(obj.getDate_collected());
             view.result.setText(obj.getResult_content() + " copies/mL");
+
+           /* if (obj.getResult_content() instanceof String ){
+                view.result.setTextColor(Color.parseColor("#F32013"));
+            }*/
+            /*if(Character.isDigit(Integer.parseInt(obj.getResult_content()))){
+                view.result.setTextColor(Color.parseColor("#F32013"));
+            }*/
+
+            try {
+                //int x= Integer.parseInt(obj.getResult_content());
+                //if (x!= String)
+                String sample = obj.getResult_content();
+                char[] chars = sample.toCharArray();
+                StringBuilder sb = new StringBuilder();
+                for(char c : chars){
+                    if(Character.isDigit(c)){
+                       // sb.append(c);
+                        view.result.setTextColor(Color.parseColor("#F32013"));
+                        view.unsup.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        view.sup.setVisibility(View.VISIBLE);
+                    }
+                }
+
+
+            }catch (NumberFormatException e){
+                e.getStackTrace();
+
+            }
 
         }
 

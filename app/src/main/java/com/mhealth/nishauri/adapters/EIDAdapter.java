@@ -1,6 +1,7 @@
 package com.mhealth.nishauri.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +73,8 @@ public class EIDAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             view.dependant.setText(obj.getDependant_name());
 
             if (obj.getResult_content().equals("Positive")){
+
+                view.result.setTextColor(Color.parseColor("#F32013"));
 
                 view.result_guidline.setVisibility(View.VISIBLE);
 

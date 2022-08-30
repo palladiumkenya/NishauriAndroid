@@ -712,6 +712,15 @@
 
             </LinearLayout>
 
+            <!--    Begin bar chart -->
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/chart1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <!-- end -->
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_large" />

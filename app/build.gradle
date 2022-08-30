@@ -16,7 +16,7 @@ android {
     defaultConfig {
         applicationId "com.mhealth.nishauri"
         minSdkVersion 19
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode 44
         versionName "1.1.0 Beta"
 
@@ -72,6 +72,9 @@ dependencies {
     implementation 'com.amitshekhar.android:android-networking:1.0.2'
 
     implementation 'com.airbnb.android:lottie:3.4.4'
+
+    //implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
 
     //Kommunicate sdk
         //implementation 'io.kommunicate.sdk:kommunicateui:2.4.1'
