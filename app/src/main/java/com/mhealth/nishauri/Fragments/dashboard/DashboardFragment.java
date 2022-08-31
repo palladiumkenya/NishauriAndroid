@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.EventLogTags;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.fxn.stash.Stash;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -27,6 +29,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.Models.ViralLoad;
+import com.mhealth.nishauri.Models.ViralLoads;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
 
@@ -41,19 +44,25 @@ import butterknife.Unbinder;
 import static com.mhealth.nishauri.utils.AppController.TAG;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class DashboardFragment extends Fragment {
 
-    private ArrayList<ViralLoad> viralLoadArrayList;
+    private ArrayList<ViralLoads> viralLoadArrayList = new ArrayList<>();
+
+    ArrayList<BarEntry> barEntryArrayList1;
+    ArrayList<String> labelsName1;
+    ArrayList<ViralLoads> viralLoads =new ArrayList<>();
+
 
     private ProgressDialog pDialog;
 
 
-    ArrayList yAxis;
+   /* ArrayList yAxis;
     ArrayList yValues;
     ArrayList xAxis1;
-    BarEntry values ;
+    BarEntry values ;*/
     //BarChart chart;
     BarData data;
 
@@ -117,6 +126,9 @@ public class DashboardFragment extends Fragment {
     @BindView(R.id.chart1)
     BarChart chart2;
 
+   /* @BindView(R.id.chart1)
+    BarChart chart3;*/
+
 
     public void onAttach(Context ctx) {
         super.onAttach(ctx);
@@ -144,7 +156,7 @@ public class DashboardFragment extends Fragment {
         pDialog.setMessage("Getting Results...");
         pDialog.setCancelable(true);
 
-        viralLoadArrayList = new ArrayList<>();
+       // viralLoadArrayList = new ArrayList<>();
         loadViralLoad();
 
         return root;
@@ -153,13 +165,6 @@ public class DashboardFragment extends Fragment {
     //load vl
 
     private void loadViralLoad() {
-
-       /* xAxis1 = new ArrayList();
-        yAxis = null;
-        yValues = new ArrayList();*/
-
-
-
 
         String auth_token = loggedInUser.getAuth_token();
 
@@ -176,7 +181,7 @@ public class DashboardFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-                        Log.e(TAG, response.toString());
+                        //Log.e(TAG, response.toString());
 
 
 
@@ -224,21 +229,27 @@ public class DashboardFragment extends Fragment {
                                             if(Character.isDigit(c)){
                                                 ArrayList<BarEntry> entries = new ArrayList<>();
                                                 entries.add(new BarEntry(Float.parseFloat(result_content), 0));
-                                                entries.add(new BarEntry(Float.parseFloat(result_content), 1));
-                                                entries.add(new BarEntry(Float.parseFloat(result_content), 2));
+                                                entries.add(new BarEntry(1200, 1));
 
-                                                BarDataSet dataset = new BarDataSet(entries, "");
+                                                //entries.add(new BarEntry(Float.parseFloat(String.valueOf(chars)), 0));
+                                                Log.d("", String.valueOf(chars));
+                                                //entries.add(new BarEntry(Float.parseFloat(result_content), 1));
+                                                //entries.add(new BarEntry(Float.parseFloat(result_content), 2));
+
+                                                BarDataSet dataset = new BarDataSet(entries, "Viral load trends");
 
                                                 ArrayList<String> labels = new ArrayList<String>();
                                                 labels.add(date_collected);
-                                                labels.add(date_collected);
-                                                labels.add(date_collected);
+                                                labels.add("2020-09-28");
+                                                //labels.add(date_collected);
 
                                                 BarData bardata = new BarData(labels, dataset);
                                                 dataset.setColors(ColorTemplate.JOYFUL_COLORS);
                                                 chart2.setData(bardata);
                                                 chart2.animateY(5000);
                                                 chart2.animateX(3000);
+
+
 
 
                                             }
@@ -350,6 +361,230 @@ public class DashboardFragment extends Fragment {
                         else{
 
                            // error_lyt.setVisibility(View.VISIBLE);
+                            Snackbar.make(root.findViewById(R.id.frag_dashboard), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+
+                        }
+
+
+                    }
+                });
+    }
+
+    private void loadViralLoad1() {
+
+        String auth_token = loggedInUser.getAuth_token();
+
+
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.VIRAL_LOAD)
+                .addHeaders("Authorization","Token "+ auth_token)
+                .addHeaders("Content-Type", "application.json")
+                .addHeaders("Accept", "*/*")
+                .addHeaders("Accept", "gzip, deflate, br")
+                .addHeaders("Connection","keep-alive")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+                        Log.e(TAG, response.toString());
+
+
+
+                        //  viralLoadArrayList.clear();
+
+
+
+                        try {
+
+                            String  message = response.has("message") ? response.getString("message") : "" ;
+
+
+                            if (message.contains("No results for the given CCC Number were found")){
+                                // no_result_lyt.setVisibility(View.VISIBLE);
+                                Snackbar.make(root.findViewById(R.id.frag_dashboard),message, Snackbar.LENGTH_LONG).show();
+
+                            }
+                            JSONArray myArray = response.getJSONArray("data");
+
+
+                            if (myArray.length() > 0){
+
+
+                                for (int i = 0; i < myArray.length(); i++) {
+
+                                    JSONObject item = (JSONObject) myArray.get(i);
+
+
+                                    int  id = item.has("id") ? item.getInt("id") : 0;
+                                    String r_id = item.has("r_id") ? item.getString("r_id") : "";
+                                    String result_type = item.has("result_type") ? item.getString("result_type") : "";
+                                    String result_content = item.has("result_content") ? item.getString("result_content") : "";
+                                    String date_collected = item.has("date_collected") ? item.getString("date_collected") : "";
+                                    String lab_name = item.has("lab_name") ? item.getString("lab_name") : "";
+                                    int  user = item.has("user") ? item.getInt("user") : 0;
+
+
+                                    try {
+                                        //int x= Integer.parseInt(obj.getResult_content());
+                                        //if (x!= String)
+                                        //String sample = obj.getResult_content();
+                                        char[] chars = result_content.toCharArray();
+                                        StringBuilder sb = new StringBuilder();
+                                        for(char c : chars){
+                                            if(Character.isDigit(c)){
+
+                                               // ArrayList<BarEntry> entries = new ArrayList<>();
+
+                                               // viralLoadArrayList.add((new ViralLoads(date_collected, result_content)));
+                                                barEntryArrayList1=new ArrayList<>();
+                                                labelsName1=new ArrayList<>();
+
+                                                viralLoadArrayList.clear();
+                                               viralLoadArrayList.add(new ViralLoads(date_collected, result_content));
+                                                for (int x=0; x<viralLoadArrayList.size(); x++){
+
+                                                    barEntryArrayList1.add(new BarEntry(x, (int) Float.parseFloat(result_content)));
+                                                    labelsName1.add(date_collected);
+
+                                                }
+
+                                                BarDataSet barDataSet =new BarDataSet(barEntryArrayList1, "Viral load trends");
+                                                barDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+                                               BarData barData =new BarData(labelsName1, barDataSet);
+                                                //chart3.setData(barData);
+
+                                               /* XAxis xAxis = chart3.getXAxis();
+                                                xAxis.setValueFormatter(new In);*/
+
+
+                                                /*barEntryArrayList1.add(new BarEntry(date_collected, result_content));
+                                                entries.add(new BarEntry(Float.parseFloat(result_content), 1));
+                                                entries.add(new BarEntry(Float.parseFloat(result_content), 2));*/
+
+                                                //BarDataSet dataset = new BarDataSet(entries, "");
+
+                                             /*   ArrayList<String> labels = new ArrayList<String>();
+                                                labels.add(date_collected);
+                                                labels.add(date_collected);
+                                                labels.add(date_collected);
+
+                                                BarData bardata = new BarData(labels, dataset);
+                                                dataset.setColors(ColorTemplate.JOYFUL_COLORS);
+                                                chart2.setData(bardata);
+                                                chart2.animateY(5000);
+                                                chart2.animateX(3000);*/
+
+
+                                            }
+
+                                        }
+
+
+                                    }catch (NumberFormatException e){
+                                        e.getStackTrace();
+
+                                    }
+
+
+
+
+
+                                   /* try {
+                                        //int x= Integer.parseInt(obj.getResult_content());
+                                        //if (x!= String)
+                                       // String sample = obj.getResult_content();
+                                        char[] chars = result_content.toCharArray();
+                                        StringBuilder sb = new StringBuilder();
+                                        for(char c : chars){
+                                            if(Character.isDigit(c)){
+
+
+                                                xAxis1.add(date_collected);
+
+                                                values = new BarEntry(Float.parseFloat(result_content), i);
+                                                yValues.add(values);
+                                            }
+
+                                        }
+
+
+                                    }catch (NumberFormatException e){
+                                        e.getStackTrace();
+
+                                    }*/
+
+
+                                    //ViralLoad newResult = new ViralLoad(id,r_id,result_type,result_content,date_collected,lab_name,user);
+
+                                    //  viralLoadArrayList.add(newResult);
+                                    //mAdapter.notifyDataSetChanged();
+
+
+
+                                   /* xAxis1.add(date_collected);
+
+                                    values = new BarEntry(Integer.parseInt(result_content),i);
+                                    yValues.add(values);*/
+
+
+
+                                }
+
+                            }else if (response.getJSONObject("data").has("message")){
+                                //not data found
+
+                               /* if (pDialog != null && pDialog.isShowing()) {
+                                    pDialog.hide();
+                                    pDialog.cancel();
+                                }*/
+
+                                Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                           /* if (pDialog != null && pDialog.isShowing()) {
+                                pDialog.hide();
+                                pDialog.cancel();
+                            }*/
+                        }
+
+                        // BarDataSet barDataSet1 = new BarDataSet(yValues, "Goals LaLiga 16/17");
+                        // barDataSet1.setColor(Color.rgb(0, 82, 159));
+
+                        /*yAxis = new ArrayList();
+                        yAxis.add(barDataSet1);
+                        String names[]= (String[]) xAxis1.toArray(new String[xAxis1.size()]);
+                        data = new BarData(names,yAxis);
+                        chart2.setData(data);
+                        chart2.setDescription("");
+                        chart2.animateXY(2000, 2000);
+                        chart2.invalidate();*/
+                        //pd.hide();
+
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+
+                        if (pDialog != null && pDialog.isShowing()) {
+                            pDialog.hide();
+                            pDialog.cancel();
+                        }
+
+
+                        Log.e(TAG, String.valueOf(error.getErrorCode()));
+                        if (error.getErrorCode() == 0){
+
+                            // no_result_lyt.setVisibility(View.VISIBLE);
+                        }
+                        else{
+
+                            // error_lyt.setVisibility(View.VISIBLE);
                             Snackbar.make(root.findViewById(R.id.frag_dashboard), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
 
                         }
