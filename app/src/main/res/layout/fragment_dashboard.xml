@@ -713,11 +713,11 @@
             </LinearLayout>
 
             <!--    Begin bar chart -->
-            <com.github.mikephil.charting.charts.BarChart
+           <!-- <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/chart1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                />-->
 
             <!-- end -->
 
@@ -740,8 +740,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_large" />
 
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/chart1"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                />
+
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -755,7 +762,7 @@
                     android:layout_marginLeft="@dimen/spacing_xsmall"
                     android:layout_marginRight="@dimen/spacing_xsmall"
                     android:layout_marginTop="@dimen/spacing_xsmall"
-                    android:visibility="visible"
+                    android:visibility="invisible"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp">
 
