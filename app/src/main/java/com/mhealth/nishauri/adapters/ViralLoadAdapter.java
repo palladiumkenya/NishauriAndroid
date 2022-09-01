@@ -5,12 +5,20 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mhealth.nishauri.Models.ViralLoad;
 import com.mhealth.nishauri.R;
+import com.skydoves.balloon.ArrowOrientation;
+import com.skydoves.balloon.ArrowPositionRules;
+import com.skydoves.balloon.Balloon;
+import com.skydoves.balloon.BalloonAnimation;
+import com.skydoves.balloon.BalloonSizeSpec;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +45,7 @@ public class ViralLoadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
         public TextView result_date, sup, unsup;
         public TextView result;
+        public ImageButton bt_expand;
 
 
 
@@ -46,6 +55,9 @@ public class ViralLoadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             result = (TextView) v.findViewById(R.id.txt_viral_load_result);
             unsup = (TextView) v.findViewById(R.id.txt_viral_load1);
             sup = (TextView) v.findViewById(R.id.txt_viral_load);
+            bt_expand=(ImageButton) v.findViewById(R.id.bt_expand2);
+
+
 
         }
     }
@@ -86,9 +98,80 @@ public class ViralLoadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                        // sb.append(c);
                         view.result.setTextColor(Color.parseColor("#F32013"));
                         view.unsup.setVisibility(View.VISIBLE);
+
+                        view.bt_expand.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                //Toast.makeText(context, "VL", Toast.LENGTH_SHORT).show();
+
+                                Balloon balloon = new Balloon.Builder(context).
+                                        setArrowSize(10)
+                                        .setArrowOrientation(ArrowOrientation.TOP)
+                                        .setArrowPositionRules(ArrowPositionRules.ALIGN_ANCHOR)
+                                        .setArrowPosition(0.5f)
+                                        //.setWidth(220) // sets 220dp width size.
+                                        .setWidth(BalloonSizeSpec.WRAP)
+
+                                        .setHeight(65)
+                                        .setTextSize(15f)
+                                        .setCornerRadius(4f)
+                                        .setAlpha(0.9f)
+                                        .setText("This could mean the beginning of treatment failure, Kindly visit your doctor/healthcare provider as soon as possible!")
+                                        .setTextIsHtml(true)
+                                        .setIconDrawable(ContextCompat.getDrawable(context, R.drawable.ic_profile))
+                                        .setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary))
+
+                                        .setBalloonAnimation(BalloonAnimation.FADE)
+
+                                        .setMarginLeft(14) // sets the left margin on the balloon.
+                                        .setMarginRight(14)
+
+
+                                        .build();
+                                balloon.showAlignBottom(view);
+                                balloon.show(view);
+                            }
+                        });
                     }
                     else{
                         view.sup.setVisibility(View.VISIBLE);
+                        view.bt_expand.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+
+                                Balloon balloon = new Balloon.Builder(context).
+                                        setArrowSize(10)
+                                        .setArrowOrientation(ArrowOrientation.TOP)
+                                        .setArrowPositionRules(ArrowPositionRules.ALIGN_ANCHOR)
+                                        .setArrowPosition(0.5f)
+                                        //.setWidth(220) // sets 220dp width size.
+                                        .setWidth(BalloonSizeSpec.WRAP)
+
+                                        .setHeight(65)
+                                        .setTextSize(15f)
+                                        .setCornerRadius(4f)
+                                        .setAlpha(0.9f)
+                                        .setText("This means you are adhering to your treatment well, " +
+                                                "Continue taking your medication as advised by your doctor/healthcare provider")
+                                        .setTextIsHtml(true)
+                                        .setIconDrawable(ContextCompat.getDrawable(context, R.drawable.ic_profile))
+                                        .setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary))
+
+                                        .setBalloonAnimation(BalloonAnimation.FADE)
+
+                                        .setMarginLeft(14) // sets the left margin on the balloon.
+                                        .setMarginRight(14)
+
+
+                                        .build();
+                                balloon.showAlignBottom(view);
+                                balloon.show(view);
+
+
+                            }
+                        });
+
                     }
                 }
 

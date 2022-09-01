@@ -13,12 +13,9 @@
         android:background="@android:color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal">
-
         <View
             android:layout_width="@dimen/spacing_large"
             android:layout_height="wrap_content" />
-
-
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/question"

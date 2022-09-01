@@ -13,8 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -97,6 +99,9 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.txt_facility)
     TextView txt_facility;
 
+    //@BindView(R.id.bt_expandT)
+    //ImageButton  bt_expand1;
+
 
 
 
@@ -143,6 +148,13 @@ public class HomeFragment extends Fragment {
         loadUpcomingAppointments();
 
         loadCurrentTreatments();
+
+       /* bt_expand1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(root.findViewById(R.id.frag_home), "Regimen" , Snackbar.LENGTH_LONG).show();
+            }
+        });*/
 
 
         btn_add_dependant.setOnClickListener(new View.OnClickListener() {

@@ -10,6 +10,9 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/spacing_medium"
         android:orientation="horizontal">
+        <View
+            android:layout_width="@dimen/spacing_large"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/txt_treatment_title"
@@ -28,7 +31,17 @@
             android:text="ART"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
+   <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/bt_expand1"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="@color/grey_60"
+
+            android:src="@drawable/ic_expand_arrow" />
+
     </LinearLayout>
+
 
     <View
         android:layout_width="match_parent"

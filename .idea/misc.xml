@@ -37,7 +37,16 @@
         <entry key="..\:/Users/This/Nishauri_1.1.1/app/src/main/res/layout/fragment_viral_load_results.xml" value="0.2" />
         <entry key="..\:/Users/This/Nishauri_1.1.1/app/src/main/res/layout/item_eid_results.xml" value="0.153125" />
         <entry key="..\:/Users/This/Nishauri_1.1.1/app/src/main/res/layout/item_viral_load_results.xml" value="0.2" />
+        <entry key="..\:/Users/vikog/Nishauri_1.1.1/app/src/main/res/layout/fragment_current_art.xml" value="0.1358695652173913" />
         <entry key="..\:/Users/vikog/Nishauri_1.1.1/app/src/main/res/layout/fragment_dashboard.xml" value="0.13632246376811594" />
+        <entry key="..\:/Users/vikog/Nishauri_1.1.1/app/src/main/res/layout/fragment_faqs.xml" value="0.11730072463768115" />
+        <entry key="..\:/Users/vikog/Nishauri_1.1.1/app/src/main/res/layout/fragment_home.xml" value="0.10677083333333333" />
+        <entry key="..\:/Users/vikog/Nishauri_1.1.1/app/src/main/res/layout/fragment_treatments.xml" value="0.11730072463768115" />
+        <entry key="..\:/Users/vikog/Nishauri_1.1.1/app/src/main/res/layout/item_current_art.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/vikog/Nishauri_1.1.1/app/src/main/res/layout/item_faq.xml" value="0.11730072463768115" />
+        <entry key="..\:/Users/vikog/Nishauri_1.1.1/app/src/main/res/layout/item_treatment_home.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/vikog/Nishauri_1.1.1/app/src/main/res/layout/item_upcoming_appointment.xml" value="0.11730072463768115" />
+        <entry key="..\:/Users/vikog/Nishauri_1.1.1/app/src/main/res/layout/item_viral_load_results.xml" value="0.12" />
       </map>
     </option>
   </component>

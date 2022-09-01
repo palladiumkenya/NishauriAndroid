@@ -64,6 +64,16 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
 
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/bt_expand3"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:tint="@color/grey_60"
+
+                    android:src="@drawable/ic_expand_arrow" />
+
+
             </LinearLayout>
 
             <LinearLayout
