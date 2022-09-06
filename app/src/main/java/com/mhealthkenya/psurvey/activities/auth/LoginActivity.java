@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

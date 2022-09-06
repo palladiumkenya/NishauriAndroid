@@ -270,6 +270,12 @@ public class SignUpActivity extends AppCompatActivity {
                         Log.e(TAG, error.getErrorBody());
 
                         Snackbar.make(findViewById(R.id.signup_lyt), "Error: "+error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+
+                        /*if (error.getErrorBody().contains("This field may not be blank.")) {
+
+                            Snackbar.make(findViewById(R.id.signup_lyt), "Please fill all fields", Snackbar.LENGTH_LONG).show();
+                        }*/
+                   // }
                     }
                 });
 

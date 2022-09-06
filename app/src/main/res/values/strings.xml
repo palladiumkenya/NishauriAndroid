@@ -22,6 +22,7 @@
     <string name="survey">Begin Survey</string>
     <string name="next">Next</string>
     <string name="new_survey">New Survey</string>
+    <string name="new_query">New Questionnaire</string>
     <string name="done">Done</string>
     <string name="logout">Log out</string>
     <string name="login">Login</string>
