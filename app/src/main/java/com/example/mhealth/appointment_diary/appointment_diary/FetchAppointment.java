@@ -234,7 +234,15 @@ public class FetchAppointment extends AppCompatActivity implements SmsReceiver.M
 
         } else {
 
-            populateListView();
+            Handler handler = new Handler();
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    populateListView();
+                }
+            };handler.post(runnable);
+
+            //populateListView();
 
 
         }
@@ -252,7 +260,14 @@ public class FetchAppointment extends AppCompatActivity implements SmsReceiver.M
                 if(chkInternet.isInternetAvailable()){
 
                     Toast.makeText(FetchAppointment.this, "going online", Toast.LENGTH_SHORT).show();
-                    loadMessagesOnline();
+                    Handler handler = new Handler();
+                    Runnable runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            loadMessagesOnline();
+                        }
+                    }; handler.post(runnable);
+                    //loadMessagesOnline();
 
 //        triggerAppointmentMessages();
 
@@ -292,14 +307,30 @@ public class FetchAppointment extends AppCompatActivity implements SmsReceiver.M
         if(chkInternet.isInternetAvailable()){
 
             acs.getTodaysAppointmentMessages(getUserPhoneNumber());
-            populateListView();
+            Handler handler = new Handler();
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    populateListView();
+                }
+            };handler.post(runnable);
+
+            //populateListView();
 
         }
         else{
 
         }
 
-        populateListView();
+        Handler handler = new Handler();
+        Runnable r =new Runnable() {
+            @Override
+            public void run() {
+                populateListView();
+            }
+        };handler.post(r);
+
+        //populateListView();
     }
 
     @Override

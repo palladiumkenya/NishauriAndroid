@@ -78,12 +78,29 @@ public class SelectUrls extends AppCompatActivity {
              @Override
              public void onClick(View view) {
 
-                 UrlTable urlTable =new UrlTable(base_url, stage_name);
-                 urlTable.save();
 
-                 UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+                try {
+                    UrlTable urlTable =new UrlTable(base_url, stage_name);
+                    urlTable.save();
+                }catch(Exception e){
+
+                }
+                 /*UrlTable urlTable =new UrlTable(base_url, stage_name);
+                 urlTable.save();*/
+
+                 try {
+
+                     UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+                     z= _url.base_url1;
+                     zz =_url.stage_name1;
+
+                 }catch(Exception e){
+                     //e.printStackTrace();
+                 }
+
+                /* UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
                  z= _url.base_url1;
-                 zz =_url.stage_name1;
+                 zz =_url.stage_name1;*/
 
 
 

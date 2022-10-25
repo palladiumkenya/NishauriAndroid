@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,6 +40,7 @@ import com.example.mhealth.appointment_diary.tables.UrlTable;
 import com.facebook.stetho.Stetho;
 import com.orm.SugarRecord;
 
+import java.io.File;
 import java.util.List;
 
 //import android.support.v8.app.NotificationCompat;
@@ -73,24 +75,40 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
 
+
+
         /*UrlTable urlTable =new UrlTable(base_url, stage_name);
         urlTable.save();*/
 
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        connect =findViewById(R.id.connected_to);
+
+        try {
+
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+            z= _url.base_url1;
+            zz =_url.stage_name1;
+            Toast.makeText(LoginActivity.this, zz, Toast.LENGTH_LONG).show();
+            connect.setText(zz);
+            connect.setTextColor(Color.parseColor("#F32013"));
+
+        }catch (Exception e){
+            Log.d("No baseURL", e.getMessage());
+        }
+
+       /* UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
         z= _url.base_url1;
         zz =_url.stage_name1;
-
         Toast.makeText(LoginActivity.this, zz, Toast.LENGTH_LONG).show();
+        connect.setText(zz);
+        connect.setTextColor(Color.parseColor("#F32013"));*/
 
 
-
-
-        connect =findViewById(R.id.connected_to);
+       // connect =findViewById(R.id.connected_to);
        // selekt =findViewById(R.id.select_server);
 
         //connect.setText("You are connected to" + " " + Config.STAGE_NAME + " " + "server");
-        connect.setText(zz);
-        connect.setTextColor(Color.parseColor("#F32013"));
+        //connect.setText(zz);
+       // connect.setTextColor(Color.parseColor("#F32013"));
        /* selekt.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

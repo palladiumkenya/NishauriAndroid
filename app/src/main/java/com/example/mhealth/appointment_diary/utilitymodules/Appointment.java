@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -91,10 +92,21 @@ public class Appointment extends AppCompatActivity implements AdapterView.OnItem
         final Button btnRSubmit = (Button) findViewById(R.id.btnRSubmit);
         btnRSubmit.setEnabled(true);
 
-        populateAppointment();
-        populatePrevious();
 
-        setSpinnerListeners();
+        Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                populateAppointment();
+                populatePrevious();
+
+                setSpinnerListeners();
+            }
+        };handler.post(runnable);
+
+       /* populateAppointment();
+        populatePrevious();
+        setSpinnerListeners();*/
 
 
 
@@ -168,8 +180,19 @@ public class Appointment extends AppCompatActivity implements AdapterView.OnItem
             upnE.setText("");
             aotherE.setText("");
 
-            populateAppointment();
-            populatePrevious();
+
+            Handler handler = new Handler();
+
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    populateAppointment();
+                    populatePrevious();
+                }
+            };handler.post(runnable);
+
+           /* populateAppointment();
+            populatePrevious();*/
         }
         catch(Exception e){
 

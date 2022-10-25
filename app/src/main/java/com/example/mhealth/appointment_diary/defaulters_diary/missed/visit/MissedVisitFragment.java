@@ -3,6 +3,8 @@ package com.example.mhealth.appointment_diary.defaulters_diary.missed.visit;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -167,8 +169,14 @@ public class MissedVisitFragment extends Fragment {
 
         }
 
-
-        populateListView();
+        Handler handler =new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                populateListView();
+            }
+        }; handler.post(runnable);
+        //populateListView();
 
 
         return view;

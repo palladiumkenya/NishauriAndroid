@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,21 +53,61 @@ public class DefaulterFragment extends Fragment {
         View view = inflater.inflate(R.layout.defaulted_fragment, container, false);
 
         if (savedInstanceState == null) {
-            getFragmentManager()
+            Handler handler = new Handler();
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.frame2, new DefaulterCallFragment())
+                            .commit();
+                }
+            }; handler.post(runnable);
+
+
+
+            /*getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.frame2, new DefaulterCallFragment())
-                    .commit();
+                    .commit();*/
         }
         fragPosition=0;
 
-        setDefaultFragment();
+        Handler handler = new Handler();
+        Runnable runnable =new Runnable() {
+            @Override
+            public void run() {
+                setDefaultFragment();
+            }
+        };handler.post(runnable);
+
+
+        //setDefaultFragment();
 
         sbg = (SegmentedButtonGroup) view.findViewById(R.id.segmentedButtonGroup);
 
         sbg.setOnClickedButtonListener(new SegmentedButtonGroup.OnClickedButtonListener() {
             @Override
             public void onClickedButton(int position) {
-                if (position == 0) {
+                Handler handler1 = new Handler();
+                Runnable runnable1 = new Runnable() {
+                    @Override
+                    public void run() {
+                        if (position == 0) {
+
+                            setFragment(new DefaulterCallFragment());
+                            fragPosition = 0;
+
+                        } else if (position == 1) {
+
+                            setFragment(new DefaulterVisitFragment());
+                            fragPosition = 1;
+
+                        }
+                    }
+                };handler1.post(runnable1);
+
+               /* if (position == 0) {
 
                     setFragment(new DefaulterCallFragment());
                     fragPosition = 0;
@@ -75,7 +117,7 @@ public class DefaulterFragment extends Fragment {
                     setFragment(new DefaulterVisitFragment());
                     fragPosition = 1;
 
-                }
+                }*/
             }
         });
 
@@ -105,10 +147,17 @@ public class DefaulterFragment extends Fragment {
     private void setDefaultFragment() {
 
         try {
+            Handler handler = new Handler();
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    setFragment(new DefaulterCallFragment());
+                }
+            };handler.post(runnable);
 
-            setFragment(new DefaulterCallFragment());
+            //setFragment(new DefaulterCallFragment());
         } catch (Exception e) {
-
+            e.printStackTrace();
 
         }
     }
@@ -142,11 +191,23 @@ public class DefaulterFragment extends Fragment {
 
     public void setFragment(Fragment f) {
 
-        FragmentManager fmanager = getChildFragmentManager();
+        Handler handler =new Handler();
+        Runnable runnable =new Runnable() {
+            @Override
+            public void run() {
+                FragmentManager fmanager = getChildFragmentManager();
+                FragmentTransaction ft = fmanager.beginTransaction();
+                ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out); //for animation while changing fragment
+                ft.replace(R.id.frame2, f);
+                ft.commit();
+            }
+        };handler.post(runnable);
+
+       /* FragmentManager fmanager = getChildFragmentManager();
         FragmentTransaction ft = fmanager.beginTransaction();
         ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out); //for animation while changing fragment
         ft.replace(R.id.frame2, f);
-        ft.commit();
+        ft.commit();*/
     }
 }
 

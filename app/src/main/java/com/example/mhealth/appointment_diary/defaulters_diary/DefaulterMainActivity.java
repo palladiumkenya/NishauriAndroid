@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.os.SystemClock;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -171,7 +172,15 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
                         defaultB = false;
                         missedB = true;
                         lostB = false;
-                        missedFrag = (MissedFragment) adapter.getItem(index);
+                        Handler handler = new Handler();
+                        Runnable runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                missedFrag = (MissedFragment) adapter.getItem(index);
+                            }
+                        }; handler.post(runnable);
+
+                       // missedFrag = (MissedFragment) adapter.getItem(index);
 
 
 
@@ -186,7 +195,15 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
                         defaultB = true;
                         missedB = false;
                         lostB = false;
-                        defaultFrag = (DefaulterFragment) adapter.getItem(index);
+                        Handler handler1 = new Handler();
+                        Runnable runnable1 = new Runnable() {
+                            @Override
+                            public void run() {
+                                defaultFrag = (DefaulterFragment) adapter.getItem(index);
+                            }
+                        };handler1.post(runnable1);
+
+                        //defaultFrag = (DefaulterFragment) adapter.getItem(index);
 
 
 
@@ -204,7 +221,15 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
                         defaultB = false;
                         missedB = false;
                         lostB = true;
-                        lostFrag = (LosttoFollowFragment) adapter.getItem(index);
+
+                        Handler handler2 = new Handler();
+                        Runnable runnable2 = new Runnable() {
+                            @Override
+                            public void run() {
+                                lostFrag = (LosttoFollowFragment) adapter.getItem(index);
+                            }
+                        };handler2.post(runnable2);
+                        //lostFrag = (LosttoFollowFragment) adapter.getItem(index);
 
 
 
@@ -385,7 +410,14 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
                 if (chkInternet.isInternetAvailable()) {
 
                     Toast.makeText(DefaulterMainActivity.this, "going online", Toast.LENGTH_SHORT).show();
-                    loadMessagesOnline();
+                    Handler handler = new Handler();
+                    Runnable runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            loadMessagesOnline();
+                        }
+                    }; handler.post(runnable);
+                   // loadMessagesOnline();
 
 //        triggerAppointmentMessages();
 
@@ -424,7 +456,15 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
 
         if (chkInternet.isInternetAvailable()) {
 
-            acs.getDefaultersAppointmentMessages(getUserPhoneNumber());
+            Handler handler = new Handler();
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    acs.getDefaultersAppointmentMessages(getUserPhoneNumber());
+                }
+            }; handler.post(runnable);
+
+           // acs.getDefaultersAppointmentMessages(getUserPhoneNumber());
 
         } else {
 

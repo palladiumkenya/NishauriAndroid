@@ -12,12 +12,14 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.os.SystemClock;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import com.example.mhealth.appointment_diary.DCMActivity;
+import com.example.mhealth.appointment_diary.Progress.Progress;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.cardview.widget.CardView;
@@ -86,6 +88,8 @@ import static com.example.mhealth.appointment_diary.StringSplitter.SplitString.s
 
 public class TodaysAppointment extends AppCompatActivity {
 
+    Progress progress;
+
     Button btnRegister, btnReport, bookedappointments, broadcast, transfer, consent,transitCl,moveClinic, todayapp;
     CardView card_register, card_book, card_consent, card_dsd, card_transfer, card_transit, card_clinic, card_today;
     Button missed,honored;
@@ -95,6 +99,7 @@ public class TodaysAppointment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.todaysappointment);
+        progress =new Progress(TodaysAppointment.this);
 
         setToolbar();
         initialise();
@@ -146,8 +151,21 @@ public class TodaysAppointment extends AppCompatActivity {
         card_book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Appointment.class);
-                startActivity(intent);
+                Handler handler = new Handler();
+                Runnable r =new Runnable() {
+                    @Override
+                    public void run() {
+                        progress.showProgress("loading..");
+                        Intent intent = new Intent(getApplicationContext(),Appointment.class);
+                        startActivity(intent);
+
+                        progress.dissmissProgress();
+                    }
+                };
+                handler.post(r);
+
+                /*Intent intent = new Intent(getApplicationContext(),Appointment.class);
+                startActivity(intent);*/
             }
         });
 
@@ -225,8 +243,23 @@ public class TodaysAppointment extends AppCompatActivity {
 
             bookedappointments.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(),Appointment.class);
-                    startActivity(intent);
+                    try {
+                        Handler handler = new Handler();
+                        Runnable runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(getApplicationContext(),Appointment.class);
+                                startActivity(intent);
+                            }
+                        }; handler.post(runnable);
+
+
+                    }catch(Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                    /*Intent intent = new Intent(getApplicationContext(),Appointment.class);
+                    startActivity(intent);*/
                 }
             });
 
@@ -254,8 +287,26 @@ public class TodaysAppointment extends AppCompatActivity {
             todayapp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), FetchAppointment.class);
-                    startActivity(intent);
+
+                    try {
+                        Handler handler = new Handler();
+                        Runnable runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(getApplicationContext(),FetchAppointment.class);
+                                startActivity(intent);
+                            }
+                        }; handler.post(runnable);
+
+
+                    }catch(Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+
+
+                   /* Intent intent = new Intent(getApplicationContext(), FetchAppointment.class);
+                    startActivity(intent);*/
                 }
             });
 
