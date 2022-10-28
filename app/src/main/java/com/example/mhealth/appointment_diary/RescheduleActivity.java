@@ -52,6 +52,7 @@ public class RescheduleActivity extends AppCompatActivity {
 
 
     private String phone_no;
+    public String z;
 
     private Button btn_check;
     private EditText ccc_no;
@@ -140,9 +141,14 @@ public class RescheduleActivity extends AppCompatActivity {
     }
 
     private void searchApt() {
+        try {
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+              z=  _url.base_url1;
+        }catch (Exception e){
 
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        String  z=  _url.base_url1;
+        }
+        /*UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;*/
         JSONObject payload = new JSONObject();
         try {
             payload.put("clinic_number", ccc_no.getText().toString());

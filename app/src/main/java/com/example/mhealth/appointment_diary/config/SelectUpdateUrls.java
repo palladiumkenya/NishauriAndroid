@@ -1,14 +1,14 @@
 package com.example.mhealth.appointment_diary.config;
 
+import static android.R.layout.simple_spinner_item;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,23 +21,20 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.loginmodule.LoginActivity;
 import com.example.mhealth.appointment_diary.tables.UrlTable;
 import com.example.mhealth.appointment_diary.tables.urlModel;
-import com.orm.SugarRecord;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.util.ArrayList;
-import static android.R.layout.simple_spinner_item;
-public class SelectUrls extends AppCompatActivity {
+
+public class SelectUpdateUrls extends AppCompatActivity {
 
     ProgressDialog progressDialog;
 
@@ -49,42 +46,34 @@ public class SelectUrls extends AppCompatActivity {
     public String z, zz;
 
     int dataId;
-   public String base_url;
-   public String stage_name;
+    public String base_url;
+    public String stage_name;
     SharedPreferences sharedPreferences1;
     Button btn_prcd;
 
-   /* @Override
-    public void onBackPressed() {
-        //super.onBackPressed();
-        finishAffinity();
-    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_urls);
-       // setScreen();
-
-
+        setContentView(R.layout.activity_select_update_urls);
         btn_prcd = findViewById(R.id.login_proceed);
 
-         spinner1 =findViewById(R.id.spCompany);
-         geturls1();
+        spinner1 =findViewById(R.id.spCompany);
+        geturls1();
 
 
-         btn_prcd.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
+        btn_prcd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                 if (dataId!=1 && dataId!=2){
-                     Toast.makeText(SelectUrls.this, "Invalid", Toast.LENGTH_LONG).show();
-                 }else {
-                     new GetOperation().execute();
+                if (dataId!=1 && dataId!=2){
+                    Toast.makeText(SelectUpdateUrls.this, "Invalid", Toast.LENGTH_LONG).show();
+                }else {
+                    new GetOperation().execute();
 
-                 }
-             }
-         });
+                }
+            }
+        });
 
 
 
@@ -97,8 +86,8 @@ public class SelectUrls extends AppCompatActivity {
         String FirstTime =preferencesS.getString("FirstTimeInstall", "");
 
         if (FirstTime.equals("Yes")){
-          Intent intent1 =new Intent(SelectUrls.this, LoginActivity.class);
-          startActivity(intent1);
+            Intent intent1 =new Intent(SelectUpdateUrls.this, LoginActivity.class);
+            startActivity(intent1);
 
         }else{
             SharedPreferences.Editor editor =preferencesS.edit();
@@ -144,7 +133,7 @@ public class SelectUrls extends AppCompatActivity {
                     urlModelArrayList.add("--Select the system to connect to--");
 
 
-                    ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(SelectUrls.this, simple_spinner_item, urlModelArrayList);
+                    ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(SelectUpdateUrls.this, simple_spinner_item, urlModelArrayList);
                     spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
                     spinner1.setAdapter(spinnerArrayAdapter);
                     //removeSimpleProgressDialog();
@@ -194,7 +183,7 @@ public class SelectUrls extends AppCompatActivity {
 
             }
         });
-        RequestQueue requestQueue = Volley.newRequestQueue(SelectUrls.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(SelectUpdateUrls.this);
         requestQueue.add(jsonObjectRequest);
     }
 
@@ -203,7 +192,7 @@ public class SelectUrls extends AppCompatActivity {
         protected void onPreExecute() {
             try {
 
-                progressDialog = new ProgressDialog(SelectUrls.this);
+                progressDialog = new ProgressDialog(SelectUpdateUrls.this);
                 progressDialog.setTitle("Loading...");
                 progressDialog.setMessage("Please wait...");
                /* progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -214,7 +203,7 @@ public class SelectUrls extends AppCompatActivity {
 
 
             } catch (Exception e) {
-                Toast.makeText(SelectUrls.this, "error loading progress dialog, try again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SelectUpdateUrls.this, "error loading progress dialog, try again", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -223,28 +212,28 @@ public class SelectUrls extends AppCompatActivity {
 
         protected String doInBackground(String... params) {
             try {
+
                 UrlTable.deleteAll(UrlTable.class);
                 UrlTable urlTable =new UrlTable(base_url, stage_name);
                 urlTable.save();
 
-                progressDialog.dismiss();
-
-                Intent intent = new Intent(SelectUrls.this, LoginActivity.class);
+                /*Intent intent = new Intent(SelectUpdateUrls.this, LoginActivity.class);
                 startActivity(intent);
-                finish();
+                finish();*/
 
 
             } catch (Exception e) {
-                Log.d("error saving data", "error on server saving");
+                Log.d("error saving data", e.toString());
+                Toast.makeText(SelectUpdateUrls.this, "error saving", Toast.LENGTH_LONG).show();
             }
             return null;
         }
 
         protected void onPostExecute(String result) {
             progressDialog.dismiss();
-            //Toast.makeText(SelectUrls.this, "progress dialog dismissed", Toast.LENGTH_SHORT).show();
 
         }
+
 
 
     }

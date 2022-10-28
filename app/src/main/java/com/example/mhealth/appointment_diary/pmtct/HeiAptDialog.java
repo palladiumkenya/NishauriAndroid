@@ -62,6 +62,8 @@ public class HeiAptDialog extends BottomSheetDialogFragment {
     private String phone_no;
     private String PCR_TAKEN = "";
 
+    public  String z;
+
     RequestQueue queue;
 
 
@@ -266,9 +268,12 @@ public class HeiAptDialog extends BottomSheetDialogFragment {
     }
 
     private void bookHeiApt() {
-
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        String  z=  _url.base_url1;
+        try {
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+              z=  _url.base_url1;
+        }catch (Exception e){
+            //e.printStackTrace();
+        }
 
         JSONObject payload = new JSONObject();
         try {

@@ -68,6 +68,7 @@ public class PmtctBookAptFragment extends Fragment {
     private Unbinder unbinder;
     private View root;
     private Context context;
+    public String  z;
 
     RequestQueue queue;
 
@@ -201,9 +202,14 @@ public class PmtctBookAptFragment extends Fragment {
     }
 
     private void getHeis() {
-
+    try {
         UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        String  z=  _url.base_url1;
+        z=  _url.base_url1;
+    }catch(Exception e){
+        e.printStackTrace();
+    }
+       /* UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;*/
         JSONObject payload = new JSONObject();
         try {
             payload.put("clinic_number", mfl_code.getText().toString()+ccc_no.getText().toString());

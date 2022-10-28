@@ -1,10 +1,13 @@
 package com.example.mhealth.appointment_diary.config;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,7 +28,8 @@ public class Config extends AppCompatActivity {
     //https://ushaurinode.mhealthkenya.co.ke
 
     public static String STAGE_NAME= "";
-    public static String z, zz;
+    public String z, zz;
+    ProgressDialog progressDialog;
 
 
     //public static final String mainShortcode="40146"; CHANGED TO BELOW
@@ -99,29 +103,26 @@ public class Config extends AppCompatActivity {
         setContentView(R.layout.activity_config);
 
 
-
-
-
         TextView x =findViewById(R.id.show);
         Button xx =findViewById(R.id.show1);
 
-        //String z;
-
-       /* Bundle bundle =getIntent().getExtras();
-        z= bundle.getString("url");
-        zz =bundle.getString("stage_key");*/
         getAlert();
-
-        x.setText("You are connected to" + " " +zz);
-        //Toast.makeText(Config.this, BASE_URL, Toast.LENGTH_LONG).show();
-        x.setTextColor(Color.parseColor("#F32013"));
 
     }
 
     private void getAlert(){
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        z= _url.base_url1;
-        zz=_url.stage_name1;
+
+        try {
+
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+            z= _url.base_url1;
+            zz =_url.stage_name1;
+
+        }catch (Exception e){
+            Log.d("No baseURL", e.getMessage());
+        }
+
+
 
         AlertDialog.Builder builder1 = new AlertDialog.Builder(Config.this);
         builder1.setIcon(android.R.drawable.ic_dialog_alert);
@@ -136,12 +137,13 @@ public class Config extends AppCompatActivity {
 
                         Intent intent = new Intent(Config.this, LoginActivity.class);
                         startActivity(intent);
+                        finish();
 
                         //dialog.cancel();
                     }
                 });
 
-        builder1.setNegativeButton(
+       /* builder1.setNegativeButton(
                 "Cancel",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -150,11 +152,10 @@ public class Config extends AppCompatActivity {
                         startActivity(intent);
                         dialog.cancel();
                     }
-                });
+                });*/
 
         AlertDialog alert11 = builder1.create();
         alert11.show();
+
     }
-
-
-}
+    }

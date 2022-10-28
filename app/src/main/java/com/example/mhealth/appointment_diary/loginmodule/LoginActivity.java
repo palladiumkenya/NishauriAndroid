@@ -75,11 +75,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
 
-
-
-        /*UrlTable urlTable =new UrlTable(base_url, stage_name);
-        urlTable.save();*/
-
         connect =findViewById(R.id.connected_to);
 
         try {
@@ -87,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
             UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
             z= _url.base_url1;
             zz =_url.stage_name1;
-            Toast.makeText(LoginActivity.this, zz, Toast.LENGTH_LONG).show();
+            Toast.makeText(LoginActivity.this, "You are connected to" + "" +zz, Toast.LENGTH_LONG).show();
             connect.setText(zz);
             connect.setTextColor(Color.parseColor("#F32013"));
 
@@ -95,27 +90,7 @@ public class LoginActivity extends AppCompatActivity {
             Log.d("No baseURL", e.getMessage());
         }
 
-       /* UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        z= _url.base_url1;
-        zz =_url.stage_name1;
-        Toast.makeText(LoginActivity.this, zz, Toast.LENGTH_LONG).show();
-        connect.setText(zz);
-        connect.setTextColor(Color.parseColor("#F32013"));*/
 
-
-       // connect =findViewById(R.id.connected_to);
-       // selekt =findViewById(R.id.select_server);
-
-        //connect.setText("You are connected to" + " " + Config.STAGE_NAME + " " + "server");
-        //connect.setText(zz);
-       // connect.setTextColor(Color.parseColor("#F32013"));
-       /* selekt.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent1 =new Intent(LoginActivity.this, SelectUrls.class);
-                startActivity(intent1);
-            }
-        });*/
 
         initialise();
         getMessagesForTracer();

@@ -71,6 +71,8 @@ public class PmtctRegistrationFragment extends Fragment {
 
     private String phone_no;
 
+    public  String z;
+
 
     String[] gender_list = {"Please select gender","Female","Male"};
     String[] yes_no = {"Type of caregiver","Breastfeeding - Yes","Breastfeeding - No", "Pregnant", "Not applicable" };
@@ -391,8 +393,14 @@ public class PmtctRegistrationFragment extends Fragment {
 
     private void checkPmtct() {
 
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        String  z=  _url.base_url1;
+        try{
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+             z=  _url.base_url1;
+        }catch (Exception e){
+
+        }
+        /*UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;*/
         JSONObject payload = new JSONObject();
         try {
             payload.put("clinic_number", mfl_code.getText().toString()+ccc_no.getText().toString());
@@ -515,8 +523,15 @@ public class PmtctRegistrationFragment extends Fragment {
 
     private void submitNoHei(){
 
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        String  z=  _url.base_url1;
+
+        try{
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+              z=  _url.base_url1;
+        }catch (Exception e){
+
+        }
+       /* UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;*/
 
         JSONObject payload = new JSONObject();
         try {
@@ -626,9 +641,15 @@ public class PmtctRegistrationFragment extends Fragment {
     }
 
     private void registerHei(){
+        try {
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+              z=  _url.base_url1;
 
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        String  z=  _url.base_url1;
+        }catch (Exception e){
+
+        }
+       /* UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;*/
         JSONObject payload = new JSONObject();
         try {
             payload.put("clinic_number", mfl_code.getText().toString()+ccc_no.getText().toString());

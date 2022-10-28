@@ -54,7 +54,7 @@ public class PmtctCaregiverRegistrationFragment extends Fragment {
     private Unbinder unbinder;
     private View root;
     private Context context;
-
+    public  String z;
 
     RequestQueue queue;
 
@@ -311,8 +311,15 @@ public class PmtctCaregiverRegistrationFragment extends Fragment {
 
 
     private void registerHei(){
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        String  z=  _url.base_url1;
+
+        try {
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+             z=  _url.base_url1;
+        } catch ( Exception e){
+
+        }
+        /*UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;*/
         JSONObject payload = new JSONObject();
         try {
             payload.put("phone_no", phone_no);

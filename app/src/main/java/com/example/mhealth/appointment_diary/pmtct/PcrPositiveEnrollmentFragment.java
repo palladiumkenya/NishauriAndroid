@@ -82,6 +82,7 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
     private String SRV_FILE_NO = "";
     private String SRV_HEI_NO = "";
     private String SRV_DOB = "";
+    public String  z;
 
 
     String[] yes_no = {"Enable motivation?","YES","NO"};
@@ -418,9 +419,14 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
     }
 
     private void searchPcr() {
+        try {
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+             z=  _url.base_url1;
+        }catch (Exception e){
 
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        String  z=  _url.base_url1;
+        }
+       /* UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;*/
         JSONObject payload = new JSONObject();
         try {
             payload.put("hei_no", search_hei_no.getText().toString());
@@ -589,9 +595,14 @@ public class PcrPositiveEnrollmentFragment extends Fragment {
 
 
     private void updatePcr() {
+        try {
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+             z=  _url.base_url1;
+        }catch( Exception e){
 
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        String  z=  _url.base_url1;
+        }
+        /*UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;*/
         JSONObject payload = new JSONObject();
         try {
             payload.put("hei_no", hei_no.getText().toString());

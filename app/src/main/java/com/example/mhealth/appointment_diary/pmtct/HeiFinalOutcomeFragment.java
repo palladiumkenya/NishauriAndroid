@@ -72,6 +72,8 @@ public class HeiFinalOutcomeFragment extends Fragment {
     private String DECEASED_DATE = "";
     private String TO_DATE = "";
 
+    public String z;
+
 
     String[] young_final_outcome = {"Select final outcome","Dead","LTFU", "TO"};
     String[] old_final_outcome = {"Select final outcome*","Enroll to CCC","Discharged from PMTCT"};
@@ -293,8 +295,14 @@ public class HeiFinalOutcomeFragment extends Fragment {
     }
 
     private void searchHei() {
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        String  z=  _url.base_url1;
+        try {
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+             z=  _url.base_url1;
+        }catch (Exception e){
+
+        }
+        /*UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;*/
 
         JSONObject payload = new JSONObject();
         try {
@@ -508,8 +516,15 @@ public class HeiFinalOutcomeFragment extends Fragment {
 
     private void updateFinalOutcome() {
 
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        String  z=  _url.base_url1;
+        try {
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+              z=  _url.base_url1;
+        }catch(Exception e){
+
+        }
+
+        /*UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;*/
         JSONObject payload = new JSONObject();
         try {
             payload.put("hei_no", HEI_NO);

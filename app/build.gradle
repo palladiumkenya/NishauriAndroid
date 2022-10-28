@@ -9,9 +9,9 @@ android {
         applicationId "com.mhealth.ushauriv2"
         minSdkVersion 16
         targetSdkVersion 33
-        versionCode 49
+        versionCode 57
        // versionName "3.1.8"
-        versionName "4.0.1"
+        versionName "4.0.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
@@ -85,7 +85,7 @@ dependencies {
     //    start sms retriever api implementation
     implementation 'com.google.android.gms:play-services-base:18.1.0'
     implementation 'com.google.android.gms:play-services-identity:18.0.1'
-    implementation 'com.google.android.gms:play-services-auth:20.2.0'
+    implementation 'com.google.android.gms:play-services-auth:20.3.0'
     implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.1'
     //    end sms retriever api implementation
    // implementation 'org.jetbrains.kotlin:kotlin-stdlib-jre7:1.4.10'

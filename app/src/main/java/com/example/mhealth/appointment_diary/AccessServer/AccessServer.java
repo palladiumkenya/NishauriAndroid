@@ -96,8 +96,14 @@ public class AccessServer {
 
     public void sendDetailsToDb(final String message) throws MalformedURLException, URISyntaxException {
 
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        z= _url.base_url1;
+        try{
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+            z= _url.base_url1;
+        }catch(Exception e){
+
+        }
+        /*UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        z= _url.base_url1;*/
         //zz =_url.stage_name1;
 
         pr.showProgress("Sending message...");
@@ -150,8 +156,14 @@ public class AccessServer {
 
 
     public void sendDetailsToDbPost(final String msg, final String phone) {
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        z= _url.base_url1;
+        try{
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+            z= _url.base_url1;
+        } catch(Exception e){
+
+        }
+       /* UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        z= _url.base_url1;*/
 
         pr.showProgress("Sending message.....");
         final int[] mStatusCode = new int[1];
@@ -245,8 +257,14 @@ public class AccessServer {
 
 
     public void sendConfirmToDbPost(final String msg, final String phone, final String ON_DSD, final String second_outcome_code ) {
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        z= _url.base_url1;
+        try{
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+            z= _url.base_url1;
+        }catch(Exception e){
+            //e.printStackTrace();
+        }
+        /*UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        z= _url.base_url1;*/
 
         pr.showProgress("Sending message.....");
         final int[] mStatusCode = new int[1];
@@ -366,8 +384,15 @@ public class AccessServer {
 
 
     public void getTodaysAppointmentMessages(final String phone){
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        z= _url.base_url1;
+        try{
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+            z= _url.base_url1;
+        } catch(Exception e){
+            //e.printStackTrace();
+        }
+
+       /* UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        z= _url.base_url1;*/
 
         Toast.makeText(ctx, ""+phone, Toast.LENGTH_SHORT).show();
 
@@ -535,8 +560,14 @@ public class AccessServer {
     //start get defaulter messages
 
     public void getDefaultersAppointmentMessages(final String phone){
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        z= _url.base_url1;
+        try{
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+            z= _url.base_url1;
+        }catch(Exception e){
+
+        }
+       /* UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        z= _url.base_url1;*/
 
 
         try{
@@ -711,12 +742,14 @@ public class AccessServer {
 
 
     public void getUserMflCode(final String phone, final EditText phoneE){
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        z= _url.base_url1;
 
-        //HttpsTrustManager.allowAllSSL();
+        try{
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+            z= _url.base_url1;
+        }catch(Exception e){
 
-//        Toast.makeText(ctx, ""+phone, Toast.LENGTH_SHORT).show();
+        }
+
         final int[] mStatusCode = new int[1];
 
         try{
@@ -903,8 +936,17 @@ public class AccessServer {
    //start function to remove fake defaulters
 
     public void removeFakeDefaulter(final String msg, final String phone) {
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        z= _url.base_url1;
+
+        try{
+
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+            z= _url.base_url1;
+
+        }catch(Exception e){
+
+        }
+        /*UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        z= _url.base_url1;*/
 
         pr.showProgress("Sending message.....");
         final int[] mStatusCode = new int[1];

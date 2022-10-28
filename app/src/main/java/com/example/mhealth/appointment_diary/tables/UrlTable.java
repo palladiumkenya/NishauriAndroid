@@ -1,7 +1,9 @@
 package com.example.mhealth.appointment_diary.tables;
 
 import com.orm.SugarRecord;
+import com.orm.dsl.Table;
 
+@Table
 public class UrlTable extends SugarRecord {
 
     public String base_url1, stage_name1;

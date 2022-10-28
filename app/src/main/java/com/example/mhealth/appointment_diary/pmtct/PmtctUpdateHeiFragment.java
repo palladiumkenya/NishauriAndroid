@@ -58,6 +58,8 @@ public class PmtctUpdateHeiFragment extends Fragment {
     private View root;
     private Context context;
 
+    public String z;
+
 
     RequestQueue queue;
 
@@ -301,9 +303,14 @@ public class PmtctUpdateHeiFragment extends Fragment {
     }
 
     private void searchHei() {
+        try{
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+            z=  _url.base_url1;
+        }catch (Exception e){
 
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        String  z=  _url.base_url1;
+        }
+       /* UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;*/
         JSONObject payload = new JSONObject();
         try {
             payload.put("hei_no", search_hei_no.getText().toString());
@@ -459,9 +466,14 @@ public class PmtctUpdateHeiFragment extends Fragment {
 
 
     private void updateHei(){
+        try{
+            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+         z=  _url.base_url1;
+        } catch (Exception e){
 
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        String  z=  _url.base_url1;
+        }
+        /*UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;*/
         JSONObject payload = new JSONObject();
         try {
             payload.put("user_phone", phone_no);
