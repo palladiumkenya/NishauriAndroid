@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -44,8 +45,6 @@ import java.io.File;
 import java.util.List;
 
 //import android.support.v8.app.NotificationCompat;
-
-
 public class LoginActivity extends AppCompatActivity {
 
 
@@ -73,16 +72,30 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        //setScreen();
 
 
         connect =findViewById(R.id.connected_to);
 
         try {
 
-            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-            z= _url.base_url1;
-            zz =_url.stage_name1;
-            Toast.makeText(LoginActivity.this, "You are connected to" + "" +zz, Toast.LENGTH_LONG).show();
+           // UrlTable _url = SugarRecord.findById(UrlTable.class, 4);
+            //select *from getLastRecord ORDER BY id DESC LIMIT 1;
+
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                    zz=_url.get(x).getStage_name1();
+                    Toast.makeText(LoginActivity.this, "You are connected to" + " " +zz, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            //UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+
+           // z= _url.base_url1;
+           // zz =_url.stage_name1;
+            Toast.makeText(LoginActivity.this, "You are connected to" + " " +zz, Toast.LENGTH_LONG).show();
             connect.setText(zz);
             connect.setTextColor(Color.parseColor("#F32013"));
 
@@ -461,5 +474,27 @@ public class LoginActivity extends AppCompatActivity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setScreen(){
+        SharedPreferences preferencesS =getSharedPreferences("PREFERENCE", MODE_PRIVATE);
+
+        String FirstTime =preferencesS.getString("FirstTimeInstall", "");
+
+        if (FirstTime.equals("Yes")){
+            Intent i =new Intent(LoginActivity.this, SelectUrls.class);
+            // Closing all the Activities
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
+            finish();
+
+
+        }else{
+            SharedPreferences.Editor editor =preferencesS.edit();
+            editor.putString("FirstTimeInstall", "Yes");
+            editor.apply();
+        }
     }
 }

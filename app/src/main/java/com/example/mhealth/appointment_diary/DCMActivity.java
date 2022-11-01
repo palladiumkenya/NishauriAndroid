@@ -338,12 +338,17 @@ public class DCMActivity extends AppCompatActivity {
         btn_dcm_submit_apt.setOnClickListener(new View.OnClickListener() {
               /*  UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
               String   a=  _url.base_url1;*/
+
             @Override
             public void onClick(View v) {
 
                 try {
-                    UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-                    z=  _url.base_url1;
+                    List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+                    if (_url.size()==1){
+                        for (int x=0; x<_url.size(); x++){
+                            z=_url.get(x).getBase_url1();
+                        }
+                    }
                 }catch (Exception e){
 
                 }
@@ -390,27 +395,38 @@ public class DCMActivity extends AppCompatActivity {
                                 bookOnDcm();
 
                         }else if (ON_DCM_STATUS.equals("NOT on DSD")){
-                            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-                            String  z=  _url.base_url1;
+                            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+                            if (_url.size()==1){
+                                for (int x=0; x<_url.size(); x++){
+                                    z=_url.get(x).getBase_url1();
+                                }
+                            }
                             if (validateNotOnDcm())
                                 bookNormalTca(z+Config.NOT_ON_DCM_BOOKING1);
 
                         }
                     }else if (STABILITY_LEVEL.equals("Unstable")){
-                        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-                        String  z=  _url.base_url1;
+                        List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+                        if (_url.size()==1){
+                            for (int x=0; x<_url.size(); x++){
+                                z=_url.get(x).getBase_url1();
+                                                            }
+                        }
                         if (validateUnstable())
                             bookNormalTca(z+Config.UNSTABLE_BOOKING1);
                     }
                 }else {
                     try {
-                        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-                        z=  _url.base_url1;
+                        List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+                        if (_url.size()==1){
+                            for (int x=0; x<_url.size(); x++){
+                                z=_url.get(x).getBase_url1();
+
+                            }
+                        }
                     }catch (Exception e){
 
                     }
-                    /*UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-                      z=  _url.base_url1;*/
                     if (validateWellAdvanced())
                         bookNormalTca(z+Config.NOT_ON_DCM_BOOKING1);
                 }
@@ -785,16 +801,17 @@ public class DCMActivity extends AppCompatActivity {
 
     private void bookOnDcm() {
         try {
-            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-              z=  _url.base_url1;
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
         }catch ( Exception e){
 
 
         }
-        /*UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        String  z=  _url.base_url1;*/
-
         JSONObject payload = new JSONObject();
         try {
             payload.put("clinic_number", mfl_code.getText().toString()+ccc_no.getText().toString());
@@ -951,13 +968,16 @@ public class DCMActivity extends AppCompatActivity {
 
     private void getDuration() {
         try {
-            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-             z=  _url.base_url1;
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+
+                }
+            }
         }catch (Exception e){
 
         }
-       /* UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        String  z=  _url.base_url1;*/
         JSONObject payload = new JSONObject();
         try {
             payload.put("clinic_number", mfl_code.getText().toString()+ccc_no.getText().toString());

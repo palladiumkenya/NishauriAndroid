@@ -39,6 +39,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -97,14 +98,17 @@ public class AccessServer {
     public void sendDetailsToDb(final String message) throws MalformedURLException, URISyntaxException {
 
         try{
-            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-            z= _url.base_url1;
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                    //zz=_url.get(x).getStage_name1();
+                    // Toast.makeText(LoginActivity.this, "You are connected to" + " " +zz, Toast.LENGTH_LONG).show();
+                }
+            }
         }catch(Exception e){
 
         }
-        /*UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        z= _url.base_url1;*/
-        //zz =_url.stage_name1;
 
         pr.showProgress("Sending message...");
 
@@ -157,14 +161,16 @@ public class AccessServer {
 
     public void sendDetailsToDbPost(final String msg, final String phone) {
         try{
-            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-            z= _url.base_url1;
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
         } catch(Exception e){
 
         }
-       /* UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        z= _url.base_url1;*/
-
         pr.showProgress("Sending message.....");
         final int[] mStatusCode = new int[1];
 
@@ -258,14 +264,15 @@ public class AccessServer {
 
     public void sendConfirmToDbPost(final String msg, final String phone, final String ON_DSD, final String second_outcome_code ) {
         try{
-            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-            z= _url.base_url1;
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
         }catch(Exception e){
             //e.printStackTrace();
         }
-        /*UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        z= _url.base_url1;*/
-
         pr.showProgress("Sending message.....");
         final int[] mStatusCode = new int[1];
 
@@ -385,14 +392,16 @@ public class AccessServer {
 
     public void getTodaysAppointmentMessages(final String phone){
         try{
-            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-            z= _url.base_url1;
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
         } catch(Exception e){
             //e.printStackTrace();
         }
 
-       /* UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        z= _url.base_url1;*/
 
         Toast.makeText(ctx, ""+phone, Toast.LENGTH_SHORT).show();
 
@@ -561,14 +570,15 @@ public class AccessServer {
 
     public void getDefaultersAppointmentMessages(final String phone){
         try{
-            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-            z= _url.base_url1;
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                                   }
+            }
         }catch(Exception e){
 
         }
-       /* UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        z= _url.base_url1;*/
-
 
         try{
 
@@ -744,8 +754,12 @@ public class AccessServer {
     public void getUserMflCode(final String phone, final EditText phoneE){
 
         try{
-            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-            z= _url.base_url1;
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
         }catch(Exception e){
 
         }
@@ -939,14 +953,16 @@ public class AccessServer {
 
         try{
 
-            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-            z= _url.base_url1;
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
         }catch(Exception e){
 
         }
-        /*UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        z= _url.base_url1;*/
 
         pr.showProgress("Sending message.....");
         final int[] mStatusCode = new int[1];

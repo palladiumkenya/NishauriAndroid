@@ -1,12 +1,18 @@
 package com.example.mhealth.appointment_diary.config;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -34,10 +40,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import static android.R.layout.simple_spinner_item;
 public class SelectUrls extends AppCompatActivity {
+
+    private static final int PERMISSION_REQUEST_CODE = 1;
+    private static final int PERMS_REQUEST_CODE=12345;
+    private static final String COMMAND = "su 0 setenforce 0";
 
     ProgressDialog progressDialog;
 
@@ -54,17 +66,46 @@ public class SelectUrls extends AppCompatActivity {
     SharedPreferences sharedPreferences1;
     Button btn_prcd;
 
-   /* @Override
+    @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        finishAffinity();
-    }*/
+       finishAffinity();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_urls);
-       // setScreen();
+        hasPermissions();
+        requestPerms();
+              /* try {
+                        Runtime.getRuntime().exec(COMMAND);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }*/
+               setScreen();
+
+
+
+       /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M  && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
+        }*/
+
+
+        // SELinux
+
+// Set SELinux to permissive
+
+       /* try {
+            Runtime.getRuntime().exec(COMMAND);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+        //End SELinux
+        //checkPermissions();
+       //setScreen();
 
 
         btn_prcd = findViewById(R.id.login_proceed);
@@ -92,20 +133,23 @@ public class SelectUrls extends AppCompatActivity {
 
 
     private void setScreen(){
-        SharedPreferences preferencesS =getSharedPreferences("PREFERENCE", MODE_PRIVATE);
+      try{
+              SharedPreferences preferencesS = getSharedPreferences("PREFERENCE", MODE_PRIVATE);
+              String FirstTime = preferencesS.getString("FirstTimeInstall", "");
 
-        String FirstTime =preferencesS.getString("FirstTimeInstall", "");
+              if (FirstTime.equals("Yes")) {
+                  Intent intent1 = new Intent(SelectUrls.this, LoginActivity.class);
+                  startActivity(intent1);
 
-        if (FirstTime.equals("Yes")){
-          Intent intent1 =new Intent(SelectUrls.this, LoginActivity.class);
-          startActivity(intent1);
+              } else {
+                  SharedPreferences.Editor editor = preferencesS.edit();
+                  editor.putString("FirstTimeInstall", "Yes");
+                  editor.apply();
+              }
+          }catch(Exception e){
 
-        }else{
-            SharedPreferences.Editor editor =preferencesS.edit();
-            editor.putString("FirstTimeInstall", "Yes");
-            editor.apply();
+            }
         }
-    }
 
     public void geturls1(){
         String URLstring = "https://ushaurinode.mhealthkenya.co.ke/config";
@@ -229,9 +273,9 @@ public class SelectUrls extends AppCompatActivity {
 
                 progressDialog.dismiss();
 
-                Intent intent = new Intent(SelectUrls.this, LoginActivity.class);
+                Intent intent = new Intent(SelectUrls.this, Config.class);
                 startActivity(intent);
-                finish();
+               // finish();
 
 
             } catch (Exception e) {
@@ -248,4 +292,155 @@ public class SelectUrls extends AppCompatActivity {
 
 
     }
+
+    //try with catch
+
+
+    private  void setscreen2() {
+        try {
+            SharedPreferences preferencesS = getSharedPreferences("PREFERENCE", MODE_PRIVATE);
+            String FirstTime = preferencesS.getString("FirstTimeInstall", "");
+
+            if (FirstTime.equals("Yes")) {
+                Intent intent1 = new Intent(SelectUrls.this, LoginActivity.class);
+                startActivity(intent1);
+
+            } else {
+                SharedPreferences.Editor editor = preferencesS.edit();
+                editor.putString("FirstTimeInstall", "Yes");
+                editor.apply();
+            }
+        }catch (Exception e){
+
+        }
+
+
+    }
+   /* @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 1000:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    /*try {
+                        Runtime.getRuntime().exec(COMMAND);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    Toast.makeText(this, "permission granted", Toast.LENGTH_LONG).show();
+
+                } else {
+                    Toast.makeText(this, "permission denied please install again to grant permission", Toast.LENGTH_LONG).show();
+                    //finish();
+                }
+
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+
+    /*private boolean checkPermissions(){
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }
+        else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+            return false;
+        }*/
+
+
+
+
+/*        FILE* fp = fopen("/proc/filesystems", "r");
+        char* line = (char*) calloc(50, sizeof(char));
+        bool result = false;
+        while(fgets(line, 50, fp)) {
+            if (strstr(line, "selinuxfs")) {
+                result = true;
+            }
+        }
+        if (line) {
+            free(line);
+        }
+        fclose(fp);
+        return result;
+    }
+
+    void DisableSelinux() {
+
+
+        FILE fp = fopen("/proc/mounts", "r");
+        char* line = (char*) calloc(1024, sizeof(char));
+        while(fgets(line, 1024, fp)) {
+            if (strstr(line, "selinuxfs")) {
+                strtok(line, " ");
+                char* selinux_dir = strtok(NULL, " ");
+                char* selinux_path = strcat(selinux_dir, "/enforce");
+                FILE* fp_selinux = fopen(selinux_path, "w");
+                char* buf = "0"; // set selinux to permissive
+                fwrite(buf, strlen(buf), 1, fp_selinux);
+                fclose(fp_selinux);
+                break;
+            }
+        }
+        fclose(fp);
+        if (line) {
+            free(line);
+        }
+    }*/
+
+    private boolean hasPermissions(){
+
+
+        int res = 0;
+
+        String[] permissions = new String[]{
+                Manifest.permission.INTERNET,
+//                android.Manifest.permission.READ_SMS,
+//                android.Manifest.permission.RECEIVE_SMS,
+//                android.Manifest.permission.CALL_PHONE
+
+
+        };
+
+        for (String perms : permissions) {
+            res = checkCallingOrSelfPermission(perms);
+
+            if (!(res == PackageManager.PERMISSION_GRANTED)) {
+                return false;
+            }
+
+        }
+        return true;
+
+
+    }
+
+
+    private void requestPerms(){
+
+        String[] permissions=new String[]{
+                Manifest.permission.INTERNET,
+//                android.Manifest.permission.SEND_SMS,
+//                android.Manifest.permission.READ_SMS,
+//                android.Manifest.permission.RECEIVE_SMS,
+        };
+
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+            requestPermissions(permissions,PERMS_REQUEST_CODE);
+
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(
+                    getApplicationContext());
+            builder.setAutoCancel(true);
+
+        }
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
 }

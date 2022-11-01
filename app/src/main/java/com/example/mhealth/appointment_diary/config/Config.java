@@ -22,6 +22,8 @@ import com.example.mhealth.appointment_diary.loginmodule.LoginActivity;
 import com.example.mhealth.appointment_diary.tables.UrlTable;
 import com.orm.SugarRecord;
 
+import java.util.List;
+
 public class Config extends AppCompatActivity {
 
    // public static String BASE_URL= "";
@@ -114,10 +116,15 @@ public class Config extends AppCompatActivity {
 
         try {
 
-            UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-            z= _url.base_url1;
-            zz =_url.stage_name1;
 
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                    zz=_url.get(x).getStage_name1();
+                    //Toast.makeText(LoginActivity.this, "You are connected to" + " " +zz, Toast.LENGTH_LONG).show();
+                }
+            }
         }catch (Exception e){
             Log.d("No baseURL", e.getMessage());
         }
@@ -143,7 +150,7 @@ public class Config extends AppCompatActivity {
                     }
                 });
 
-       /* builder1.setNegativeButton(
+        /*builder1.setNegativeButton(
                 "Cancel",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
