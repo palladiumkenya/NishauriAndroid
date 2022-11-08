@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:layout_alignParentBottom="true"
     android:background="#fffff0">
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                 />
+                />
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -141,74 +140,74 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/f_name"
-                    android:inputType="text"
-                    android:hint="Enter  first name*"
-                    android:textColorHint="#000"
-                    android:maxLength="24"
-                    android:textSize="12dp"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/f_name"
+                        android:inputType="text"
+                        android:hint="Enter  first name*"
+                        android:textColorHint="#000"
+                        android:maxLength="24"
+                        android:textSize="12dp"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
 
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/s_name"
-                    android:inputType="text"
-                    android:hint="Enter middle name*"
-                    android:textColorHint="#000"
-                    android:maxLength="24"
-                    android:textSize="12dp"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/s_name"
+                        android:inputType="text"
+                        android:hint="Enter middle name*"
+                        android:textColorHint="#000"
+                        android:maxLength="24"
+                        android:textSize="12dp"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/o_name"
-                    android:inputType="text"
-                    android:hint="Enter  last name"
-                    android:textColorHint="#000"
-                    android:maxLength="24"
-                    android:textSize="12dp"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/o_name"
+                        android:inputType="text"
+                        android:hint="Enter  last name"
+                        android:textColorHint="#000"
+                        android:maxLength="24"
+                        android:textSize="12dp"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/dob"
-                    android:focusable="false"
-                    android:inputType="text"
-                    android:textStyle="bold"
-                    android:hint="Enter client date Of birth*"
-                    android:textColorHint="#000"
-                    android:maxLength="24"
-                    android:textSize="12dp"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dob"
+                        android:focusable="false"
+                        android:inputType="text"
+                        android:textStyle="bold"
+                        android:hint="Enter client date Of birth*"
+                        android:textColorHint="#000"
+                        android:maxLength="24"
+                        android:textSize="12dp"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
 
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -237,10 +236,10 @@
                     android:visibility="gone"
                     android:layout_height="wrap_content">
 
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:text="Are you an Orphan"
-                       android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="Are you an Orphan"
+                        android:layout_height="wrap_content" />
 
                     <Spinner
                         android:layout_width="match_parent"
@@ -263,7 +262,7 @@
                 </LinearLayout>
 
 
-
+                <!-- ID no field -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:orientation="vertical"
@@ -274,7 +273,6 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-
 
                         <EditText
                             android:layout_width="match_parent"
@@ -289,119 +287,177 @@
                             />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                </LinearLayout>
+
+                <!-- Birth cert no. -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/birthnoll"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/birthno"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter Birth cert NO."
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
+                <!-- UPI no  -->
 
-                android:text="Select sex*" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20sp"
-                android:layout_height="wrap_content">
-
-
-
-                <Spinner
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:id="@+id/gender_spinner"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Select marital status"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20sp"
-                android:layout_height="wrap_content">
-
-
-
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:id="@+id/marital_spinner"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Select patient condition*" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20sp"
-                android:layout_height="wrap_content">
-
-
-
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:id="@+id/condition_spinner"
-
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-
-
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:hint="CCC enrolment date*"
-                    android:id="@+id/enrollment_date"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="false"
+                    android:orientation="vertical"
+                    android:id="@+id/UPInoll"
                     android:visibility="gone"
-                    android:hint="Date enrolled into HIV care*"
-                    android:id="@+id/art_date"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/UPIno"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="UPI NO."
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
 
 
 
-
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
+                <TextView
+                    android:id="@+id/textView11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:hint="Enter primary phone number*"
-                    android:fontFamily="serif"
-                    android:maxLength="10"
-                    android:id="@+id/phone"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:textStyle="bold"
+
+                    android:text="Select sex*" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20sp"
+                    android:layout_height="wrap_content">
+
+
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:id="@+id/gender_spinner"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Select marital status"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20sp"
+                    android:layout_height="wrap_content">
+
+
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:id="@+id/marital_spinner"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Select patient condition*" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20sp"
+                    android:layout_height="wrap_content">
+
+
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:id="@+id/condition_spinner"
+
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:hint="CCC enrolment date*"
+                        android:id="@+id/enrollment_date"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:visibility="gone"
+                        android:hint="Date enrolled into HIV care*"
+                        android:id="@+id/art_date"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:hint="Enter primary phone number*"
+                        android:fontFamily="serif"
+                        android:maxLength="10"
+                        android:id="@+id/phone"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -453,76 +509,11 @@
 
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Enable SMS*"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp"
-                android:layout_height="wrap_content">
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Enable Sms"-->
-                <!--android:fontFamily="serif"-->
-
-                <!--android:textColor="#000"-->
-                <!--/>-->
-
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:id="@+id/sms_spinner"
-
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-
-            <!--start here-->
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:id="@+id/smslayout"
-                android:visibility="gone"
-                android:layout_height="wrap_content">
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:text="Select language*"/>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="20dp"
-                    android:layout_height="wrap_content">
-
-                    <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Select your Language"-->
-                    <!--android:fontFamily="serif"-->
-                    <!--android:textColor="#000"-->
-                    <!--/>-->
-
-                    <Spinner
-                        android:layout_width="match_parent"
-                        android:id="@+id/language_spinner"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:text="Select preferred messaging time*"/>
-
+                    android:text="Enable SMS*"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
@@ -540,65 +531,130 @@
 
                     <Spinner
                         android:layout_width="match_parent"
-                        android:id="@+id/time_spinner"
+                        android:id="@+id/sms_spinner"
+
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Select motivational alerts*"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp"
-                android:layout_height="wrap_content">
+                <!--start here-->
 
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Enable Sms"-->
-                <!--android:fontFamily="serif"-->
-
-                <!--android:textColor="#000"-->
-                <!--/>-->
-
-                <Spinner
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:id="@+id/weekly_spinner"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
+                    android:orientation="vertical"
+                    android:id="@+id/smslayout"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:text="Select language*"/>
 
 
-            <!--ends here-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="20dp"
+                        android:layout_height="wrap_content">
 
-            </LinearLayout>
+                        <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Select your Language"-->
+                        <!--android:fontFamily="serif"-->
+                        <!--android:textColor="#000"-->
+                        <!--/>-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Select status*"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp"
-                android:layout_height="wrap_content">
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:id="@+id/language_spinner"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
 
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Select your Status"-->
-                <!--android:fontFamily="serif"-->
-                <!--android:textColor="#000"-->
-                <!--/>-->
 
-                <Spinner
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:text="Select preferred messaging time*"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="20dp"
+                        android:layout_height="wrap_content">
+
+                        <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Enable Sms"-->
+                        <!--android:fontFamily="serif"-->
+
+                        <!--android:textColor="#000"-->
+                        <!--/>-->
+
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:id="@+id/time_spinner"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:text="Select motivational alerts*"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="20dp"
+                        android:layout_height="wrap_content">
+
+                        <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Enable Sms"-->
+                        <!--android:fontFamily="serif"-->
+
+                        <!--android:textColor="#000"-->
+                        <!--/>-->
+
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:id="@+id/weekly_spinner"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+
+                    <!--ends here-->
+
+                </LinearLayout>
+
+                <TextView
                     android:layout_width="match_parent"
-                    android:id="@+id/status_spinner"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Select status*"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:layout_height="wrap_content">
+
+                    <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Select your Status"-->
+                    <!--android:fontFamily="serif"-->
+                    <!--android:textColor="#000"-->
+                    <!--/>-->
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:id="@+id/status_spinner"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
 
 
 
@@ -693,37 +749,39 @@
                 </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp"
-                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:layout_height="wrap_content">
 
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Select your Status"-->
-                <!--android:fontFamily="serif"-->
-                <!--android:textColor="#000"-->
-                <!--/>-->
+                    <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Select your Status"-->
+                    <!--android:fontFamily="serif"-->
+                    <!--android:textColor="#000"-->
+                    <!--/>-->
 
 
-            </LinearLayout>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Submit"
-                android:onClick="submitClicked"
-                android:id="@+id/btnRSubmit"
-                android:fontFamily="serif"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:textColor="#FFFFFF"
-                android:background="@drawable/background_round_corner_button"
-                android:textAllCaps="true"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="10sp"
-                />
+                </LinearLayout>
+
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Submit"
+                    android:onClick="submitClicked"
+                    android:id="@+id/btnRSubmit"
+                    android:fontFamily="serif"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/background_round_corner_button"
+                    android:textAllCaps="true"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="10sp"
+                    />
 
 
             </LinearLayout>
