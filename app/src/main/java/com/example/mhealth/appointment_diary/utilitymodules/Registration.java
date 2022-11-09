@@ -417,6 +417,19 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
         try {
 
+                    locatorcountyE.setText("");
+                    locatorsubcountyE.setText("");
+                    locatorlocationE.setText("");
+                    locatorwardE.setText("");
+                    locatorvillageE.setText("");
+
+                     ageinyearsE.setText("");
+
+
+
+
+
+
             cccE.setText("");
             upnE.setText("");
             f_nameE.setText("");

@@ -334,12 +334,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/UPIno"
-                            android:inputType="text"
+                            android:inputType="none"
                             android:textStyle="bold"
                             android:hint="UPI NO."
                             android:textColorHint="#000"
                             android:maxLength="24"
                             android:textSize="12dp"
+                            android:editable="false"
+                            android:focusable="true"
 
 
                             />
