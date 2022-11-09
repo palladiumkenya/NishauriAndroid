@@ -5,6 +5,7 @@ package com.example.mhealth.appointment_diary.AccessServer;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -1069,6 +1070,125 @@ public class AccessServer {
     }
 
 //end function to remove fake defaulters
+
+    //request UPI
+    public void requestUPI(final String msg, final String mfl) {
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+        pr.showProgress("Requesting UPI...");
+        final int[] mStatusCode = new int[1];
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, z+Config.UPI_REQUEST,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+//                        Toast.makeText(ctx, "message "+response, Toast.LENGTH_SHORT).show();
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            for (int a=0; a<jsonObject.length(); a++){
+                                String jsonObject1 =jsonObject.getString("clientNumber");
+                                Toast.makeText(ctx, "UPI is"+jsonObject1, Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        pr.dissmissProgress();
+
+
+                        if(mStatusCode[0]==200){
+
+
+
+                            dialogs.showSuccessDialog(response,"Server Response");
+
+
+                        }
+                        else{
+
+                            dialogs.showErrorDialog(response,"Server response");
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        pr.dissmissProgress();
+
+                        try{
+
+                            //byte[] htmlBodyBytes = error.networkResponse.data;
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                           // dialogs.showErrorDialog(new String(htmlBodyBytes),"Server Response");
+                            Log.d("", error.getMessage());
+                            Toast.makeText(ctx, error.getMessage(), Toast.LENGTH_LONG).show();
+
+                            pr.dissmissProgress();
+
+                        }
+                        catch(Exception e){
+
+
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                            dialogs.showErrorDialog("error occured, try again","Server Response");
+
+                            pr.dissmissProgress();
+
+
+                        }
+
+
+                    }
+                }) {
+
+
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                mStatusCode[0] = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+
+            @Override
+            protected VolleyError parseNetworkError(VolleyError volleyError) {
+                return super.parseNetworkError(volleyError);
+            }
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("reg_payload",msg);
+                params.put("user_mfl", mfl);
+
+
+                return params;
+            }
+
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                800000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(ctx);
+        requestQueue.add(stringRequest);
+
+//        RequestQueue requestQueue = Volley.newRequestQueue(ctx);
+//        requestQueue.add(stringRequest);
+
+    }
 
 }
 

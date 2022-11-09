@@ -43,6 +43,10 @@ public class Config extends AppCompatActivity {
     public static final String GETAFFILIATION_URL1 = "/chore/affiliation";
     public static final String SENDDATATODB_URL1 = "/receiver/";
 
+    public static final String UPI_VERIFY = "/mohupi/verify";
+    public static final String UPI_REQUEST = "/mohupi/getUPI";
+
+
     public static final String GETTODAYSAPPOINTMENT_URL1 = "/today_appointments";
     public static final String GETUSERMFLCODE_URL1 = "/verifyMFLCode";
     //  public static final String REMOVEFAKEDEFAULTER_URL = "https://ushaurinew.mhealthkenya.co.ke/chore/toda";

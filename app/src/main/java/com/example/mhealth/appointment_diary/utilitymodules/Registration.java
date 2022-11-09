@@ -22,11 +22,14 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mhealth.appointment_diary.AccessServer.AccessServer;
 import com.example.mhealth.appointment_diary.AppendFunction.AppendFunction;
@@ -44,6 +47,7 @@ import com.example.mhealth.appointment_diary.tables.Clientartdate;
 import com.example.mhealth.appointment_diary.tables.Mflcode;
 import com.example.mhealth.appointment_diary.tables.Myaffiliation;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
+import com.example.mhealth.appointment_diary.tables.UrlTable;
 import com.facebook.stetho.Stetho;
 
 import org.json.JSONException;
@@ -62,6 +66,7 @@ import java.util.Map;
 public class Registration extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Progress progress;
+    public String z;
 
 
     LinearLayout smslayoutL, idnoL, orphanL, altphoneL, disableL,groupingL, birthL, UPIL;
@@ -163,7 +168,9 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
         final Context gratitude = this;
         final Button btnRSubmit = (Button) findViewById(R.id.btnRSubmit);
+        final Button submitUPIrequest = (Button) findViewById(R.id.btnRequest);
         btnRSubmit.setEnabled(true);
+        submitUPIrequest.setEnabled(true);
 
         Stetho.initializeWithDefaults(this);
 
@@ -637,7 +644,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 }else{
 
                     progress.showProgress("Getting UPI number");
-
                     Map<String, String> params =new HashMap<String, String>();
                     params.put("identifier", "national-id");
                     // params.put("identifier_value", "2345678");
@@ -648,11 +654,24 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                     JSONObject jsonObject =new JSONObject(params);
                     String url ="https://ushauriapi.kenyahmis.org/mohupi/verify";
 
+                    try{
+                        List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+                        if (_url.size()==1){
+                            for (int x=0; x<_url.size(); x++){
+                                z=_url.get(x).getBase_url1();
+                            }
+                        }
+
+                    } catch(Exception e){
+
+                    }
+
                     RequestQueue requestQueue = Volley.newRequestQueue(Registration.this);
 
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
+                            UPI_number.setText("");
                             //Log.d("UPI", response.toString());
                             progress.dissmissProgress();
 
@@ -700,7 +719,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                                 }else{
                                     Toast.makeText(Registration.this, "Client has no UPI number", Toast.LENGTH_SHORT).show();
-
+                                    UPI_number.setText("");
                                 }
 
 
@@ -716,7 +735,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                         @Override
                         public void onErrorResponse(VolleyError error) {
 
-                            Toast.makeText(Registration.this, "error occured, try again", Toast.LENGTH_SHORT).show();
+                            Log.d("", error.getMessage());
+                            Toast.makeText(Registration.this, "error occured, try again"+error.getMessage(), Toast.LENGTH_SHORT).show();
                             progress.dissmissProgress();
                             //Toast.makeText(Registration.this, "Lost focus2"+idnoE.getText().toString(), Toast.LENGTH_SHORT).show();
 
@@ -806,19 +826,35 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                     Map<String, String> params =new HashMap<String, String>();
                     params.put("identifier", "national-id");
-                    params.put("identifier_value", "2345678");
+                   // params.put("identifier_value", "2345678");
 
-                    //params.put("identifier_value", idnoE.getText().toString());
+                    params.put("identifier_value", dobirth.getText().toString());
 
 
                     JSONObject jsonObject =new JSONObject(params);
                     String url ="https://ushauriapi.kenyahmis.org/mohupi/verify";
+
+                    try{
+                        List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+                        if (_url.size()==1){
+                            for (int x=0; x<_url.size(); x++){
+                                z=_url.get(x).getBase_url1();
+                            }
+                        }
+
+                    } catch(Exception e){
+
+                    }
+
+
+
 
                     RequestQueue requestQueue =Volley.newRequestQueue(Registration.this);
 
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
+                            UPI_number.setText("");
                             //Log.d("UPI", response.toString());
                             progress.dissmissProgress();
 
@@ -864,6 +900,10 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                                     //AlertDialog
 
+                                }
+                                else{
+                                    Toast.makeText(Registration.this, "Client has no UPI number", Toast.LENGTH_SHORT).show();
+                                    UPI_number.setText("");
                                 }
 
 
@@ -2041,7 +2081,721 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         }
 
     }
+    //begin requesting UPI
+    public void submitUPIrequest(View v) {
 
+        try {
+
+
+
+            //start set locator information variables
+
+//            locatorsubcountyS,locatorlocationS,locatorwardS,locatorvillageS
+
+            if(locatorcountyE.getText().toString().trim().isEmpty()){
+
+                locatorcountyS="-1";
+
+            }
+            else{
+
+                locatorcountyS=locatorcountyE.getText().toString();
+
+            }
+
+            if(locatorsubcountyE.getText().toString().trim().isEmpty()){
+
+                locatorsubcountyS="-1";
+
+            }
+            else{
+
+                locatorsubcountyS=locatorsubcountyE.getText().toString();
+
+            }
+
+
+            if(locatorlocationE.getText().toString().trim().isEmpty()){
+
+                locatorlocationS="-1";
+
+            }
+            else{
+
+                locatorlocationS=locatorlocationE.getText().toString();
+
+            }
+
+
+            if(locatorwardE.getText().toString().trim().isEmpty()){
+
+                locatorwardS="-1";
+
+            }
+            else{
+
+                locatorwardS=locatorwardE.getText().toString();
+
+            }
+
+            if(locatorvillageE.getText().toString().trim().isEmpty()){
+
+                locatorvillageS="-1";
+
+            }
+            else{
+
+                locatorvillageS=locatorvillageE.getText().toString();
+
+            }
+
+
+            //end set locator information variables
+
+            String cccS = cccE.getText().toString();
+            String fileserialS = fileserialE.getText().toString();
+            String upnS = upnE.getText().toString();
+            String f_nameS = f_nameE.getText().toString();
+            String s_nameS = s_nameE.getText().toString();
+            String o_nameS = o_nameE.getText().toString();
+            String dobS = dobE.getText().toString();
+            String enrollmentS = enrollment_dateE.getText().toString();
+            String art_dateS = art_dateE.getText().toString();
+            String phoneS = phoneE.getText().toString();
+            String altphoneNumber = "-1";
+            String buddyphoneNumber = "-1";
+            String idNumber = "-1";
+
+            String[] dobArray = new String[]{};
+            String[] enrollmentArray = new String[]{};
+            String[] artArray = new String[]{};
+
+            String dobYear = "";
+            String dobMnth = "";
+            String dobDay = "";
+
+            int dobYearv = -1;
+            int dobMnthv = -1;
+            int dobDayv = -1;
+
+            String artYear = "";
+            String artMnth = "";
+            String artDay = "";
+
+            int artYearv = -1;
+            int artMnthv = -1;
+            int artDayv = -1;
+
+            String enrollYear = "";
+            String enrollMnth = "";
+            String enrollDay = "";
+
+            int enrollYearv = -1;
+            int enrollMnthv = -1;
+            int enrollDayv = -1;
+
+
+            String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+            String currentArray[] = timeStamp.split("\\.");
+            String currentDate = currentArray[2];
+            String currentMonth = currentArray[1];
+            String currentYear = currentArray[0];
+
+            int cdate = Integer.parseInt(currentDate);
+            int cmnth = Integer.parseInt(currentMonth);
+            int cyear = Integer.parseInt(currentYear);
+
+            if (!dobS.isEmpty()) {
+                dobArray = dobS.split("/");
+                dobYear = dobArray[2];
+                dobMnth = dobArray[1];
+                dobDay = dobArray[0];
+
+                dobYearv = Integer.parseInt(dobYear);
+                dobMnthv = Integer.parseInt(dobMnth);
+                dobDayv = Integer.parseInt(dobDay);
+
+            }
+            if (!enrollmentS.isEmpty()) {
+                enrollmentArray = enrollmentS.split("/");
+
+                enrollYear = enrollmentArray[2];
+                enrollMnth = enrollmentArray[1];
+                enrollDay = enrollmentArray[0];
+
+                enrollYearv = Integer.parseInt(enrollYear);
+                enrollMnthv = Integer.parseInt(enrollMnth);
+                enrollDayv = Integer.parseInt(enrollDay);
+
+            }
+            if (!art_dateS.isEmpty()) {
+
+                artArray = art_dateS.split("/");
+
+                artYear = artArray[2];
+                artMnth = artArray[1];
+                artDay = artArray[0];
+
+                artYearv = Integer.parseInt(artYear);
+                artMnthv = Integer.parseInt(artMnth);
+                artDayv = Integer.parseInt(artDay);
+            }
+
+
+//            get the dob years
+
+
+//            get the art years
+
+
+//            get the art years
+
+
+            if (patientStatus_code.contentEquals("0")) {
+
+                Toast.makeText(this, "Please Select client type", Toast.LENGTH_SHORT).show();
+
+
+            } else if (cccS.trim().isEmpty()) {
+
+                cccE.setError("mfl code is required");
+
+            } else if (upnS.trim().isEmpty()) {
+
+                upnE.setError("CCC No. required");
+
+            }
+//           else if(fileserialS.trim().isEmpty() && !patientStatus_code.contentEquals("2")){
+//
+//                fileserialE.setError("file serial number is required");
+//           }
+
+            else if (f_nameS.trim().isEmpty() && !patientStatus_code.contentEquals("2")) {
+
+                f_nameE.setError("First name required");
+
+            } else if (s_nameS.trim().isEmpty() && !patientStatus_code.contentEquals("2")) {
+                s_nameE.setError("Second name required");
+            } else if (dobS.trim().isEmpty() && !patientStatus_code.contentEquals("2")) {
+                dobE.setError("Date of Birth required");
+            }
+//            else if(idnoL.isShown() && idnoE.getText().toString().trim().isEmpty()){
+//                idnoE.setError("ID Number is required");
+//           }
+            else if (enrollmentS.trim().isEmpty() && !patientStatus_code.contentEquals("2")) {
+                enrollment_dateE.setError("Enrollment date required");
+            } else if (art_dateE.isShown() && art_dateS.trim().isEmpty() && !patientStatus_code.contentEquals("2")) {
+                art_dateE.setError("ART date required");
+            } else if (phoneS.trim().isEmpty() && !patientStatus_code.contentEquals("2")) {
+                phoneE.setError("Phone required");
+            } else if ((!dobS.trim().isEmpty()) && dobYearv > cyear) {
+
+                dobE.setError("Date of Birth should be less than today");
+                Toast.makeText(this, "Date of Birth should be less than today", Toast.LENGTH_SHORT).show();
+
+            } else if ((!dobS.trim().isEmpty()) && dobYearv == cyear && dobMnthv > cmnth) {
+
+                dobE.setError("Date of Birth should be less than today");
+                Toast.makeText(this, "Date of Birth should be less than today", Toast.LENGTH_SHORT).show();
+
+            } else if ((!dobS.trim().isEmpty()) && dobYearv == cyear && dobMnthv == cmnth && dobDayv >= cdate) {
+
+                dobE.setError("Date of Birth should be less than today");
+                Toast.makeText(this, "Date of Birth should be less than today", Toast.LENGTH_SHORT).show();
+
+            } else if ((!dobS.trim().isEmpty()) && (!enrollmentS.trim().isEmpty()) && dobYearv > enrollYearv) {
+
+                dobE.setError("Date of Birth should be less than enroll date");
+                Toast.makeText(this, "Date of Birth should be less than enroll date", Toast.LENGTH_SHORT).show();
+
+            } else if ((!dobS.trim().isEmpty()) && (!enrollmentS.trim().isEmpty()) && dobYearv == enrollYearv && dobMnthv > enrollMnthv) {
+
+                dobE.setError("Date of Birth should be less than enroll date");
+                Toast.makeText(this, "Date of Birth should be less than enroll date", Toast.LENGTH_SHORT).show();
+
+            } else if ((!dobS.trim().isEmpty()) && (!enrollmentS.trim().isEmpty()) && dobYearv == enrollYearv && dobMnthv == enrollMnthv && dobDayv >= enrollDayv) {
+
+                dobE.setError("Date of Birth should be less than enroll date");
+                Toast.makeText(this, "Date of Birth should be less than enroll date", Toast.LENGTH_SHORT).show();
+
+            } else if (art_dateE.isShown() && (!dobS.trim().isEmpty()) && (!art_dateS.trim().isEmpty()) && dobYearv > artYearv) {
+
+                dobE.setError("Date of Birth should be less than ART date");
+                Toast.makeText(this, "Date of Birth should be less than ART date", Toast.LENGTH_SHORT).show();
+
+            } else if (art_dateE.isShown() && (!dobS.trim().isEmpty()) && (!art_dateS.trim().isEmpty()) && dobYearv == artYearv && dobMnthv > artMnthv) {
+
+                dobE.setError("Date of Birth should be less than ART date");
+                Toast.makeText(this, "Date of Birth should be less than  ART date", Toast.LENGTH_SHORT).show();
+
+            } else if (art_dateE.isShown() && (!dobS.trim().isEmpty()) && (!art_dateS.trim().isEmpty()) && dobYearv == artYearv && dobMnthv == artMnthv && dobDayv >= artDayv) {
+
+                dobE.setError("Date of Birth should be less than ART date");
+                Toast.makeText(this, "Date of Birth should be less than ART date", Toast.LENGTH_SHORT).show();
+
+            } else if (art_dateE.isShown() && (!art_dateS.trim().isEmpty()) && artYearv > cyear) {
+
+                art_dateE.setError("ART date should not be greater than today");
+                Toast.makeText(this, "ART date should not be greater than today", Toast.LENGTH_SHORT).show();
+
+            } else if (art_dateE.isShown() && (!art_dateS.trim().isEmpty()) && artYearv == cyear && artMnthv > cmnth) {
+                art_dateE.setError("ART date should not be greater than today");
+                Toast.makeText(this, "ART date should not be greater than today", Toast.LENGTH_SHORT).show();
+
+            } else if (art_dateE.isShown() && (!art_dateS.trim().isEmpty()) && artYearv == cyear && artMnthv == cmnth && artDayv > cdate) {
+
+                art_dateE.setError("ART date should not be greater than today");
+                Toast.makeText(this, "ART date should not be greater than today", Toast.LENGTH_SHORT).show();
+
+            }
+
+//            else if(enrollYearv>cyear){
+//
+//                enrollment_dateE.setError("Enrollment date should be less than today");
+//                Toast.makeText(this, "Enrollment date should be less than today", Toast.LENGTH_SHORT).show();
+//
+//            }
+//            else if(enrollYearv==cyear&&enrollMnthv>cmnth){
+//                enrollment_dateE.setError("Enrollment date should be less than today");
+//                Toast.makeText(this, "Enrollment date should be less than today", Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//            else if(enrollYearv==cyear&&enrollMnthv==cmnth && enrollDayv>=cdate){
+//
+//                enrollment_dateE.setError("Enrollment date should be less than today");
+//                Toast.makeText(this, "Enrollment date should be less than today", Toast.LENGTH_SHORT).show();
+//
+//            }
+
+            else if (art_dateE.isShown() && (!enrollmentS.trim().isEmpty()) && enrollYearv > artYearv) {
+
+                enrollment_dateE.setError("Enrollment date should be less than ART date");
+                Toast.makeText(this, "Enrollment date should be less than ART date", Toast.LENGTH_SHORT).show();
+
+            } else if (art_dateE.isShown() && (!enrollmentS.trim().isEmpty()) && enrollYearv == artYearv && enrollMnthv > artMnthv) {
+                enrollment_dateE.setError("Enrollment date should be less than ART date");
+                Toast.makeText(this, "Enrollment date should be less than ART date", Toast.LENGTH_SHORT).show();
+
+            } else if (art_dateE.isShown() && (!enrollmentS.trim().isEmpty()) && enrollYearv == artYearv && enrollMnthv == artMnthv && enrollDayv > artDayv) {
+
+                enrollment_dateE.setError("Enrollment date should be less than or equal to ART date");
+                Toast.makeText(this, "Enrollment date should be less than or equal to ART date", Toast.LENGTH_SHORT).show();
+
+            } else if (gender_code.contentEquals("0") && !patientStatus_code.contentEquals("2")) {
+                Toast.makeText(this, "Please Select Gender", Toast.LENGTH_SHORT).show();
+
+
+            } else if (marital_code.contentEquals("0") && !patientStatus_code.contentEquals("2")) {
+                Toast.makeText(this, "Please Select Marital Status", Toast.LENGTH_SHORT).show();
+
+
+            } else if (condition_code.contentEquals("0") && !patientStatus_code.contentEquals("2")) {
+
+                Toast.makeText(this, "Please Select Condition", Toast.LENGTH_SHORT).show();
+
+
+            }
+//            else if(grouping_code.contentEquals("0")){
+//                Toast.makeText(this, "Please Select Grouping", Toast.LENGTH_SHORT).show();
+//
+//
+//            }
+            else if (smslayoutL.isShown() && language_code.contentEquals("0")) {
+
+                Toast.makeText(this, "Please Select Language", Toast.LENGTH_SHORT).show();
+
+
+            } else if (sms_code.contentEquals("0") && !patientStatus_code.contentEquals("2")) {
+                Toast.makeText(this, "Please Select Sms Option", Toast.LENGTH_SHORT).show();
+
+
+            } else if (sms_code.contentEquals("1") && wklyMotivation_code.contentEquals("0") && !patientStatus_code.contentEquals("2")) {
+                Toast.makeText(this, "Please Select motivational code", Toast.LENGTH_SHORT).show();
+
+
+            } else if (Selectstatus_code.contentEquals("0") && !patientStatus_code.contentEquals("2")) {
+                Toast.makeText(this, "Please Select Status", Toast.LENGTH_SHORT).show();
+
+
+            } else {
+
+                if (sms_code.contentEquals("0") || sms_code.contentEquals("2")) {
+
+                    sms_code = "-1";
+                    wklyMotivation_code = "-1";
+                }
+                if (idnoE.isShown() && !idnoE.getText().toString().trim().isEmpty()) {
+                    idnoS = idnoE.getText().toString();
+                } else {
+
+                    idnoS = "-1";
+                }
+
+                if (UPI_number.isShown() && !UPI_number.getText().toString().trim().isEmpty()){
+                    upi_no = UPI_number.getText().toString();
+                }else{
+                    upi_no ="-1";
+                }
+
+                if (dobirth.isShown() && !dobirth.getText().toString().trim().isEmpty()){
+                    birth_cert_no =dobirth.getText().toString();
+                }else{
+                    birth_cert_no="-1";
+                }
+
+                //*******check empty values and set them to -1***
+
+                /* Encrypt */
+                if (cccS.trim().isEmpty()) {
+                    cccS = "-1";
+                }
+                if (f_nameS.trim().isEmpty()) {
+                    f_nameS = "-1";
+                }
+                if (s_nameS.trim().isEmpty()) {
+
+                    s_nameS = "-1";
+                }
+                if (o_nameS.trim().isEmpty()) {
+
+                    o_nameS = "-1";
+                }
+                if (dobS.trim().isEmpty()) {
+
+                    dobS = "-1";
+                }
+                if (gender_code.trim().isEmpty()) {
+
+                    gender_code = "-1";
+                }
+                if (gender_code.contentEquals("0")) {
+
+                    gender_code = "-1";
+                }
+                if (marital_code.trim().isEmpty()) {
+                    marital_code = "-1";
+                }
+                if (marital_code.contentEquals("0")) {
+                    marital_code = "-1";
+                }
+                if (condition_code.trim().isEmpty()) {
+                    condition_code = "-1";
+                }
+                if (condition_code.contentEquals("0")) {
+                    condition_code = "-1";
+                }
+
+                if (enrollmentS.trim().isEmpty()) {
+                    enrollmentS = "-1";
+                }
+                if (art_dateS.trim().isEmpty()) {
+                    art_dateS = "-1";
+                }
+                if (phoneS.trim().isEmpty()) {
+                    phoneS = "-1";
+                }
+                if (language_code.trim().isEmpty()) {
+                    language_code = "-1";
+                }
+                if (language_code.contentEquals("0")) {
+                    language_code = "-1";
+                }
+                if (sms_code.trim().isEmpty()) {
+                    sms_code = "-1";
+                }
+                if (sms_code.contentEquals("0")) {
+                    sms_code = "-1";
+                }
+                if (wklyMotivation_code.trim().isEmpty()) {
+                    wklyMotivation_code = "-1";
+                }
+                if (wklyMotivation_code.contentEquals("0")) {
+                    wklyMotivation_code = "-1";
+                }
+                if (messageTime_code.trim().isEmpty()) {
+                    messageTime_code = "-1";
+                }
+
+                if (messageTime_code.contentEquals("0")) {
+
+                    messageTime_code = "-1";
+                }
+                if (Selectstatus_code.trim().isEmpty()) {
+                    Selectstatus_code = "-1";
+                }
+                if (Selectstatus_code.contentEquals("0")) {
+                    Selectstatus_code = "-1";
+                }
+                if (patientStatus_code.trim().isEmpty()) {
+                    patientStatus_code = "-1";
+                }
+                if (patientStatus_code.contentEquals("0")) {
+
+                    patientStatus_code = "-1";
+                }
+                if (altphoneE.isShown() && !altphoneE.getText().toString().isEmpty()) {
+
+                    altphoneNumber = altphoneE.getText().toString();
+                } else {
+
+                    altphoneNumber = "-1";
+                }
+
+                if (buddyphoneE.isShown() && !buddyphoneE.getText().toString().isEmpty()) {
+
+                    buddyphoneNumber = altphoneE.getText().toString();
+                } else {
+
+                    buddyphoneNumber = "-1";
+                }
+
+                if(!groupingL.isShown()){
+
+                    new_grouping_code="-1";
+
+
+                }
+
+                if(!art_dateE.isShown()){
+
+                    art_dateS="-1";
+
+                }
+
+//*******check empty values and set them to -1***
+
+                String newupns = AppendFunction.AppendUniqueIdentifier(upnS);
+                String myccnumber = cccS + newupns;
+
+                String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" +upi_no+ "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code+"*"+new_grouping_code+"*"+locatorcountyS+"*"+locatorsubcountyS+"*"+locatorlocationS+"*"+locatorwardS+"*"+locatorvillageS;
+                // String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" +upi_no+ "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code+"*"+new_grouping_code+"*"+locatorcountyS+"*"+locatorsubcountyS+"*"+locatorlocationS+"*"+locatorwardS+"*"+locatorvillageS;
+
+
+//                    String sendSms = "Reg*" + cccS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + language_code + "*" + sms_code + "*" +wkly_code+"*"+pnt_code+"*"+message_code+"*"+ status_code;
+
+
+                String encrypted = Base64Encoder.encryptString(sendSms);
+
+
+                String mynumber = Config.mainShortcode;
+
+                if (chkinternet.isInternetAvailable()) {
+                    List<Activelogin> myl = Activelogin.findWithQuery(Activelogin.class, "select * from Activelogin");
+                    for (int x = 0; x < myl.size(); x++) {
+
+                        String un = myl.get(x).getUname();
+                        List<Registrationtable> myl2 = Registrationtable.findWithQuery(Registrationtable.class, "select * from Registrationtable where username=? limit 1", un);
+                        for (int y = 0; y < myl2.size(); y++) {
+
+                            String phne = myl2.get(y).getPhone();
+//                                acs.sendDetailsToDb("Reg*"+sendSms+"/"+phne);
+                          // acs.requestUPI("Reg*" + encrypted, "13023");
+                            //BEGIN UPI REQUEST
+
+
+                            try{
+                                List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+                                if (_url.size()==1){
+                                    for (int bb=0; bb<_url.size(); bb++){
+                                        z=_url.get(bb).getBase_url1();
+                                    }
+                                }
+
+                            } catch(Exception e){
+
+                            }
+                            //pr.showProgress("Requesting UPI...");
+                            final int[] mStatusCode = new int[1];
+
+                            StringRequest stringRequest = new StringRequest(Request.Method.POST, z+Config.UPI_REQUEST,
+                                    new Response.Listener<String>() {
+                                        @Override
+                                        public void onResponse(String response) {
+//                        Toast.makeText(ctx, "message "+response, Toast.LENGTH_SHORT).show();
+
+                                            try {
+                                                JSONObject jsonObject = new JSONObject(response);
+
+                                                for (int a=0; a<jsonObject.length(); a++){
+                                                    String jsonObject1 =jsonObject.getString("clientNumber");
+                                                    Toast.makeText(Registration.this, "UPI is"+jsonObject1, Toast.LENGTH_LONG).show();
+                                                    UPI_number.setText(jsonObject1);
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                           // pr.dissmissProgress();
+
+
+                                            if(mStatusCode[0]==200){
+
+
+
+                                               // dialogs.showSuccessDialog(response,"Server Response");
+
+
+                                            }
+                                            else{
+
+                                               // dialogs.showErrorDialog(response,"Server response");
+                                            }
+
+                                        }
+                                    },
+                                    new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                            //pr.dissmissProgress();
+
+                                            try{
+
+                                                //byte[] htmlBodyBytes = error.networkResponse.data;
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                                                // dialogs.showErrorDialog(new String(htmlBodyBytes),"Server Response");
+                                                Log.d("", error.getMessage());
+                                                Toast.makeText(Registration.this, error.getMessage(), Toast.LENGTH_LONG).show();
+
+                                                //pr.dissmissProgress();
+
+                                            }
+                                            catch(Exception e){
+
+
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                                                //dialogs.showErrorDialog("error occured, try again","Server Response");
+
+                                               // pr.dissmissProgress();
+
+
+                                            }
+
+
+                                        }
+                                    }) {
+
+
+                                @Override
+                                protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                                    mStatusCode[0] = response.statusCode;
+                                    return super.parseNetworkResponse(response);
+                                }
+
+                                @Override
+                                protected VolleyError parseNetworkError(VolleyError volleyError) {
+                                    return super.parseNetworkError(volleyError);
+                                }
+                                @Override
+                                protected Map<String, String> getParams() {
+                                    Map<String, String> params = new HashMap<String, String>();
+
+                                    params.put("reg_payload","Reg*" + encrypted);
+                                    params.put("user_mfl", cccE.getText().toString());
+
+
+                                    return params;
+                                }
+
+                            };
+
+                            stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                                    800000,
+                                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                            RequestQueue requestQueue = Volley.newRequestQueue(Registration.this);
+                            requestQueue.add(stringRequest);
+
+//        RequestQueue requestQueue = Volley.newRequestQueue(ctx);
+//        requestQueue.add(stringRequest);
+
+                        }
+
+
+
+                            //END UPI REQUEST
+                            //acs.requestUPI("Reg*" + encrypted, newupns);
+                        }
+
+
+
+                } else {
+
+                    sm.sendMessageApi("Reg*" + encrypted, mynumber);
+                    LogindisplayDialog("Client registered successfully, kindly confirm that you have received the client registration successful SMS before booking an appointment");
+
+
+
+                }
+
+
+                final String mycc = cccE.getText().toString();
+                final String myupn = upnE.getText().toString();
+
+                saveClientArtData(mycc, myupn, art_dateS);
+
+               // clearFields();
+
+                counter = counter + 1;
+
+
+                RegisterCounter newcount = new RegisterCounter(counter);
+                newcount.save();
+
+//                        System.out.println("decrypted text is "+decrypted);
+
+//                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+//
+//                    alertDialogBuilder.setMessage("DO you want to make appointment");
+//                    alertDialogBuilder.setPositiveButton("yes",
+//                            new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface arg0, int arg1) {
+////                                    Toast.makeText(Appointment.this,"You clicked yes button",Toast.LENGTH_LONG).show();
+//
+//
+//                                    Intent myint = new Intent(Registration.this , Appointment.class);
+//                                    myint.putExtra("ccc",mycc);
+//                                    myint.putExtra("upn",myupn);
+//                                    startActivity(myint);
+//
+//                                    Toast.makeText(getApplicationContext(), "Registration was submitted successfully", Toast.LENGTH_SHORT).show();
+//
+//
+////                                    myint.putExtra("value","ths value");
+//                                }
+//                            });
+//
+//                    alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//
+//
+//
+//                            Toast.makeText(getApplicationContext(), "Registration was submitted successfully", Toast.LENGTH_SHORT).show();
+//
+////                            finish();
+//                        }
+//                    });
+//
+//
+//
+//                    AlertDialog alertDialog = alertDialogBuilder.create();
+//                    alertDialog.show();
+
+//                    LogindisplayDialog("success submitting Registration");
+
+
+            }
+
+
+        } catch (Exception e) {
+            Toast.makeText(this, "error in submission, try again " + e, Toast.LENGTH_SHORT).show();
+
+
+        }
+    }
 
 }
 
