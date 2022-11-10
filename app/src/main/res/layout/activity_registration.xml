@@ -710,6 +710,7 @@
 
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:orientation="vertical"
                     android:id="@+id/locatorinfoll"
@@ -762,6 +763,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -819,6 +821,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/birth_facility"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/spacing_xlarge"
@@ -872,6 +875,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/affiliation_facility"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/spacing_xlarge"
@@ -918,6 +922,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/spacing_xlarge"
                         android:gravity="center_vertical"
@@ -983,6 +988,7 @@
                         android:text="Ward of residence"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/grey_90"
+                        android:visibility="gone"
 
                         />
 

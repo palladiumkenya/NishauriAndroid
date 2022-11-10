@@ -257,7 +257,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         getCountries();
         getFacilities();
         getcountiesbirth();
-
+getWards(wardID);
 
         final Context gratitude = this;
         final Button btnRSubmit = (Button) findViewById(R.id.btnRSubmit);
@@ -1992,10 +1992,10 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 String newupns = AppendFunction.AppendUniqueIdentifier(upnS);
                 String myccnumber = cccS + newupns;
 
-                String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + upi_no + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code + "*" + new_grouping_code + "*" + locatorcountyS + "*" + locatorsubcountyS + "*" + locatorlocationS + "*" + locatorwardS + "*" + locatorvillageS;
+              //String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + upi_no + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code + "*" + new_grouping_code + "*" + locatorcountyS + "*" + locatorsubcountyS + "*" + locatorlocationS + "*" + locatorwardS + "*" + locatorvillageS;
                 // String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" +upi_no+ "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code+"*"+new_grouping_code+"*"+locatorcountyS+"*"+locatorsubcountyS+"*"+locatorlocationS+"*"+locatorwardS+"*"+locatorvillageS;
-
-
+                String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + upi_no + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code + "*" + new_grouping_code + "*" + countryID+"*" +countyIDb+"*"+countyID + "*" + scountyID + "*" + locatorlocationS + "*" + wardID + "*" + locatorvillageS;
+//countyID + "*" + scountyID + "*" + locatorlocationS + "*" + wardID + "*" + locatorvillageS;
 //                    String sendSms = "Reg*" + cccS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + language_code + "*" + sms_code + "*" +wkly_code+"*"+pnt_code+"*"+message_code+"*"+ status_code;
 
 
@@ -2913,8 +2913,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                         countiess.add(newCounty);
                         countiesList.add(newCounty.getName());
                     }
-                    countiess.add(new counties(0, "--select county--", 0));
-                    countiesList.add("---select county--");
+                    countiess.add(new counties(0, "Select county of residence*", 0));
+                    countiesList.add("Select county of residence*");
 
 
 
@@ -3049,8 +3049,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                         scountyList.add(newServiceUnit.getName());
                     }
 
-                    scountiess.add(new scounties(0, "--select sub-county--"));
-                    scountyList.add("--select Sub-county--");
+                    scountiess.add(new scounties(0, "Select sub-county of residence*"));
+                    scountyList.add("Select sub-county of residence*");
 
                     ArrayAdapter<String> aa = new ArrayAdapter<String>(Registration.this,
                             android.R.layout.simple_spinner_dropdown_item,
@@ -3171,8 +3171,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                         wardsList.add(newServiceUnit.getName());
                     }
 
-                    wardss.add(new wards(0, "--select Ward--", 0));
-                    wardsList.add("--select Ward--");
+                    wardss.add(new wards(0, "Select Ward of residence*", 0));
+                    wardsList.add("Select Ward of residence*");
 
                     ArrayAdapter<String> aa = new ArrayAdapter<String>(Registration.this,
                             android.R.layout.simple_spinner_dropdown_item,
@@ -3188,8 +3188,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                     rankSpinner.setAdapter(aa);
                     rankSpinner.setSelection(aa.getCount() - 1);
 
-                    wardID = wardss.get(aa.getCount() - 1).getId();
-
+                  //wardID = wardss.get(aa.getCount() - 1).getId();
+                   wardID = wardss.get(aa.getCount() -1).getId();
                     rankSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         //@Overide
                         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
@@ -3296,8 +3296,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
 
 
-                        countiessb.add(new counties(0, "--select county--", 0));
-                        countiesListb.add("---select county--");
+                        countiessb.add(new counties(0, "Select county of birth*", 0));
+                        countiesListb.add("Select county of birth*");
 
 
 
@@ -3426,8 +3426,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                         countriesList.add(newCounty.getName());
 
                     }
-                        countries.add(new Country(0, "--select country--", " --select country--"));
-                        countriesList.add("--select country-");
+                        countries.add(new Country(0, "Select country of birth*", " Select country of birth*"));
+                        countriesList.add("Select country of birth*");
 
 
 
