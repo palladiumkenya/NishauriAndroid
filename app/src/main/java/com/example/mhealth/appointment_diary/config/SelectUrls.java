@@ -11,6 +11,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -76,6 +79,11 @@ public class SelectUrls extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_urls);
+       if (!haveNetworkConnection()){
+           Toast.makeText(SelectUrls.this, "Check your internet", Toast.LENGTH_LONG).show();
+       }else{
+          geturls1();
+       }
         hasPermissions();
         requestPerms();
               /* try {
@@ -111,7 +119,7 @@ public class SelectUrls extends AppCompatActivity {
         btn_prcd = findViewById(R.id.login_proceed);
 
          spinner1 =findViewById(R.id.spCompany);
-         geturls1();
+       //  geturls1();
 
 
          btn_prcd.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +160,7 @@ public class SelectUrls extends AppCompatActivity {
         }
 
     public void geturls1(){
+
         String URLstring = "https://ushaurinode.mhealthkenya.co.ke/config";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URLstring, null, new Response.Listener<JSONObject>() {
             @Override
@@ -238,6 +247,10 @@ public class SelectUrls extends AppCompatActivity {
 
             }
         });
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                800000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue = Volley.newRequestQueue(SelectUrls.this);
         requestQueue.add(jsonObjectRequest);
     }
@@ -441,6 +454,25 @@ public class SelectUrls extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
+    }
+
+
+    //test internet
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
     }
 
 }

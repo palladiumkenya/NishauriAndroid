@@ -59,10 +59,7 @@ public class AccessServer {
     Progress pr;
     ProcessMessage pm;
     Dialogs dialogs;
-
     SweetAlertDialog mdialog;
-
-
     Dialog mydialog;
     private JSONArray id_result;
 

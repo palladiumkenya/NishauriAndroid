@@ -2,6 +2,7 @@ package com.example.mhealth.appointment_diary.utilitymodules;
 
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -34,7 +35,9 @@ import com.android.volley.toolbox.Volley;
 import com.example.mhealth.appointment_diary.AccessServer.AccessServer;
 import com.example.mhealth.appointment_diary.AppendFunction.AppendFunction;
 import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
+import com.example.mhealth.appointment_diary.Dialogs.Dialogs;
 import com.example.mhealth.appointment_diary.Mydates.MyDates;
+import com.example.mhealth.appointment_diary.ProcessReceivedMessage.ProcessMessage;
 import com.example.mhealth.appointment_diary.Progress.Progress;
 import com.example.mhealth.appointment_diary.R;
 //import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
@@ -60,6 +63,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 /**
  * Created by DELL on 12/11/2015.
  */
@@ -67,6 +72,11 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
     Progress progress;
     public String z;
+
+    Dialogs dialogs;
+    SweetAlertDialog mdialog;
+    Dialog mydialog;
+  public  String jsonObject1, jsonObject2, jsonObject3;
 
 
     LinearLayout smslayoutL, idnoL, orphanL, altphoneL, disableL,groupingL, birthL, UPIL;
@@ -123,6 +133,19 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        try {
+            //this.ctx = ctx;
+            //pr = new Progress(ctx);
+            mydialog = new Dialog(Registration.this);
+            dialogs=new Dialogs(Registration.this);
+           // pm=new ProcessMessage();
+
+        } catch (Exception e) {
+
+
+        }
+
         //getUPI();
         // components from activity_registration.xml
 
@@ -704,13 +727,15 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                     UPI_number.setText(UPI_number1);
                                     //UPI_number.setEnabled(false);
 
-                                    Toast.makeText(Registration.this, "Clients UPI number is"+ " " +UPI_number1 +" "+ "Name"+ " "+ firstname+ " "+ lastname, Toast.LENGTH_SHORT).show();
+                                    dialogs.showSuccessDialog("Clients UPI number is"+ " " +UPI_number1,  "Name:"+ " "+ firstname+ " "+ lastname);
+
+                                    //Toast.makeText(Registration.this, "Clients UPI number is"+ " " +UPI_number1 +" "+ "Name:"+ " "+ firstname+ " "+ lastname, Toast.LENGTH_SHORT).show();
                                     Log.d("", UPI_number1);
 
                                     //AlertDialog
                                     AlertDialog.Builder builder1 = new AlertDialog.Builder(Registration.this);
                                     builder1.setIcon(android.R.drawable.ic_dialog_alert);
-                                    builder1.setTitle("Clients UPI number is"+ " " + UPI_number1 );
+                                    builder1.setTitle("Client's UPI number is"+ " " + UPI_number1 );
                                     builder1.setMessage("Name" + " " + firstname + " " + lastname );
                                     builder1.setCancelable(false);
 
@@ -725,13 +750,15 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                                 }
                                             });
 
-
+                                   /* AlertDialog alert11 = builder1.create();
+                                    alert11.show();*/
 
 
                                     //AlertDialog
 
                                 }else{
-                                    Toast.makeText(Registration.this, "Client has no UPI number", Toast.LENGTH_SHORT).show();
+                                    dialogs.showErrorDialog("Client has no UPI number", "Please request UPI number for the client");
+                                  //  Toast.makeText(Registration.this, "Client has no UPI number", Toast.LENGTH_SHORT).show();
                                     UPI_number.setText("");
                                 }
 
@@ -886,8 +913,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                                     UPI_number.setText(UPI_number1);
                                     // UPI_number.setEnabled(false);
-
-                                    Toast.makeText(Registration.this, "Clients UPI number is"+ " " +UPI_number1 +" "+ "Name"+ " "+ firstname+ " "+ lastname, Toast.LENGTH_SHORT).show();
+                                    dialogs.showSuccessDialog("Clients UPI number is"+ " " +UPI_number1,  "Name:"+ " "+ firstname+ " "+ lastname);
+                                    //Toast.makeText(Registration.this, "Clients UPI number is"+ " " +UPI_number1 +" "+ "Name"+ " "+ firstname+ " "+ lastname, Toast.LENGTH_SHORT).show();
                                     Log.d("", UPI_number1);
 
                                     //AlertDialog
@@ -915,7 +942,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                                 }
                                 else{
-                                    Toast.makeText(Registration.this, "Client has no UPI number", Toast.LENGTH_SHORT).show();
+                                    dialogs.showErrorDialog("Client has no UPI number", "Please request UPI number for the client");
+                                    //Toast.makeText(Registration.this, "Client has no UPI number", Toast.LENGTH_SHORT).show();
                                     UPI_number.setText("");
                                 }
 
@@ -2631,27 +2659,40 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                                 JSONObject jsonObject = new JSONObject(response);
 
                                                 for (int a=0; a<jsonObject.length(); a++){
-                                                    String jsonObject1 =jsonObject.getString("clientNumber");
-                                                    Toast.makeText(Registration.this, "UPI is"+jsonObject1, Toast.LENGTH_LONG).show();
+                                                     jsonObject1 =jsonObject.getString("clientNumber");
+                                                     jsonObject2 =jsonObject.getString("firstName");
+                                                     jsonObject3 =jsonObject.getString("lastName");
+
+                                                    // Dialog
+
+                                                    //end dialog
+
+
+                                                   ////dialogs.showSuccessDialog("Clients UPI number is"+ " " +jsonObject1, "Name:" + " "+ jsonObject2 + " "+ jsonObject3);
+                                                    //Toast.makeText(Registration.this, "Clients UPI number is"+ " " +jsonObject1, Toast.LENGTH_LONG).show();
                                                     UPI_number.setText(jsonObject1);
                                                 }
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                             }
+
+
                                            // pr.dissmissProgress();
 
 
                                             if(mStatusCode[0]==200){
+                                                //UPI_number.setText(jsonObject1);
+                                                dialogs.showSuccessDialog("Clients UPI number is"+ " " +jsonObject1, "Name:" + " "+ jsonObject2 + " "+ jsonObject3);
 
 
 
-                                               // dialogs.showSuccessDialog(response,"Server Response");
+                                                //dialogs.showSuccessDialog(response,"Server Response");
 
 
                                             }
                                             else{
 
-                                               // dialogs.showErrorDialog(response,"Server response");
+                                                dialogs.showErrorDialog(response,"Server response");
                                             }
 
                                         }

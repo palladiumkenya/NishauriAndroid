@@ -28,6 +28,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mhealth.appointment_diary.Dialogs.Dialogs;
 import com.example.mhealth.appointment_diary.LoadMessages.LoadMessages;
 import com.example.mhealth.appointment_diary.MainOptions;
 import com.example.mhealth.appointment_diary.R;
@@ -56,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
     String myaff;
 
     String z, zz;
+    Dialogs dialogs;
 
 
     ProgressDialog progressDialog;
@@ -72,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        dialogs=new Dialogs(LoginActivity.this);
         //setScreen();
 
 
@@ -95,6 +98,10 @@ public class LoginActivity extends AppCompatActivity {
 
            // z= _url.base_url1;
            // zz =_url.stage_name1;
+            if (zz==null){
+                dialogs.showErrorDialog("System not selected", "Please select the system to connect to");
+
+            }
             Toast.makeText(LoginActivity.this, "You are connected to" + " " +zz, Toast.LENGTH_LONG).show();
             connect.setText(zz);
             connect.setTextColor(Color.parseColor("#F32013"));
