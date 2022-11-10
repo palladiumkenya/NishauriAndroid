@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -24,11 +25,16 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
 import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -43,7 +49,11 @@ import com.example.mhealth.appointment_diary.R;
 //import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
 import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.encryption.Base64Encoder;
+import com.example.mhealth.appointment_diary.models.Country;
 import com.example.mhealth.appointment_diary.models.RegisterCounter;
+import com.example.mhealth.appointment_diary.models.counties;
+import com.example.mhealth.appointment_diary.models.scounties;
+import com.example.mhealth.appointment_diary.models.wards;
 import com.example.mhealth.appointment_diary.sendmessages.SendMessage;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Clientartdate;
@@ -52,11 +62,15 @@ import com.example.mhealth.appointment_diary.tables.Myaffiliation;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
 import com.example.mhealth.appointment_diary.tables.UrlTable;
 import com.facebook.stetho.Stetho;
+import com.google.android.material.snackbar.Snackbar;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -70,22 +84,55 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  */
 public class Registration extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    private RequestQueue rq;
+
+    ArrayList<String> countiesList;
+    ArrayList<counties> countiess;
+
+    ArrayList<String> scountyList;
+    ArrayList<scounties> scountiess;
+
+    ArrayList<String> wardsList;
+    ArrayList<wards> wardss;
+
+    private int countyID = 0;
+    private int scountyID = 0;
+
+    private int wardID = 0;
+
+
+    ArrayList<String> countiesListb;
+    ArrayList<counties> countiessb;
+    private int countyIDb = 0;
+
+
+    ArrayList<String> countriesList;
+    ArrayList<Country> countries;
+
+    private String origin_country = "";
+    private int countryID = 0;
+
+
     Progress progress;
     public String z;
 
     Dialogs dialogs;
     SweetAlertDialog mdialog;
     Dialog mydialog;
-  public  String jsonObject1, jsonObject2, jsonObject3;
+    public String jsonObject1, jsonObject2, jsonObject3;
 
 
-    LinearLayout smslayoutL, idnoL, orphanL, altphoneL, disableL,groupingL, birthL, UPIL;
+    //Spinner ServiceSpinner, serviceUnitSpinner, rankSpinner, countrySpinner;
+    private SearchableSpinner birthSpinner, ServiceSpinner, serviceUnitSpinner, rankSpinner, countrySpinner;
 
-    EditText cccE, upnE, fileserialE, f_nameE, s_nameE, o_nameE, dobE, enrollment_dateE, art_dateE, phoneE, buddyphoneE, idnoE, altphoneE,ageinyearsE,locatorcountyE,locatorsubcountyE,locatorlocationE,locatorwardE,locatorvillageE, UPI_number, dobirth;
+
+    LinearLayout smslayoutL, idnoL, orphanL, altphoneL, disableL, groupingL, birthL, UPIL;
+
+    EditText cccE, upnE, fileserialE, f_nameE, s_nameE, o_nameE, dobE, enrollment_dateE, art_dateE, phoneE, buddyphoneE, idnoE, altphoneE, ageinyearsE, locatorcountyE, locatorsubcountyE, locatorlocationE, locatorwardE, locatorvillageE, UPI_number, dobirth;
 
     Spinner genderS, maritalS, conditionS, enrollmentS, languageS, smsS, wklymotivation, messageTime, SelectstatusS, patientStatus, GroupingS, orphanS, schoolS, newGroupingS;
 
-    String gender_code, marital_code, condition_code,grouping_code,new_grouping_code, category_code, language_code, sms_code, Selectstatus_code, wklyMotivation_code, messageTime_code, patientStatus_code, school_code, orphan_code, idnoS, upi_no, birth_cert_no, locatorcountyS,locatorsubcountyS,locatorlocationS,locatorwardS,locatorvillageS;
+    String gender_code, marital_code, condition_code, grouping_code, new_grouping_code, category_code, language_code, sms_code, Selectstatus_code, wklyMotivation_code, messageTime_code, patientStatus_code, school_code, orphan_code, idnoS, upi_no, birth_cert_no, locatorcountyS, locatorsubcountyS, locatorlocationS, locatorwardS, locatorvillageS;
 
     DatePickerDialog datePickerDialog;
     CheckInternet chkinternet;
@@ -95,13 +142,13 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     String[] genders = {"", "Female", "Male"};
     // Please Select Gender*
 
-    String[] newgroupings = {"", "Adolescent","PMTCT","TB","Adults","Peads","TB-HIV","HEI"};
+    String[] newgroupings = {"", "Adolescent", "PMTCT", "TB", "Adults", "Peads", "TB-HIV", "HEI"};
     //Please Select Grouping
     String[] gendersUcsf = {"", "Female", "Male"};
     //Please Select Sex
     String[] maritals = {"", "Single", "Married Monogomaus", "Married Polygamous", "Divorced", "Widowed", "Cohabiting", "Not Applicable"};
     //Please Select Marital Status*
-    String[] maritalsInfants = {"", "Single","Not Applicable"};
+    String[] maritalsInfants = {"", "Single", "Not Applicable"};
     //Please Select Marital Status
     String[] conditions = {"", "ART", "Pre-Art"};
     // Please Select Condition*
@@ -121,7 +168,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     //Please select preffered messaging time
     String[] pntstatus = {"", "New client", "Update client", "Transfer Client In (Transfer in of a client from a facility without ushauri system)"};
     //Enable Sms
-    String[] statuss = {"", "Active", "Disabled", "Deceased","Transfer Out"};
+    String[] statuss = {"", "Active", "Disabled", "Deceased", "Transfer Out"};
     //Please Select Status*
     String[] statussnew = {"", "Active"};
     //Please Select Status
@@ -134,12 +181,32 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
+        rq = Volley.newRequestQueue(Registration.this);
+
+
+        ServiceSpinner = findViewById(R.id.ServiceSpinner);
+        serviceUnitSpinner = findViewById(R.id.serviceUnit);
+        rankSpinner = findViewById(R.id.RankSpinner);
+        birthSpinner = findViewById(R.id.birthCountySpinner);
+        countrySpinner = findViewById(R.id.countrySpinner);
+
+
+        /*rankSpin.setTitle("Select Rank");
+        rankSpin.setPositiveButton("OK");*/
+
+
+        /*ServiceSpinner.setTitle("Select Service");
+        ServiceSpinner.setPositiveButton("OK");
+        serviceUnitSpinner.setTitle("Select Unit");
+        serviceUnitSpinner.setPositiveButton("OK");*/
+
+
         try {
             //this.ctx = ctx;
             //pr = new Progress(ctx);
             mydialog = new Dialog(Registration.this);
-            dialogs=new Dialogs(Registration.this);
-           // pm=new ProcessMessage();
+            dialogs = new Dialogs(Registration.this);
+            // pm=new ProcessMessage();
 
         } catch (Exception e) {
 
@@ -187,6 +254,9 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
         setSpinnerListeners();
         setPrompts();
+        getCountries();
+        getFacilities();
+        getcountiesbirth();
 
 
         final Context gratitude = this;
@@ -200,30 +270,29 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-    private void populateMflCode(){
+    private void populateMflCode() {
 
-        try{
+        try {
 
-            List<Mflcode> myl=Mflcode.findWithQuery(Mflcode.class,"select * from Mflcode limit 1");
-            String mflcode="";
+            List<Mflcode> myl = Mflcode.findWithQuery(Mflcode.class, "select * from Mflcode limit 1");
+            String mflcode = "";
 
-            for(int x=0;x<myl.size();x++){
+            for (int x = 0; x < myl.size(); x++) {
 
-                mflcode=myl.get(x).getMfl();
+                mflcode = myl.get(x).getMfl();
 
             }
             cccE.setText(mflcode);
 
-        }
-        catch(Exception e){
+        } catch (Exception e) {
 
             Toast.makeText(this, "error occured populating mflcode", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void populateSerialNumber(){
+    private void populateSerialNumber() {
 
-        try{
+        try {
 
             upnE.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -243,8 +312,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                 }
             });
-        }
-        catch(Exception e){
+        } catch (Exception e) {
 
             Toast.makeText(this, "error setting serial number", Toast.LENGTH_SHORT).show();
         }
@@ -345,21 +413,21 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     public void initialise() {
 
         try {
-            progress =new Progress(Registration.this);
-            ageinyearsE=(EditText) findViewById(R.id.ageinyears);
+            progress = new Progress(Registration.this);
+            ageinyearsE = (EditText) findViewById(R.id.ageinyears);
             sm = new SendMessage(Registration.this);
             acs = new AccessServer(Registration.this);
             chkinternet = new CheckInternet(Registration.this);
             idnoE = (EditText) findViewById(R.id.idno);
             idnoS = "";
-            upi_no="";
-            birth_cert_no="";
+            upi_no = "";
+            birth_cert_no = "";
 
-            locatorcountyE= (EditText) findViewById(R.id.locatorcounty);
-            locatorsubcountyE= (EditText) findViewById(R.id.locatorsubcounty);
-            locatorlocationE= (EditText) findViewById(R.id.locatorlocation);
-            locatorwardE= (EditText) findViewById(R.id.locatorward);
-            locatorvillageE= (EditText) findViewById(R.id.locatorvillage);
+            locatorcountyE = (EditText) findViewById(R.id.locatorcounty);
+            locatorsubcountyE = (EditText) findViewById(R.id.locatorsubcounty);
+            locatorlocationE = (EditText) findViewById(R.id.locatorlocation);
+            locatorwardE = (EditText) findViewById(R.id.locatorward);
+            locatorvillageE = (EditText) findViewById(R.id.locatorvillage);
 
 
             buddyphoneE = (EditText) findViewById(R.id.buddyphone);
@@ -382,9 +450,9 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             art_dateE = (EditText) findViewById(R.id.art_date);
             phoneE = (EditText) findViewById(R.id.phone);
             //UPI no
-            UPI_number =(EditText) findViewById(R.id.UPIno);
+            UPI_number = (EditText) findViewById(R.id.UPIno);
             //dob no
-            dobirth =(EditText) findViewById(R.id.birthno);
+            dobirth = (EditText) findViewById(R.id.birthno);
 
             birthL = (LinearLayout) findViewById(R.id.birthnoll);
             UPIL = (LinearLayout) findViewById(R.id.UPInoll);
@@ -408,8 +476,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
 
             gender_code = "";
-            grouping_code="";
-            new_grouping_code="";
+            grouping_code = "";
+            new_grouping_code = "";
             marital_code = "";
             condition_code = "";
             category_code = "";
@@ -422,11 +490,11 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             orphan_code = "";
             school_code = "";
 
-            locatorcountyS="-1";
-            locatorsubcountyS="-1";
-            locatorlocationS="-1";
-            locatorwardS="-1";
-            locatorvillageS="-1";
+            locatorcountyS = "-1";
+            locatorsubcountyS = "-1";
+            locatorlocationS = "-1";
+            locatorwardS = "-1";
+            locatorvillageS = "-1";
 //           grouping_code="";
         } catch (Exception e) {
 
@@ -440,17 +508,13 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
         try {
 
-                    locatorcountyE.setText("");
-                    locatorsubcountyE.setText("");
-                    locatorlocationE.setText("");
-                    locatorwardE.setText("");
-                    locatorvillageE.setText("");
+            locatorcountyE.setText("");
+            locatorsubcountyE.setText("");
+            locatorlocationE.setText("");
+            locatorwardE.setText("");
+            locatorvillageE.setText("");
 
-                     ageinyearsE.setText("");
-
-
-
-
+            ageinyearsE.setText("");
 
 
             cccE.setText("");
@@ -604,7 +668,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                     int mycurrentYear = Integer.parseInt(MyDates.getCurrentYear());
                                     int difference = mycurrentYear - year;
 
-                                    ageinyearsE.setText(difference+" Years");
+                                    ageinyearsE.setText(difference + " Years");
 
 
                                     if (difference >= 18) {
@@ -618,8 +682,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                         }
 
 
-                                    }
-                                    else if(difference<18){
+                                    } else if (difference < 18) {
                                         idnoL.setVisibility(View.GONE);
                                         birthL.setVisibility(View.VISIBLE);
                                         UPIL.setVisibility(View.VISIBLE);
@@ -629,10 +692,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                         if (isUcsf()) {
                                             orphanL.setVisibility(View.GONE);
                                         }
-                                    }
-
-
-                                    else {
+                                    } else {
 
                                         idnoL.setVisibility(View.GONE);
                                         if (isUcsf()) {
@@ -647,13 +707,12 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                                     }
 
-                                    if(difference<=12){
+                                    if (difference <= 12) {
 
 
                                         populateMaritalInfant();
 
-                                    }
-                                    else{
+                                    } else {
 
                                         populateMarital();
 
@@ -675,30 +734,30 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         idnoE.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-                if (hasFocus){
+                if (hasFocus) {
                     Toast.makeText(Registration.this, "has focus", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
 
                     progress.showProgress("Getting UPI number");
-                    Map<String, String> params =new HashMap<String, String>();
+                    Map<String, String> params = new HashMap<String, String>();
                     params.put("identifier", "national-id");
                     // params.put("identifier_value", "2345678");
 
                     params.put("identifier_value", idnoE.getText().toString());
 
 
-                    JSONObject jsonObject =new JSONObject(params);
-                    String url ="https://ushauriapi.kenyahmis.org/mohupi/verify";
+                    JSONObject jsonObject = new JSONObject(params);
+                    String url = "https://ushauriapi.kenyahmis.org/mohupi/verify";
 
-                    try{
-                        List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-                        if (_url.size()==1){
-                            for (int x=0; x<_url.size(); x++){
-                                z=_url.get(x).getBase_url1();
+                    try {
+                        List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+                        if (_url.size() == 1) {
+                            for (int x = 0; x < _url.size(); x++) {
+                                z = _url.get(x).getBase_url1();
                             }
                         }
 
-                    } catch(Exception e){
+                    } catch (Exception e) {
 
                     }
 
@@ -714,20 +773,20 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                             try {
                                 //JSONObject jsonObject1 =response.getJSONObject("clientExists");
 
-                                boolean  x = response.getBoolean("clientExists");
-                                if (x==true){
+                                boolean x = response.getBoolean("clientExists");
+                                if (x == true) {
                                     //Toast.makeText(Registration.this, "Exists", Toast.LENGTH_SHORT).show();
 
-                                    JSONObject jsonObject1 =response.getJSONObject("client");
+                                    JSONObject jsonObject1 = response.getJSONObject("client");
 
-                                    String UPI_number1 =jsonObject1.getString("clientNumber");
-                                    String firstname =jsonObject1.getString("firstName");
-                                    String lastname =jsonObject1.getString("lastName");
+                                    String UPI_number1 = jsonObject1.getString("clientNumber");
+                                    String firstname = jsonObject1.getString("firstName");
+                                    String lastname = jsonObject1.getString("lastName");
 
                                     UPI_number.setText(UPI_number1);
                                     //UPI_number.setEnabled(false);
 
-                                    dialogs.showSuccessDialog("Clients UPI number is"+ " " +UPI_number1,  "Name:"+ " "+ firstname+ " "+ lastname);
+                                    dialogs.showSuccessDialog("Clients UPI number is" + " " + UPI_number1, "Name:" + " " + firstname + " " + lastname);
 
                                     //Toast.makeText(Registration.this, "Clients UPI number is"+ " " +UPI_number1 +" "+ "Name:"+ " "+ firstname+ " "+ lastname, Toast.LENGTH_SHORT).show();
                                     Log.d("", UPI_number1);
@@ -735,8 +794,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                     //AlertDialog
                                     AlertDialog.Builder builder1 = new AlertDialog.Builder(Registration.this);
                                     builder1.setIcon(android.R.drawable.ic_dialog_alert);
-                                    builder1.setTitle("Client's UPI number is"+ " " + UPI_number1 );
-                                    builder1.setMessage("Name" + " " + firstname + " " + lastname );
+                                    builder1.setTitle("Client's UPI number is" + " " + UPI_number1);
+                                    builder1.setMessage("Name" + " " + firstname + " " + lastname);
                                     builder1.setCancelable(false);
 
                                     builder1.setPositiveButton(
@@ -756,9 +815,9 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                                     //AlertDialog
 
-                                }else{
+                                } else {
                                     dialogs.showErrorDialog("Client has no UPI number", "Please request UPI number for the client");
-                                  //  Toast.makeText(Registration.this, "Client has no UPI number", Toast.LENGTH_SHORT).show();
+                                    //  Toast.makeText(Registration.this, "Client has no UPI number", Toast.LENGTH_SHORT).show();
                                     UPI_number.setText("");
                                 }
 
@@ -776,7 +835,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                         public void onErrorResponse(VolleyError error) {
 
                             Log.d("", error.getMessage());
-                            Toast.makeText(Registration.this, "error occured, try again"+error.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Registration.this, "error occured, try again" + error.getMessage(), Toast.LENGTH_SHORT).show();
                             progress.dissmissProgress();
                             //Toast.makeText(Registration.this, "Lost focus2"+idnoE.getText().toString(), Toast.LENGTH_SHORT).show();
 
@@ -849,47 +908,43 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                     Volley.newRequestQueue(Registration.this).add(jsonObjectRequest);*/
 
 
-
     }
 
-    public void getUPI_birth(){
-
+    public void getUPI_birth() {
 
 
         dobirth.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-                if (hasFocus){
+                if (hasFocus) {
                     Toast.makeText(Registration.this, "has focus", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     progress.showProgress("Getting UPI number");
 
-                    Map<String, String> params =new HashMap<String, String>();
+                    Map<String, String> params = new HashMap<String, String>();
                     params.put("identifier", "national-id");
-                   // params.put("identifier_value", "2345678");
+                    // params.put("identifier_value", "2345678");
 
                     params.put("identifier_value", dobirth.getText().toString());
 
 
-                    JSONObject jsonObject =new JSONObject(params);
-                    String url ="https://ushauriapi.kenyahmis.org/mohupi/verify";
+                    JSONObject jsonObject = new JSONObject(params);
+                    String url = "https://ushauriapi.kenyahmis.org/mohupi/verify";
 
-                    try{
-                        List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-                        if (_url.size()==1){
-                            for (int x=0; x<_url.size(); x++){
-                                z=_url.get(x).getBase_url1();
+                    try {
+                        List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+                        if (_url.size() == 1) {
+                            for (int x = 0; x < _url.size(); x++) {
+                                z = _url.get(x).getBase_url1();
                             }
                         }
 
-                    } catch(Exception e){
+                    } catch (Exception e) {
 
                     }
 
 
-
-
-                    RequestQueue requestQueue =Volley.newRequestQueue(Registration.this);
+                    RequestQueue requestQueue = Volley.newRequestQueue(Registration.this);
 
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
                         @Override
@@ -901,27 +956,27 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                             try {
                                 //JSONObject jsonObject1 =response.getJSONObject("clientExists");
 
-                                boolean  x = response.getBoolean("clientExists");
-                                if (x==true){
+                                boolean x = response.getBoolean("clientExists");
+                                if (x == true) {
                                     //Toast.makeText(Registration.this, "Exists", Toast.LENGTH_SHORT).show();
 
-                                    JSONObject jsonObject1 =response.getJSONObject("client");
+                                    JSONObject jsonObject1 = response.getJSONObject("client");
 
-                                    String UPI_number1 =jsonObject1.getString("clientNumber");
-                                    String firstname =jsonObject1.getString("firstName");
-                                    String lastname =jsonObject1.getString("lastName");
+                                    String UPI_number1 = jsonObject1.getString("clientNumber");
+                                    String firstname = jsonObject1.getString("firstName");
+                                    String lastname = jsonObject1.getString("lastName");
 
                                     UPI_number.setText(UPI_number1);
                                     // UPI_number.setEnabled(false);
-                                    dialogs.showSuccessDialog("Clients UPI number is"+ " " +UPI_number1,  "Name:"+ " "+ firstname+ " "+ lastname);
+                                    dialogs.showSuccessDialog("Clients UPI number is" + " " + UPI_number1, "Name:" + " " + firstname + " " + lastname);
                                     //Toast.makeText(Registration.this, "Clients UPI number is"+ " " +UPI_number1 +" "+ "Name"+ " "+ firstname+ " "+ lastname, Toast.LENGTH_SHORT).show();
                                     Log.d("", UPI_number1);
 
                                     //AlertDialog
                                     AlertDialog.Builder builder1 = new AlertDialog.Builder(Registration.this);
                                     builder1.setIcon(android.R.drawable.ic_dialog_alert);
-                                    builder1.setTitle("Clients UPI number is"+ " " + UPI_number1 );
-                                    builder1.setMessage("Name" + " " + firstname + " " + lastname );
+                                    builder1.setTitle("Clients UPI number is" + " " + UPI_number1);
+                                    builder1.setMessage("Name" + " " + firstname + " " + lastname);
                                     builder1.setCancelable(false);
 
                                     builder1.setPositiveButton(
@@ -936,12 +991,9 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                             });
 
 
-
-
                                     //AlertDialog
 
-                                }
-                                else{
+                                } else {
                                     dialogs.showErrorDialog("Client has no UPI number", "Please request UPI number for the client");
                                     //Toast.makeText(Registration.this, "Client has no UPI number", Toast.LENGTH_SHORT).show();
                                     UPI_number.setText("");
@@ -978,7 +1030,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
-
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // On selecting a spinner item
         Spinner spin = (Spinner) parent;
@@ -999,12 +1050,11 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
             condition_code = Integer.toString(position);
 
-            if(position==2){
+            if (position == 2) {
 
                 art_dateE.setVisibility(View.GONE);
 
-            }
-            else{
+            } else {
 
                 art_dateE.setVisibility(View.VISIBLE);
             }
@@ -1198,20 +1248,19 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
-    private boolean displayGrouping(){
+    private boolean displayGrouping() {
 
-        boolean result=false;
+        boolean result = false;
 
-        if(isUcsf()){
+        if (isUcsf()) {
             groupingL.setVisibility(View.GONE);
-            result=false;
-        }
-        else{
+            result = false;
+        } else {
 
             groupingL.setVisibility(View.VISIBLE);
-            result=true;
+            result = true;
         }
-        return  result;
+        return result;
     }
 
 
@@ -1228,12 +1277,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 newGroupingS.setAdapter(customAdapter);
 
 
-
-
             } else {
-
-
-
 
 
             }
@@ -1474,65 +1518,58 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         try {
 
 
-
             //start set locator information variables
 
 //            locatorsubcountyS,locatorlocationS,locatorwardS,locatorvillageS
 
-            if(locatorcountyE.getText().toString().trim().isEmpty()){
+            if (locatorcountyE.getText().toString().trim().isEmpty()) {
 
-                locatorcountyS="-1";
+                locatorcountyS = "-1";
 
-            }
-            else{
+            } else {
 
-                locatorcountyS=locatorcountyE.getText().toString();
-
-            }
-
-            if(locatorsubcountyE.getText().toString().trim().isEmpty()){
-
-                locatorsubcountyS="-1";
+                locatorcountyS = locatorcountyE.getText().toString();
 
             }
-            else{
 
-                locatorsubcountyS=locatorsubcountyE.getText().toString();
+            if (locatorsubcountyE.getText().toString().trim().isEmpty()) {
+
+                locatorsubcountyS = "-1";
+
+            } else {
+
+                locatorsubcountyS = locatorsubcountyE.getText().toString();
 
             }
 
 
-            if(locatorlocationE.getText().toString().trim().isEmpty()){
+            if (locatorlocationE.getText().toString().trim().isEmpty()) {
 
-                locatorlocationS="-1";
+                locatorlocationS = "-1";
 
-            }
-            else{
+            } else {
 
-                locatorlocationS=locatorlocationE.getText().toString();
-
-            }
-
-
-            if(locatorwardE.getText().toString().trim().isEmpty()){
-
-                locatorwardS="-1";
-
-            }
-            else{
-
-                locatorwardS=locatorwardE.getText().toString();
+                locatorlocationS = locatorlocationE.getText().toString();
 
             }
 
-            if(locatorvillageE.getText().toString().trim().isEmpty()){
+            if (locatorwardE.getText().toString().trim().isEmpty()) {
 
-                locatorvillageS="-1";
+                locatorwardS = "-1";
+
+            } else {
+
+                locatorwardS = locatorwardE.getText().toString();
 
             }
-            else{
 
-                locatorvillageS=locatorvillageE.getText().toString();
+            if (locatorvillageE.getText().toString().trim().isEmpty()) {
+
+                locatorvillageS = "-1";
+
+            } else {
+
+                locatorvillageS = locatorvillageE.getText().toString();
 
             }
 
@@ -1819,16 +1856,16 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                     idnoS = "-1";
                 }
 
-                if (UPI_number.isShown() && !UPI_number.getText().toString().trim().isEmpty()){
+                if (UPI_number.isShown() && !UPI_number.getText().toString().trim().isEmpty()) {
                     upi_no = UPI_number.getText().toString();
-                }else{
-                    upi_no ="-1";
+                } else {
+                    upi_no = "-1";
                 }
 
-                if (dobirth.isShown() && !dobirth.getText().toString().trim().isEmpty()){
-                    birth_cert_no =dobirth.getText().toString();
-                }else{
-                    birth_cert_no="-1";
+                if (dobirth.isShown() && !dobirth.getText().toString().trim().isEmpty()) {
+                    birth_cert_no = dobirth.getText().toString();
+                } else {
+                    birth_cert_no = "-1";
                 }
 
                 //*******check empty values and set them to -1***
@@ -1937,16 +1974,16 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                     buddyphoneNumber = "-1";
                 }
 
-                if(!groupingL.isShown()){
+                if (!groupingL.isShown()) {
 
-                    new_grouping_code="-1";
+                    new_grouping_code = "-1";
 
 
                 }
 
-                if(!art_dateE.isShown()){
+                if (!art_dateE.isShown()) {
 
-                    art_dateS="-1";
+                    art_dateS = "-1";
 
                 }
 
@@ -1955,7 +1992,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 String newupns = AppendFunction.AppendUniqueIdentifier(upnS);
                 String myccnumber = cccS + newupns;
 
-                String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" +upi_no+ "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code+"*"+new_grouping_code+"*"+locatorcountyS+"*"+locatorsubcountyS+"*"+locatorlocationS+"*"+locatorwardS+"*"+locatorvillageS;
+                String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + upi_no + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code + "*" + new_grouping_code + "*" + locatorcountyS + "*" + locatorsubcountyS + "*" + locatorlocationS + "*" + locatorwardS + "*" + locatorvillageS;
                 // String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" +upi_no+ "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code+"*"+new_grouping_code+"*"+locatorcountyS+"*"+locatorsubcountyS+"*"+locatorlocationS+"*"+locatorwardS+"*"+locatorvillageS;
 
 
@@ -1986,7 +2023,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                     sm.sendMessageApi("Reg*" + encrypted, mynumber);
                     LogindisplayDialog("Client registered successfully, kindly confirm that you have received the client registration successful SMS before booking an appointment");
-
 
 
                 }
@@ -2122,71 +2158,66 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         }
 
     }
+
     //begin requesting UPI
     public void submitUPIrequest(View v) {
 
         try {
 
 
-
             //start set locator information variables
 
 //            locatorsubcountyS,locatorlocationS,locatorwardS,locatorvillageS
 
-            if(locatorcountyE.getText().toString().trim().isEmpty()){
+            if (locatorcountyE.getText().toString().trim().isEmpty()) {
 
-                locatorcountyS="-1";
+                locatorcountyS = "-1";
 
-            }
-            else{
+            } else {
 
-                locatorcountyS=locatorcountyE.getText().toString();
-
-            }
-
-            if(locatorsubcountyE.getText().toString().trim().isEmpty()){
-
-                locatorsubcountyS="-1";
+                locatorcountyS = locatorcountyE.getText().toString();
 
             }
-            else{
 
-                locatorsubcountyS=locatorsubcountyE.getText().toString();
+            if (locatorsubcountyE.getText().toString().trim().isEmpty()) {
+
+                locatorsubcountyS = "-1";
+
+            } else {
+
+                locatorsubcountyS = locatorsubcountyE.getText().toString();
 
             }
 
 
-            if(locatorlocationE.getText().toString().trim().isEmpty()){
+            if (locatorlocationE.getText().toString().trim().isEmpty()) {
 
-                locatorlocationS="-1";
+                locatorlocationS = "-1";
 
-            }
-            else{
+            } else {
 
-                locatorlocationS=locatorlocationE.getText().toString();
-
-            }
-
-
-            if(locatorwardE.getText().toString().trim().isEmpty()){
-
-                locatorwardS="-1";
-
-            }
-            else{
-
-                locatorwardS=locatorwardE.getText().toString();
+                locatorlocationS = locatorlocationE.getText().toString();
 
             }
 
-            if(locatorvillageE.getText().toString().trim().isEmpty()){
 
-                locatorvillageS="-1";
+            if (locatorwardE.getText().toString().trim().isEmpty()) {
+
+                locatorwardS = "-1";
+
+            } else {
+
+                locatorwardS = locatorwardE.getText().toString();
 
             }
-            else{
 
-                locatorvillageS=locatorvillageE.getText().toString();
+            if (locatorvillageE.getText().toString().trim().isEmpty()) {
+
+                locatorvillageS = "-1";
+
+            } else {
+
+                locatorvillageS = locatorvillageE.getText().toString();
 
             }
 
@@ -2473,16 +2504,16 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                     idnoS = "-1";
                 }
 
-                if (UPI_number.isShown() && !UPI_number.getText().toString().trim().isEmpty()){
+                if (UPI_number.isShown() && !UPI_number.getText().toString().trim().isEmpty()) {
                     upi_no = UPI_number.getText().toString();
-                }else{
-                    upi_no ="-1";
+                } else {
+                    upi_no = "-1";
                 }
 
-                if (dobirth.isShown() && !dobirth.getText().toString().trim().isEmpty()){
-                    birth_cert_no =dobirth.getText().toString();
-                }else{
-                    birth_cert_no="-1";
+                if (dobirth.isShown() && !dobirth.getText().toString().trim().isEmpty()) {
+                    birth_cert_no = dobirth.getText().toString();
+                } else {
+                    birth_cert_no = "-1";
                 }
 
                 //*******check empty values and set them to -1***
@@ -2591,16 +2622,16 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                     buddyphoneNumber = "-1";
                 }
 
-                if(!groupingL.isShown()){
+                if (!groupingL.isShown()) {
 
-                    new_grouping_code="-1";
+                    new_grouping_code = "-1";
 
 
                 }
 
-                if(!art_dateE.isShown()){
+                if (!art_dateE.isShown()) {
 
-                    art_dateS="-1";
+                    art_dateS = "-1";
 
                 }
 
@@ -2609,7 +2640,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 String newupns = AppendFunction.AppendUniqueIdentifier(upnS);
                 String myccnumber = cccS + newupns;
 
-                String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" +upi_no+ "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code+"*"+new_grouping_code+"*"+locatorcountyS+"*"+locatorsubcountyS+"*"+locatorlocationS+"*"+locatorwardS+"*"+locatorvillageS;
+                String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + upi_no + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code + "*" + new_grouping_code + "*" + locatorcountyS + "*" + locatorsubcountyS + "*" + locatorlocationS + "*" + locatorwardS + "*" + locatorvillageS;
                 // String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" +upi_no+ "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code+"*"+new_grouping_code+"*"+locatorcountyS+"*"+locatorsubcountyS+"*"+locatorlocationS+"*"+locatorwardS+"*"+locatorvillageS;
 
 
@@ -2631,25 +2662,25 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                             String phne = myl2.get(y).getPhone();
 //                                acs.sendDetailsToDb("Reg*"+sendSms+"/"+phne);
-                          // acs.requestUPI("Reg*" + encrypted, "13023");
+                            // acs.requestUPI("Reg*" + encrypted, "13023");
                             //BEGIN UPI REQUEST
 
 
-                            try{
-                                List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-                                if (_url.size()==1){
-                                    for (int bb=0; bb<_url.size(); bb++){
-                                        z=_url.get(bb).getBase_url1();
+                            try {
+                                List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+                                if (_url.size() == 1) {
+                                    for (int bb = 0; bb < _url.size(); bb++) {
+                                        z = _url.get(bb).getBase_url1();
                                     }
                                 }
 
-                            } catch(Exception e){
+                            } catch (Exception e) {
 
                             }
                             //pr.showProgress("Requesting UPI...");
                             final int[] mStatusCode = new int[1];
 
-                            StringRequest stringRequest = new StringRequest(Request.Method.POST, z+Config.UPI_REQUEST,
+                            StringRequest stringRequest = new StringRequest(Request.Method.POST, z + Config.UPI_REQUEST,
                                     new Response.Listener<String>() {
                                         @Override
                                         public void onResponse(String response) {
@@ -2658,17 +2689,17 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                             try {
                                                 JSONObject jsonObject = new JSONObject(response);
 
-                                                for (int a=0; a<jsonObject.length(); a++){
-                                                     jsonObject1 =jsonObject.getString("clientNumber");
-                                                     jsonObject2 =jsonObject.getString("firstName");
-                                                     jsonObject3 =jsonObject.getString("lastName");
+                                                for (int a = 0; a < jsonObject.length(); a++) {
+                                                    jsonObject1 = jsonObject.getString("clientNumber");
+                                                    jsonObject2 = jsonObject.getString("firstName");
+                                                    jsonObject3 = jsonObject.getString("lastName");
 
                                                     // Dialog
 
                                                     //end dialog
 
 
-                                                   ////dialogs.showSuccessDialog("Clients UPI number is"+ " " +jsonObject1, "Name:" + " "+ jsonObject2 + " "+ jsonObject3);
+                                                    ////dialogs.showSuccessDialog("Clients UPI number is"+ " " +jsonObject1, "Name:" + " "+ jsonObject2 + " "+ jsonObject3);
                                                     //Toast.makeText(Registration.this, "Clients UPI number is"+ " " +jsonObject1, Toast.LENGTH_LONG).show();
                                                     UPI_number.setText(jsonObject1);
                                                 }
@@ -2677,22 +2708,20 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                             }
 
 
-                                           // pr.dissmissProgress();
+                                            // pr.dissmissProgress();
 
 
-                                            if(mStatusCode[0]==200){
+                                            if (mStatusCode[0] == 200) {
                                                 //UPI_number.setText(jsonObject1);
-                                                dialogs.showSuccessDialog("Clients UPI number is"+ " " +jsonObject1, "Name:" + " "+ jsonObject2 + " "+ jsonObject3);
-
+                                                dialogs.showSuccessDialog("Clients UPI number is" + " " + jsonObject1, "Name:" + " " + jsonObject2 + " " + jsonObject3);
 
 
                                                 //dialogs.showSuccessDialog(response,"Server Response");
 
 
-                                            }
-                                            else{
+                                            } else {
 
-                                                dialogs.showErrorDialog(response,"Server response");
+                                                dialogs.showErrorDialog(response, "Server response");
                                             }
 
                                         }
@@ -2702,7 +2731,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                         public void onErrorResponse(VolleyError error) {
                                             //pr.dissmissProgress();
 
-                                            try{
+                                            try {
 
                                                 //byte[] htmlBodyBytes = error.networkResponse.data;
 
@@ -2713,15 +2742,13 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                                                 //pr.dissmissProgress();
 
-                                            }
-                                            catch(Exception e){
-
+                                            } catch (Exception e) {
 
 
 //                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
                                                 //dialogs.showErrorDialog("error occured, try again","Server Response");
 
-                                               // pr.dissmissProgress();
+                                                // pr.dissmissProgress();
 
 
                                             }
@@ -2741,11 +2768,12 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                 protected VolleyError parseNetworkError(VolleyError volleyError) {
                                     return super.parseNetworkError(volleyError);
                                 }
+
                                 @Override
                                 protected Map<String, String> getParams() {
                                     Map<String, String> params = new HashMap<String, String>();
 
-                                    params.put("reg_payload","Reg*" + encrypted);
+                                    params.put("reg_payload", "Reg*" + encrypted);
                                     params.put("user_mfl", cccE.getText().toString());
 
 
@@ -2767,18 +2795,15 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                         }
 
 
-
-                            //END UPI REQUEST
-                            //acs.requestUPI("Reg*" + encrypted, newupns);
-                        }
-
+                        //END UPI REQUEST
+                        //acs.requestUPI("Reg*" + encrypted, newupns);
+                    }
 
 
                 } else {
 
                     sm.sendMessageApi("Reg*" + encrypted, mynumber);
                     LogindisplayDialog("Client registered successfully, kindly confirm that you have received the client registration successful SMS before booking an appointment");
-
 
 
                 }
@@ -2789,7 +2814,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                 saveClientArtData(mycc, myupn, art_dateS);
 
-               // clearFields();
+                // clearFields();
 
                 counter = counter + 1;
 
@@ -2851,5 +2876,641 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
-}
+    //getcounties
 
+    public void getFacilities() {
+        String curl = "https://ushauriapi.kenyahmis.org/locator/counties";
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
+                curl, null, new Response.Listener<JSONArray>() {
+
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+
+                try {
+
+
+                    countiess = new ArrayList<counties>();
+                    countiesList = new ArrayList<String>();
+
+                    countiess.clear();
+                    countiesList.clear();
+
+
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject service = (JSONObject) response.get(i);
+
+
+                        int id = service.has("id") ? service.getInt("id") : 0;
+                        String name = service.has("name") ? service.getString("name") : "";
+                        int code = service.has("code") ? service.getInt("code") : 0;
+
+
+                        counties newCounty = new counties(id, name, code);
+
+                        countiess.add(newCounty);
+                        countiesList.add(newCounty.getName());
+                    }
+                    countiess.add(new counties(0, "--select county--", 0));
+                    countiesList.add("---select county--");
+
+
+
+
+                    ArrayAdapter<String> aa = new ArrayAdapter<String>(Registration.this,
+                                android.R.layout.simple_spinner_dropdown_item,
+                                countiesList) {
+                            @Override
+                            public int getCount() {
+                                return super.getCount(); // you dont display last item. It is used as hint.
+                            }
+                        };
+
+                        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                        // if (ServiceSpinner != null){
+                        ServiceSpinner.setAdapter(aa);
+                        ServiceSpinner.setSelection(aa.getCount() - 1);
+
+                        countyID = countiess.get(aa.getCount() - 1).getId();
+
+                        ServiceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+
+
+                                // serviceUnitSpinner.setAdapter(null);
+
+                                countyID = countiess.get(position).getId();
+                                //getDepartments(services.get(position).getService_id());
+
+//
+                                   /* if (serviceID !=0)
+                                        Toast.makeText(Registration.this, "getting units", Toast.LENGTH_LONG).show();*/
+                                try {
+                                    getDepartments(countyID);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                //getDepartments(serviceID);
+
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+
+
+                            }
+                        });
+
+
+
+
+                    //}
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(Registration.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Toast.makeText(Registration.this, " cant get services", Toast.LENGTH_LONG).show();
+                error.printStackTrace();
+                getFacilities();
+            }
+        }
+        ) {
+
+            /**
+             * Passing some request headers
+             */
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                //headers.put("Authorization", loggedInUser.getToken_type()+" "+loggedInUser.getAccess_token());
+                headers.put("Content-Type", "application/json");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+
+        };
+
+
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //AppController.getInstance().addToRequestQueue(jsonObjReq);
+        rq.add(jsonArrayRequest);
+
+
+    }
+
+    //SubcountyList
+
+    public void getDepartments(int ID) {
+
+        String url = "https://ushauriapi.kenyahmis.org/locator/scounties?county=";
+        //"https://ushauriapi.kenyahmis.org/locator/scounties?county=47";
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url + ID,
+                null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+                //Toast.makeText(Registration.this, "response", Toast.LENGTH_LONG).show();
+
+                try {
+
+                    scountiess = new ArrayList<scounties>();
+                    scountyList = new ArrayList<String>();
+
+                    scountiess.clear();
+                    scountyList.clear();
+
+
+                    //JSONArray jsonArray = response.getJSONArray("data");
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject serviceUnit = (JSONObject) response.get(i);
+
+                        int id = serviceUnit.has("id") ? serviceUnit.getInt("id") : 0;
+                        String name = serviceUnit.has("name") ? serviceUnit.getString("name") : "";
+
+
+                        scounties newServiceUnit = new scounties(id, name);
+
+                        scountiess.add(newServiceUnit);
+                        scountyList.add(newServiceUnit.getName());
+                    }
+
+                    scountiess.add(new scounties(0, "--select sub-county--"));
+                    scountyList.add("--select Sub-county--");
+
+                    ArrayAdapter<String> aa = new ArrayAdapter<String>(Registration.this,
+                            android.R.layout.simple_spinner_dropdown_item,
+                            scountyList) {
+                        @Override
+                        public int getCount() {
+                            return super.getCount(); // you dont display last item. It is used as hint.
+                        }
+                    };
+
+                    aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                    serviceUnitSpinner.setAdapter(aa);
+                    serviceUnitSpinner.setSelection(aa.getCount() - 1);
+
+                    scountyID = scountiess.get(aa.getCount() - 1).getId();
+
+                    serviceUnitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        //@Overide
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+
+                            // Toast.makeText(Registration.this, "null selected", Toast.LENGTH_LONG).show();
+                            scountyID = scountiess.get(position).getId();
+                            getWards(scountyID);
+                            //call wards here
+
+
+//                                Toast.makeText(context,facilityDepartments.get(position).getDepartment_name(), Toast.LENGTH_LONG).show();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Toast.makeText(Registration.this, "cant get", Toast.LENGTH_LONG).show();
+
+
+                if (error instanceof NetworkError) {
+                    Toast.makeText(Registration.this, "Network Error", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ParseError) {
+                    Toast.makeText(Registration.this, "Parse Error", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ServerError) {
+                    Toast.makeText(Registration.this, "Server Error", Toast.LENGTH_SHORT).show();
+                    error.printStackTrace();
+                }
+                error.printStackTrace();
+                getDepartments(countyID);
+            }
+        }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                //headers.put("Authorization", loggedInUser.getToken_type()+" "+loggedInUser.getAccess_token());
+
+                headers.put("Content-Type", "application/json");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+        };
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //AppController.getInstance().addToRequestQueue(jsonObjReq);
+        rq.add(jsonArrayRequest);
+
+
+    }
+//call wards
+
+    public void getWards(int ID) {
+
+        String url = "https://ushauriapi.kenyahmis.org/locator/wards?scounty=";
+        //https://ushauriapi.kenyahmis.org/locator/wards?scounty=1
+        //"https://ushauriapi.kenyahmis.org/locator/scounties?county=47";
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url + ID,
+                null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+                //Toast.makeText(Registration.this, "response", Toast.LENGTH_LONG).show();
+
+                try {
+
+                    wardss = new ArrayList<wards>();
+                    wardsList = new ArrayList<String>();
+
+                    wardss.clear();
+                    wardsList.clear();
+
+
+                    //JSONArray jsonArray = response.getJSONArray("data");
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject serviceUnit = (JSONObject) response.get(i);
+
+                        int id = serviceUnit.has("id") ? serviceUnit.getInt("id") : 0;
+                        String name = serviceUnit.has("name") ? serviceUnit.getString("name") : "";
+                        int scounty_id = serviceUnit.has("scounty_id") ? serviceUnit.getInt("scounty_id") : 0;
+
+
+                        wards newServiceUnit = new wards(id, name, scounty_id);
+
+                        wardss.add(newServiceUnit);
+                        wardsList.add(newServiceUnit.getName());
+                    }
+
+                    wardss.add(new wards(0, "--select Ward--", 0));
+                    wardsList.add("--select Ward--");
+
+                    ArrayAdapter<String> aa = new ArrayAdapter<String>(Registration.this,
+                            android.R.layout.simple_spinner_dropdown_item,
+                            wardsList) {
+                        @Override
+                        public int getCount() {
+                            return super.getCount(); // you dont display last item. It is used as hint.
+                        }
+                    };
+
+                    aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                    rankSpinner.setAdapter(aa);
+                    rankSpinner.setSelection(aa.getCount() - 1);
+
+                    wardID = wardss.get(aa.getCount() - 1).getId();
+
+                    rankSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        //@Overide
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+
+                            // Toast.makeText(Registration.this, "null selected", Toast.LENGTH_LONG).show();
+                            wardID = wardss.get(position).getId();
+
+                            //call wards here
+
+
+//                                Toast.makeText(context,facilityDepartments.get(position).getDepartment_name(), Toast.LENGTH_LONG).show();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Toast.makeText(Registration.this, "cant get", Toast.LENGTH_LONG).show();
+
+
+                if (error instanceof NetworkError) {
+                    Toast.makeText(Registration.this, "Network Error", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ParseError) {
+                    Toast.makeText(Registration.this, "Parse Error", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ServerError) {
+                    Toast.makeText(Registration.this, "Server Error", Toast.LENGTH_SHORT).show();
+                    error.printStackTrace();
+                }
+                error.printStackTrace();
+                getWards(scountyID);
+                //getDepartments(countyID);
+            }
+        }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                //headers.put("Authorization", loggedInUser.getToken_type()+" "+loggedInUser.getAccess_token());
+
+                headers.put("Content-Type", "application/json");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+        };
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //AppController.getInstance().addToRequestQueue(jsonObjReq);
+        rq.add(jsonArrayRequest);
+
+
+    }
+
+    //getcounties of birth
+
+    public void getcountiesbirth() {
+        String curl = "https://ushauriapi.kenyahmis.org/locator/counties";
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
+                curl, null, new Response.Listener<JSONArray>() {
+
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+
+                try {
+
+
+                    countiessb = new ArrayList<counties>();
+                    countiesListb = new ArrayList<String>();
+
+                    countiessb.clear();
+                    countiesListb.clear();
+
+
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject service = (JSONObject) response.get(i);
+
+
+                        int id = service.has("id") ? service.getInt("id") : 0;
+                        String name = service.has("name") ? service.getString("name") : "";
+                        int code = service.has("code") ? service.getInt("code") : 0;
+
+
+                        counties newCounty = new counties(id, name, code);
+
+                        countiessb.add(newCounty);
+                        countiesListb.add(newCounty.getName());
+                    }
+
+
+
+                        countiessb.add(new counties(0, "--select county--", 0));
+                        countiesListb.add("---select county--");
+
+
+
+                        ArrayAdapter<String> aa = new ArrayAdapter<String>(Registration.this,
+                                android.R.layout.simple_spinner_dropdown_item,
+                                countiesListb) {
+                            @Override
+                            public int getCount() {
+                                return super.getCount(); // you dont display last item. It is used as hint.
+                            }
+                        };
+
+                        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                        // if (ServiceSpinner != null){
+                        birthSpinner.setAdapter(aa);
+                        birthSpinner.setSelection(aa.getCount() - 1);
+
+                        countyIDb = countiessb.get(aa.getCount() - 1).getId();
+
+                        birthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+
+
+                                // serviceUnitSpinner.setAdapter(null);
+
+                                countyIDb = countiessb.get(position).getId();
+
+
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+
+
+                            }
+                        });
+
+                    }
+
+
+                    //}
+
+                 catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(Registration.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                // Toast.makeText(Registration.this, " cant get services", Toast.LENGTH_LONG).show();
+                error.printStackTrace();
+                getcountiesbirth();
+            }
+        }
+        ) {
+
+            /**
+             * Passing some request headers
+             */
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                //headers.put("Authorization", loggedInUser.getToken_type()+" "+loggedInUser.getAccess_token());
+                headers.put("Content-Type", "application/json");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+
+        };
+
+
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //AppController.getInstance().addToRequestQueue(jsonObjReq);
+        rq.add(jsonArrayRequest);
+
+
+    }
+
+//get countries
+
+    public void getCountries(){
+
+        String curl1 = "https://ushauriapi.kenyahmis.org/locator/countries";
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
+                curl1, null, new Response.Listener<JSONArray>() {
+
+
+            @Override
+            public void onResponse(JSONArray response) {
+                //Toast.makeText(Registration.this, response,  Toast.LENGTH_LONG).show();
+                //dialogs.showSuccessDialog("yes", response.toString());
+               // error.printStackTrace();
+
+
+                try {
+
+
+                    countries = new ArrayList<Country>();
+                    countriesList = new ArrayList<String>();
+
+                    countries.clear();
+                    countriesList.clear();
+
+
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject service = (JSONObject) response.get(i);
+
+
+                        int id = service.has("id") ? service.getInt("id") : 0;
+                        String name = service.has("name") ? service.getString("name") : "";
+                        String code = service.has("code") ? service.getString("code") : "";
+
+
+                        Country newCounty = new Country(id, name, code);
+
+                        countries.add(newCounty);
+                        countriesList.add(newCounty.getName());
+
+                    }
+                        countries.add(new Country(0, "--select country--", " --select country--"));
+                        countriesList.add("--select country-");
+
+
+
+
+                        ArrayAdapter<String> aa = new ArrayAdapter<String>(Registration.this,
+                                android.R.layout.simple_spinner_dropdown_item,
+                                countriesList) {
+                            @Override
+                            public int getCount() {
+                                return super.getCount(); // you dont display last item. It is used as hint.
+                            }
+                        };
+
+                        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                        // if (ServiceSpinner != null){
+                        countrySpinner.setAdapter(aa);
+                        countrySpinner.setSelection(aa.getCount() - 1);
+
+                        countryID = countries.get(aa.getCount() - 1).getId();
+
+                        countrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+
+
+                                // serviceUnitSpinner.setAdapter(null);
+
+                                countryID = countries.get(position).getId();
+
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+
+
+                            }
+                        });
+
+
+
+
+                    //}
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(Registration.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                 Toast.makeText(Registration.this, " cant get country", Toast.LENGTH_LONG).show();
+                error.printStackTrace();
+                getCountries();
+            }
+        }
+        ) {
+
+            /**
+             * Passing some request headers
+             */
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                //headers.put("Authorization", loggedInUser.getToken_type()+" "+loggedInUser.getAccess_token());
+                headers.put("Content-Type", "application/json");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+
+        };
+
+
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //AppController.getInstance().addToRequestQueue(jsonObjReq);
+        rq.add(jsonArrayRequest);
+
+
+    }
+
+}
