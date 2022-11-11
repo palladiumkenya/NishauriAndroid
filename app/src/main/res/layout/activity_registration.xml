@@ -278,7 +278,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/idno"
-                            android:inputType="text"
+                            android:inputType="number"
                             android:textStyle="bold"
                             android:hint="Enter ID NO./Passport No."
                             android:textColorHint="#000"

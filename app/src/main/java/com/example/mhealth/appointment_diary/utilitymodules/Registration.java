@@ -127,6 +127,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
 
     LinearLayout smslayoutL, idnoL, orphanL, altphoneL, disableL, groupingL, birthL, UPIL;
+    Button upibtn;
 
     EditText cccE, upnE, fileserialE, f_nameE, s_nameE, o_nameE, dobE, enrollment_dateE, art_dateE, phoneE, buddyphoneE, idnoE, altphoneE, ageinyearsE, locatorcountyE, locatorsubcountyE, locatorlocationE, locatorwardE, locatorvillageE, UPI_number, dobirth;
 
@@ -189,16 +190,9 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         rankSpinner = findViewById(R.id.RankSpinner);
         birthSpinner = findViewById(R.id.birthCountySpinner);
         countrySpinner = findViewById(R.id.countrySpinner);
+        upibtn =findViewById(R.id.btnRSubmit);
 
 
-        /*rankSpin.setTitle("Select Rank");
-        rankSpin.setPositiveButton("OK");*/
-
-
-        /*ServiceSpinner.setTitle("Select Service");
-        ServiceSpinner.setPositiveButton("OK");
-        serviceUnitSpinner.setTitle("Select Unit");
-        serviceUnitSpinner.setPositiveButton("OK");*/
 
 
         try {
@@ -257,7 +251,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         getCountries();
         getFacilities();
         getcountiesbirth();
-getWards(wardID);
+       //getWards(wardID);
 
         final Context gratitude = this;
         final Button btnRSubmit = (Button) findViewById(R.id.btnRSubmit);
@@ -1517,6 +1511,19 @@ getWards(wardID);
 
         try {
 
+            if(countryID==0){
+
+
+            }else if (countyID==0){
+
+            }else if (scountyID==0){
+
+            }else if (wardID==0){
+
+            }else if (countyIDb==0){
+
+            }
+
 
             //start set locator information variables
 
@@ -1680,7 +1687,12 @@ getWards(wardID);
                 Toast.makeText(this, "Please Select client type", Toast.LENGTH_SHORT).show();
 
 
-            } else if (cccS.trim().isEmpty()) {
+            }
+
+
+
+
+            else if (cccS.trim().isEmpty()) {
 
                 cccE.setError("mfl code is required");
 
@@ -2162,7 +2174,32 @@ getWards(wardID);
     //begin requesting UPI
     public void submitUPIrequest(View v) {
 
+        if (UPI_number.getText().toString().isEmpty()){
+            upibtn.setEnabled(true);
+        }else if (!UPI_number.getText().toString().isEmpty()){
+            upibtn.setEnabled(false);
+            Toast.makeText(this, "Client has UPI number", Toast.LENGTH_SHORT).show();
+        }
+
         try {
+            if(countryID==0){
+
+                Toast.makeText(Registration.this, "Please select country of birth", Toast.LENGTH_LONG).show();
+
+            }else if (countyID==0){
+                Toast.makeText(Registration.this, "Please select county of residence", Toast.LENGTH_LONG).show();
+
+            }else if (scountyID==0){
+                Toast.makeText(Registration.this, "Please select sub-county", Toast.LENGTH_LONG).show();
+
+            }else if (wardID==0){
+                Toast.makeText(Registration.this, "Please select ward", Toast.LENGTH_LONG).show();
+
+            }else if (countyIDb==0){
+                Toast.makeText(Registration.this, "Please select county of birth", Toast.LENGTH_LONG).show();
+
+            }
+
 
 
             //start set locator information variables
@@ -2640,7 +2677,8 @@ getWards(wardID);
                 String newupns = AppendFunction.AppendUniqueIdentifier(upnS);
                 String myccnumber = cccS + newupns;
 
-                String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + upi_no + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code + "*" + new_grouping_code + "*" + locatorcountyS + "*" + locatorsubcountyS + "*" + locatorlocationS + "*" + locatorwardS + "*" + locatorvillageS;
+                //String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + upi_no + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code + "*" + new_grouping_code + "*" + locatorcountyS + "*" + locatorsubcountyS + "*" + locatorlocationS + "*" + locatorwardS + "*" + locatorvillageS;
+                String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + upi_no + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code + "*" + new_grouping_code + "*" + countryID+"*" +countyIDb+"*"+countyID + "*" + scountyID + "*" + locatorlocationS + "*" + wardID + "*" + locatorvillageS;
                 // String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" +upi_no+ "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code+"*"+new_grouping_code+"*"+locatorcountyS+"*"+locatorsubcountyS+"*"+locatorlocationS+"*"+locatorwardS+"*"+locatorvillageS;
 
 
@@ -2684,7 +2722,8 @@ getWards(wardID);
                                     new Response.Listener<String>() {
                                         @Override
                                         public void onResponse(String response) {
-//                        Toast.makeText(ctx, "message "+response, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Registration.this, "message "+response, Toast.LENGTH_LONG).show();
+                                            //dialogs.showSuccessDialog("response", response);
 
                                             try {
                                                 JSONObject jsonObject = new JSONObject(response);
@@ -2701,9 +2740,10 @@ getWards(wardID);
 
                                                     ////dialogs.showSuccessDialog("Clients UPI number is"+ " " +jsonObject1, "Name:" + " "+ jsonObject2 + " "+ jsonObject3);
                                                     //Toast.makeText(Registration.this, "Clients UPI number is"+ " " +jsonObject1, Toast.LENGTH_LONG).show();
-                                                    UPI_number.setText(jsonObject1);
+                                                    //UPI_number.setText(jsonObject1);
                                                 }
                                             } catch (JSONException e) {
+                                               // Toast.makeText(Registration.this, "catch", Toast.LENGTH_SHORT).show();
                                                 e.printStackTrace();
                                             }
 
@@ -2712,7 +2752,7 @@ getWards(wardID);
 
 
                                             if (mStatusCode[0] == 200) {
-                                                //UPI_number.setText(jsonObject1);
+                                                UPI_number.setText(jsonObject1);
                                                 dialogs.showSuccessDialog("Clients UPI number is" + " " + jsonObject1, "Name:" + " " + jsonObject2 + " " + jsonObject3);
 
 
@@ -2721,7 +2761,7 @@ getWards(wardID);
 
                                             } else {
 
-                                                dialogs.showErrorDialog(response, "Server response");
+                                                dialogs.showErrorDialog("UPI not given", "Server response");
                                             }
 
                                         }
@@ -2729,6 +2769,7 @@ getWards(wardID);
                                     new Response.ErrorListener() {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
+                                            Toast.makeText(Registration.this, "error", Toast.LENGTH_SHORT).show();
                                             //pr.dissmissProgress();
 
                                             try {
@@ -2738,7 +2779,7 @@ getWards(wardID);
 //                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
                                                 // dialogs.showErrorDialog(new String(htmlBodyBytes),"Server Response");
                                                 Log.d("", error.getMessage());
-                                                Toast.makeText(Registration.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                                               // Toast.makeText(Registration.this, error.getMessage(), Toast.LENGTH_LONG).show();
 
                                                 //pr.dissmissProgress();
 
