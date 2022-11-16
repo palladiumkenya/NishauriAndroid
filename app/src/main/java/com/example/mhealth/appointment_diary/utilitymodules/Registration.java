@@ -729,19 +729,18 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if (hasFocus) {
-                    Toast.makeText(Registration.this, "has focus", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(Registration.this, "has focus", Toast.LENGTH_SHORT).show();
                 } else {
 
                     progress.showProgress("Getting UPI number");
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("identifier", "national-id");
-                    // params.put("identifier_value", "2345678");
-
+                    //params.put("identifier_value", "2345678");
                     params.put("identifier_value", idnoE.getText().toString());
 
 
                     JSONObject jsonObject = new JSONObject(params);
-                    String url = "https://ushauriapi.kenyahmis.org/mohupi/verify";
+
 
                     try {
                         List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
@@ -756,12 +755,13 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                     }
 
                     RequestQueue requestQueue = Volley.newRequestQueue(Registration.this);
+                    String url = "https://ushauriapi.kenyahmis.org/mohupi/verify";
 
-                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
+                    JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
                             UPI_number.setText("");
-                            //Log.d("UPI", response.toString());
+                            Log.d("UPI", response.toString());
                             progress.dissmissProgress();
 
                             try {
@@ -769,7 +769,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                                 boolean x = response.getBoolean("clientExists");
                                 if (x == true) {
-                                    //Toast.makeText(Registration.this, "Exists", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Registration.this, "Exists", Toast.LENGTH_SHORT).show();
 
                                     JSONObject jsonObject1 = response.getJSONObject("client");
 
@@ -783,31 +783,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                     dialogs.showSuccessDialog("Clients UPI number is" + " " + UPI_number1, "Name:" + " " + firstname + " " + lastname);
 
                                     //Toast.makeText(Registration.this, "Clients UPI number is"+ " " +UPI_number1 +" "+ "Name:"+ " "+ firstname+ " "+ lastname, Toast.LENGTH_SHORT).show();
-                                    Log.d("", UPI_number1);
-
-                                    //AlertDialog
-                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(Registration.this);
-                                    builder1.setIcon(android.R.drawable.ic_dialog_alert);
-                                    builder1.setTitle("Client's UPI number is" + " " + UPI_number1);
-                                    builder1.setMessage("Name" + " " + firstname + " " + lastname);
-                                    builder1.setCancelable(false);
-
-                                    builder1.setPositiveButton(
-                                            "OK",
-                                            new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int id) {
-
-                                                    UPI_number.setText(UPI_number1);
-
-                                                    //dialog.cancel();
-                                                }
-                                            });
-
-                                   /* AlertDialog alert11 = builder1.create();
-                                    alert11.show();*/
-
-
-                                    //AlertDialog
+                                    //Log.d("", UPI_number1);
 
                                 } else {
                                     dialogs.showErrorDialog("Client has no UPI number", "Please request UPI number for the client");
@@ -835,7 +811,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                         }
                     });
-                    requestQueue.add(jsonObjectRequest);
+                    requestQueue.add(jsonObjectRequest1);
 
 
                     //   Toast.makeText(Registration.this, "Lost focus"+idnoE.getText().toString(), Toast.LENGTH_SHORT).show();
@@ -843,63 +819,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
             }
         });
-
-       /* UPI_number.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                //Toast.makeText(Registration.this, "", Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-        // RequestQueue queue = Volley.newRequestQueue(this);
-        //String url ="https://ushauriapi.kenyahmis.org/mohupi/verify";
-
-
-// POST parameters
-       /* Map<String, String> params = new HashMap<String, String>();
-        params.put("identifier", "national-id");
-        params.put("identifier_value", "2345678");*/
-        // JSONObject jsonObj = new JSONObject(params);
-
-
-
-
-                   /* Map<String, String> params = new HashMap<String, String>();
-                    params.put("identifier", "national-id");
-                    params.put("identifier_value", "2345678");
-                    String url ="https://ushauriapi.kenyahmis.org/mohupi/verify";
-
-                   JSONObject jsonObj = new JSONObject(params);
-                    JsonObjectRequest jsonObjectRequest =new JsonObjectRequest(Request.Method.POST, url, jsonObj, new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-
-                            Toast.makeText(Registration.this, response.toString(), Toast.LENGTH_SHORT).show();
-
-                            Log.d("", response.toString());
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-
-                            error.printStackTrace();
-                            Toast.makeText(Registration.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-
-                        }
-                    });
-                   // queue.add(jsonObjectRequest);
-                    Volley.newRequestQueue(Registration.this).add(jsonObjectRequest);*/
 
 
     }
@@ -911,7 +830,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if (hasFocus) {
-                    Toast.makeText(Registration.this, "has focus", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(Registration.this, "has focus", Toast.LENGTH_SHORT).show();
                 } else {
                     progress.showProgress("Getting UPI number");
 
@@ -923,7 +842,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
 
                     JSONObject jsonObject = new JSONObject(params);
-                    String url = "https://ushauriapi.kenyahmis.org/mohupi/verify";
+                    //String url = "https://ushauriapi.kenyahmis.org/mohupi/verify";
 
                     try {
                         List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
@@ -939,12 +858,13 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
 
                     RequestQueue requestQueue = Volley.newRequestQueue(Registration.this);
+                    String url = "https://ushauriapi.kenyahmis.org/mohupi/verify";
 
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
                             UPI_number.setText("");
-                            //Log.d("UPI", response.toString());
+                            Log.d("UPI", response.toString());
                             progress.dissmissProgress();
 
                             try {

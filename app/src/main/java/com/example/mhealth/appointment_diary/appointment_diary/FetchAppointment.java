@@ -471,7 +471,7 @@ public class FetchAppointment extends AppCompatActivity implements SmsReceiver.M
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                    Toast.makeText(getApplicationContext(), "searching", Toast.LENGTH_SHORT).show();
+                   //Toast.makeText(getApplicationContext(), "searching", Toast.LENGTH_SHORT).show();
                     doSearching(s);
                     //myadapt.getFilter().filter(s);
                 }
@@ -500,7 +500,10 @@ public class FetchAppointment extends AppCompatActivity implements SmsReceiver.M
     public void doSearching(CharSequence s){
         //refreshSmsInbox();
         try {
-            myadapt.getFilter().filter(s.toString());
+            myadapt.getFilter().filter(s);
+            //Toast.makeText(getApplicationContext(), "searching appointments"+s, Toast.LENGTH_SHORT).show();
+           // myadapt.getFilter().filter(s.toString());
+            //myadapt.filter.performFiltering(s.toString());
         }
         catch(Exception e){
 

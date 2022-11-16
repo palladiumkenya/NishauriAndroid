@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -31,6 +32,7 @@ import com.example.mhealth.appointment_diary.MakeCalls.makeCalls;
 import com.example.mhealth.appointment_diary.R;
 //import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
 import com.example.mhealth.appointment_diary.config.Config;
+import com.example.mhealth.appointment_diary.defaulters_diary.losttofollow.LosttoFollowModel;
 import com.example.mhealth.appointment_diary.encryption.Base64Encoder;
 import com.example.mhealth.appointment_diary.models.Appointments;
 import com.example.mhealth.appointment_diary.sendmessages.SendMessage;
@@ -38,6 +40,7 @@ import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
 import com.example.mhealth.appointment_diary.utilitymodules.Appointment;
 
+import java.nio.channels.ScatteringByteChannel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -79,7 +82,7 @@ public class AppointmentAdapter extends BaseAdapter implements Filterable {
     public AppointmentAdapter(Context cont, List<AppointmentModel> mlist) {
 
         this.mycont = cont;
-        mylist = new ArrayList<>();
+        //mylist = new ArrayList<>();
         this.mylist = mlist;
         this.filterList = mlist;
 
@@ -460,48 +463,40 @@ public class AppointmentAdapter extends BaseAdapter implements Filterable {
 
         if(filter==null){
 
-            filter=new CustomFilter();
+            //filter=new  CustomFilter();
+            filter=new AppointmentAdapter.CustomFilter();
 
         }
         return filter;
     }
 
-    class CustomFilter extends Filter
-    {
+    class CustomFilter extends Filter {
 
 
         @Override
-        protected FilterResults performFiltering(CharSequence constraint)
-        {
+        protected FilterResults performFiltering(CharSequence constraint) {
 
-            FilterResults results=new FilterResults();
-            if(constraint!=null && constraint.length()>0)
-            {
+            FilterResults results = new FilterResults();
+            if (constraint != null && constraint.length() > 0) {
 
                 constraint=constraint.toString().toUpperCase();
-                ArrayList<AppointmentModel> filters=new ArrayList<AppointmentModel>();
+                ArrayList<AppointmentModel> filters = new ArrayList<AppointmentModel>();
 
-                for(int i=0;i<filterList.size();i++)
-                {
+                for (int i = 0; i < filterList.size(); i++) {
 
-                    if(filterList.get(i).getThename().toUpperCase().contains(constraint) || filterList.get(i).apptype.toUpperCase().contains(constraint) || filterList.get(i).ccnumber.toUpperCase().contains(constraint))
-                    {
-
-
-                        AppointmentModel am=new AppointmentModel(filterList.get(i).getCcnumber(),filterList.get(i).getThename(),filterList.get(i).getPhone(),filterList.get(i).getApptype(),filterList.get(i).getDate(),filterList.get(i).read,filterList.get(i).patientID,filterList.get(i).getFileserial());
+                    if (filterList.get(i).getThename().toUpperCase().contains(constraint) || filterList.get(i).apptype.toUpperCase().contains(constraint) || filterList.get(i).ccnumber.toUpperCase().contains(constraint)) {
+                        AppointmentModel am = new AppointmentModel(filterList.get(i).getCcnumber(), filterList.get(i).getThename(), filterList.get(i).getPhone(), filterList.get(i).getApptype(), filterList.get(i).getDate(), filterList.get(i).read, filterList.get(i).patientID, filterList.get(i).getFileserial());
                         filters.add(am);
                     }
                 }
 
-                results.count=filters.size();
-                results.values=filters;
+                results.count = filters.size();
+                results.values = filters;
 
-            }
+            } else {
 
-            else{
-
-                results.count=filterList.size();
-                results.values=filterList;
+                results.count = filterList.size();
+                results.values = filterList;
 
 
             }
@@ -511,11 +506,27 @@ public class AppointmentAdapter extends BaseAdapter implements Filterable {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
+            mylist = (List<AppointmentModel>) results.values;
+            notifyDataSetChanged();
+           // mylist.clear();
+           // mylist.addAll((List)results.values);
+               /* try{
+                    mylist.addAll((List)results.values);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }*/
 
 
-            mylist= (List<AppointmentModel>) results.values;
-            if(mylist.isEmpty())
-            {
+            /*if (mylist == null) {
+                mylist = (List<AppointmentModel>) results.values;
+
+            }*/
+
+            // mylist = (List<AppointmentModel>) results.values;
+
+           /* try {
+
+            if (mylist.isEmpty()) {
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mycont);
 
@@ -526,7 +537,7 @@ public class AppointmentAdapter extends BaseAdapter implements Filterable {
                             public void onClick(DialogInterface arg0, int arg1) {
 //                                    Toast.makeText(Appointment.this,"You clicked yes button",Toast.LENGTH_LONG).show();
 
-                                Intent myint = new Intent(mycont , Appointment.class);
+                                Intent myint = new Intent(mycont, Appointment.class);
                                 mycont.startActivity(myint);
 
 
@@ -534,7 +545,7 @@ public class AppointmentAdapter extends BaseAdapter implements Filterable {
                             }
                         });
 
-                alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -542,12 +553,16 @@ public class AppointmentAdapter extends BaseAdapter implements Filterable {
                 });
 
 
-
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
             }
+        }
+            catch (Exception e){
+                e.printStackTrace();
+            }*/
 
-            notifyDataSetChanged();
+           // notifyDataSetChanged();
+
 
         }
     }
