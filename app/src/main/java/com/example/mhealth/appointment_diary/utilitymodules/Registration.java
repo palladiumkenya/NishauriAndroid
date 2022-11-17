@@ -115,6 +115,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
     Progress progress;
     public String z;
+    String IDused;
 
     Dialogs dialogs;
     SweetAlertDialog mdialog;
@@ -2280,6 +2281,28 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 //            get the art years
 
 
+           /* TextWatcher textWatcher = new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if(String.valueOf(s.length()) <= 10){
+                        Toast.makeText(getContext(), "your text",Toast.LENGTH_LONG).show();
+                    }
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            };
+            edit_explain.addTextChangedListener(textWatcher);*/
+
+
             if (patientStatus_code.contentEquals("0")) {
 
                 Toast.makeText(this, "Please Select client type", Toast.LENGTH_SHORT).show();
@@ -2307,6 +2330,12 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 s_nameE.setError("Second name required");
             } else if (dobS.trim().isEmpty() && !patientStatus_code.contentEquals("2")) {
                 dobE.setError("Date of Birth required");
+            }
+            else if (!(o_nameS.length() >2)){
+                o_nameE.setError("Last name must have atleast 3 characters");
+                //Toast.makeText(,Re, "", Toast.LENGTH_SHORT).show();
+                dialogs.showErrorDialog("The length of 'Last Name' must be at least 3 characters", "");
+
             }
 //            else if(idnoL.isShown() && idnoE.getText().toString().trim().isEmpty()){
 //                idnoE.setError("ID Number is required");
@@ -2645,13 +2674,26 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                         //Toast.makeText(Registration.this, "message "+response, Toast.LENGTH_LONG).show();
                                             //dialogs.showSuccessDialog("response", response);
 
+
+
                                             try {
+                                               /* for (int i=0; i<response.length(); i++){
+                                                JSONObject jsonObject7 = (JSONObject) response.get(i); }*/
+                                                //JSONObject jsonObject9 =re
                                                 JSONObject jsonObject = new JSONObject(response);
+                                                //JSONObject jsonObject4 =jsonObject.getJSONObject("errors");
+                                                /*if (jsonObject.has("errors")){
+                                                   IDused = jsonObject4.getString("identifications[0]");
+                                                    dialogs.showErrorDialog("",IDused);
+                                                }
+
+                                                 IDused =jsonObject4.getString("identifications[0]");*/
 
                                                 for (int a = 0; a < jsonObject.length(); a++) {
                                                     jsonObject1 = jsonObject.getString("clientNumber");
                                                     jsonObject2 = jsonObject.getString("firstName");
                                                     jsonObject3 = jsonObject.getString("lastName");
+
 
                                                     // Dialog
 
@@ -2668,13 +2710,41 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                             }
 
 
+
                                             // pr.dissmissProgress();
 
 
                                             if (mStatusCode[0] == 200) {
-                                                UPI_number.setText(jsonObject1);
-                                                dialogs.showSuccessDialog("Clients UPI number is" + " " + jsonObject1, "Name:" + " " + jsonObject2 + " " + jsonObject3);
+                                                JSONObject jsonObject = null;
+                                                try {
+                                                    jsonObject = new JSONObject(response);
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                                JSONObject jsonObject4 = null;
+                                                try {
+                                                    jsonObject4 = jsonObject.getJSONObject("errors");
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                                if (jsonObject.has("errors")){
+                                                    try {
+                                                        IDused = jsonObject4.getString("identifications[0]");
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                    dialogs.showErrorDialog(IDused, "Server response");
+                                                }else{
+                                                    dialogs.showSuccessDialog("Clients UPI number is" + " " + jsonObject1, "Name:" + " " + jsonObject2 + " " + jsonObject3);
+                                                    UPI_number.setText(jsonObject1);
+                                                }
 
+
+                                                //UPI_number.setText(jsonObject1);
+                                                //dialogs.showSuccessDialog("Clients UPI number is" + " " + jsonObject1, "Name:" + " " + jsonObject2 + " " + jsonObject3);
+                                                //dialogs.showSuccessDialog("Server response", response);
+                                               // if (response.)
+                                                //dialogs.showErrorDialog("NOTE:", IDused);
 
                                                 //dialogs.showSuccessDialog(response,"Server Response");
 
@@ -2689,6 +2759,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                     new Response.ErrorListener() {
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
+
                                             Toast.makeText(Registration.this, "error", Toast.LENGTH_SHORT).show();
                                             //pr.dissmissProgress();
 

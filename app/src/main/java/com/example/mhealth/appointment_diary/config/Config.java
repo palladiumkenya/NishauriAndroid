@@ -45,6 +45,7 @@ public class Config extends AppCompatActivity {
 
     public static final String UPI_VERIFY = "/mohupi/verify";
     public static final String UPI_REQUEST = "/mohupi/getUPI";
+    //https://ushauriapi.kenyahmis.org/mohupi/verify
 
 
     public static final String GETTODAYSAPPOINTMENT_URL1 = "/today_appointments";
