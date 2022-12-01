@@ -7,7 +7,7 @@ android {
     defaultConfig {
 
         applicationId "com.mhealth.ushauriv2"
-        minSdkVersion 21  //was16
+        minSdkVersion 16
         targetSdkVersion 33
         versionCode 64
        // versionName "3.1.8"
@@ -111,11 +111,6 @@ dependencies {
    // implementation 'androidx.work:work-runtime:2.8.0-beta01'
 
     implementation 'androidx.work:work-runtime:2.8.0-alpha02'
-
-    //calender
-    implementation 'com.github.shrikanth7698:Collapsible-Calendar-View-Android:v1.0.3'
-    implementation 'com.github.mahimrocky:EventCalender:v1.0.0'
-    implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
 
 
 

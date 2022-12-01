@@ -57,7 +57,6 @@ public class AppointmentAdapter extends BaseAdapter implements Filterable {
     private Context mycont;
     private List<AppointmentModel> mylist;
     CustomFilter filter;
-
     private List<AppointmentModel> filterList;
     List<Appointments> books = null;
 
