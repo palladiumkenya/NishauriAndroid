@@ -42,6 +42,7 @@ public class Config extends AppCompatActivity {
     public static final String GETAFFILIATION_URL = "https://ushaurinew.mhealthkenya.co.ke/chore/affiliation";
     public static final String GETAFFILIATION_URL1 = "/chore/affiliation";
     public static final String SENDDATATODB_URL1 = "/receiver/";
+    public static final String CAL_LIST ="/appnt/applist";
 
     public static final String UPI_VERIFY = "/mohupi/verify";
     public static final String UPI_REQUEST = "/mohupi/getUPI";
