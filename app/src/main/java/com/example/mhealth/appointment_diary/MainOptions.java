@@ -319,7 +319,7 @@ public class MainOptions extends AppCompatActivity {
 
                 @Override
                 public void onClick(View v) {
-                    String url = "https://ushaurinew.mhealthkenya.co.ke/";
+                    String url = "https://ushauri.nascop.org";
                     Intent i = new Intent(Intent.ACTION_VIEW);
                     i.setData(Uri.parse(url));
                     startActivity(i);

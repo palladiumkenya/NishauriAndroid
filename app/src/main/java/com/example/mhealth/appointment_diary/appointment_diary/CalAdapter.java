@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.mhealth.appointment_diary.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CalAdapter extends BaseAdapter implements Filterable {
@@ -58,7 +59,7 @@ public class CalAdapter extends BaseAdapter implements Filterable {
             TextView phoneT = (TextView) v.findViewById(R.id.phone);
             TextView apptypeT = (TextView) v.findViewById(R.id.apptype);
             TextView dateT = (TextView) v.findViewById(R.id.date);
-            TextView fileT = (TextView) v.findViewById(R.id.lostfileserial);
+            TextView fileT = (TextView) v.findViewById(R.id.file_no);
 
 
 
@@ -105,12 +106,44 @@ public class CalAdapter extends BaseAdapter implements Filterable {
     class CustomFilter1 extends Filter{
 
         @Override
-        protected FilterResults performFiltering(CharSequence charSequence) {
-            return null;
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+
+            FilterResults results = new FilterResults();
+            if (constraint != null && constraint.length() > 0) {
+
+                constraint=constraint.toString().toUpperCase();
+                ArrayList<CalModel> filters = new ArrayList<CalModel>();
+
+                for (int i = 0; i < filterList.size(); i++) {
+
+                    if (filterList.get(i).getClient_name().toUpperCase().contains(constraint) || filterList.get(i).getAppointment_type().toUpperCase().contains(constraint) || filterList.get(i).getClinic_no().toUpperCase().contains(constraint)) {
+                       CalModel am = new CalModel(filterList.get(i).getClinic_no(), filterList.get(i).getClient_name(), filterList.get(i).getClient_phone_no(), filterList.get(i).getAppointment_type(), filterList.get(i).getAppntmnt_date(),  filterList.get(i).getFile_no());
+                        filters.add(am);
+                    }
+                }
+
+                results.count = filters.size();
+                results.values = filters;
+
+            } else {
+
+                results.count = filterList.size();
+                results.values = filterList;
+
+
+            }
+            return results;
+
+
+
+            //return null;
         }
 
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            mylist = (List<CalModel>) filterResults.values;
+            notifyDataSetChanged();
 
         }
     }
