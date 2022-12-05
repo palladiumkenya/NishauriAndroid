@@ -132,8 +132,7 @@ public class TodaysAppointment extends AppCompatActivity {
         card_transit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Intent intent = new Intent(getApplicationContext(), TransitClient.class);
-                Intent intent = new Intent(getApplicationContext(), AppointmentCalender.class);
+                Intent intent = new Intent(getApplicationContext(), TransitClient.class);
                 startActivity(intent);
 
             }
@@ -143,8 +142,7 @@ public class TodaysAppointment extends AppCompatActivity {
         card_clinic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Intent intent = new Intent(getApplicationContext(), ClinicMovement.class);
-                Intent intent = new Intent(getApplicationContext(), AppCal.class);
+                Intent intent = new Intent(getApplicationContext(), ClinicMovement.class);
                 startActivity(intent);
             }
         });
