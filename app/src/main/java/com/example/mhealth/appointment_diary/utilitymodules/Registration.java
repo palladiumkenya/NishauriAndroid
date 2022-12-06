@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,6 +50,7 @@ import com.example.mhealth.appointment_diary.R;
 //import com.example.mhealth.appointment_diary.SSLTrustCertificate.SSLTrust;
 import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.encryption.Base64Encoder;
+import com.example.mhealth.appointment_diary.loginmodule.LoginActivity;
 import com.example.mhealth.appointment_diary.models.Country;
 import com.example.mhealth.appointment_diary.models.RegisterCounter;
 import com.example.mhealth.appointment_diary.models.counties;
@@ -758,7 +760,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                     RequestQueue requestQueue = Volley.newRequestQueue(Registration.this);
                     String url = "https://ushauriapi.kenyahmis.org/mohupi/verify";
 
-                    JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
+                    JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest(Request.Method.POST, z+Config.UPI_VERIFY, jsonObject, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
                             UPI_number.setText("");
@@ -778,13 +780,58 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                     String firstname = jsonObject1.getString("firstName");
                                     String lastname = jsonObject1.getString("lastName");
 
-                                    UPI_number.setText(UPI_number1);
+                                   // UPI_number.setText(UPI_number1);
                                     //UPI_number.setEnabled(false);
 
-                                    dialogs.showSuccessDialog("Clients UPI number is" + " " + UPI_number1, "Name:" + " " + firstname + " " + lastname);
+                                    //dialogs.showSuccessDialog("Clients UPI number is" + " " + UPI_number1, "Name:" + " " + firstname + " " + lastname);
 
                                     //Toast.makeText(Registration.this, "Clients UPI number is"+ " " +UPI_number1 +" "+ "Name:"+ " "+ firstname+ " "+ lastname, Toast.LENGTH_SHORT).show();
+
                                     //Log.d("", UPI_number1);
+
+
+                                    AlertDialog.Builder builder1 = new AlertDialog.Builder(Registration.this);
+                                    builder1.setIcon(android.R.drawable.ic_dialog_alert);
+                                    builder1.setTitle("Clients UPI number is" + " " + UPI_number1);
+                                    builder1.setMessage( "Name:" + " " + firstname + " " + lastname);
+                                    builder1.setCancelable(false);
+
+                                    builder1.setPositiveButton(
+                                            "Accept",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    UPI_number.setText(UPI_number1);
+
+                                                    /*Intent intent = new Intent(Registration.this, LoginActivity.class);
+                                                    startActivity(intent);
+                                                    finish();*/
+
+                                                    //dialog.cancel();
+                                                }
+                                            });
+
+        builder1.setNegativeButton(
+                "Reject",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        UPI_number.setText("");
+
+                       /* Intent intent = new Intent(Config.this, SelectUrls.class);
+                        startActivity(intent);
+                        dialog.cancel();*/
+                    }
+                });
+
+                                    AlertDialog alert11 = builder1.create();
+                                    alert11.show();
+
+
+
+
+
+
+
 
                                 } else {
                                     dialogs.showErrorDialog("Client has no UPI number", "Please request UPI number for the client");
@@ -861,7 +908,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                     RequestQueue requestQueue = Volley.newRequestQueue(Registration.this);
                     String url = "https://ushauriapi.kenyahmis.org/mohupi/verify";
 
-                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>() {
+                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, z+Config.UPI_VERIFY, jsonObject, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
                             UPI_number.setText("");
@@ -881,14 +928,57 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                     String firstname = jsonObject1.getString("firstName");
                                     String lastname = jsonObject1.getString("lastName");
 
-                                    UPI_number.setText(UPI_number1);
+                                    //UPI_number.setText(UPI_number1);
                                     // UPI_number.setEnabled(false);
-                                    dialogs.showSuccessDialog("Clients UPI number is" + " " + UPI_number1, "Name:" + " " + firstname + " " + lastname);
+                                   // dialogs.showSuccessDialog("Clients UPI number is" + " " + UPI_number1, "Name:" + " " + firstname + " " + lastname);
                                     //Toast.makeText(Registration.this, "Clients UPI number is"+ " " +UPI_number1 +" "+ "Name"+ " "+ firstname+ " "+ lastname, Toast.LENGTH_SHORT).show();
                                     Log.d("", UPI_number1);
 
-                                    //AlertDialog
+
+
+
+
                                     AlertDialog.Builder builder1 = new AlertDialog.Builder(Registration.this);
+                                    builder1.setIcon(android.R.drawable.ic_dialog_alert);
+                                    builder1.setTitle("Clients UPI number is" + " " + UPI_number1);
+                                    builder1.setMessage( "Name:" + " " + firstname + " " + lastname);
+                                    builder1.setCancelable(false);
+
+                                    builder1.setPositiveButton(
+                                            "Accept",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    UPI_number.setText(UPI_number1);
+
+                                                    /*Intent intent = new Intent(Registration.this, LoginActivity.class);
+                                                    startActivity(intent);
+                                                    finish();*/
+
+                                                    //dialog.cancel();
+                                                }
+                                            });
+
+                                    builder1.setNegativeButton(
+                                            "Reject",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+
+                                                    UPI_number.setText("");
+
+                       /* Intent intent = new Intent(Config.this, SelectUrls.class);
+                        startActivity(intent);
+                        dialog.cancel();*/
+                                                }
+                                            });
+
+                                    AlertDialog alert11 = builder1.create();
+                                    alert11.show();
+
+
+
+
+                                    //AlertDialog
+                                   /* AlertDialog.Builder builder1 = new AlertDialog.Builder(Registration.this);
                                     builder1.setIcon(android.R.drawable.ic_dialog_alert);
                                     builder1.setTitle("Clients UPI number is" + " " + UPI_number1);
                                     builder1.setMessage("Name" + " " + firstname + " " + lastname);
@@ -903,7 +993,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                                                     //dialog.cancel();
                                                 }
-                                            });
+                                            });*/
 
 
                                     //AlertDialog
@@ -1432,7 +1522,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
         try {
 
-            if(countryID==0){
+            /*if(countryID==0){
 
 
             }else if (countyID==0){
@@ -1443,7 +1533,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
             }else if (countyIDb==0){
 
-            }
+            }*/
 
 
             //start set locator information variables
@@ -2101,6 +2191,9 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             upibtn.setEnabled(false);
             Toast.makeText(this, "Client has UPI number", Toast.LENGTH_SHORT).show();
         }
+        /*else if (!(dobirth.getText().toString().length() > 2)){
+            Toast.makeText(Registration.this, "Birth certificate number must be atleast 3 characters", Toast.LENGTH_LONG).show();
+        }*/
 
         try {
             if(countryID==0){
@@ -2667,11 +2760,11 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                             //pr.showProgress("Requesting UPI...");
                             final int[] mStatusCode = new int[1];
 
-                            StringRequest stringRequest = new StringRequest(Request.Method.POST, z + Config.UPI_REQUEST,
+                            StringRequest stringRequest = new StringRequest(Request.Method.POST, z+Config.UPI_REQUEST,
                                     new Response.Listener<String>() {
                                         @Override
                                         public void onResponse(String response) {
-                        //Toast.makeText(Registration.this, "message "+response, Toast.LENGTH_LONG).show();
+                                        //Toast.makeText(Registration.this, "message "+response, Toast.LENGTH_LONG).show();
                                             //dialogs.showSuccessDialog("response", response);
 
 
@@ -2733,7 +2826,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                                     } catch (JSONException e) {
                                                         e.printStackTrace();
                                                     }
-                                                    dialogs.showErrorDialog(IDused, "Server response");
+                                                    //dialogs.showErrorDialog(IDused, "Server response");
+                                                    dialogs.showErrorDialog(response, "Server response");
                                                 }else{
                                                     dialogs.showSuccessDialog("Clients UPI number is" + " " + jsonObject1, "Name:" + " " + jsonObject2 + " " + jsonObject3);
                                                     UPI_number.setText(jsonObject1);
@@ -2752,6 +2846,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                             } else {
 
                                                 dialogs.showErrorDialog("UPI not given", "Server response");
+
                                             }
 
                                         }
@@ -2760,7 +2855,9 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                         @Override
                                         public void onErrorResponse(VolleyError error) {
 
-                                            Toast.makeText(Registration.this, "error", Toast.LENGTH_SHORT).show();
+                                            dialogs.showErrorDialog( error.getMessage(), "Server response");
+
+                                           // Toast.makeText(Registration.this, "error", Toast.LENGTH_SHORT).show();
                                             //pr.dissmissProgress();
 
                                             try {
@@ -2911,10 +3008,21 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     //getcounties
 
     public void getFacilities() {
-        String curl = "https://ushauriapi.kenyahmis.org/locator/counties";
+        //String curl = "https://ushauriapi.kenyahmis.org/locator/counties";
+        try {
+            List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size() == 1) {
+                for (int x = 0; x < _url.size(); x++) {
+                    z = _url.get(x).getBase_url1();
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
-                curl, null, new Response.Listener<JSONArray>() {
+                z+Config.COUNTIES, null, new Response.Listener<JSONArray>() {
 
 
             @Override
@@ -3051,7 +3159,19 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         String url = "https://ushauriapi.kenyahmis.org/locator/scounties?county=";
         //"https://ushauriapi.kenyahmis.org/locator/scounties?county=47";
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url + ID,
+        try {
+            List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size() == 1) {
+                for (int x = 0; x < _url.size(); x++) {
+                    z = _url.get(x).getBase_url1();
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, z+Config.S_COUNTIES+ID,
                 null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -3172,7 +3292,19 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         //https://ushauriapi.kenyahmis.org/locator/wards?scounty=1
         //"https://ushauriapi.kenyahmis.org/locator/scounties?county=47";
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url + ID,
+        try {
+            List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size() == 1) {
+                for (int x = 0; x < _url.size(); x++) {
+                    z = _url.get(x).getBase_url1();
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,  z+Config.WARDS+ID,
                 null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -3293,8 +3425,22 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     public void getcountiesbirth() {
         String curl = "https://ushauriapi.kenyahmis.org/locator/counties";
 
+
+        try {
+            List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size() == 1) {
+                for (int x = 0; x < _url.size(); x++) {
+                    z = _url.get(x).getBase_url1();
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
+
+
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
-                curl, null, new Response.Listener<JSONArray>() {
+                z+Config.COUNTIES, null, new Response.Listener<JSONArray>() {
 
 
             @Override
@@ -3421,9 +3567,21 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     public void getCountries(){
 
         String curl1 = "https://ushauriapi.kenyahmis.org/locator/countries";
+        try {
+            List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size() == 1) {
+                for (int x = 0; x < _url.size(); x++) {
+                    z = _url.get(x).getBase_url1();
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
+
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
-                curl1, null, new Response.Listener<JSONArray>() {
+                z+Config.COUNTRIES, null, new Response.Listener<JSONArray>() {
 
 
             @Override

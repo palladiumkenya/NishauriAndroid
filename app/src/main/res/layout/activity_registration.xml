@@ -96,9 +96,11 @@
                             android:inputType="number"
 
                             android:hint="MFL code*"
-                            android:textColorHint="#000"
+                            android:textStyle="bold"
                             android:maxLength="5"
-                            android:textSize="12dp"
+                            android:textSize="13sp"
+
+
                             />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -112,10 +114,11 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/upn"
                             android:inputType="number"
-                            android:hint="CCC No*"
-                            android:textColorHint="#000"
+                            android:hint="CCC no*"
+
                             android:maxLength="5"
-                            android:textSize="12dp"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
                             />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -131,10 +134,11 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/cfile"
                         android:inputType="text"
-                        android:hint="Serial Number of client file"
-                        android:textColorHint="#000"
+                        android:hint="Serial number of client file"
+
                         android:maxLength="24"
-                        android:textSize="12dp"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
 
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -150,9 +154,10 @@
                         android:id="@+id/f_name"
                         android:inputType="text"
                         android:hint="Enter  first name*"
-                        android:textColorHint="#000"
+
                         android:maxLength="24"
-                        android:textSize="12dp"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -168,9 +173,9 @@
                         android:id="@+id/s_name"
                         android:inputType="text"
                         android:hint="Enter middle name*"
-                        android:textColorHint="#000"
+                        android:textStyle="bold"
                         android:maxLength="24"
-                        android:textSize="12dp"
+                        android:textSize="13sp"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -187,7 +192,8 @@
                         android:hint="Enter  last name"
                         android:textColorHint="#000"
                         android:maxLength="24"
-                        android:textSize="12dp"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -202,10 +208,11 @@
                         android:focusable="false"
                         android:inputType="text"
                         android:textStyle="bold"
-                        android:hint="Enter client date Of birth*"
+                        android:hint="Enter client date of birth*"
                         android:textColorHint="#000"
                         android:maxLength="24"
-                        android:textSize="12dp"
+                        android:textSize="13sp"
+
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -224,7 +231,7 @@
                         android:hint="Age in years"
                         android:textColorHint="#000"
                         android:maxLength="24"
-                        android:textSize="12dp"
+                        android:textSize="12sp"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -280,10 +287,10 @@
                             android:id="@+id/idno"
                             android:inputType="number"
                             android:textStyle="bold"
-                            android:hint="Enter ID NO./Passport No."
+                            android:hint="Enter ID no./Passport no."
                             android:textColorHint="#000"
                             android:maxLength="24"
-                            android:textSize="12dp"
+                            android:textSize="13sp"
                             />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -311,7 +318,7 @@
                             android:hint="Enter Birth cert NO."
                             android:textColorHint="#000"
                             android:maxLength="24"
-                            android:textSize="12dp"
+                            android:textSize="13sp"
                             />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -356,7 +363,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-
+                    android:textSize="13sp"
                     android:text="Select sex*" />
 
                 <LinearLayout
@@ -377,6 +384,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
+                    android:textSize="13sp"
                     android:text="Select marital status"/>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -397,6 +405,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
+                    android:textSize="13sp"
                     android:text="Select patient condition*" />
 
                 <LinearLayout
@@ -426,6 +435,8 @@
                         android:focusable="false"
                         android:hint="CCC enrolment date*"
                         android:id="@+id/enrollment_date"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -440,6 +451,8 @@
                         android:visibility="gone"
                         android:hint="Date enrolled into HIV care*"
                         android:id="@+id/art_date"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -456,9 +469,11 @@
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:hint="Enter primary phone number*"
-                        android:fontFamily="serif"
+
                         android:maxLength="10"
                         android:id="@+id/phone"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -483,6 +498,7 @@
                             android:textStyle="bold"
                             android:hint="Alternative Phone number"
                             android:textColorHint="#000"
+                            android:textSize="13sp"
                             android:maxLength="10"
 
                             />
@@ -502,6 +518,7 @@
                             android:hint="Treatment Buddy Phone number"
                             android:textColorHint="#000"
                             android:maxLength="10"
+                            android:textSize="13sp"
 
                             />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -516,6 +533,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
+                    android:textSize="13sp"
                     android:text="Enable SMS*"/>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -552,6 +570,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
+                        android:textSize="13sp"
                         android:text="Select language*"/>
 
 
@@ -580,6 +599,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
+                        android:textSize="13sp"
                         android:text="Select preferred messaging time*"/>
 
                     <LinearLayout
@@ -607,6 +627,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
+                        android:textSize="13sp"
                         android:text="Select motivational alerts*"/>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -638,6 +659,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
+                    android:textSize="13sp"
                     android:text="Select status*"/>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -674,6 +696,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
+                        android:textSize="13sp"
                         android:text="Select grouping*"/>
 
                     <!--<TextView-->
@@ -704,6 +727,8 @@
                         android:layout_width="match_parent"
                         android:id="@+id/disablereason"
                         android:hint="Specify reason"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
 
@@ -723,12 +748,16 @@
                         android:layout_width="match_parent"
                         android:id="@+id/locatorcounty"
                         android:hint="County"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
                         android:layout_height="wrap_content" />
 
                     <EditText
                         android:layout_width="match_parent"
                         android:id="@+id/locatorsubcounty"
                         android:hint="Sub county"
+                        android:textSize="13sp"
+
                         android:layout_height="wrap_content" />
 
 
@@ -749,9 +778,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/grey_90"
-                    android:text="PLACE OF BIRTH INFORMATION"/>
+
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:text="Place of birth information"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
@@ -766,8 +796,8 @@
                         android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/grey_90"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
                         android:text="Country of birth"/>
 
                     <LinearLayout
@@ -829,8 +859,9 @@
                         android:paddingLeft="@dimen/spacing_small"
                         android:paddingRight="@dimen/spacing_small"
                         android:text="County of birth"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/grey_90" />
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                         />
 
                     <LinearLayout
                         android:id="@+id/birth_lyt_description"
@@ -860,9 +891,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/grey_90"
-                    android:text="CURRENT RESIDENCE INFORMATION"/>
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:text="Current residence information"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
@@ -882,9 +913,9 @@
                         android:gravity="center_vertical"
                         android:paddingLeft="@dimen/spacing_small"
                         android:paddingRight="@dimen/spacing_small"
+                        android:textStyle="bold"
                         android:text="County of residence"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/grey_90" />
+                        android:textSize="13sp"/>
 
                     <LinearLayout
                         android:id="@+id/lyt_description"
@@ -929,8 +960,8 @@
                         android:paddingLeft="@dimen/spacing_small"
                         android:paddingRight="@dimen/spacing_small"
                         android:text="Sub-county of residence"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/grey_90" />
+                        android:textSize="13sp"
+                        android:textStyle="bold"/>
 
                     <LinearLayout
 
@@ -986,8 +1017,8 @@
                         android:paddingLeft="@dimen/spacing_small"
                         android:paddingRight="@dimen/spacing_small"
                         android:text="Ward of residence"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/grey_90"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
                         android:visibility="gone"
 
                         />
@@ -1020,6 +1051,8 @@
                             android:layout_width="match_parent"
                             android:id="@+id/locatorlocation"
                             android:hint="Location"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
                             android:layout_height="wrap_content" />
 
 
@@ -1027,6 +1060,8 @@
                             android:layout_width="match_parent"
                             android:id="@+id/locatorvillage"
                             android:hint="Village"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
                             android:layout_height="wrap_content" />
 
                     </LinearLayout>

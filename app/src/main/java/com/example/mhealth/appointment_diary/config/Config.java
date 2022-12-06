@@ -45,6 +45,11 @@ public class Config extends AppCompatActivity {
 
     public static final String UPI_VERIFY = "/mohupi/verify";
     public static final String UPI_REQUEST = "/mohupi/getUPI";
+    public static final String COUNTIES ="/locator/counties";
+    public static final String S_COUNTIES ="/locator/scounties?county=";
+    public static final String WARDS="/locator/wards?scounty=";
+    public static final String COUNTRIES="/locator/countries";
+
     //https://ushauriapi.kenyahmis.org/mohupi/verify
 
 
@@ -53,6 +58,7 @@ public class Config extends AppCompatActivity {
     //  public static final String REMOVEFAKEDEFAULTER_URL = "https://ushaurinew.mhealthkenya.co.ke/chore/toda";
     public static final String GETDEFAULTERSAPPOINTMENT_URL1 = "/past_appointments";
     public static final String SENDDATATODB_URL2 = "/chore/receiver_post";
+
 
 
     public static final String JSON_ARRAYAFFILIATIONS = "affiliations";
