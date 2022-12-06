@@ -820,7 +820,8 @@ public class AccessServer {
                                 byte[] htmlBodyBytes = error.networkResponse.data;
 
 //                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
-                                dialogs.showErrorDialog(new String(htmlBodyBytes),"Server Responsess");
+                                //dialogs.showErrorDialog(new String(htmlBodyBytes),"Server Response");
+                                dialogs.showErrorDialog("No server connection", "Server Response");
                                 System.out.println("***error 3****"+error.getMessage());
                                 //Toast.makeText(ctx, error.getMessage(), Toast.LENGTH_LONG).show();
 
