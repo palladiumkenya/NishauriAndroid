@@ -353,7 +353,7 @@ public class FetchAppointment extends AppCompatActivity implements SmsReceiver.M
 
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
-            Objects.requireNonNull(getSupportActionBar()).setTitle("Today appointments");
+            Objects.requireNonNull(getSupportActionBar()).setTitle("Today Appointments");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         catch(Exception e){

@@ -258,7 +258,7 @@ public class TransitClient extends AppCompatActivity implements AdapterView.OnIt
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setTitle("Transit client");
+            getSupportActionBar().setTitle("Transit Client");
         } catch (Exception e) {
 
 

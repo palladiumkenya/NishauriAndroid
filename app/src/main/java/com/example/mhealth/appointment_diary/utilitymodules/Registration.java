@@ -10,6 +10,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -220,7 +222,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Client registration");
+        getSupportActionBar().setTitle("Client Registration");
 
 
         initialise();
@@ -251,15 +253,28 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
         setSpinnerListeners();
         setPrompts();
-        getCountries();
+        /*getCountries();
         getFacilities();
-        getcountiesbirth();
+        getcountiesbirth();*/
        //getWards(wardID);
+
+        if (chkinternet.isInternetAvailable()) {
+
+            getCountries();
+            getFacilities();
+            getcountiesbirth();
+
+            // acs.getDefaultersAppointmentMessages(getUserPhoneNumber());
+
+        } else {
+            Toast.makeText(Registration.this, "Please check your internet connection", Toast.LENGTH_LONG).show();
+
+        }
 
         final Context gratitude = this;
         final Button btnRSubmit = (Button) findViewById(R.id.btnRSubmit);
         final Button submitUPIrequest = (Button) findViewById(R.id.btnRequest);
-        btnRSubmit.setEnabled(true);
+        //btnRSubmit.setEnabled(true);
         submitUPIrequest.setEnabled(true);
 
         Stetho.initializeWithDefaults(this);
@@ -791,9 +806,9 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
 
                                     AlertDialog.Builder builder1 = new AlertDialog.Builder(Registration.this);
-                                    builder1.setIcon(android.R.drawable.ic_dialog_alert);
-                                    builder1.setTitle("Clients UPI number is" + " " + UPI_number1);
-                                    builder1.setMessage( "Name:" + " " + firstname + " " + lastname);
+                                    builder1.setIcon(getResources().getDrawable(R.drawable.moh1));
+                                    builder1.setTitle("Client UPI Number Is" + " " + UPI_number1);
+                                    builder1.setMessage( "Client Name:" + " " + firstname + " " + lastname);
                                     builder1.setCancelable(false);
 
                                     builder1.setPositiveButton(
@@ -834,7 +849,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
 
                                 } else {
-                                    dialogs.showErrorDialog("Client has no UPI number", "Please request UPI number for the client");
+                                    dialogs.showErrorDialog("Client Has No UPI Number", "Please Request UPI Number For The Client");
                                     //  Toast.makeText(Registration.this, "Client has no UPI number", Toast.LENGTH_SHORT).show();
                                     UPI_number.setText("");
                                 }
@@ -939,9 +954,10 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
 
                                     AlertDialog.Builder builder1 = new AlertDialog.Builder(Registration.this);
-                                    builder1.setIcon(android.R.drawable.ic_dialog_alert);
-                                    builder1.setTitle("Clients UPI number is" + " " + UPI_number1);
-                                    builder1.setMessage( "Name:" + " " + firstname + " " + lastname);
+                                    builder1.setIcon(getResources().getDrawable(R.drawable.moh1));
+                                    //ic_dialog_alert
+                                    builder1.setTitle("Client UPI Number Is" + " " + UPI_number1);
+                                    builder1.setMessage( "Client Name:" + " " + firstname + " " + lastname);
                                     builder1.setCancelable(false);
 
                                     builder1.setPositiveButton(
@@ -1540,7 +1556,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
 //            locatorsubcountyS,locatorlocationS,locatorwardS,locatorvillageS
 
-            if (locatorcountyE.getText().toString().trim().isEmpty()) {
+           /* if (locatorcountyE.getText().toString().trim().isEmpty()) {
 
                 locatorcountyS = "-1";
 
@@ -1558,7 +1574,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                 locatorsubcountyS = locatorsubcountyE.getText().toString();
 
-            }
+            }*/
 
 
             if (locatorlocationE.getText().toString().trim().isEmpty()) {
@@ -1571,7 +1587,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
             }
 
-            if (locatorwardE.getText().toString().trim().isEmpty()) {
+           /* if (locatorwardE.getText().toString().trim().isEmpty()) {
 
                 locatorwardS = "-1";
 
@@ -1579,7 +1595,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                 locatorwardS = locatorwardE.getText().toString();
 
-            }
+            }*/
 
             if (locatorvillageE.getText().toString().trim().isEmpty()) {
 
@@ -2038,6 +2054,9 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                             String phne = myl2.get(y).getPhone();
 //                                acs.sendDetailsToDb("Reg*"+sendSms+"/"+phne);
                             acs.sendDetailsToDbPost("Reg*" + encrypted, phne);
+
+
+
                         }
                     }
 
@@ -2045,7 +2064,11 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 } else {
 
                     sm.sendMessageApi("Reg*" + encrypted, mynumber);
+
                     LogindisplayDialog("Client registered successfully, kindly confirm that you have received the client registration successful SMS before booking an appointment");
+
+
+
 
 
                 }
@@ -2057,6 +2080,15 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 saveClientArtData(mycc, myupn, art_dateS);
 
                 clearFields();
+                countiesList.clear();
+                countiess.clear();
+                countriesList.clear();
+                countries.clear();
+                scountyList.clear();
+                scountiess.clear();
+                wardsList.clear();
+                wardss.clear();
+
 
                 counter = counter + 1;
 
@@ -2186,11 +2218,22 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     public void submitUPIrequest(View v) {
 
         if (UPI_number.getText().toString().isEmpty()){
-            upibtn.setEnabled(true);
+           // upibtn.setEnabled(true);
         }else if (!UPI_number.getText().toString().isEmpty()){
-            upibtn.setEnabled(false);
-            Toast.makeText(this, "Client has UPI number", Toast.LENGTH_SHORT).show();
+            //upibtn.setEnabled(false);
+            //Toast.makeText(this, "Client has UPI Number", Toast.LENGTH_SHORT).show();
         }
+
+        if (chkinternet.isInternetAvailable()) {
+
+            // acs.getDefaultersAppointmentMessages(getUserPhoneNumber());
+
+        } else {
+            Toast.makeText(Registration.this, "Please Check Your Internet Connection", Toast.LENGTH_LONG).show();
+
+        }
+
+
         /*else if (!(dobirth.getText().toString().length() > 2)){
             Toast.makeText(Registration.this, "Birth certificate number must be atleast 3 characters", Toast.LENGTH_LONG).show();
         }*/
@@ -2220,7 +2263,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
 //            locatorsubcountyS,locatorlocationS,locatorwardS,locatorvillageS
 
-            if (locatorcountyE.getText().toString().trim().isEmpty()) {
+           /* if (locatorcountyE.getText().toString().trim().isEmpty()) {
 
                 locatorcountyS = "-1";
 
@@ -2238,7 +2281,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                 locatorsubcountyS = locatorsubcountyE.getText().toString();
 
-            }
+            }*/
 
 
             if (locatorlocationE.getText().toString().trim().isEmpty()) {
@@ -2252,7 +2295,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             }
 
 
-            if (locatorwardE.getText().toString().trim().isEmpty()) {
+           /* if (locatorwardE.getText().toString().trim().isEmpty()) {
 
                 locatorwardS = "-1";
 
@@ -2260,7 +2303,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                 locatorwardS = locatorwardE.getText().toString();
 
-            }
+            }*/
 
             if (locatorvillageE.getText().toString().trim().isEmpty()) {
 
@@ -2829,7 +2872,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                                     dialogs.showErrorDialog(IDused, "Server response");
                                                     //dialogs.showErrorDialog(response, "Server response");
                                                 }else{
-                                                    dialogs.showSuccessDialog("Clients UPI number is" + " " + jsonObject1, "Name:" + " " + jsonObject2 + " " + jsonObject3);
+                                                    dialogs.showSuccessDialog("Client UPI Number Is" + " " + jsonObject1, "Client Name:" + " " + jsonObject2 + " " + jsonObject3);
                                                     UPI_number.setText(jsonObject1);
                                                 }
 
@@ -2931,8 +2974,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                 } else {
 
-                    sm.sendMessageApi("Reg*" + encrypted, mynumber);
-                    LogindisplayDialog("Client registered successfully, kindly confirm that you have received the client registration successful SMS before booking an appointment");
+                    //sm.sendMessageApi("Reg*" + encrypted, mynumber);
+                   // LogindisplayDialog("Client registered successfully, kindly confirm that you have received the client registration successful SMS before booking an appointment");
 
 
                 }
@@ -3053,8 +3096,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                         countiess.add(newCounty);
                         countiesList.add(newCounty.getName());
                     }
-                    countiess.add(new counties(0, "Select county of residence*", 0));
-                    countiesList.add("Select county of residence*");
+                    countiess.add(new counties(0, " ", 0));
+                    countiesList.add(" ");
 
 
 
@@ -3201,8 +3244,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                         scountyList.add(newServiceUnit.getName());
                     }
 
-                    scountiess.add(new scounties(0, "Select sub-county of residence*"));
-                    scountyList.add("Select sub-county of residence*");
+                    scountiess.add(new scounties(0, ""));
+                    scountyList.add("");
 
                     ArrayAdapter<String> aa = new ArrayAdapter<String>(Registration.this,
                             android.R.layout.simple_spinner_dropdown_item,
@@ -3335,8 +3378,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                         wardsList.add(newServiceUnit.getName());
                     }
 
-                    wardss.add(new wards(0, "Select Ward of residence*", 0));
-                    wardsList.add("Select Ward of residence*");
+                    wardss.add(new wards(0, "", 0));
+                    wardsList.add("");
 
                     ArrayAdapter<String> aa = new ArrayAdapter<String>(Registration.this,
                             android.R.layout.simple_spinner_dropdown_item,
@@ -3474,8 +3517,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
 
 
-                        countiessb.add(new counties(0, "Select county of birth*", 0));
-                        countiesListb.add("Select county of birth*");
+                        countiessb.add(new counties(0, "", 0));
+                        countiesListb.add("");
 
 
 
@@ -3616,8 +3659,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                         countriesList.add(newCounty.getName());
 
                     }
-                        countries.add(new Country(0, "Select country of birth*", " Select country of birth*"));
-                        countriesList.add("Select country of birth*");
+                        countries.add(new Country(0, "", ""));
+                        countriesList.add("");
 
 
 

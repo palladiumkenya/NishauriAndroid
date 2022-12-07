@@ -217,7 +217,7 @@ public class ClinicMovement extends AppCompatActivity implements AdapterView.OnI
 
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
-            Objects.requireNonNull(getSupportActionBar()).setTitle("Clinic movement");
+            Objects.requireNonNull(getSupportActionBar()).setTitle("Clinic Movement");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         catch(Exception e){
