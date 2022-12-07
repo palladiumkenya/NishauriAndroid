@@ -2826,8 +2826,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                                     } catch (JSONException e) {
                                                         e.printStackTrace();
                                                     }
-                                                    //dialogs.showErrorDialog(IDused, "Server response");
-                                                    dialogs.showErrorDialog(response, "Server response");
+                                                    dialogs.showErrorDialog(IDused, "Server response");
+                                                    //dialogs.showErrorDialog(response, "Server response");
                                                 }else{
                                                     dialogs.showSuccessDialog("Clients UPI number is" + " " + jsonObject1, "Name:" + " " + jsonObject2 + " " + jsonObject3);
                                                     UPI_number.setText(jsonObject1);
