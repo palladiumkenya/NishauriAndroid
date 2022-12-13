@@ -27,7 +27,7 @@
             android:name=".oijhg"
             android:exported="false" />
         <activity
-            android:name=".config.seli"
+            android:name=".appointment_diary.AppCal"
             android:exported="false" />
         <activity
             android:name=".loginmodule.Avc"

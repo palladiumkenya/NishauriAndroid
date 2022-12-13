@@ -93,7 +93,7 @@ public class AppCal extends AppCompatActivity {
 
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setTitle("Appointments calender");
+        actionBar.setTitle("Appointments Calender");
 
         listView=findViewById(R.id.calenderlist);
 
@@ -207,6 +207,7 @@ public class AppCal extends AppCompatActivity {
         JsonArrayRequest jsonArrayRequest =new JsonArrayRequest(Request.Method.GET, urls , null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
+            //  Toast.makeText(AppCal.this, "success"+phone, Toast.LENGTH_SHORT).show();
                 if (response.length() == 0) {
                     calist.clear();
                     calAdapter.notifyDataSetChanged();
@@ -277,8 +278,8 @@ public class AppCal extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
 
-               /* params.put("telephone", "0705255873");
-                params.put("start", "2022-10-26");*/
+                /*params.put("telephone", "0746537136");
+                params.put("start", "2022-10-12");*/
 
 
                 return params;

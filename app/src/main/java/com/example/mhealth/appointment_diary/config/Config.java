@@ -49,6 +49,9 @@ public class Config extends AppCompatActivity {
     public static final String S_COUNTIES ="/locator/scounties?county=";
     public static final String WARDS="/locator/wards?scounty=";
     public static final String COUNTRIES="/locator/countries";
+    //https://ushauriapi.kenyahmis.org
+    //
+    public static final String CALIST="/appnt/applist";
 
     //https://ushauriapi.kenyahmis.org/mohupi/verify
 

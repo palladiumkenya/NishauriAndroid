@@ -91,7 +91,7 @@ public class TodaysAppointment extends AppCompatActivity {
     Progress progress;
 
     Button btnRegister, btnReport, bookedappointments, broadcast, transfer, consent,transitCl,moveClinic, todayapp;
-    CardView card_register, card_book, card_consent, card_dsd, card_transfer, card_transit, card_clinic, card_today;
+    CardView card_register, card_book, card_consent, card_dsd, card_transfer, card_transit, card_clinic, card_today, card_calender;
     Button missed,honored;
     String passedUname,passedPassword;
 
@@ -116,6 +116,7 @@ public class TodaysAppointment extends AppCompatActivity {
         card_transit= (CardView) findViewById(R.id.card_transi);
         card_clinic= (CardView)  findViewById(R.id.card_clin);
         card_today= (CardView) findViewById(R.id.card_todey);
+        card_calender= (CardView) findViewById(R.id.card_calender);
 
         card_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +134,14 @@ public class TodaysAppointment extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TransitClient.class);
+                startActivity(intent);
+
+            }
+        });
+        card_calender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AppCal.class);
                 startActivity(intent);
 
             }
