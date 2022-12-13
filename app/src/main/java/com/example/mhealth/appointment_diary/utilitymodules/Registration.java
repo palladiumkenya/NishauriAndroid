@@ -25,6 +25,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -113,6 +114,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     ArrayList<String> countriesList;
     ArrayList<Country> countries;
 
+    TextView textViewCondition;
+
     private String origin_country = "";
     private int countryID = 0;
 
@@ -172,7 +175,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     // Enable weekly motivation alerts
     String[] msgtime = {"", "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "22:00", "23:00"};
     //Please select preffered messaging time
-    String[] pntstatus = {"", "New client", "Update client", "Transfer Client In (Transfer in of a client from a facility without ushauri system)"};
+    String[] pntstatus = {"", "New client", "Update client", "Transfer Client In (Transfer in of a client from a facility without ushauri system)", "Pregnant and Breastfeeding Mothers"};
     //Enable Sms
     String[] statuss = {"", "Active", "Disabled", "Deceased", "Transfer Out"};
     //Please Select Status*
@@ -243,7 +246,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         populateGender();
         populateLanguage();
 
-        populateNewGrouping();
+       populateNewGrouping();
         populateSms();
 //        populateStatus();
         populateweekly();
@@ -484,6 +487,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             wklymotivation = (Spinner) findViewById(R.id.weekly_spinner);
             messageTime = (Spinner) findViewById(R.id.time_spinner);
             patientStatus = (Spinner) findViewById(R.id.Patientstatus_spinner);
+
+            textViewCondition = findViewById(R.id.textView12);
 //           GroupingS=(Spinner) findViewById(R.id.grouping_spinner);
 
 
@@ -795,16 +800,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                     String firstname = jsonObject1.getString("firstName");
                                     String lastname = jsonObject1.getString("lastName");
 
-                                   // UPI_number.setText(UPI_number1);
-                                    //UPI_number.setEnabled(false);
-
-                                    //dialogs.showSuccessDialog("Clients UPI number is" + " " + UPI_number1, "Name:" + " " + firstname + " " + lastname);
-
-                                    //Toast.makeText(Registration.this, "Clients UPI number is"+ " " +UPI_number1 +" "+ "Name:"+ " "+ firstname+ " "+ lastname, Toast.LENGTH_SHORT).show();
-
-                                    //Log.d("", UPI_number1);
-
-
                                     AlertDialog.Builder builder1 = new AlertDialog.Builder(Registration.this);
                                     builder1.setIcon(getResources().getDrawable(R.drawable.moh1));
                                     builder1.setTitle("Client UPI Number Is" + " " + UPI_number1);
@@ -816,12 +811,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                             new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
                                                     UPI_number.setText(UPI_number1);
-
-                                                    /*Intent intent = new Intent(Registration.this, LoginActivity.class);
-                                                    startActivity(intent);
-                                                    finish();*/
-
-                                                    //dialog.cancel();
                                                 }
                                             });
 
@@ -832,9 +821,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                         UPI_number.setText("");
 
-                       /* Intent intent = new Intent(Config.this, SelectUrls.class);
-                        startActivity(intent);
-                        dialog.cancel();*/
                     }
                 });
 
@@ -942,16 +928,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                     String UPI_number1 = jsonObject1.getString("clientNumber");
                                     String firstname = jsonObject1.getString("firstName");
                                     String lastname = jsonObject1.getString("lastName");
-
-                                    //UPI_number.setText(UPI_number1);
-                                    // UPI_number.setEnabled(false);
-                                   // dialogs.showSuccessDialog("Clients UPI number is" + " " + UPI_number1, "Name:" + " " + firstname + " " + lastname);
-                                    //Toast.makeText(Registration.this, "Clients UPI number is"+ " " +UPI_number1 +" "+ "Name"+ " "+ firstname+ " "+ lastname, Toast.LENGTH_SHORT).show();
                                     Log.d("", UPI_number1);
-
-
-
-
 
                                     AlertDialog.Builder builder1 = new AlertDialog.Builder(Registration.this);
                                     builder1.setIcon(getResources().getDrawable(R.drawable.moh1));
@@ -966,11 +943,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                                 public void onClick(DialogInterface dialog, int id) {
                                                     UPI_number.setText(UPI_number1);
 
-                                                    /*Intent intent = new Intent(Registration.this, LoginActivity.class);
-                                                    startActivity(intent);
-                                                    finish();*/
-
-                                                    //dialog.cancel();
                                                 }
                                             });
 
@@ -981,38 +953,12 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                                                     UPI_number.setText("");
 
-                       /* Intent intent = new Intent(Config.this, SelectUrls.class);
-                        startActivity(intent);
-                        dialog.cancel();*/
                                                 }
                                             });
 
                                     AlertDialog alert11 = builder1.create();
                                     alert11.show();
 
-
-
-
-                                    //AlertDialog
-                                   /* AlertDialog.Builder builder1 = new AlertDialog.Builder(Registration.this);
-                                    builder1.setIcon(android.R.drawable.ic_dialog_alert);
-                                    builder1.setTitle("Clients UPI number is" + " " + UPI_number1);
-                                    builder1.setMessage("Name" + " " + firstname + " " + lastname);
-                                    builder1.setCancelable(false);
-
-                                    builder1.setPositiveButton(
-                                            "OK",
-                                            new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int id) {
-
-                                                    UPI_number.setText(UPI_number1);
-
-                                                    //dialog.cancel();
-                                                }
-                                            });*/
-
-
-                                    //AlertDialog
 
                                 } else {
                                     dialogs.showErrorDialog("Client has no UPI number", "Please request UPI number for the client");
@@ -1024,9 +970,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
-
-                            // Toast.makeText(Registration.this, idnoE.getText().toString(), Toast.LENGTH_SHORT).show();
 
                         }
                     }, new Response.ErrorListener() {
@@ -1168,13 +1111,70 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             if (patientStatus_code.contentEquals("1")) {
                 populateStatusNew();
                 cccE.setEnabled(false);
+                upnE.setEnabled(true);
                 populateMflCode();
 
+                cccE.setVisibility(View.VISIBLE);
+                upnE.setVisibility(View.VISIBLE);
+                art_dateE.setVisibility(View.VISIBLE);
+                enrollment_dateE.setVisibility(View.VISIBLE);
+                groupingL.setVisibility(View.VISIBLE);
+                conditionS.setVisibility(View.VISIBLE);
+                textViewCondition.setVisibility(View.VISIBLE);
 
-            } else {
+
+
+            } else if (patientStatus_code.contentEquals("2")){
                 cccE.setEnabled(true);
+                upnE.setEnabled(true);
                 cccE.setText("");
                 populateStatus();
+
+                cccE.setVisibility(View.VISIBLE);
+                upnE.setVisibility(View.VISIBLE);
+                art_dateE.setVisibility(View.VISIBLE);
+                enrollment_dateE.setVisibility(View.VISIBLE);
+                groupingL.setVisibility(View.VISIBLE);
+
+                conditionS.setVisibility(View.VISIBLE);
+                textViewCondition.setVisibility(View.VISIBLE);
+
+            }
+            else if (patientStatus_code.contentEquals("3")){
+                cccE.setEnabled(true);
+                cccE.setText("");
+                upnE.setEnabled(true);
+                populateStatus();
+
+                cccE.setVisibility(View.VISIBLE);
+                upnE.setVisibility(View.VISIBLE);
+                art_dateE.setVisibility(View.VISIBLE);
+                enrollment_dateE.setVisibility(View.VISIBLE);
+
+                groupingL.setVisibility(View.VISIBLE);
+                conditionS.setVisibility(View.VISIBLE);
+                textViewCondition.setVisibility(View.VISIBLE);
+
+            }
+            else if (patientStatus_code.contentEquals("4")){
+                // disable mfl and ccno
+                //disable ccc date and care date
+                // grouping default PMTCT
+
+                cccE.setEnabled(false);
+                upnE.setEnabled(false);
+
+                cccE.setVisibility(View.GONE);
+                upnE.setVisibility(View.GONE);
+
+                art_dateE.setVisibility(View.GONE);
+                enrollment_dateE.setVisibility(View.GONE);
+
+                cccE.setText("");
+                populateStatus();
+                groupingL.setVisibility(View.GONE);
+                conditionS.setVisibility(View.GONE);
+                textViewCondition.setVisibility(View.GONE);
 
             }
 
@@ -1538,43 +1538,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
         try {
 
-            /*if(countryID==0){
-
-
-            }else if (countyID==0){
-
-            }else if (scountyID==0){
-
-            }else if (wardID==0){
-
-            }else if (countyIDb==0){
-
-            }*/
-
-
-            //start set locator information variables
-
-//            locatorsubcountyS,locatorlocationS,locatorwardS,locatorvillageS
-
-           /* if (locatorcountyE.getText().toString().trim().isEmpty()) {
-
-                locatorcountyS = "-1";
-
-            } else {
-
-                locatorcountyS = locatorcountyE.getText().toString();
-
-            }
-
-            if (locatorsubcountyE.getText().toString().trim().isEmpty()) {
-
-                locatorsubcountyS = "-1";
-
-            } else {
-
-                locatorsubcountyS = locatorsubcountyE.getText().toString();
-
-            }*/
 
 
             if (locatorlocationE.getText().toString().trim().isEmpty()) {
@@ -1587,15 +1550,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
             }
 
-           /* if (locatorwardE.getText().toString().trim().isEmpty()) {
-
-                locatorwardS = "-1";
-
-            } else {
-
-                locatorwardS = locatorwardE.getText().toString();
-
-            }*/
 
             if (locatorvillageE.getText().toString().trim().isEmpty()) {
 
@@ -1716,10 +1670,31 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
             }
 
+            if (patientStatus_code.contentEquals("1") || patientStatus_code.contentEquals("2") || patientStatus_code.contentEquals("3")) {
+                upnE.setEnabled(true);
+                conditionS.setVisibility(View.VISIBLE);
+               // groupingL.setVisibility(View.VISIBLE);
+               // populateNewGrouping();
+
+                if (cccS.trim().isEmpty() || upnS.trim().isEmpty()) {
+
+                     Toast.makeText(this, "MFL Code and CCC No is required", Toast.LENGTH_SHORT).show();
+                }
+                }
+
+
+            if (patientStatus_code.contentEquals("4")){
+                //groupingL.setVisibility(View.GONE);
+
+
+            }
 
 
 
-            else if (cccS.trim().isEmpty()) {
+
+
+
+           /* else if (cccS.trim().isEmpty()) {
 
                 cccE.setError("mfl code is required");
 
@@ -1727,7 +1702,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                 upnE.setError("CCC No. required");
 
-            }
+            }*/
 //           else if(fileserialS.trim().isEmpty() && !patientStatus_code.contentEquals("2")){
 //
 //                fileserialE.setError("file serial number is required");
@@ -1745,13 +1720,40 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 //            else if(idnoL.isShown() && idnoE.getText().toString().trim().isEmpty()){
 //                idnoE.setError("ID Number is required");
 //           }
-            else if (enrollmentS.trim().isEmpty() && !patientStatus_code.contentEquals("2")) {
+
+            if (patientStatus_code.contentEquals("1") || patientStatus_code.contentEquals("3")) {
+                if (enrollmentS.trim().isEmpty()) {
+                    enrollment_dateE.setError("Enrollment date required");
+                }
+            }
+
+
+           /* else if (enrollmentS.trim().isEmpty() && !patientStatus_code.contentEquals("2")) {
                 enrollment_dateE.setError("Enrollment date required");
-            } else if (art_dateE.isShown() && art_dateS.trim().isEmpty() && !patientStatus_code.contentEquals("2")) {
+            }*/
+
+            if (patientStatus_code.contentEquals("1") || patientStatus_code.contentEquals("3")) {
+                if (art_dateE.isShown() && art_dateS.trim().isEmpty()) {
+                    art_dateE.setError("ART date required");
+                }
+            }
+
+           /* else if (art_dateE.isShown() && art_dateS.trim().isEmpty() && !patientStatus_code.contentEquals("2")) {
                 art_dateE.setError("ART date required");
-            } else if (phoneS.trim().isEmpty() && !patientStatus_code.contentEquals("2")) {
+            } */
+
+            if (patientStatus_code.contentEquals("1") || patientStatus_code.contentEquals("3")) {
+                if (phoneS.trim().isEmpty()) {
+                    phoneE.setError("Phone required");
+                }
+            }
+
+            /*else if (phoneS.trim().isEmpty() && !patientStatus_code.contentEquals("2")) {
                 phoneE.setError("Phone required");
-            } else if ((!dobS.trim().isEmpty()) && dobYearv > cyear) {
+            } */
+
+
+            else if ((!dobS.trim().isEmpty()) && dobYearv > cyear) {
 
                 dobE.setError("Date of Birth should be less than today");
                 Toast.makeText(this, "Date of Birth should be less than today", Toast.LENGTH_SHORT).show();
@@ -1853,12 +1855,23 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 Toast.makeText(this, "Please Select Marital Status", Toast.LENGTH_SHORT).show();
 
 
-            } else if (condition_code.contentEquals("0") && !patientStatus_code.contentEquals("2")) {
+            }
+
+
+          else if (patientStatus_code.contentEquals("1") || patientStatus_code.contentEquals("3")) {
+                if (condition_code.contentEquals("0")) {
+
+                    Toast.makeText(this, "Please Select Condition", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+
+
+
+            /*else if (condition_code.contentEquals("0") && !patientStatus_code.contentEquals("2")) {
 
                 Toast.makeText(this, "Please Select Condition", Toast.LENGTH_SHORT).show();
-
-
-            }
+            }*/
 //            else if(grouping_code.contentEquals("0")){
 //                Toast.makeText(this, "Please Select Grouping", Toast.LENGTH_SHORT).show();
 //
@@ -2830,15 +2843,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                                     jsonObject2 = jsonObject.getString("firstName");
                                                     jsonObject3 = jsonObject.getString("lastName");
 
-
-                                                    // Dialog
-
-                                                    //end dialog
-
-
-                                                    ////dialogs.showSuccessDialog("Clients UPI number is"+ " " +jsonObject1, "Name:" + " "+ jsonObject2 + " "+ jsonObject3);
-                                                    //Toast.makeText(Registration.this, "Clients UPI number is"+ " " +jsonObject1, Toast.LENGTH_LONG).show();
-                                                    //UPI_number.setText(jsonObject1);
                                                 }
                                             } catch (JSONException e) {
                                                // Toast.makeText(Registration.this, "catch", Toast.LENGTH_SHORT).show();
@@ -2877,15 +2881,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                                 }
 
 
-                                                //UPI_number.setText(jsonObject1);
-                                                //dialogs.showSuccessDialog("Clients UPI number is" + " " + jsonObject1, "Name:" + " " + jsonObject2 + " " + jsonObject3);
-                                                //dialogs.showSuccessDialog("Server response", response);
-                                               // if (response.)
-                                                //dialogs.showErrorDialog("NOTE:", IDused);
-
-                                                //dialogs.showSuccessDialog(response,"Server Response");
-
-
                                             } else {
 
                                                 dialogs.showErrorDialog("UPI not given", "Server response");
@@ -2899,9 +2894,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                         public void onErrorResponse(VolleyError error) {
 
                                             dialogs.showErrorDialog( error.getMessage(), "Server response");
-
-                                           // Toast.makeText(Registration.this, "error", Toast.LENGTH_SHORT).show();
-                                            //pr.dissmissProgress();
 
                                             try {
 
