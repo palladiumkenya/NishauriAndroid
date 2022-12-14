@@ -56,6 +56,9 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.final_outcome)
     CardView final_outcome;
 
+    @BindView(R.id.pregnant_mothers)
+    CardView pregnant_mothers;
+
 
 
 
@@ -83,6 +86,14 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 //Navigation.findNavController(v).navigate(R.id.nav_exposures);
                 NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.unscheduled_hei_apt);
+
+            }
+        });
+
+        pregnant_mothers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.pregnantBreastfeeding);
 
             }
         });

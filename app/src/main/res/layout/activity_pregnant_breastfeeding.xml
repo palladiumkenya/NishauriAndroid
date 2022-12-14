@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".pmtct.PregnantBreastfeeding">
+
+    <!--<com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
+
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:titleTextColor="#FFFFFF"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>-->
+
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:padding="12dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="@dimen/spacing_xlarge"
+                android:background="@drawable/mybutton"
+                android:padding="10dp"
+                android:text="Client Registration"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:id="@+id/consent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:background="@drawable/mybutton"
+                android:padding="10dp"
+                android:text="Consent Client"
+                android:textColor="#ffffff" />
+
+
+            <Button
+                android:id="@+id/bookedappointments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:background="@drawable/mybutton"
+                android:padding="10dp"
+                android:text="Book Appointment"
+                android:textColor="#ffffff" />
+
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fitsSystemWindows="true"
+        android:scrollbars="none"
+        android:scrollingCache="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_large" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_large"
+                    android:layout_marginRight="@dimen/spacing_large"
+                    android:background="@android:color/white"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/spacing_large"
+                        android:paddingTop="@dimen/spacing_large">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/spacing_smlarge"
+                            android:layout_marginRight="@dimen/spacing_smlarge"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_medium"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="@dimen/spacing_large"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:background="@color/grey_5" />
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/spacing_mlarge"
+                            android:layout_marginRight="@dimen/spacing_mlarge"
+                            android:orientation="vertical">
+                            <!-- try this  -->
+
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/hiv"
+                                    android:layout_margin="@dimen/spacing_medium"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="2dp"
+                                    app:cardElevation="2dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="80dp"
+                                            android:paddingTop="@dimen/spacing_large"
+                                            android:scaleType="centerInside"
+                                            app:srcCompat="@drawable/hiv_outcome" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:padding="@dimen/spacing_large">
+
+                                            <LinearLayout
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:orientation="vertical">
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:maxLines="1"
+                                                    android:singleLine="true"
+                                                    android:text="HIV Outcome"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"
+
+                                                    android:textColor="@color/grey_90"
+                                                    />
+
+
+
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+                                <!--calender -->
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/card_pregnant"
+                                    android:layout_margin="@dimen/spacing_medium"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="2dp"
+                                    app:cardElevation="2dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="80dp"
+                                            android:paddingTop="@dimen/spacing_large"
+                                            app:srcCompat="@drawable/preg_outcome"
+                                            android:scaleType="centerInside" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:orientation="horizontal"
+                                            android:padding="@dimen/spacing_large">
+
+                                            <LinearLayout
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:orientation="vertical">
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:maxLines="1"
+                                                    android:singleLine="true"
+                                                    android:text="Pregnant Mother's Outcome"
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"
+
+                                                    android:textColor="@color/grey_90" />
+
+
+
+
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+                            <!-- Client registration -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/card_exit"
+                                    android:layout_margin="@dimen/spacing_medium"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="2dp"
+                                    app:cardElevation="2dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="80dp"
+                                            android:paddingTop="@dimen/spacing_large"
+                                            app:srcCompat="@drawable/exit"
+                                            android:scaleType="centerInside" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:orientation="horizontal"
+                                            android:padding="@dimen/spacing_large">
+
+                                            <LinearLayout
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:orientation="vertical">
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:maxLines="1"
+                                                    android:gravity="center_horizontal"
+                                                    android:singleLine="true"
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"
+                                                    android:text="Exit Client"
+                                                    android:textColor="@color/grey_90" />
+
+
+
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="@dimen/spacing_large"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:background="@color/grey_5" />
+
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_large" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

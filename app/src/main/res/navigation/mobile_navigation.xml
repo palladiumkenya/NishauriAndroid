@@ -42,6 +42,11 @@
         android:id="@+id/hei_final_outcome"
         android:name="com.example.mhealth.appointment_diary.pmtct.HeiFinalOutcomeFragment"
         android:label="HEI final outcome" />
+    <activity
+        android:id="@+id/pregnantBreastfeeding"
+        android:name="com.example.mhealth.appointment_diary.pmtct.PregnantBreastfeeding"
+        android:label="activity_pregnant_breastfeeding"
+        tools:layout="@layout/activity_pregnant_breastfeeding" />
 
 
 </navigation>
