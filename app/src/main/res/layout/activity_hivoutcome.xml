@@ -152,7 +152,7 @@
                         android:text="Client is" />
 
                     <Spinner
-                        android:id="@+id/hei_gender_spinner"
+                        android:id="@+id/ClientSpinner"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
