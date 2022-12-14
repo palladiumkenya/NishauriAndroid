@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     >
 
 
@@ -10,69 +11,174 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="18">
+        android:weightSum="3">
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.40"
+            android:gravity="left"
+            android:padding="5dp"
+            android:text="CCC number"
+            android:textSize="13sp"
+            />
 
 
         <TextView
             android:id="@+id/ccnumber"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="1"
             android:gravity="left"
             android:padding="1dp"
-            android:text="CCC number"
+            android:text="CCC Number"
           />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:padding="5dp"
+            android:text="Name"
+            android:layout_weight="1.39"
+
+            />
+
         <TextView
             android:id="@+id/appname"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="1"
             android:gravity="left"
             android:padding="1dp"
             android:text="Name"
              />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:layout_weight="1.39"
+            android:gravity="left"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Appointment Type"
+            />
+
 
         <TextView
             android:id="@+id/apptype"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="1"
             android:gravity="left"
             android:padding="1dp"
             android:text="Appointment type"
+            android:textSize="13sp"
             />
+    </LinearLayout>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.38"
+            android:gravity="left"
+            android:padding="5dp"
+            android:text="Phone"
+            android:textSize="13sp"
+            />
 
 
         <TextView
             android:id="@+id/phone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="1"
             android:gravity="left"
-            android:padding="1dp"
+            android:padding="5dp"
             android:text="Phone"
+            android:textSize="13sp"
              />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.39"
+            android:gravity="left"
+            android:padding="5dp"
+            android:text="Date"
+            />
+
         <TextView
             android:id="@+id/date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="1"
             android:gravity="left"
-            android:padding="1dp"
+            android:padding="5dp"
             android:text="Date"
+            android:textSize="13sp"
             />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+        <TextView
+
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.40"
+            android:gravity="left"
+            android:padding="5dp"
+            android:text="File Number"
+            />
 
 
         <TextView
             android:id="@+id/file_no"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="1"
             android:gravity="left"
             android:padding="1dp"
             android:text="Files"
+            android:textSize="13sp"
              />
 
 
