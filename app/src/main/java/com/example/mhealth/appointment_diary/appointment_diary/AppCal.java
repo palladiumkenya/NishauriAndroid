@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
@@ -202,12 +203,15 @@ public class AppCal extends AppCompatActivity {
         } catch(Exception e){
 
         }
-        String urls ="https://ushauriapi.kenyahmis.org/appnt/applist?telephone=0746537136 &start="+dates;
-        //String urls ="https://ushauriapi.kenyahmis.org/appnt/applist?=+dates;
-        JsonArrayRequest jsonArrayRequest =new JsonArrayRequest(Request.Method.GET, urls , null, new Response.Listener<JSONArray>() {
+
+       // String urls ="https://ushauriapi.kenyahmis.org/appnt/applist?telephone=0746537136 &start="+dates;
+        String urls ="?telephone="+phone;
+        String tt ="&start="+dates;
+        JsonArrayRequest jsonArrayRequest =new JsonArrayRequest(Request.Method.GET,  z+Config.CALENDER_LIST+urls+tt, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-            //  Toast.makeText(AppCal.this, "success"+phone, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(AppCal.this, "success"+response, Toast.LENGTH_SHORT).show();
+
                 if (response.length() == 0) {
                     calist.clear();
                     calAdapter.notifyDataSetChanged();
@@ -216,11 +220,6 @@ public class AppCal extends AppCompatActivity {
 
                 } else {
 
-
-
-                // Toast.makeText(AppCal.this, "success"+response, Toast.LENGTH_SHORT).show();
-
-                //dialogs.showSuccessDialog("success", response.toString());
 
                 Log.d("resposee", response.toString());
                 for (int x = 0; x < response.length(); x++) {
@@ -264,7 +263,7 @@ public class AppCal extends AppCompatActivity {
             }
         }){
 
-            @Override
+            /*@Override
             protected Response<JSONArray> parseNetworkResponse(NetworkResponse response) {
                // mStatusCode[0] = response.statusCode;
                 return super.parseNetworkResponse(response);
@@ -273,22 +272,23 @@ public class AppCal extends AppCompatActivity {
             @Override
             protected VolleyError parseNetworkError(VolleyError volleyError) {
                 return super.parseNetworkError(volleyError);
-            }
+            }*/
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
 
+
                 /*params.put("telephone", "0746537136");
-                params.put("start", "2022-10-12");*/
+                params.put("start", dates);*/
 
 
                 return params;
             }
         };
-        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+        /*jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
                 800000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));*/
         RequestQueue requestQueue = Volley.newRequestQueue(AppCal.this);
         requestQueue.add(jsonArrayRequest);
     }
