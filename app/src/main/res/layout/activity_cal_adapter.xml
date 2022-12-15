@@ -20,7 +20,7 @@
             android:layout_weight="1.40"
             android:gravity="left"
             android:padding="5dp"
-            android:text="CCC number"
+            android:text="CCC Number"
             android:textSize="13sp"
             />
 
@@ -130,6 +130,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+
         android:weightSum="3">
         <TextView
             android:textStyle="bold"
@@ -138,17 +139,16 @@
             android:layout_weight="1.39"
             android:gravity="left"
             android:padding="5dp"
-            android:text="Date"
+            android:text="Notification"
             />
 
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/notification"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="left"
             android:padding="5dp"
-            android:text="Date"
             android:textSize="13sp"
             />
     </LinearLayout>
@@ -166,18 +166,18 @@
             android:layout_weight="1.40"
             android:gravity="left"
             android:padding="5dp"
-            android:text="File Number"
+            android:text="Appointment Status"
             />
 
 
         <TextView
-            android:id="@+id/file_no"
+            android:id="@+id/status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="left"
             android:padding="1dp"
-            android:text="Files"
+
             android:textSize="13sp"
              />
 

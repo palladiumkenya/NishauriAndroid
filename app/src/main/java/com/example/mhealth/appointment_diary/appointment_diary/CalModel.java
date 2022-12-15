@@ -2,18 +2,20 @@ package com.example.mhealth.appointment_diary.appointment_diary;
 
 public class CalModel {
 
-    String clinic_no,client_name,client_phone_no,appointment_type,appntmnt_date,file_no;
+    String clinic_no,client_name,client_phone_no,appointment_type,appntmnt_date,file_no,appointment_status,notification;
 
     public CalModel() {
     }
 
-    public CalModel(String clinic_no, String client_name, String client_phone_no, String appointment_type, String appntmnt_date, String file_no) {
+    public CalModel(String clinic_no, String client_name, String client_phone_no, String appointment_type, String appntmnt_date, String file_no, String appointment_status, String notification) {
         this.clinic_no = clinic_no;
         this.client_name = client_name;
         this.client_phone_no = client_phone_no;
         this.appointment_type = appointment_type;
         this.appntmnt_date = appntmnt_date;
         this.file_no = file_no;
+        this.appointment_status = appointment_status;
+        this.notification=notification;
     }
 
     public String getClinic_no() {
@@ -62,5 +64,21 @@ public class CalModel {
 
     public void setFile_no(String file_no) {
         this.file_no = file_no;
+    }
+
+    public String getAppointment_status() {
+        return appointment_status;
+    }
+
+    public void setAppointment_status(String appointment_status) {
+        this.appointment_status = appointment_status;
+    }
+
+    public String getNotification() {
+        return notification;
+    }
+
+    public void setNotification(String notification) {
+        this.notification = notification;
     }
 }

@@ -108,8 +108,8 @@ public class AppCal extends AppCompatActivity {
         //Set an event for Teachers' Professional Day 2016 which is 21st of October
         ///card = (CardView) findViewById(R.id.card);
         text = (TextView) findViewById(R.id.text);
-        Event ev1 = new Event(Color.RED, 1669749065000L, "Teachers' Professional Day");
-        compactCalendar.addEvent(ev1, true);
+       /* Event ev1 = new Event(Color.RED, 1669749065000L, "Teachers' Professional Day");
+        compactCalendar.addEvent(ev1, true);*/
 
         Date date = null;
         try {
@@ -122,8 +122,8 @@ public class AppCal extends AppCompatActivity {
         cal.setTime(date);
         millis = cal.getTimeInMillis();
 
-        Event ev2 = new Event(Color.RED, millis, "ttttttTeachers' Professional Day");
-        compactCalendar.addEvent(ev2, true);
+        /*Event ev2 = new Event(Color.RED, millis, "ttttttTeachers' Professional Day");
+        compactCalendar.addEvent(ev2, true);*/
 
 
         Log.e("zzzzzzzzzzz", "" + millis);
@@ -236,11 +236,13 @@ public class AppCal extends AppCompatActivity {
                         String appointment_type = jsonObject.getString("appointment_type");
                         String appntmnt_date = jsonObject.getString("appntmnt_date");
                         String file = jsonObject.getString("file_no");
+                        String appointment_status = jsonObject.getString("appointment_status");
+                        String notification = jsonObject.getString("notification");
 
                         //Toast.makeText(AppCal.this, "success", Toast.LENGTH_SHORT).show();
 
 
-                        CalModel appCal = new CalModel(clinic_no, ccname, client_phone_no, appointment_type, appntmnt_date, file);
+                        CalModel appCal = new CalModel(clinic_no, ccname, client_phone_no, appointment_type, appntmnt_date, file,appointment_status, notification);
                         calist.add(appCal);
 
                         listView.setAdapter(calAdapter);
@@ -258,7 +260,7 @@ public class AppCal extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(AppCal.this, "errror", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AppCal.this, "Server Connection Error", Toast.LENGTH_SHORT).show();
 
             }
         }){

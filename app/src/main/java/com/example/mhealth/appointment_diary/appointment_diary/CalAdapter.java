@@ -58,8 +58,8 @@ public class CalAdapter extends BaseAdapter implements Filterable {
             TextView appnameT = (TextView) v.findViewById(R.id.appname);
             TextView phoneT = (TextView) v.findViewById(R.id.phone);
             TextView apptypeT = (TextView) v.findViewById(R.id.apptype);
-            TextView dateT = (TextView) v.findViewById(R.id.date);
-            TextView fileT = (TextView) v.findViewById(R.id.file_no);
+            TextView notificationT = (TextView) v.findViewById(R.id.notification);
+            TextView statusT = (TextView) v.findViewById(R.id.status);
 
 
 
@@ -68,9 +68,9 @@ public class CalAdapter extends BaseAdapter implements Filterable {
             final String appnameS = mylist.get(position).getClient_name();
             final String phoneS = mylist.get(position).getClient_phone_no();
             final String apptypeS = mylist.get(position).getAppointment_type();
-            final String dateS = mylist.get(position).getAppntmnt_date();
+            final String notificationS = mylist.get(position).getNotification();
            // final String appidS = mylist.get(position).getPatientID();
-            final String fileS = mylist.get(position).getFile_no();
+            final String statusS = mylist.get(position).getAppointment_status();
 
 
 
@@ -78,9 +78,9 @@ public class CalAdapter extends BaseAdapter implements Filterable {
             appnameT.setText(appnameS);
             phoneT.setText(phoneS);
             apptypeT.setText(apptypeS);
-            dateT.setText(dateS);
+            notificationT.setText(notificationS);
 //            patientID.setText(appidS);
-            fileT.setText(fileS);
+            statusT.setText(statusS);
 
 
 
@@ -118,7 +118,7 @@ public class CalAdapter extends BaseAdapter implements Filterable {
                 for (int i = 0; i < filterList.size(); i++) {
 
                     if (filterList.get(i).getClient_name().toUpperCase().contains(constraint) || filterList.get(i).getAppointment_type().toUpperCase().contains(constraint) || filterList.get(i).getClinic_no().toUpperCase().contains(constraint)) {
-                       CalModel am = new CalModel(filterList.get(i).getClinic_no(), filterList.get(i).getClient_name(), filterList.get(i).getClient_phone_no(), filterList.get(i).getAppointment_type(), filterList.get(i).getAppntmnt_date(),  filterList.get(i).getFile_no());
+                       CalModel am = new CalModel(filterList.get(i).getClinic_no(), filterList.get(i).getClient_name(), filterList.get(i).getClient_phone_no(), filterList.get(i).getAppointment_type(), filterList.get(i).getAppntmnt_date(),  filterList.get(i).getFile_no(), filterList.get(i).getAppointment_status(), filterList.get(i).getNotification());
                         filters.add(am);
                     }
                 }
