@@ -111,11 +111,10 @@
 
     <TextView
         android:id="@+id/datelist"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/colorPrimary"
-        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+
         android:layout_below="@+id/collapse_view"
         android:visibility="gone"
         android:textSize="20dp" />

@@ -12,7 +12,7 @@ import com.example.mhealth.appointment_diary.R;
 
 public class ANCVisit extends AppCompatActivity {
     String[] clientIs = {"","Pregnant", "Pregnant and Breastfeeding"};
-    String[] hivResults = {"", "DTG", "NVP"};
+    String[] hivResults = {"", "TDF+3TC+EFV", "TDF+3TC+DTG", "TDF+3TC+DTG", "AZT+3TC+NVP", " AZT+3TC+EFV", "ABC+3TC+NVP", "ABC+3TC+EFV", " ABC+3TC+DTG", "ABC+3TC+LPV/r", " AZT+3TC+LPV/r+ RTV", "ART5TDF+3TC +ATV/r","ABC+3TC+DTG", "ABC+3TC+DTG", "ABC+3TC+ATV/r", "AZT+3TC+ATV/r", "AZT+3TC+DRV/r"};
     Spinner clientIsS, hivResultsS;
     private String CLIENT_IS = "";
     private String HIV_RESULTS = "";

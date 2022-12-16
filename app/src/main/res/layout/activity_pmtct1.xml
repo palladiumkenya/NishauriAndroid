@@ -279,7 +279,70 @@
 
                                     </LinearLayout>
                                 </androidx.cardview.widget.CardView>
-                                <!--calender -->
+                                <!--Labor and Delivery -->
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/card_delivery"
+                                    android:layout_margin="@dimen/spacing_medium"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="2dp"
+                                    app:cardElevation="2dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="80dp"
+                                            android:paddingTop="@dimen/spacing_large"
+                                            app:srcCompat="@drawable/preg_outcome"
+                                            android:scaleType="centerInside" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:orientation="horizontal"
+                                            android:padding="@dimen/spacing_large">
+
+                                            <LinearLayout
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:orientation="vertical">
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:maxLines="1"
+
+                                                    android:singleLine="true"
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"
+                                                    android:text="Labor and Delivery"
+                                                    android:textColor="@color/grey_90" />
+
+
+
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+                            <!-- PMC -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
                                 <androidx.cardview.widget.CardView
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
@@ -336,68 +399,7 @@
                                     </LinearLayout>
                                 </androidx.cardview.widget.CardView>
 
-                            </LinearLayout>
 
-                            <!-- Client registration -->
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:id="@+id/card_delivery"
-                                    android:layout_margin="@dimen/spacing_medium"
-                                    android:layout_weight="1"
-                                    app:cardCornerRadius="2dp"
-                                    app:cardElevation="2dp">
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <ImageView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="80dp"
-                                            android:paddingTop="@dimen/spacing_large"
-                                            app:srcCompat="@drawable/preg_outcome"
-                                            android:scaleType="centerInside" />
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:gravity="center"
-                                            android:orientation="horizontal"
-                                            android:padding="@dimen/spacing_large">
-
-                                            <LinearLayout
-                                                android:layout_width="0dp"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1"
-                                                android:orientation="vertical">
-
-                                                <TextView
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:maxLines="1"
-
-                                                    android:singleLine="true"
-                                                    android:autoSizeTextType="uniform"
-                                                    android:autoSizeMinTextSize="8sp"
-                                                    android:autoSizeMaxTextSize="11sp"
-                                                    android:text="Labor and Delivery"
-                                                    android:textColor="@color/grey_90" />
-
-
-
-                                            </LinearLayout>
-
-                                        </LinearLayout>
-
-                                    </LinearLayout>
-                                </androidx.cardview.widget.CardView>
                                 <!-- 4th -->
                                 <androidx.cardview.widget.CardView
                                     android:layout_width="0dp"
@@ -438,7 +440,7 @@
                                                     android:layout_height="wrap_content"
                                                     android:maxLines="1"
                                                     android:singleLine="true"
-                                                    android:text="HEI"
+                                                    android:text="HEI Visit"
                                                     android:autoSizeTextType="uniform"
                                                     android:autoSizeMinTextSize="8sp"
                                                     android:autoSizeMaxTextSize="11sp"

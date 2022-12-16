@@ -15,12 +15,13 @@ public class PNCVisit extends AppCompatActivity {
     String[] clientVisitType = {"", "Labor and Delivery", "ANC", "PNC"};
     String[] ModeDelivery = {"", "Spontaneous Vaginal Delivery (SVD)", "Cesarean Section (CS)", "Breech Delivery",  "Assisted Vaginal Delivery"};
     String[] placeDelivery = {"", "Home", "Facility", "Born before Arrival"};
-    String[] DeliveryOutcome = {"", "Penta", "PSV"};
+    String[] DeliveryOutcome = {"", "Penta", "Measles", "PCV"};
     String[] MothersOutcome = {"", "Alive", "Dead"};
     String[] MotherTested = {"", "Yes", "No"};
     String[] BabyDelivered = {"", "Live Birth", "Fresh Still Birth", "Macerated Still Birth"};
     String[] BabySex = {"", "Male", "Female"};
-    String[] Regimen= {"", "DTG", "NVP"};
+    String[] Regimen= {"", "TDF+3TC+EFV", "TDF+3TC+DTG", "TDF+3TC+DTG", "AZT+3TC+NVP", " AZT+3TC+EFV", "ABC+3TC+NVP", "ABC+3TC+EFV", " ABC+3TC+DTG", "ABC+3TC+LPV/r", " AZT+3TC+LPV/r+ RTV", "ART5TDF+3TC +ATV/r","ABC+3TC+DTG", "ABC+3TC+DTG", "ABC+3TC+ATV/r", "AZT+3TC+ATV/r", "AZT+3TC+DRV/r"};
+
 
     Spinner clientVisitTypeS,  ModeDeliveryS, placeDeliveryS, DeliveryOutcomeS, MothersOutcomeS, MotherTestedS, BabyDeliveredS,  BabySexS, RegimenS;
     private String CLIENT_VISIT_TYPE = "";
