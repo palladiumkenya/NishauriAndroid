@@ -66,7 +66,7 @@ public class ANCVisit extends AppCompatActivity {
 
         try{
             //getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+           // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("ANC Visit");
 
         }

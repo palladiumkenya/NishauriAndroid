@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".pmtct.PregnantBreastfeeding">
+    tools:context=".pmtct.PMTCT1">
 
     <!--<com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -298,7 +298,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="80dp"
                                             android:paddingTop="@dimen/spacing_large"
-                                            app:srcCompat="@drawable/preg_outcome"
+                                            app:srcCompat="@drawable/ic_caregiver"
                                             android:scaleType="centerInside" />
 
                                         <LinearLayout
@@ -347,7 +347,7 @@
                                 <androidx.cardview.widget.CardView
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:id="@+id/card_exit"
+                                    android:id="@+id/card_delivery"
                                     android:layout_margin="@dimen/spacing_medium"
                                     android:layout_weight="1"
                                     app:cardCornerRadius="2dp"
@@ -362,7 +362,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="80dp"
                                             android:paddingTop="@dimen/spacing_large"
-                                            app:srcCompat="@drawable/exit"
+                                            app:srcCompat="@drawable/preg_outcome"
                                             android:scaleType="centerInside" />
 
                                         <LinearLayout
@@ -417,7 +417,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="80dp"
                                             android:paddingTop="@dimen/spacing_large"
-                                            app:srcCompat="@drawable/preg_outcome"
+                                            app:srcCompat="@drawable/pregnant_b"
                                             android:scaleType="centerInside" />
 
                                         <LinearLayout

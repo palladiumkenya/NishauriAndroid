@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.mhealth.appointment_diary.pmtct.HomeFragment"
-        android:label="PMTCT" />
+        android:label="HEI" />
     <fragment
         android:id="@+id/book_mother_apt"
         android:name="com.example.mhealth.appointment_diary.pmtct.PmtctBookAptFragment"
@@ -44,9 +44,9 @@
         android:label="HEI final outcome" />
     <activity
         android:id="@+id/pregnantBreastfeeding"
-        android:name="com.example.mhealth.appointment_diary.pmtct.PregnantBreastfeeding"
+        android:name="com.example.mhealth.appointment_diary.pmtct.PMTCT1"
         android:label="activity_pregnant_breastfeeding"
-        tools:layout="@layout/activity_pregnant_breastfeeding" />
+        tools:layout="@layout/activity_pmtct1" />
 
 
 </navigation>

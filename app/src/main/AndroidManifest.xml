@@ -24,6 +24,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
         <activity
+            android:name=".pmtct.LaborAndDelivery"
+            android:exported="false" />
+        <activity
             android:name=".pmtct.ExitClient"
             android:exported="false" />
         <activity
@@ -33,7 +36,7 @@
             android:name=".pmtct.ANCVisit"
             android:exported="false" />
         <activity
-            android:name=".pmtct.PregnantBreastfeeding"
+            android:name=".pmtct.PMTCT1"
             android:exported="false" />
         <activity
             android:name=".oijhg"

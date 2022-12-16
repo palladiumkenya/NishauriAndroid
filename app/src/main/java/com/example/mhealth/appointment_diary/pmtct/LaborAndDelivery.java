@@ -10,12 +10,11 @@ import android.widget.Spinner;
 
 import com.example.mhealth.appointment_diary.R;
 
-public class PNCVisit extends AppCompatActivity {
-
+public class LaborAndDelivery extends AppCompatActivity {
     String[] clientVisitType = {"", "Labor and Delivery", "ANC", "PNC"};
     String[] ModeDelivery = {"", "Spontaneous Vaginal Delivery (SVD)", "Cesarean Section (CS)", "Breech Delivery",  "Assisted Vaginal Delivery"};
     String[] placeDelivery = {"", "Home", "Facility", "Born before Arrival"};
-    String[] DeliveryOutcome = {"", "Penta", "PSV"};
+    String[] DeliveryOutcome = {"", "Single", "Twins","Triplets"};
     String[] MothersOutcome = {"", "Alive", "Dead"};
     String[] MotherTested = {"", "Yes", "No"};
     String[] BabyDelivered = {"", "Live Birth", "Fresh Still Birth", "Macerated Still Birth"};
@@ -36,58 +35,36 @@ public class PNCVisit extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pncvisit);
-        //clientVisitTypeS =(Spinner) findViewById(R.id.clientVisitspinner);
+        setContentView(R.layout.activity_labor_and_delivery);
+
         ModeDeliveryS = (Spinner) findViewById(R.id.deliveryMode);
-        placeDeliveryS =(Spinner) findViewById(R.id.DeliveryPlace);
-        MothersOutcomeS =(Spinner) findViewById(R.id.mothersOutcome);
-        DeliveryOutcomeS =(Spinner) findViewById(R.id.deliveryOutcome);
+        placeDeliveryS = (Spinner) findViewById(R.id.DeliveryPlace);
+        MothersOutcomeS = (Spinner) findViewById(R.id.mothersOutcome);
+        DeliveryOutcomeS = (Spinner) findViewById(R.id.deliveryOutcome);
 
-        MotherTestedS =(Spinner) findViewById(R.id.motherTested);
-        BabyDeliveredS =(Spinner) findViewById(R.id.Babydelivered);
-       // BabySexS=(Spinner) findViewById(R.id.babySex);
-
-
+        MotherTestedS = (Spinner) findViewById(R.id.motherTested);
+        BabyDeliveredS = (Spinner) findViewById(R.id.Babydelivered);
+        // BabySexS=(Spinner) findViewById(R.id.babySex);
 
 
-        try{
+        try {
             //getSupportActionBar().setDisplayShowHomeEnabled(true);
-           // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("PNC Visit");
+            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Labor and Delivery");
+
+        } catch (Exception e) {
+
 
         }
-        catch(Exception e){
-
-
-        }
-        //client visit type
-       /* ArrayAdapter<String> clientvisitAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, clientVisitType);
-        clientvisitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        clientVisitTypeS.setAdapter(clientvisitAdapter);
-
-        clientVisitTypeS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                CLIENT_VISIT_TYPE = clientVisitType[position];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });*/
-
-        //Mode delivery
-        ArrayAdapter<String> ModedeliveryAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, ModeDelivery);
+        ArrayAdapter<String> ModedeliveryAdapter = new ArrayAdapter<String>(LaborAndDelivery.this, android.R.layout.simple_spinner_item, ModeDelivery);
         ModedeliveryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-      ModeDeliveryS.setAdapter(ModedeliveryAdapter);
+        ModeDeliveryS.setAdapter(ModedeliveryAdapter);
 
-       ModeDeliveryS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        ModeDeliveryS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-               MODE_DELIVERY = ModeDelivery[position];
+                MODE_DELIVERY = ModeDelivery[position];
             }
 
             @Override
@@ -96,8 +73,8 @@ public class PNCVisit extends AppCompatActivity {
             }
         });
 
-       //placeDelivery
-        ArrayAdapter<String> PlacedeliveryAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, placeDelivery);
+        //placeDelivery
+        ArrayAdapter<String> PlacedeliveryAdapter = new ArrayAdapter<String>(LaborAndDelivery.this, android.R.layout.simple_spinner_item, placeDelivery);
         PlacedeliveryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         placeDeliveryS.setAdapter(PlacedeliveryAdapter);
 
@@ -116,15 +93,15 @@ public class PNCVisit extends AppCompatActivity {
 
         //Delivery Outcome
 
-        ArrayAdapter<String> OutcomedeliveryAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, DeliveryOutcome);
+        ArrayAdapter<String> OutcomedeliveryAdapter = new ArrayAdapter<String>(LaborAndDelivery.this, android.R.layout.simple_spinner_item, DeliveryOutcome);
         PlacedeliveryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         DeliveryOutcomeS.setAdapter(OutcomedeliveryAdapter);
 
-     DeliveryOutcomeS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        DeliveryOutcomeS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-               DELIVERY_OUTCOME = DeliveryOutcome[position];
+                DELIVERY_OUTCOME = DeliveryOutcome[position];
             }
 
             @Override
@@ -132,17 +109,17 @@ public class PNCVisit extends AppCompatActivity {
 
             }
         });
-     //MothersOutcome
+        //MothersOutcome
 
-        ArrayAdapter<String> MotherOutcomeAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, MothersOutcome);
+        ArrayAdapter<String> MotherOutcomeAdapter = new ArrayAdapter<String>(LaborAndDelivery.this, android.R.layout.simple_spinner_item, MothersOutcome);
         PlacedeliveryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-       MothersOutcomeS.setAdapter(MotherOutcomeAdapter);
+        MothersOutcomeS.setAdapter(MotherOutcomeAdapter);
 
         MothersOutcomeS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-              MOTHERS_OUTCOME = MothersOutcome[position];
+                MOTHERS_OUTCOME = MothersOutcome[position];
             }
 
             @Override
@@ -152,7 +129,7 @@ public class PNCVisit extends AppCompatActivity {
         });
         // MotherTested
 
-        ArrayAdapter<String> MotherTestedAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, MotherTested);
+        ArrayAdapter<String> MotherTestedAdapter = new ArrayAdapter<String>(LaborAndDelivery.this, android.R.layout.simple_spinner_item, MotherTested);
         PlacedeliveryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         MotherTestedS.setAdapter(MotherTestedAdapter);
 
@@ -170,8 +147,8 @@ public class PNCVisit extends AppCompatActivity {
         });
 
         //BabyDelivered
-        ArrayAdapter<String> BabyDeliveredAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, BabyDelivered);
-       BabyDeliveredAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> BabyDeliveredAdapter = new ArrayAdapter<String>(LaborAndDelivery.this, android.R.layout.simple_spinner_item, BabyDelivered);
+        BabyDeliveredAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         BabyDeliveredS.setAdapter(BabyDeliveredAdapter);
 
         BabyDeliveredS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -207,9 +184,5 @@ public class PNCVisit extends AppCompatActivity {
         });*/
 
 
-
-
-
-
     }
-}
+    }

@@ -24,6 +24,7 @@ import com.example.mhealth.appointment_diary.config.SelectUrls;
 import com.example.mhealth.appointment_diary.defaulters_diary.DefaulterMainActivity;
 import com.example.mhealth.appointment_diary.loginmodule.LoginActivity;
 import com.example.mhealth.appointment_diary.models.Appointments;
+import com.example.mhealth.appointment_diary.pmtct.PMTCT1;
 import com.example.mhealth.appointment_diary.report.Report;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Ucsftracers;
@@ -115,7 +116,7 @@ public class MainOptions extends AppCompatActivity {
         pmtct_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(MainOptions.this, PmtctActivity.class);
+                Intent intent1 = new Intent(MainOptions.this, PMTCT1.class);
                 startActivity(intent1);
             }
         });

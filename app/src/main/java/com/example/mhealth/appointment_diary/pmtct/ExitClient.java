@@ -40,7 +40,7 @@ public class ExitClient extends AppCompatActivity {
 
         try{
             //getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+           // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("Exit Client");
 
         }

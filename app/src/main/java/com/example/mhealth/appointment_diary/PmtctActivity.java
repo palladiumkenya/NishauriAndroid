@@ -40,6 +40,7 @@ public class PmtctActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("HEI");
 
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
