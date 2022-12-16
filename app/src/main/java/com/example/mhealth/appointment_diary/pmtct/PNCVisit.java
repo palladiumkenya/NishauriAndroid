@@ -20,8 +20,9 @@ public class PNCVisit extends AppCompatActivity {
     String[] MotherTested = {"", "Yes", "No"};
     String[] BabyDelivered = {"", "Live Birth", "Fresh Still Birth", "Macerated Still Birth"};
     String[] BabySex = {"", "Male", "Female"};
+    String[] Regimen= {"", "DTG", "NVP"};
 
-    Spinner clientVisitTypeS,  ModeDeliveryS, placeDeliveryS, DeliveryOutcomeS, MothersOutcomeS, MotherTestedS, BabyDeliveredS,  BabySexS;
+    Spinner clientVisitTypeS,  ModeDeliveryS, placeDeliveryS, DeliveryOutcomeS, MothersOutcomeS, MotherTestedS, BabyDeliveredS,  BabySexS, RegimenS;
     private String CLIENT_VISIT_TYPE = "";
     private String MODE_DELIVERY = "";
     private String PLACE_DELIVERY = "";
@@ -30,6 +31,7 @@ public class PNCVisit extends AppCompatActivity {
     private String MOTHER_TESTED = "";
     private String BABY_DELIVERED = "";
     private String BABY_SEX = "";
+    private String REGIMEN = "";
 
 
 
@@ -45,7 +47,7 @@ public class PNCVisit extends AppCompatActivity {
 
         MotherTestedS =(Spinner) findViewById(R.id.motherTested);
         BabyDeliveredS =(Spinner) findViewById(R.id.Babydelivered);
-       // BabySexS=(Spinner) findViewById(R.id.babySex);
+        RegimenS=(Spinner) findViewById(R.id.motherRegimen2);
 
 
 
@@ -187,13 +189,13 @@ public class PNCVisit extends AppCompatActivity {
             }
         });
 
-        //Baby sex
+        //regimen
 
-       /* ArrayAdapter<String> BabySexAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, BabySex);
-        BabySexAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        BabySexS.setAdapter(BabySexAdapter);
+        ArrayAdapter<String> RegimenAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, Regimen);
+       RegimenAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        RegimenS.setAdapter(RegimenAdapter);
 
-        BabySexS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+      RegimenS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -204,7 +206,7 @@ public class PNCVisit extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });*/
+        });
 
 
 

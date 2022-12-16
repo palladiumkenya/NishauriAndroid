@@ -19,8 +19,10 @@ public class LaborAndDelivery extends AppCompatActivity {
     String[] MotherTested = {"", "Yes", "No"};
     String[] BabyDelivered = {"", "Live Birth", "Fresh Still Birth", "Macerated Still Birth"};
     String[] BabySex = {"", "Male", "Female"};
+    String[] CurrentRe = {"", "DTG", "NVP"};
+    String[] Immunization = {"", "Penta", "PSV"};
 
-    Spinner clientVisitTypeS,  ModeDeliveryS, placeDeliveryS, DeliveryOutcomeS, MothersOutcomeS, MotherTestedS, BabyDeliveredS,  BabySexS;
+    Spinner clientVisitTypeS,  ModeDeliveryS, placeDeliveryS, DeliveryOutcomeS, MothersOutcomeS, MotherTestedS, BabyDeliveredS,  BabySexS, currentS, ImmunizationS;
     private String CLIENT_VISIT_TYPE = "";
     private String MODE_DELIVERY = "";
     private String PLACE_DELIVERY = "";
@@ -29,6 +31,8 @@ public class LaborAndDelivery extends AppCompatActivity {
     private String MOTHER_TESTED = "";
     private String BABY_DELIVERED = "";
     private String BABY_SEX = "";
+    private String CURRENT_R = "";
+    private String IMMNUNIZATION = "";
 
 
 
@@ -43,8 +47,11 @@ public class LaborAndDelivery extends AppCompatActivity {
         DeliveryOutcomeS = (Spinner) findViewById(R.id.deliveryOutcome);
 
         MotherTestedS = (Spinner) findViewById(R.id.motherTested);
-        BabyDeliveredS = (Spinner) findViewById(R.id.Babydelivered);
-        // BabySexS=(Spinner) findViewById(R.id.babySex);
+        BabyDeliveredS = (Spinner) findViewById(R.id.BabyDelivered1);
+        currentS = (Spinner) findViewById(R.id. motherCurrentRegimen1);
+
+         BabySexS=(Spinner) findViewById(R.id.BabySex1);
+        ImmunizationS=(Spinner) findViewById(R.id.BabyImmunization1);
 
 
         try {
@@ -164,9 +171,29 @@ public class LaborAndDelivery extends AppCompatActivity {
             }
         });
 
+        //current reg
+        ArrayAdapter<String> CurrentregAdapter = new ArrayAdapter<String>(LaborAndDelivery.this, android.R.layout.simple_spinner_item, CurrentRe);
+        CurrentregAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        currentS.setAdapter(CurrentregAdapter);
+
+        currentS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                CURRENT_R = CurrentRe[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
         //Baby sex
 
-       /* ArrayAdapter<String> BabySexAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, BabySex);
+        ArrayAdapter<String> BabySexAdapter = new ArrayAdapter<String>(LaborAndDelivery.this, android.R.layout.simple_spinner_item, BabySex);
         BabySexAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         BabySexS.setAdapter(BabySexAdapter);
 
@@ -181,7 +208,25 @@ public class LaborAndDelivery extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });*/
+        });
+
+        //immunization
+        ArrayAdapter<String> ImmunizationAdapter = new ArrayAdapter<String>(LaborAndDelivery.this, android.R.layout.simple_spinner_item, Immunization);
+        ImmunizationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+       ImmunizationS.setAdapter(ImmunizationAdapter);
+
+        ImmunizationS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                BABY_SEX = BabySex[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
     }

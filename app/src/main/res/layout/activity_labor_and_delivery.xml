@@ -319,7 +319,7 @@
                         android:text="Mother's Current Regimen" />
 
                     <Spinner
-                        android:id="@+id/motherCurrentRegimen"
+                        android:id="@+id/motherCurrentRegimen1"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -340,7 +340,7 @@
                         android:text="Baby Delivered" />
 
                     <Spinner
-                        android:id="@+id/BabyDelivered"
+                        android:id="@+id/BabyDelivered1"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -451,7 +451,7 @@
                         android:text="Baby's Sex" />
 
                     <Spinner
-                        android:id="@+id/BabySex"
+                        android:id="@+id/BabySex1"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -473,7 +473,7 @@
                         android:text="Baby's Immunization" />
 
                     <Spinner
-                        android:id="@+id/BabyImmunization"
+                        android:id="@+id/BabyImmunization1"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"

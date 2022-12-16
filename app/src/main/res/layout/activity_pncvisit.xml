@@ -195,7 +195,7 @@
                         android:text="Mother's Current Regimen" />
 
                     <Spinner
-                        android:id="@+id/motherRegimen"
+                        android:id="@+id/motherRegimen2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
