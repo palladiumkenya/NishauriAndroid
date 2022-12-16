@@ -50,6 +50,8 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Month;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -99,6 +101,7 @@ public class AppCal extends AppCompatActivity {
                 //Day day1 = day.getYear() + "/" + (day.getMonth() + 1) + "/" + day.getDay();
 
                 Day day = collapsibleCalendar.getSelectedDay();
+
                 Log.i(getClass().getName(), "Selected Day: "
                         + day.getYear() + "/" + (day.getMonth() + 1) + "/" + day.getDay());
 
@@ -185,7 +188,12 @@ public class AppCal extends AppCompatActivity {
 
         Log.e("zzzzzzzzzzz", "" + millis);
         month_name = (TextView) findViewById(R.id.month);
-        month_name.setText(dateFormatForMonth.format(compactCalendar.getFirstDayOfCurrentMonth()));
+
+
+        //month_name.setText(dateFormatForMonth.format(compactCalendar.getFirstDayOfCurrentMonth()));
+
+       // month_name.setText(dateFormatForMonth.format(collapsibleCalendar.));
+
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -194,10 +202,25 @@ public class AppCal extends AppCompatActivity {
 
             }
         });
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                collapsibleCalendar.prevMonth();
+
+
+            }
+        });
         findViewById(R.id.next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 compactCalendar.scrollRight();
+            }
+        });
+
+        findViewById(R.id.next).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                collapsibleCalendar.nextMonth();
             }
         });
         compactCalendar.setListener(new CompactCalendarView.CompactCalendarViewListener() {
