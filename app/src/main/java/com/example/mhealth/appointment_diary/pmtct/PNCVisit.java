@@ -10,12 +10,12 @@ import android.widget.Spinner;
 
 import com.example.mhealth.appointment_diary.R;
 
-public class PregnantMothersOutcome extends AppCompatActivity {
+public class PNCVisit extends AppCompatActivity {
 
     String[] clientVisitType = {"", "Labor and Delivery", "ANC", "PNC"};
     String[] ModeDelivery = {"", "Spontaneous Vaginal Delivery (SVD)", "Cesarean Section (CS)", "Breech Delivery",  "Assisted Vaginal Delivery"};
     String[] placeDelivery = {"", "Home", "Facility", "Born before Arrival"};
-    String[] DeliveryOutcome = {"", "Single", "Twins", "Triplets"};
+    String[] DeliveryOutcome = {"", "Penta", "PSV"};
     String[] MothersOutcome = {"", "Alive", "Dead"};
     String[] MotherTested = {"", "Yes", "No"};
     String[] BabyDelivered = {"", "Live Birth", "Fresh Still Birth", "Macerated Still Birth"};
@@ -36,8 +36,8 @@ public class PregnantMothersOutcome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pregnant_mothers_outcome);
-        clientVisitTypeS =(Spinner) findViewById(R.id.clientVisitspinner);
+        setContentView(R.layout.activity_pncvisit);
+        //clientVisitTypeS =(Spinner) findViewById(R.id.clientVisitspinner);
         ModeDeliveryS = (Spinner) findViewById(R.id.deliveryMode);
         placeDeliveryS =(Spinner) findViewById(R.id.DeliveryPlace);
         MothersOutcomeS =(Spinner) findViewById(R.id.mothersOutcome);
@@ -45,7 +45,7 @@ public class PregnantMothersOutcome extends AppCompatActivity {
 
         MotherTestedS =(Spinner) findViewById(R.id.motherTested);
         BabyDeliveredS =(Spinner) findViewById(R.id.Babydelivered);
-        BabySexS=(Spinner) findViewById(R.id.babySex);
+       // BabySexS=(Spinner) findViewById(R.id.babySex);
 
 
 
@@ -53,7 +53,7 @@ public class PregnantMothersOutcome extends AppCompatActivity {
         try{
             //getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Pregnant Mothers outcome");
+            getSupportActionBar().setTitle("PNC Visit");
 
         }
         catch(Exception e){
@@ -61,7 +61,7 @@ public class PregnantMothersOutcome extends AppCompatActivity {
 
         }
         //client visit type
-        ArrayAdapter<String> clientvisitAdapter = new ArrayAdapter<String>(PregnantMothersOutcome.this, android.R.layout.simple_spinner_item, clientVisitType);
+       /* ArrayAdapter<String> clientvisitAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, clientVisitType);
         clientvisitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         clientVisitTypeS.setAdapter(clientvisitAdapter);
 
@@ -76,10 +76,10 @@ public class PregnantMothersOutcome extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
         //Mode delivery
-        ArrayAdapter<String> ModedeliveryAdapter = new ArrayAdapter<String>(PregnantMothersOutcome.this, android.R.layout.simple_spinner_item, ModeDelivery);
+        ArrayAdapter<String> ModedeliveryAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, ModeDelivery);
         ModedeliveryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
       ModeDeliveryS.setAdapter(ModedeliveryAdapter);
 
@@ -97,7 +97,7 @@ public class PregnantMothersOutcome extends AppCompatActivity {
         });
 
        //placeDelivery
-        ArrayAdapter<String> PlacedeliveryAdapter = new ArrayAdapter<String>(PregnantMothersOutcome.this, android.R.layout.simple_spinner_item, placeDelivery);
+        ArrayAdapter<String> PlacedeliveryAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, placeDelivery);
         PlacedeliveryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         placeDeliveryS.setAdapter(PlacedeliveryAdapter);
 
@@ -116,7 +116,7 @@ public class PregnantMothersOutcome extends AppCompatActivity {
 
         //Delivery Outcome
 
-        ArrayAdapter<String> OutcomedeliveryAdapter = new ArrayAdapter<String>(PregnantMothersOutcome.this, android.R.layout.simple_spinner_item, DeliveryOutcome);
+        ArrayAdapter<String> OutcomedeliveryAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, DeliveryOutcome);
         PlacedeliveryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         DeliveryOutcomeS.setAdapter(OutcomedeliveryAdapter);
 
@@ -134,7 +134,7 @@ public class PregnantMothersOutcome extends AppCompatActivity {
         });
      //MothersOutcome
 
-        ArrayAdapter<String> MotherOutcomeAdapter = new ArrayAdapter<String>(PregnantMothersOutcome.this, android.R.layout.simple_spinner_item, MothersOutcome);
+        ArrayAdapter<String> MotherOutcomeAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, MothersOutcome);
         PlacedeliveryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
        MothersOutcomeS.setAdapter(MotherOutcomeAdapter);
 
@@ -152,7 +152,7 @@ public class PregnantMothersOutcome extends AppCompatActivity {
         });
         // MotherTested
 
-        ArrayAdapter<String> MotherTestedAdapter = new ArrayAdapter<String>(PregnantMothersOutcome.this, android.R.layout.simple_spinner_item, MotherTested);
+        ArrayAdapter<String> MotherTestedAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, MotherTested);
         PlacedeliveryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         MotherTestedS.setAdapter(MotherTestedAdapter);
 
@@ -170,7 +170,7 @@ public class PregnantMothersOutcome extends AppCompatActivity {
         });
 
         //BabyDelivered
-        ArrayAdapter<String> BabyDeliveredAdapter = new ArrayAdapter<String>(PregnantMothersOutcome.this, android.R.layout.simple_spinner_item, BabyDelivered);
+        ArrayAdapter<String> BabyDeliveredAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, BabyDelivered);
        BabyDeliveredAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         BabyDeliveredS.setAdapter(BabyDeliveredAdapter);
 
@@ -189,7 +189,7 @@ public class PregnantMothersOutcome extends AppCompatActivity {
 
         //Baby sex
 
-        ArrayAdapter<String> BabySexAdapter = new ArrayAdapter<String>(PregnantMothersOutcome.this, android.R.layout.simple_spinner_item, BabySex);
+       /* ArrayAdapter<String> BabySexAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, BabySex);
         BabySexAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         BabySexS.setAdapter(BabySexAdapter);
 
@@ -204,7 +204,7 @@ public class PregnantMothersOutcome extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
 
 

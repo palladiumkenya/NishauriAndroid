@@ -1,7 +1,6 @@
 package com.example.mhealth.appointment_diary.pmtct;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
@@ -22,7 +21,7 @@ public class PregnantBreastfeeding extends AppCompatActivity {
         try{
             //getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Pregnant and Breastfeeding Mothers");
+            getSupportActionBar().setTitle("PMTCT");
 
         }
         catch(Exception e){
@@ -37,7 +36,7 @@ public class PregnantBreastfeeding extends AppCompatActivity {
         card_hiv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(PregnantBreastfeeding.this, HIVOutcome.class);
+                Intent intent =new Intent(PregnantBreastfeeding.this, ANCVisit.class);
                 startActivity(intent);
 
             }
@@ -47,7 +46,7 @@ public class PregnantBreastfeeding extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent =new Intent(PregnantBreastfeeding.this, PregnantMothersOutcome.class);
+                Intent intent =new Intent(PregnantBreastfeeding.this, PNCVisit.class);
                 startActivity(intent);
 
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".pmtct.PregnantMothersOutcome">
+    tools:context=".pmtct.ANCVisit">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                         android:id="@+id/search_hei_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter ID/NUPI*"
+                        android:hint="Enter CCC Number*"
                         android:inputType="number"
                         android:textColorHint="#000"
                         android:textSize="12sp" />
@@ -71,7 +71,7 @@
                         android:id="@+id/hei_no_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="MOH123456789"
+                        android:hint="1234500001"
                         android:inputType="number"
                         android:textColorHint="#000" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -84,7 +84,7 @@
                         android:id="@+id/phone_no_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="First Name"
+                        android:hint="First Name*"
                         android:inputType="text"
                         android:maxLength="24"
                         android:textColorHint="#000" />
@@ -99,7 +99,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:focusable="false"
-                        android:hint="Last Name"
+                        android:hint="Last Name*"
                         android:inputType="text"
                         android:maxLength="24"
                         android:textColorHint="#000" />
@@ -129,7 +129,7 @@
                         android:id="@+id/middle_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Date of Birth"
+                        android:hint="Date of Birth*"
                         android:inputType="text"
                         android:textColorHint="#000"
                         />
@@ -149,16 +149,85 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Client Visit Type" />
+                        android:text="Client is" />
 
                     <Spinner
-                        android:id="@+id/clientVisitspinner"
+                        android:id="@+id/ClientSpinner"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20sp" />
 
                 </LinearLayout>
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/ANCVisit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="ANC Visit Number:*"
+                        android:inputType="number"
+                        android:textColorHint="#000" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/ANCClinic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="ANC Clinic Number:*"
+                        android:inputType="text"
+                        android:maxLength="24"
+                        android:textColorHint="#000" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/ANCNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:hint="Number of ANC Visits*"
+                        android:inputType="text"
+                        android:maxLength="24"
+                        android:textColorHint="#000" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- mothers regimen -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Mother's Current Regimen" />
+
+                    <Spinner
+                        android:id="@+id/hivResults"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -167,7 +236,7 @@
                         android:id="@+id/parity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="P/ANC Visit Number:*"
+                        android:hint="Parity:*"
                         android:inputType="number"
                         android:textColorHint="#000" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -180,7 +249,7 @@
                         android:id="@+id/gravida"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="P/ANC Clinic Number:*"
+                        android:hint="Gravida:*"
                         android:inputType="text"
                         android:maxLength="24"
                         android:textColorHint="#000" />
@@ -195,141 +264,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:focusable="false"
-                        android:hint="Number of ANC Visits*"
+                        android:hint="LMP Date"
                         android:inputType="text"
                         android:maxLength="24"
                         android:textColorHint="#000" />
                 </com.google.android.material.textfield.TextInputLayout>
-                <!-- mode -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Mode of Delivery" />
-
-                    <Spinner
-                        android:id="@+id/deliveryMode"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20sp" />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Place of Delivery" />
-
-                    <Spinner
-                        android:id="@+id/DeliveryPlace"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20sp" />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Delivery Outcome" />
-
-                    <Spinner
-                        android:id="@+id/deliveryOutcome"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Mothers Outcome" />
-
-                    <Spinner
-                        android:id="@+id/mothersOutcome"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Mother Tested for HIV" />
-
-                    <Spinner
-                        android:id="@+id/motherTested"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20sp" />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Baby Delivered" />
-
-                    <Spinner
-                        android:id="@+id/Babydelivered"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20sp" />
-
-                </LinearLayout>
-
 
 
 
@@ -338,10 +277,10 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/Datedied"
+                        android:id="@+id/edd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Date Died:*"
+                        android:hint="EDD:*"
                         android:inputType="text"
                         android:textColorHint="#000"
                         />
@@ -352,49 +291,14 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/deathcause"
+                        android:id="@+id/gestation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Cause of Death:*"
+                        android:hint="Gestation (in weeks):*"
                         android:inputType="text"
                         android:textColorHint="#000"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/babyDOB"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Baby's Date of Birth:*"
-                        android:inputType="text"
-                        android:textColorHint="#000"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Baby's Sex" />
-
-                    <Spinner
-                        android:id="@+id/babySex"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20sp" />
-
-                </LinearLayout>
 
 
 
@@ -415,7 +319,6 @@
 
 
     </androidx.core.widget.NestedScrollView>
-
 
 
 

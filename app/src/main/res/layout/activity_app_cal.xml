@@ -35,6 +35,7 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:visibility="gone"
             android:id="@+id/back"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -45,6 +46,7 @@
             android:textSize="40dp" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/month"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
@@ -54,6 +56,7 @@
             android:textSize="20dp" />
 
         <ImageView
+            android:visibility="gone"
             android:id="@+id/next"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
@@ -65,6 +68,7 @@
     </RelativeLayout>
 
     <com.github.sundeepk.compactcalendarview.CompactCalendarView
+        android:visibility="gone"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/compactcalendar_view"
         android:layout_width="fill_parent"
@@ -81,11 +85,15 @@
         app:compactCalendarTextColor="#000"
         app:compactCalendarTextSize="12sp" />
     <com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
-        android:visibility="invisible"
+        android:id="@+id/collapse_view"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/compactcalendar_view"
 
+        app:todayItem_textColor="#ff4081"
+        app:todayItem_background="@drawable/circle_white_stroke_background"
+        app:selectedItem_textColor="#00ced1"
         >
     </com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar>
 
@@ -108,7 +116,7 @@
         android:layout_centerHorizontal="true"
         android:textColor="@color/colorPrimary"
         android:gravity="center_vertical"
-        android:layout_below="@+id/compactcalendar_view"
+        android:layout_below="@+id/collapse_view"
         android:visibility="gone"
         android:textSize="20dp" />
 

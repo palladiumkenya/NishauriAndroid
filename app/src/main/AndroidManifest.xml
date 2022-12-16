@@ -27,10 +27,10 @@
             android:name=".pmtct.ExitClient"
             android:exported="false" />
         <activity
-            android:name=".pmtct.PregnantMothersOutcome"
+            android:name=".pmtct.PNCVisit"
             android:exported="false" />
         <activity
-            android:name=".pmtct.HIVOutcome"
+            android:name=".pmtct.ANCVisit"
             android:exported="false" />
         <activity
             android:name=".pmtct.PregnantBreastfeeding"

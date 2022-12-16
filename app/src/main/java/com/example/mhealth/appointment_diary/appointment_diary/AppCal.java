@@ -1,5 +1,6 @@
 package com.example.mhealth.appointment_diary.appointment_diary;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -40,6 +41,8 @@ import com.example.mhealth.appointment_diary.tables.Registrationtable;
 import com.example.mhealth.appointment_diary.tables.UrlTable;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
+import com.shrikanthravi.collapsiblecalendarview.data.Day;
+import com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,6 +62,7 @@ import java.util.Objects;
 public class AppCal extends AppCompatActivity {
 
     CompactCalendarView compactCalendar;
+    CollapsibleCalendar collapsibleCalendar;
     private SimpleDateFormat dateFormatMonth = new SimpleDateFormat("MMMM- yyyy", Locale.getDefault());
     private SimpleDateFormat dateFormatMonth2 = new SimpleDateFormat("MM yyyy", Locale.getDefault());
     TextView month_name;
@@ -68,6 +72,7 @@ public class AppCal extends AppCompatActivity {
     CardView card;
     TextView text;
     String z, dates, phone;
+    String datex;
 
     Dialogs dialogs;
     List<CalModel> calist;
@@ -85,6 +90,58 @@ public class AppCal extends AppCompatActivity {
         setToolbar();
 
         textView1 =findViewById(R.id.datelist);
+        collapsibleCalendar =findViewById(R.id.collapse_view);
+
+        collapsibleCalendar.setCalendarListener(new CollapsibleCalendar.CalendarListener() {
+            @Override
+            public void onDaySelect() {
+
+                //Day day1 = day.getYear() + "/" + (day.getMonth() + 1) + "/" + day.getDay();
+
+                Day day = collapsibleCalendar.getSelectedDay();
+                Log.i(getClass().getName(), "Selected Day: "
+                        + day.getYear() + "/" + (day.getMonth() + 1) + "/" + day.getDay());
+
+                 datex = day.getYear() + "/" + (day.getMonth() + 1) + "/" + day.getDay();
+
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+               // dates=format.format(x);
+
+                Toast.makeText(AppCal.this, ""+datex, Toast.LENGTH_SHORT).show();
+                callApi1();
+
+            }
+
+            @Override
+            public void onItemClick(@NonNull View view) {
+
+            }
+
+            @Override
+            public void onDataUpdate() {
+
+            }
+
+            @Override
+            public void onMonthChange() {
+
+            }
+
+            @Override
+            public void onWeekChange(int i) {
+
+            }
+
+            @Override
+            public void onClickListener() {
+
+            }
+
+            @Override
+            public void onDayChanged() {
+
+            }
+        });
         calist= new ArrayList<>();
 
         calAdapter =new CalAdapter(AppCal.this, calist);
@@ -206,7 +263,7 @@ public class AppCal extends AppCompatActivity {
 
        // String urls ="https://ushauriapi.kenyahmis.org/appnt/applist?telephone=0746537136 &start="+dates;
         String urls ="?telephone="+phone;
-        String tt ="&start="+dates;
+        String tt ="&start="+datex;
         JsonArrayRequest jsonArrayRequest =new JsonArrayRequest(Request.Method.GET,  z+Config.CALENDER_LIST+urls+tt, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -380,15 +437,21 @@ public class AppCal extends AppCompatActivity {
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                     //Toast.makeText(getApplicationContext(), "searching", Toast.LENGTH_SHORT).show();
+
+
                     doSearching(s);
                     int x = listView.getCount();
                     textView1.setText("Total appointments"+ " "+ String.valueOf(x));
+                    calAdapter.notifyDataSetChanged();
                     //myadapt.getFilter().filter(s);
                 }
 
                 @Override
                 public void afterTextChanged(Editable s) {
+                    calAdapter.notifyDataSetChanged();
 
+                    int x = listView.getCount();
+                    textView1.setText("Total appointments"+ " "+ String.valueOf(x));
 
                 }
             });
@@ -423,7 +486,4 @@ public class AppCal extends AppCompatActivity {
         }
 
     }
-
-
-
 }

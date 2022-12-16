@@ -10,9 +10,9 @@ import android.widget.Spinner;
 
 import com.example.mhealth.appointment_diary.R;
 
-public class HIVOutcome extends AppCompatActivity {
-    String[] clientIs = {"", "Breastfeeding", "Not Breastfeeding", "Pregnant", "Pregnant and Breastfeeding"};
-    String[] hivResults = {"", "Unknown", "Negative", "Positive"};
+public class ANCVisit extends AppCompatActivity {
+    String[] clientIs = {"","Pregnant", "Pregnant and Breastfeeding"};
+    String[] hivResults = {"", "DTG", "NVP"};
     Spinner clientIsS, hivResultsS;
     private String CLIENT_IS = "";
     private String HIV_RESULTS = "";
@@ -20,13 +20,13 @@ public class HIVOutcome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hivoutcome);
+        setContentView(R.layout.activity_ancvisit);
 
         clientIsS = (Spinner) findViewById(R.id.ClientSpinner);
         hivResultsS =(Spinner) findViewById(R.id.hivResults);
 
 //      Client is
-        ArrayAdapter<String> clientAdapter = new ArrayAdapter<String>(HIVOutcome.this, android.R.layout.simple_spinner_item, clientIs);
+        ArrayAdapter<String> clientAdapter = new ArrayAdapter<String>(ANCVisit.this, android.R.layout.simple_spinner_item, clientIs);
         clientAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         clientIsS.setAdapter(clientAdapter);
 
@@ -43,7 +43,7 @@ public class HIVOutcome extends AppCompatActivity {
             }
         });
 // hiv results
-        ArrayAdapter<String> resultsAdapter = new ArrayAdapter<String>(HIVOutcome.this, android.R.layout.simple_spinner_item, hivResults);
+        ArrayAdapter<String> resultsAdapter = new ArrayAdapter<String>(ANCVisit.this, android.R.layout.simple_spinner_item, hivResults);
         clientAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         hivResultsS.setAdapter(resultsAdapter);
 
@@ -67,7 +67,7 @@ public class HIVOutcome extends AppCompatActivity {
         try{
             //getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("HIV Outcome");
+            getSupportActionBar().setTitle("ANC Visit");
 
         }
         catch(Exception e){
