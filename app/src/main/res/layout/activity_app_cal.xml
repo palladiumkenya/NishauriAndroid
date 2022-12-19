@@ -86,11 +86,9 @@
         app:compactCalendarTextSize="12sp" />
     <com.shrikanthravi.collapsiblecalendarview.widget.CollapsibleCalendar
         android:id="@+id/collapse_view"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/compactcalendar_view"
-
         app:todayItem_textColor="#ff4081"
         app:todayItem_background="@drawable/circle_white_stroke_background"
         app:selectedItem_textColor="#00ced1"
