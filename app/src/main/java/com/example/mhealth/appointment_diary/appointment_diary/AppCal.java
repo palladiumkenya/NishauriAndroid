@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
@@ -50,8 +49,6 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Month;
-import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -62,7 +59,6 @@ import java.util.Map;
 import java.util.Objects;
 
 public class AppCal extends AppCompatActivity {
-
     CompactCalendarView compactCalendar;
     CollapsibleCalendar collapsibleCalendar;
     private SimpleDateFormat dateFormatMonth = new SimpleDateFormat("MMMM- yyyy", Locale.getDefault());
@@ -105,10 +101,10 @@ public class AppCal extends AppCompatActivity {
                 Log.i(getClass().getName(), "Selected Day: "
                         + day.getYear() + "/" + (day.getMonth() + 1) + "/" + day.getDay());
 
-                 datex = day.getYear() + "/" + (day.getMonth() + 1) + "/" + day.getDay();
+                datex = day.getYear() + "/" + (day.getMonth() + 1) + "/" + day.getDay();
 
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-               // dates=format.format(x);
+                // dates=format.format(x);
 
                 Toast.makeText(AppCal.this, ""+datex, Toast.LENGTH_SHORT).show();
                 callApi1();
@@ -192,7 +188,7 @@ public class AppCal extends AppCompatActivity {
 
         //month_name.setText(dateFormatForMonth.format(compactCalendar.getFirstDayOfCurrentMonth()));
 
-       // month_name.setText(dateFormatForMonth.format(collapsibleCalendar.));
+        // month_name.setText(dateFormatForMonth.format(collapsibleCalendar.));
 
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -284,13 +280,13 @@ public class AppCal extends AppCompatActivity {
 
         }
 
-       // String urls ="https://ushauriapi.kenyahmis.org/appnt/applist?telephone=0746537136 &start="+dates;
+        // String urls ="https://ushauriapi.kenyahmis.org/appnt/applist?telephone=0746537136 &start="+dates;
         String urls ="?telephone="+phone;
         String tt ="&start="+datex;
         JsonArrayRequest jsonArrayRequest =new JsonArrayRequest(Request.Method.GET,  z+Config.CALENDER_LIST+urls+tt, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-            //Toast.makeText(AppCal.this, "success"+response, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AppCal.this, "success"+response, Toast.LENGTH_SHORT).show();
 
                 if (response.length() == 0) {
                     calist.clear();
@@ -301,39 +297,39 @@ public class AppCal extends AppCompatActivity {
                 } else {
 
 
-                Log.d("resposee", response.toString());
-                for (int x = 0; x < response.length(); x++) {
-                    //  Toast.makeText(AppCal.this, String.valueOf(response.length()), Toast.LENGTH_SHORT).show();
-                    textView1.setVisibility(View.VISIBLE);
-                    textView1.setText("Total appointments on"+ " "+ datex + " " +" is "+ String.valueOf(response.length()));
+                    Log.d("resposee", response.toString());
+                    for (int x = 0; x < response.length(); x++) {
+                        //  Toast.makeText(AppCal.this, String.valueOf(response.length()), Toast.LENGTH_SHORT).show();
+                        textView1.setVisibility(View.VISIBLE);
+                        textView1.setText("Total appointments on"+ " "+ datex + " " +" is "+ String.valueOf(response.length()));
 
 
-                    try {
-                        JSONObject jsonObject = response.getJSONObject(x);
-                        String clinic_no = jsonObject.getString("clinic_no");
-                        String ccname = jsonObject.getString("client_name");
-                        String client_phone_no = jsonObject.getString("client_phone_no");
-                        String appointment_type = jsonObject.getString("appointment_type");
-                        String appntmnt_date = jsonObject.getString("appntmnt_date");
-                        String file = jsonObject.getString("file_no");
-                        String appointment_status = jsonObject.getString("appointment_status");
-                        String notification = jsonObject.getString("notification");
+                        try {
+                            JSONObject jsonObject = response.getJSONObject(x);
+                            String clinic_no = jsonObject.getString("clinic_no");
+                            String ccname = jsonObject.getString("client_name");
+                            String client_phone_no = jsonObject.getString("client_phone_no");
+                            String appointment_type = jsonObject.getString("appointment_type");
+                            String appntmnt_date = jsonObject.getString("appntmnt_date");
+                            String file = jsonObject.getString("file_no");
+                            String appointment_status = jsonObject.getString("appointment_status");
+                            String notification = jsonObject.getString("notification");
 
-                        //Toast.makeText(AppCal.this, "success", Toast.LENGTH_SHORT).show();
-
-
-                        CalModel appCal = new CalModel(clinic_no, ccname, client_phone_no, appointment_type, appntmnt_date, file,appointment_status, notification);
-                        calist.add(appCal);
-
-                        listView.setAdapter(calAdapter);
+                            //Toast.makeText(AppCal.this, "success", Toast.LENGTH_SHORT).show();
 
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                            CalModel appCal = new CalModel(clinic_no, ccname, client_phone_no, appointment_type, appntmnt_date, file,appointment_status, notification);
+                            calist.add(appCal);
+
+                            listView.setAdapter(calAdapter);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
-               // JSONObject jsonObject = new JSONObject(response.get);
+                // JSONObject jsonObject = new JSONObject(response.get);
                 //                                                                                                                                                                                                                                                                                                                                        String
 
             }
@@ -464,7 +460,7 @@ public class AppCal extends AppCompatActivity {
 
                     doSearching(s);
                     int x = listView.getCount();
-                   // textView1.setText("Total appointments"+ " "+ String.valueOf(x));
+                    // textView1.setText("Total appointments"+ " "+ String.valueOf(x));
                     calAdapter.notifyDataSetChanged();
                     //myadapt.getFilter().filter(s);
                 }
@@ -511,4 +507,6 @@ public class AppCal extends AppCompatActivity {
         }
 
     }
+
+
 }
