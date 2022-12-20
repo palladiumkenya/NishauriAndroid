@@ -20,8 +20,9 @@ public class Question implements Serializable {
     private int questionnaire;
     private int created_by;
     private boolean is_required;
+    private String date_validation;
 
-    public Question(int id, String question, int question_type, String createdAt, int questionnaire, int created_by, boolean is_required){
+    public Question(int id, String question, int question_type, String createdAt, int questionnaire, int created_by, boolean is_required, String date_validation){
 
         this.id = id;
         this.question = question;
@@ -30,6 +31,7 @@ public class Question implements Serializable {
         this.questionnaire = questionnaire;
         this.created_by = created_by;
         this.is_required = is_required;
+        this.date_validation=date_validation;
 
     }
 
@@ -87,5 +89,13 @@ public class Question implements Serializable {
 
     public void setIs_required(boolean is_required) {
         this.is_required = is_required;
+    }
+
+    public String getDate_validation() {
+        return date_validation;
+    }
+
+    public void setDate_validation(String date_validation) {
+        this.date_validation = date_validation;
     }
 }

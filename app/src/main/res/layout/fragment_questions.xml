@@ -139,7 +139,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
 
-                    <!-- date Edittext -->
+                    <!-- date Edittext none -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -160,6 +160,49 @@
                             android:textSize="12dp"
                             />
                     </com.google.android.material.textfield.TextInputLayout>
+                    <!-- date Edittext restrict future-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayoutfuture"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dobfuture"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <!-- date Edittext restrict past-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayoutpast"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dobpast"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
 
 
                     <!-- Numeric Edittext -->

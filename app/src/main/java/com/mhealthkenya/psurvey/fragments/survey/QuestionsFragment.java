@@ -81,6 +81,7 @@ import static com.mhealthkenya.psurvey.depedancies.AppController.TAG;
 
 
 public class QuestionsFragment extends Fragment {
+    DatePickerDialog datePickerDialog;
 
     private Unbinder unbinder;
     private View root;
@@ -114,8 +115,19 @@ public class QuestionsFragment extends Fragment {
     @BindView(R.id.dateLayout)
     TextInputLayout dateTextTil;
 
+    @BindView(R.id.dateLayoutfuture)
+    TextInputLayout dateTextTilfuture;
+    @BindView(R.id.dateLayoutpast)
+    TextInputLayout dateTextTilpast;
+
     @BindView(R.id.dob)
     TextInputEditText dobEditText;
+
+    @BindView(R.id.dobfuture)
+    TextInputEditText dobEditTextfuture;
+
+    @BindView(R.id.dobpast)
+    TextInputEditText dobEditTextpast;
 
     @BindView(R.id.til_numeric_layout)
     TextInputLayout numericText;
@@ -186,7 +198,7 @@ public class QuestionsFragment extends Fragment {
         //set EditText type4 to accept numeric only
         numericEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
 
-        //DatePicker
+        //DatePickerNone
         dobEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -194,11 +206,13 @@ public class QuestionsFragment extends Fragment {
                 mYear = calendar.get ( Calendar.YEAR );
                 mMonth = calendar.get ( Calendar.MONTH );
                 mDay = calendar.get ( Calendar.DAY_OF_MONTH );
+              //  datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
 
                 //show dialog
-                DatePickerDialog datePickerDialog = new DatePickerDialog ( context, new DatePickerDialog.OnDateSetListener () {
+                datePickerDialog = new DatePickerDialog ( context, new DatePickerDialog.OnDateSetListener () {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                        dobEditText.setText ( dayOfMonth + "/" + (month + 1) + "/" + year );
                     }
                 }, mYear, mMonth, mDay );
@@ -208,7 +222,57 @@ public class QuestionsFragment extends Fragment {
 
             }
         });
+        //DatePickerFuture
 
+        dobEditTextfuture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+           DatePickerDialog datePicker = new DatePickerDialog(context   , new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                       dobEditTextfuture.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+
+                // show the dialog
+                datePicker.show();
+            }
+        });
+
+
+        //DatePickerPast
+        dobEditTextpast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(context   , new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        dobEditTextpast.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
+
+                // show the dialog
+                datePicker.show();
+
+            }
+        });
 
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -249,29 +313,71 @@ public class QuestionsFragment extends Fragment {
                      provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), numericEditText.getText().toString());
                  }
 
-               /* else if (questions.getQuestion_type() ==5){
-                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString());
-
-                 }*/
-
-                    /*if (dobEditText.getText().toString().equals("")){
-                        Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
-
-                    }*/
-                    else if (questions.getQuestion_type()==5 && questions.isIs_required()){
-                         if(dobEditText.getText().toString().equals("")) {
-                             Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
-                         }else{
-                             provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString());
-                         }
-
-                }
-                 else if (questions.getQuestion_type() ==5){
+              /* else if (questions.getQuestion_type() ==5){
                      provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString());
 
                  }
 
-                else if (questions.getQuestion_type() == 2){
+                   if (dobEditText.getText().toString().equals("")){
+                        Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+
+                    }*/
+
+                 //datepicker none
+                    else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("none")){
+                        if(dobEditText.getText().toString().equals("") && questions.getDate_validation().equals("none")) {
+                             Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                             //&& questions.getDate_validation().contentEquals("none")
+                         }
+                        {
+                             provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString());
+                         }
+
+                }
+                 else if (questions.getQuestion_type() ==5 &&questions.getDate_validation().equals("none")){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString());
+
+                 }
+
+                 // //datepicker restrict future
+
+                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("restrict_future")){
+                     if(dobEditTextfuture.getText().toString().equals("")) {
+                         Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                     }else{
+                         provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString());
+                     }
+
+                 }
+                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_future")){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString());
+
+                 }
+
+
+                 //restrict past date
+                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("restrict_past")){
+
+                     if(dobEditTextfuture.getText().toString().equals("") && questions.getDate_validation().equals("restrict_future")) {
+                         Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                     }
+
+                     {
+
+                         provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextpast.getText().toString());
+                     }
+
+                 }
+                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_past")){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextpast.getText().toString());
+
+                 }
+
+
+
+
+
+                 else if (questions.getQuestion_type() == 2){
 
                     int radioButtonID = singleChoiceRadioGroup.getCheckedRadioButtonId();
 
@@ -442,6 +548,7 @@ public class QuestionsFragment extends Fragment {
 
                                 int questionId = question.has("id") ? question.getInt("id"): 0;
                                 String questionName = question.has("question") ? question.getString("question") : "";
+                                String date_validation = question.has("date_validation") ? question.getString("date_validation") : "";
                                 int questionType = question.has("question_type") ? question.getInt("question_type") : 0;
                                 String createdAt = question.has("created_at") ? question.getString("created_at") : "";
                                 int questionnaire = question.has("questionnaire") ? question.getInt("questionnaire") : 0;
@@ -449,7 +556,7 @@ public class QuestionsFragment extends Fragment {
                                 boolean is_required = question.has("is_required") ? question.getBoolean("is_required") : Boolean.parseBoolean("");
 
 
-                                questions = new Question(questionId,questionName,questionType,createdAt,questionnaire,createdBy, is_required);
+                                questions = new Question(questionId,questionName,questionType,createdAt,questionnaire,createdBy, is_required, date_validation);
 
 
                                 JSONArray ans = response.getJSONArray("Ans");
@@ -508,12 +615,21 @@ public class QuestionsFragment extends Fragment {
                                             numericText.setVisibility(View.VISIBLE);
                                             numericEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
                                         }
-
-                                        else if (questions.getQuestion_type()==5){
+                                        //none
+                                        else if (questions.getQuestion_type()==5 && questions.getDate_validation().equals("none")){
                                             dateTextTil.setVisibility(View.VISIBLE);
-
-
                                         }
+
+                                       // restrict future
+                                        else if (questions.getQuestion_type()==5 && questions.getDate_validation().equals("restrict_future")){
+                                            dateTextTilfuture.setVisibility(View.VISIBLE);
+                                        }
+
+                                        //restrict past
+                                        else if (questions.getQuestion_type()==5 && questions.getDate_validation().equals("restrict_past")){
+                                            dateTextTilpast.setVisibility(View.VISIBLE);
+                                        }
+
 
                                         else {
                                             Toast.makeText(context, "No answers found for this question", Toast.LENGTH_SHORT).show();
@@ -577,5 +693,34 @@ public class QuestionsFragment extends Fragment {
     public void onPause() {
         shimmer_my_container.stopShimmerAnimation();
         super.onPause();
+    }
+    public void dets(){
+        //DatePicker
+        dobEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance ();
+                mYear = calendar.get ( Calendar.YEAR );
+                mMonth = calendar.get ( Calendar.MONTH );
+                mDay = calendar.get ( Calendar.DAY_OF_MONTH );
+
+                //show dialog
+               datePickerDialog = new DatePickerDialog ( context, new DatePickerDialog.OnDateSetListener () {
+
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
+                        dobEditText.setText ( dayOfMonth + "/" + (month + 1) + "/" + year );
+                    }
+                }, mYear, mMonth, mDay );
+                datePickerDialog.show ();
+
+
+
+            }
+        });
     }
 }
