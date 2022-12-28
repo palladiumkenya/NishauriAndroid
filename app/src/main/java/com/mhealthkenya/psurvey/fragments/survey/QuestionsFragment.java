@@ -54,6 +54,7 @@ import com.mhealthkenya.psurvey.models.Answer;
 import com.mhealthkenya.psurvey.models.Question;
 import com.mhealthkenya.psurvey.models.QuestionsList;
 import com.mhealthkenya.psurvey.models.auth;
+import com.mhealthkenya.psurvey.models.repeat_count;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -90,11 +91,14 @@ public class QuestionsFragment extends Fragment {
     private String openText = "";
     private String questionLink;
     private int sessionID;
+    int repeat_count;
 
     private CheckBox checkBox;
 
     private auth loggedInUser;
     private Question questions;
+    private repeat_count repeat_count1;
+    private repeat_count  _repeat_count;
     private Answer answers;
     private ArrayList<Answer> answerList = new ArrayList<>();
     private List<Integer> multiAnswerList = new ArrayList<>();
@@ -105,29 +109,149 @@ public class QuestionsFragment extends Fragment {
 
     @BindView(R.id.tv_survey_question)
     MaterialTextView surveyQuestion;
-
+    //openText1
     @BindView(R.id.til_open_text)
     TextInputLayout openTextTil;
-
     @BindView(R.id.etxt_open_text)
     TextInputEditText openTextEtxt;
 
+    //openText2
+    @BindView(R.id.til_open_text2)
+    TextInputLayout openTextTil2;
+    @BindView(R.id.etxt_open_text2)
+    TextInputEditText openTextEtxt2;
+
+    //openText3
+    @BindView(R.id.til_open_text3)
+    TextInputLayout openTextTil3;
+    @BindView(R.id.etxt_open_text3)
+    TextInputEditText openTextEtxt3;
+
+    //openText4
+    @BindView(R.id.til_open_text4)
+    TextInputLayout openTextTil4;
+    @BindView(R.id.etxt_open_text4)
+    TextInputEditText openTextEtxt4;
+
+    //openText5
+    @BindView(R.id.til_open_text5)
+    TextInputLayout openTextTil5;
+    @BindView(R.id.etxt_open_text5)
+    TextInputEditText openTextEtxt5;
+
+    //openText6
+    @BindView(R.id.til_open_text6)
+    TextInputLayout openTextTil6;
+    @BindView(R.id.etxt_open_text6)
+    TextInputEditText openTextEtxt6;
+
+    //dateNone1
     @BindView(R.id.dateLayout)
     TextInputLayout dateTextTil;
-
-    @BindView(R.id.dateLayoutfuture)
-    TextInputLayout dateTextTilfuture;
-    @BindView(R.id.dateLayoutpast)
-    TextInputLayout dateTextTilpast;
-
     @BindView(R.id.dob)
     TextInputEditText dobEditText;
+    //dateNone2
+    @BindView(R.id.dateLayout2)
+    TextInputLayout dateTextTil2;
+    @BindView(R.id.dob2)
+    TextInputEditText dobEditText2;
+    //dateNone3
+    @BindView(R.id.dateLayout3)
+    TextInputLayout dateTextTil3;
+    @BindView(R.id.dob3)
+    TextInputEditText dobEditText3;
+    //dateNone4
+    @BindView(R.id.dateLayout4)
+    TextInputLayout dateTextTil4;
+    @BindView(R.id.dob4)
+    TextInputEditText dobEditText4;
+    //dateNone5
+    @BindView(R.id.dateLayout5)
+    TextInputLayout dateTextTil5;
+    @BindView(R.id.dob5)
+    TextInputEditText dobEditText5;
+    //dateNone6
+    @BindView(R.id.dateLayout6)
+    TextInputLayout dateTextTil6;
+    @BindView(R.id.dob6)
+    TextInputEditText dobEditText6;
 
+    //datefuture1
+    @BindView(R.id.dateLayoutfuture)
+    TextInputLayout dateTextTilfuture;
     @BindView(R.id.dobfuture)
     TextInputEditText dobEditTextfuture;
 
+
+    //datefuture2
+    @BindView(R.id.dateLayoutfuture2)
+    TextInputLayout dateTextTilfuture2;
+    @BindView(R.id.dobfuture2)
+    TextInputEditText dobEditTextfuture2;
+
+    //datefuture3
+    @BindView(R.id.dateLayoutfuture3)
+    TextInputLayout dateTextTilfuture3;
+    @BindView(R.id.dobfuture3)
+    TextInputEditText dobEditTextfuture3;
+
+    //datefuture4
+    @BindView(R.id.dateLayoutfuture4)
+    TextInputLayout dateTextTilfuture4;
+    @BindView(R.id.dobfuture4)
+    TextInputEditText dobEditTextfuture4;
+
+    //datefuture5
+    @BindView(R.id.dateLayoutfuture5)
+    TextInputLayout dateTextTilfuture5;
+    @BindView(R.id.dobfuture5)
+    TextInputEditText dobEditTextfuture5;
+
+    //datefuture6
+    @BindView(R.id.dateLayoutfuture6)
+    TextInputLayout dateTextTilfuture6;
+    @BindView(R.id.dobfuture6)
+    TextInputEditText dobEditTextfuture6;
+
+
+    //datepast1
+    @BindView(R.id.dateLayoutpast)
+    TextInputLayout dateTextTilpast;
     @BindView(R.id.dobpast)
     TextInputEditText dobEditTextpast;
+
+    //datepast2
+    @BindView(R.id.dateLayoutpast2)
+    TextInputLayout dateTextTilpast2;
+    @BindView(R.id.dobpast2)
+    TextInputEditText dobEditTextpast2;
+
+    //datepast3
+    @BindView(R.id.dateLayoutpast3)
+    TextInputLayout dateTextTilpast3;
+    @BindView(R.id.dobpast3)
+    TextInputEditText dobEditTextpast3;
+
+    //datepast4
+    @BindView(R.id.dateLayoutpast4)
+    TextInputLayout dateTextTilpast4;
+    @BindView(R.id.dobpast4)
+    TextInputEditText dobEditTextpast4;
+
+    //datepast5
+    @BindView(R.id.dateLayoutpast5)
+    TextInputLayout dateTextTilpast5;
+    @BindView(R.id.dobpast5)
+    TextInputEditText dobEditTextpast5;
+
+    //datepast6
+    @BindView(R.id.dateLayoutpast6)
+    TextInputLayout dateTextTilpast6;
+    @BindView(R.id.dobpast6)
+    TextInputEditText dobEditTextpast6;
+
+
+
 
     @BindView(R.id.til_numeric_layout)
     TextInputLayout numericText;
@@ -198,7 +322,7 @@ public class QuestionsFragment extends Fragment {
         //set EditText type4 to accept numeric only
         numericEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
 
-        //DatePickerNone
+        //DatePickerNone1
         dobEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -217,13 +341,139 @@ public class QuestionsFragment extends Fragment {
                     }
                 }, mYear, mMonth, mDay );
                 datePickerDialog.show ();
-
-
-
             }
         });
-        //DatePickerFuture
+        //DatePickerNone2
+        dobEditText2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance ();
+                mYear = calendar.get ( Calendar.YEAR );
+                mMonth = calendar.get ( Calendar.MONTH );
+                mDay = calendar.get ( Calendar.DAY_OF_MONTH );
+                //  datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
 
+                //show dialog
+                datePickerDialog = new DatePickerDialog ( context, new DatePickerDialog.OnDateSetListener () {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                        dobEditText2.setText ( dayOfMonth + "/" + (month + 1) + "/" + year );
+                    }
+                }, mYear, mMonth, mDay );
+                datePickerDialog.show ();
+            }
+        });
+        //DatePickerNone3
+        dobEditText3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance ();
+                mYear = calendar.get ( Calendar.YEAR );
+                mMonth = calendar.get ( Calendar.MONTH );
+                mDay = calendar.get ( Calendar.DAY_OF_MONTH );
+                //  datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+                //show dialog
+                datePickerDialog = new DatePickerDialog ( context, new DatePickerDialog.OnDateSetListener () {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                        dobEditText3.setText ( dayOfMonth + "/" + (month + 1) + "/" + year );
+                    }
+                }, mYear, mMonth, mDay );
+                datePickerDialog.show ();
+            }
+        });
+        //DatePickerNone4
+        dobEditText4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance ();
+                mYear = calendar.get ( Calendar.YEAR );
+                mMonth = calendar.get ( Calendar.MONTH );
+                mDay = calendar.get ( Calendar.DAY_OF_MONTH );
+                //  datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+                //show dialog
+                datePickerDialog = new DatePickerDialog ( context, new DatePickerDialog.OnDateSetListener () {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                        dobEditText4.setText ( dayOfMonth + "/" + (month + 1) + "/" + year );
+                    }
+                }, mYear, mMonth, mDay );
+                datePickerDialog.show ();
+            }
+        });
+        //DatePickerNone5
+        dobEditText5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance ();
+                mYear = calendar.get ( Calendar.YEAR );
+                mMonth = calendar.get ( Calendar.MONTH );
+                mDay = calendar.get ( Calendar.DAY_OF_MONTH );
+                //  datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+                //show dialog
+                datePickerDialog = new DatePickerDialog ( context, new DatePickerDialog.OnDateSetListener () {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                        dobEditText5.setText ( dayOfMonth + "/" + (month + 1) + "/" + year );
+                    }
+                }, mYear, mMonth, mDay );
+                datePickerDialog.show ();
+            }
+        });
+        //DatePickerNone6
+        dobEditText6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance ();
+                mYear = calendar.get ( Calendar.YEAR );
+                mMonth = calendar.get ( Calendar.MONTH );
+                mDay = calendar.get ( Calendar.DAY_OF_MONTH );
+                //  datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+                //show dialog
+                datePickerDialog = new DatePickerDialog ( context, new DatePickerDialog.OnDateSetListener () {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                        dobEditText6.setText ( dayOfMonth + "/" + (month + 1) + "/" + year );
+                    }
+                }, mYear, mMonth, mDay );
+                datePickerDialog.show ();
+            }
+        });
+
+        //DatePickerNone6
+       /* dobEditText6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance ();
+                mYear = calendar.get ( Calendar.YEAR );
+                mMonth = calendar.get ( Calendar.MONTH );
+                mDay = calendar.get ( Calendar.DAY_OF_MONTH );
+                //  datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+                //show dialog
+                datePickerDialog = new DatePickerDialog ( context, new DatePickerDialog.OnDateSetListener () {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                        dobEditText.setText ( dayOfMonth + "/" + (month + 1) + "/" + year );
+                    }
+                }, mYear, mMonth, mDay );
+                datePickerDialog.show ();
+            }
+        });*/
+
+
+
+        //DatePickerFuture1
         dobEditTextfuture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -246,6 +496,128 @@ public class QuestionsFragment extends Fragment {
                 datePicker.show();
             }
         });
+
+        //DatePickerFuture2
+        dobEditTextfuture2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(context   , new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        dobEditTextfuture2.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+
+                // show the dialog
+                datePicker.show();
+            }
+        });
+
+        //DatePickerFuture3
+        dobEditTextfuture3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(context   , new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        dobEditTextfuture3.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+
+                // show the dialog
+                datePicker.show();
+            }
+        });
+
+        //DatePickerFuture4
+        dobEditTextfuture4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(context   , new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        dobEditTextfuture4.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+
+                // show the dialog
+                datePicker.show();
+            }
+        });
+
+
+        //DatePickerFuture5
+        dobEditTextfuture5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(context   , new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        dobEditTextfuture5.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+
+                // show the dialog
+                datePicker.show();
+            }
+        });
+
+        //DatePickerFuture6
+        dobEditTextfuture6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(context   , new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        dobEditTextfuture6.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+
+                // show the dialog
+                datePicker.show();
+            }
+        });
+
 
 
         //DatePickerPast
@@ -274,6 +646,139 @@ public class QuestionsFragment extends Fragment {
             }
         });
 
+
+
+
+        //DatePickerPast2
+        dobEditTextpast2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(context   , new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        dobEditTextpast2.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
+
+                // show the dialog
+                datePicker.show();
+
+            }
+        });
+        //DatePickerPast3
+        dobEditTextpast3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(context   , new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        dobEditTextpast3.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
+
+                // show the dialog
+                datePicker.show();
+
+            }
+        });
+
+        //DatePickerPast4
+        dobEditTextpast4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(context   , new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        dobEditTextpast4.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
+
+                // show the dialog
+                datePicker.show();
+
+            }
+        });
+
+
+        //DatePickerPast5
+        dobEditTextpast5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(context   , new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        dobEditTextpast5.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
+
+                // show the dialog
+                datePicker.show();
+
+            }
+        });
+
+        //DatePickerPast6
+        dobEditTextpast6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(context   , new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        dobEditTextpast6.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
+
+                // show the dialog
+                datePicker.show();
+
+            }
+        });
+
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -283,7 +788,9 @@ public class QuestionsFragment extends Fragment {
                      provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString());
 
                 }*/
-                 if(questions.getQuestion_type()==1 && questions.isIs_required()){
+
+                //Open Text repeat count 1
+                 if(questions.getQuestion_type()==1 && questions.isIs_required() && questions.isIs_repeatable() && repeat_count==1){
                     if(openTextEtxt.getText().toString().equals("")){
                      Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();}else{
                         provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString());
@@ -293,6 +800,73 @@ public class QuestionsFragment extends Fragment {
                 else if (questions.getQuestion_type() == 1 )
                 {
                     provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString());
+
+                }
+                //Open Text repeat count 2
+                if(questions.getQuestion_type()==1 && questions.isIs_required() && questions.isIs_repeatable() && repeat_count==2){
+                    if(openTextEtxt.getText().toString().equals("") || openTextEtxt2.getText().toString().equals("")){
+                        Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();}else{
+                        provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString()+ " ,"+openTextEtxt2.getText().toString());
+                    }
+
+                }
+                else if (questions.getQuestion_type() == 1 )
+                {
+                    provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString()+ " ,"+openTextEtxt2.getText().toString());
+
+                }
+                //Open Text repeat count 3
+                if(questions.getQuestion_type()==1 && questions.isIs_required() && questions.isIs_repeatable() && repeat_count==3){
+                    if(openTextEtxt.getText().toString().equals("") || openTextEtxt2.getText().toString().equals("")|| openTextEtxt3.getText().toString().equals("")){
+                        Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();}else{
+                        provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString()+ " ,"+openTextEtxt2.getText().toString() + " ,"+openTextEtxt3.getText().toString());
+                    }
+
+                }
+                else if (questions.getQuestion_type() == 1 )
+                {
+                    provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString()+ " ,"+openTextEtxt2.getText().toString()+ " ,"+openTextEtxt3.getText().toString());
+
+                }
+                //Open Text repeat count 4
+                if(questions.getQuestion_type()==1 && questions.isIs_required() && questions.isIs_repeatable() && repeat_count==4){
+                    if(openTextEtxt.getText().toString().equals("") || openTextEtxt2.getText().toString().equals("")|| openTextEtxt3.getText().toString().equals("") || openTextEtxt4.getText().toString().equals("")){
+                        Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();}else{
+                        provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString()+ " ,"+openTextEtxt2.getText().toString() + " ,"+openTextEtxt3.getText().toString()+ " ,"+openTextEtxt4.getText().toString());
+                    }
+
+                }
+                else if (questions.getQuestion_type() == 1 )
+                {
+                    provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString()+ " ,"+openTextEtxt2.getText().toString()+ " ,"+openTextEtxt3.getText().toString()+ " ,"+openTextEtxt4.getText().toString());
+
+                }
+
+                //Open Text repeat count 5
+                if(questions.getQuestion_type()==1 && questions.isIs_required() && questions.isIs_repeatable() && repeat_count==5){
+                    if(openTextEtxt.getText().toString().equals("") || openTextEtxt2.getText().toString().equals("")|| openTextEtxt2.getText().toString().equals("")|| openTextEtxt3.getText().toString().equals("")|| openTextEtxt4.getText().toString().equals("")|| openTextEtxt5.getText().toString().equals("")){
+                        Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();}else{
+                        provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString()+ " ,"+openTextEtxt2.getText().toString() + " ,"+openTextEtxt3.getText().toString()+ " ,"+openTextEtxt4.getText().toString()+ " ,"+openTextEtxt5.getText().toString());
+                    }
+
+                }
+                else if (questions.getQuestion_type() == 1 )
+                {
+                    provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString()+ " ,"+openTextEtxt2.getText().toString()+ " ,"+openTextEtxt3.getText().toString()+ " ,"+openTextEtxt4.getText().toString()+ " ,"+openTextEtxt5.getText().toString());
+
+                }
+
+                //Open Text repeat count 6
+                if(questions.getQuestion_type()==1 && questions.isIs_required() && questions.isIs_repeatable() && repeat_count==5 && questions.isIs_repeatable() && repeat_count==6){
+                    if(openTextEtxt.getText().toString().equals("") || openTextEtxt2.getText().toString().equals("")|| openTextEtxt2.getText().toString().equals("")|| openTextEtxt3.getText().toString().equals("")|| openTextEtxt4.getText().toString().equals("")|| openTextEtxt5.getText().toString().equals("")|| openTextEtxt6.getText().toString().equals("")){
+                        Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();}else{
+                        provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString()+ " ,"+openTextEtxt2.getText().toString() + " ,"+openTextEtxt3.getText().toString()+ " ,"+openTextEtxt4.getText().toString()+ " ,"+openTextEtxt5.getText().toString()+ " ,"+openTextEtxt6.getText().toString());
+                    }
+
+                }
+                else if (questions.getQuestion_type() == 1 )
+                {
+                    provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString()+ " ,"+openTextEtxt2.getText().toString()+ " ,"+openTextEtxt3.getText().toString()+ " ,"+openTextEtxt4.getText().toString()+ " ,"+openTextEtxt5.getText().toString()+ " ,"+openTextEtxt6.getText().toString());
 
                 }
 
@@ -323,9 +897,9 @@ public class QuestionsFragment extends Fragment {
 
                     }*/
 
-                 //datepicker none
-                    else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("none")){
-                        if(dobEditText.getText().toString().equals("") && questions.getDate_validation().equals("none")) {
+                 //datepicker none & not repeatable
+                    else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("none") && !questions.isIs_repeatable()){
+                        if(dobEditText.getText().toString().equals("")) {
                              Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
                              //&& questions.getDate_validation().contentEquals("none")
                          }
@@ -334,14 +908,90 @@ public class QuestionsFragment extends Fragment {
                          }
 
                 }
-                 else if (questions.getQuestion_type() ==5 &&questions.getDate_validation().equals("none")){
+                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("none") && !questions.isIs_repeatable() ){
                      provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString());
 
                  }
+                 //datepicker none & repeatable count2
+                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("none") && questions.isIs_repeatable() && repeat_count==2){
+                     if(dobEditText.getText().toString().equals("") ||dobEditText2.getText().toString().equals("")) {
+                         Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                         //&& questions.getDate_validation().contentEquals("none")
+                     }
+                     {
+                         provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString()+ " ," + dobEditText2.getText().toString());
+                     }
 
-                 // //datepicker restrict future
+                 }
+                 else if (questions.getQuestion_type() ==5 &&questions.getDate_validation().equals("none") && questions.isIs_repeatable() && repeat_count==2 ){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString()+ " ," + dobEditText2.getText().toString());
 
-                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("restrict_future")){
+                 }
+               // datepicker none & repeatable count3
+                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("none") && questions.isIs_repeatable() && repeat_count==3){
+                     if(dobEditText.getText().toString().equals("") || dobEditText2.getText().toString().equals("") ||dobEditText3.getText().toString().equals("")) {
+                         Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                         //&& questions.getDate_validation().contentEquals("none")
+                     }
+                     {
+                         provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString() +" ," + dobEditText2.getText().toString() +" ," + dobEditText3.getText().toString());
+                     }
+
+                 }
+                 else if (questions.getQuestion_type() ==5 &&questions.getDate_validation().equals("none") && questions.isIs_repeatable() && repeat_count==3 ){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString()+" ," + dobEditText2.getText().toString()+" ," + dobEditText3.getText().toString());
+
+                 }
+                 // datepicker none & repeatable count4
+                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("none") && questions.isIs_repeatable() && repeat_count==4){
+                     if(dobEditText.getText().toString().equals("") ||dobEditText2.getText().toString().equals("") || dobEditText3.getText().toString().equals("") || dobEditText4.getText().toString().equals("")) {
+                         Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                         //&& questions.getDate_validation().contentEquals("none")
+                     }
+                     {
+                         provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString()+ " ," +dobEditText2.getText().toString().equals("")+ " ," +dobEditText3.getText().toString().equals("")+ " ," +dobEditText4.getText().toString().equals(""));
+                     }
+
+                 }
+                 else if (questions.getQuestion_type() ==5 &&questions.getDate_validation().equals("none") && questions.isIs_repeatable() && repeat_count1.getRepeat_count()==4 ){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString() + " ," +dobEditText2.getText().toString().equals("")+ " ," +dobEditText3.getText().toString().equals("")+ " ," +dobEditText4.getText().toString().equals(""));
+
+                 }
+                 // datepicker none & repeatable count5
+                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("none") && questions.isIs_repeatable() && repeat_count==5){
+                     if(dobEditText.getText().toString().equals("") || dobEditText2.getText().toString().equals("") || dobEditText3.getText().toString().equals("") || dobEditText4.getText().toString().equals("") || dobEditText5.getText().toString().equals("")) {
+                         Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                         //&& questions.getDate_validation().contentEquals("none")
+                     }
+                     {
+                         provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString()+ " ," +dobEditText2.getText().toString().equals("")+ " ," +dobEditText3.getText().toString().equals("")+ " ," +dobEditText4.getText().toString().equals("")+ " ," +dobEditText5.getText().toString().equals(""));
+                     }
+
+                 }
+                 else if (questions.getQuestion_type() ==5 &&questions.getDate_validation().equals("none") && questions.isIs_repeatable() && repeat_count==5){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString()+ " ," +dobEditText2.getText().toString().equals("")+ " ," +dobEditText3.getText().toString().equals("")+ " ," +dobEditText4.getText().toString().equals("")+ " ," +dobEditText5.getText().toString().equals(""));
+
+                 }
+
+                 // datepicker none & repeatable count6
+                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("none") && questions.isIs_repeatable() && repeat_count==6){
+                     if(dobEditText.getText().toString().equals("") || dobEditText2.getText().toString().equals("") || dobEditText3.getText().toString().equals("") || dobEditText4.getText().toString().equals("") || dobEditText4.getText().toString().equals("") || dobEditText5.getText().toString().equals("") || dobEditText6.getText().toString().equals("")) {
+                         Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                         //&& questions.getDate_validation().contentEquals("none")
+                     }
+                     {
+                         provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString()+ " ," +dobEditText2.getText().toString().equals("")+ " ," +dobEditText3.getText().toString().equals("")+ " ," +dobEditText4.getText().toString().equals("")+ " ," +dobEditText5.getText().toString().equals("")+ " ," +dobEditText6.getText().toString().equals(""));
+                     }
+
+                 }
+                 else if (questions.getQuestion_type() ==5 &&questions.getDate_validation().equals("none") && questions.isIs_repeatable() && repeat_count1.getRepeat_count()==6){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString() + " ," +dobEditText2.getText().toString().equals("")+ " ," +dobEditText3.getText().toString().equals("")+ " ," +dobEditText4.getText().toString().equals("")+ " ," +dobEditText5.getText().toString().equals("")+ " ," +dobEditText6.getText().toString().equals(""));
+
+                 }
+
+
+                 //datepicker restrict future repeat count none
+                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==1){
                      if(dobEditTextfuture.getText().toString().equals("")) {
                          Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
                      }else{
@@ -349,16 +999,86 @@ public class QuestionsFragment extends Fragment {
                      }
 
                  }
-                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_future")){
+                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable()  && repeat_count==1){
                      provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString());
 
                  }
 
+                 //datepicker restrict future repeat count 2
+                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==2){
+                     if(dobEditTextfuture.getText().toString().equals("") || dobEditTextfuture2.getText().toString().equals("")) {
+                         Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                     }else{
+                         provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString() + " ," +dobEditTextfuture2.getText().toString());
+                     }
 
-                 //restrict past date
-                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("restrict_past")){
+                 }
+                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_future")&& questions.isIs_repeatable() && repeat_count==2){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString() + " ," +dobEditTextfuture2.getText().toString());
 
-                     if(dobEditTextfuture.getText().toString().equals("") && questions.getDate_validation().equals("restrict_future")) {
+                 }
+                 //datepicker restrict future repeat count 3
+                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==3){
+                     if(dobEditTextfuture.getText().toString().equals("") || dobEditTextfuture2.getText().toString().equals("") || dobEditTextfuture3.getText().toString().equals("")) {
+                         Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                     }else{
+                         provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString() + " ," +dobEditTextfuture2.getText().toString()+ " ," +dobEditTextfuture3.getText().toString());
+                     }
+
+                 }
+                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_future")&& questions.isIs_repeatable() && repeat_count==3){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString()+ " ," +dobEditTextfuture2.getText().toString()+ " ," +dobEditTextfuture3.getText().toString());
+
+                 }
+
+
+                 //datepicker restrict future repeat count 4
+                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==4){
+                     if(dobEditTextfuture.getText().toString().equals("") || dobEditTextfuture2.getText().toString().equals("") || dobEditTextfuture3.getText().toString().equals("") || dobEditTextfuture4.getText().toString().equals("") ) {
+                         Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                     }else{
+                         provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString()+ " ," +dobEditTextfuture2.getText().toString()+ " ," +dobEditTextfuture3.getText().toString()+ " ," +dobEditTextfuture4.getText().toString());
+                     }
+
+                 }
+                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==4){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString()+ " ," +dobEditTextfuture2.getText().toString()+ " ," +dobEditTextfuture3.getText().toString() + " ," +dobEditTextfuture4.getText().toString());
+
+                 }
+
+                 //datepicker restrict future repeat count 5
+                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==5){
+                     if(dobEditTextfuture.getText().toString().equals("")) {
+                         Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                     }else{
+                         provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString()+ " ," +dobEditTextfuture2.getText().toString()+ " ," +dobEditTextfuture3.getText().toString() + " ," +dobEditTextfuture4.getText().toString() + " ," +dobEditTextfuture5.getText().toString());
+                     }
+
+                 }
+                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==5){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString()+ " ," +dobEditTextfuture2.getText().toString()+ " ," +dobEditTextfuture3.getText().toString()+ " ," +dobEditTextfuture4.getText().toString()+ " ," +dobEditTextfuture5.getText().toString());
+
+                 }
+
+                 //datepicker restrict future repeat count 6
+                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==6){
+                     if(dobEditTextfuture.getText().toString().equals("") ||dobEditTextfuture2.getText().toString().equals("")|| dobEditTextfuture3.getText().toString().equals("")|| dobEditTextfuture4.getText().toString().equals("") || dobEditTextfuture5.getText().toString().equals("") ||dobEditTextfuture6.getText().toString().equals("")) {
+                         Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                     }else{
+                         provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString()+ " ," +dobEditTextfuture2.getText().toString()+ " ," +dobEditTextfuture3.getText().toString()+ " ," +dobEditTextfuture4.getText().toString()+ " ," +dobEditTextfuture5.getText().toString()+ " ," +dobEditTextfuture6.getText().toString());
+                     }
+
+                 }
+                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==6){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString()+ " ," +dobEditTextfuture2.getText().toString()+ " ," +dobEditTextfuture3.getText().toString()+ " ," +dobEditTextfuture4.getText().toString()+ " ," +dobEditTextfuture5.getText().toString()+ " ," +dobEditTextfuture6.getText().toString());
+
+                 }
+
+
+                 //restrict past date non repeat
+                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("restrict_past") && !questions.isIs_repeatable()){
+
+                     if(dobEditTextpast.getText().toString().equals("")) {
                          Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
                      }
 
@@ -368,8 +1088,94 @@ public class QuestionsFragment extends Fragment {
                      }
 
                  }
-                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_past")){
+                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_past")&& !questions.isIs_repeatable()){
                      provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextpast.getText().toString());
+
+                 }
+                 //restrict past date  repeat count 2
+                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("restrict_past") && questions.isIs_repeatable() && repeat_count==2){
+
+                     if(dobEditTextpast.getText().toString().equals("") || dobEditTextpast2.getText().toString().equals("")) {
+                         Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                     }
+
+                     {
+
+                         provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextpast.getText().toString()+ " ,"+ dobEditTextpast2.getText().toString());
+                     }
+
+                 }
+                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_past")&& questions.isIs_repeatable() && repeat_count==2){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextpast.getText().toString()+ " ,"+ dobEditTextpast2.getText().toString());
+
+                 }
+
+                 //restrict past date  repeat count 3
+                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("restrict_past") && questions.isIs_repeatable() && repeat_count==3){
+
+                     if(dobEditTextpast.getText().toString().equals("") || dobEditTextpast2.getText().toString().equals("") || dobEditTextpast3.getText().toString().equals("")) {
+                         Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                     }
+
+                     {
+
+                         provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString() + " ," +dobEditTextpast3.getText().toString());
+                     }
+
+                 }
+                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_past")&& questions.isIs_repeatable() && repeat_count==3){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextpast.getText().toString()+ " ," + dobEditTextpast2.getText().toString() + " ," +dobEditTextpast3.getText().toString());
+
+                 }
+                 //restrict past date  repeat count 4
+                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("restrict_past") && questions.isIs_repeatable() && repeat_count==4){
+
+                     if(dobEditTextpast.getText().toString().equals("") ||dobEditTextpast2.getText().toString().equals("") ||dobEditTextpast3.getText().toString().equals("") ||dobEditTextpast4.getText().toString().equals("")) {
+                         Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                     }
+
+                     {
+
+                         provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextpast.getText().toString()+ " ,"+ dobEditTextpast2.getText().toString()+ " ,"+ dobEditTextpast3.getText().toString()+ " ,"+ dobEditTextpast4.getText().toString());
+                     }
+
+                 }
+                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_past")&& questions.isIs_repeatable() && repeat_count1.getRepeat_count()==4){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextpast.getText().toString() + " ,"+ dobEditTextpast2.getText().toString()+ " ,"+ dobEditTextpast3.getText().toString()+ " ,"+ dobEditTextpast4.getText().toString());
+
+                 }
+                 //restrict past date  repeat count 5
+                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("restrict_past") && questions.isIs_repeatable() && repeat_count==5){
+
+                     if(dobEditTextpast.getText().toString().equals("") || dobEditTextpast2.getText().toString().equals("") ||dobEditTextpast3.getText().toString().equals("") ||dobEditTextpast4.getText().toString().equals("") ||dobEditTextpast5.getText().toString().equals("")) {
+                         Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                     }
+
+                     {
+
+                         provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextpast.getText().toString()+ " ,"+dobEditTextpast2.getText().toString() + " ,"+dobEditTextpast3.getText().toString()+ " ,"+dobEditTextpast4.getText().toString()+ " ,"+dobEditTextpast5.getText().toString());
+                     }
+
+                 }
+                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_past")&& questions.isIs_repeatable() && repeat_count1.getRepeat_count()==5){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextpast.getText().toString()+ " ,"+dobEditTextpast2.getText().toString() + " ,"+dobEditTextpast3.getText().toString()+ " ,"+dobEditTextpast4.getText().toString()+ " ,"+dobEditTextpast5.getText().toString());
+
+                 }
+
+                 //restrict past date  repeat count 6
+                 else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("restrict_past") && questions.isIs_repeatable() && repeat_count==6){
+
+                     if(dobEditTextpast.getText().toString().equals("") ||dobEditTextpast2.getText().toString().equals("") ||dobEditTextpast3.getText().toString().equals("")||dobEditTextpast4.getText().toString().equals("")||dobEditTextpast5.getText().toString().equals("")||dobEditTextpast6.getText().toString().equals("")) {
+                         Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                     }
+
+                     {
+
+                         provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextpast.getText().toString()+ " ,"+dobEditTextpast2.getText().toString() + " ,"+dobEditTextpast3.getText().toString()+ " ,"+dobEditTextpast4.getText().toString()+ " ,"+dobEditTextpast5.getText().toString()+ " ,"+dobEditTextpast6.getText().toString());
+                     }
+                 }
+                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_past")&& questions.isIs_repeatable() && repeat_count==6){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextpast.getText().toString()+ " ,"+dobEditTextpast2.getText().toString() + " ,"+dobEditTextpast3.getText().toString()+ " ,"+dobEditTextpast4.getText().toString()+ " ,"+dobEditTextpast5.getText().toString()+ " ,"+dobEditTextpast6.getText().toString());
 
                  }
 
@@ -448,7 +1254,7 @@ public class QuestionsFragment extends Fragment {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("session", sessionID );
+            jsonObject.put("session", sessionID);
             jsonObject.put("question", questionNumber);
             jsonObject.put("answer", answer);
             jsonObject.put("open_text", openText);
@@ -519,9 +1325,8 @@ public class QuestionsFragment extends Fragment {
     private void loadQuestion() {
 
         String auth_token = loggedInUser.getAuth_token();
-
-
-        AndroidNetworking.get(questionLink)
+        //int session2 = sessionID;
+        AndroidNetworking.get(questionLink+ "/"+sessionID)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -554,9 +1359,10 @@ public class QuestionsFragment extends Fragment {
                                 int questionnaire = question.has("questionnaire") ? question.getInt("questionnaire") : 0;
                                 int createdBy = question.has("created_by") ? question.getInt("created_by") : 0;
                                 boolean is_required = question.has("is_required") ? question.getBoolean("is_required") : Boolean.parseBoolean("");
+                                boolean is_repeatable = question.has("is_repeatable") ? question.getBoolean("is_repeatable") : Boolean.parseBoolean("");
 
 
-                                questions = new Question(questionId,questionName,questionType,createdAt,questionnaire,createdBy, is_required, date_validation);
+                                questions = new Question(questionId,questionName,questionType,createdAt,questionnaire,createdBy, is_required, date_validation, is_repeatable);
 
 
                                 JSONArray ans = response.getJSONArray("Ans");
@@ -576,63 +1382,200 @@ public class QuestionsFragment extends Fragment {
                                         int  created_by = item.has("created_by") ? item.getInt("created_by") : 0;
 
 
-                                        answers = new Answer(ansID,option,created_at,questionID,created_by);
-                                        answerList.add(answers);
+
+                                            answers = new Answer(ansID, option, created_at, questionID, created_by);
+                                            answerList.add(answers);
+
+                                        if (response.has("repeat_count")) {
+                                            repeat_count = response.getInt("repeat_count");
+
+                                           /* if (questions.getQuestion_type() == 1 && !is_repeatable) {
+                                                openTextTil.setVisibility(View.VISIBLE);
+                                            }*/
+                                            if (questions.getQuestion_type() == 1 && is_repeatable && repeat_count==1) {
+                                                openTextTil.setVisibility(View.VISIBLE);
+                                            }
+
+                                            //repeat count =2
+                                            else if (questions.getQuestion_type()==1 && is_repeatable && repeat_count==2){
+                                                openTextTil.setVisibility(View.VISIBLE);
+                                                openTextTil2.setVisibility(View.VISIBLE);
+                                            }
+                                            //repeat count =3
+                                            else if (questions.getQuestion_type()==1 && is_repeatable && repeat_count==3){
+                                                openTextTil.setVisibility(View.VISIBLE);
+                                                openTextTil2.setVisibility(View.VISIBLE);
+                                                openTextTil3.setVisibility(View.VISIBLE);
+                                            }
 
 
-                                        if (questions.getQuestion_type() == 1){
-                                            openTextTil.setVisibility(View.VISIBLE);
+                                            //repeat count =4
+                                            else if (questions.getQuestion_type()==1 && is_repeatable && repeat_count==4){
+                                                openTextTil.setVisibility(View.VISIBLE);
+                                                openTextTil2.setVisibility(View.VISIBLE);
+                                                openTextTil3.setVisibility(View.VISIBLE);
+                                                openTextTil4.setVisibility(View.VISIBLE);
+                                            }
 
 
-                                        }
-                                        else if (questions.getQuestion_type() == 2){
-                                            singleChoiceRadioGroup.setVisibility(View.VISIBLE);
-
-                                            RadioButton rbn = new RadioButton(context);
-                                            rbn.setId(View.generateViewId());
-                                            rbn.setText(answers.getOption());
-                                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
-                                            rbn.setLayoutParams(params);
-                                            singleChoiceRadioGroup.addView(rbn);
+                                            //repeat count =5
+                                            else if (questions.getQuestion_type()==1 && is_repeatable && repeat_count==5){
+                                                openTextTil.setVisibility(View.VISIBLE);
+                                                openTextTil2.setVisibility(View.VISIBLE);
+                                                openTextTil3.setVisibility(View.VISIBLE);
+                                                openTextTil4.setVisibility(View.VISIBLE);
+                                                openTextTil5.setVisibility(View.VISIBLE);
+                                            }
 
 
-                                        }
-                                        else if (questions.getQuestion_type() == 3){
-
-                                            openTextTil.setVisibility(View.GONE);
-                                            singleChoiceRadioGroup.setVisibility(View.GONE);
-                                            multipleChoiceAns.setVisibility(View.VISIBLE);
-
-                                            checkBox = new CheckBox(context);
-                                            checkBox.setId(answers.getId());
-                                            checkBox.setText(answers.getOption());
-                                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
-                                            checkBox.setLayoutParams(params);
-                                            multipleChoiceAns.addView(checkBox);
-
-                                        }
-                                        else if (questions.getQuestion_type()==4){
-                                            numericText.setVisibility(View.VISIBLE);
-                                            numericEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
-                                        }
-                                        //none
-                                        else if (questions.getQuestion_type()==5 && questions.getDate_validation().equals("none")){
-                                            dateTextTil.setVisibility(View.VISIBLE);
-                                        }
-
-                                       // restrict future
-                                        else if (questions.getQuestion_type()==5 && questions.getDate_validation().equals("restrict_future")){
-                                            dateTextTilfuture.setVisibility(View.VISIBLE);
-                                        }
-
-                                        //restrict past
-                                        else if (questions.getQuestion_type()==5 && questions.getDate_validation().equals("restrict_past")){
-                                            dateTextTilpast.setVisibility(View.VISIBLE);
-                                        }
+                                            //repeat count =6
+                                            else if (questions.getQuestion_type()==1 && is_repeatable && repeat_count==6){
+                                                openTextTil.setVisibility(View.VISIBLE);
+                                                openTextTil2.setVisibility(View.VISIBLE);
+                                                openTextTil3.setVisibility(View.VISIBLE);
+                                                openTextTil4.setVisibility(View.VISIBLE);
+                                                openTextTil5.setVisibility(View.VISIBLE);
+                                                openTextTil6.setVisibility(View.VISIBLE);
+                                            }
 
 
-                                        else {
-                                            Toast.makeText(context, "No answers found for this question", Toast.LENGTH_SHORT).show();
+
+                                            else if (questions.getQuestion_type() == 2) {
+                                                singleChoiceRadioGroup.setVisibility(View.VISIBLE);
+
+                                                RadioButton rbn = new RadioButton(context);
+                                                rbn.setId(View.generateViewId());
+                                                rbn.setText(answers.getOption());
+                                                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
+                                                rbn.setLayoutParams(params);
+                                                singleChoiceRadioGroup.addView(rbn);
+
+
+                                            } else if (questions.getQuestion_type() == 3) {
+
+                                                openTextTil.setVisibility(View.GONE);
+                                                singleChoiceRadioGroup.setVisibility(View.GONE);
+                                                multipleChoiceAns.setVisibility(View.VISIBLE);
+
+                                                checkBox = new CheckBox(context);
+                                                checkBox.setId(answers.getId());
+                                                checkBox.setText(answers.getOption());
+                                                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
+                                                checkBox.setLayoutParams(params);
+                                                multipleChoiceAns.addView(checkBox);
+
+                                            } else if (questions.getQuestion_type() == 4) {
+                                                numericText.setVisibility(View.VISIBLE);
+                                                numericEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
+                                            }
+                                            //none
+                                            /*else if (questions.getQuestion_type() == 5 && questions.getDate_validation().equals("none") && !questions.isIs_repeatable()) {
+                                                dateTextTilfuture.setVisibility(View.VISIBLE);
+                                            }*/
+
+                                            // restrict future1
+                                            else if (questions.getQuestion_type() == 5 && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==1) {
+                                                dateTextTilfuture.setVisibility(View.VISIBLE);
+
+                                            }
+
+                                            // restrict future2
+                                            else if (questions.getQuestion_type() == 5 && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==2) {
+                                                dateTextTilfuture.setVisibility(View.VISIBLE);
+                                                dateTextTilfuture2.setVisibility(View.VISIBLE);
+
+                                            }
+
+
+                                            // restrict future3
+                                            else if (questions.getQuestion_type() == 5 && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable()  && repeat_count==3) {
+                                                dateTextTilfuture.setVisibility(View.VISIBLE);
+                                                dateTextTilfuture2.setVisibility(View.VISIBLE);
+                                                dateTextTilfuture3.setVisibility(View.VISIBLE);
+
+                                            }
+
+                                            // restrict future4
+                                            else if (questions.getQuestion_type() == 5 && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==4) {
+                                                dateTextTilfuture.setVisibility(View.VISIBLE);
+                                                dateTextTilfuture2.setVisibility(View.VISIBLE);
+                                                dateTextTilfuture3.setVisibility(View.VISIBLE);
+                                                dateTextTilfuture4.setVisibility(View.VISIBLE);
+
+                                            }
+                                            // restrict future5
+                                            else if (questions.getQuestion_type() == 5 && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==5) {
+                                                dateTextTilfuture.setVisibility(View.VISIBLE);
+                                                dateTextTilfuture2.setVisibility(View.VISIBLE);
+                                                dateTextTilfuture3.setVisibility(View.VISIBLE);
+                                                dateTextTilfuture4.setVisibility(View.VISIBLE);
+                                                dateTextTilfuture5.setVisibility(View.VISIBLE);
+
+                                            }
+
+                                            // restrict future6
+                                            else if (questions.getQuestion_type() == 5 && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable()&& repeat_count==6) {
+                                                dateTextTilfuture.setVisibility(View.VISIBLE);
+                                                dateTextTilfuture2.setVisibility(View.VISIBLE);
+                                                dateTextTilfuture3.setVisibility(View.VISIBLE);
+                                                dateTextTilfuture4.setVisibility(View.VISIBLE);
+                                                dateTextTilfuture5.setVisibility(View.VISIBLE);
+                                                dateTextTilfuture6.setVisibility(View.VISIBLE);
+
+                                            }
+
+
+
+
+
+                                            //restrict past repeat none
+                                            else if (questions.getQuestion_type() == 5 && questions.getDate_validation().equals("restrict_past") && !questions.isIs_repeatable()) {
+                                                dateTextTilpast.setVisibility(View.VISIBLE);
+                                            }
+                                            //restrict past2
+                                            else if (questions.getQuestion_type() == 5 && questions.getDate_validation().equals("restrict_past") && questions.isIs_repeatable() && repeat_count1.getRepeat_count()==2) {
+                                                dateTextTilpast.setVisibility(View.VISIBLE);
+                                                dateTextTilpast2.setVisibility(View.VISIBLE);
+                                            }
+
+                                            //restrict past3
+                                            else if (questions.getQuestion_type() == 5 && questions.getDate_validation().equals("restrict_past") && questions.isIs_repeatable() && repeat_count1.getRepeat_count()==3) {
+                                                dateTextTilpast.setVisibility(View.VISIBLE);
+                                                dateTextTilpast2.setVisibility(View.VISIBLE);
+                                                dateTextTilpast3.setVisibility(View.VISIBLE);
+                                            }
+
+
+                                            //restrict past4
+                                            else if (questions.getQuestion_type() == 5 && questions.getDate_validation().equals("restrict_past")&& questions.isIs_repeatable() && repeat_count1.getRepeat_count()==4) {
+                                                dateTextTilpast.setVisibility(View.VISIBLE);
+                                                dateTextTilpast2.setVisibility(View.VISIBLE);
+                                                dateTextTilpast3.setVisibility(View.VISIBLE);
+                                                dateTextTilpast4.setVisibility(View.VISIBLE);
+                                            }
+                                            //restrict past5
+                                            else if (questions.getQuestion_type() == 5 && questions.getDate_validation().equals("restrict_past") && questions.isIs_repeatable() && repeat_count1.getRepeat_count()==5) {
+                                                dateTextTilpast.setVisibility(View.VISIBLE);
+                                                dateTextTilpast2.setVisibility(View.VISIBLE);
+                                                dateTextTilpast3.setVisibility(View.VISIBLE);
+                                                dateTextTilpast4.setVisibility(View.VISIBLE);
+                                                dateTextTilpast5.setVisibility(View.VISIBLE);
+                                            }
+
+                                            //restrict past6
+                                            else if (questions.getQuestion_type() == 5 && questions.getDate_validation().equals("restrict_past") && questions.isIs_repeatable() && repeat_count1.getRepeat_count()==6) {
+                                                dateTextTilpast.setVisibility(View.VISIBLE);
+                                                dateTextTilpast2.setVisibility(View.VISIBLE);
+                                                dateTextTilpast3.setVisibility(View.VISIBLE);
+                                                dateTextTilpast4.setVisibility(View.VISIBLE);
+                                                dateTextTilpast5.setVisibility(View.VISIBLE);
+                                                dateTextTilpast6.setVisibility(View.VISIBLE);
+                                            }
+
+
+                                            else {
+                                                Toast.makeText(context, "No answers found for this question", Toast.LENGTH_SHORT).show();
+                                            }
                                         }
 
                                     }
@@ -694,33 +1637,5 @@ public class QuestionsFragment extends Fragment {
         shimmer_my_container.stopShimmerAnimation();
         super.onPause();
     }
-    public void dets(){
-        //DatePicker
-        dobEditText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Calendar calendar = Calendar.getInstance ();
-                mYear = calendar.get ( Calendar.YEAR );
-                mMonth = calendar.get ( Calendar.MONTH );
-                mDay = calendar.get ( Calendar.DAY_OF_MONTH );
 
-                //show dialog
-               datePickerDialog = new DatePickerDialog ( context, new DatePickerDialog.OnDateSetListener () {
-
-
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-                        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
-
-                        dobEditText.setText ( dayOfMonth + "/" + (month + 1) + "/" + year );
-                    }
-                }, mYear, mMonth, mDay );
-                datePickerDialog.show ();
-
-
-
-            }
-        });
-    }
 }

@@ -59,7 +59,7 @@ public class questionsAdapter extends RecyclerView.Adapter<questionsAdapter.Ques
 
     List<Questions> all = new ArrayList<>();
     List<Question> question1 = new ArrayList<>();
-   Question question2;
+    Question question2;
 
     Context context;
 
