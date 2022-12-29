@@ -789,8 +789,24 @@ public class QuestionsFragment extends Fragment {
 
                 }*/
 
+                //Open Text not repeat
+
+                if(questions.getQuestion_type()==1 && questions.isIs_required()){
+                    if(openTextEtxt.getText().toString().equals("")){
+                        Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();}
+                    else{
+                        provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString());
+                    }
+
+                }
+                else if (questions.getQuestion_type() == 1 )
+                {
+                    provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString());
+
+                }
                 //Open Text repeat count 1
-                 if(questions.getQuestion_type()==1 && questions.isIs_required() && questions.isIs_repeatable() && repeat_count==1){
+
+                /* if(questions.getQuestion_type()==1 && questions.isIs_required() && questions.isIs_repeatable() && repeat_count==1){
                     if(openTextEtxt.getText().toString().equals("")){
                      Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();}else{
                         provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString());
@@ -805,7 +821,8 @@ public class QuestionsFragment extends Fragment {
                 //Open Text repeat count 2
                 if(questions.getQuestion_type()==1 && questions.isIs_required() && questions.isIs_repeatable() && repeat_count==2){
                     if(openTextEtxt.getText().toString().equals("") || openTextEtxt2.getText().toString().equals("")){
-                        Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();}else{
+                        Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();}
+                    else{
                         provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString()+ " ,"+openTextEtxt2.getText().toString());
                     }
 
@@ -868,7 +885,7 @@ public class QuestionsFragment extends Fragment {
                 {
                     provideAnswers(sessionID, questions.getId(), String.valueOf(answers.getId()), openTextEtxt.getText().toString()+ " ,"+openTextEtxt2.getText().toString()+ " ,"+openTextEtxt3.getText().toString()+ " ,"+openTextEtxt4.getText().toString()+ " ,"+openTextEtxt5.getText().toString()+ " ,"+openTextEtxt6.getText().toString());
 
-                }
+                }*/
 
                 /*else if (questions.getQuestion_type() == 4){
 
@@ -897,8 +914,27 @@ public class QuestionsFragment extends Fragment {
 
                     }*/
 
+                //none
+                //datepicker none & not repeatable
+                else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("none") && !questions.isIs_repeatable()){
+                    if(dobEditText.getText().toString().equals("")) {
+                        Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                        //&& questions.getDate_validation().contentEquals("none")
+                    }
+                    {
+                        provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString());
+                    }
+
+                }
+                else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("none") && !questions.isIs_repeatable()){
+                    provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString());
+
+                }
+
+
+
                  //datepicker none & not repeatable
-                    else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("none") && !questions.isIs_repeatable()){
+                    else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("none") && questions.isIs_repeatable() && repeat_count==1){
                         if(dobEditText.getText().toString().equals("")) {
                              Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
                              //&& questions.getDate_validation().contentEquals("none")
@@ -908,7 +944,7 @@ public class QuestionsFragment extends Fragment {
                          }
 
                 }
-                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("none") && !questions.isIs_repeatable() ){
+                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("none") && questions.isIs_repeatable() && repeat_count==1){
                      provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString());
 
                  }
@@ -984,13 +1020,28 @@ public class QuestionsFragment extends Fragment {
                      }
 
                  }
-                 else if (questions.getQuestion_type() ==5 &&questions.getDate_validation().equals("none") && questions.isIs_repeatable() && repeat_count1.getRepeat_count()==6){
+                 else if (questions.getQuestion_type() ==5 &&questions.getDate_validation().equals("none") && questions.isIs_repeatable() && repeat_count==6){
                      provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditText.getText().toString() + " ," +dobEditText2.getText().toString().equals("")+ " ," +dobEditText3.getText().toString().equals("")+ " ," +dobEditText4.getText().toString().equals("")+ " ," +dobEditText5.getText().toString().equals("")+ " ," +dobEditText6.getText().toString().equals(""));
 
                  }
 
+                //datepicker restrict future notrrepeat
 
-                 //datepicker restrict future repeat count none
+                else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("restrict_future") && !questions.isIs_repeatable()){
+                    if(dobEditTextfuture.getText().toString().equals("")) {
+                        Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
+                    }else{
+                        provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString());
+                    }
+
+                }
+                else if (questions.getQuestion_type() ==5 && !questions.isIs_required()  && questions.getDate_validation().equals("restrict_future") && !questions.isIs_repeatable()){
+                    provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString());
+
+                }
+
+
+                 //datepicker restrict future repeat count one
                  else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==1){
                      if(dobEditTextfuture.getText().toString().equals("")) {
                          Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
@@ -999,7 +1050,7 @@ public class QuestionsFragment extends Fragment {
                      }
 
                  }
-                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable()  && repeat_count==1){
+                 else if (questions.getQuestion_type() ==5&& !questions.isIs_required() && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable()  && repeat_count==1){
                      provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString());
 
                  }
@@ -1013,7 +1064,7 @@ public class QuestionsFragment extends Fragment {
                      }
 
                  }
-                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_future")&& questions.isIs_repeatable() && repeat_count==2){
+                 else if (questions.getQuestion_type() ==5 && !questions.isIs_required() && questions.getDate_validation().equals("restrict_future")&& questions.isIs_repeatable() && repeat_count==2){
                      provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString() + " ," +dobEditTextfuture2.getText().toString());
 
                  }
@@ -1026,7 +1077,7 @@ public class QuestionsFragment extends Fragment {
                      }
 
                  }
-                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_future")&& questions.isIs_repeatable() && repeat_count==3){
+                 else if (questions.getQuestion_type() ==5 && !questions.isIs_required() && questions.getDate_validation().equals("restrict_future")&& questions.isIs_repeatable() && repeat_count==3){
                      provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString()+ " ," +dobEditTextfuture2.getText().toString()+ " ," +dobEditTextfuture3.getText().toString());
 
                  }
@@ -1041,21 +1092,21 @@ public class QuestionsFragment extends Fragment {
                      }
 
                  }
-                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==4){
-                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString()+ " ," +dobEditTextfuture2.getText().toString()+ " ," +dobEditTextfuture3.getText().toString() + " ," +dobEditTextfuture4.getText().toString());
+                 else if (questions.getQuestion_type() ==5 && !questions.isIs_required() && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==4){
+                     provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString()+ " ," +dobEditTextfuture2.getText().toString()+ " ," +dobEditTextfuture3.getText().toString()+ " ," +dobEditTextfuture4.getText().toString());
 
                  }
 
                  //datepicker restrict future repeat count 5
                  else if (questions.getQuestion_type()==5 && questions.isIs_required() && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==5){
-                     if(dobEditTextfuture.getText().toString().equals("")) {
+                     if(dobEditTextfuture.getText().toString().equals("")||dobEditTextfuture2.getText().toString().equals("")|| dobEditTextfuture3.getText().toString().equals("")|| dobEditTextfuture4.getText().toString().equals("") || dobEditTextfuture5.getText().toString().equals("")) {
                          Toast.makeText(context, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
                      }else{
                          provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString()+ " ," +dobEditTextfuture2.getText().toString()+ " ," +dobEditTextfuture3.getText().toString() + " ," +dobEditTextfuture4.getText().toString() + " ," +dobEditTextfuture5.getText().toString());
                      }
 
                  }
-                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==5){
+                 else if (questions.getQuestion_type() ==5 && !questions.isIs_required() && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==5){
                      provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString()+ " ," +dobEditTextfuture2.getText().toString()+ " ," +dobEditTextfuture3.getText().toString()+ " ," +dobEditTextfuture4.getText().toString()+ " ," +dobEditTextfuture5.getText().toString());
 
                  }
@@ -1069,7 +1120,7 @@ public class QuestionsFragment extends Fragment {
                      }
 
                  }
-                 else if (questions.getQuestion_type() ==5 && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==6){
+                 else if (questions.getQuestion_type() ==5 && !questions.isIs_required() && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==6){
                      provideAnswers(sessionID,questions.getId(),String.valueOf(answers.getId()), dobEditTextfuture.getText().toString()+ " ," +dobEditTextfuture2.getText().toString()+ " ," +dobEditTextfuture3.getText().toString()+ " ," +dobEditTextfuture4.getText().toString()+ " ," +dobEditTextfuture5.getText().toString()+ " ," +dobEditTextfuture6.getText().toString());
 
                  }
@@ -1392,12 +1443,16 @@ public class QuestionsFragment extends Fragment {
                                            /* if (questions.getQuestion_type() == 1 && !is_repeatable) {
                                                 openTextTil.setVisibility(View.VISIBLE);
                                             }*/
-                                            if (questions.getQuestion_type() == 1 && is_repeatable && repeat_count==1) {
+                                           /* if (questions.getQuestion_type() == 1 && is_repeatable && repeat_count==1) {
+                                                openTextTil.setVisibility(View.VISIBLE);
+                                            }*/
+
+                                          if (questions.getQuestion_type() == 1  ){
                                                 openTextTil.setVisibility(View.VISIBLE);
                                             }
 
                                             //repeat count =2
-                                            else if (questions.getQuestion_type()==1 && is_repeatable && repeat_count==2){
+                                           /* else if (questions.getQuestion_type()==1 && is_repeatable && repeat_count==2){
                                                 openTextTil.setVisibility(View.VISIBLE);
                                                 openTextTil2.setVisibility(View.VISIBLE);
                                             }
@@ -1436,7 +1491,7 @@ public class QuestionsFragment extends Fragment {
                                                 openTextTil4.setVisibility(View.VISIBLE);
                                                 openTextTil5.setVisibility(View.VISIBLE);
                                                 openTextTil6.setVisibility(View.VISIBLE);
-                                            }
+                                            }*/
 
 
 
@@ -1469,9 +1524,21 @@ public class QuestionsFragment extends Fragment {
                                                 numericEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
                                             }
                                             //none
-                                            /*else if (questions.getQuestion_type() == 5 && questions.getDate_validation().equals("none") && !questions.isIs_repeatable()) {
+                                            else if (questions.getQuestion_type() == 5 && questions.getDate_validation().equals("none") && questions.isIs_repeatable() && repeat_count==1) {
+                                                dateTextTil.setVisibility(View.VISIBLE);
+                                            }
+                                          //none not repeat
+                                          else if (questions.getQuestion_type() == 5 && questions.getDate_validation().equals("none") && !questions.isIs_repeatable()) {
+                                              dateTextTil.setVisibility(View.VISIBLE);
+                                          }
+
+                                            //try
+                                            // restrict future1
+                                            else if (questions.getQuestion_type() == 5 && questions.getDate_validation().equals("restrict_future") && !questions.isIs_repeatable()) {
+                                               // dateTextTil.setVisibility(View.VISIBLE);
                                                 dateTextTilfuture.setVisibility(View.VISIBLE);
-                                            }*/
+
+                                            }
 
                                             // restrict future1
                                             else if (questions.getQuestion_type() == 5 && questions.getDate_validation().equals("restrict_future") && questions.isIs_repeatable() && repeat_count==1) {
