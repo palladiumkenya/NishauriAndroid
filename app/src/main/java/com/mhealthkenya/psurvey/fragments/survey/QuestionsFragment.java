@@ -1648,8 +1648,11 @@ public class QuestionsFragment extends Fragment {
                                     }
 
                                 }
-
-                                surveyQuestion.setText(questions.getQuestion());
+                                    if (!questions.isIs_required()){
+                                surveyQuestion.setText(questions.getQuestion());}
+                                    else if(questions.isIs_required()){
+                                        surveyQuestion.setText(questions.getQuestion()+" * ");
+                                    }
 
                             }
                             else if (message.contains("Questionnaire complete")){
