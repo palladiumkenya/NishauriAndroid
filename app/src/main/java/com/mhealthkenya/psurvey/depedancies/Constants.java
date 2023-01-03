@@ -6,13 +6,12 @@ public class Constants {
     //public static int dataID;
 
     /*ENDPOINT*/
-    //public static String ENDPOINT = "https://psurveyapi.kenyahmis.org/";
-    //public static String ENDPOINT="https://prod.kenyahmis.org:9100/";
-    //public static String ENDPOINT = "https://psurvey-api.mhealthkenya.co.ke/";
-   public static String ENDPOINT ="https://psurveyapi.kenyahmis.org/";
- //https://psurveyapi.kenyahmis.org/api/questions/answer/
-   // https://psurvey-api.mhealthkenya.co.ke/ api/questionnaire/start/
- //https://psurveyapi.kenyahmis.org/api/questions/answer/
+
+  public static String ENDPOINT ="https://psurveyapi.kenyahmis.org/";
+
+  //public static String ENDPOINT =" https://psurveyapitest.kenyahmis.org/";
+
+
     //AUTH
     public static String SIGNUP = "auth/users/";
     public static String CURRENT_USER = "auth/users/me";
