@@ -3,11 +3,15 @@ package com.mhealthkenya.psurvey.activities.auth;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,6 +29,11 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.Task;
 import com.mhealthkenya.psurvey.R;
 import com.mhealthkenya.psurvey.activities.MainActivity;
 import com.mhealthkenya.psurvey.depedancies.Constants;
@@ -78,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
         LoginActivity loginActivity =new LoginActivity();
         //loginActivity.
         setContentView(R.layout.activity_login);
+        Updateapp();
 
 
         Stash.init(this);
@@ -323,6 +333,45 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
 
+    }
+    public void Updateapp(){
+        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(this);
+        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+        //Checks platform will allow type of update
+
+        appUpdateInfoTask.addOnSuccessListener(result -> {
+
+            if (result.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+
+                //requestUpdate(result);
+
+                // android.view.ContextThemeWrapper ctw = new android.view.ContextThemeWrapper(this, R.style.Theme_AlertDialog);
+                final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
+                alertDialogBuilder.setTitle("pSurvey");
+                alertDialogBuilder.setCancelable(false);
+
+                alertDialogBuilder.setMessage("pSurvey Recommends That You Update To The Latest Version");
+                alertDialogBuilder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int id) {
+
+                        try {
+                            startActivity(new Intent("android.intent.action.View", Uri.parse("https://play.google.com/store/apps/details?id=com.mhealthkenya.psurvey" + getPackageName())));
+
+                        } catch (ActivityNotFoundException e) {
+                            startActivity(new Intent("android.intent.action.View", Uri.parse("https://play.google.com/store/apps/details?id=com.mhealthkenya.psurvey" + getPackageName())));
+
+                        }
+
+                    }
+                });
+                alertDialogBuilder.show();}
+
+
+
+
+        });
     }
 
 }
