@@ -23,6 +23,7 @@ import com.mhealthkenya.psurvey.R;
 import com.mhealthkenya.psurvey.adapters.questionnairesAdapter;
 import com.mhealthkenya.psurvey.depedancies.Constants;
 import com.mhealthkenya.psurvey.models.Questionnaires;
+import com.mhealthkenya.psurvey.models.UrlTable;
 import com.mhealthkenya.psurvey.models.auth;
 
 import org.json.JSONArray;
@@ -30,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,6 +45,7 @@ public class QuestionnairesFragment extends Fragment {
     private Unbinder unbinder;
     private View root;
     private Context context;
+    public String z;
 
     private auth loggedInUser;
     private questionnairesAdapter mAdapter;
@@ -120,9 +123,20 @@ public class QuestionnairesFragment extends Fragment {
     private void loadQuestionnaires() {
 
         String auth_token = loggedInUser.getAuth_token();
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
 
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.ALL_QUESTIONNAIRES)
+        AndroidNetworking.get(z+Constants.ALL_QUESTIONNAIRES)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

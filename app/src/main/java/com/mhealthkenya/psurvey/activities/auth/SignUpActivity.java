@@ -26,6 +26,7 @@ import com.mhealthkenya.psurvey.R;
 import com.mhealthkenya.psurvey.depedancies.Constants;
 import com.mhealthkenya.psurvey.models.Designation;
 import com.mhealthkenya.psurvey.models.Facility;
+import com.mhealthkenya.psurvey.models.UrlTable;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import org.json.JSONArray;
@@ -33,11 +34,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static com.mhealthkenya.psurvey.depedancies.AppController.TAG;
 
 public class SignUpActivity extends AppCompatActivity {
+    public String z;
 
     private Toolbar toolbar;
     private Button btn_signup;
@@ -225,7 +228,19 @@ public class SignUpActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        AndroidNetworking.post(Constants.ENDPOINT+Constants.SIGNUP)
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+
+        AndroidNetworking.post(z+Constants.SIGNUP)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")
@@ -283,9 +298,19 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void getFacilities() {
 
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
+        } catch(Exception e){
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.ALL_FACILITIES)
+        }
+
+        AndroidNetworking.get(z+Constants.ALL_FACILITIES)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
@@ -297,6 +322,7 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         // do anything with response
                         Log.e(TAG, response.toString());
+                        //Toast.makeText(SignUpActivity.this, "Sign up successful!"+z, Toast.LENGTH_SHORT).show();
 
                         try {
 
@@ -385,8 +411,20 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void getDesignation() {
 
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.DESIGNATION)
+        } catch(Exception e){
+
+        }
+
+
+        AndroidNetworking.get(z+Constants.DESIGNATION)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")

@@ -9,6 +9,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -38,6 +39,7 @@ import com.mhealthkenya.psurvey.R;
 import com.mhealthkenya.psurvey.activities.MainActivity;
 import com.mhealthkenya.psurvey.depedancies.Constants;
 
+import com.mhealthkenya.psurvey.models.UrlTable;
 import com.mhealthkenya.psurvey.models.auth;
 
 import org.json.JSONException;
@@ -56,6 +58,7 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 import java.util.Collections;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -72,11 +75,14 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private Button btn_login;
-    private TextView sign_up;
+    private TextView sign_up, connect;
     private TextView forgot_password;
     private TextInputEditText phoneNumber;
     private TextInputEditText password;
     private ProgressDialog pDialog;
+
+    public String z, zz;
+
 
 
 
@@ -87,6 +93,42 @@ public class LoginActivity extends AppCompatActivity {
         LoginActivity loginActivity =new LoginActivity();
         //loginActivity.
         setContentView(R.layout.activity_login);
+
+
+        try {
+
+            // UrlTable _url = SugarRecord.findById(UrlTable.class, 4);
+            //select *from getLastRecord ORDER BY id DESC LIMIT 1;
+
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                    zz=_url.get(x).getStage_name1();
+                    Toast.makeText(LoginActivity.this, "You are connected to" + " " +zz, Toast.LENGTH_LONG).show();
+
+
+                }
+            }
+
+            //UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+
+            // z= _url.base_url1;
+            // zz =_url.stage_name1;
+            if (zz==null){
+               // dialogs.showErrorDialog("System not selected", "Please select the system to connect to");
+                Toast.makeText(LoginActivity.this, "You are not connected to", Toast.LENGTH_LONG).show();
+
+            }else{
+           // Toast.makeText(LoginActivity.this, "You are connected to" + " " +zz, Toast.LENGTH_LONG).show();
+           // connect.setText(zz);
+            }
+            //connect.setTextColor(Color.parseColor("#F32013"));}
+
+        }catch (Exception e){
+            Log.d("No baseURL", e.getMessage());
+        }
+
         Updateapp();
 
 
@@ -94,6 +136,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         initialise();
+        connect.setText(zz);
+        connect.setTextColor(Color.parseColor("#F32013"));
 
         pDialog = new ProgressDialog(LoginActivity.this);
         pDialog.setTitle("Signing In...");
@@ -163,6 +207,7 @@ public class LoginActivity extends AppCompatActivity {
 
         btn_login = findViewById(R.id.btn_login);
         sign_up = (TextView) findViewById(R.id.tv_sign_up);
+        connect =(TextView) findViewById(R.id.connected_to);
 //        forgot_password = findViewById(R.id.tv_forgot_password);
 
         phoneNumber = (TextInputEditText) findViewById(R.id.edtxt_phone_no);
@@ -184,9 +229,21 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+
 
        // AndroidNetworking.initialize(getApplicationContext(), myUnsafeHttpClient());
-        AndroidNetworking.post(Constants.ENDPOINT+Constants.LOGIN)
+        AndroidNetworking.post(z+Constants.LOGIN)
                 .addHeaders("Content-Type", "application.json")
                // .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")

@@ -31,6 +31,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.mhealthkenya.psurvey.R;
 import com.mhealthkenya.psurvey.depedancies.Constants;
+import com.mhealthkenya.psurvey.models.UrlTable;
 import com.mhealthkenya.psurvey.models.auth;
 import com.mhealthkenya.psurvey.models.data;
 
@@ -50,6 +51,7 @@ import static com.mhealthkenya.psurvey.depedancies.AppController.TAG;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
@@ -64,6 +66,7 @@ public class StartSurveyFragment extends Fragment {
     private Unbinder unbinder;
     private View root;
     private Context context;
+    public String z;
 
     private auth loggedInUser;
     ArrayList<String> dataList;
@@ -168,8 +171,19 @@ public class StartSurveyFragment extends Fragment {
         }
 
         String auth_token = loggedInUser.getAuth_token();
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
-        AndroidNetworking.post(Constants.ENDPOINT+Constants.INITIAL_CONFIRMATION)
+        } catch(Exception e){
+
+        }
+
+        AndroidNetworking.post(z+Constants.INITIAL_CONFIRMATION)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
@@ -239,7 +253,19 @@ public class StartSurveyFragment extends Fragment {
     private void getparticipant() {
 
         String auth_token = loggedInUser.getAuth_token();
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.GET_PARTICIPANTS)
+
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+        AndroidNetworking.get(z+Constants.GET_PARTICIPANTS)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

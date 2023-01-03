@@ -27,6 +27,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.mhealthkenya.psurvey.R;
 import com.mhealthkenya.psurvey.activities.auth.LoginActivity;
 import com.mhealthkenya.psurvey.depedancies.Constants;
+import com.mhealthkenya.psurvey.models.UrlTable;
 import com.mhealthkenya.psurvey.models.auth;
 
 import androidx.navigation.NavController;
@@ -42,11 +43,14 @@ import org.json.JSONObject;
 
 import static com.mhealthkenya.psurvey.depedancies.AppController.TAG;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
     private auth loggedInUser;
+    public String z;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +84,20 @@ public class MainActivity extends AppCompatActivity {
 
         String auth_token = loggedInUser.getAuth_token();
 
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_USER)
+        } catch(Exception e){
+
+        }
+
+
+        AndroidNetworking.get(z+Constants.CURRENT_USER)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -159,7 +175,19 @@ public class MainActivity extends AppCompatActivity {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        AndroidNetworking.post(Constants.ENDPOINT+Constants.LOGOUT)
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+
+        AndroidNetworking.post(z+Constants.LOGOUT)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

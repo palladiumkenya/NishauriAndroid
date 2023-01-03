@@ -156,17 +156,14 @@
                             android:layout_height="@dimen/spacing_middle" />
 
 
-                        <!--<com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/tv_forgot_password"
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/connected_to"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="right|end"
-                            android:layout_marginTop="@dimen/spacing_medium"
-                            android:clickable="true"
-                            android:text="Forgot Password ?"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                            android:textColor="@color/grey_500"
-                            android:textStyle="bold" />-->
+                            android:text="cvb"
+                            android:textSize="16dip" />
+
+
 
                     </LinearLayout>
 
@@ -202,6 +199,8 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
     </LinearLayout>
+
+
 
 
 

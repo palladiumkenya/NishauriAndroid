@@ -29,6 +29,7 @@ import com.mhealthkenya.psurvey.R;
 import com.mhealthkenya.psurvey.adapters.activeSurveyAdapter;
 import com.mhealthkenya.psurvey.depedancies.Constants;
 import com.mhealthkenya.psurvey.models.ActiveSurveys;
+import com.mhealthkenya.psurvey.models.UrlTable;
 import com.mhealthkenya.psurvey.models.auth;
 
 import org.json.JSONArray;
@@ -37,6 +38,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,6 +52,7 @@ public class SelectSurveyFragment extends Fragment {
     private Unbinder unbinder;
     private View root;
     private Context context;
+    public String z;
 
     private auth loggedInUser;
     private activeSurveyAdapter mAdapter;
@@ -176,8 +179,19 @@ public class SelectSurveyFragment extends Fragment {
     private void loadActiveSurveys() {
 
         String auth_token = loggedInUser.getAuth_token();
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.ACTIVE_SURVEYS)
+        } catch(Exception e){
+
+        }
+
+        AndroidNetworking.get(z+Constants.ACTIVE_SURVEYS)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

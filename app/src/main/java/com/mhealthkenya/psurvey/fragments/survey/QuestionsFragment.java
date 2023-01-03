@@ -53,6 +53,7 @@ import com.mhealthkenya.psurvey.models.Questions;
 import com.mhealthkenya.psurvey.models.Answer;
 import com.mhealthkenya.psurvey.models.Question;
 import com.mhealthkenya.psurvey.models.QuestionsList;
+import com.mhealthkenya.psurvey.models.UrlTable;
 import com.mhealthkenya.psurvey.models.auth;
 import com.mhealthkenya.psurvey.models.repeat_count;
 
@@ -83,6 +84,8 @@ import static com.mhealthkenya.psurvey.depedancies.AppController.TAG;
 
 public class QuestionsFragment extends Fragment {
     DatePickerDialog datePickerDialog;
+
+    public String z;
 
     private Unbinder unbinder;
     private View root;
@@ -1316,9 +1319,20 @@ public class QuestionsFragment extends Fragment {
         }
 
         String auth_token = loggedInUser.getAuth_token();
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
 
 
-        AndroidNetworking.post(Constants.ENDPOINT+Constants.PROVIDE_ANSWER)
+        AndroidNetworking.post(z+Constants.PROVIDE_ANSWER)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")

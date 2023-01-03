@@ -40,7 +40,7 @@
         android:id="@+id/login_proceed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_round_corner_button"
+
         android:textColor="#FFFFFF"
         android:textAllCaps="true"
         android:layout_marginLeft="25dp"

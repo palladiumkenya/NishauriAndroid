@@ -31,6 +31,7 @@ import com.mhealthkenya.psurvey.depedancies.Constants;
 import com.mhealthkenya.psurvey.models.ActiveSurveys;
 import com.mhealthkenya.psurvey.models.Designation;
 import com.mhealthkenya.psurvey.models.Facility;
+import com.mhealthkenya.psurvey.models.UrlTable;
 import com.mhealthkenya.psurvey.models.User;
 import com.mhealthkenya.psurvey.models.auth;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
@@ -40,6 +41,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -57,6 +59,7 @@ public class EditProfileFragment extends Fragment {
 
     private auth loggedInUser;
     private User user;
+    public String z;
 
 
     private int facilityID = 0;
@@ -150,9 +153,20 @@ public class EditProfileFragment extends Fragment {
     private void loadCurrentUser(){
 
         String auth_token = loggedInUser.getAuth_token();
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
 
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_USER)
+        AndroidNetworking.get(z+Constants.CURRENT_USER)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -212,9 +226,19 @@ public class EditProfileFragment extends Fragment {
 
     private void getFacilities() {
 
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
+        } catch(Exception e){
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.ALL_FACILITIES)
+        }
+
+        AndroidNetworking.get(z+Constants.ALL_FACILITIES)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
@@ -315,8 +339,20 @@ public class EditProfileFragment extends Fragment {
 
     private void getDesignation() {
 
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.DESIGNATION)
+        } catch(Exception e){
+
+        }
+
+
+        AndroidNetworking.get(z+Constants.DESIGNATION)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
@@ -434,8 +470,19 @@ public class EditProfileFragment extends Fragment {
         }
 
         String auth_token = loggedInUser.getAuth_token();
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
-        AndroidNetworking.patch(Constants.ENDPOINT+Constants.UPDATE_USER)
+        } catch(Exception e){
+
+        }
+
+        AndroidNetworking.patch(z+Constants.UPDATE_USER)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")

@@ -41,6 +41,7 @@ import com.mhealthkenya.psurvey.activities.InformedActivity;
 import com.mhealthkenya.psurvey.activities.PrivacyActivity;
 import com.mhealthkenya.psurvey.depedancies.Constants;
 import com.mhealthkenya.psurvey.models.ActiveSurveys;
+import com.mhealthkenya.psurvey.models.UrlTable;
 import com.mhealthkenya.psurvey.models.auth;
 import com.mhealthkenya.psurvey.models.data;
 
@@ -56,6 +57,7 @@ import okhttp3.OkHttpClient;
 import static com.mhealthkenya.psurvey.depedancies.AppController.TAG;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -65,6 +67,8 @@ public class InformedConsentFragment extends Fragment {
     private View root;
     private Context context;
     //String privacytext, informtext;
+
+    public String z;
 
 
     ArrayList<String> dataList;
@@ -296,7 +300,19 @@ public class InformedConsentFragment extends Fragment {
 
 
            String auth_token = loggedInUser.getAuth_token();
-        AndroidNetworking.post(Constants.ENDPOINT+Constants.PATIENT_CONSENT)
+
+          try{
+              List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+              if (_url.size()==1){
+                  for (int x=0; x<_url.size(); x++){
+                      z=_url.get(x).getBase_url1();
+                  }
+              }
+
+          } catch(Exception e){
+
+          }
+        AndroidNetworking.post(z+Constants.PATIENT_CONSENT)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
@@ -384,7 +400,18 @@ public class InformedConsentFragment extends Fragment {
     private void getparticipant(){
 
         String auth_token = loggedInUser.getAuth_token();
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.GET_PARTICIPANTS)
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+        AndroidNetworking.get(z+Constants.GET_PARTICIPANTS)
                 //.addQueryParameter("limit", "3")
                 //.addHeaders("token", "1234")
 
