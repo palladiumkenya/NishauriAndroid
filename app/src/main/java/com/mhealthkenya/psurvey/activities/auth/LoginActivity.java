@@ -37,6 +37,7 @@ import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.play.core.tasks.Task;
 import com.mhealthkenya.psurvey.R;
 import com.mhealthkenya.psurvey.activities.MainActivity;
+import com.mhealthkenya.psurvey.activities.SelectUrls;
 import com.mhealthkenya.psurvey.depedancies.Constants;
 
 import com.mhealthkenya.psurvey.models.UrlTable;
@@ -82,10 +83,6 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
 
     public String z, zz;
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,6 +115,29 @@ public class LoginActivity extends AppCompatActivity {
             if (zz==null){
                // dialogs.showErrorDialog("System not selected", "Please select the system to connect to");
                 Toast.makeText(LoginActivity.this, "You are not connected to", Toast.LENGTH_LONG).show();
+
+                androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(LoginActivity.this);
+                builder1.setIcon(R.drawable.logo);
+                builder1.setTitle("You are not connected to any Server");
+                builder1.setMessage("");
+                builder1.setCancelable(false);
+
+                builder1.setPositiveButton(
+                        "Connect",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                Intent intent = new Intent(LoginActivity.this, SelectUrls.class);
+                                startActivity(intent);
+                                finish();
+
+                                //dialog.cancel();
+                            }
+                        });
+
+                androidx.appcompat.app.AlertDialog alert11 = builder1.create();
+                alert11.show();
+
 
             }else{
            // Toast.makeText(LoginActivity.this, "You are connected to" + " " +zz, Toast.LENGTH_LONG).show();

@@ -164,7 +164,6 @@
                             android:textSize="16dip" />
 
 
-
                     </LinearLayout>
 
                 </androidx.core.widget.NestedScrollView>
