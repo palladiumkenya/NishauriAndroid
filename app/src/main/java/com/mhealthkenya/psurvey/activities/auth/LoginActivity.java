@@ -140,7 +140,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
             }else{
-           // Toast.makeText(LoginActivity.this, "You are connected to" + " " +zz, Toast.LENGTH_LONG).show();
+            Toast.makeText(LoginActivity.this, "You are connected to" + " " +zz, Toast.LENGTH_LONG).show();
            // connect.setText(zz);
             }
             //connect.setTextColor(Color.parseColor("#F32013"));}
@@ -149,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
             Log.d("No baseURL", e.getMessage());
         }
 
-        Updateapp();
+        //Updateapp();
 
 
         Stash.init(this);
@@ -434,10 +434,11 @@ public class LoginActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int id) {
 
                         try {
-                            startActivity(new Intent("android.intent.action.View", Uri.parse("https://play.google.com/store/apps/details?id=com.mhealthkenya.psurvey" + getPackageName())));
+                            startActivity(new Intent("android.intent.action.View", Uri.parse("https://play.google.com/store/apps/details?id=com.mhealthkenya.psurvey")));
 
                         } catch (ActivityNotFoundException e) {
-                            startActivity(new Intent("android.intent.action.View", Uri.parse("https://play.google.com/store/apps/details?id=com.mhealthkenya.psurvey" + getPackageName())));
+                            //e.printStackTrace();
+                            startActivity(new Intent("android.intent.action.View", Uri.parse("https://play.google.com/store/apps/details?id=com.mhealthkenya.psurvey")));
 
                         }
 

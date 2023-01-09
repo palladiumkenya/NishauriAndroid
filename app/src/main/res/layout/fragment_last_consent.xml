@@ -113,6 +113,7 @@
                 android:background="@android:color/white"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp"
+                android:visibility="gone"
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout

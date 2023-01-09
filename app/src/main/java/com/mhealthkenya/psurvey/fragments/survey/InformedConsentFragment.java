@@ -238,7 +238,7 @@ public class InformedConsentFragment extends Fragment {
         btn_patient_consent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (dataID==1 && TextUtils.isEmpty(etxt_ccc_no.getText().toString())){
+                /*if (dataID==1 && TextUtils.isEmpty(etxt_ccc_no.getText().toString())){
                     Snackbar.make(root.findViewById(R.id.frag_patient_consent),"Enter Patient's CCC Number", Snackbar.LENGTH_SHORT).show();
                 }
                 else if (dataID==1 && TextUtils.isEmpty(etxt_first_name.getText().toString())){
@@ -247,6 +247,10 @@ public class InformedConsentFragment extends Fragment {
 
 
                 else if (dataID!=1 &&dataID!=2){
+                    Snackbar.make(root.findViewById(R.id.frag_patient_consent), "Invalid", Snackbar.LENGTH_LONG).show();
+
+                }*/
+                if (dataID!=1 || dataID!=2){
                     Snackbar.make(root.findViewById(R.id.frag_patient_consent), "Invalid", Snackbar.LENGTH_LONG).show();
 
                 }

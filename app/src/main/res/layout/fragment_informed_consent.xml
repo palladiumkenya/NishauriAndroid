@@ -124,11 +124,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_medium"
+                        android:visibility="gone"
                         android:text="Patient Information"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
                         android:textColor="@color/colorPrimary" />
 
                     <com.google.android.material.textview.MaterialTextView
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_medium"
@@ -138,6 +140,7 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_ccc_no"
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/spacing_middle"
@@ -158,6 +161,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:visibility="gone"
                         android:id="@+id/til_f_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
