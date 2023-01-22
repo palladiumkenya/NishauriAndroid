@@ -742,20 +742,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_large" />
 
+
+
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/chart1"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:visibility="gone"
                 />
 
 
             <LinearLayout
-                android:visibility="gone"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle">
+                <!-- visible-->
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -764,7 +768,7 @@
                     android:layout_marginLeft="@dimen/spacing_xsmall"
                     android:layout_marginRight="@dimen/spacing_xsmall"
                     android:layout_marginTop="@dimen/spacing_xsmall"
-                    android:visibility="invisible"
+                    android:visibility="visible"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp">
 
