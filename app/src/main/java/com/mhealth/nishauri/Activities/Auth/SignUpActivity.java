@@ -258,7 +258,7 @@ public class SignUpActivity extends AppCompatActivity {
             case R.id.bt_continue_ccc_no:
                 // validate input user here
                 if (ccc_no.getText().toString().trim().equals("")) {
-                    Snackbar.make(parent_view, "Please provide your CCC Number.", Snackbar.LENGTH_SHORT).show();
+                    //Snackbar.make(parent_view, "Please provide your CCC Number.", Snackbar.LENGTH_SHORT).show();
 
                     return;
                 }

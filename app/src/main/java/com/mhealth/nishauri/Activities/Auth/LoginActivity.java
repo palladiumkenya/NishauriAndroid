@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Sign In");
+        toolbar.setTitle("Nishauri");
         setSupportActionBar(toolbar);
 
 //        initialization of components
