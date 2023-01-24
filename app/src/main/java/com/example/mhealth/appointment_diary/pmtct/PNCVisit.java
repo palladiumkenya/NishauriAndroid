@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.example.mhealth.appointment_diary.R;
@@ -34,6 +36,9 @@ public class PNCVisit extends AppCompatActivity {
     private String BABY_SEX = "";
     private String REGIMEN = "";
 
+    LinearLayout searchLayout;
+    Button btnSearch;
+
 
 
     @Override
@@ -49,6 +54,8 @@ public class PNCVisit extends AppCompatActivity {
         MotherTestedS =(Spinner) findViewById(R.id.motherTested);
         BabyDeliveredS =(Spinner) findViewById(R.id.Babydelivered);
         RegimenS=(Spinner) findViewById(R.id.motherRegimen2);
+        searchLayout =(LinearLayout)findViewById(R.id. hei_details_layout);
+        btnSearch =(Button) findViewById(R.id.btn_search);
 
 
 
@@ -62,6 +69,19 @@ public class PNCVisit extends AppCompatActivity {
         catch(Exception e){
 
 
+        }
+
+        try {
+            btnSearch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    searchLayout.setVisibility(View.VISIBLE);
+
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
         }
         //client visit type
        /* ArrayAdapter<String> clientvisitAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, clientVisitType);

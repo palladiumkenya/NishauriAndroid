@@ -13,6 +13,7 @@
         android:padding="12dp">
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -39,29 +40,27 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content">
 
                     <Button
                         android:id="@+id/btn_search"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:layout_marginTop="4dp"
                         android:background="@color/colorPrimary"
                         android:fontFamily="serif"
                         android:text="Search"
                         android:textColor="#FFFFFF" />
-                </com.google.android.material.textfield.TextInputLayout>
+
 
             </LinearLayout>
 
-
+            <!-- hei search details -->
             <LinearLayout
                 android:id="@+id/hei_details_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:orientation="vertical">
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -135,9 +134,38 @@
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/current_regimen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Current Regimen"
+                        android:inputType="text"
+                        android:textColorHint="#000"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity ="center"
+                    android:text="Start Visit"
+                    android:background="@drawable/background_round_corner_button"
+                    android:textColor="#FFFFFF"
+                   />
 
 
 
+            </LinearLayout>
+            <!-- end search details -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -166,21 +194,7 @@
                         android:textColorHint="#000" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:visibility="gone"
-                    android:layout_height="wrap_content">
 
-                    <EditText
-                        android:id="@+id/lmp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:hint="Number of ANC Visits*"
-                        android:inputType="text"
-                        android:maxLength="24"
-                        android:textColorHint="#000" />
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
