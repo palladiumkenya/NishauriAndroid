@@ -81,4 +81,10 @@
     <string name="submit_defaulter_call_honored">submit</string>
     <string name="client_registration1">Client Registration</string>
 
+    <string name="deathcause"><font size="30">Cause of Death</font></string>
+    <string name="dateDied"><font size="30">Date Died</font></string>
+    <string name="babydob"><font size="30">Baby Date of Birth</font></string>
+    <string name="dateStartedprophy"><font size="30">Date Started</font></string>
+
+
 </resources>

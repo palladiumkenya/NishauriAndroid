@@ -92,27 +92,7 @@
 
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Mother's Current Regimen" />
-
-        <Spinner
-            android:id="@+id/motherRegimen3"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20sp" />
-
-    </LinearLayout>
     <!-- mode -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -128,7 +108,7 @@
             android:text="Mode of Delivery" />
 
         <Spinner
-            android:id="@+id/deliveryMode1"
+            android:id="@+id/DeliveryMode1"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -156,138 +136,217 @@
             android:layout_marginBottom="20sp" />
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:layout_height="wrap_content">
+            <!-- Delivery outcome -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Baby's Immunization" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Delivery Outcome*" />
 
-        <Spinner
-            android:id="@+id/deliveryOutcome1"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20sp" />
+                <Spinner
+                    android:id="@+id/deliveryOutcome"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp" />
 
-    </LinearLayout>
+            </LinearLayout>
+            <!-- Baby delivered -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Baby Delivered"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Mothers Outcome" />
+                <Spinner
+                    android:id="@+id/BabydeliveredS"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp" />
 
-        <Spinner
-            android:id="@+id/mothersOutcome1"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20sp" />
+            </LinearLayout>
+            <!-- Date died -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/dateDied"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/dateDied"
+                    android:textColorHint="#000"
+                    android:textSize="12sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:visibility="gone"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:layout_height="wrap_content">
+            <!-- Cause of Death -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Mother Tested for HIV" />
+                <EditText
+                    android:id="@+id/deathCause"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/deathcause"
+                    android:textColorHint="#000"
+                     />
+            </com.google.android.material.textfield.TextInputLayout>
+            <!-- Baby's DOB-->
 
-        <Spinner
-            android:id="@+id/motherTested1"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20sp" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:visibility="gone"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/babyDOB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/babydob"
+                    android:textColorHint="#000"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Baby Delivered" />
+            <!-- baby's sex -->
 
-        <Spinner
-            android:id="@+id/Babydelivered1"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Baby's Sex" />
+
+                <Spinner
+                    android:id="@+id/babySex"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp" />
+
+            </LinearLayout>
+
+            <!-- Mother's Outcome -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Mother's Outcome*" />
+
+                <Spinner
+                    android:id="@+id/motheroutcome"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp" />
+
+            </LinearLayout>
+            <!-- Mother tested for HIV -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Mother Tested for HIV*" />
+
+                <Spinner
+                    android:id="@+id/mothertestedhiv"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp" />
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@color/colorPrimary"
+                android:fontFamily="serif"
+                android:text="Prophylaxis Details"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF" />
+            <!-- Date Started -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/datestartedproph"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/dateStartedprophy"
+                    android:textColorHint="#000"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Baby medication -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Baby's Medication" />
+
+                <Spinner
+                    android:id="@+id/babyMedicationS"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp" />
+
+            </LinearLayout>
 
 
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/Datedied1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Date Died:*"
-            android:inputType="text"
-            android:textColorHint="#000"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/deathcause1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Cause of Death:*"
-            android:inputType="text"
-            android:textColorHint="#000"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-    <!-- <com.google.android.material.textfield.TextInputLayout
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content">
-
-         <EditText
-             android:id="@+id/babyDOB"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:hint="Baby's Date of Birth:*"
-             android:inputType="text"
-             android:textColorHint="#000"
-             />
-     </com.google.android.material.textfield.TextInputLayout>-->
 
 
 
@@ -300,6 +359,7 @@
         android:fontFamily="serif"
         android:text="Save"
         android:textSize="12sp"
+        android:textAllCaps="true"
         android:textColor="#FFFFFF" />
         </LinearLayout>
 
