@@ -24,6 +24,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
         <activity
+            android:name=".pmtct.ANCVisitStarted"
+            android:exported="false" />
+        <activity
             android:name=".pmtct.PNCVisitStart"
             android:exported="false" />
         <activity
