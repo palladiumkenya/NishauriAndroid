@@ -13,7 +13,6 @@
         android:padding="12dp">
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -151,6 +150,7 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/btnStart"
                     android:gravity ="center"
                     android:text="Start Visit"
                     android:background="@drawable/background_round_corner_button"

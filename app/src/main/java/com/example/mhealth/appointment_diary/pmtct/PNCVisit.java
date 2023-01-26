@@ -2,6 +2,7 @@ package com.example.mhealth.appointment_diary.pmtct;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,7 +38,7 @@ public class PNCVisit extends AppCompatActivity {
     private String REGIMEN = "";
 
     LinearLayout searchLayout;
-    Button btnSearch;
+    Button btnSearch, btnStart1;
 
 
 
@@ -56,6 +57,7 @@ public class PNCVisit extends AppCompatActivity {
         RegimenS=(Spinner) findViewById(R.id.motherRegimen2);
         searchLayout =(LinearLayout)findViewById(R.id. hei_details_layout);
         btnSearch =(Button) findViewById(R.id.btn_search);
+        btnStart1 =(Button) findViewById(R.id.btnStart);
 
 
 
@@ -83,6 +85,16 @@ public class PNCVisit extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
+
+            btnStart1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent1 =new Intent(PNCVisit.this, PNCVisitStart.class);
+                    startActivity(intent1);
+
+                }
+            });
+
         //client visit type
        /* ArrayAdapter<String> clientvisitAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, clientVisitType);
         clientvisitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
