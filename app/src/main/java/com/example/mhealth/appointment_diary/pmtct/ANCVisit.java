@@ -29,7 +29,7 @@ public class ANCVisit extends AppCompatActivity {
         setContentView(R.layout.activity_ancvisit);
 
         /*clientIsS = (Spinner) findViewById(R.id.ClientSpinner);
-       // hivResultsS =(Spinner) findViewById(R.id.hivResults);*/
+        hivResultsS =(Spinner) findViewById(R.id.hivResults);*/
         startvisit=(Button) findViewById(R.id.btn_startVisit);
         searchbtn =(Button) findViewById(R.id.btn_search);
         details =(LinearLayout) findViewById(R.id.hei_details_layout);

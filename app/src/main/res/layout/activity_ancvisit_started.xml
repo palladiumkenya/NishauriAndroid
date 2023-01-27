@@ -452,7 +452,16 @@
 
 
 
-
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@color/colorPrimary"
+                android:fontFamily="serif"
+                android:text="Save"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF" />
 
 
 
