@@ -243,6 +243,14 @@
 
 
             <!-- enter ccno -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/positiveLayout"
+                >
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -284,10 +292,172 @@
                     android:textColorHint="#000"
                     android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <!--partner hiv status -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/partnerLayout"
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/partccno"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter CCC Number*"
+                        android:textColorHint="#000"
+                        android:textSize="12sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/partccEn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="CCC Enrolment Date*"
+                        android:textColorHint="#000"
+                        android:textSize="12sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/partARTstart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="ART Start Date*"
+                        android:textColorHint="#000"
+                        android:textSize="12sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <!-- Viral Load results -->
+
+            <Button
+                android:id="@+id/btnVL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@color/colorPrimary"
+                android:fontFamily="serif"
+                android:text="Viral Load Results"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/VLLayout"
+            >
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/vldatesample"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Date of Sample Collection*"
+                    android:textColorHint="#000"
+                    android:textSize="12sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/VLResults"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Results"
+                    android:textColorHint="#000"
+                    android:textSize="12sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+            <!-- Test Results -->
+
+            <Button
+                android:id="@+id/btnTestResults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@color/colorPrimary"
+                android:fontFamily="serif"
+                android:text="Test Results"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF" />
 
 
 
-</LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Syphilis Serology" />
+
+                <Spinner
+                    android:id="@+id/SyphilisSpinner"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp" />
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Has The Client Been Treated for Syphilis?" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/syphilisID">
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/yesId"/>
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/noId"/>
+
+            </RadioGroup>
+
+
+
+
+
+
+
+
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
