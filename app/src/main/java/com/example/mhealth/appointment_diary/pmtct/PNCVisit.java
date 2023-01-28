@@ -8,60 +8,41 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mhealth.appointment_diary.R;
+import com.example.mhealth.appointment_diary.config.Config;
+import com.example.mhealth.appointment_diary.tables.Activelogin;
+import com.example.mhealth.appointment_diary.tables.Registrationtable;
+import com.example.mhealth.appointment_diary.tables.UrlTable;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
 
 public class PNCVisit extends AppCompatActivity {
 
-    String[] clientVisitType = {"", "Labor and Delivery", "ANC", "PNC"};
-    String[] ModeDelivery = {"", "Spontaneous Vaginal Delivery (SVD)", "Cesarean Section (CS)", "Breech Delivery",  "Assisted Vaginal Delivery"};
-    String[] placeDelivery = {"", "Home", "Facility", "Born before Arrival"};
-    String[] DeliveryOutcome = {"", "Penta", "Measles", "PCV"};
-    String[] MothersOutcome = {"", "Alive", "Dead"};
-    String[] MotherTested = {"", "Yes", "No"};
-    String[] BabyDelivered = {"", "Live Birth", "Fresh Still Birth", "Macerated Still Birth"};
-    String[] BabySex = {"", "Male", "Female"};
-    String[] Regimen= {"", "TDF+3TC+EFV", "TDF+3TC+DTG", "TDF+3TC+DTG", "AZT+3TC+NVP", " AZT+3TC+EFV", "ABC+3TC+NVP", "ABC+3TC+EFV", " ABC+3TC+DTG", "ABC+3TC+LPV/r", " AZT+3TC+LPV/r+ RTV", "ART5TDF+3TC +ATV/r","ABC+3TC+DTG", "ABC+3TC+DTG", "ABC+3TC+ATV/r", "AZT+3TC+ATV/r", "AZT+3TC+DRV/r"};
-
-
-    Spinner clientVisitTypeS,  ModeDeliveryS, placeDeliveryS, DeliveryOutcomeS, MothersOutcomeS, MotherTestedS, BabyDeliveredS,  BabySexS, RegimenS;
-    private String CLIENT_VISIT_TYPE = "";
-    private String MODE_DELIVERY = "";
-    private String PLACE_DELIVERY = "";
-    private String DELIVERY_OUTCOME = "";
-    private String MOTHERS_OUTCOME = "";
-    private String MOTHER_TESTED = "";
-    private String BABY_DELIVERED = "";
-    private String BABY_SEX = "";
-    private String REGIMEN = "";
-
-    LinearLayout searchLayout;
-    Button btnSearch, btnStart1;
-
+    Button startvisit,searchbtn;
+    LinearLayout details;
+    String z, phone;
+    EditText ccno,clinicno,fname,Mname,lname,dobi,reg, upino;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pncvisit);
-        //clientVisitTypeS =(Spinner) findViewById(R.id.clientVisitspinner);
-        ModeDeliveryS = (Spinner) findViewById(R.id.deliveryMode);
-        placeDeliveryS =(Spinner) findViewById(R.id.DeliveryPlace);
-        MothersOutcomeS =(Spinner) findViewById(R.id.mothersOutcome);
-        DeliveryOutcomeS =(Spinner) findViewById(R.id.deliveryOutcome);
-
-        MotherTestedS =(Spinner) findViewById(R.id.motherTested);
-        BabyDeliveredS =(Spinner) findViewById(R.id.Babydelivered);
-        RegimenS=(Spinner) findViewById(R.id.motherRegimen2);
-        searchLayout =(LinearLayout)findViewById(R.id. hei_details_layout);
-        btnSearch =(Button) findViewById(R.id.btn_search);
-        btnStart1 =(Button) findViewById(R.id.btnStart);
-
-
-
-
         try{
             //getSupportActionBar().setDisplayShowHomeEnabled(true);
            // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -69,182 +50,132 @@ public class PNCVisit extends AppCompatActivity {
 
         }
         catch(Exception e){
-
-
         }
 
-        try {
-            btnSearch.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        startvisit=(Button) findViewById(R.id.btn_startVisit);
+        searchbtn =(Button) findViewById(R.id.btn_search);
+        details =(LinearLayout) findViewById(R.id.hei_details_layout);
 
-                    searchLayout.setVisibility(View.VISIBLE);
+        ccno=(EditText) findViewById(R.id.cc);
+        clinicno=(EditText) findViewById(R.id.clinicno);
+        fname=(EditText) findViewById(R.id.fname);
+        Mname=(EditText) findViewById(R.id.Mname);
+        lname=(EditText) findViewById(R.id.lname);
+        dobi=(EditText) findViewById(R.id.dobb);
+        reg=(EditText) findViewById(R.id.reg);
+        upino=(EditText) findViewById(R.id.upino);
 
-                }
-            });
-        }catch (Exception e){
-            e.printStackTrace();
+        searchbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ccno.getText().toString().isEmpty()){
+                    Toast.makeText(PNCVisit.this, "Enter CCC Number", Toast.LENGTH_LONG).show();
+                }else{
+                    searchPNC();}
+                // details.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        startvisit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PNCVisit.this, PNCVisitStart.class);
+                startActivity(intent);
+
+            }
+        });
+
+
+
+    }
+    private void  searchPNC(){
+
+        List<Activelogin> al=Activelogin.findWithQuery(Activelogin.class,"select * from Activelogin limit 1");
+        for(int x=0;x<al.size();x++) {
+            String myuname = al.get(x).getUname();
+            List<Registrationtable> myl = Registrationtable.findWithQuery(Registrationtable.class, "select * from Registrationtable where username=? limit 1", myuname);
+            for (int y = 0; y < myl.size(); y++) {
+
+                phone = myl.get(y).getPhone();
+
+            }
         }
 
-            btnStart1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent1 =new Intent(PNCVisit.this, PNCVisitStart.class);
-                    startActivity(intent1);
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+        String urls1 ="?ccc="+ccno.getText().toString();
+        String tt1 ="&phone_number="+phone;
+        //z+ Config.CALENDER_LIST+urls+tt,
+        //  String url1 ="https://ushauriapi.kenyahmis.org/pmtct/search?ccc=1305701529&phone_number=0780888928";
+        //https://ushauriapi.kenyahmis.org/pmtct/search?ccc=1305701529&phone_number=0780888928
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, z+ Config.SEARCHANCPNC+urls1+tt1, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Toast.makeText(PNCVisit.this, "SUCCESS", Toast.LENGTH_SHORT).show();
+                details.setVisibility(View.VISIBLE);
+                for (int i=0; i<response.length(); i++){
+                    try {
+                        JSONObject jsonObject =response.getJSONObject(i);
+
+                        String clinicnumber =jsonObject.getString("clinic_number");
+                        String f_name =jsonObject.getString("f_name");
+                        String m_name =jsonObject.getString("m_name");
+                        String l_name =jsonObject.getString("l_name");
+                        String currentregimen =jsonObject.getString("currentregimen");
+                        String dob =jsonObject.getString("dob");
+                        String upi_no =jsonObject.getString("upi_no");
+
+
+                     /*String upi_no =jsonObject.getString("upi_no");
+                     String f_name =jsonObject.getString("f_name");
+                     String m_name =jsonObject.getString("m_name");
+                     String l_name =jsonObject.getString("l_name");
+                     String dob =jsonObject.getString("dob");
+                     String currentregimen =jsonObject.getString("currentregimen");*/
+
+
+                        ccno.setText(clinicnumber);
+                        fname.setText(f_name);
+                        Mname.setText(m_name);
+                        lname.setText(l_name);
+                        reg.setText(currentregimen);
+                        dobi.setText(dob);
+                        upino.setText(upi_no);
+                     /*clinicno.setText(upi_no);
+                     fname.setText(f_name);
+                     Mname.setText(m_name);
+                     lname.setText(l_name);
+                     dobi.setText(dob);
+                     reg.setText(currentregimen);*/
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
                 }
-            });
-
-        //client visit type
-       /* ArrayAdapter<String> clientvisitAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, clientVisitType);
-        clientvisitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        clientVisitTypeS.setAdapter(clientvisitAdapter);
-
-        clientVisitTypeS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                CLIENT_VISIT_TYPE = clientVisitType[position];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                //details.setVisibility(View.VISIBLE);
 
             }
-        });*/
-
-        //Mode delivery
-        ArrayAdapter<String> ModedeliveryAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, ModeDelivery);
-        ModedeliveryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-      ModeDeliveryS.setAdapter(ModedeliveryAdapter);
-
-       ModeDeliveryS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        }, new Response.ErrorListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-               MODE_DELIVERY = ModeDelivery[position];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onErrorResponse(VolleyError error) {
+                details.setVisibility(View.GONE);
+                Toast.makeText(PNCVisit.this, error.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
-
-       //placeDelivery
-        ArrayAdapter<String> PlacedeliveryAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, placeDelivery);
-        PlacedeliveryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        placeDeliveryS.setAdapter(PlacedeliveryAdapter);
-
-        placeDeliveryS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                PLACE_DELIVERY = placeDelivery[position];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        //Delivery Outcome
-
-        ArrayAdapter<String> OutcomedeliveryAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, DeliveryOutcome);
-        PlacedeliveryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        DeliveryOutcomeS.setAdapter(OutcomedeliveryAdapter);
-
-     DeliveryOutcomeS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-               DELIVERY_OUTCOME = DeliveryOutcome[position];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-     //MothersOutcome
-
-        ArrayAdapter<String> MotherOutcomeAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, MothersOutcome);
-        PlacedeliveryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-       MothersOutcomeS.setAdapter(MotherOutcomeAdapter);
-
-        MothersOutcomeS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-              MOTHERS_OUTCOME = MothersOutcome[position];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        // MotherTested
-
-        ArrayAdapter<String> MotherTestedAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, MotherTested);
-        PlacedeliveryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        MotherTestedS.setAdapter(MotherTestedAdapter);
-
-        MotherTestedS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                MOTHER_TESTED = MotherTested[position];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        //BabyDelivered
-        ArrayAdapter<String> BabyDeliveredAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, BabyDelivered);
-       BabyDeliveredAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        BabyDeliveredS.setAdapter(BabyDeliveredAdapter);
-
-        BabyDeliveredS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                BABY_DELIVERED = BabyDelivered[position];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        //regimen
-
-        ArrayAdapter<String> RegimenAdapter = new ArrayAdapter<String>(PNCVisit.this, android.R.layout.simple_spinner_item, Regimen);
-       RegimenAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        RegimenS.setAdapter(RegimenAdapter);
-
-      RegimenS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                BABY_SEX = BabySex[position];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-
-
-
-
+        RequestQueue requestQueue = Volley.newRequestQueue(PNCVisit.this);
+        requestQueue.add(jsonArrayRequest);
     }
 }

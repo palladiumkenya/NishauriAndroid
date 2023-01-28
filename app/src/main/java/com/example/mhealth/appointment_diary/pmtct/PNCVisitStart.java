@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.example.mhealth.appointment_diary.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class PNCVisitStart extends AppCompatActivity {
     String[] ClientVisitType = {"", "Labor and Delivery", "PNC"};
@@ -37,11 +38,16 @@ public class PNCVisitStart extends AppCompatActivity {
     private String REGIMEN = "";
     private String BABY_MEDICATION = "";
 
+    LinearLayout pnclayout1;
+    TextInputLayout yLDlayout1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pncvisit_start);
+        pnclayout1 = (LinearLayout) findViewById(R.id.pnclayout1);
+        yLDlayout1=(TextInputLayout) findViewById(R.id.yLDlayout1);
 
         try{
             //getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -61,7 +67,7 @@ public class PNCVisitStart extends AppCompatActivity {
 
         MotherTestedS =(Spinner) findViewById(R.id.mothertestedhiv);
         BabyDeliveredS =(Spinner) findViewById(R.id.BabydeliveredS);
-        RegimenS=(Spinner) findViewById(R.id.motherRegimen2);
+        //RegimenS=(Spinner) findViewById(R.id.motherRegimen2);
         BabySexS=(Spinner) findViewById(R.id.babySex);
         BabyMedicationS=(Spinner) findViewById(R.id.babyMedicationS);
 
@@ -75,6 +81,7 @@ public class PNCVisitStart extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 MODE_DELIVERY = ModeDelivery[position];
+
             }
 
             @Override
@@ -220,6 +227,12 @@ public class PNCVisitStart extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                CLIENT_VISIT_TYPE = ClientVisitType[position];
+
+               if (CLIENT_VISIT_TYPE.contentEquals("PNC")){
+                   pnclayout1.setVisibility(View.VISIBLE);
+               }
+               if(CLIENT_VISIT_TYPE.contentEquals("Labor and Delivery"))
+                yLDlayout1.setVisibility(View.VISIBLE);
             }
 
             @Override

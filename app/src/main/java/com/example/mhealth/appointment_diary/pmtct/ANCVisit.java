@@ -98,7 +98,7 @@ public class ANCVisit extends AppCompatActivity {
         }
 
     }
-    private  void  searchANC(){
+    private void  searchANC(){
 
         List<Activelogin> al=Activelogin.findWithQuery(Activelogin.class,"select * from Activelogin limit 1");
         for(int x=0;x<al.size();x++) {
