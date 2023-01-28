@@ -76,11 +76,16 @@
         </LinearLayout>
 
         <!-- L and D layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:id="@+id/yLDlayout1">
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:id="@+id/yLDlayout1">
+            >
 
             <EditText
                 android:id="@+id/NoANC1"
@@ -182,7 +187,15 @@
                     android:layout_marginBottom="20sp" />
 
             </LinearLayout>
+        </LinearLayout>
             <!-- Date died -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:id="@+id/stillbirthlay"
+            android:layout_height="wrap_content">
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -211,6 +224,7 @@
                     android:textColorHint="#000"
                      />
             </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
             <!-- Baby's DOB-->
 
             <com.google.android.material.textfield.TextInputLayout

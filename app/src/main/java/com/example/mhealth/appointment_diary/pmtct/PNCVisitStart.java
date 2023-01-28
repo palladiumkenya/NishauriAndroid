@@ -38,8 +38,7 @@ public class PNCVisitStart extends AppCompatActivity {
     private String REGIMEN = "";
     private String BABY_MEDICATION = "";
 
-    LinearLayout pnclayout1;
-    TextInputLayout yLDlayout1;
+    LinearLayout pnclayout1, yLDlayout1, stillbirthlay;
 
 
     @Override
@@ -47,7 +46,8 @@ public class PNCVisitStart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pncvisit_start);
         pnclayout1 = (LinearLayout) findViewById(R.id.pnclayout1);
-        yLDlayout1=(TextInputLayout) findViewById(R.id.yLDlayout1);
+        yLDlayout1=(LinearLayout) findViewById(R.id.yLDlayout1);
+        stillbirthlay=(LinearLayout) findViewById(R.id.stillbirthlay);
 
         try{
             //getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -173,6 +173,17 @@ public class PNCVisitStart extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 BABY_DELIVERED = BabyDelivered[position];
+
+                if (BABY_DELIVERED.contentEquals("Macerated Still Birth")){
+                    stillbirthlay.setVisibility(View.VISIBLE);
+                }
+                else if (BABY_DELIVERED.contentEquals("Live Birth")){
+                    stillbirthlay.setVisibility(View.GONE);
+                }
+                else if (BABY_DELIVERED.contentEquals("Fresh Still Birth")){
+                    stillbirthlay.setVisibility(View.GONE);
+                }
+
             }
 
             @Override
@@ -230,12 +241,19 @@ public class PNCVisitStart extends AppCompatActivity {
 
                if (CLIENT_VISIT_TYPE.contentEquals("PNC")){
                    pnclayout1.setVisibility(View.VISIBLE);
+                   yLDlayout1.setVisibility(View.GONE);
                }
-               if(CLIENT_VISIT_TYPE.contentEquals("Labor and Delivery"))
+             else  if(CLIENT_VISIT_TYPE.contentEquals("Labor and Delivery")){
                 yLDlayout1.setVisibility(View.VISIBLE);
+                pnclayout1.setVisibility(View.GONE);
             }
+            else  if(CLIENT_VISIT_TYPE.contentEquals(" "))
+                    yLDlayout1.setVisibility(View.GONE);
+                    pnclayout1.setVisibility(View.GONE);
+        }
 
-            @Override
+
+        @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
