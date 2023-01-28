@@ -81,12 +81,18 @@
                     android:layout_marginBottom="20sp" />
 
             </LinearLayout>
+            <!-- pregnant -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/pregnant">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:weightSum="3"
                 android:layout_height="wrap_content">
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -122,12 +128,6 @@
                         android:inputType="number"
                         android:textColorHint="#000" />
                 </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-
-
 
 
             </LinearLayout>
@@ -176,6 +176,7 @@
                     android:textColorHint="#000"
                     />
             </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -190,6 +191,7 @@
                     android:textColorHint="#000"
                     />
             </com.google.android.material.textfield.TextInputLayout>
+
 
 
 <!-- HIV Status -->
@@ -428,6 +430,14 @@
                     android:layout_marginBottom="20sp" />
 
             </LinearLayout>
+
+            <!-- positive selected -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/positiveSelected">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -449,6 +459,7 @@
                 android:id="@+id/noId"/>
 
             </RadioGroup>
+            </LinearLayout>
 
 
 

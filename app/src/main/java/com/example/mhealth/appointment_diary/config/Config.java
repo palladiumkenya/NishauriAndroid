@@ -50,6 +50,7 @@ public class Config extends AppCompatActivity {
     public static final String WARDS="/locator/wards?scounty=";
     public static final String COUNTRIES="/locator/countries";
     public static final String CALENDER_LIST="/appnt/applist";
+    public static final String SEARCHANCPNC="/pmtct/search";
 
 
     //https://ushauriapi.kenyahmis.org

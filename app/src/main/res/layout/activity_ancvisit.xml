@@ -29,10 +29,10 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/search_hei_no"
+                        android:id="@+id/cc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter CCC Number*"
+                        android:hint="Enter CCC Number"
                         android:inputType="number"
                         android:textColorHint="#000"
                         android:textSize="12sp" />
@@ -70,25 +70,26 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/hei_no_et"
+                        android:id="@+id/clinicno"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="1234500001"
                         android:inputType="number"
+                        android:enabled="false"
                         android:textColorHint="#000" />
                 </com.google.android.material.textfield.TextInputLayout>
-
+                <!-- upi NO -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/phone_no_et"
+                        android:id="@+id/upino"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="First Name*"
-                        android:inputType="text"
-                        android:maxLength="24"
+                        android:hint="MOH1234567890"
+                        android:inputType="number"
+                        android:enabled="false"
                         android:textColorHint="#000" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -97,11 +98,27 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/dob"
+                        android:id="@+id/fname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="First Name"
+                        android:inputType="text"
+                        android:maxLength="24"
+                        android:enabled="false"
+                        android:textColorHint="#000" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/Mname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:focusable="false"
-                        android:hint="Last Name*"
+                        android:hint="Middle Name"
+                        android:enabled="false"
                         android:inputType="text"
                         android:maxLength="24"
                         android:textColorHint="#000" />
@@ -114,11 +131,12 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/first_name"
+                        android:id="@+id/lname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Other names"
+                        android:hint="Last Name"
                         android:inputType="text"
+                        android:enabled="false"
                         android:textColorHint="#000"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -128,12 +146,13 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/middle_name"
+                        android:id="@+id/dobb"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Date of Birth*"
+                        android:hint="Date of Birth"
                         android:inputType="text"
                         android:textColorHint="#000"
+                        android:enabled="false"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -142,11 +161,12 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/Cregimen"
+                        android:id="@+id/reg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Current Regimen*"
+                        android:hint="Current Regimen"
                         android:inputType="text"
+                        android:enabled="false"
                         android:textColorHint="#000"
                         />
                 </com.google.android.material.textfield.TextInputLayout>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.example.mhealth.appointment_diary.R;
@@ -19,11 +20,16 @@ public class ANCVisitStarted extends AppCompatActivity {
     private String CLIENT_IS = "";
     private String HIV_RESULTS = "";
     private String SYPHILIS = "";
+    LinearLayout pregnant, positiveLayout,partnerLayout,positiveselected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ancvisit_started);
+        pregnant = (LinearLayout) findViewById(R.id.pregnant);
+        positiveLayout = (LinearLayout) findViewById(R.id.positiveLayout);
+        partnerLayout = (LinearLayout) findViewById(R.id.partnerLayout);
+        positiveselected= (LinearLayout) findViewById(R.id.positiveSelected);
 
         try{
             //getSupportActionBar().setDisplayShowHomeEnabled(true);
