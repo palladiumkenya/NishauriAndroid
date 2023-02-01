@@ -24,13 +24,16 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
         <activity
+            android:name=".pmtct.LaborAndDelivery"
+            android:exported="false" />
+        <activity
             android:name=".pmtct.ANCVisitStarted"
             android:exported="false" />
         <activity
             android:name=".pmtct.PNCVisitStart"
             android:exported="false" />
         <activity
-            android:name=".pmtct.LaborAndDelivery"
+            android:name=".pmtct.LaborAndDeliveryStart"
             android:exported="false" />
         <activity
             android:name=".pmtct.ExitClient"
