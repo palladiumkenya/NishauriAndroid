@@ -40,19 +40,20 @@
 
         <!-- pnc visit/clinic-->
 
-        <LinearLayout
+       <!-- <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone"
-            android:id="@+id/pnclayout1">
+            android:id="@+id/pnclayout11">-->
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/pncVlay">
 
         <EditText
-            android:id="@+id/PNCvno1"
+            android:id="@+id/PNC_VisitNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="PNC Visit Number:*"
@@ -62,10 +63,12 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/pncClay">
 
         <EditText
-            android:id="@+id/PNCcno1"
+            android:id="@+id/PNC_ClinicNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="PNC Clinic Number:*"
@@ -73,7 +76,7 @@
             android:maxLength="24"
             android:textColorHint="#000" />
     </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+       <!-- </LinearLayout>-->
 
         <!-- L and D layout -->
         <LinearLayout
@@ -88,7 +91,7 @@
             >
 
             <EditText
-                android:id="@+id/NoANC1"
+                android:id="@+id/ANC_VisitNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Number of ANC Visits:*"
@@ -202,10 +205,11 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/dateDied"
+                    android:id="@+id/DateDied"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/dateDied"
+                    android:focusable="false"
                     android:textColorHint="#000"
                     android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -217,7 +221,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/deathCause"
+                    android:id="@+id/DeathCause"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/deathcause"
@@ -233,10 +237,11 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/babyDOB"
+                    android:id="@+id/BabyDOB"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/babydob"
+                    android:focusable="false"
                     android:textColorHint="#000"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -326,9 +331,11 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/datestartedproph"
+                    android:id="@+id/DateStarted"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:focusable="false"
                     android:hint="@string/dateStartedprophy"
                     android:textColorHint="#000"
                     />

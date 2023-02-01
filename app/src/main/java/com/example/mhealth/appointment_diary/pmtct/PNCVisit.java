@@ -13,12 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mhealth.appointment_diary.Dialogs.ErrorMessage;
 import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
@@ -29,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public class PNCVisit extends AppCompatActivity {
@@ -173,9 +176,63 @@ public class PNCVisit extends AppCompatActivity {
                 details.setVisibility(View.GONE);
                 Toast.makeText(PNCVisit.this, error.getMessage(), Toast.LENGTH_SHORT).show();
 
+
+                ////
+
+             // try {
+                 // String  body = new String(error.networkResponse.data, "UTF-8");
+                    /*String  body = new String(error.networkResponse.data, "UTF-8");
+
+                    JSONObject json = new JSONObject(body);*/
+                    //                            Log.e("error response : ", json.toString());
+
+                     /*JSONObject json1 = new JSONObject(error.getMessage());
+                    String message = json1.has("message") ? json1.getString("message") : "";
+                    String reason = json1.has("reason") ? json1.getString("reason") : "";
+
+                    Toast.makeText(PNCVisit.this, message, Toast.LENGTH_SHORT).show();*/
+
+
+               // }
+              /*catch (JSONException e) {
+                    e.printStackTrace();
+                }*/
             }
+
+                ////
+               /* NetworkResponse response = error.networkResponse;
+
+                if(response != null && response.data != null) {
+                    String body;
+                    //get status code here
+                    String statusCode = String.valueOf(error.networkResponse.statusCode);
+                    //get response body and parse with appropriate encoding
+                    if (error.networkResponse.data != null) {
+                        try {
+                            body = new String(error.networkResponse.data, "UTF-8");
+
+                            JSONObject json = new JSONObject(body);
+                            //                            Log.e("error response : ", json.toString());
+
+
+                            String message = json.has("message") ? json.getString("message") : "";
+                            String reason = json.has("reason") ? json.getString("reason") : "";
+
+                            Toast.makeText(PNCVisit.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+
+
+                        } catch (UnsupportedEncodingException | JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+                }
+
+                }*/
         });
         RequestQueue requestQueue = Volley.newRequestQueue(PNCVisit.this);
         requestQueue.add(jsonArrayRequest);
-    }
+        }
+
 }

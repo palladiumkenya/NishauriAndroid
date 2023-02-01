@@ -1533,7 +1533,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
-
+//Submit registration details
     public void submitClicked(View v) {
 
         try {
@@ -3726,7 +3726,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             }
 
         };
-
 
         jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
                 0,
