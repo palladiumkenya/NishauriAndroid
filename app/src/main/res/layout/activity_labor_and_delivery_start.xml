@@ -37,6 +37,52 @@
                         android:textColorHint="#000" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Mother Tested for HIV*" />
+
+                    <Spinner
+                        android:id="@+id/motherTested"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+                <!-- HIV results -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:visibility="gone"
+                    android:id="@+id/hivlay"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="HIV Results" />
+
+                    <Spinner
+                        android:id="@+id/hivResults1"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -278,12 +324,6 @@
                     android:id="@+id/diededits"
                     android:visibility="gone">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:text="Record 1"/>
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -320,11 +360,7 @@
                     android:orientation="vertical"
                     android:id="@+id/diededits2"
                     android:visibility="gone">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:text="Record 2"/>
+
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
@@ -362,11 +398,6 @@
                     android:id="@+id/diededits3"
                     android:visibility="gone">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:text="Record 3"/>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
@@ -403,12 +434,6 @@
                     android:orientation="vertical"
                     android:id="@+id/diededits4"
                     android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:text="Record 4"/>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
@@ -447,12 +472,6 @@
                     android:id="@+id/diededits5"
                     android:visibility="gone">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:text="Record 5"/>
-
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -483,19 +502,16 @@
                 </LinearLayout>
 
                 <!-- livelay1 -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone"
-                    android:id="@+id/livetexts">
+
 
                     <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:id="@+id/livetexts">
 
                     <EditText
-                        android:id="@+id/BabysDOB"
+                        android:id="@+id/BabysDOB1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Baby's Date of Birth:*"
@@ -508,7 +524,9 @@
                     android:orientation="horizontal"
                     android:weightSum="2"
                     android:layout_marginTop="@dimen/spacing_large"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/livetextss">
 
                     <TextView
                         android:layout_width="0dp"
@@ -524,21 +542,16 @@
                         android:layout_marginBottom="20sp" />
 
                 </LinearLayout>
-                </LinearLayout>
 
 
 
                 <!-- livelay2-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone"
-                    android:id="@+id/livetexts2">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:id="@+id/livetexts2">
 
                         <EditText
                             android:id="@+id/BabysDOB2"
@@ -554,7 +567,10 @@
                         android:orientation="horizontal"
                         android:weightSum="2"
                         android:layout_marginTop="@dimen/spacing_large"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:id="@+id/livetextss2"
+                        >
 
                         <TextView
                             android:layout_width="0dp"
@@ -570,19 +586,15 @@
                             android:layout_marginBottom="20sp" />
 
                     </LinearLayout>
-                </LinearLayout>
+
 
                 <!-- livelay3 -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone"
-                    android:id="@+id/livetexts3">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:id="@+id/livetexts3">
 
                         <EditText
                             android:id="@+id/BabysDOB3"
@@ -598,7 +610,9 @@
                         android:orientation="horizontal"
                         android:weightSum="2"
                         android:layout_marginTop="@dimen/spacing_large"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:id="@+id/livetextss3">
 
                         <TextView
                             android:layout_width="0dp"
@@ -614,19 +628,13 @@
                             android:layout_marginBottom="20sp" />
 
                     </LinearLayout>
-                </LinearLayout>
-
                 <!-- livelay4 -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone"
-                    android:id="@+id/livetexts4">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:id="@+id/livetexts4">
 
                         <EditText
                             android:id="@+id/BabysDOB4"
@@ -642,7 +650,9 @@
                         android:orientation="horizontal"
                         android:weightSum="2"
                         android:layout_marginTop="@dimen/spacing_large"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:id="@+id/livetextss4">
 
                         <TextView
                             android:layout_width="0dp"
@@ -658,19 +668,14 @@
                             android:layout_marginBottom="20sp" />
 
                     </LinearLayout>
-                </LinearLayout>
 
                 <!-- livelay5 -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone"
-                    android:id="@+id/livetexts5">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:id="@+id/livetexts5">
 
                         <EditText
                             android:id="@+id/BabysDOB5"
@@ -686,7 +691,9 @@
                         android:orientation="horizontal"
                         android:weightSum="2"
                         android:layout_marginTop="@dimen/spacing_large"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:id="@+id/livetextss5">
 
                         <TextView
                             android:layout_width="0dp"
@@ -702,11 +709,6 @@
                             android:layout_marginBottom="20sp" />
 
                     </LinearLayout>
-                </LinearLayout>
-
-
-
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -730,27 +732,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Mother Tested for HIV*" />
-
-                    <Spinner
-                        android:id="@+id/motherTested"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20sp" />
-
-                </LinearLayout>
 
 
                 <!-- <com.google.android.material.textfield.TextInputLayout
@@ -763,7 +744,7 @@
                          android:layout_height="wrap_content"
                          android:hint="Baby's Date of Birth:*"
                          android:inputType="text"
-                         android:textColorHint="#000"
+                         android:textColorHint="000"
                          />
                  </com.google.android.material.textfield.TextInputLayout>-->
 

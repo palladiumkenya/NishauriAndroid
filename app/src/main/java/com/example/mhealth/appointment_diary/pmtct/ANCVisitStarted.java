@@ -16,7 +16,7 @@ public class ANCVisitStarted extends AppCompatActivity {
     String[] clientIs = {"","Breastfeeding", "Not Breastfeeding", "Pregnant", "Pregnant and Breastfeeding"};
     String[] hivResults = {"", "Unknown", "Negative", "Positive"};
     String[] syphilis = {"","Negative", "Positive", "Requested", "Not Requested", "Poor Sample Quality"};
-    Spinner clientIsS, hivResultsS, SyphilisS;
+    Spinner clientIsS, hivResultsS, SyphilisS, hivResultsSp;
     private String CLIENT_IS = "";
     private String HIV_RESULTS = "";
     private String SYPHILIS = "";
@@ -34,7 +34,7 @@ public class ANCVisitStarted extends AppCompatActivity {
         try{
             //getSupportActionBar().setDisplayShowHomeEnabled(true);
             // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("ANC Visit Started");
+            getSupportActionBar().setTitle("ANC Visit Details");
 
         }
         catch(Exception e){
@@ -42,6 +42,7 @@ public class ANCVisitStarted extends AppCompatActivity {
         }
         clientIsS = (Spinner) findViewById(R.id.ClientSpinner);
         hivResultsS =(Spinner) findViewById(R.id.hivResults1);
+        hivResultsSp =(Spinner) findViewById(R.id.hivResults1p);
         SyphilisS =(Spinner) findViewById(R.id.SyphilisSpinner);
 
         //Client is
@@ -61,12 +62,29 @@ public class ANCVisitStarted extends AppCompatActivity {
 
             }
         });
-        // hiv results
+        // hiv results1
         ArrayAdapter<String> resultsAdapter = new ArrayAdapter<String>(ANCVisitStarted.this, android.R.layout.simple_spinner_item, hivResults);
         clientAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         hivResultsS.setAdapter(resultsAdapter);
 
         hivResultsS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                HIV_RESULTS = clientIs[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        // hiv results2
+        ArrayAdapter<String> resultsAdapter1 = new ArrayAdapter<String>(ANCVisitStarted.this, android.R.layout.simple_spinner_item, hivResults);
+        clientAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        hivResultsSp.setAdapter(resultsAdapter1);
+
+        hivResultsSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 

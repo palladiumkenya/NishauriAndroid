@@ -15,28 +15,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            android:layout_marginTop="@dimen/spacing_large"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="0dp"
+            <!-- Baby's DOB-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Client Visit Type*" />
+                android:layout_height="wrap_content">
 
-            <Spinner
-                android:id="@+id/visitType1"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20sp" />
+                <EditText
+                    android:id="@+id/BabyDOB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Date of Visit"
+                    android:focusable="false"
+                    android:textColorHint="#000"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
+
 
         <!-- pnc visit/clinic-->
 
@@ -49,7 +44,6 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:id="@+id/pncVlay">
 
         <EditText
@@ -64,7 +58,6 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:id="@+id/pncClay">
 
         <EditText
@@ -76,7 +69,38 @@
             android:maxLength="24"
             android:textColorHint="#000" />
     </com.google.android.material.textfield.TextInputLayout>
-       <!-- </LinearLayout>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/positiveSelected">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Client Counselled on Postparturm FP?" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/syphilisID">
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/yesId"/>
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/noId"/>
+
+                </RadioGroup>
+            </LinearLayout>
+
+
+            <!-- </LinearLayout>-->
 
         <!-- L and D layout -->
         <LinearLayout
@@ -103,148 +127,11 @@
 
 
 
-    <!-- mode -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Mode of Delivery" />
 
-        <Spinner
-            android:id="@+id/DeliveryMode1"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20sp" />
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Place of Delivery" />
-
-        <Spinner
-            android:id="@+id/DeliveryPlace1"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20sp" />
-
-    </LinearLayout>
-            <!-- Delivery outcome -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Delivery Outcome*" />
-
-                <Spinner
-                    android:id="@+id/deliveryOutcome"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20sp" />
-
-            </LinearLayout>
-            <!-- Baby delivered -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Baby Delivered"/>
-
-                <Spinner
-                    android:id="@+id/BabydeliveredS"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20sp" />
-
-            </LinearLayout>
         </LinearLayout>
-            <!-- Date died -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:id="@+id/stillbirthlay"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/DateDied"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/dateDied"
-                    android:focusable="false"
-                    android:textColorHint="#000"
-                    android:textSize="12sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Cause of Death -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/DeathCause"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/deathcause"
-                    android:textColorHint="#000"
-                     />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-            <!-- Baby's DOB-->
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/BabyDOB"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/babydob"
-                    android:focusable="false"
-                    android:textColorHint="#000"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- baby's sex -->
 
@@ -259,7 +146,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Baby's Sex" />
+                    android:text="FP Methods" />
 
                 <Spinner
                     android:id="@+id/babySex"
@@ -269,109 +156,6 @@
                     android:layout_marginBottom="20sp" />
 
             </LinearLayout>
-
-            <!-- Mother's Outcome -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Mother's Outcome*" />
-
-                <Spinner
-                    android:id="@+id/motheroutcome"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20sp" />
-
-            </LinearLayout>
-            <!-- Mother tested for HIV -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Mother Tested for HIV*" />
-
-                <Spinner
-                    android:id="@+id/mothertestedhiv"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20sp" />
-
-            </LinearLayout>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:background="@color/colorPrimary"
-                android:fontFamily="serif"
-                android:text="Prophylaxis Details"
-                android:textSize="12sp"
-                android:textColor="#FFFFFF" />
-            <!-- Date Started -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/DateStarted"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:focusable="false"
-                    android:hint="@string/dateStartedprophy"
-                    android:textColorHint="#000"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Baby medication -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Baby's Medication" />
-
-                <Spinner
-                    android:id="@+id/babyMedicationS"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20sp" />
-
-            </LinearLayout>
-
-
-
-
-
-
-
-
-
 
     <Button
         android:id="@+id/btn_submit_reg1"

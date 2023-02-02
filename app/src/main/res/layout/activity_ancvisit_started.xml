@@ -48,7 +48,8 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone">
 
         <EditText
             android:id="@+id/ANCNumber"
@@ -86,7 +87,7 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+
             android:id="@+id/pregnant">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -180,7 +181,8 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/gestation"
@@ -207,19 +209,7 @@
         android:textSize="12sp"
         android:textColor="#FFFFFF" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/testedDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Date Tested*"
-                    android:textColorHint="#000"
-                    android:textSize="12sp" />
-            </com.google.android.material.textfield.TextInputLayout>
             <!-- HIV results -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -242,6 +232,19 @@
                     android:layout_marginBottom="20sp" />
 
             </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/testedDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Date Tested*"
+                    android:textColorHint="#000"
+                    android:textSize="12sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
             <!-- enter ccno -->
@@ -297,6 +300,52 @@
             </LinearLayout>
 
             <!--partner hiv status -->
+            <Button
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@color/colorPrimary"
+                android:fontFamily="serif"
+                android:text="Partner HIV Status"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF" />
+            <!-- HIV results -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="HIV Results" />
+
+                <Spinner
+                    android:id="@+id/hivResults1p"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp" />
+
+            </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/testedDatep"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Date Tested*"
+                    android:textColorHint="#000"
+                    android:textSize="12sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -451,14 +500,47 @@
                 <RadioButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Yes"
                     android:id="@+id/yesId"/>
 
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Positive"
                 android:id="@+id/noId"/>
 
             </RadioGroup>
+
+                <!--Hepatitis B -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hepatitis B Serology" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hepatitis">
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Positive"
+                        android:id="@+id/hpositive"/>
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Negative"
+                        android:id="@+id/hnegative"/>
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Not Done"
+                        android:id="@+id/hnot"/>
+
+                </RadioGroup>
             </LinearLayout>
 
 
