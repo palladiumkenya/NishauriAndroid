@@ -89,11 +89,13 @@
                     <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="Yes"
                         android:id="@+id/yesId"/>
 
                     <RadioButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="No"
                         android:id="@+id/noId"/>
 
                 </RadioGroup>
