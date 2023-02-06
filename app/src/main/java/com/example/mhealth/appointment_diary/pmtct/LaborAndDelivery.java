@@ -142,7 +142,7 @@ public class LaborAndDelivery extends AppCompatActivity {
                      String currentregimen =jsonObject.getString("currentregimen");*/
 
 
-                        ccno.setText(clinicnumber);
+                        clinicno.setText(clinicnumber);
                         fname.setText(f_name);
                         Mname.setText(m_name);
                         lname.setText(l_name);

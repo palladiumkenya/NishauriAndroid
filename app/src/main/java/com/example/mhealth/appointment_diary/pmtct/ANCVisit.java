@@ -153,7 +153,7 @@ public class ANCVisit extends AppCompatActivity {
                      String currentregimen =jsonObject.getString("currentregimen");*/
 
 
-                     ccno.setText(clinicnumber);
+                     clinicno.setText(clinicnumber);
                      fname.setText(f_name);
                      Mname.setText(m_name);
                      lname.setText(l_name);
@@ -180,7 +180,7 @@ public class ANCVisit extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 details.setVisibility(View.GONE);
-                Toast.makeText(ANCVisit.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ANCVisit.this, error.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
