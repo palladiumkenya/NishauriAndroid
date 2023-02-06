@@ -7,13 +7,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.example.mhealth.appointment_diary.AccessServer.AccessServer;
+import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
 import com.example.mhealth.appointment_diary.R;
+import com.example.mhealth.appointment_diary.encryption.Base64Encoder;
+import com.example.mhealth.appointment_diary.tables.Activelogin;
+import com.example.mhealth.appointment_diary.tables.Registrationtable;
+import com.example.mhealth.appointment_diary.utilitymodules.Registration;
 
+import java.util.Base64;
 import java.util.Calendar;
+import java.util.List;
 
 public class ANCVisitStarted extends AppCompatActivity {
 
@@ -25,30 +35,129 @@ public class ANCVisitStarted extends AppCompatActivity {
     private String HIV_RESULTS = "";
     private String SYPHILIS = "";
     LinearLayout pregnant, positiveLayout,partnerLayout,positiveselected;
-    EditText lmp, testedDate, testedDatep, ccEn,ARTstart,partccEn,partARTstart, vldatesample;
+    EditText CCCNo, partnerCCCNo, gravida,EDD_date, LMP_date, DateTested,ANC_Visitno,ANC_clinicno,ANCNumber,  partnerDateTested,CCCEnrolDate, ARTStart_date,partnerCCCEnrolDate,partnerARTStart_date, VLdate,parity1,parity2,VLResults,CCCNo22;
+    String ClientIS_code, HIV_Results_Code, partnerHIV_Results_Code, SyphilisSerology_code, HepatitisB_code;
+
+    Button saveANC;
+
+    CheckInternet chkinternet;
+    AccessServer acs;
+    String newCC;
+
+    /*gravida=gravida,lmp=LMP_date,edd=EDD_date,gestation,testedDate,
+    ccno, ccEn, ARTstart,, partccno, partccEn, partARTstart,VLResults=VLResults*/
+
+
+
+
+    //SyphilisTreated_code, HepatitisB-code
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ancvisit_started);
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                newCC= null;
+            } else {
+                newCC= extras.getString("Client_CCC");
+            }
+        } else {
+            newCC= (String) savedInstanceState.getSerializable("Client_CCC");
+        }
+
+        acs = new AccessServer(ANCVisitStarted.this);
+        chkinternet = new CheckInternet(ANCVisitStarted.this);
         pregnant = (LinearLayout) findViewById(R.id.pregnant);
         positiveLayout = (LinearLayout) findViewById(R.id.positiveLayout);
         partnerLayout = (LinearLayout) findViewById(R.id.partnerLayout);
         positiveselected= (LinearLayout) findViewById(R.id.positiveSelected);
 
-        lmp= (EditText) findViewById(R.id.lmp);
-        testedDate= (EditText) findViewById(R.id.testedDate);
-        testedDatep= (EditText) findViewById(R.id.testedDatep);
+        LMP_date= (EditText) findViewById(R.id.lmp);
+        parity1= (EditText) findViewById(R.id.parity);
+        parity2= (EditText) findViewById(R.id.parity2);
+        VLResults= (EditText) findViewById(R.id.VLResults);
 
-        ccEn= (EditText) findViewById(R.id.ccEn);
-        ARTstart= (EditText) findViewById(R.id.ARTstart);
-        partccEn= (EditText) findViewById(R.id.partccEn);
-        partARTstart= (EditText) findViewById(R.id.partARTstart);
+        EDD_date= (EditText) findViewById(R.id.edd);
+        gravida= (EditText) findViewById(R.id.gravida);
+        ANC_Visitno= (EditText) findViewById(R.id.ANCVisit);
+        ANC_clinicno= (EditText) findViewById(R.id.ANCClinic);
+        ANCNumber= (EditText) findViewById(R.id.ANCNumber);
+        partnerCCCNo= (EditText) findViewById(R.id.partccno);
+        DateTested= (EditText) findViewById(R.id.testedDate);
+        partnerDateTested= (EditText) findViewById(R.id.testedDatep);
+        CCCNo22= (EditText) findViewById(R.id.ccno);
 
-        vldatesample= (EditText) findViewById(R.id. vldatesample);
+        CCCEnrolDate= (EditText) findViewById(R.id.ccEn);
+        ARTStart_date= (EditText) findViewById(R.id.ARTstart);
+        partnerCCCEnrolDate= (EditText) findViewById(R.id.partccEn);
+        partnerARTStart_date= (EditText) findViewById(R.id.partARTstart);
+        saveANC= (Button) findViewById(R.id.btn_save);
+
+        VLdate= (EditText) findViewById(R.id. vldatesample);
+        ClientIS_code="";
+        HIV_Results_Code="";
+        partnerHIV_Results_Code="";
+        SyphilisSerology_code="";
+        HepatitisB_code="";
+        saveANC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String ANC_no =ANC_Visitno.getText().toString();
+                String ANC_clinic_no =ANC_clinicno.getText().toString();
+
+
+                String parity_1 =parity1.getText().toString();
+                String parity_2 =parity2.getText().toString();
+                String gravida1 =gravida.getText().toString();
+                String LMPdate =LMP_date.getText().toString();
+
+               // String LMPdate =LMP_date.getText().toString();
+                String EDDDATE =EDD_date.getText().toString();
+                String DateTested1 =DateTested.getText().toString();
+                String CCCNo2 = CCCNo22.getText().toString();
+               // String CCCNo2="";
+                String CCCEnrolDate1 =CCCEnrolDate.getText().toString();
+                String ARTStart_date1 =ARTStart_date .getText().toString();
+                String partnerDateTested1 =partnerDateTested.getText().toString();
+                String partnerCCCNo1 =partnerCCCNo.getText().toString();
+                String partnerCCCEnrolDate1 =partnerCCCEnrolDate.getText().toString();
+                String partnerARTStart_date1 =partnerARTStart_date.getText().toString();
+                String VLdate1 =VLdate.getText().toString();
+                String VLResults1 =VLResults.getText().toString();
+
+
+                String ANC_data =  newCC + "*" + ANC_no + "*" + ANC_clinic_no + "*" + ClientIS_code + "*" + parity_1 + "*" + parity_2+ "*" + gravida1 + "*" + LMPdate + "*" + EDDDATE+ "*" + HIV_Results_Code + "*"+ DateTested1 + "*" + CCCNo2 + "*" +CCCEnrolDate1 + "*" + ARTStart_date1 + "*" + partnerHIV_Results_Code + "*" +  partnerDateTested1+ "*" +partnerCCCNo1 + "*" + partnerCCCEnrolDate1+ "*" + partnerARTStart_date1 + "*" +VLdate1 + "*" + VLResults1 + "*" + SyphilisSerology_code + "*" + HepatitisB_code;
+
+                String enc = Base64Encoder.encryptString(ANC_data);
+
+
+                    List<Activelogin> myl = Activelogin.findWithQuery(Activelogin.class, "select * from Activelogin");
+                    for (int x = 0; x < myl.size(); x++) {
+
+                        String un = myl.get(x).getUname();
+                        List<Registrationtable> myl2 = Registrationtable.findWithQuery(Registrationtable.class, "select * from Registrationtable where username=? limit 1", un);
+                        for (int y = 0; y < myl2.size(); y++) {
+
+                            String phne = myl2.get(y).getPhone();
+//                                acs.sendDetailsToDb("Reg*"+sendSms+"/"+phne);
+                            acs.ANCPost("anc*" + enc, phne);
+
+                            Toast.makeText(ANCVisitStarted.this, "Success", Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                }
+
+
+            }
+        });
 
         //vldatesample
-        vldatesample.setOnClickListener(new View.OnClickListener() {
+        VLdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Calendar calendar = Calendar.getInstance();
@@ -59,7 +168,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                     @Override
                     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
                         // adding the selected date in the edittext
-                        vldatesample.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                        VLdate.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
                 }, year, month, day);
 
@@ -77,7 +186,7 @@ public class ANCVisitStarted extends AppCompatActivity {
 
         //partARTstart
 
-        partARTstart.setOnClickListener(new View.OnClickListener() {
+        partnerARTStart_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Calendar calendar = Calendar.getInstance();
@@ -88,7 +197,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                     @Override
                     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
                         // adding the selected date in the edittext
-                        partARTstart.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                        partnerARTStart_date.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
                 }, year, month, day);
 
@@ -104,7 +213,7 @@ public class ANCVisitStarted extends AppCompatActivity {
 
 
         //partccEn
-        partccEn.setOnClickListener(new View.OnClickListener() {
+        partnerCCCEnrolDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Calendar calendar = Calendar.getInstance();
@@ -115,7 +224,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                     @Override
                     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
                         // adding the selected date in the edittext
-                        partccEn.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                        partnerCCCEnrolDate.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
                 }, year, month, day);
 
@@ -129,7 +238,7 @@ public class ANCVisitStarted extends AppCompatActivity {
         });
 
         //ARTstart
-        ARTstart.setOnClickListener(new View.OnClickListener() {
+       ARTStart_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Calendar calendar = Calendar.getInstance();
@@ -140,7 +249,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                     @Override
                     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
                         // adding the selected date in the edittext
-                        ARTstart.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                        ARTStart_date.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
                 }, year, month, day);
 
@@ -155,7 +264,7 @@ public class ANCVisitStarted extends AppCompatActivity {
 
 
         //ccEn
-        ccEn.setOnClickListener(new View.OnClickListener() {
+        CCCEnrolDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Calendar calendar = Calendar.getInstance();
@@ -166,7 +275,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                     @Override
                     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
                         // adding the selected date in the edittext
-                        ccEn.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                        CCCEnrolDate.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
                 }, year, month, day);
 
@@ -183,7 +292,7 @@ public class ANCVisitStarted extends AppCompatActivity {
 
 
         //testedDatep
-        testedDatep.setOnClickListener(new View.OnClickListener() {
+        partnerDateTested.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Calendar calendar = Calendar.getInstance();
@@ -194,7 +303,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                     @Override
                     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
                         // adding the selected date in the edittext
-                        testedDatep.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                        partnerDateTested.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
                 }, year, month, day);
 
@@ -208,7 +317,7 @@ public class ANCVisitStarted extends AppCompatActivity {
         });
 
         //testedDate
-        testedDate.setOnClickListener(new View.OnClickListener() {
+        DateTested.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Calendar calendar = Calendar.getInstance();
@@ -219,7 +328,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                     @Override
                     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
                         // adding the selected date in the edittext
-                        testedDate.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                        DateTested.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
                 }, year, month, day);
 
@@ -234,7 +343,7 @@ public class ANCVisitStarted extends AppCompatActivity {
 
 
         //lmp  date
-       lmp.setOnClickListener(new View.OnClickListener() {
+       LMP_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Calendar calendar = Calendar.getInstance();
@@ -245,7 +354,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                     @Override
                     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
                         // adding the selected date in the edittext
-                       lmp.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                       LMP_date.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
                 }, year, month, day);
 
@@ -282,6 +391,8 @@ public class ANCVisitStarted extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
              CLIENT_IS = clientIs[position];
+                ClientIS_code=Integer.toString(position);
+
             }
 
             @Override
@@ -299,6 +410,7 @@ public class ANCVisitStarted extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 HIV_RESULTS = clientIs[position];
+                HIV_Results_Code=Integer.toString(position);
             }
 
             @Override
@@ -316,6 +428,8 @@ public class ANCVisitStarted extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 HIV_RESULTS = clientIs[position];
+
+                partnerHIV_Results_Code=Integer.toString(position);
             }
 
             @Override
@@ -335,6 +449,9 @@ public class ANCVisitStarted extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                SYPHILIS = syphilis[position];
+
+               SyphilisSerology_code=Integer.toString(position);
+               // HepatitisB_code="";
 
                if (SYPHILIS.contentEquals("Positive")){
                    positiveselected.setVisibility(View.VISIBLE);

@@ -111,6 +111,14 @@ public class Config extends AppCompatActivity {
     public static final String SEARCH_RESCHEDULE_APT1 = "/api/edit_appointment/get/client/apps";
     public static final String RESCHEDULE_APT1 = "/api/edit_appointment/edit/appointment/date/";
 
+    public static final String ANC="/pmtct/pnc";
+
+    /*
+    https://ushauriapi.kenyahmis.org/pmtct/pnc
+            10:15
+    https://ushauriapi.kenyahmis.org/pmtct/lad*/
+
+
 
     @Override
     public void onBackPressed() {

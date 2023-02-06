@@ -44,6 +44,7 @@ public class ANCVisit extends AppCompatActivity {
     String z, phone;
     EditText ccno,clinicno,fname,Mname,lname,dobi,reg, upino;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +55,7 @@ public class ANCVisit extends AppCompatActivity {
         startvisit=(Button) findViewById(R.id.btn_startVisit);
         searchbtn =(Button) findViewById(R.id.btn_search);
         details =(LinearLayout) findViewById(R.id.hei_details_layout);
+
 
         ccno=(EditText) findViewById(R.id.cc);
         clinicno=(EditText) findViewById(R.id.clinicno);
@@ -80,7 +82,10 @@ public class ANCVisit extends AppCompatActivity {
         startvisit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String sendCC =clinicno.getText().toString();
                 Intent intent = new Intent(ANCVisit.this, ANCVisitStarted.class);
+                intent.putExtra("Client_CCC", sendCC);
+
                 startActivity(intent);
 
             }

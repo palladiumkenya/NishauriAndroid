@@ -313,7 +313,7 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
                         // accessing data from database or creating network call
                         //acs.getDefaultersAppointmentMessages(getUserPhoneNumber());
                         handleMenuSearch();
-                        Toast.makeText(DefaulterMainActivity.this, "Task is Completed.", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(DefaulterMainActivity.this, "Task is Completed.", Toast.LENGTH_SHORT).show();
                     }
                 }).start();
 
@@ -371,16 +371,8 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
 //                    Toast.makeText(getApplicationContext(), "searching", Toast.LENGTH_SHORT).show();
 
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run(){
-                            // accessing data from database or creating network call
+
                             doSearching(s);
-                            Toast.makeText(DefaulterMainActivity.this, "Task is Completed.", Toast.LENGTH_SHORT).show();
-                        }
-                    }).start();
-
-
 
                 }
 
