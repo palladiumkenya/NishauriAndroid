@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,15 +16,18 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mhealth.appointment_diary.Dialogs.ErrorMessage;
 import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.appointment_diary.AppCal;
 import com.example.mhealth.appointment_diary.config.Config;
+import com.example.mhealth.appointment_diary.config.VolleyErrors;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
 import com.example.mhealth.appointment_diary.tables.UrlTable;
@@ -30,6 +36,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public class ANCVisit extends AppCompatActivity {
@@ -149,15 +156,6 @@ public class ANCVisit extends AppCompatActivity {
                      String dob =jsonObject.getString("dob");
                      String upi_no =jsonObject.getString("upi_no");
 
-
-                     /*String upi_no =jsonObject.getString("upi_no");
-                     String f_name =jsonObject.getString("f_name");
-                     String m_name =jsonObject.getString("m_name");
-                     String l_name =jsonObject.getString("l_name");
-                     String dob =jsonObject.getString("dob");
-                     String currentregimen =jsonObject.getString("currentregimen");*/
-
-
                      clinicno.setText(clinicnumber);
                      fname.setText(f_name);
                      Mname.setText(m_name);
@@ -184,6 +182,38 @@ public class ANCVisit extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
+                NetworkResponse response = error.networkResponse;
+                if(response != null && response.data != null){
+                    String body;
+                    //get status code here
+                    String statusCode = String.valueOf(error.networkResponse.statusCode);
+                    //get response body and parse with appropriate encoding
+                    if(error.networkResponse.data!=null) {
+                        try {
+                            body = new String(error.networkResponse.data,"UTF-8");
+
+                            JSONObject json = new JSONObject(body);
+                            //                            Log.e("error response : ", json.toString());
+
+
+                            String message = json.has("message") ? json.getString("message") : "";
+                            String reason = json.has("reason") ? json.getString("reason") : "";
+
+                            Toast.makeText(ANCVisit.this, message,Toast.LENGTH_LONG).show();
+
+
+                        } catch (UnsupportedEncodingException | JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }else {
+
+                    Log.e("VOlley error :", error.getLocalizedMessage()+" message:"+error.getMessage());
+                    Toast.makeText(ANCVisit.this, VolleyErrors.getVolleyErrorMessages(error, ANCVisit.this),Toast.LENGTH_LONG).show();
+                }
+
                 details.setVisibility(View.GONE);
                 //Toast.makeText(ANCVisit.this, error.getMessage(), Toast.LENGTH_SHORT).show();
 
@@ -192,4 +222,6 @@ public class ANCVisit extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(ANCVisit.this);
         requestQueue.add(jsonArrayRequest);
     }
+
+
 }

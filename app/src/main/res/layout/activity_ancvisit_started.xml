@@ -142,9 +142,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Gravida:*"
-                    android:inputType="text"
-                    android:enabled="false"
+                    android:inputType="none"
+                    android:focusable="true"
                     android:maxLength="24"
+                    android:editable="false"
                     android:textColorHint="#000" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -168,13 +169,14 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone">
+                >
 
                 <EditText
                     android:id="@+id/edd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="EDD:*"
+                    android:focusable="false"
                     android:inputType="text"
                     android:textColorHint="#000"
                     />
@@ -488,70 +490,62 @@
                     android:layout_marginBottom="20sp" />
 
             </LinearLayout>
-
+            <!-- Has the client been treated -->
             <!-- positive selected -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:id="@+id/positiveSelected"
                 android:visibility="gone"
-                android:id="@+id/positiveSelected">
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Has The Client Been Treated for Syphilis?" />
-
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/syphilisID">
-
-                <RadioButton
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Yes"
-                    android:id="@+id/yesId"/>
+                    android:text="Has The Client Been Treated for Syphilis?" />
 
-            <RadioButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="No"
-                android:id="@+id/noId"/>
+                <Spinner
+                    android:id="@+id/clientTreat"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp" />
 
-            </RadioGroup>
             </LinearLayout>
 
+
+
+
                 <!--Hepatitis B -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:id="@+id/hepatisib"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_height="wrap_content">
+
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Hepatitis B Serology" />
 
-                <RadioGroup
-                    android:layout_width="match_parent"
+                <Spinner
+                    android:id="@+id/hepB"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:id="@+id/hepatitis">
+                    android:layout_marginBottom="20sp" />
 
-                    <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Positive"
-                        android:id="@+id/hpositive"/>
+            </LinearLayout>
 
-                    <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Negative"
-                        android:id="@+id/hnegative"/>
 
-                    <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Not Done"
-                        android:id="@+id/hnot"/>
 
-                </RadioGroup>
+
            <!-- </LinearLayout>-->
 
 

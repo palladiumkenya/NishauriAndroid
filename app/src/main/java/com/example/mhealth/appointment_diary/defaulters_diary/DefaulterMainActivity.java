@@ -307,15 +307,12 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
 
             case R.id.action_search2:
 
-                new Thread(new Runnable() {
-                    @Override
-                    public void run(){
+
                         // accessing data from database or creating network call
                         //acs.getDefaultersAppointmentMessages(getUserPhoneNumber());
+
                         handleMenuSearch();
                        // Toast.makeText(DefaulterMainActivity.this, "Task is Completed.", Toast.LENGTH_SHORT).show();
-                    }
-                }).start();
 
                // handleMenuSearch();
                 return true;
@@ -371,8 +368,11 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
 //                    Toast.makeText(getApplicationContext(), "searching", Toast.LENGTH_SHORT).show();
 
-
-                            doSearching(s);
+                            try {
+                          doSearching(s);}
+                            catch (Exception e){
+                                e.printStackTrace();
+                            }
 
                 }
 
@@ -487,6 +487,7 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
                 @Override
                 public void run(){
                     pr.showProgress("Sending message...");
+
                     acs.getDefaultersAppointmentMessages(getUserPhoneNumber());
                     pr.dissmissProgress();
 
