@@ -350,7 +350,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 BABY_DELIVERED2 = BabyDelivered[position];
 
-                if (BABY_DELIVERED2.contentEquals("Macerated Still Birth")|| BABY_DELIVERED.contentEquals("Fresh Still Birth")){
+                if (BABY_DELIVERED2.contentEquals("Macerated Still Birth")|| BABY_DELIVERED2.contentEquals("Fresh Still Birth")){
                     diedlay2.setVisibility(View.VISIBLE);
                     livetexts2.setVisibility(View.GONE);
                     livetextss2.setVisibility(View.GONE);
@@ -412,7 +412,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 BABY_DELIVERED3 = BabyDelivered[position];
 
-                if (BABY_DELIVERED3.contentEquals("Macerated Still Birth")|| BABY_DELIVERED.contentEquals("Fresh Still Birth")){
+                if (BABY_DELIVERED3.contentEquals("Macerated Still Birth")|| BABY_DELIVERED3.contentEquals("Fresh Still Birth")){
                     /*livetexts.setVisibility(View.GONE);
                     livetexts2.setVisibility(View.GONE);
 
@@ -472,7 +472,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 BABY_DELIVERED4 = BabyDelivered[position];
 
-                if (BABY_DELIVERED4.contentEquals("Macerated Still Birth")|| BABY_DELIVERED.contentEquals("Fresh Still Birth")){
+                if (BABY_DELIVERED4.contentEquals("Macerated Still Birth")|| BABY_DELIVERED4.contentEquals("Fresh Still Birth")){
                     /*livetexts.setVisibility(View.GONE);
                     livetexts2.setVisibility(View.GONE);
                     livetexts3.setVisibility(View.GONE);
@@ -533,7 +533,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 BABY_DELIVERED5 = BabyDelivered[position];
 
-                if (BABY_DELIVERED5.contentEquals("Macerated Still Birth")|| BABY_DELIVERED.contentEquals("Fresh Still Birth")){
+                if (BABY_DELIVERED5.contentEquals("Macerated Still Birth")|| BABY_DELIVERED5.contentEquals("Fresh Still Birth")){
 
                     /*livetexts.setVisibility(View.GONE);
                     livetexts2.setVisibility(View.GONE);
