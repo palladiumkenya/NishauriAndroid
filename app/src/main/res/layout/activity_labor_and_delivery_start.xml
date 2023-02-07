@@ -22,14 +22,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:id="@+id/pncVlay">
 
                     <EditText
-                        android:id="@+id/PNC_VisitNo"
+                        android:id="@+id/ANCVisit_NO"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Number of ANC Visits*"
@@ -89,7 +90,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/middle_name"
+                        android:id="@+id/deliveryDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Date of Delivery*"
@@ -228,7 +229,7 @@
                         android:layout_height="wrap_content">
 
                         <EditText
-                            android:id="@+id/Datedied"
+                            android:id="@+id/Datedied1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Date Died:*"
@@ -242,7 +243,7 @@
                         android:layout_height="wrap_content">
 
                         <EditText
-                            android:id="@+id/deathcause"
+                            android:id="@+id/deathcause1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Cause of Death:*"

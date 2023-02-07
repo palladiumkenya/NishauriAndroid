@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -46,12 +47,36 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
     private String TESTED = "";
     LinearLayout diedlay, singleLay, twinLay,tripleLay, quadlay, fifthlay,diedlay2,diedlay3,diedlay4, diedlay5,livetextss,livetextss2,livetextss3,livetextss4,livetextss5,hivlay;
     TextInputLayout livetexts,livetexts2,livetexts3,livetexts4,livetexts5;
+    EditText ANCVisit_NO, deliveryDate, Datedied1, deathcause1,BabysDOB1, Datedied2,deathcause2,BabysDOB2, Datedied3,deathcause3,BabysDOB3, Datedied4,deathcause4,BabysDOB4,  Datedied5,deathcause5,BabysDOB5;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_labor_and_delivery_start);
+                ANCVisit_NO=(EditText) findViewById(R.id.ANCVisit_NO);
+                deliveryDate=(EditText) findViewById(R.id.deliveryDate);
+
+                Datedied1=(EditText) findViewById(R.id.Datedied1);
+                deathcause1=(EditText) findViewById(R.id.deathcause1);
+                BabysDOB1=(EditText) findViewById(R.id.BabysDOB1);
+
+                Datedied2=(EditText) findViewById(R.id.Datedied2);
+                deathcause2=(EditText) findViewById(R.id.deathcause2);
+                BabysDOB2=(EditText) findViewById(R.id.BabysDOB2);
+
+                Datedied3=(EditText) findViewById(R.id.Datedied3);
+                deathcause3=(EditText) findViewById(R.id.deathcause3);
+                BabysDOB3=(EditText) findViewById(R.id.BabysDOB3);
+
+                Datedied4=(EditText) findViewById(R.id.Datedied4);
+                deathcause4=(EditText) findViewById(R.id.deathcause4);
+                BabysDOB4=(EditText) findViewById(R.id.BabysDOB4);
+
+                Datedied5=(EditText) findViewById(R.id.Datedied5);
+                deathcause5=(EditText) findViewById(R.id.deathcause5);
+                BabysDOB5=(EditText) findViewById(R.id.BabysDOB5);
+
         diedlay=(LinearLayout)findViewById(R.id.diededits);
         diedlay2=(LinearLayout)findViewById(R.id.diededits2);
         diedlay3=(LinearLayout)findViewById(R.id.diededits3);
