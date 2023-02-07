@@ -70,73 +70,38 @@
             android:textColorHint="#000" />
     </com.google.android.material.textfield.TextInputLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/positiveSelected">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Client Counselled on Postparturm FP?" />
-
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/syphilisID">
-
-                    <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Yes"
-                        android:id="@+id/yesId"/>
-
-                    <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="No"
-                        android:id="@+id/noId"/>
-
-                </RadioGroup>
-            </LinearLayout>
 
 
             <!-- </LinearLayout>-->
 
         <!-- L and D layout -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:id="@+id/yLDlayout1">
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
 
-            <EditText
-                android:id="@+id/ANC_VisitNo"
+            <!-- fp cousel -->
+            <!-- baby's sex -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Number of ANC Visits:*"
-                android:inputType="text"
-                android:maxLength="24"
-                android:textColorHint="#000" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_height="wrap_content">
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Client Counselled on Postparturm FP?" />
 
+                <Spinner
+                    android:id="@+id/FPS"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp" />
 
-
-
-
-
-
-        </LinearLayout>
+            </LinearLayout>
 
             <!-- baby's sex -->
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
