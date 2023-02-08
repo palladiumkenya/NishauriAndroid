@@ -198,7 +198,7 @@ public class PNCVisitStart extends AppCompatActivity {
 
                 String phne = myl2.get(y).getPhone();
 //                                acs.sendDetailsToDb("Reg*"+sendSms+"/"+phne);
-                acs.ANCPost("pnc*" + enc, phne);
+                acs.PNCPost("pnc*" + enc, phne);
 
 
 

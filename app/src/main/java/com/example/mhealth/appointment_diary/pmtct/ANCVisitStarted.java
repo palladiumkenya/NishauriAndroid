@@ -621,7 +621,7 @@ public class ANCVisitStarted extends AppCompatActivity {
             public void onFocusChange(View view, boolean hasFocus) {
 
                 if (hasFocus) {
-                     Toast.makeText(ANCVisitStarted.this, "has focus", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(ANCVisitStarted.this, "has focus", Toast.LENGTH_SHORT).show();
                     gra = 0;
 
                     pa11 = Integer.parseInt(parity1.getText().toString());

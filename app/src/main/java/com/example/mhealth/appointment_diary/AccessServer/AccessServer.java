@@ -1192,7 +1192,6 @@ public class AccessServer {
 
 
     // Post TO ANC
-
     public void ANCPost(final String msg, final String phone) {
         try{
             List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
@@ -1201,7 +1200,8 @@ public class AccessServer {
                     z=_url.get(x).getBase_url1();
 
                  // all ="https://ushauriapi.kenyahmis.org/pmtct/pnc";
-                    all = "https://ushauriapi.kenyahmis.org/pmtct/lad";
+                    //all = "https://ushauriapi.kenyahmis.org/pmtct/lad";
+                    all="https://ushauriapi.kenyahmis.org/pmtct/anc";
                    // z+Config.ANC
                 }
             }
@@ -1210,6 +1210,218 @@ public class AccessServer {
 
         }
         pr.showProgress("Sending ANC Details.....");
+        final int[] mStatusCode = new int[1];
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, all,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+//                        Toast.makeText(ctx, "message "+response, Toast.LENGTH_SHORT).show();
+                        pr.dissmissProgress();
+
+
+                        if(mStatusCode[0]==200){
+
+                            dialogs.showSuccessDialog(response,"Server Response");
+
+                        }
+                        else{
+
+                            dialogs.showErrorDialog(response,"Server response");
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        pr.dissmissProgress();
+
+                        try{
+
+                            byte[] htmlBodyBytes = error.networkResponse.data;
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                            dialogs.showErrorDialog(new String(htmlBodyBytes),"Server Response");
+
+                            pr.dissmissProgress();
+
+                        }
+                        catch(Exception e){
+
+
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                            dialogs.showErrorDialog("error occured, try again","Server Response");
+
+                            pr.dissmissProgress();
+
+
+                        }
+
+
+                    }
+                }) {
+
+
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                mStatusCode[0] = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+
+            @Override
+            protected VolleyError parseNetworkError(VolleyError volleyError) {
+                return super.parseNetworkError(volleyError);
+            }
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("msg",msg);
+                params.put("phone_no", phone);
+
+
+                return params;
+            }
+
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                800000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(ctx);
+        requestQueue.add(stringRequest);
+
+//        RequestQueue requestQueue = Volley.newRequestQueue(ctx);
+//        requestQueue.add(stringRequest);
+
+    }
+    // Post TO PNC
+    public void PNCPost(final String msg, final String phone) {
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+
+                    all ="https://ushauriapi.kenyahmis.org/pmtct/pnc";
+                    //all = "https://ushauriapi.kenyahmis.org/pmtct/lad";
+                    //all="https://ushauriapi.kenyahmis.org/pmtct/anc";
+                    // z+Config.ANC
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+        pr.showProgress("Sending PNC Details.....");
+        final int[] mStatusCode = new int[1];
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, all,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+//                        Toast.makeText(ctx, "message "+response, Toast.LENGTH_SHORT).show();
+                        pr.dissmissProgress();
+
+
+                        if(mStatusCode[0]==200){
+
+                            dialogs.showSuccessDialog(response,"Server Response");
+
+                        }
+                        else{
+
+                            dialogs.showErrorDialog(response,"Server response");
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        pr.dissmissProgress();
+
+                        try{
+
+                            byte[] htmlBodyBytes = error.networkResponse.data;
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                            dialogs.showErrorDialog(new String(htmlBodyBytes),"Server Response");
+
+                            pr.dissmissProgress();
+
+                        }
+                        catch(Exception e){
+
+
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                            dialogs.showErrorDialog("error occured, try again","Server Response");
+
+                            pr.dissmissProgress();
+
+
+                        }
+
+
+                    }
+                }) {
+
+
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                mStatusCode[0] = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+
+            @Override
+            protected VolleyError parseNetworkError(VolleyError volleyError) {
+                return super.parseNetworkError(volleyError);
+            }
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("msg",msg);
+                params.put("phone_no", phone);
+
+
+                return params;
+            }
+
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                800000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue requestQueue = Volley.newRequestQueue(ctx);
+        requestQueue.add(stringRequest);
+
+//        RequestQueue requestQueue = Volley.newRequestQueue(ctx);
+//        requestQueue.add(stringRequest);
+
+    }
+    // Post TO LD
+    public void LDPost(final String msg, final String phone) {
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+
+                    all = "https://ushauriapi.kenyahmis.org/pmtct/lad";
+
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+        pr.showProgress("Sending Labour & Delivery Details.....");
         final int[] mStatusCode = new int[1];
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, all,

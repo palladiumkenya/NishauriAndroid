@@ -1238,6 +1238,8 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 String enc = Base64Encoder.encryptString(LD_data);
 
+                String enc2 =Base64Encoder.decryptedString(enc);
+
 
                 List<Activelogin> myl = Activelogin.findWithQuery(Activelogin.class, "select * from Activelogin");
                 for (int x = 0; x < myl.size(); x++) {
@@ -1248,12 +1250,13 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                         String phne = myl2.get(y).getPhone();
 //                                acs.sendDetailsToDb("Reg*"+sendSms+"/"+phne);
-                        acs.ANCPost("ld*" + enc, phne);
+                        acs.LDPost("ld*" + enc, phne);
 
 
-
+                        Log.d("Encrypted", enc2);
+                        Log.d("Dencrypted", enc);
                         Toast.makeText(LaborAndDeliveryStart.this, "Labour and Delivery Details Saved Successful", Toast.LENGTH_SHORT).show();
-                       // Log.e("", clientTreated_code + HepatitisB_code);
+
 
                     }
 
