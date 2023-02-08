@@ -52,6 +52,7 @@ public class ANCVisit extends AppCompatActivity {
     String z, phone;
     EditText ccno,clinicno,fname,Mname,lname,dobi,reg, upino;
     Dialogs dialogs;
+    boolean x;
 
 
     @Override
@@ -146,10 +147,14 @@ public class ANCVisit extends AppCompatActivity {
             @Override
             public void onResponse(JSONArray response) {
                 //Toast.makeText(ANCVisit.this, "SUCCESS", Toast.LENGTH_SHORT).show();
+
+
                 details.setVisibility(View.VISIBLE);
              for (int i=0; i<response.length(); i++){
                  try {
                      JSONObject jsonObject =response.getJSONObject(i);
+                    /*x = jsonObject.getBoolean("success");
+                    if (x==true){*/
 
                      String clinicnumber =jsonObject.getString("clinic_number");
                      String f_name =jsonObject.getString("f_name");
@@ -173,10 +178,11 @@ public class ANCVisit extends AppCompatActivity {
                      dobi.setText(dob);
                      reg.setText(currentregimen);*/
 
-
                  } catch (JSONException e) {
                      e.printStackTrace();
                  }
+
+                 //catch
 
              }
                 //details.setVisibility(View.VISIBLE);
@@ -185,6 +191,7 @@ public class ANCVisit extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
 
 
                 try{

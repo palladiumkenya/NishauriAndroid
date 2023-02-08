@@ -1234,7 +1234,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
 
 
-                String LD_data =  newCC + "*" + ANCVisit_NO1 + "*" + MotherTestedS_code+ "*" + deliveryDate1 + "*" +ModeDeliveryS_code + "*" + placeDeliveryS_code+ "*" + DeliveryOutcomeS_code + "*" + BabyDeliveredS_code + "*" + Datedied11+ "*" +deathcause11+"*" + BabysDOB11 + "*"+ BabySexS_code + "*" + BabyDeliveredS2_code + "*" +Datedied22 + "*" + deathcause22 + "*" + BabysDOB22 + "*" +  BabySexS2_code+ "*" +BabyDeliveredS3_code + "*" + Datedied33+ "*" +  deathcause33 + "*" +BabysDOB33 + "*" + BabySexS3_code + "*" + BabyDeliveredS4_code + "*" + Datedied44+ "*" +deathcause44+"*" + BabysDOB44 + "*"+ BabySexS4_code+ "*" + BabyDeliveredS5_code + "*" + Datedied55+ "*" +deathcause55+"*" + BabysDOB55 + "*"+ BabySexS5_code+ "*"+ MothersOutcomeS_code;
+                String LD_data =  newCC + "*" + ANCVisit_NO1 + "*" + MotherTestedS_code+ "*" +hivResultsS_code+ "*" + deliveryDate1 + "*" +ModeDeliveryS_code + "*" + placeDeliveryS_code+ "*" + DeliveryOutcomeS_code + "*" + BabyDeliveredS_code + "*" + Datedied11+ "*" +deathcause11+"*" + BabysDOB11 + "*"+ BabySexS_code + "*" + BabyDeliveredS2_code + "*" +Datedied22 + "*" + deathcause22 + "*" + BabysDOB22 + "*" +  BabySexS2_code+ "*" +BabyDeliveredS3_code + "*" + Datedied33+ "*" +  deathcause33 + "*" +BabysDOB33 + "*" + BabySexS3_code + "*" + BabyDeliveredS4_code + "*" + Datedied44+ "*" +deathcause44+"*" + BabysDOB44 + "*"+ BabySexS4_code+ "*" + BabyDeliveredS5_code + "*" + Datedied55+ "*" +deathcause55+"*" + BabysDOB55 + "*"+ BabySexS5_code+ "*"+ MothersOutcomeS_code;
 
                 String enc = Base64Encoder.encryptString(LD_data);
 
