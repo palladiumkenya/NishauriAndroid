@@ -78,7 +78,9 @@ public class LaborAndDelivery extends AppCompatActivity {
         startvisit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String sendCC =clinicno.getText().toString();
                 Intent intent = new Intent(LaborAndDelivery.this, LaborAndDeliveryStart.class);
+                intent.putExtra("Client_CCC", sendCC);
                 startActivity(intent);
 
             }

@@ -1200,7 +1200,8 @@ public class AccessServer {
                 for (int x=0; x<_url.size(); x++){
                     z=_url.get(x).getBase_url1();
 
-                  all ="https://ushauriapi.kenyahmis.org/pmtct/pnc";
+                 // all ="https://ushauriapi.kenyahmis.org/pmtct/pnc";
+                    all = "https://ushauriapi.kenyahmis.org/pmtct/lad";
                    // z+Config.ANC
                 }
             }

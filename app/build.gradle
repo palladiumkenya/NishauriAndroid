@@ -119,6 +119,10 @@ dependencies {
 
 
 
+    implementation 'com.github.mjn1369:fieldsetview:1.0.0'
+
+
+
 
 }
 

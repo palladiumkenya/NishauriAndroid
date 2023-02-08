@@ -23,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mhealth.appointment_diary.Dialogs.Dialogs;
 import com.example.mhealth.appointment_diary.Dialogs.ErrorMessage;
 import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.appointment_diary.AppCal;
@@ -50,12 +51,14 @@ public class ANCVisit extends AppCompatActivity {
     LinearLayout details;
     String z, phone;
     EditText ccno,clinicno,fname,Mname,lname,dobi,reg, upino;
+    Dialogs dialogs;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ancvisit);
+        dialogs=new Dialogs(ANCVisit.this);
 
         /*clientIsS = (Spinner) findViewById(R.id.ClientSpinner);
         hivResultsS =(Spinner) findViewById(R.id.hivResults);*/
@@ -183,35 +186,27 @@ public class ANCVisit extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                NetworkResponse response = error.networkResponse;
-                if(response != null && response.data != null){
-                    String body;
-                    //get status code here
-                    String statusCode = String.valueOf(error.networkResponse.statusCode);
-                    //get response body and parse with appropriate encoding
-                    if(error.networkResponse.data!=null) {
-                        try {
-                            body = new String(error.networkResponse.data,"UTF-8");
 
-                            JSONObject json = new JSONObject(body);
-                            //                            Log.e("error response : ", json.toString());
+                try{
+
+                    byte[] htmlBodyBytes = error.networkResponse.data;
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                    dialogs.showErrorDialog(new String(htmlBodyBytes),"Server Response");
 
 
-                            String message = json.has("message") ? json.getString("message") : "";
-                            String reason = json.has("reason") ? json.getString("reason") : "";
 
-                            Toast.makeText(ANCVisit.this, message,Toast.LENGTH_LONG).show();
+                }
+                catch(Exception e){
 
 
-                        } catch (UnsupportedEncodingException | JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
 
-                }else {
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                    dialogs.showErrorDialog("error occured, try again"+error.getMessage(),"Server Response");
 
-                    Log.e("VOlley error :", error.getLocalizedMessage()+" message:"+error.getMessage());
-                    Toast.makeText(ANCVisit.this, VolleyErrors.getVolleyErrorMessages(error, ANCVisit.this),Toast.LENGTH_LONG).show();
+
+
+
                 }
 
                 details.setVisibility(View.GONE);
