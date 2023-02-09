@@ -642,7 +642,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 BABY_DELIVERED2 = BabyDelivered[position];
-                BabyDeliveredS2_code=Integer.toString(position);
+                BabyDeliveredS2_code = Integer.toString(position);
 
 
                 if (BABY_DELIVERED2.contentEquals("Macerated Still Birth")|| BABY_DELIVERED2.contentEquals("Fresh Still Birth")){
@@ -1198,14 +1198,290 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
             }
         });*/
-        submitLD();
+        //submitLD();
+        saveLD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ANCVisit_NO.getText().toString().isEmpty()) {
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Number of ANC Visits", Toast.LENGTH_SHORT).show();
+                }
+               else if (deliveryDate.getText().toString().isEmpty()) {
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Delivery Date", Toast.LENGTH_SHORT).show();
+                }
+
+               else if (MotherTestedS_code.contentEquals("0")) {
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select If Mother is Tested", Toast.LENGTH_SHORT).show();
+                }
+                else if (MotherTestedS_code.contentEquals("1") && hivResultsS_code.contentEquals("0")) {
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Mother's HIV Results", Toast.LENGTH_SHORT).show();
+                }
+               else if (ModeDeliveryS_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Mode of Delivery", Toast.LENGTH_SHORT).show();
+
+                }
+                else if (placeDeliveryS_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Place of Delivery", Toast.LENGTH_SHORT).show();
+
+                }
+                else if (DeliveryOutcomeS_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Delivery Outcome", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (DeliveryOutcomeS_code.contentEquals("1") && BabyDeliveredS_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby Delivered", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (DeliveryOutcomeS_code.contentEquals("2") && BabyDeliveredS_code.contentEquals("0") ){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby Delivered Option", Toast.LENGTH_SHORT).show();
+
+                }
+                else if (DeliveryOutcomeS_code.contentEquals("2") && BabyDeliveredS2_code.contentEquals("0") ){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby Delivered Option", Toast.LENGTH_SHORT).show();
+
+                }
+
+                //3
+
+                else if (DeliveryOutcomeS_code.contentEquals("3") && BabyDeliveredS_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby Delivered Option", Toast.LENGTH_SHORT).show();
+
+                }
+                else if (DeliveryOutcomeS_code.contentEquals("3") && BabyDeliveredS2_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby Delivered Option", Toast.LENGTH_SHORT).show();
+
+                }
+                else if (DeliveryOutcomeS_code.contentEquals("3") && BabyDeliveredS3_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby Delivered Option", Toast.LENGTH_SHORT).show();
+
+                }
+
+                //4
+                else if (DeliveryOutcomeS_code.contentEquals("4") && BabyDeliveredS_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby Delivered Options", Toast.LENGTH_SHORT).show();
+
+                }
+                else if (DeliveryOutcomeS_code.contentEquals("4") && BabyDeliveredS2_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby Delivered Options", Toast.LENGTH_SHORT).show();
+
+                }
+                else if (DeliveryOutcomeS_code.contentEquals("4") && BabyDeliveredS3_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby Delivered Options", Toast.LENGTH_SHORT).show();
+
+                }
+                else if (DeliveryOutcomeS_code.contentEquals("4") && BabyDeliveredS4_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby Delivered Options", Toast.LENGTH_SHORT).show();
+
+                }
+                //5
+
+                else if (DeliveryOutcomeS_code.contentEquals("5") && BabyDeliveredS_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby Delivered Options", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (DeliveryOutcomeS_code.contentEquals("5") && BabyDeliveredS2_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby Delivered Options", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (DeliveryOutcomeS_code.contentEquals("5") && BabyDeliveredS3_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby Delivered Options", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (DeliveryOutcomeS_code.contentEquals("5") && BabyDeliveredS4_code.contentEquals("0") ){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby Delivered Options", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (DeliveryOutcomeS_code.contentEquals("5") && BabyDeliveredS5_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby Delivered Options", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+
+
+
+
+
+
+                else if (MothersOutcomeS_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Mother's Outcome", Toast.LENGTH_SHORT).show();
+                }
+                //baby 1
+                else if (BabyDeliveredS_code.contentEquals("1") && BabysDOB1.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Date of Birth ", Toast.LENGTH_SHORT).show();
+
+                }
+                else if (BabyDeliveredS_code.contentEquals("1") && BabySexS_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Sex", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+                else if (BabyDeliveredS_code.contentEquals("2")&& Datedied1.getText().toString().isEmpty() ){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Date of death", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (BabyDeliveredS_code.contentEquals("2")&&deathcause1.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Cause of Death", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+                else if (BabyDeliveredS_code.contentEquals("3")&& Datedied1.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Date of death", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (BabyDeliveredS_code.contentEquals("3")&&deathcause1.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Cause of Death", Toast.LENGTH_SHORT).show();
+
+                }
+
+                //baby 2
+                //(BABY_DELIVERED.contentEquals("Live Birth")
+
+                else if (BabyDeliveredS2_code.contentEquals("1") && BabysDOB2.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Date of Birth ", Toast.LENGTH_SHORT).show();
+
+                }
+                else if (BabyDeliveredS2_code.contentEquals("1") && BabySexS2_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Sex", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+                else if (BabyDeliveredS2_code.contentEquals("2")&& Datedied2.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Date of death", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (BabyDeliveredS2_code.contentEquals("2")&& deathcause2.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select  Baby's Cause of Death", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (BabyDeliveredS2_code.contentEquals("3")&& Datedied2.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Date of death", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (BabyDeliveredS2_code.contentEquals("3")&& deathcause2.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Cause of Death", Toast.LENGTH_SHORT).show();
+
+                }
+
+                // baby 3
+                else if (BabyDeliveredS3_code.contentEquals("1") && BabysDOB3.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Date of Birth ", Toast.LENGTH_SHORT).show();
+
+                }
+                else if (BabyDeliveredS3_code.contentEquals("1") && BabySexS3_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Sex", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+                else if (BabyDeliveredS3_code.contentEquals("2")&& Datedied3.getText().toString().isEmpty() ){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Date of death", Toast.LENGTH_SHORT).show();
+
+                }
+                else if (BabyDeliveredS3_code.contentEquals("2")&& deathcause3.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Cause of Death", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (BabyDeliveredS3_code.contentEquals("3")&& Datedied3.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Date of death", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (BabyDeliveredS3_code.contentEquals("3")&& deathcause3.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Cause of Death", Toast.LENGTH_SHORT).show();
+
+                }
+
+                //baby 4
+
+                else if (BabyDeliveredS4_code.contentEquals("1") && BabysDOB4.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Date of Birth", Toast.LENGTH_SHORT).show();
+
+                }
+                else if (BabyDeliveredS4_code.contentEquals("1") && BabySexS4_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Sex", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (BabyDeliveredS4_code.contentEquals("2")&& Datedied4.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Date of death", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (BabyDeliveredS4_code.contentEquals("2")&& deathcause4.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's  Cause of Death", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+                else if (BabyDeliveredS4_code.contentEquals("3")&& Datedied4.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Date of death", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (BabyDeliveredS4_code.contentEquals("3")&& deathcause4.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select  Baby's Cause of Death", Toast.LENGTH_SHORT).show();
+
+                }
+                //baby 5
+                else if (BabyDeliveredS5_code.contentEquals("1") && BabysDOB5.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Date of Birth ", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (BabyDeliveredS5_code.contentEquals("1") && BabySexS5_code.contentEquals("0")){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Sex", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (BabyDeliveredS5_code.contentEquals("2")&& Datedied5.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Date of death", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (BabyDeliveredS5_code.contentEquals("2") && deathcause5.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Cause of Death", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+                else if (BabyDeliveredS5_code.contentEquals("3")&& Datedied5.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Date of death", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+                else if (BabyDeliveredS5_code.contentEquals("3")&& deathcause5.getText().toString().isEmpty()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Cause of Death", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+
+
+                else{
+                submitLD();}
+
+            }
+        });
 
     }
 
     public void submitLD(){
-        saveLD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
                 String ANCVisit_NO1=ANCVisit_NO.getText().toString();
                 String saveLD1=saveLD.getText().toString();
@@ -1255,7 +1531,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                         Log.d("Encrypted", enc2);
                         Log.d("Dencrypted",  LD_data);
-                        Toast.makeText(LaborAndDeliveryStart.this, "Labour and Delivery Details Saved Successful", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(LaborAndDeliveryStart.this, "Labour and Delivery Details Saved Successful", Toast.LENGTH_SHORT).show();
 
 
                     }
@@ -1263,8 +1539,5 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 }
 
-
-            }
-        });
     }
     }
