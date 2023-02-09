@@ -644,7 +644,7 @@ public class ANCVisitStarted extends AppCompatActivity {
 
 
 
-                        Toast.makeText(ANCVisitStarted.this, "ANC Details Saved Successful", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(ANCVisitStarted.this, "ANC Details Saved Successful", Toast.LENGTH_SHORT).show();
                         Log.e("", clientTreated_code + HepatitisB_code);
 
                     }

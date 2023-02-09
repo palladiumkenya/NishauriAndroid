@@ -86,8 +86,27 @@ public class PNCVisitStart extends AppCompatActivity {
 
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                savePNC();
+            public void onClick(View view)
+            {
+                if (Baby_Sexcode.contentEquals("0")) {
+                    Toast.makeText(PNCVisitStart.this, "Please Select If Counselled pn Family Planning", Toast.LENGTH_SHORT).show();
+                }else if (Fp_code.contentEquals("0")){
+                    Toast.makeText(PNCVisitStart.this, "Please Select The Family Planning Method", Toast.LENGTH_SHORT).show();
+
+                }
+
+                else if (BabyDOB.getText().toString().isEmpty()){
+                    Toast.makeText(PNCVisitStart.this, "Please Select Date of Visit", Toast.LENGTH_SHORT).show();
+
+                }
+                else if (PNC_VisitNo.getText().toString().isEmpty()){
+                    Toast.makeText(PNCVisitStart.this, "Please PNC Visit Number Visit", Toast.LENGTH_SHORT).show();
+                }
+                else if (PNC_ClinicNo.getText().toString().isEmpty()){
+                    Toast.makeText(PNCVisitStart.this, "Please PNC Clinic Number Visit", Toast.LENGTH_SHORT).show();
+                }else{
+
+                savePNC();}
             }
         });
 
@@ -174,13 +193,6 @@ public class PNCVisitStart extends AppCompatActivity {
     }
     public void savePNC(){
 
-         if (Baby_Sexcode.contentEquals("0")) {
-            Toast.makeText(this, "Please Select If Counselled pn Family Planning", Toast.LENGTH_SHORT).show();
-        }else if (Fp_code.contentEquals("0")){
-             Toast.makeText(this, "Please Select The Family Planning Method", Toast.LENGTH_SHORT).show();
-
-        }
-
          String det = BabyDOB.getText().toString();
          String visit = PNC_VisitNo.getText().toString();
         String clinic = PNC_ClinicNo.getText().toString();
@@ -202,7 +214,7 @@ public class PNCVisitStart extends AppCompatActivity {
 
 
 
-                Toast.makeText(PNCVisitStart.this, "PNC Details Saved Successful", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PNCVisitStart.this, "PNC Details Saved Successful", Toast.LENGTH_SHORT).show();
                // Log.e("", clientTreated_code + HepatitisB_code);
 
 
