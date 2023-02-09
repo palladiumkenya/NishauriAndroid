@@ -1250,11 +1250,11 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                         String phne = myl2.get(y).getPhone();
 //                                acs.sendDetailsToDb("Reg*"+sendSms+"/"+phne);
-                        acs.LDPost("ld*" + enc, phne);
+                        acs.LDPost("lad*" + enc, phne);
 
 
                         Log.d("Encrypted", enc2);
-                        Log.d("Dencrypted", enc);
+                        Log.d("Dencrypted",  LD_data);
                         Toast.makeText(LaborAndDeliveryStart.this, "Labour and Delivery Details Saved Successful", Toast.LENGTH_SHORT).show();
 
 

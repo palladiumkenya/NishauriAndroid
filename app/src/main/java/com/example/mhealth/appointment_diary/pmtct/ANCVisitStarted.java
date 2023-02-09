@@ -519,13 +519,58 @@ public class ANCVisitStarted extends AppCompatActivity {
         });
 
 
-        submitANC();
-    }
 
-    public void submitANC(){
         saveANC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (ANC_Visitno.getText().toString().isEmpty()){
+                    Toast.makeText(ANCVisitStarted.this, "Enter ANC Visit Number", Toast.LENGTH_LONG).show();
+                }
+               else if (ANC_clinicno.getText().toString().isEmpty()){
+                    Toast.makeText(ANCVisitStarted.this, "Enter ANC Clinic Number", Toast.LENGTH_LONG).show();
+                }
+                else if (ClientIS_code.contentEquals("0")){
+                    Toast.makeText(ANCVisitStarted.this, "Specify If Client Is Breastfeeding", Toast.LENGTH_LONG).show();
+                }
+                else if (parity1.getText().toString().isEmpty()){
+                    Toast.makeText(ANCVisitStarted.this, "Enter parity 1", Toast.LENGTH_LONG).show();
+                }
+                else if (parity2.getText().toString().isEmpty()){
+                    Toast.makeText(ANCVisitStarted.this, "Enter parity 2", Toast.LENGTH_LONG).show();
+                }
+                else if (LMP_date.getText().toString().isEmpty()){
+                    Toast.makeText(ANCVisitStarted.this, "Enter LMP Date", Toast.LENGTH_LONG).show();
+                }
+                else if (EDD_date.getText().toString().isEmpty()){
+                    Toast.makeText(ANCVisitStarted.this, "Enter EDD Date", Toast.LENGTH_LONG).show();
+                }
+                else if (Gestation.getText().toString().isEmpty()){
+                    Toast.makeText(ANCVisitStarted.this, "Enter Gestation", Toast.LENGTH_LONG).show();
+                }
+                else if (HIV_Results_Code.contentEquals("0")){
+                    Toast.makeText(ANCVisitStarted.this, "Enter HIV Results", Toast.LENGTH_LONG).show();
+                }
+
+                else if (DateTested.getText().toString().isEmpty()){
+                    Toast.makeText(ANCVisitStarted.this, "Enter Date Tested", Toast.LENGTH_LONG).show();
+                }
+                else if (SyphilisSerology_code.contentEquals("0")){
+                    Toast.makeText(ANCVisitStarted.this, "Select Syphilis Serology", Toast.LENGTH_LONG).show();
+                }
+                else if (HepatitisB_code.contentEquals("0")){
+                    Toast.makeText(ANCVisitStarted.this, "Select Hepatitis B Serology", Toast.LENGTH_LONG).show();
+                }
+
+                else{
+                submitANC();}
+
+            }
+        });
+    }
+
+    public void submitANC(){
+
                 try {
                     gra= 0;
 
@@ -606,11 +651,6 @@ public class ANCVisitStarted extends AppCompatActivity {
 
 
                 }
-
-
-            }
-        });
-
     }
 
     private void populategravida() {
