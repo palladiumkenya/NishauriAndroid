@@ -1,0 +1,1134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    android:layout_alignParentBottom="true"
+    android:background="#fffff0"
+    tools:context=".utilitymodules.UPIUpdateActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+
+        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
+
+        <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar"-->
+        <!--android:layout_width="267dp"-->
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--android:background="@drawable/reg"-->
+        <!--app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />-->
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar1"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <ImageView
+                android:id="@+id/tv_header_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                />
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_alignParentTop="true"
+        >
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:focusableInTouchMode="true"
+                android:id="@+id/mydetailsll"
+
+                android:layout_height="wrap_content">
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:textStyle="bold"
+                    android:text="Select Client Type*"/>
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10sp"
+                    android:visibility="gone"
+                    android:id="@+id/Patientstatus_spinner"
+                    android:layout_marginBottom="5sp"
+                    android:layout_height="wrap_content"/>
+
+
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:weightSum="2"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/cccupi"
+                            android:inputType="number"
+                            android:enabled="false"
+
+                            android:hint="UPI Number*"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+
+
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/populate"
+                            android:background="#a3c1ad"
+
+                            android:text="Populate*"
+                            android:layout_weight="1"
+
+                            />
+
+
+                </LinearLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cfile"
+                        android:inputType="text"
+                        android:hint="Serial Number of Client File"
+
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/f_name"
+                        android:inputType="text"
+                        android:hint="Enter  First Name*"
+
+                        android:maxLength="24"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/s_name"
+                        android:inputType="text"
+                        android:hint="Enter Middle Name*"
+                        android:textStyle="bold"
+                        android:maxLength="24"
+                        android:textSize="13sp"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/o_name"
+                        android:inputType="text"
+                        android:hint="Enter  Last Name"
+                        android:textColorHint="#000"
+                        android:maxLength="24"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dob"
+                        android:focusable="false"
+                        android:inputType="text"
+                        android:textStyle="bold"
+                        android:hint="Enter Client Date of Birth*"
+                        android:textColorHint="#000"
+                        android:maxLength="24"
+                        android:textSize="13sp"
+
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ageinyears"
+                        android:focusable="false"
+                        android:inputType="text"
+                        android:textStyle="bold"
+                        android:hint="Age in Years"
+                        android:textColorHint="#000"
+                        android:maxLength="24"
+                        android:textSize="12sp"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/orphanll"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="Are you an Orphan"
+                        android:layout_height="wrap_content" />
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:id="@+id/orphan_spinner"
+                        android:layout_height="wrap_content"/>
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="Are you in school"
+                        android:layout_height="wrap_content" />
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:id="@+id/school_spinner"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+
+
+                <!-- ID no field -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/idnoll"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/idno"
+                            android:inputType="number"
+                            android:textStyle="bold"
+                            android:hint="Enter ID No./Passport No."
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="13sp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <!-- Birth cert no. -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/birthnoll"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/birthno"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter Birth Certificate NO."
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="13sp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <!-- UPI no  -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/UPInoll"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/UPIno"
+                            android:inputType="none"
+                            android:textStyle="bold"
+                            android:hint="UPI NO."
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            android:editable="false"
+                            android:focusable="true"
+
+
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:text="Select Sex*" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20sp"
+                    android:layout_height="wrap_content">
+
+
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:id="@+id/gender_spinner"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:text="Select Marital Status"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20sp"
+                    android:layout_height="wrap_content">
+
+
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:id="@+id/marital_spinner"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:text="Select Patient Condition*" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20sp"
+                    android:layout_height="wrap_content">
+
+
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:id="@+id/condition_spinner"
+
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:hint="CCC Enrolment Date*"
+                        android:id="@+id/enrollment_date"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:visibility="gone"
+                        android:hint="Date Enrolled into HIV Care*"
+                        android:id="@+id/art_date"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:hint="Enter Primary Phone Number*"
+
+                        android:maxLength="10"
+                        android:id="@+id/phone"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/altphonell"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/altphone"
+                            android:inputType="number"
+                            android:textStyle="bold"
+                            android:hint="Alternative Phone Number"
+                            android:textColorHint="#000"
+                            android:textSize="13sp"
+                            android:maxLength="10"
+
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/buddyphone"
+                            android:inputType="number"
+                            android:textStyle="bold"
+                            android:hint="Treatment Buddy Phone number"
+                            android:textColorHint="#000"
+                            android:maxLength="10"
+                            android:textSize="13sp"
+
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:text="Enable SMS*"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:layout_height="wrap_content">
+
+                    <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Enable Sms"-->
+                    <!--android:fontFamily="serif"-->
+
+                    <!--android:textColor="#000"-->
+                    <!--/>-->
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:id="@+id/sms_spinner"
+
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <!--start here-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/smslayout"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        android:text="Select Language*"/>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="20dp"
+                        android:layout_height="wrap_content">
+
+                        <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Select your Language"-->
+                        <!--android:fontFamily="serif"-->
+                        <!--android:textColor="#000"-->
+                        <!--/>-->
+
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:id="@+id/language_spinner"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        android:text="Select Preferred Messaging Time*"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="20dp"
+                        android:layout_height="wrap_content">
+
+                        <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Enable Sms"-->
+                        <!--android:fontFamily="serif"-->
+
+                        <!--android:textColor="#000"-->
+                        <!--/>-->
+
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:id="@+id/time_spinner"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        android:text="Select Motivational Alerts*"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="20dp"
+                        android:layout_height="wrap_content">
+
+                        <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Enable Sms"-->
+                        <!--android:fontFamily="serif"-->
+
+                        <!--android:textColor="#000"-->
+                        <!--/>-->
+
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:id="@+id/weekly_spinner"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+
+                    <!--ends here-->
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:text="Select Status*"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:layout_height="wrap_content">
+
+                    <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Select your Status"-->
+                    <!--android:fontFamily="serif"-->
+                    <!--android:textColor="#000"-->
+                    <!--/>-->
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:id="@+id/status_spinner"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:id="@+id/groupingll"
+                    android:layout_marginBottom="20dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        android:text="Select Grouping*"/>
+
+                    <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Select your Status"-->
+                    <!--android:fontFamily="serif"-->
+                    <!--android:textColor="#000"-->
+                    <!--/>-->
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:id="@+id/grouping_spinner"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/disablell"
+                    android:visibility="gone"
+                    android:layout_marginBottom="20dp"
+                    android:layout_height="wrap_content">
+
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:id="@+id/disablereason"
+                        android:hint="Specify reason"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/locatorinfoll"
+                    android:layout_marginBottom="20dp"
+                    android:layout_height="wrap_content">
+
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:id="@+id/locatorcounty"
+                        android:hint="County"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:id="@+id/locatorsubcounty"
+                        android:hint="Sub County"
+                        android:textSize="13sp"
+
+                        android:layout_height="wrap_content" />
+
+
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:id="@+id/locatorward"
+                        android:hint="Ward"
+                        android:layout_height="wrap_content" />
+
+
+
+
+                </LinearLayout>
+
+                <!-- country birth -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:text="Place of Birth Information"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="?attr/actionBarSize"
+                    android:orientation="vertical">
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:text="Country of Birth*"/>
+
+                    <LinearLayout
+                        android:id="@+id/country_descriptionH"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_large"
+                        android:orientation="vertical">
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+
+
+
+                            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                                android:id="@+id/countrySpinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/spacing_xlarge"
+                                android:drawSelectorOnTop="true" />
+
+                            <!-- end search spinner -->
+
+
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+
+                <!-- county of birth spinner -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="?attr/actionBarSize"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/birth_facility"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:text="County of Birth*"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        />
+
+                    <LinearLayout
+                        android:id="@+id/birth_lyt_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_large"
+                        android:orientation="vertical">
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                                android:id="@+id/birthCountySpinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/spacing_xlarge"
+                                android:drawSelectorOnTop="true"
+                                />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:text="Current Residence Information"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0"/>
+                <!-- county of residence spinner -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="?attr/actionBarSize"
+                    android:orientation="vertical">
+
+                    <TextView
+
+                        android:id="@+id/affiliation_facility"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:text="County of Residence*"
+                        android:textSize="13sp"/>
+
+                    <LinearLayout
+                        android:id="@+id/lyt_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_large"
+                        android:orientation="vertical">
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                                android:id="@+id/ServiceSpinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/spacing_xlarge"
+                                android:drawSelectorOnTop="true"
+
+                                />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <!-- subcounty of residence -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="?attr/actionBarSize"
+                    android:orientation="vertical">
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Sub County of Residence*"
+                        android:textSize="13sp"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_large"
+                        android:orientation="vertical">
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+
+
+
+
+                            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                                android:id="@+id/serviceUnit"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/spacing_xlarge"
+                                android:drawSelectorOnTop="true"
+                                />
+
+
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="?attr/actionBarSize"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/RanksText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ward of Residence*"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+
+                        />
+
+                    <LinearLayout
+                        android:id="@+id/Rank_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_large"
+                        android:orientation="vertical">
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                                android:id="@+id/RankSpinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/spacing_xlarge"
+                                android:drawSelectorOnTop="true"
+
+                                />
+
+
+                        </LinearLayout>
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:id="@+id/locatorlocation"
+                            android:hint="Location"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:layout_height="wrap_content" />
+
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:id="@+id/locatorvillage"
+                            android:hint="Village"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <!-- finish spinner -->
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:layout_height="wrap_content">
+
+                    <Button
+
+                        android:id="@+id/btnRequest"
+                        android:visibility="gone"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="REQUEST UPI"
+                        android:background="@drawable/background_round_corner_button"
+                        android:fontFamily="serif"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:textColor="#FFFFFF"
+                        android:layout_marginBottom="10sp"
+                        android:layout_height="wrap_content"/>
+
+                    <Button
+
+                        android:id="@+id/btnRSubmit"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="UPDATE"
+                        android:background="@drawable/background_round_corner_button"
+                        android:fontFamily="serif"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:textColor="#FFFFFF"
+                        android:layout_marginBottom="10sp"
+                        android:layout_height="wrap_content"/>
+
+
+                    <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Select your Status"-->
+                    <!--android:fontFamily="serif"-->
+                    <!--android:textColor="#000"-->
+                    <!--/>-->
+
+
+                </LinearLayout>
+
+
+
+                <Button
+                    android:visibility="gone"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Update"
+
+                    android:id="@+id/btnRSubmi"
+                    android:fontFamily="serif"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/background_round_corner_button"
+                    android:textAllCaps="true"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="10sp"
+                    />
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

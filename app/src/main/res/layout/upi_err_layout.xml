@@ -74,7 +74,7 @@ android:weightSum="3">
     android:gravity="left"
     android:textStyle="bold"
     android:padding="5dp"
-    android:text="Name"
+    android:text="Error Description"
     android:textSize="13sp" />
 
 <TextView
@@ -166,7 +166,7 @@ android:weightSum="4">
     android:background="@drawable/mybutton"
     android:gravity="center"
     android:padding="5dp"
-    android:text="Confirm"
+    android:text="Update"
     android:textSize="13sp" />
 
 

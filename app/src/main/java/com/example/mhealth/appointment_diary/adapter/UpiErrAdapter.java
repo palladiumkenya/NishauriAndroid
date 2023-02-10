@@ -22,6 +22,7 @@ import com.example.mhealth.appointment_diary.models.Appointments;
 import com.example.mhealth.appointment_diary.models.UpiErrModel;
 import com.example.mhealth.appointment_diary.sendmessages.SendMessage;
 import com.example.mhealth.appointment_diary.utilitymodules.Registration;
+import com.example.mhealth.appointment_diary.utilitymodules.UPIUpdateActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,7 +110,7 @@ public class UpiErrAdapter extends BaseAdapter implements Filterable {
                     public void onClick(View view) {
 
                         //mc.initiateCall(clientNumber);
-                        Intent intent = new Intent(mycont, Registration.class);
+                        Intent intent = new Intent(mycont, UPIUpdateActivity.class);
                         intent.putExtra("UPI", clientNumber);
                         mycont.startActivity(intent);
 

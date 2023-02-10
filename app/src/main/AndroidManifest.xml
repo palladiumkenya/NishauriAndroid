@@ -24,6 +24,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
         <activity
+            android:name=".utilitymodules.UPIUpdateActivity"
+            android:exported="false" />
+        <activity
             android:name=".wellnesstab.UPIErrorList"
             android:exported="false" />
         <activity
