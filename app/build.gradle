@@ -121,6 +121,8 @@ dependencies {
 
     implementation 'com.github.mjn1369:fieldsetview:1.0.0'
 
+    implementation 'com.amitshekhar.android:android-networking:1.0.2'
+
 
 
 

@@ -236,6 +236,14 @@
                     android:layout_marginBottom="20sp" />
 
             </LinearLayout>
+        <!-- hiv data 1 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/hivdata1"
+                android:visibility="gone"
+                android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -305,6 +313,7 @@
                     android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
+            </LinearLayout>
 
             <!--partner hiv status -->
             <Button
@@ -339,6 +348,13 @@
                     android:layout_marginBottom="20sp" />
 
             </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/hivdata2"
+            android:visibility="gone"
+            android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -405,6 +421,7 @@
                         android:textSize="12sp" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
+        </LinearLayout>
 
             <!-- Viral Load results -->
 

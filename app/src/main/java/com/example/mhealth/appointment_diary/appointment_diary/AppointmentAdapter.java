@@ -119,8 +119,6 @@ public class AppointmentAdapter extends BaseAdapter implements Filterable {
 
 
         try {
-
-
             TextView ccnumberT = (TextView) v.findViewById(R.id.ccnumber);
             TextView appnameT = (TextView) v.findViewById(R.id.appname);
             TextView phoneT = (TextView) v.findViewById(R.id.phone);

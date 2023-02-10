@@ -28,6 +28,7 @@ import com.example.mhealth.appointment_diary.pmtct.PMTCT1;
 import com.example.mhealth.appointment_diary.report.Report;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Ucsftracers;
+import com.example.mhealth.appointment_diary.wellnesstab.UPIErrorList;
 import com.example.mhealth.appointment_diary.wellnesstab.WellnesTabs;
 import com.facebook.stetho.Stetho;
 import com.tapadoo.alerter.Alerter;
@@ -46,7 +47,7 @@ public class MainOptions extends AppCompatActivity {
     String passedUname,passedPassword;
     TextView title_header, help_desk;
 
-    private CardView appointment_diary, defaulter_diary,pmtct_menu, mlab_menu, dashboard, wellness_menu, edit_appointments;
+    private CardView appointment_diary, defaulter_diary,pmtct_menu, mlab_menu, dashboard, wellness_menu, edit_appointments, upi_menu_card;
 
 
     @Override
@@ -92,6 +93,14 @@ public class MainOptions extends AppCompatActivity {
                 //startActivity(callIntent);
 
 
+            }
+        });
+
+        upi_menu_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainOptions.this, UPIErrorList.class);
+                startActivity(intent);
             }
         });
 
@@ -380,6 +389,7 @@ public class MainOptions extends AppCompatActivity {
             wellness_menu = findViewById(R.id.wellness_menu);
             edit_appointments = findViewById(R.id.edit_appointments);
             help_desk = findViewById(R.id.helpContact);
+            upi_menu_card =findViewById(R.id.upi_menu_card);
 
 
 

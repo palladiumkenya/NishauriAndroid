@@ -400,7 +400,7 @@
 
                             </LinearLayout>
 
-
+                            <!--pmtct -->
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -534,7 +534,7 @@
 
                             </LinearLayout>
 
-
+                            <!-- web dashboard -->
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -667,6 +667,8 @@
 
                             </LinearLayout>
 
+                            <!-- reschedule -->
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -734,6 +736,70 @@
 
                                     </LinearLayout>
                                 </androidx.cardview.widget.CardView>
+
+                                <!-- upi -->
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/upi_menu_card"
+                                    android:layout_margin="@dimen/spacing_medium"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="2dp"
+                                    app:cardElevation="2dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="80dp"
+                                            android:paddingTop="@dimen/spacing_large"
+                                            app:srcCompat="@drawable/upi_r"
+                                            android:scaleType="centerInside" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:orientation="horizontal"
+                                            android:padding="@dimen/spacing_large">
+
+                                            <LinearLayout
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1"
+                                                android:orientation="vertical">
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:maxLines="1"
+                                                    android:singleLine="true"
+                                                    android:text="UPI ERRORS"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="8sp"
+                                                    android:autoSizeMaxTextSize="11sp"
+                                                    android:textColor="@color/grey_90" />
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:text="Rectify Errors on UPI"
+
+                                                    android:autoSizeTextType="uniform"
+                                                    android:autoSizeMinTextSize="10sp"
+                                                    android:autoSizeMaxTextSize="13sp"/>
+
+                                            </LinearLayout>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                </androidx.cardview.widget.CardView>
+
 
                             </LinearLayout>
 

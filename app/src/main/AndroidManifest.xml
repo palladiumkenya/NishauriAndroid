@@ -24,6 +24,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
         <activity
+            android:name=".wellnesstab.UPIErrorList"
+            android:exported="false" />
+        <activity
             android:name=".pmtct.LaborAndDelivery"
             android:exported="false" />
         <activity

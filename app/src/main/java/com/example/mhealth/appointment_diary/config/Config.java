@@ -52,6 +52,8 @@ public class Config extends AppCompatActivity {
     public static final String CALENDER_LIST="/appnt/applist";
     public static final String SEARCHANCPNC="/pmtct/search";
 
+    public static final String UPIERR="/mohupi/geterrorlist";
+
 
     //https://ushauriapi.kenyahmis.org
     //

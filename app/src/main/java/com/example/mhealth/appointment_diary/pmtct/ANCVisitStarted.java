@@ -42,7 +42,7 @@ public class ANCVisitStarted extends AppCompatActivity {
     private String CLIENT_TREATED = "";
     private String HEPATITIS_B = "";
     private String SYPHILIS = "";
-    LinearLayout pregnant, positiveLayout,partnerLayout,positiveselected;
+    LinearLayout pregnant, positiveLayout,partnerLayout,positiveselected,hivdata1c, hivdata2c;
     EditText CCCNo, partnerCCCNo, gravida,EDD_date, LMP_date, DateTested,ANC_Visitno,ANC_clinicno,ANCNumber,  partnerDateTested,CCCEnrolDate, ARTStart_date,partnerCCCEnrolDate,partnerARTStart_date, VLdate,parity1,parity2,VLResults,CCCNo22, Gestation;
     String ClientIS_code, HIV_Results_Code, partnerHIV_Results_Code, SyphilisSerology_code,clientTreated_code, HepatitisB_code;
     RadioGroup syphilisID,hepatitisID;
@@ -86,6 +86,9 @@ public class ANCVisitStarted extends AppCompatActivity {
         positiveLayout = (LinearLayout) findViewById(R.id.positiveLayout);
         partnerLayout = (LinearLayout) findViewById(R.id.partnerLayout);
         positiveselected= (LinearLayout) findViewById(R.id.positiveSelected);
+        hivdata1c= findViewById(R.id.hivdata1);
+        hivdata2c=findViewById(R.id.hivdata2);
+       // hivdata2==  findViewById(R.id.hivdata1);
 
         LMP_date= (EditText) findViewById(R.id.lmp);
         parity1= (EditText) findViewById(R.id.parity);
@@ -410,6 +413,20 @@ public class ANCVisitStarted extends AppCompatActivity {
 
                 HIV_RESULTS = clientIs[position];
                 HIV_Results_Code=Integer.toString(position);
+
+                if (HIV_Results_Code.contentEquals("3")){
+                    hivdata1c.setVisibility(View.VISIBLE);
+
+                }else if(HIV_Results_Code.contentEquals("2")){
+                    hivdata1c.setVisibility(View.GONE);
+                }
+                else if(HIV_Results_Code.contentEquals("1")){
+                    hivdata1c.setVisibility(View.GONE);
+                }
+
+                else if( partnerHIV_Results_Code.contentEquals("0")){
+                    hivdata1c.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -427,8 +444,22 @@ public class ANCVisitStarted extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 HIV_RESULTS = clientIs[position];
-
                 partnerHIV_Results_Code=Integer.toString(position);
+
+
+
+                if ( partnerHIV_Results_Code.contentEquals("3")){
+                    hivdata2c.setVisibility(View.VISIBLE);
+
+                }else if( partnerHIV_Results_Code.contentEquals("2")){
+                    hivdata2c.setVisibility(View.GONE);
+                }
+                else if( partnerHIV_Results_Code.contentEquals("1")){
+                    hivdata2c.setVisibility(View.GONE);
+                }
+                else if( partnerHIV_Results_Code.contentEquals("0")){
+                    hivdata2c.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -552,9 +583,9 @@ public class ANCVisitStarted extends AppCompatActivity {
                     Toast.makeText(ANCVisitStarted.this, "Enter HIV Results", Toast.LENGTH_LONG).show();
                 }
 
-                else if (DateTested.getText().toString().isEmpty()){
+               /* else if (DateTested.getText().toString().isEmpty()){
                     Toast.makeText(ANCVisitStarted.this, "Enter Date Tested", Toast.LENGTH_LONG).show();
-                }
+                }*/
                 else if (SyphilisSerology_code.contentEquals("0")){
                     Toast.makeText(ANCVisitStarted.this, "Select Syphilis Serology", Toast.LENGTH_LONG).show();
                 }

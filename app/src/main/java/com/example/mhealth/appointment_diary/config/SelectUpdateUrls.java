@@ -114,7 +114,9 @@ public class SelectUpdateUrls extends AppCompatActivity {
 
                     JSONArray jsonArray =response.getJSONArray("USHAURI");
 
+
                     for (int i =0; i<jsonArray.length(); i++){
+
 
                         JSONObject jsonObject =jsonArray.getJSONObject(i);
                         int url_id = jsonObject.getInt("id");
