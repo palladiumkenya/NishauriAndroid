@@ -2,6 +2,7 @@ package com.example.mhealth.appointment_diary.adapter;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -20,6 +21,7 @@ import com.example.mhealth.appointment_diary.appointment_diary.AppointmentModel;
 import com.example.mhealth.appointment_diary.models.Appointments;
 import com.example.mhealth.appointment_diary.models.UpiErrModel;
 import com.example.mhealth.appointment_diary.sendmessages.SendMessage;
+import com.example.mhealth.appointment_diary.utilitymodules.Registration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,7 @@ import java.util.List;
 public class UpiErrAdapter extends BaseAdapter implements Filterable {
 
     private Context mycont;
-    private List<UpiErrModel> mylist;
+    private List<UpiErrModel> mylist=new ArrayList<>();
     UpiErrAdapter.CustomFilter filter;
     private List<UpiErrModel> filterList;
     List<UpiErrModel> books = null;
@@ -106,7 +108,11 @@ public class UpiErrAdapter extends BaseAdapter implements Filterable {
                     @Override
                     public void onClick(View view) {
 
-                        mc.initiateCall(clientNumber);
+                        //mc.initiateCall(clientNumber);
+                        Intent intent = new Intent(mycont, Registration.class);
+                        intent.putExtra("UPI", clientNumber);
+                        mycont.startActivity(intent);
+
 //                    Toast.makeText(mycont, "calling client "+phoneS, Toast.LENGTH_SHORT).show();
                     }
                 });
