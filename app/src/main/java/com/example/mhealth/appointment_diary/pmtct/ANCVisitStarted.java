@@ -145,7 +145,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                 }, year, month, day);
 
                 // set maximum date to be selected as today
-                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
                 datePicker.getDatePicker();
 
                 // show the dialog
