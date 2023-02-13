@@ -25,9 +25,14 @@ import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
 import com.example.mhealth.appointment_diary.utilitymodules.Registration;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class ANCVisitStarted extends AppCompatActivity {
 
@@ -46,6 +51,8 @@ public class ANCVisitStarted extends AppCompatActivity {
     EditText CCCNo, partnerCCCNo, gravida,EDD_date, LMP_date, DateTested,ANC_Visitno,ANC_clinicno,ANCNumber,  partnerDateTested,CCCEnrolDate, ARTStart_date,partnerCCCEnrolDate,partnerARTStart_date, VLdate,parity1,parity2,VLResults,CCCNo22, Gestation;
     String ClientIS_code, HIV_Results_Code, partnerHIV_Results_Code, SyphilisSerology_code,clientTreated_code, HepatitisB_code;
     RadioGroup syphilisID,hepatitisID;
+
+    Calendar calendar1;
 
     Button saveANC;
 
@@ -129,7 +136,7 @@ public class ANCVisitStarted extends AppCompatActivity {
         // populategravida();
 
         //EDD_date
-        EDD_date.setOnClickListener(new View.OnClickListener() {
+       /* EDD_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Calendar calendar = Calendar.getInstance();
@@ -151,7 +158,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                 // show the dialog
                 datePicker.show();
             }
-        });
+        });*/
 
 
         //vldatesample
@@ -320,6 +327,9 @@ public class ANCVisitStarted extends AppCompatActivity {
             public void onClick(View view) {
                 final Calendar calendar = Calendar.getInstance();
                 final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                long timeInMilliseconds = calendar.getTimeInMillis()+ TimeUnit.DAYS.toMillis(280);
+
                 final int year = calendar.get(Calendar.YEAR);
                 final int month = calendar.get(Calendar.MONTH);
                 DatePickerDialog datePicker = new DatePickerDialog(ANCVisitStarted.this  , new DatePickerDialog.OnDateSetListener() {
@@ -327,6 +337,20 @@ public class ANCVisitStarted extends AppCompatActivity {
                     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
                         // adding the selected date in the edittext
                         DateTested.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+
+
+
+                       /* Calendar calendar = Calendar.getInstance();
+                        calendar.set(year,monthOfYear + 1,dayOfMonth);
+
+                        long timeInMilliseconds = calendar.getTimeInMillis()+TimeUnit.DAYS.toMillis(280);
+                        calendar.setTimeInMillis(timeInMilliseconds);
+                        int mYear = calendar.get(Calendar.YEAR);
+                        int mMonth = calendar.get(Calendar.MONTH);
+                        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+                        eText.setText(mDay + "/" + mMonth + "/" + mYear);*/
+
+
                     }
                 }, year, month, day);
 
@@ -344,15 +368,37 @@ public class ANCVisitStarted extends AppCompatActivity {
        LMP_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Calendar calendar = Calendar.getInstance();
-                final int day = calendar.get(Calendar.DAY_OF_MONTH);
-                final int year = calendar.get(Calendar.YEAR);
-                final int month = calendar.get(Calendar.MONTH);
+                calendar1 = Calendar.getInstance();
+                final int day = calendar1.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar1.get(Calendar.YEAR);
+                final int month = calendar1.get(Calendar.MONTH);
                 DatePickerDialog datePicker = new DatePickerDialog(ANCVisitStarted.this  , new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
                         // adding the selected date in the edittext
                        LMP_date.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+
+                     /* SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+
+                        calendar1.add(Calendar.DAY_OF_MONTH, 280);
+                        String dateAfter = sdf.format(calendar1.getTime());
+
+                        EDD_date.setText(dateAfter);*/
+
+                       /* final Calendar calender = Calendar.getInstance();
+                        calender.set(Calendar.YEAR,year);
+                        calender.set(Calendar.MONTH,month);
+                        //calender.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+                        calender.add(Calendar.DAY_OF_MONTH,40);
+                        Date s = calender.getTime();
+                        Log.e("TA", "vale" + sdf.format(s));
+                        final int day = calender.get ( Calendar.DAY_OF_MONTH );
+                        EDD_date.setText(sdf.format(s));*/
+
+                        //EDD_date.setText(dayOfMonth+TimeUnit.DAYS.toMillis(280)+ "/" + (month + 1) + "/" + year );
+
+
+
                     }
                 }, year, month, day);
 
@@ -364,6 +410,55 @@ public class ANCVisitStarted extends AppCompatActivity {
                 datePicker.show();
             }
         });
+
+       LMP_date.addTextChangedListener(new TextWatcher() {
+           @Override
+           public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+           }
+
+           @Override
+           public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+           }
+
+           @Override
+           public void afterTextChanged(Editable editable) {
+               String ss = LMP_date.getText().toString();
+
+               int x = 280/7;
+
+               Gestation.setText(String.valueOf(x));
+
+
+             //   Calendar calendar = Calendar.getInstance();
+                      //  calendar.set(year,monthOfYear + 1,dayOfMonth);
+
+                        /*long timeInMilliseconds = ss.getTimeInMillis()+TimeUnit.DAYS.toMillis(280);
+                        calendar.setTimeInMillis(timeInMilliseconds);
+                        int mYear = calendar.get(Calendar.YEAR);
+                        int mMonth = calendar.get(Calendar.MONTH);
+                        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+                        eText.setText(mDay + "/" + mMonth + "/" + mYear);*/
+
+
+               String dt = "2012-01-04";  // Start date
+               SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");    //yyyy-MM-dd
+               Calendar c = Calendar.getInstance();
+               try {
+                       // dd/MM/yyyy
+                   c.setTime(Objects.requireNonNull(sdf.parse(ss)));
+               } catch (ParseException e) {
+                   e.printStackTrace();
+               }
+               c.add(Calendar.DATE, 280);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+               SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+               String output = sdf1.format(c.getTime());
+
+               EDD_date.setText(output);
+
+           }
+       });
 
         try{
             //getSupportActionBar().setDisplayShowHomeEnabled(true);

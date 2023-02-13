@@ -30,6 +30,7 @@ import com.example.mhealth.appointment_diary.loginmodule.LoginActivity;
 import com.example.mhealth.appointment_diary.models.Appointments;
 import com.example.mhealth.appointment_diary.pmtct.ANCVisit;
 import com.example.mhealth.appointment_diary.pmtct.LaborAndDelivery;
+import com.example.mhealth.appointment_diary.pmtct.LaborAndDeliveryStart;
 import com.example.mhealth.appointment_diary.pmtct.PNCVisit;
 import com.example.mhealth.appointment_diary.tables.Mflcode;
 import com.example.mhealth.appointment_diary.tables.UrlTable;
@@ -1513,7 +1514,7 @@ public class AccessServer {
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
 
-                                            Intent intent = new Intent(ctx, LaborAndDelivery.class);
+                                            Intent intent = new Intent(ctx, LaborAndDeliveryStart.class);
                                             ctx.startActivity(intent);
 
 
@@ -1521,16 +1522,7 @@ public class AccessServer {
                                         }
                                     });
 
-        /*builder1.setNegativeButton(
-                "Cancel",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
 
-                        Intent intent = new Intent(Config.this, SelectUrls.class);
-                        startActivity(intent);
-                        dialog.cancel();
-                    }
-                });*/
 
                             AlertDialog alert11 = builder1.create();
                             alert11.show();
