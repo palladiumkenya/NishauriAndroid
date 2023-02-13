@@ -4,6 +4,7 @@ package com.example.mhealth.appointment_diary.AccessServer;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.EditText;
@@ -23,8 +24,13 @@ import com.example.mhealth.appointment_diary.DCMActivity;
 import com.example.mhealth.appointment_diary.Dialogs.Dialogs;
 import com.example.mhealth.appointment_diary.ProcessReceivedMessage.ProcessMessage;
 import com.example.mhealth.appointment_diary.Progress.Progress;
+import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.config.Config;
+import com.example.mhealth.appointment_diary.loginmodule.LoginActivity;
 import com.example.mhealth.appointment_diary.models.Appointments;
+import com.example.mhealth.appointment_diary.pmtct.ANCVisit;
+import com.example.mhealth.appointment_diary.pmtct.LaborAndDelivery;
+import com.example.mhealth.appointment_diary.pmtct.PNCVisit;
 import com.example.mhealth.appointment_diary.tables.Mflcode;
 import com.example.mhealth.appointment_diary.tables.UrlTable;
 import com.orm.SugarRecord;
@@ -47,6 +53,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static com.android.volley.Request.Method.GET;
 import static com.android.volley.Request.Method.POST;
+
+import androidx.appcompat.app.AlertDialog;
 
 
 public class AccessServer {
@@ -1199,10 +1207,8 @@ public class AccessServer {
                 for (int x=0; x<_url.size(); x++){
                     z=_url.get(x).getBase_url1();
 
-                 // all ="https://ushauriapi.kenyahmis.org/pmtct/pnc";
-                    //all = "https://ushauriapi.kenyahmis.org/pmtct/lad";
                     all="https://ushauriapi.kenyahmis.org/pmtct/anc";
-                   // z+Config.ANC
+
                 }
             }
 
@@ -1222,7 +1228,32 @@ public class AccessServer {
 
                         if(mStatusCode[0]==200){
 
-                            dialogs.showSuccessDialog(response,"Server Response");
+                            //dialogs.showSuccessDialog(response,"Server Response");
+
+                            androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(ctx);
+                            builder1.setIcon(R.drawable.nascoplogonew);
+                            builder1.setTitle(response);
+                            builder1.setMessage( "Server Response");
+                            builder1.setCancelable(false);
+
+                            builder1.setPositiveButton(
+                                    "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+
+                                            Intent intent = new Intent(ctx, ANCVisit.class);
+                                            ctx.startActivity(intent);
+
+
+                                            //dialog.cancel();
+                                        }
+                                    });
+
+
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
+
+
 
                         }
                         else{
@@ -1329,7 +1360,42 @@ public class AccessServer {
 
                         if(mStatusCode[0]==200){
 
-                            dialogs.showSuccessDialog(response,"Server Response");
+                            //dialogs.showSuccessDialog(response,"Server Response");
+
+                            androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(ctx);
+                            builder1.setIcon(R.drawable.nascoplogonew);
+                            builder1.setTitle(response);
+                            builder1.setMessage( "Server Response");
+                            builder1.setCancelable(false);
+
+                            builder1.setPositiveButton(
+                                    "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+
+                                            Intent intent = new Intent(ctx, PNCVisit.class);
+                                            ctx.startActivity(intent);
+
+
+                                            //dialog.cancel();
+                                        }
+                                    });
+
+        /*builder1.setNegativeButton(
+                "Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        Intent intent = new Intent(Config.this, SelectUrls.class);
+                        startActivity(intent);
+                        dialog.cancel();
+                    }
+                });*/
+
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
+
+
 
                         }
                         else{
@@ -1434,9 +1500,43 @@ public class AccessServer {
 
                         if(mStatusCode[0]==200){
 
-                            dialogs.showSuccessDialog(response,"Server Response");
+                            //dialogs.showSuccessDialog(response,"Server Response");
+
+                            androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(ctx);
+                            builder1.setIcon(android.R.drawable.ic_dialog_alert);
+                            builder1.setTitle(response);
+                            builder1.setMessage( "Server Response");
+                            builder1.setCancelable(false);
+
+                            builder1.setPositiveButton(
+                                    "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+
+                                            Intent intent = new Intent(ctx, LaborAndDelivery.class);
+                                            ctx.startActivity(intent);
+
+
+                                            //dialog.cancel();
+                                        }
+                                    });
+
+        /*builder1.setNegativeButton(
+                "Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        Intent intent = new Intent(Config.this, SelectUrls.class);
+                        startActivity(intent);
+                        dialog.cancel();
+                    }
+                });*/
+
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
 
                         }
+
                         else{
 
                             dialogs.showErrorDialog(response,"Server response");
