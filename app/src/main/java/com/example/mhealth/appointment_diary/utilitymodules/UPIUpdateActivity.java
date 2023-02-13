@@ -20,14 +20,16 @@ import org.json.JSONObject;
 
 public class UPIUpdateActivity extends AppCompatActivity {
 
-    EditText upitext, cfile, f_name, s_name, o_name;
+    EditText upitext, cfile, f_name, s_name, o_name, dob;
     String newUpi;
     Button populate1;
+    boolean a;
 
     String  fname;
     String file;
     String mname;
     String lname;
+    String dob1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class UPIUpdateActivity extends AppCompatActivity {
         f_name =(EditText) findViewById(R.id.f_name);
         s_name =(EditText) findViewById(R.id.s_name);
         o_name =(EditText) findViewById(R.id.o_name);
+        dob =(EditText) findViewById(R.id.dob);
+
 
         populate1 =(Button) findViewById(R.id.populate);
 
@@ -99,8 +103,16 @@ public class UPIUpdateActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         //Toast.makeText(UPIUpdateActivity.this, "sucess", Toast.LENGTH_SHORT).show();
+                        try {
+                            a = response.getBoolean("success");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (a){
 
                         try {
+
                             JSONObject jsonObject =response.getJSONObject("message");
 
                               fname =jsonObject.getString("f_name");
@@ -108,6 +120,8 @@ public class UPIUpdateActivity extends AppCompatActivity {
                              mname =jsonObject.getString("m_name");
                             //Toast.makeText(UPIUpdateActivity.this, "sucess"+mname, Toast.LENGTH_SHORT).show();
                              lname =jsonObject.getString("l_name");
+                            dob1 =jsonObject.getString("dob");
+
 
                             /*cfile.setText(file);
                             f_name.setText(fname);
@@ -124,7 +138,10 @@ public class UPIUpdateActivity extends AppCompatActivity {
                         f_name.setText(fname);
                         s_name.setText(mname);
                         cfile.setText(file);
-                        o_name.setText(lname);
+                        dob.setText(dob1);
+                        o_name.setText(lname);}else{
+                            Toast.makeText(UPIUpdateActivity.this, "No record found", Toast.LENGTH_SHORT).show();
+                        }
 
                     }
 
