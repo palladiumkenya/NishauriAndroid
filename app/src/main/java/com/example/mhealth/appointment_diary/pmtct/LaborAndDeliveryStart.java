@@ -909,17 +909,6 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 if (BABY_DELIVERED5.contentEquals("Macerated Still Birth")|| BABY_DELIVERED5.contentEquals("Fresh Still Birth")){
 
-                    /*livetexts.setVisibility(View.GONE);
-                    livetexts2.setVisibility(View.GONE);
-                    livetexts3.setVisibility(View.GONE);
-                    livetexts4.setVisibility(View.GONE);
-
-
-                    livetextss.setVisibility(View.GONE);
-                    livetextss2.setVisibility(View.GONE);
-                    livetextss3.setVisibility(View.GONE);
-                    livetextss4.setVisibility(View.GONE);
-                    */
 
                     diedlay5.setVisibility(View.VISIBLE);
                     livetexts5.setVisibility(View.GONE);
@@ -1114,6 +1103,38 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                     diedlay5.setVisibility(View.GONE);
                     livetexts5.setVisibility(View.GONE);
                     livetextss5.setVisibility(View.GONE);
+                }
+                else if (DeliveryOutcomeS_code.contentEquals("0")){
+                    diedlay.setVisibility(View.GONE);
+                    diedlay2.setVisibility(View.GONE);
+                    diedlay3.setVisibility(View.GONE);
+                    diedlay4.setVisibility(View.GONE);
+                    diedlay5.setVisibility(View.GONE);
+
+                    livetexts.setVisibility(View.GONE);
+                    livetextss.setVisibility(View.GONE);
+                    livetexts2.setVisibility(View.GONE);
+                    livetextss2.setVisibility(View.GONE);
+                    livetexts3.setVisibility(View.GONE);
+                    livetextss3.setVisibility(View.GONE);
+                    livetexts4.setVisibility(View.GONE);
+                    livetextss4.setVisibility(View.GONE);
+                    livetexts5.setVisibility(View.GONE);
+                    livetextss5.setVisibility(View.GONE);
+
+                    baby1.setVisibility(View.GONE);
+                    baby2.setVisibility(View.GONE);
+                    baby3.setVisibility(View.GONE);
+                    baby4.setVisibility(View.GONE);
+                    baby5.setVisibility(View.GONE);
+
+                    singleLay.setVisibility(View.GONE);
+                    twinLay.setVisibility(View.GONE);
+                    tripleLay.setVisibility(View.GONE);
+                    quadlay.setVisibility(View.GONE);
+                    fifthlay.setVisibility(View.GONE);
+
+
                 }
                 else if (DELIVERY_OUTCOME.contentEquals("Quadruplets")){
 
