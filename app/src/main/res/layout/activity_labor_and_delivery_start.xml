@@ -196,6 +196,18 @@
                 </LinearLayout>
                 <!-- single baby -->
 
+                <Button
+                    android:id="@+id/baby1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="#004d4d"
+                    android:fontFamily="serif"
+                    android:text="Baby 1 details"
+                    android:visibility="gone"
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF" />
+
 
 
 
@@ -312,6 +324,17 @@
 
 
                 <!-- twin -->
+                <Button
+                    android:id="@+id/baby2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="#004d4d"
+                    android:fontFamily="serif"
+                    android:visibility="gone"
+                    android:text="Baby 2 details"
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
@@ -417,6 +440,17 @@
                 </LinearLayout>
 
                 <!-- trip-->
+                <Button
+                    android:id="@+id/baby3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="#004d4d"
+                    android:fontFamily="serif"
+                    android:text="Baby 3 details"
+                    android:visibility="gone"
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
@@ -518,6 +552,17 @@
 
                 </LinearLayout>
                 <!-- quad -->
+                <Button
+                    android:id="@+id/baby4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="#004d4d"
+                    android:fontFamily="serif"
+                    android:text="Baby 4 details"
+                    android:visibility="gone"
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
@@ -623,6 +668,17 @@
 
 
                 <!-- fifth -->
+                <Button
+                    android:id="@+id/baby5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="#004d4d"
+                    android:fontFamily="serif"
+                    android:text="Baby 5 details"
+                    android:visibility="gone"
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:orientation="horizontal"

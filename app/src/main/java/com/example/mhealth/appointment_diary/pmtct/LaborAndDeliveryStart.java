@@ -39,7 +39,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
     String[] CurrentRe = {"", "TDF+3TC+EFV", "TDF+3TC+DTG", "TDF+3TC+DTG", "AZT+3TC+NVP", " AZT+3TC+EFV", "ABC+3TC+NVP", "ABC+3TC+EFV", " ABC+3TC+DTG", "ABC+3TC+LPV/r", " AZT+3TC+LPV/r+ RTV", "ART5TDF+3TC +ATV/r","ABC+3TC+DTG", "ABC+3TC+DTG", "ABC+3TC+ATV/r", "AZT+3TC+ATV/r", "AZT+3TC+DRV/r"};
     String[] Immunization = {"", "Penta", "PSV"};
     String[] hivResults = {"", "Unknown", "Negative", "Positive"};
-    Button saveLD;
+    Button saveLD, baby1, baby2, baby3, baby4, baby5;
     FieldSetView maceratedfield1,maceratedfield2,maceratedfield3,maceratedfield4,maceratedfield5, livelayfield1,livelayfield2,livelayfield3,livelayfield4,livelayfield5;
 
 
@@ -119,6 +119,11 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                 Datedied5=(EditText) findViewById(R.id.Datedied5);
                 deathcause5=(EditText) findViewById(R.id.deathcause5);
                 BabysDOB5=(EditText) findViewById(R.id.BabysDOB5);
+                baby1 =(Button) findViewById(R.id.baby1);
+                baby2 =(Button) findViewById(R.id.baby2);
+                baby3 =(Button) findViewById(R.id.baby3);
+                baby4 =(Button) findViewById(R.id.baby4);
+                baby5=(Button) findViewById(R.id.baby5);
 
         diedlay=(LinearLayout)findViewById(R.id.diededits);
         diedlay2=(LinearLayout)findViewById(R.id.diededits2);
@@ -612,7 +617,8 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                     livetextss4.setVisibility(View.GONE);
                     livetextss5.setVisibility(View.GONE);*/
                 }
-                /*else if (BABY_DELIVERED.contentEquals("Fresh Still Birth")){
+                else if (BabyDeliveredS_code.contentEquals("0")){
+                    //  Toast.makeText(LaborAndDeliveryStart.this, "vbn", Toast.LENGTH_SHORT).show();
                     diedlay.setVisibility(View.GONE);
                     diedlay2.setVisibility(View.GONE);
                     diedlay3.setVisibility(View.GONE);
@@ -620,11 +626,17 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                     diedlay5.setVisibility(View.GONE);
 
                     livetexts.setVisibility(View.GONE);
+                    livetextss.setVisibility(View.GONE);
                     livetexts2.setVisibility(View.GONE);
+                    livetextss2.setVisibility(View.GONE);
                     livetexts3.setVisibility(View.GONE);
+                    livetextss3.setVisibility(View.GONE);
                     livetexts4.setVisibility(View.GONE);
+                    livetextss4.setVisibility(View.GONE);
                     livetexts5.setVisibility(View.GONE);
-                }*/
+                    livetextss5.setVisibility(View.GONE);
+
+                }
             }
 
             @Override
@@ -662,6 +674,28 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                     livetextss3.setVisibility(View.GONE);
                     livetextss4.setVisibility(View.GONE);
                     livetextss5.setVisibility(View.GONE);*/
+                }
+
+
+                else if (BabyDeliveredS2_code.contentEquals("0")){
+                    //  Toast.makeText(LaborAndDeliveryStart.this, "vbn", Toast.LENGTH_SHORT).show();
+                    diedlay.setVisibility(View.GONE);
+                    diedlay2.setVisibility(View.GONE);
+                    diedlay3.setVisibility(View.GONE);
+                    diedlay4.setVisibility(View.GONE);
+                    diedlay5.setVisibility(View.GONE);
+
+                    livetexts.setVisibility(View.GONE);
+                    livetextss.setVisibility(View.GONE);
+                    livetexts2.setVisibility(View.GONE);
+                    livetextss2.setVisibility(View.GONE);
+                    livetexts3.setVisibility(View.GONE);
+                    livetextss3.setVisibility(View.GONE);
+                    livetexts4.setVisibility(View.GONE);
+                    livetextss4.setVisibility(View.GONE);
+                    livetexts5.setVisibility(View.GONE);
+                    livetextss5.setVisibility(View.GONE);
+
                 }
                 else if (BABY_DELIVERED2.contentEquals("Live Birth")){
 
@@ -724,6 +758,27 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                     livetexts3.setVisibility(View.GONE);
                     diedlay3.setVisibility(View.VISIBLE);
                 }
+
+                else if (BabyDeliveredS3_code.contentEquals("0")){
+                    //  Toast.makeText(LaborAndDeliveryStart.this, "vbn", Toast.LENGTH_SHORT).show();
+                    diedlay.setVisibility(View.GONE);
+                    diedlay2.setVisibility(View.GONE);
+                    diedlay3.setVisibility(View.GONE);
+                    diedlay4.setVisibility(View.GONE);
+                    diedlay5.setVisibility(View.GONE);
+
+                    livetexts.setVisibility(View.GONE);
+                    livetextss.setVisibility(View.GONE);
+                    livetexts2.setVisibility(View.GONE);
+                    livetextss2.setVisibility(View.GONE);
+                    livetexts3.setVisibility(View.GONE);
+                    livetextss3.setVisibility(View.GONE);
+                    livetexts4.setVisibility(View.GONE);
+                    livetextss4.setVisibility(View.GONE);
+                    livetexts5.setVisibility(View.GONE);
+                    livetextss5.setVisibility(View.GONE);
+
+                }
                 else if (BABY_DELIVERED3.contentEquals("Live Birth")){
                     livetexts3.setVisibility(View.VISIBLE);
                     livetextss3.setVisibility(View.VISIBLE);
@@ -785,6 +840,27 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                     diedlay4.setVisibility(View.VISIBLE);
                     livetexts4.setVisibility(View.GONE);
                     livetextss4.setVisibility(View.GONE);
+                }
+
+                else if (BabyDeliveredS4_code.contentEquals("0")){
+                    //  Toast.makeText(LaborAndDeliveryStart.this, "vbn", Toast.LENGTH_SHORT).show();
+                    diedlay.setVisibility(View.GONE);
+                    diedlay2.setVisibility(View.GONE);
+                    diedlay3.setVisibility(View.GONE);
+                    diedlay4.setVisibility(View.GONE);
+                    diedlay5.setVisibility(View.GONE);
+
+                    livetexts.setVisibility(View.GONE);
+                    livetextss.setVisibility(View.GONE);
+                    livetexts2.setVisibility(View.GONE);
+                    livetextss2.setVisibility(View.GONE);
+                    livetexts3.setVisibility(View.GONE);
+                    livetextss3.setVisibility(View.GONE);
+                    livetexts4.setVisibility(View.GONE);
+                    livetextss4.setVisibility(View.GONE);
+                    livetexts5.setVisibility(View.GONE);
+                    livetextss5.setVisibility(View.GONE);
+
                 }
                 else if (BABY_DELIVERED4.contentEquals("Live Birth")){
                     livetexts4.setVisibility(View.VISIBLE);
@@ -849,6 +925,27 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                     livetexts5.setVisibility(View.GONE);
                     livetextss5.setVisibility(View.GONE);
                 }
+
+                else if (BabyDeliveredS5_code.contentEquals("0")){
+                    //  Toast.makeText(LaborAndDeliveryStart.this, "vbn", Toast.LENGTH_SHORT).show();
+                    diedlay.setVisibility(View.GONE);
+                    diedlay2.setVisibility(View.GONE);
+                    diedlay3.setVisibility(View.GONE);
+                    diedlay4.setVisibility(View.GONE);
+                    diedlay5.setVisibility(View.GONE);
+
+                    livetexts.setVisibility(View.GONE);
+                    livetextss.setVisibility(View.GONE);
+                    livetexts2.setVisibility(View.GONE);
+                    livetextss2.setVisibility(View.GONE);
+                    livetexts3.setVisibility(View.GONE);
+                    livetextss3.setVisibility(View.GONE);
+                    livetexts4.setVisibility(View.GONE);
+                    livetextss4.setVisibility(View.GONE);
+                    livetexts5.setVisibility(View.GONE);
+                    livetextss5.setVisibility(View.GONE);
+
+                }
                 else if (BABY_DELIVERED5.contentEquals("Live Birth")){
 
                     /*livetexts.setVisibility(View.GONE);
@@ -896,6 +993,13 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                 DeliveryOutcomeS_code=Integer.toString(position);
 
                 if (DELIVERY_OUTCOME.contentEquals("Single")){
+                    baby1.setVisibility(View.VISIBLE);
+
+                    baby2.setVisibility(View.GONE);
+                    baby3.setVisibility(View.GONE);
+                    baby4.setVisibility(View.GONE);
+                    baby5.setVisibility(View.GONE);
+
                     //Toast.makeText(getApplicationContext(), "sinle", Toast.LENGTH_SHORT).show();
                     singleLay.setVisibility(View.VISIBLE);
                     twinLay.setVisibility(View.GONE);
@@ -935,6 +1039,15 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 }
                 else if (DELIVERY_OUTCOME.contentEquals("Twins")){
+                    baby1.setVisibility(View.VISIBLE);
+
+                    baby2.setVisibility(View.VISIBLE);
+                    baby3.setVisibility(View.GONE);
+                    baby4.setVisibility(View.GONE);
+                    baby5.setVisibility(View.GONE);
+
+
+
                     singleLay.setVisibility(View.VISIBLE);
                     twinLay.setVisibility(View.VISIBLE);
                     tripleLay.setVisibility(View.GONE);
@@ -965,6 +1078,15 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                 }
 
                 else if (DELIVERY_OUTCOME.contentEquals("Triplets")){
+                    baby1.setVisibility(View.VISIBLE);
+
+                    baby2.setVisibility(View.VISIBLE);
+                    baby3.setVisibility(View.VISIBLE);
+                    baby4.setVisibility(View.GONE);
+                    baby5.setVisibility(View.GONE);
+
+
+
                     singleLay.setVisibility(View.VISIBLE);
                     twinLay.setVisibility(View.VISIBLE);
                     tripleLay.setVisibility(View.VISIBLE);
@@ -994,6 +1116,15 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                     livetextss5.setVisibility(View.GONE);
                 }
                 else if (DELIVERY_OUTCOME.contentEquals("Quadruplets")){
+
+                    baby1.setVisibility(View.VISIBLE);
+
+                    baby2.setVisibility(View.VISIBLE);
+                    baby3.setVisibility(View.VISIBLE);
+                    baby4.setVisibility(View.VISIBLE);
+                    baby5.setVisibility(View.GONE);
+
+
                     singleLay.setVisibility(View.VISIBLE);
                     twinLay.setVisibility(View.VISIBLE);
                     tripleLay.setVisibility(View.VISIBLE);
@@ -1023,6 +1154,14 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                 }
 
                 else if (DELIVERY_OUTCOME.contentEquals("Quintuplets")){
+
+                    baby1.setVisibility(View.VISIBLE);
+
+                    baby2.setVisibility(View.VISIBLE);
+                    baby3.setVisibility(View.VISIBLE);
+                    baby4.setVisibility(View.VISIBLE);
+                    baby5.setVisibility(View.VISIBLE);
+
                     singleLay.setVisibility(View.VISIBLE);
                     twinLay.setVisibility(View.VISIBLE);
                     tripleLay.setVisibility(View.VISIBLE);
