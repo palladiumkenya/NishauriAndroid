@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mhealth.appointment_diary.AccessServer.AccessServer;
@@ -39,11 +40,14 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
     String[] CurrentRe = {"", "TDF+3TC+EFV", "TDF+3TC+DTG", "TDF+3TC+DTG", "AZT+3TC+NVP", " AZT+3TC+EFV", "ABC+3TC+NVP", "ABC+3TC+EFV", " ABC+3TC+DTG", "ABC+3TC+LPV/r", " AZT+3TC+LPV/r+ RTV", "ART5TDF+3TC +ATV/r","ABC+3TC+DTG", "ABC+3TC+DTG", "ABC+3TC+ATV/r", "AZT+3TC+ATV/r", "AZT+3TC+DRV/r"};
     String[] Immunization = {"", "Penta", "PSV"};
     String[] hivResults = {"", "Unknown", "Negative", "Positive"};
+
+    String[] prophy = {"", "AZT", "NVP", "CTX"};
+    TextView prophtxt1, prophtxt2, prophtxt3, prophtxt4, prophtxt5;
     Button saveLD, baby1, baby2, baby3, baby4, baby5;
     FieldSetView maceratedfield1,maceratedfield2,maceratedfield3,maceratedfield4,maceratedfield5, livelayfield1,livelayfield2,livelayfield3,livelayfield4,livelayfield5;
 
 
-    Spinner clientVisitTypeS,  ModeDeliveryS, placeDeliveryS, DeliveryOutcomeS, MothersOutcomeS, MotherTestedS, BabyDeliveredS,BabyDeliveredS2,BabyDeliveredS3,BabyDeliveredS4,BabyDeliveredS5,  BabySexS,BabySexS2, BabySexS3, BabySexS4, BabySexS5, currentS, ImmunizationS, hivResultsS;
+    Spinner clientVisitTypeS,  ModeDeliveryS, placeDeliveryS, DeliveryOutcomeS, MothersOutcomeS, MotherTestedS, BabyDeliveredS,BabyDeliveredS2,BabyDeliveredS3,BabyDeliveredS4,BabyDeliveredS5,  BabySexS,BabySexS2, BabySexS3, BabySexS4, BabySexS5, currentS, ImmunizationS, hivResultsS, prophyS1, prophyS2, prophyS3, prophyS4, prophyS5;
     private String CLIENT_VISIT_TYPE = "";
     private String MODE_DELIVERY = "";
     private String PLACE_DELIVERY = "";
@@ -55,6 +59,13 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
     private String BABY_DELIVERED3 = "";
     private String BABY_DELIVERED4 = "";
     private String BABY_DELIVERED5 = "";
+
+    private String PROPHY1 = "";
+    private String PROPHY2 = "";
+    private String PROPHY3 = "";
+    private String PROPHY4 = "";
+    private String PROPHY5 = "";
+
     private String BABY_SEX = "";
     private String BABY_SEX2 = "";
     private String BABY_SEX3 = "";
@@ -69,10 +80,10 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
     private String HIV = "";
     private String TESTED = "";
-    LinearLayout diedlay, singleLay, twinLay,tripleLay, quadlay, fifthlay,diedlay2,diedlay3,diedlay4, diedlay5,livetextss,livetextss2,livetextss3,livetextss4,livetextss5,hivlay;
-    TextInputLayout livetexts,livetexts2,livetexts3,livetexts4,livetexts5;
-    EditText ANCVisit_NO, deliveryDate, Datedied1, deathcause1,BabysDOB1, Datedied2,deathcause2,BabysDOB2, Datedied3,deathcause3,BabysDOB3, Datedied4,deathcause4,BabysDOB4,  Datedied5,deathcause5,BabysDOB5;
-    String BabyDeliveredS_code,BabyDeliveredS2_code,BabyDeliveredS3_code,BabyDeliveredS4_code,BabyDeliveredS5_code,ModeDeliveryS_code, placeDeliveryS_code, DeliveryOutcomeS_code, MothersOutcomeS_code, MotherTestedS_code, BabySexS_code,BabySexS2_code,BabySexS3_code,BabySexS4_code,BabySexS5_code, currentS_code, ImmunizationS_code, hivResultsS_code;
+    LinearLayout diedlay, singleLay, twinLay,tripleLay, quadlay, fifthlay,diedlay2,diedlay3,diedlay4, diedlay5,livetextss,livetextss2,livetextss3,livetextss4,livetextss5,hivlay,prophLay1, prophLay2, prophLay3, prophLay4, prophLay5;
+    TextInputLayout livetexts,livetexts2,livetexts3,livetexts4,livetexts5,prophdet1, prophdet2, prophdet3, prophdet4, prophdet5;
+    EditText ANCVisit_NO, deliveryDate, Datedied1, deathcause1,BabysDOB1, Datedied2,deathcause2,BabysDOB2, Datedied3,deathcause3,BabysDOB3, Datedied4,deathcause4,BabysDOB4,  Datedied5,deathcause5,BabysDOB5,prophed1,prophed2, prophed3, prophed4,prophed5;
+    String BabyDeliveredS_code,BabyDeliveredS2_code,BabyDeliveredS3_code,BabyDeliveredS4_code,BabyDeliveredS5_code,ModeDeliveryS_code, placeDeliveryS_code, DeliveryOutcomeS_code, MothersOutcomeS_code, MotherTestedS_code, BabySexS_code,BabySexS2_code,BabySexS3_code,BabySexS4_code,BabySexS5_code, currentS_code, ImmunizationS_code, hivResultsS_code, prophy1_code, prophy2_code, prophy3_code, prophy4_code, prophy5_code;
 
 
     @Override
@@ -137,11 +148,37 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
         fifthlay=(LinearLayout)findViewById(R.id.fifthLay);
         hivlay=(LinearLayout)findViewById(R.id.hivlay);
 
+        prophLay1=(LinearLayout)findViewById(R.id.prophLay1);
+        prophLay2=(LinearLayout)findViewById(R.id.prophLay2);
+        prophLay3=(LinearLayout)findViewById(R.id.prophLay3);
+        prophLay4=(LinearLayout)findViewById(R.id.prophLay4);
+        prophLay5=(LinearLayout)findViewById(R.id.prophLay5);
+
         livetexts=(TextInputLayout) findViewById(R.id.livetexts);
         livetexts2=(TextInputLayout) findViewById(R.id.livetexts2);
         livetexts3=(TextInputLayout) findViewById(R.id.livetexts3);
         livetexts4=(TextInputLayout) findViewById(R.id.livetexts4);
         livetexts5=(TextInputLayout) findViewById(R.id.livetexts5);
+
+        //prophylay
+        prophdet1=(TextInputLayout) findViewById(R.id.prophdet1);
+        prophdet2=(TextInputLayout) findViewById(R.id. prophdet2);
+        prophdet3=(TextInputLayout) findViewById(R.id. prophdet3);
+        prophdet4=(TextInputLayout) findViewById(R.id. prophdet4);
+        prophdet5=(TextInputLayout) findViewById(R.id. prophdet5);
+
+       // prophtxt1=(TextView) findViewById(R.id.prophtxt1);
+        prophtxt2=(TextView) findViewById(R.id. prophtxt2);
+        prophtxt3=(TextView) findViewById(R.id. prophtxt3);
+        prophtxt4=(TextView) findViewById(R.id. prophtxt4);
+        prophtxt5=(TextView) findViewById(R.id. prophtxt5);
+
+        //proph edittexts
+        prophed1=(EditText) findViewById(R.id.prophed1);
+        prophed2=(EditText) findViewById(R.id.prophed2);
+        prophed3=(EditText) findViewById(R.id.prophed3 );
+        prophed4=(EditText) findViewById(R.id.prophed4);
+        prophed5=(EditText) findViewById(R.id.prophed5);
 
 
         livetextss=(LinearLayout) findViewById(R.id.livetextss);
@@ -155,6 +192,13 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
         placeDeliveryS = (Spinner) findViewById(R.id.DeliveryPlace);
         MothersOutcomeS = (Spinner) findViewById(R.id.mothersOutcome);
         DeliveryOutcomeS = (Spinner) findViewById(R.id.deliveryOutcome);
+
+
+                prophyS1 = (Spinner) findViewById(R.id.BabyMedication1);
+                prophyS2= (Spinner) findViewById(R.id.BabyMedication2);
+                prophyS3= (Spinner) findViewById(R.id.BabyMedication3);
+                prophyS4= (Spinner) findViewById(R.id.BabyMedication4);
+                prophyS5= (Spinner) findViewById(R.id.BabyMedication5);
 
         MotherTestedS = (Spinner) findViewById(R.id.motherTested);
         BabyDeliveredS = (Spinner) findViewById(R.id.BabyDelivered1);
@@ -171,6 +215,140 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
         BabySexS3=(Spinner) findViewById(R.id.BabySex3);
         BabySexS4=(Spinner) findViewById(R.id.BabySex4);
         BabySexS5=(Spinner) findViewById(R.id.BabySex5);
+
+        //proph date
+        prophed1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(LaborAndDeliveryStart.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        prophed1.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+               // datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker();
+
+                // show the dialog
+                datePicker.show();
+
+            }
+        });
+        //proph date 2
+        prophed2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(LaborAndDeliveryStart.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        prophed2.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                // datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker();
+
+                // show the dialog
+                datePicker.show();
+
+            }
+        });
+
+        //proph date
+        prophed3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(LaborAndDeliveryStart.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        prophed3.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                // datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker();
+
+                // show the dialog
+                datePicker.show();
+
+            }
+        });
+
+        //proph date
+        prophed4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(LaborAndDeliveryStart.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        prophed4.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                // datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker();
+
+                // show the dialog
+                datePicker.show();
+
+            }
+        });
+
+        //proph date
+        prophed5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(LaborAndDeliveryStart.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        prophed5.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                // datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker();
+
+                // show the dialog
+                datePicker.show();
+
+            }
+        });
 
         //delivery_date
         deliveryDate.setOnClickListener(new View.OnClickListener() {
@@ -452,6 +630,114 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
 
         }
+        //prophy1
+
+        ArrayAdapter<String> ProphyAdapter = new ArrayAdapter<String>(LaborAndDeliveryStart.this, android.R.layout.simple_spinner_item, prophy);
+        ProphyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+       prophyS1.setAdapter(ProphyAdapter);
+
+        prophyS1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                PROPHY1 = prophy[position];
+                prophy1_code=Integer.toString(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //prophy2
+
+        ArrayAdapter<String> ProphyAdapter2 = new ArrayAdapter<String>(LaborAndDeliveryStart.this, android.R.layout.simple_spinner_item, prophy);
+        ProphyAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        prophyS2.setAdapter(ProphyAdapter2);
+
+        prophyS2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                PROPHY2 = prophy[position];
+                prophy2_code=Integer.toString(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //prophy3
+        ArrayAdapter<String> ProphyAdapter3 = new ArrayAdapter<String>(LaborAndDeliveryStart.this, android.R.layout.simple_spinner_item, prophy);
+        ProphyAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        prophyS3.setAdapter(ProphyAdapter3);
+
+        prophyS3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                PROPHY3 = prophy[position];
+                prophy3_code=Integer.toString(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        //prophy 4
+
+        ArrayAdapter<String> ProphyAdapter4 = new ArrayAdapter<String>(LaborAndDeliveryStart.this, android.R.layout.simple_spinner_item, prophy);
+        ProphyAdapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        prophyS4.setAdapter(ProphyAdapter4);
+
+        prophyS4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                PROPHY4 = prophy[position];
+                prophy4_code=Integer.toString(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //prophy 5
+        ArrayAdapter<String> ProphyAdapter5 = new ArrayAdapter<String>(LaborAndDeliveryStart.this, android.R.layout.simple_spinner_item, prophy);
+        ProphyAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        prophyS5.setAdapter(ProphyAdapter5);
+
+        prophyS5.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                PROPHY5 = prophy[position];
+                prophy5_code=Integer.toString(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
+
+
+        //delivery mode
         ArrayAdapter<String> ModedeliveryAdapter = new ArrayAdapter<String>(LaborAndDeliveryStart.this, android.R.layout.simple_spinner_item, ModeDelivery);
         ModedeliveryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ModeDeliveryS.setAdapter(ModedeliveryAdapter);
@@ -577,22 +863,11 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                     livetextss.setVisibility(View.GONE);
                     diedlay.setVisibility(View.VISIBLE);
                     //maceratedfield1.setVisibility(View.VISIBLE);
-                   /* livetexts2.setVisibility(View.GONE);
-                    livetexts3.setVisibility(View.GONE);
-                    livetexts4.setVisibility(View.GONE);
-                    livetexts5.setVisibility(View.GONE);
 
+                    prophdet1.setVisibility(View.GONE);
+                    prophLay1.setVisibility(View.GONE);
+                    prophed1.setText("");
 
-                    livetextss2.setVisibility(View.GONE);
-                    livetextss3.setVisibility(View.GONE);
-                    livetextss4.setVisibility(View.GONE);
-                    livetextss5.setVisibility(View.GONE);*/
-
-
-                    /*diedlay2.setVisibility(View.GONE);
-                    diedlay3.setVisibility(View.GONE);
-                    diedlay4.setVisibility(View.GONE);
-                    diedlay5.setVisibility(View.GONE);*/
 
                 }
                 else if (BABY_DELIVERED.contentEquals("Live Birth")){
@@ -601,24 +876,24 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                     livetexts.setVisibility(View.VISIBLE);
                     livetextss.setVisibility(View.VISIBLE);
-                    /*diedlay2.setVisibility(View.GONE);
-                    diedlay3.setVisibility(View.GONE);
-                    diedlay4.setVisibility(View.GONE);
-                    diedlay5.setVisibility(View.GONE);*/
 
-                    /*livetexts2.setVisibility(View.GONE);
-                    livetexts3.setVisibility(View.GONE);
-                    livetexts4.setVisibility(View.GONE);
-                    livetexts5.setVisibility(View.GONE);
+                    prophdet1.setVisibility(View.VISIBLE);
+                    prophLay1.setVisibility(View.VISIBLE);
+                   // prophtxt1.setVisibility(View.VISIBLE);
 
-
-                    livetextss2.setVisibility(View.GONE);
-                    livetextss3.setVisibility(View.GONE);
-                    livetextss4.setVisibility(View.GONE);
-                    livetextss5.setVisibility(View.GONE);*/
                 }
                 else if (BabyDeliveredS_code.contentEquals("0")){
                     //  Toast.makeText(LaborAndDeliveryStart.this, "vbn", Toast.LENGTH_SHORT).show();
+
+                    prophdet1.setVisibility(View.GONE);
+                    prophLay1.setVisibility(View.GONE);
+                    prophed1.setText("");
+                    //prophtxt1.setVisibility(View.GONE);
+                   // prophtxt5.setVisibility(View.GONE);
+
+
+
+
                     diedlay.setVisibility(View.GONE);
                     diedlay2.setVisibility(View.GONE);
                     diedlay3.setVisibility(View.GONE);
@@ -662,23 +937,24 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                     livetexts2.setVisibility(View.GONE);
                     livetextss2.setVisibility(View.GONE);
 
+                    prophed2.setText("");
 
-                    /*livetexts.setVisibility(View.GONE);
 
-                     livetexts3.setVisibility(View.GONE);
-                    livetexts4.setVisibility(View.GONE);
-                    livetexts5.setVisibility(View.GONE);
 
-                    livetextss.setVisibility(View.GONE);
-                    livetextss2.setVisibility(View.GONE);
-                    livetextss3.setVisibility(View.GONE);
-                    livetextss4.setVisibility(View.GONE);
-                    livetextss5.setVisibility(View.GONE);*/
+
+                    prophdet2.setVisibility(View.GONE);
+                    prophLay2.setVisibility(View.GONE);
+                    //prophtxt2.setVisibility(View.GONE);
+
                 }
 
 
                 else if (BabyDeliveredS2_code.contentEquals("0")){
                     //  Toast.makeText(LaborAndDeliveryStart.this, "vbn", Toast.LENGTH_SHORT).show();
+                    prophdet2.setVisibility(View.GONE);
+                    prophLay2.setVisibility(View.GONE);
+                    prophed2.setText("");
+
                     diedlay.setVisibility(View.GONE);
                     diedlay2.setVisibility(View.GONE);
                     diedlay3.setVisibility(View.GONE);
@@ -702,27 +978,12 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                     livetexts2.setVisibility(View.VISIBLE);
                     livetextss2.setVisibility(View.VISIBLE);
                     diedlay2.setVisibility(View.GONE);
-                   /* livetexts.setVisibility(View.GONE);
-                    livetexts3.setVisibility(View.GONE);
-                    livetexts4.setVisibility(View.GONE);
-                    livetexts5.setVisibility(View.GONE);
 
-                    livetextss.setVisibility(View.GONE);
+                    prophdet2.setVisibility(View.VISIBLE);
+                    prophLay2.setVisibility(View.VISIBLE);
 
-                    livetextss3.setVisibility(View.GONE);
-                    livetextss4.setVisibility(View.GONE);
-                    livetextss5.setVisibility(View.GONE);
-
-                    ;*/
                 }
-               /* else if (BABY_DELIVERED.contentEquals("Fresh Still Birth")){
-                    diedlay2.setVisibility(View.GONE);
-                    livetexts.setVisibility(View.GONE);
-                    livetexts2.setVisibility(View.GONE);
-                    livetexts3.setVisibility(View.GONE);
-                    livetexts4.setVisibility(View.GONE);
-                    livetexts5.setVisibility(View.GONE);
-                }*/
+
             }
 
             @Override
@@ -743,17 +1004,12 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                 BabyDeliveredS3_code=Integer.toString(position);
 
                 if (BABY_DELIVERED3.contentEquals("Macerated Still Birth")|| BABY_DELIVERED3.contentEquals("Fresh Still Birth")){
-                    /*livetexts.setVisibility(View.GONE);
-                    livetexts2.setVisibility(View.GONE);
 
-                    livetexts4.setVisibility(View.GONE);
-                    livetexts5.setVisibility(View.GONE);
+                    prophdet3.setVisibility(View.GONE);
+                    prophLay3.setVisibility(View.GONE);
+                    prophed3.setText("");
 
-                    livetextss.setVisibility(View.GONE);
-                    livetextss2.setVisibility(View.GONE);
-                    livetextss3.setVisibility(View.GONE);
-                    livetextss4.setVisibility(View.GONE);
-                    livetextss5.setVisibility(View.GONE);*/
+
                     livetextss3.setVisibility(View.GONE);
                     livetexts3.setVisibility(View.GONE);
                     diedlay3.setVisibility(View.VISIBLE);
@@ -761,6 +1017,11 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 else if (BabyDeliveredS3_code.contentEquals("0")){
                     //  Toast.makeText(LaborAndDeliveryStart.this, "vbn", Toast.LENGTH_SHORT).show();
+                    prophdet3.setVisibility(View.GONE);
+                    prophLay3.setVisibility(View.GONE);
+                    prophed3.setText("");
+
+
                     diedlay.setVisibility(View.GONE);
                     diedlay2.setVisibility(View.GONE);
                     diedlay3.setVisibility(View.GONE);
@@ -784,27 +1045,13 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                     livetextss3.setVisibility(View.VISIBLE);
                     diedlay3.setVisibility(View.GONE);
 
-                   /* livetexts.setVisibility(View.GONE);
-                    livetexts2.setVisibility(View.GONE);
-                    livetexts4.setVisibility(View.GONE);
-                    livetexts5.setVisibility(View.GONE);
+                    prophdet3.setVisibility(View.VISIBLE);
+                    prophLay3.setVisibility(View.VISIBLE);
 
 
-                    livetextss.setVisibility(View.GONE);
-                    livetextss2.setVisibility(View.GONE);
-                    livetextss4.setVisibility(View.GONE);
-                    livetextss5.setVisibility(View.GONE);*/
 
                 }
-               /* else if (BABY_DELIVERED3.contentEquals("Fresh Still Birth")){
 
-                    livetexts.setVisibility(View.GONE);
-                    livetexts2.setVisibility(View.GONE);
-                    livetexts3.setVisibility(View.GONE);
-                    livetexts4.setVisibility(View.GONE);
-                    livetexts5.setVisibility(View.GONE);
-                    diedlay3.setVisibility(View.GONE);
-                }*/
             }
 
             @Override
@@ -825,17 +1072,9 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                 BabyDeliveredS4_code=Integer.toString(position);
 
                 if (BABY_DELIVERED4.contentEquals("Macerated Still Birth")|| BABY_DELIVERED4.contentEquals("Fresh Still Birth")){
-                    /*livetexts.setVisibility(View.GONE);
-                    livetexts2.setVisibility(View.GONE);
-                    livetexts3.setVisibility(View.GONE);
-                    livetexts4.setVisibility(View.GONE);
-                    livetexts5.setVisibility(View.GONE);
-
-                    livetextss.setVisibility(View.GONE);
-                    livetextss2.setVisibility(View.GONE);
-                    livetextss3.setVisibility(View.GONE);
-                    livetextss4.setVisibility(View.GONE);
-                    livetextss5.setVisibility(View.GONE);*/
+                    prophdet4.setVisibility(View.GONE);
+                    prophLay4.setVisibility(View.GONE);
+                    prophed4.setText("");
 
                     diedlay4.setVisibility(View.VISIBLE);
                     livetexts4.setVisibility(View.GONE);
@@ -844,6 +1083,11 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 else if (BabyDeliveredS4_code.contentEquals("0")){
                     //  Toast.makeText(LaborAndDeliveryStart.this, "vbn", Toast.LENGTH_SHORT).show();
+
+                    prophdet4.setVisibility(View.GONE);
+                    prophLay4.setVisibility(View.GONE);
+                    prophed4.setText("");
+
                     diedlay.setVisibility(View.GONE);
                     diedlay2.setVisibility(View.GONE);
                     diedlay3.setVisibility(View.GONE);
@@ -867,26 +1111,11 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                     livetextss4.setVisibility(View.VISIBLE);
                     diedlay4.setVisibility(View.GONE);
 
-                    /*livetexts.setVisibility(View.GONE);
-                    livetexts2.setVisibility(View.GONE);
-                    livetexts3.setVisibility(View.GONE);
 
-                    livetexts5.setVisibility(View.GONE);
-
-                    livetextss.setVisibility(View.GONE);
-                    livetextss2.setVisibility(View.GONE);
-                    livetextss3.setVisibility(View.GONE);
-                    livetextss5.setVisibility(View.GONE);*/
+                    prophdet4.setVisibility(View.VISIBLE);
+                    prophLay4.setVisibility(View.VISIBLE);
                 }
-                /*else if (BABY_DELIVERED4.contentEquals("Fresh Still Birth")){
 
-                    livetexts.setVisibility(View.GONE);
-                    livetexts2.setVisibility(View.GONE);
-                    livetexts3.setVisibility(View.GONE);
-                    livetexts4.setVisibility(View.GONE);
-                    livetexts5.setVisibility(View.GONE);
-                    diedlay4.setVisibility(View.GONE);
-                }*/
             }
 
             @Override
@@ -913,10 +1142,20 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                     diedlay5.setVisibility(View.VISIBLE);
                     livetexts5.setVisibility(View.GONE);
                     livetextss5.setVisibility(View.GONE);
+
+                    prophdet5.setVisibility(View.GONE);
+                    prophLay5.setVisibility(View.GONE);
+                    prophed5.setText("");
                 }
 
                 else if (BabyDeliveredS5_code.contentEquals("0")){
                     //  Toast.makeText(LaborAndDeliveryStart.this, "vbn", Toast.LENGTH_SHORT).show();
+
+                    prophdet5.setVisibility(View.GONE);
+                    prophLay5.setVisibility(View.GONE);
+
+                    prophed5.setText("");
+
                     diedlay.setVisibility(View.GONE);
                     diedlay2.setVisibility(View.GONE);
                     diedlay3.setVisibility(View.GONE);
@@ -936,31 +1175,15 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 }
                 else if (BABY_DELIVERED5.contentEquals("Live Birth")){
+                    prophdet5.setVisibility(View.VISIBLE);
+                    prophLay5.setVisibility(View.VISIBLE);
 
-                    /*livetexts.setVisibility(View.GONE);
-                    livetexts2.setVisibility(View.GONE);
-                    livetexts3.setVisibility(View.GONE);
-                    livetexts4.setVisibility(View.GONE);
-                    livetexts5.setVisibility(View.GONE);
-
-                    livetextss.setVisibility(View.GONE);
-                    livetextss2.setVisibility(View.GONE);
-                    livetextss3.setVisibility(View.GONE);
-                    livetextss4.setVisibility(View.GONE);*/
                     livetextss5.setVisibility(View.VISIBLE);
                     livetexts5.setVisibility(View.VISIBLE);
 
                     diedlay5.setVisibility(View.GONE);
                 }
-               /* else if (BABY_DELIVERED5.contentEquals("Fresh Still Birth")){
 
-                    livetexts.setVisibility(View.GONE);
-                    livetexts2.setVisibility(View.GONE);
-                    livetexts3.setVisibility(View.GONE);
-                    livetexts4.setVisibility(View.GONE);
-                    livetexts5.setVisibility(View.GONE);
-                    diedlay5.setVisibility(View.GONE);
-                }*/
             }
 
             @Override
@@ -1133,6 +1356,25 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                     tripleLay.setVisibility(View.GONE);
                     quadlay.setVisibility(View.GONE);
                     fifthlay.setVisibility(View.GONE);
+
+
+                    prophdet1.setVisibility(View.GONE);
+                    prophLay1.setVisibility(View.GONE);
+
+                    prophdet2.setVisibility(View.GONE);
+                    prophLay2.setVisibility(View.GONE);
+
+                    prophdet3.setVisibility(View.GONE);
+                    prophLay3.setVisibility(View.GONE);
+
+                    prophdet4.setVisibility(View.GONE);
+                    prophLay4.setVisibility(View.GONE);
+
+                    prophdet5.setVisibility(View.GONE);
+                    prophLay5.setVisibility(View.GONE);
+
+
+
 
 
                 }
@@ -1668,9 +1910,23 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                String deathcause55=deathcause5.getText().toString();
                String  BabysDOB55=BabysDOB5.getText().toString();
 
+        //ProphyDate5+ "*" +BabyMed5
+               String ProphyDate1 =prophed1.getText().toString();
+               String ProphyDate2 =prophed2.getText().toString();
+                 String ProphyDate3 =prophed3.getText().toString();
+                String ProphyDate4 =prophed4.getText().toString();
+                String ProphyDate5 =prophed5.getText().toString();
 
 
-                String LD_data =  newCC + "*" + ANCVisit_NO1 + "*" + MotherTestedS_code+ "*" +hivResultsS_code+ "*" + deliveryDate1 + "*" +ModeDeliveryS_code + "*" + placeDeliveryS_code+ "*" + DeliveryOutcomeS_code + "*" + BabyDeliveredS_code + "*" + Datedied11+ "*" +deathcause11+"*" + BabysDOB11 + "*"+ BabySexS_code + "*" + BabyDeliveredS2_code + "*" +Datedied22 + "*" + deathcause22 + "*" + BabysDOB22 + "*" +  BabySexS2_code+ "*" +BabyDeliveredS3_code + "*" + Datedied33+ "*" +  deathcause33 + "*" +BabysDOB33 + "*" + BabySexS3_code + "*" + BabyDeliveredS4_code + "*" + Datedied44+ "*" +deathcause44+"*" + BabysDOB44 + "*"+ BabySexS4_code+ "*" + BabyDeliveredS5_code + "*" + Datedied55+ "*" +deathcause55+"*" + BabysDOB55 + "*"+ BabySexS5_code+ "*"+ MothersOutcomeS_code;
+
+
+        String LD_data =  newCC + "*" + ANCVisit_NO1 + "*" + MotherTestedS_code+ "*" +hivResultsS_code+ "*" + deliveryDate1 + "*" +ModeDeliveryS_code + "*" + placeDeliveryS_code+ "*" + DeliveryOutcomeS_code + "*" + BabyDeliveredS_code + "*" + Datedied11+ "*" +deathcause11+"*" + BabysDOB11 + "*"+ BabySexS_code + "*" +ProphyDate1+ "*" +prophy1_code+ "*" + BabyDeliveredS2_code + "*" +Datedied22 + "*" + deathcause22 + "*" + BabysDOB22 + "*" +  BabySexS2_code+ "*" +ProphyDate2+ "*" +prophy2_code+ "*" +BabyDeliveredS3_code + "*" + Datedied33+ "*" +  deathcause33 + "*" +BabysDOB33 + "*" + BabySexS3_code + "*" + ProphyDate3+ "*" +prophy3_code+ "*" +BabyDeliveredS4_code + "*" + Datedied44+ "*" +deathcause44+"*" + BabysDOB44 + "*"+ BabySexS4_code+ "*" + ProphyDate4+ "*" +prophy4_code+ "*" +BabyDeliveredS5_code + "*" + Datedied55+ "*" +deathcause55+"*" + BabysDOB55 + "*"+ BabySexS5_code+ "*"+ProphyDate5+ "*" +prophy5_code+ "*" + MothersOutcomeS_code;
+
+
+
+               // String LD_data =  newCC + "*" + ANCVisit_NO1 + "*" + MotherTestedS_code+ "*" +hivResultsS_code+ "*" + deliveryDate1 + "*" +ModeDeliveryS_code + "*" + placeDeliveryS_code+ "*" + DeliveryOutcomeS_code + "*" + BabyDeliveredS_code + "*" + Datedied11+ "*" +deathcause11+"*" + BabysDOB11 + "*"+ BabySexS_code + "*" + BabyDeliveredS2_code + "*" +Datedied22 + "*" + deathcause22 + "*" + BabysDOB22 + "*" +  BabySexS2_code+ "*" +BabyDeliveredS3_code + "*" + Datedied33+ "*" +  deathcause33 + "*" +BabysDOB33 + "*" + BabySexS3_code + "*" + BabyDeliveredS4_code + "*" + Datedied44+ "*" +deathcause44+"*" + BabysDOB44 + "*"+ BabySexS4_code+ "*" + BabyDeliveredS5_code + "*" + Datedied55+ "*" +deathcause55+"*" + BabysDOB55 + "*"+ BabySexS5_code+ "*"+ MothersOutcomeS_code;
+
+
 
                 String enc = Base64Encoder.encryptString(LD_data);
 

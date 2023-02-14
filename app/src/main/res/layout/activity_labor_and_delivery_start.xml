@@ -208,9 +208,6 @@
                     android:textSize="12sp"
                     android:textColor="#FFFFFF" />
 
-
-
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
@@ -234,8 +231,52 @@
                         android:layout_marginBottom="20sp" />
 
                 </LinearLayout>
-                <!--macerated1 -->
 
+                <!-- prophylaxis Details 1 -->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/prophdet1"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/prophed1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Date tested for Prophylaxis:*"
+                        android:inputType="text"
+                        android:focusable="false"
+                        android:textColorHint="#000"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:visibility="gone"
+                    android:id ="@+id/prophLay1"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Baby's Medication on Prophylaxis" />
+
+                    <Spinner
+                        android:id="@+id/BabyMedication1"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+
+
+                <!--macerated1 -->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -352,6 +393,56 @@
 
                     <Spinner
                         android:id="@+id/BabyDelivered2"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+
+                <!-- prophylaxis Details 2 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/prophtxt2"
+                    android:textColor="#004d4d"
+                    android:visibility="gone"
+                    android:text="Prophylaxis Details" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/prophdet2">
+
+                    <EditText
+                        android:id="@+id/prophed2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Date tested for Prophylaxis:*"
+                        android:inputType="text"
+                        android:focusable="false"
+                        android:textColorHint="#000"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:visibility="gone"
+                    android:id="@+id/prophLay2"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Baby's Medication on Prophylaxis" />
+
+                    <Spinner
+                        android:id="@+id/BabyMedication2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -475,6 +566,60 @@
 
                 </LinearLayout>
 
+                <!-- prophylaxis Details 3 -->
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#004d4d"
+                    android:id="@+id/prophtxt3"
+                    android:visibility="gone"
+                    android:text="Prophylaxis Details" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/prophdet3">
+
+                    <EditText
+                        android:id="@+id/prophed3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Date tested for Prophylaxis:*"
+                        android:inputType="text"
+                        android:focusable="false"
+                        android:textColorHint="#000"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:visibility="gone"
+                    android:id ="@+id/prophLay3"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Baby's Medication on Prophylaxis" />
+
+                    <Spinner
+                        android:id="@+id/BabyMedication3"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+
+
+
                 <!--macerated3 -->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -580,6 +725,56 @@
 
                     <Spinner
                         android:id="@+id/BabyDelivered4"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+
+                <!-- prophylaxis Details 4 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/prophtxt4"
+                    android:textColor="#004d4d"
+                    android:visibility="gone"
+                    android:text="Prophylaxis Details" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/prophdet4">
+
+                    <EditText
+                        android:id="@+id/prophed4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Date tested for Prophylaxis:*"
+                        android:inputType="text"
+                        android:focusable="false"
+                        android:textColorHint="#000"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:visibility="gone"
+                    android:id ="@+id/prophLay4"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Baby's Medication on Prophylaxis" />
+
+                    <Spinner
+                        android:id="@+id/BabyMedication4"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -696,6 +891,55 @@
 
                     <Spinner
                         android:id="@+id/BabyDelivered5"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+                <!-- prophylaxis Details 5 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/prophtxt5"
+                    android:textColor="#004d4d"
+                    android:visibility="gone"
+                    android:text="Prophylaxis Details" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/prophdet5">
+
+                    <EditText
+                        android:id="@+id/prophed5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Date tested for Prophylaxis:*"
+                        android:inputType="text"
+                        android:focusable="false"
+                        android:textColorHint="#000"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:visibility="gone"
+                    android:id ="@+id/prophLay5"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Baby's Medication on Prophylaxis" />
+
+                    <Spinner
+                        android:id="@+id/BabyMedication5"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
