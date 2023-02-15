@@ -416,6 +416,9 @@ public class ANCVisitStarted extends AppCompatActivity {
 
                 EDD_date.setText(output);
 
+
+
+
             }
         });
 
