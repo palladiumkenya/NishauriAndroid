@@ -234,6 +234,7 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                                 sms_id= jsonObject.getString("smsenable");
                                 county1 =jsonObject.getString("locator_county");
                                 countyID = Integer.parseInt(jsonObject.getString("locator_county"));
+                                //scountyID = Integer.parseInt(jsonObject.getString("locator_county"));
 
                                 Log.d("COUNTY",String.valueOf(countyID));
 
@@ -667,7 +668,8 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                     aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
                     serviceUnitSpinner.setAdapter(aa);
-                    serviceUnitSpinner.setSelection(aa.getCount() - 1);
+                   // serviceUnitSpinner.setSelection(aa.getCount() - 1);
+                    serviceUnitSpinner.setSelection(scountyID);
 
                     scountyID = scountiess.get(aa.getCount() - 1).getId();
 
