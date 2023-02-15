@@ -12,6 +12,7 @@ import android.widget.Filterable;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
 import com.example.mhealth.appointment_diary.AccessServer.AccessServer;
 import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
 import com.example.mhealth.appointment_diary.MakeCalls.makeCalls;
@@ -20,6 +21,9 @@ import com.example.mhealth.appointment_diary.appointment_diary.AppointmentAdapte
 import com.example.mhealth.appointment_diary.appointment_diary.AppointmentModel;
 import com.example.mhealth.appointment_diary.models.Appointments;
 import com.example.mhealth.appointment_diary.models.UpiErrModel;
+import com.example.mhealth.appointment_diary.models.counties;
+import com.example.mhealth.appointment_diary.models.scounties;
+import com.example.mhealth.appointment_diary.models.wards;
 import com.example.mhealth.appointment_diary.sendmessages.SendMessage;
 import com.example.mhealth.appointment_diary.utilitymodules.Registration;
 import com.example.mhealth.appointment_diary.utilitymodules.UPIUpdateActivity;
@@ -28,6 +32,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UpiErrAdapter extends BaseAdapter implements Filterable {
+
+    private RequestQueue rq;
+
+    ArrayList<String> countiesList;
+    ArrayList<counties> countiess;
+
+    ArrayList<String> scountyList;
+    ArrayList<scounties> scountiess;
+
+    ArrayList<String> wardsList;
+    ArrayList<wards> wardss;
+
+    private int countyID = 0;
+    private int scountyID = 0;
+
+    private int wardID = 0;
+
+
+    ArrayList<String> countiesListb;
+    ArrayList<counties> countiessb;
+    private int countyIDb = 0;
 
     private Context mycont;
     private List<UpiErrModel> mylist=new ArrayList<>();

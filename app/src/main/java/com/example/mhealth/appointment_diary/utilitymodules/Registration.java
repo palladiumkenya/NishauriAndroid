@@ -3456,7 +3456,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     }
 
     //getcounties of birth
-
     public void getcountiesbirth() {
         String curl = "https://ushauriapi.kenyahmis.org/locator/counties";
 

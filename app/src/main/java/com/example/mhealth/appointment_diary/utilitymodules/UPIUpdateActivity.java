@@ -7,22 +7,43 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.mhealth.appointment_diary.R;
+import com.example.mhealth.appointment_diary.config.Config;
+import com.example.mhealth.appointment_diary.models.counties;
+import com.example.mhealth.appointment_diary.models.scounties;
+import com.example.mhealth.appointment_diary.models.wards;
 import com.example.mhealth.appointment_diary.tables.Myaffiliation;
+import com.example.mhealth.appointment_diary.tables.UrlTable;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner genderS, maritalS, conditionS, enrollmentS, languageS, smsS, wklymotivation, messageTime, SelectstatusS, patientStatus, GroupingS, orphanS, schoolS, newGroupingS;
@@ -32,6 +53,31 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
     String[] gendersUcsf = {"", "Female", "Male"};
 
     String[] smss = {"", "Yes", "No"};
+    public String z;
+    String county1;
+    ArrayList<String> countiesListb;
+    ArrayList<counties> countiessb;
+    private int countyIDb = 0;
+
+    ArrayList<String> countiesList;
+    ArrayList<counties> countiess;
+
+    ArrayList<String> scountyList;
+    ArrayList<scounties> scountiess;
+
+
+
+    ArrayList<String> wardsList;
+    ArrayList<wards> wardss;
+
+    private int countyID = 0;
+    private int scountyID = 0;
+
+    private int wardID = 0;
+
+
+
+
 
     EditText upitext, cfile, f_name, s_name, o_name, dob, idno, birthno, enrollment_date, art_date, phone;
     String newUpi, Idno, Birthno, Enrollment_date, Art_date, Phone;
@@ -50,11 +96,21 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
     String mname;
     String lname;
     String dob1;
+    private RequestQueue rq;
+    private SearchableSpinner birthSpinner, ServiceSpinner, serviceUnitSpinner, rankSpinner, countrySpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upiupdate);
+
+        rq = Volley.newRequestQueue(UPIUpdateActivity.this);
+
+        ServiceSpinner = findViewById(R.id.ServiceSpinner);
+        serviceUnitSpinner = findViewById(R.id.serviceUnit);
+        rankSpinner = findViewById(R.id.RankSpinner);
+        birthSpinner = findViewById(R.id.birthCountySpinner);
+        countrySpinner = findViewById(R.id.countrySpinner);
 
         genderS = (Spinner) findViewById(R.id.gender_spinner);
         schoolS = (Spinner) findViewById(R.id.school_spinner);
@@ -94,6 +150,8 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
 
 
         setSpinnerListeners();
+        getcountiesbirth();
+        //getFacilities();
         //populateGender();
 
         if (savedInstanceState == null) {
@@ -174,6 +232,10 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                                 genderid = jsonObject.getInt("gender");
                                 marital_id = jsonObject.getInt("marital");
                                 sms_id= jsonObject.getString("smsenable");
+                                county1 =jsonObject.getString("locator_county");
+                                countyID = Integer.parseInt(jsonObject.getString("locator_county"));
+
+                                Log.d("COUNTY",String.valueOf(countyID));
 
 
                             } catch (JSONException e) {
@@ -194,6 +256,7 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                             populateGender();
                             populateMarital();
                             populateSms();
+                            getFacilities();
 
                             Log.d("SMS", sms_code);
                             // Toast.makeText(UPIUpdateActivity.this, gender_code, Toast.LENGTH_SHORT).show();
@@ -386,5 +449,564 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
 
         }
     }
+    //get counties
 
-}
+    //getcounties
+
+    public void getFacilities() {
+        //String curl = "https://ushauriapi.kenyahmis.org/locator/counties";
+        try {
+            List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size() == 1) {
+                for (int x = 0; x < _url.size(); x++) {
+                    z = _url.get(x).getBase_url1();
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
+                z+Config.COUNTIES, null, new Response.Listener<JSONArray>() {
+
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+
+                try {
+
+
+                    countiess = new ArrayList<counties>();
+                    countiesList = new ArrayList<String>();
+
+                    countiess.clear();
+                    countiesList.clear();
+
+
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject service = (JSONObject) response.get(i);
+
+
+                        int id = service.has("id") ? service.getInt("id") : 0;
+                        String name = service.has("name") ? service.getString("name") : "";
+                        int code = service.has("code") ? service.getInt("code") : 0;
+
+
+                        counties newCounty = new counties(id, name, code);
+
+                        countiess.add(newCounty);
+                        countiesList.add(newCounty.getName());
+                    }
+                    countiess.add(new counties(0, " ", 0));
+                    countiesList.add(" ");
+
+
+
+
+                    ArrayAdapter<String> aa = new ArrayAdapter<String>(UPIUpdateActivity.this,
+                            android.R.layout.simple_spinner_dropdown_item,
+                            countiesList) {
+                        @Override
+                        public int getCount() {
+                            return super.getCount(); // you dont display last item. It is used as hint.
+                        }
+                    };
+
+                    aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                    // if (ServiceSpinner != null){
+                    ServiceSpinner.setAdapter(aa);
+                    ServiceSpinner.setSelection(countyID);
+                   // ServiceSpinner.setSelection(aa.getCount() - 1);
+
+                 //  county1=  ServiceSpinner.getSelectedItem().toString();
+
+                    countyID = countiess.get(aa.getCount() - 1).getId();
+
+                    ServiceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+
+
+                            // serviceUnitSpinner.setAdapter(null);
+
+                            countyID = countiess.get(position).getId();
+
+
+                            //getDepartments(services.get(position).getService_id());
+
+//
+                                   /* if (serviceID !=0)
+                                        Toast.makeText(Registration.this, "getting units", Toast.LENGTH_LONG).show();*/
+                            try {
+                                getDepartments(countyID);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                            //getDepartments(serviceID);
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+
+                        }
+                    });
+
+
+
+
+                    //}
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(UPIUpdateActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Toast.makeText(Registration.this, " cant get services", Toast.LENGTH_LONG).show();
+                error.printStackTrace();
+                getFacilities();
+            }
+        }
+        ) {
+
+            /**
+             * Passing some request headers
+             */
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                //headers.put("Authorization", loggedInUser.getToken_type()+" "+loggedInUser.getAccess_token());
+                headers.put("Content-Type", "application/json");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+
+        };
+
+
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //AppController.getInstance().addToRequestQueue(jsonObjReq);
+        rq.add(jsonArrayRequest);
+
+
+    }
+
+    //SubcountyList
+
+    public void getDepartments(int ID) {
+
+        String url = "https://ushauriapi.kenyahmis.org/locator/scounties?county=";
+        //"https://ushauriapi.kenyahmis.org/locator/scounties?county=47";
+
+        try {
+            List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size() == 1) {
+                for (int x = 0; x < _url.size(); x++) {
+                    z = _url.get(x).getBase_url1();
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, z+Config.S_COUNTIES+ID,
+                null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+                //Toast.makeText(Registration.this, "response", Toast.LENGTH_LONG).show();
+
+                try {
+
+                    scountiess = new ArrayList<scounties>();
+                    scountyList = new ArrayList<String>();
+
+                    scountiess.clear();
+                    scountyList.clear();
+
+
+                    //JSONArray jsonArray = response.getJSONArray("data");
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject serviceUnit = (JSONObject) response.get(i);
+
+                        int id = serviceUnit.has("id") ? serviceUnit.getInt("id") : 0;
+                        String name = serviceUnit.has("name") ? serviceUnit.getString("name") : "";
+
+
+                        scounties newServiceUnit = new scounties(id, name);
+
+                        scountiess.add(newServiceUnit);
+                        scountyList.add(newServiceUnit.getName());
+                    }
+
+                    scountiess.add(new scounties(0, ""));
+                    scountyList.add("");
+
+                    ArrayAdapter<String> aa = new ArrayAdapter<String>(UPIUpdateActivity.this,
+                            android.R.layout.simple_spinner_dropdown_item,
+                            scountyList) {
+                        @Override
+                        public int getCount() {
+                            return super.getCount(); // you dont display last item. It is used as hint.
+                        }
+                    };
+
+                    aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                    serviceUnitSpinner.setAdapter(aa);
+                    serviceUnitSpinner.setSelection(aa.getCount() - 1);
+
+                    scountyID = scountiess.get(aa.getCount() - 1).getId();
+
+                    serviceUnitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        //@Overide
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+
+                            // Toast.makeText(Registration.this, "null selected", Toast.LENGTH_LONG).show();
+                            scountyID = scountiess.get(position).getId();
+                            getWards(scountyID);
+                            //call wards here
+
+
+//                                Toast.makeText(context,facilityDepartments.get(position).getDepartment_name(), Toast.LENGTH_LONG).show();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Toast.makeText(Registration.this, "cant get", Toast.LENGTH_LONG).show();
+
+
+                if (error instanceof NetworkError) {
+                    Toast.makeText(UPIUpdateActivity.this, "Network Error", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ParseError) {
+                    Toast.makeText(UPIUpdateActivity.this, "Parse Error", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ServerError) {
+                    Toast.makeText(UPIUpdateActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                    error.printStackTrace();
+                }
+                error.printStackTrace();
+                getDepartments(countyID);
+            }
+        }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                //headers.put("Authorization", loggedInUser.getToken_type()+" "+loggedInUser.getAccess_token());
+
+                headers.put("Content-Type", "application/json");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+        };
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //AppController.getInstance().addToRequestQueue(jsonObjReq);
+        rq.add(jsonArrayRequest);
+
+
+    }
+//call wards
+
+    public void getWards(int ID) {
+
+        String url = "https://ushauriapi.kenyahmis.org/locator/wards?scounty=";
+        //https://ushauriapi.kenyahmis.org/locator/wards?scounty=1
+        //"https://ushauriapi.kenyahmis.org/locator/scounties?county=47";
+
+        try {
+            List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size() == 1) {
+                for (int x = 0; x < _url.size(); x++) {
+                    z = _url.get(x).getBase_url1();
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,  z+Config.WARDS+ID,
+                null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+                //Toast.makeText(Registration.this, "response", Toast.LENGTH_LONG).show();
+
+                try {
+
+                    wardss = new ArrayList<wards>();
+                    wardsList = new ArrayList<String>();
+
+                    wardss.clear();
+                    wardsList.clear();
+
+
+                    //JSONArray jsonArray = response.getJSONArray("data");
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject serviceUnit = (JSONObject) response.get(i);
+
+                        int id = serviceUnit.has("id") ? serviceUnit.getInt("id") : 0;
+                        String name = serviceUnit.has("name") ? serviceUnit.getString("name") : "";
+                        int scounty_id = serviceUnit.has("scounty_id") ? serviceUnit.getInt("scounty_id") : 0;
+
+
+                        wards newServiceUnit = new wards(id, name, scounty_id);
+
+                        wardss.add(newServiceUnit);
+                        wardsList.add(newServiceUnit.getName());
+                    }
+
+                    wardss.add(new wards(0, "", 0));
+                    wardsList.add("");
+
+                    ArrayAdapter<String> aa = new ArrayAdapter<String>(UPIUpdateActivity.this,
+                            android.R.layout.simple_spinner_dropdown_item,
+                            wardsList) {
+                        @Override
+                        public int getCount() {
+                            return super.getCount(); // you dont display last item. It is used as hint.
+                        }
+                    };
+
+                    aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                    rankSpinner.setAdapter(aa);
+                    rankSpinner.setSelection(aa.getCount() - 1);
+
+                    //wardID = wardss.get(aa.getCount() - 1).getId();
+                    wardID = wardss.get(aa.getCount() -1).getId();
+                    rankSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        //@Overide
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+
+                            // Toast.makeText(Registration.this, "null selected", Toast.LENGTH_LONG).show();
+                            wardID = wardss.get(position).getId();
+
+                            //call wards here
+
+
+//                                Toast.makeText(context,facilityDepartments.get(position).getDepartment_name(), Toast.LENGTH_LONG).show();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Toast.makeText(Registration.this, "cant get", Toast.LENGTH_LONG).show();
+
+
+                if (error instanceof NetworkError) {
+                    Toast.makeText(UPIUpdateActivity.this, "Network Error", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ParseError) {
+                    Toast.makeText(UPIUpdateActivity.this, "Parse Error", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ServerError) {
+                    Toast.makeText(UPIUpdateActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                    error.printStackTrace();
+                }
+                error.printStackTrace();
+                getWards(scountyID);
+                //getDepartments(countyID);
+            }
+        }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                //headers.put("Authorization", loggedInUser.getToken_type()+" "+loggedInUser.getAccess_token());
+
+                headers.put("Content-Type", "application/json");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+        };
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //AppController.getInstance().addToRequestQueue(jsonObjReq);
+        rq.add(jsonArrayRequest);
+
+
+    }
+
+    //getcounties of birth
+    public void getcountiesbirth() {
+        String curl = "https://ushauriapi.kenyahmis.org/locator/counties";
+
+
+        try {
+            List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size() == 1) {
+                for (int x = 0; x < _url.size(); x++) {
+                    z = _url.get(x).getBase_url1();
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
+
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
+                z+ Config.COUNTIES, null, new Response.Listener<JSONArray>() {
+
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+
+                try {
+
+
+                    countiessb = new ArrayList<counties>();
+                    countiesListb = new ArrayList<String>();
+
+                    countiessb.clear();
+                    countiesListb.clear();
+
+
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject service = (JSONObject) response.get(i);
+
+
+                        int id = service.has("id") ? service.getInt("id") : 0;
+                        String name = service.has("name") ? service.getString("name") : "";
+                        int code = service.has("code") ? service.getInt("code") : 0;
+
+
+                        counties newCounty = new counties(id, name, code);
+
+                        countiessb.add(newCounty);
+                        countiesListb.add(newCounty.getName());
+                    }
+
+
+
+                    countiessb.add(new counties(0, "", 0));
+                    countiesListb.add("");
+
+
+
+                    ArrayAdapter<String> aa = new ArrayAdapter<String>(UPIUpdateActivity.this,
+                            android.R.layout.simple_spinner_dropdown_item,
+                            countiesListb) {
+                        @Override
+                        public int getCount() {
+                            return super.getCount(); // you dont display last item. It is used as hint.
+                        }
+                    };
+
+                    aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                    // if (ServiceSpinner != null){
+                    birthSpinner.setAdapter(aa);
+                    birthSpinner.setSelection(aa.getCount() - 1);
+
+                    countyIDb = countiessb.get(aa.getCount() - 1).getId();
+
+                    birthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+
+
+                            // serviceUnitSpinner.setAdapter(null);
+
+                            countyIDb = countiessb.get(position).getId();
+
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+
+                        }
+                    });
+
+                }
+
+
+                //}
+
+                catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(UPIUpdateActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                // Toast.makeText(Registration.this, " cant get services", Toast.LENGTH_LONG).show();
+                error.printStackTrace();
+                getcountiesbirth();
+            }
+        }
+        ) {
+
+            /**
+             * Passing some request headers
+             */
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                //headers.put("Authorization", loggedInUser.getToken_type()+" "+loggedInUser.getAccess_token());
+                headers.put("Content-Type", "application/json");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+
+        };
+
+
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //AppController.getInstance().addToRequestQueue(jsonObjReq);
+        rq.add(jsonArrayRequest);
+
+}}
