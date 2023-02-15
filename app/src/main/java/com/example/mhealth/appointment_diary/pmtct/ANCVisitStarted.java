@@ -19,14 +19,19 @@ import android.widget.Toast;
 
 import com.example.mhealth.appointment_diary.AccessServer.AccessServer;
 import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
+import com.example.mhealth.appointment_diary.Mydates.MyDates;
 import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.encryption.Base64Encoder;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
 import com.example.mhealth.appointment_diary.utilitymodules.Registration;
 
+import org.joda.time.DateTime;
+import org.joda.time.Weeks;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
@@ -35,6 +40,9 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class ANCVisitStarted extends AppCompatActivity {
+    Date datelmp;
+    Date date1;
+    Date date2;
 
     String[] clientIs = {"", "Breastfeeding", "Not Breastfeeding", "Pregnant", "Pregnant and Breastfeeding"};
     String[] clientTreated = {"", "Yes", "No"};
@@ -396,9 +404,18 @@ public class ANCVisitStarted extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
                 String ss = LMP_date.getText().toString();
 
+
+                //try gest
+              //  int mycurrentYear = Integer.parseInt(MyDates.getCurrentDate()+ "/"+MyDates.getCurrentMonth()+"/"+MyDates.getCurrentYear());
+               // int difference = mycurrentYear - ss;
+
+
+
                 int x = 280 / 7;
 
-                Gestation.setText(String.valueOf(x));
+
+                //Gestation.setText(String.valueOf(x));
+                //Gestation.setText(String.valueOf(mycurrentYear));
 
 
                 String dt = "2012-01-04";  // Start date
@@ -415,6 +432,48 @@ public class ANCVisitStarted extends AppCompatActivity {
                 String output = sdf1.format(c.getTime());
 
                 EDD_date.setText(output);
+
+
+                //gestation
+                Gestation.setText(ss);
+
+                String lm = LMP_date.getText().toString();
+
+                try {
+                    date1 = sdf1.parse(lm);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+
+
+                  Calendar aa =Calendar.getInstance();
+                SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+
+                String datecurr =sdf2.format(aa.getTime());
+
+                try {
+                  date2 = sdf2.parse(datecurr);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                //String  datelmp1 =ss;
+
+                //assert datelmp1 != null;
+                DateTime dateTime1 = new DateTime(date1);
+               DateTime dateTime2 = new DateTime(date2);
+
+               int weeks = Weeks.weeksBetween(dateTime1, dateTime2).getWeeks();
+              //  String lmpdt =sdf2.format()
+                Gestation.setText(String.valueOf(weeks));
+
+
+                //Calendar aa =Calendar.getInstance();
+                //Calendar bb =Calendar.getInstance();
+
+               // aa.set(String.valueOf(LMP_date.getText().toString()));
 
 
 
