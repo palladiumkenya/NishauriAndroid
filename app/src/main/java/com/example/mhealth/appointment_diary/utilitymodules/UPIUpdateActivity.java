@@ -47,7 +47,7 @@ import java.util.Map;
 
 public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner genderS, maritalS, conditionS, enrollmentS, languageS, smsS, wklymotivation, messageTime, SelectstatusS, patientStatus, GroupingS, orphanS, schoolS, newGroupingS;
-    String condition_code, grouping_code, new_grouping_code, category_code, language_code, sms_code,sms_id, Selectstatus_code, wklyMotivation_code, messageTime_code, patientStatus_code, school_code, orphan_code, idnoS, upi_no, birth_cert_no, locatorcountyS, locatorsubcountyS, locatorlocationS, locatorwardS, locatorvillageS;
+    String condition_code, grouping_code, new_grouping_code, category_code, language_code, sms_code,sms_id, Selectstatus_code, wklyMotivation_code, messageTime_code, patientStatus_code, school_code, orphan_code, idnoS, upi_no, birth_cert_no, locatorcountyS, locatorsubcountyS, locatorlocationS, locatorwardS, locatorvillageS, county_code, scounty_code, ward_code;
 
     String[] genders = {"", "Female", "Male"};
     String[] gendersUcsf = {"", "Female", "Male"};
@@ -84,7 +84,7 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
     Button populate1;
     boolean a;
 
-    int genderid, gender_code, marital_code, marital_id;
+    int genderid, gender_code, marital_code, marital_id, county_code1, scounty_code1, ward_code1;
 
     //Please Select Sex
     String[] maritals = {"", "Single", "Married Monogomaus", "Married Polygamous", "Divorced", "Widowed", "Cohabiting", "Not Applicable"};
@@ -232,11 +232,14 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                                 genderid = jsonObject.getInt("gender");
                                 marital_id = jsonObject.getInt("marital");
                                 sms_id= jsonObject.getString("smsenable");
-                                county1 =jsonObject.getString("locator_county");
+                               // county1 =jsonObject.getString("locator_county");
+                               // county_code1 = Integer.parseInt(jsonObject.getString("locator_county"));
                                 countyID = Integer.parseInt(jsonObject.getString("locator_county"));
-                                //scountyID = Integer.parseInt(jsonObject.getString("locator_county"));
+                                scountyID = Integer.parseInt(jsonObject.getString("locator_sub_county"));
+                                wardID = Integer.parseInt(jsonObject.getString("locator_ward"));
 
-                                Log.d("COUNTY",String.valueOf(countyID));
+                              //  Log.d("COUNTY",String.valueOf(countyID));
+                                Log.d("COUNTY",String.valueOf(county_code1));
 
 
                             } catch (JSONException e) {
@@ -254,6 +257,9 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                             gender_code = genderid;
                             marital_code = marital_id;
                             sms_code=sms_id;
+                            countyID=county_code1;
+                            scountyID=scounty_code1;
+                            wardID=ward_code1;
                             populateGender();
                             populateMarital();
                             populateSms();
@@ -519,12 +525,15 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
 
                     // if (ServiceSpinner != null){
                     ServiceSpinner.setAdapter(aa);
-                    ServiceSpinner.setSelection(countyID);
+                   //ServiceSpinner.setSelection(countyID);
+                    ServiceSpinner.setSelection(county_code1);
                    // ServiceSpinner.setSelection(aa.getCount() - 1);
 
                  //  county1=  ServiceSpinner.getSelectedItem().toString();
 
-                    countyID = countiess.get(aa.getCount() - 1).getId();
+      //              countyID = countiess.get(aa.getCount() - 1).getId();
+       //             county_code1 = countiess.get(aa.getCount() - 1).getId();
+                    //countyID = Integer.parseInt(ServiceSpinner.getSelectedItem().toString());
 
                     ServiceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
@@ -533,7 +542,11 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
 
                             // serviceUnitSpinner.setAdapter(null);
 
-                            countyID = countiess.get(position).getId();
+                          //countyID = countiess.get(position).getId();
+                           //countyID =position;
+                            county_code1 = countiess.get(position).getId();
+                           // county_code1 = position;
+
 
 
                             //getDepartments(services.get(position).getService_id());
@@ -542,7 +555,8 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                                    /* if (serviceID !=0)
                                         Toast.makeText(Registration.this, "getting units", Toast.LENGTH_LONG).show();*/
                             try {
-                                getDepartments(countyID);
+                                //getDepartments(countyID);
+                                getDepartments(county_code1);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -669,17 +683,22 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
 
                     serviceUnitSpinner.setAdapter(aa);
                    // serviceUnitSpinner.setSelection(aa.getCount() - 1);
-                    serviceUnitSpinner.setSelection(scountyID);
+                   // serviceUnitSpinner.setSelection(scountyID);
+                    serviceUnitSpinner.setSelection(scounty_code1);
 
-                    scountyID = scountiess.get(aa.getCount() - 1).getId();
+      //              scountyID = scountiess.get(aa.getCount() - 1).getId();
 
                     serviceUnitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         //@Overide
                         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
                             // Toast.makeText(Registration.this, "null selected", Toast.LENGTH_LONG).show();
-                            scountyID = scountiess.get(position).getId();
-                            getWards(scountyID);
+                  //          scountyID = scountiess.get(position).getId();
+                  //          scounty_code1 = scountiess.get(position).getId();
+                            scounty_code1 = position;
+                           // scountyID = position;
+                  //          getWards(scountyID);
+                            getWards(scounty_code1);
                             //call wards here
 
 
@@ -803,16 +822,20 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                     aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
                     rankSpinner.setAdapter(aa);
-                    rankSpinner.setSelection(aa.getCount() - 1);
+                    //rankSpinner.setSelection(aa.getCount() - 1);
+        //            rankSpinner.setSelection(wardID);
+                    rankSpinner.setSelection(ward_code1);
 
                     //wardID = wardss.get(aa.getCount() - 1).getId();
-                    wardID = wardss.get(aa.getCount() -1).getId();
+          //          wardID = wardss.get(aa.getCount() -1).getId();
                     rankSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         //@Overide
                         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
                             // Toast.makeText(Registration.this, "null selected", Toast.LENGTH_LONG).show();
-                            wardID = wardss.get(position).getId();
+          //                  wardID = wardss.get(position).getId();
+                            //wardID = position;
+                            ward_code1 = position;
 
                             //call wards here
 
@@ -848,7 +871,8 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                     error.printStackTrace();
                 }
                 error.printStackTrace();
-                getWards(scountyID);
+     //           getWards(scountyID);
+                getWards(scounty_code1);
                 //getDepartments(countyID);
             }
         }
