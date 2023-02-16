@@ -35,27 +35,13 @@ public class UpiErrAdapter extends BaseAdapter implements Filterable {
 
     private RequestQueue rq;
 
-    ArrayList<String> countiesList;
-    ArrayList<counties> countiess;
-
-    ArrayList<String> scountyList;
-    ArrayList<scounties> scountiess;
-
-    ArrayList<String> wardsList;
-    ArrayList<wards> wardss;
-
-    private int countyID = 0;
-    private int scountyID = 0;
-
-    private int wardID = 0;
 
 
-    ArrayList<String> countiesListb;
-    ArrayList<counties> countiessb;
-    private int countyIDb = 0;
+
+
 
     private Context mycont;
-    private List<UpiErrModel> mylist=new ArrayList<>();
+    private List<UpiErrModel> mylist;
     UpiErrAdapter.CustomFilter filter;
     private List<UpiErrModel> filterList;
     List<UpiErrModel> books = null;
@@ -69,12 +55,21 @@ public class UpiErrAdapter extends BaseAdapter implements Filterable {
 
     public UpiErrAdapter(Context mycont, List<UpiErrModel> mylist) {
         this.mycont = mycont;
+
         this.mylist = mylist;
+
+        this.filterList=mylist;
+      //  mylist=new ArrayList<>();
     }
 
 
     @Override
     public int getCount() {
+
+        if (mylist==null){
+            return 0;
+
+        }
         return mylist.size();
     }
 
@@ -137,6 +132,8 @@ public class UpiErrAdapter extends BaseAdapter implements Filterable {
                         //mc.initiateCall(clientNumber);
                         Intent intent = new Intent(mycont, UPIUpdateActivity.class);
                         intent.putExtra("UPI", clientNumber);
+                        intent.putExtra("ccc", nascopCccNumber);
+
                         mycont.startActivity(intent);
 
 //                    Toast.makeText(mycont, "calling client "+phoneS, Toast.LENGTH_SHORT).show();

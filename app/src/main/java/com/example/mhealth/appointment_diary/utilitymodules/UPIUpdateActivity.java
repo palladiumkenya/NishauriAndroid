@@ -2,6 +2,7 @@ package com.example.mhealth.appointment_diary.utilitymodules;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,24 +24,38 @@ import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.mhealth.appointment_diary.AccessServer.AccessServer;
+import com.example.mhealth.appointment_diary.AppendFunction.AppendFunction;
+import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
+import com.example.mhealth.appointment_diary.Dialogs.Dialogs;
+import com.example.mhealth.appointment_diary.ProcessReceivedMessage.ProcessMessage;
+import com.example.mhealth.appointment_diary.Progress.Progress;
 import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.config.Config;
+import com.example.mhealth.appointment_diary.encryption.Base64Encoder;
+import com.example.mhealth.appointment_diary.models.RegisterCounter;
 import com.example.mhealth.appointment_diary.models.counties;
 import com.example.mhealth.appointment_diary.models.scounties;
 import com.example.mhealth.appointment_diary.models.wards;
+import com.example.mhealth.appointment_diary.pmtct.ANCVisit;
+import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Myaffiliation;
+import com.example.mhealth.appointment_diary.tables.Registrationtable;
 import com.example.mhealth.appointment_diary.tables.UrlTable;
+import com.google.android.material.snackbar.Snackbar;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -80,8 +96,8 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
 
 
     EditText upitext, cfile, f_name, s_name, o_name, dob, idno, birthno, enrollment_date, art_date, phone;
-    String newUpi, Idno, Birthno, Enrollment_date, Art_date, Phone;
-    Button populate1;
+    String newUpi, Cno, Idno, Birthno, Enrollment_date, Art_date, Phone;
+    Button populate1,btnRSubm1;
     boolean a;
 
     int genderid, gender_code, marital_code, marital_id, county_code1, scounty_code1, ward_code1;
@@ -99,10 +115,20 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
     private RequestQueue rq;
     private SearchableSpinner birthSpinner, ServiceSpinner, serviceUnitSpinner, rankSpinner, countrySpinner;
 
+    Progress pr;
+    ProcessMessage pm;
+    Dialogs dialogs;
+
+    CheckInternet chkinternet;
+    AccessServer acs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upiupdate);
+        chkinternet=new CheckInternet(UPIUpdateActivity.this);
+        dialogs =new Dialogs(UPIUpdateActivity.this);
+
 
         rq = Volley.newRequestQueue(UPIUpdateActivity.this);
 
@@ -144,6 +170,7 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
 
 
         populate1 = (Button) findViewById(R.id.populate);
+        btnRSubm1= (Button) findViewById(R.id.btnRSubmit);
         gender_code = 0;
         marital_code = 0;
         sms_code="";
@@ -158,8 +185,10 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
             Bundle extras = getIntent().getExtras();
             if (extras == null) {
                 newUpi = null;
+                Cno=null;
             } else {
                 newUpi = extras.getString("UPI");
+                Cno = extras.getString("ccc");
 
             }
         } else {
@@ -172,9 +201,13 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
         populate1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getdetails1();
+                if (!chkinternet.isInternetAvailable()){
 
-            }
+                    Toast.makeText(UPIUpdateActivity.this, "Check Your Internet connection", Toast.LENGTH_LONG).show();
+                }else{
+                getdetails1();}}
+
+
         });
 
         try {
@@ -185,6 +218,22 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
         } catch (Exception e) {
 
         }
+
+
+        btnRSubm1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (!chkinternet.isInternetAvailable()) {
+                    Toast.makeText(UPIUpdateActivity.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+
+                }else{
+                   // update1();
+                    updateUserDetails();
+               }
+               // Toast.makeText(UPIUpdateActivity.this, "sssss", Toast.LENGTH_LONG).show();
+            }
+        });
 
 
     }
@@ -234,9 +283,9 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                                 sms_id= jsonObject.getString("smsenable");
                                // county1 =jsonObject.getString("locator_county");
                                // county_code1 = Integer.parseInt(jsonObject.getString("locator_county"));
-                                countyID = Integer.parseInt(jsonObject.getString("locator_county"));
-                                scountyID = Integer.parseInt(jsonObject.getString("locator_sub_county"));
-                                wardID = Integer.parseInt(jsonObject.getString("locator_ward"));
+                                county_code1 = Integer.parseInt(jsonObject.getString("locator_county"));
+                                scounty_code1= Integer.parseInt(jsonObject.getString("locator_sub_county"));
+                                ward_code1= Integer.parseInt(jsonObject.getString("locator_ward"));
 
                               //  Log.d("COUNTY",String.valueOf(countyID));
                                 Log.d("COUNTY",String.valueOf(county_code1));
@@ -257,13 +306,13 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                             gender_code = genderid;
                             marital_code = marital_id;
                             sms_code=sms_id;
-                            countyID=county_code1;
-                            scountyID=scounty_code1;
-                            wardID=ward_code1;
+                            /*county_code1=countyID;
+                            scounty_code1=scountyID;
+                            ward_code1=wardID;*/
                             populateGender();
                             populateMarital();
                             populateSms();
-                            getFacilities();
+                           getFacilities();
 
                             Log.d("SMS", sms_code);
                             // Toast.makeText(UPIUpdateActivity.this, gender_code, Toast.LENGTH_SHORT).show();
@@ -518,6 +567,8 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                         @Override
                         public int getCount() {
                             return super.getCount(); // you dont display last item. It is used as hint.
+
+                          // return  countiesList.size();
                         }
                     };
 
@@ -525,38 +576,27 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
 
                     // if (ServiceSpinner != null){
                     ServiceSpinner.setAdapter(aa);
-                   //ServiceSpinner.setSelection(countyID);
-                    ServiceSpinner.setSelection(county_code1);
-                   // ServiceSpinner.setSelection(aa.getCount() - 1);
+                    //ServiceSpinner.setSelection(countyID);
+                    ServiceSpinner.setSelection(aa.getCount() - 1);
+                    countyID = countiess.get(aa.getCount() - 1).getId();
 
-                 //  county1=  ServiceSpinner.getSelectedItem().toString();
 
-      //              countyID = countiess.get(aa.getCount() - 1).getId();
-       //             county_code1 = countiess.get(aa.getCount() - 1).getId();
-                    //countyID = Integer.parseInt(ServiceSpinner.getSelectedItem().toString());
 
                     ServiceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
 
-                            // serviceUnitSpinner.setAdapter(null);
 
-                          //countyID = countiess.get(position).getId();
-                           //countyID =position;
-                            county_code1 = countiess.get(position).getId();
-                           // county_code1 = position;
+                           try {
+                               countyID = countiess.get(position).getId();
+                           }catch(Exception e){
+                               e.printStackTrace();
+                           }
 
-
-
-                            //getDepartments(services.get(position).getService_id());
-
-//
-                                   /* if (serviceID !=0)
-                                        Toast.makeText(Registration.this, "getting units", Toast.LENGTH_LONG).show();*/
                             try {
-                                //getDepartments(countyID);
-                                getDepartments(county_code1);
+                                getDepartments(countyID);
+                                //getDepartments(county_code1);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -682,25 +722,18 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                     aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
                     serviceUnitSpinner.setAdapter(aa);
-                   // serviceUnitSpinner.setSelection(aa.getCount() - 1);
-                   // serviceUnitSpinner.setSelection(scountyID);
-                    serviceUnitSpinner.setSelection(scounty_code1);
 
-      //              scountyID = scountiess.get(aa.getCount() - 1).getId();
+                    serviceUnitSpinner.setSelection(aa.getCount() - 1);
+                   // serviceUnitSpinner.setSelection(scountyID - 1);
+                    scountyID = scountiess.get(aa.getCount() - 1).getId();
 
                     serviceUnitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         //@Overide
                         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
                             // Toast.makeText(Registration.this, "null selected", Toast.LENGTH_LONG).show();
-                  //          scountyID = scountiess.get(position).getId();
-                  //          scounty_code1 = scountiess.get(position).getId();
-                            scounty_code1 = position;
-                           // scountyID = position;
-                  //          getWards(scountyID);
-                            getWards(scounty_code1);
-                            //call wards here
-
+                            scountyID = scountiess.get(position).getId();
+                            getWards(scountyID);
 
 //                                Toast.makeText(context,facilityDepartments.get(position).getDepartment_name(), Toast.LENGTH_LONG).show();
                         }
@@ -734,6 +767,7 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                 }
                 error.printStackTrace();
                 getDepartments(countyID);
+               // getDepartments(county_code1);
             }
         }
         ) {
@@ -822,23 +856,17 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                     aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
                     rankSpinner.setAdapter(aa);
-                    //rankSpinner.setSelection(aa.getCount() - 1);
-        //            rankSpinner.setSelection(wardID);
-                    rankSpinner.setSelection(ward_code1);
 
-                    //wardID = wardss.get(aa.getCount() - 1).getId();
-          //          wardID = wardss.get(aa.getCount() -1).getId();
+                    rankSpinner.setSelection(aa.getCount() - 1);
+                   // rankSpinner.setSelection(wardID - 1);
+                    wardID = wardss.get(aa.getCount() - 1).getId();
+
                     rankSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         //@Overide
                         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
                             // Toast.makeText(Registration.this, "null selected", Toast.LENGTH_LONG).show();
-          //                  wardID = wardss.get(position).getId();
-                            //wardID = position;
-                            ward_code1 = position;
-
-                            //call wards here
-
+                            wardID = wardss.get(position).getId();
 
 //                                Toast.makeText(context,facilityDepartments.get(position).getDepartment_name(), Toast.LENGTH_LONG).show();
                         }
@@ -871,8 +899,8 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                     error.printStackTrace();
                 }
                 error.printStackTrace();
-     //           getWards(scountyID);
-                getWards(scounty_code1);
+                getWards(scountyID);
+               // getWards(scounty_code1);
                 //getDepartments(countyID);
             }
         }
@@ -1035,4 +1063,212 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
         //AppController.getInstance().addToRequestQueue(jsonObjReq);
         rq.add(jsonArrayRequest);
 
-}}
+}
+public  void update1(){
+
+   // String cccS = cccE.getText().toString();
+    String fileserialS = cfile.getText().toString();
+   // String upnS = upnE.getText().toString();
+    String f_nameS = f_name.getText().toString();
+    String s_nameS = s_name.getText().toString();
+    String o_nameS =  o_name.getText().toString();
+    String dobS = dob.getText().toString();
+    String enrollmentS = enrollment_date.getText().toString();
+    String art_dateS = art_date.getText().toString();
+   String phoneS = phone.getText().toString();
+
+
+  //  String newupns = AppendFunction.AppendUniqueIdentifier(upnS);
+   // String myccnumber = cccS + newupns;
+
+
+
+    String sendSms = Cno + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + newUpi + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + -1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + -1 +"*" +-1 +"*"+countyID + "*" + scountyID + "*" + -1 + "*" + wardID + "*" + -1;
+
+   // String sendSms = "" + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + upi_no + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + "" + "*" + "" + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code + "*" + new_grouping_code + "*" + ""+"*" +countyIDb+"*"+countyID + "*" + scountyID + "*" + locatorlocationS + "*" + wardID + "*" + locatorvillageS;
+    String encrypted = Base64Encoder.encryptString(sendSms);
+
+    Log.d("ENCRYPTEDDDDDDDDDDDD",sendSms);
+
+
+    String mynumber = Config.mainShortcode;
+
+    if (chkinternet.isInternetAvailable()) {
+        List<Activelogin> myl = Activelogin.findWithQuery(Activelogin.class, "select * from Activelogin");
+        for (int x = 0; x < myl.size(); x++) {
+
+            String un = myl.get(x).getUname();
+            List<Registrationtable> myl2 = Registrationtable.findWithQuery(Registrationtable.class, "select * from Registrationtable where username=? limit 1", un);
+            for (int y = 0; y < myl2.size(); y++) {
+
+                String phne = myl2.get(y).getPhone();
+//                                acs.sendDetailsToDb("Reg*"+sendSms+"/"+phne);
+                // acs.requestUPI("Reg*" + encrypted, "13023");
+                //BEGIN UPI REQUEST
+
+
+                try {
+                    List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+                    if (_url.size() == 1) {
+                        for (int bb = 0; bb < _url.size(); bb++) {
+                            z = _url.get(bb).getBase_url1();
+                        }
+                    }
+
+                } catch (Exception e) {
+
+                }
+                //pr.showProgress("Requesting UPI...");
+                final int[] mStatusCode = new int[1];
+
+                String url ="https://ushauriapi.kenyahmis.org/mohupi/getupdateUPI";
+
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                Toast.makeText(UPIUpdateActivity.this, "Success", Toast.LENGTH_SHORT).show();
+
+                                Log.d("qwsdfghjnm,", response.toString());
+
+
+
+
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                                /*dialogs.showErrorDialog( error.toString(), "Server response");
+                                //Toast.makeText(UPIUpdateActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                                Log.d("errrro string", error.toString());
+                                Log.d("CCCCNO",Cno);*/
+
+                                if (error == null || error.networkResponse == null) {
+                                    return;
+                                }
+
+                                String body;
+                                //get status code here
+                                final String statusCode = String.valueOf(error.networkResponse.statusCode);
+                                //get response body and parse with appropriate encoding
+                                try {
+                                    body = new String(error.networkResponse.data,"UTF-8");
+                                } catch (UnsupportedEncodingException e) {
+                                    // exception
+                                }
+                              // Log.e("Errrrors", body.3)
+
+                            }
+                        }) {
+
+
+                    @Override
+                    protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                        mStatusCode[0] = response.statusCode;
+                        return super.parseNetworkResponse(response);
+                    }
+
+                    @Override
+                    protected VolleyError parseNetworkError(VolleyError volleyError) {
+                        return super.parseNetworkError(volleyError);
+                    }
+
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<String, String>();
+
+                        params.put("reg_payload", "Reg*" + encrypted);
+                        params.put("user_mfl", "13738");
+
+                        return params;
+                    }
+
+                };
+
+                stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                        800000,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                RequestQueue requestQueue = Volley.newRequestQueue(UPIUpdateActivity.this);
+                requestQueue.add(stringRequest);
+
+            }
+
+        }
+
+
+    } else {
+
+
+    }
+
+}
+
+    private void updateUserDetails() {
+        // String cccS = cccE.getText().toString();
+        String fileserialS = cfile.getText().toString();
+        // String upnS = upnE.getText().toString();
+        String f_nameS = f_name.getText().toString();
+        String s_nameS = s_name.getText().toString();
+        String o_nameS =  o_name.getText().toString();
+        String dobS = dob.getText().toString();
+        String enrollmentS = enrollment_date.getText().toString();
+        String art_dateS = art_date.getText().toString();
+        String phoneS = phone.getText().toString();
+
+        String sendSms = Cno + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + newUpi + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" +-1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + -1 +"*" +-1 +"*"+countyID + "*" + scountyID + "*" + -1 + "*" + wardID + "*" + -1;
+
+        // String sendSms = "" + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + upi_no + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + "" + "*" + "" + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code + "*" + new_grouping_code + "*" + ""+"*" +countyIDb+"*"+countyID + "*" + scountyID + "*" + locatorlocationS + "*" + wardID + "*" + locatorvillageS;
+        String encrypted = Base64Encoder.encryptString(sendSms);
+
+        Log.d("NON-ENCRYPTED",sendSms);
+        Log.d("ENCRYPTED",encrypted);
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+
+
+            jsonObject.put("reg_payload", "Reg*" + encrypted);
+            jsonObject.put("user_mfl", "13738");
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        AndroidNetworking.post("https://ushauriapi.kenyahmis.org/mohupi/getupdateUPI")
+                .addHeaders("Accept", "*/*")
+                .addHeaders("Accept", "gzip, deflate, br")
+                .addHeaders("Connection","keep-alive")
+                .setContentType("application.json")
+                .addJSONObjectBody(jsonObject) // posting json
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener(){
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Toast.makeText(UPIUpdateActivity.this, "success", Toast.LENGTH_SHORT).show();
+                        Log.e("response", response.toString());
+
+
+                    }
+
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                        Toast.makeText(UPIUpdateActivity.this, "error"+error.getErrorDetail(), Toast.LENGTH_SHORT).show();
+                        Log.d("messss", error.getMessage());
+
+                       // Snackbar.make(root.findViewById(R.id.frag_update_user), "Error: "+error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+                    }
+                });
+
+    }
+
+}
+

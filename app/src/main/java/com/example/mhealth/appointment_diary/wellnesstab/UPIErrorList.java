@@ -84,7 +84,7 @@ public class UPIErrorList extends AppCompatActivity {
     String z, dates, phone;
     private AppointmentAdapter myadapt;
     private List<UpiErrModel> mymesslist = new ArrayList<>();
-    private List<UpiErrModel> upilist;
+    private List<UpiErrModel> upilist= new ArrayList<>();
 
     UpiErrAdapter upiErrAdapter1;
 
@@ -113,8 +113,8 @@ public class UPIErrorList extends AppCompatActivity {
 
         }
 
-        upilist= new ArrayList<>();
-        upiErrAdapter1 =new UpiErrAdapter(UPIErrorList.this, upilist);
+        //upilist= new ArrayList<>();
+       // upiErrAdapter1 =new UpiErrAdapter(UPIErrorList.this, upilist);
         dialogs=new Dialogs(UPIErrorList.this);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -379,17 +379,17 @@ public class UPIErrorList extends AppCompatActivity {
 
 
                     doSearching(s);
-                    int x = listView.getCount();
+                  //  int x = listView.getCount();
                     // textView1.setText("Total appointments"+ " "+ String.valueOf(x));
-                    upiErrAdapter1.notifyDataSetChanged();
+                   // upiErrAdapter1.notifyDataSetChanged();
                     //myadapt.getFilter().filter(s);
                 }
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    upiErrAdapter1.notifyDataSetChanged();
+                  //  upiErrAdapter1.notifyDataSetChanged();
 
-                    int x = listView.getCount();
+                   // int x = listView.getCount();
                     //textView1.setText("Total appointments"+ " "+ String.valueOf(x));
 
                 }
@@ -415,7 +415,7 @@ public class UPIErrorList extends AppCompatActivity {
         try {
 
             upiErrAdapter1.getFilter().filter(s);
-            upiErrAdapter1.notifyDataSetChanged();
+           // upiErrAdapter1.notifyDataSetChanged();
 
             //Toast.makeText(getApplicationContext(), "searching appointments"+s, Toast.LENGTH_SHORT).show();
             // myadapt.getFilter().filter(s.toString());
@@ -457,7 +457,7 @@ public class UPIErrorList extends AppCompatActivity {
                 Log.d("", response.toString());
 
                 //Toast.makeText(UPIErrorList.this, "success"+response, Toast.LENGTH_SHORT).show();
-
+                upilist= new ArrayList<>();
 
                 try {
 
@@ -471,7 +471,12 @@ public class UPIErrorList extends AppCompatActivity {
 
 
 
-                         UpiErrModel upiErrModel = new UpiErrModel(clientNumber, errorDescription,nascopCccNumber);
+                        upiErrAdapter1 =new UpiErrAdapter(UPIErrorList.this, upilist);
+
+
+
+                        UpiErrModel upiErrModel = new UpiErrModel(clientNumber, errorDescription,nascopCccNumber);
+                         //upilist=new ArrayList<>();
                             upilist.add(upiErrModel);
 
                             listView.setAdapter(upiErrAdapter1);

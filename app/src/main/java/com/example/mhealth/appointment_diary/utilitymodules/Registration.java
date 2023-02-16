@@ -2820,24 +2820,10 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                     new Response.Listener<String>() {
                                         @Override
                                         public void onResponse(String response) {
-                                        //Toast.makeText(Registration.this, "message "+response, Toast.LENGTH_LONG).show();
-                                            //dialogs.showSuccessDialog("response", response);
-
 
 
                                             try {
-                                               /* for (int i=0; i<response.length(); i++){
-                                                JSONObject jsonObject7 = (JSONObject) response.get(i); }*/
-                                                //JSONObject jsonObject9 =re
                                                 JSONObject jsonObject = new JSONObject(response);
-                                                //JSONObject jsonObject4 =jsonObject.getJSONObject("errors");
-                                                /*if (jsonObject.has("errors")){
-                                                   IDused = jsonObject4.getString("identifications[0]");
-                                                    dialogs.showErrorDialog("",IDused);
-                                                }
-
-                                                 IDused =jsonObject4.getString("identifications[0]");*/
-
                                                 for (int a = 0; a < jsonObject.length(); a++) {
                                                     jsonObject1 = jsonObject.getString("clientNumber");
                                                     jsonObject2 = jsonObject.getString("firstName");
@@ -2849,9 +2835,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                                 e.printStackTrace();
                                             }
 
-
-
-                                            // pr.dissmissProgress();
 
 
                                             if (mStatusCode[0] == 200) {
@@ -2897,22 +2880,12 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                                             try {
 
-                                                //byte[] htmlBodyBytes = error.networkResponse.data;
 
-//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
-                                                // dialogs.showErrorDialog(new String(htmlBodyBytes),"Server Response");
                                                 Log.d("", error.getMessage());
-                                               // Toast.makeText(Registration.this, error.getMessage(), Toast.LENGTH_LONG).show();
 
-                                                //pr.dissmissProgress();
 
                                             } catch (Exception e) {
 
-
-//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
-                                                //dialogs.showErrorDialog("error occured, try again","Server Response");
-
-                                                // pr.dissmissProgress();
 
 
                                             }
