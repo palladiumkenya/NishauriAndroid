@@ -170,7 +170,7 @@ public class UpiErrAdapter extends BaseAdapter implements Filterable {
 
                 for (int i = 0; i < filterList.size(); i++) {
 
-                    if (filterList.get(i).getClientNumber().toUpperCase().contains(constraint) || filterList.get(i).getNascopCccNumber().toUpperCase().contains(constraint) || filterList.get(i).getErrorDescription().toUpperCase().contains(constraint)) {
+                    if (filterList.get(i).getClientNumber().toUpperCase().contains(constraint) || filterList.get(i).getNascopCccNumber().toUpperCase().contains(constraint)) {
                      UpiErrModel am = new UpiErrModel(filterList.get(i).getClientNumber(), filterList.get(i).getNascopCccNumber(), filterList.get(i).getErrorDescription());
                         filters.add(am);
                     }

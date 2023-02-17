@@ -378,7 +378,7 @@ public class UPIErrorList extends AppCompatActivity {
                     //Toast.makeText(getApplicationContext(), "searching", Toast.LENGTH_SHORT).show();
 
 
-                    doSearching(s);
+                    doSearching(s.toString());
                   //  int x = listView.getCount();
                     // textView1.setText("Total appointments"+ " "+ String.valueOf(x));
                    // upiErrAdapter1.notifyDataSetChanged();
@@ -414,7 +414,7 @@ public class UPIErrorList extends AppCompatActivity {
         //refreshSmsInbox();
         try {
 
-            upiErrAdapter1.getFilter().filter(s);
+            upiErrAdapter1.getFilter().filter(s.toString());
            // upiErrAdapter1.notifyDataSetChanged();
 
             //Toast.makeText(getApplicationContext(), "searching appointments"+s, Toast.LENGTH_SHORT).show();
@@ -434,8 +434,18 @@ public class UPIErrorList extends AppCompatActivity {
 
         JSONObject jsonObject = new JSONObject();
         try {
+            List<Activelogin> al=Activelogin.findWithQuery(Activelogin.class,"select * from Activelogin limit 1");
+            for(int x=0;x<al.size();x++) {
+                String myuname = al.get(x).getUname();
+                List<Registrationtable> myl = Registrationtable.findWithQuery(Registrationtable.class, "select * from Registrationtable where username=? limit 1", myuname);
+                for (int y = 0; y < myl.size(); y++) {
 
-            jsonObject.put("phone_no", "0718373569");
+                    phone = myl.get(y).getPhone();
+
+                }
+            }
+
+            jsonObject.put("phone_no", phone);
 
         } catch (JSONException e) {
             e.printStackTrace();
