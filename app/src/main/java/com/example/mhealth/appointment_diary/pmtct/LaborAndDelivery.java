@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
 import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
@@ -34,12 +35,14 @@ public class LaborAndDelivery extends AppCompatActivity {
     LinearLayout details;
     String z, phone;
     EditText ccno,clinicno,fname,Mname,lname,dobi,reg, upino;
+    CheckInternet checkInternet;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_labor_and_delivery);
+        checkInternet= new CheckInternet(LaborAndDelivery.this);
 
         try{
             //getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -68,7 +71,13 @@ public class LaborAndDelivery extends AppCompatActivity {
             public void onClick(View view) {
                 if (ccno.getText().toString().isEmpty()){
                     Toast.makeText(LaborAndDelivery.this, "Enter CCC Number", Toast.LENGTH_LONG).show();
-                }else{
+                }else if (!checkInternet.isInternetAvailable()){
+                    Toast.makeText(LaborAndDelivery.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+
+                }
+
+
+                else{
                     searchPNC();}
                 // details.setVisibility(View.VISIBLE);
 

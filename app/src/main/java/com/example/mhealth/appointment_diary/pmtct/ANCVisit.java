@@ -184,12 +184,6 @@ public class ANCVisit extends AppCompatActivity {
                             reg.setText(currentregimen);
                             dobi.setText(dob);
                             upino.setText(upi_no);
-                     /*clinicno.setText(upi_no);
-                     fname.setText(f_name);
-                     Mname.setText(m_name);
-                     lname.setText(l_name);
-                     dobi.setText(dob);
-                     reg.setText(currentregimen);*/
 
                         } catch (JSONException e) {
                             e.printStackTrace();

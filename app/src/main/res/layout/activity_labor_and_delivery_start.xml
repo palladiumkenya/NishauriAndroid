@@ -231,7 +231,47 @@
                         android:layout_marginBottom="20sp" />
 
                 </LinearLayout>
+                <!-- livelay1 -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginTop="16dp"
+                    android:id="@+id/livetexts">
 
+                    <EditText
+                        android:id="@+id/BabysDOB1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Baby's Date of Birth:*"
+                        android:inputType="text"
+                        android:focusable="false"
+                        android:textColorHint="#000"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/livetextss">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Baby's Sex*" />
+
+                    <Spinner
+                        android:id="@+id/BabySex1"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
                 <!-- prophylaxis Details 1 -->
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -317,50 +357,6 @@
 
                 </LinearLayout>
 
-                <!-- livelay1 -->
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginTop="16dp"
-                    android:id="@+id/livetexts">
-
-                    <EditText
-                        android:id="@+id/BabysDOB1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Baby's Date of Birth:*"
-                        android:inputType="text"
-                        android:focusable="false"
-                        android:textColorHint="#000"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:id="@+id/livetextss">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Baby's Sex*" />
-
-                    <Spinner
-                        android:id="@+id/BabySex1"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20sp" />
-
-                </LinearLayout>
-
-
 
 
 
@@ -393,6 +389,48 @@
 
                     <Spinner
                         android:id="@+id/BabyDelivered2"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+
+                <!-- livelay2-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/livetexts2">
+
+                    <EditText
+                        android:id="@+id/BabysDOB2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Baby's Date of Birth:*"
+                        android:focusable="false"
+                        android:inputType="text"
+                        android:textColorHint="#000"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/livetextss2"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Baby's Sex*" />
+
+                    <Spinner
+                        android:id="@+id/BabySex2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -488,47 +526,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
-                <!-- livelay2-->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:id="@+id/livetexts2">
 
-                    <EditText
-                        android:id="@+id/BabysDOB2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Baby's Date of Birth:*"
-                        android:focusable="false"
-                        android:inputType="text"
-                        android:textColorHint="#000"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:id="@+id/livetextss2"
-                    >
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Baby's Sex*" />
-
-                    <Spinner
-                        android:id="@+id/BabySex2"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20sp" />
-
-                </LinearLayout>
 
                 <!-- trip-->
                 <Button
@@ -566,6 +564,48 @@
 
                 </LinearLayout>
 
+
+
+                <!-- livelay3 -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/livetexts3">
+
+                    <EditText
+                        android:id="@+id/BabysDOB3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Baby's Date of Birth:*"
+                        android:focusable="false"
+                        android:inputType="text"
+                        android:textColorHint="#000"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/livetextss3">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Baby's Sex*" />
+
+                    <Spinner
+                        android:id="@+id/BabySex3"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
                 <!-- prophylaxis Details 3 -->
 
 
@@ -656,46 +696,7 @@
                             />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
-                <!-- livelay3 -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:id="@+id/livetexts3">
 
-                    <EditText
-                        android:id="@+id/BabysDOB3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Baby's Date of Birth:*"
-                        android:focusable="false"
-                        android:inputType="text"
-                        android:textColorHint="#000"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:id="@+id/livetextss3">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Baby's Sex*" />
-
-                    <Spinner
-                        android:id="@+id/BabySex3"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20sp" />
-
-                </LinearLayout>
                 <!-- quad -->
                 <Button
                     android:id="@+id/baby4"
@@ -731,6 +732,49 @@
                         android:layout_marginBottom="20sp" />
 
                 </LinearLayout>
+
+                <!-- livelay4 -->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/livetexts4">
+
+                    <EditText
+                        android:id="@+id/BabysDOB4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Baby's Date of Birth:*"
+                        android:focusable="false"
+                        android:inputType="text"
+                        android:textColorHint="#000"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/livetextss4">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Baby's Sex*" />
+
+                    <Spinner
+                        android:id="@+id/BabySex4"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+
 
                 <!-- prophylaxis Details 4 -->
                 <TextView
@@ -818,47 +862,6 @@
                             />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
-                <!-- livelay4 -->
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:id="@+id/livetexts4">
-
-                    <EditText
-                        android:id="@+id/BabysDOB4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Baby's Date of Birth:*"
-                        android:focusable="false"
-                        android:inputType="text"
-                        android:textColorHint="#000"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:id="@+id/livetextss4">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Baby's Sex*" />
-
-                    <Spinner
-                        android:id="@+id/BabySex4"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20sp" />
-
-                </LinearLayout>
 
 
 
@@ -897,6 +900,48 @@
                         android:layout_marginBottom="20sp" />
 
                 </LinearLayout>
+                <!-- livelay5 -->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/livetexts5">
+
+                    <EditText
+                        android:id="@+id/BabysDOB5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Baby's Date of Birth:*"
+                        android:inputType="text"
+                        android:focusable="false"
+                        android:textColorHint="#000"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/livetextss5">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Baby's Sex*" />
+
+                    <Spinner
+                        android:id="@+id/BabySex5"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+
                 <!-- prophylaxis Details 5 -->
                 <TextView
                     android:layout_width="match_parent"
@@ -983,47 +1028,6 @@
                             />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
-                <!-- livelay5 -->
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        android:id="@+id/livetexts5">
-
-                        <EditText
-                            android:id="@+id/BabysDOB5"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Baby's Date of Birth:*"
-                            android:inputType="text"
-                            android:focusable="false"
-                            android:textColorHint="#000"
-                            />
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:orientation="horizontal"
-                        android:weightSum="2"
-                        android:layout_marginTop="@dimen/spacing_large"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        android:id="@+id/livetextss5">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:text="Baby's Sex*" />
-
-                        <Spinner
-                            android:id="@+id/BabySex5"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="20sp" />
-
-                    </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"

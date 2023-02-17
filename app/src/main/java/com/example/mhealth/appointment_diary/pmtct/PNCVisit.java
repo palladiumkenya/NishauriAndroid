@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
 import com.example.mhealth.appointment_diary.Dialogs.ErrorMessage;
 import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.config.Config;
@@ -41,11 +42,14 @@ public class PNCVisit extends AppCompatActivity {
     String z, phone;
     EditText ccno,clinicno,fname,Mname,lname,dobi,reg, upino;
 
+    CheckInternet chkinternet;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pncvisit);
+        chkinternet=new CheckInternet(PNCVisit.this);
         try{
             //getSupportActionBar().setDisplayShowHomeEnabled(true);
            // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -73,7 +77,13 @@ public class PNCVisit extends AppCompatActivity {
             public void onClick(View view) {
                 if (ccno.getText().toString().isEmpty()){
                     Toast.makeText(PNCVisit.this, "Enter CCC Number", Toast.LENGTH_LONG).show();
-                }else{
+                }else if (!chkinternet.isInternetAvailable()){
+
+                    Toast.makeText(PNCVisit.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
+
+                }
+
+                else{
                     searchPNC();}
                 // details.setVisibility(View.VISIBLE);
 
@@ -138,15 +148,6 @@ public class PNCVisit extends AppCompatActivity {
                         String dob =jsonObject.getString("dob");
                         String upi_no =jsonObject.getString("upi_no");
 
-
-                     /*String upi_no =jsonObject.getString("upi_no");
-                     String f_name =jsonObject.getString("f_name");
-                     String m_name =jsonObject.getString("m_name");
-                     String l_name =jsonObject.getString("l_name");
-                     String dob =jsonObject.getString("dob");
-                     String currentregimen =jsonObject.getString("currentregimen");*/
-
-
                         clinicno.setText(clinicnumber);
                         fname.setText(f_name);
                         Mname.setText(m_name);
@@ -154,12 +155,6 @@ public class PNCVisit extends AppCompatActivity {
                         reg.setText(currentregimen);
                         dobi.setText(dob);
                         upino.setText(upi_no);
-                     /*clinicno.setText(upi_no);
-                     fname.setText(f_name);
-                     Mname.setText(m_name);
-                     lname.setText(l_name);
-                     dobi.setText(dob);
-                     reg.setText(currentregimen);*/
 
 
                     } catch (JSONException e) {
@@ -179,57 +174,10 @@ public class PNCVisit extends AppCompatActivity {
 
                 ////
 
-             // try {
-                 // String  body = new String(error.networkResponse.data, "UTF-8");
-                    /*String  body = new String(error.networkResponse.data, "UTF-8");
 
-                    JSONObject json = new JSONObject(body);*/
-                    //                            Log.e("error response : ", json.toString());
-
-                     /*JSONObject json1 = new JSONObject(error.getMessage());
-                    String message = json1.has("message") ? json1.getString("message") : "";
-                    String reason = json1.has("reason") ? json1.getString("reason") : "";
-
-                    Toast.makeText(PNCVisit.this, message, Toast.LENGTH_SHORT).show();*/
-
-
-               // }
-              /*catch (JSONException e) {
-                    e.printStackTrace();
-                }*/
             }
 
-                ////
-               /* NetworkResponse response = error.networkResponse;
 
-                if(response != null && response.data != null) {
-                    String body;
-                    //get status code here
-                    String statusCode = String.valueOf(error.networkResponse.statusCode);
-                    //get response body and parse with appropriate encoding
-                    if (error.networkResponse.data != null) {
-                        try {
-                            body = new String(error.networkResponse.data, "UTF-8");
-
-                            JSONObject json = new JSONObject(body);
-                            //                            Log.e("error response : ", json.toString());
-
-
-                            String message = json.has("message") ? json.getString("message") : "";
-                            String reason = json.has("reason") ? json.getString("reason") : "";
-
-                            Toast.makeText(PNCVisit.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-
-
-                        } catch (UnsupportedEncodingException | JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-
-                }
-
-                }*/
         });
         RequestQueue requestQueue = Volley.newRequestQueue(PNCVisit.this);
         requestQueue.add(jsonArrayRequest);

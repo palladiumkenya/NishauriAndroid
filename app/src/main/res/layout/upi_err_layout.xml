@@ -84,7 +84,7 @@ android:weightSum="3">
     android:layout_weight="1"
     android:gravity="left"
     android:padding="5dp"
-    android:text="Name"
+    android:text="Error Description"
     android:textSize="13sp" />
 
 </LinearLayout>

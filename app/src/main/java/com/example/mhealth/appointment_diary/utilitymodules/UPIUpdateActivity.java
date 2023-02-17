@@ -1,9 +1,13 @@
 package com.example.mhealth.appointment_diary.utilitymodules;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -44,10 +48,14 @@ import com.example.mhealth.appointment_diary.models.counties;
 import com.example.mhealth.appointment_diary.models.scounties;
 import com.example.mhealth.appointment_diary.models.wards;
 import com.example.mhealth.appointment_diary.pmtct.ANCVisit;
+import com.example.mhealth.appointment_diary.pmtct.ANCVisitStarted;
+import com.example.mhealth.appointment_diary.pmtct.LaborAndDeliveryStart;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
+import com.example.mhealth.appointment_diary.tables.Mflcode;
 import com.example.mhealth.appointment_diary.tables.Myaffiliation;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
 import com.example.mhealth.appointment_diary.tables.UrlTable;
+import com.example.mhealth.appointment_diary.wellnesstab.UPIErrorList;
 import com.google.android.material.snackbar.Snackbar;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
@@ -57,9 +65,21 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import okhttp3.CipherSuite;
+import okhttp3.ConnectionSpec;
+import okhttp3.OkHttpClient;
+import okhttp3.TlsVersion;
 
 public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner genderS, maritalS, conditionS, enrollmentS, languageS, smsS, wklymotivation, messageTime, SelectstatusS, patientStatus, GroupingS, orphanS, schoolS, newGroupingS;
@@ -67,6 +87,7 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
 
     String[] genders = {"", "Female", "Male"};
     String[] gendersUcsf = {"", "Female", "Male"};
+    String mflcode = "";
 
     String[] smss = {"", "Yes", "No"};
     public String z;
@@ -196,6 +217,81 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
 
         }
 
+
+        dob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(UPIUpdateActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        dob.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker();
+
+                // show the dialog
+                datePicker.show();
+            }
+        });
+
+        enrollment_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(UPIUpdateActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        enrollment_date.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker();
+
+                // show the dialog
+                datePicker.show();
+            }
+        });
+
+        art_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(UPIUpdateActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                      art_date.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker();
+
+                // show the dialog
+                datePicker.show();
+
+            }
+        });
+
         Toast.makeText(UPIUpdateActivity.this, "" + newUpi, Toast.LENGTH_SHORT).show();
         upitext.setText(newUpi);
         populate1.setOnClickListener(new View.OnClickListener() {
@@ -228,8 +324,8 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                     Toast.makeText(UPIUpdateActivity.this, "Check Your Internet Connection", Toast.LENGTH_LONG).show();
 
                 }else{
-                   // update1();
-                    updateUserDetails();
+                   update1();
+                    //updateUserDetails();
                }
                // Toast.makeText(UPIUpdateActivity.this, "sssss", Toast.LENGTH_LONG).show();
             }
@@ -1080,10 +1176,12 @@ public  void update1(){
 
   //  String newupns = AppendFunction.AppendUniqueIdentifier(upnS);
    // String myccnumber = cccS + newupns;
+    String country ="KE";
+    String countyIDB="029";
 
 
-
-    String sendSms = Cno + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + newUpi + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + -1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + -1 +"*" +-1 +"*"+countyID + "*" + scountyID + "*" + -1 + "*" + wardID + "*" + -1;
+    String sendSms = Cno + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + newUpi + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" +-1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + country +"*" + countyIDB +"*"+countyID + "*" + scountyID + "*" + -1 + "*" + wardID + "*" + -1;
+    //String sendSms = Cno + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + newUpi + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + -1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + -1 +"*" +-1 +"*"+countyID + "*" + scountyID + "*" + -1 + "*" + wardID + "*" + -1;
 
    // String sendSms = "" + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + upi_no + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + "" + "*" + "" + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code + "*" + new_grouping_code + "*" + ""+"*" +countyIDb+"*"+countyID + "*" + scountyID + "*" + locatorlocationS + "*" + wardID + "*" + locatorvillageS;
     String encrypted = Base64Encoder.encryptString(sendSms);
@@ -1092,6 +1190,22 @@ public  void update1(){
 
 
     String mynumber = Config.mainShortcode;
+    try {
+
+        List<Mflcode> myl = Mflcode.findWithQuery(Mflcode.class, "select * from Mflcode limit 1");
+        mflcode = "";
+
+        for (int x = 0; x < myl.size(); x++) {
+
+            mflcode = myl.get(x).getMfl();
+
+        }
+        // mfl_code.setText(mflcode);
+
+    } catch (Exception e) {
+
+        Toast.makeText(this, "error occured populating mflcode", Toast.LENGTH_SHORT).show();
+    }
 
     if (chkinternet.isInternetAvailable()) {
         List<Activelogin> myl = Activelogin.findWithQuery(Activelogin.class, "select * from Activelogin");
@@ -1127,6 +1241,44 @@ public  void update1(){
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
+
+
+                                if(mStatusCode[0]==200){
+
+                                    //dialogs.showSuccessDialog(response,"Server Response");
+
+                                    androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(UPIUpdateActivity.this);
+                                    builder1.setIcon(android.R.drawable.ic_dialog_alert);
+                                    builder1.setTitle("Client's updated");
+                                    builder1.setMessage( "Server Response");
+                                    builder1.setCancelable(false);
+
+                                    builder1.setPositiveButton(
+                                            "OK",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+
+                                                    Intent intent = new Intent(UPIUpdateActivity.this, UPIErrorList.class);
+                                                    UPIUpdateActivity.this.startActivity(intent);
+
+
+                                                    //dialog.cancel();
+                                                }
+                                            });
+
+
+
+                                    AlertDialog alert11 = builder1.create();
+                                    alert11.show();
+
+                                }
+
+                                else{
+
+                                    dialogs.showErrorDialog(response.toString(),"Server response");
+                                }
+
+
 
                                 Toast.makeText(UPIUpdateActivity.this, "Success", Toast.LENGTH_SHORT).show();
 
@@ -1181,7 +1333,7 @@ public  void update1(){
                         Map<String, String> params = new HashMap<String, String>();
 
                         params.put("reg_payload", "Reg*" + encrypted);
-                        params.put("user_mfl", "13738");
+                        params.put("user_mfl", mflcode);
 
                         return params;
                     }
@@ -1219,7 +1371,11 @@ public  void update1(){
         String art_dateS = art_date.getText().toString();
         String phoneS = phone.getText().toString();
 
-        String sendSms = Cno + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + newUpi + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" +-1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + -1 +"*" +-1 +"*"+countyID + "*" + scountyID + "*" + -1 + "*" + wardID + "*" + -1;
+        String country ="KE";
+        String countyIDB="029";
+
+
+        String sendSms = Cno + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + newUpi + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" +-1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + country +"*" + countyIDB +"*"+countyID + "*" + scountyID + "*" + -1 + "*" + wardID + "*" + -1;
 
         // String sendSms = "" + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + upi_no + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + "" + "*" + "" + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code + "*" + new_grouping_code + "*" + ""+"*" +countyIDb+"*"+countyID + "*" + scountyID + "*" + locatorlocationS + "*" + wardID + "*" + locatorvillageS;
         String encrypted = Base64Encoder.encryptString(sendSms);
@@ -1239,8 +1395,8 @@ public  void update1(){
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
+        final int[] mStatusCode = new int[1];
+       // AndroidNetworking.initialize(getApplicationContext(), myUnsafeHttpClient());
         AndroidNetworking.post("https://ushauriapi.kenyahmis.org/mohupi/getupdateUPI")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
@@ -1251,8 +1407,43 @@ public  void update1(){
                 .getAsJSONObject(new JSONObjectRequestListener(){
                     @Override
                     public void onResponse(JSONObject response) {
+                        if(mStatusCode[0]==200){
 
-                        Toast.makeText(UPIUpdateActivity.this, "success", Toast.LENGTH_SHORT).show();
+                            //dialogs.showSuccessDialog(response,"Server Response");
+
+                            androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(UPIUpdateActivity.this);
+                            builder1.setIcon(android.R.drawable.ic_dialog_alert);
+                            builder1.setTitle("Client's updated");
+                            builder1.setMessage( "Server Response");
+                            builder1.setCancelable(false);
+
+                            builder1.setPositiveButton(
+                                    "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+
+                                            Intent intent = new Intent(UPIUpdateActivity.this, UPIErrorList.class);
+                                            UPIUpdateActivity.this.startActivity(intent);
+
+
+                                            //dialog.cancel();
+                                        }
+                                    });
+
+
+
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
+
+                        }
+
+                        else{
+
+                            dialogs.showErrorDialog(response.toString(),"Server response");
+                        }
+
+
+                        //Toast.makeText(UPIUpdateActivity.this, "success", Toast.LENGTH_SHORT).show();
                         Log.e("response", response.toString());
 
 
@@ -1269,6 +1460,78 @@ public  void update1(){
                 });
 
     }
+    private void populateMflCode() {
+
+        try {
+
+            List<Mflcode> myl = Mflcode.findWithQuery(Mflcode.class, "select * from Mflcode limit 1");
+           mflcode = "";
+
+            for (int x = 0; x < myl.size(); x++) {
+
+                mflcode = myl.get(x).getMfl();
+
+            }
+           // mfl_code.setText(mflcode);
+
+        } catch (Exception e) {
+
+            Toast.makeText(this, "error occured populating mflcode", Toast.LENGTH_SHORT).show();
+        }
+    }
+   /* private OkHttpClient myUnsafeHttpClient() {
+        try {
+
+            // Create a trust manager that does not validate certificate chains
+            final TrustManager[] trustAllCerts = new TrustManager[] {
+
+                    new X509TrustManager() {
+
+                        @Override
+                        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) { }
+                        @Override
+                        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) {
+                        }
+                        @Override
+                        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                            return new java.security.cert.X509Certificate[]{};
+                        }
+                    }
+            };
+
+            //Using TLS 1_2 & 1_1 for HTTP/2 Server requests
+            // Note : Please change accordingly
+            ConnectionSpec spec = new ConnectionSpec.Builder(ConnectionSpec.COMPATIBLE_TLS)
+                    .tlsVersions(TlsVersion.TLS_1_2, TlsVersion.TLS_1_1, TlsVersion.TLS_1_0)
+                    .cipherSuites(
+                            CipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
+                            CipherSuite.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
+                            CipherSuite.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+                            CipherSuite.TLS_DHE_RSA_WITH_AES_256_GCM_SHA384,
+                            CipherSuite.TLS_DHE_RSA_WITH_AES_256_CBC_SHA,
+                            CipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
+                            CipherSuite.TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,
+                            CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+                            CipherSuite.TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,
+                            CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,
+                            CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA)
+                    .build();
+
+            // Install the all-trusting trust manager
+            final SSLContext sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+            // Create an ssl socket factory with our all-trusting manager
+            final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+
+            OkHttpClient.Builder builder = new OkHttpClient.Builder();
+            builder.sslSocketFactory(sslSocketFactory);
+            builder.connectionSpecs(Collections.singletonList(spec));
+            builder.hostnameVerifier((hostname, session) -> true);
+            return builder.build();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }*/
 
 }
 
