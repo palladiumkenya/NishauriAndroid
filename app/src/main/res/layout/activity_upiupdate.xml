@@ -789,7 +789,6 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
 
                     android:textSize="13sp"
                     android:textStyle="bold"
@@ -797,12 +796,12 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:visibility="gone"
+
                     android:background="#c0c0c0"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+
                     android:minHeight="?attr/actionBarSize"
                     android:orientation="vertical">
 
@@ -826,7 +825,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:visibility="gone"
+
                             android:orientation="vertical">
 
 
@@ -836,7 +835,7 @@
                                 android:id="@+id/countrySpinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/spacing_xlarge"
-                                android:visibility="gone"
+
                                 android:drawSelectorOnTop="true" />
 
                             <!-- end search spinner -->
@@ -864,14 +863,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="?attr/actionBarSize"
-                    android:visibility="gone"
+
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/birth_facility"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+
                         android:text="County of Birth*"
                         android:textSize="13sp"
                         android:textStyle="bold"
@@ -882,7 +881,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_large"
-                        android:visibility="gone"
+
                         android:orientation="vertical">
 
 
@@ -890,13 +889,13 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:visibility="gone"
+
                             android:orientation="vertical">
 
                             <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                                 android:id="@+id/birthCountySpinner"
                                 android:layout_width="match_parent"
-                                android:visibility="gone"
+
                                 android:layout_height="@dimen/spacing_xlarge"
                                 android:drawSelectorOnTop="true"
                                 />
@@ -909,14 +908,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
-                    android:visibility="gone"
-
                     android:textStyle="bold"
                     android:text="Current Residence Information"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:visibility="gone"
+
                     android:background="#c0c0c0"/>
                 <!-- county of residence spinner -->
                 <LinearLayout

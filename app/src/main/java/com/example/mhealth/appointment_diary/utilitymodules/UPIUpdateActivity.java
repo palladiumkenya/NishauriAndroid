@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -43,6 +44,7 @@ import com.example.mhealth.appointment_diary.Progress.Progress;
 import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.encryption.Base64Encoder;
+import com.example.mhealth.appointment_diary.models.Country;
 import com.example.mhealth.appointment_diary.models.RegisterCounter;
 import com.example.mhealth.appointment_diary.models.counties;
 import com.example.mhealth.appointment_diary.models.scounties;
@@ -92,6 +94,19 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
     String[] smss = {"", "Yes", "No"};
     public String z;
     String county1;
+
+    ArrayList<String> countriesList;
+    ArrayList<Country> countries;
+
+    TextView textViewCondition;
+
+    private String origin_country = "";
+    private int countryID = 0;
+
+
+
+
+
     ArrayList<String> countiesListb;
     ArrayList<counties> countiessb;
     private int countyIDb = 0;
@@ -199,6 +214,7 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
 
         setSpinnerListeners();
         getcountiesbirth();
+        getCountries();
         //getFacilities();
         //populateGender();
 
@@ -1180,7 +1196,7 @@ public  void update1(){
     String countyIDB="029";
 
 
-    String sendSms = Cno + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + newUpi + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" +-1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + country +"*" + countyIDB +"*"+countyID + "*" + scountyID + "*" + -1 + "*" + wardID + "*" + -1;
+    String sendSms = Cno + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + newUpi + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" +-1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + countryID +"*" + countyIDb +"*"+countyID + "*" + scountyID + "*" + -1 + "*" + wardID + "*" + -1;
     //String sendSms = Cno + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + newUpi + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + -1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + -1 + "*" + -1 + "*" + -1+ "*" + -1 + "*" + -1 +"*" +-1 +"*"+countyID + "*" + scountyID + "*" + -1 + "*" + wardID + "*" + -1;
 
    // String sendSms = "" + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + upi_no + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + "" + "*" + "" + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code + "*" + new_grouping_code + "*" + ""+"*" +countyIDb+"*"+countyID + "*" + scountyID + "*" + locatorlocationS + "*" + wardID + "*" + locatorvillageS;
@@ -1479,6 +1495,147 @@ public  void update1(){
             Toast.makeText(this, "error occured populating mflcode", Toast.LENGTH_SHORT).show();
         }
     }
+
+    //get countries
+
+    public void getCountries(){
+
+        String curl1 = "https://ushauriapi.kenyahmis.org/locator/countries";
+        try {
+            List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size() == 1) {
+                for (int x = 0; x < _url.size(); x++) {
+                    z = _url.get(x).getBase_url1();
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
+
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
+                z+Config.COUNTRIES, null, new Response.Listener<JSONArray>() {
+
+
+            @Override
+            public void onResponse(JSONArray response) {
+                //Toast.makeText(Registration.this, response,  Toast.LENGTH_LONG).show();
+                //dialogs.showSuccessDialog("yes", response.toString());
+                // error.printStackTrace();
+
+
+                try {
+
+
+                    countries = new ArrayList<Country>();
+                    countriesList = new ArrayList<String>();
+
+                    countries.clear();
+                    countriesList.clear();
+
+
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject service = (JSONObject) response.get(i);
+
+
+                        int id = service.has("id") ? service.getInt("id") : 0;
+                        String name = service.has("name") ? service.getString("name") : "";
+                        String code = service.has("code") ? service.getString("code") : "";
+
+
+                        Country newCounty = new Country(id, name, code);
+
+                        countries.add(newCounty);
+                        countriesList.add(newCounty.getName());
+
+                    }
+                    countries.add(new Country(0, "", ""));
+                    countriesList.add("");
+
+
+
+
+                    ArrayAdapter<String> aa = new ArrayAdapter<String>(UPIUpdateActivity.this,
+                            android.R.layout.simple_spinner_dropdown_item,
+                            countriesList) {
+                        @Override
+                        public int getCount() {
+                            return super.getCount(); // you dont display last item. It is used as hint.
+                        }
+                    };
+
+                    aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                    // if (ServiceSpinner != null){
+                    countrySpinner.setAdapter(aa);
+                    countrySpinner.setSelection(aa.getCount() - 1);
+
+                    countryID = countries.get(aa.getCount() - 1).getId();
+
+                    countrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+
+
+                            // serviceUnitSpinner.setAdapter(null);
+
+                            countryID = countries.get(position).getId();
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+
+                        }
+                    });
+
+
+
+
+                    //}
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(UPIUpdateActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(UPIUpdateActivity.this, " cant get country", Toast.LENGTH_LONG).show();
+                error.printStackTrace();
+                getCountries();
+            }
+        }
+        ) {
+
+            /**
+             * Passing some request headers
+             */
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                //headers.put("Authorization", loggedInUser.getToken_type()+" "+loggedInUser.getAccess_token());
+                headers.put("Content-Type", "application/json");
+                headers.put("Accept", "application/json");
+                return headers;
+            }
+
+        };
+
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //AppController.getInstance().addToRequestQueue(jsonObjReq);
+        rq.add(jsonArrayRequest);
+
+
+    }
+
    /* private OkHttpClient myUnsafeHttpClient() {
         try {
 
