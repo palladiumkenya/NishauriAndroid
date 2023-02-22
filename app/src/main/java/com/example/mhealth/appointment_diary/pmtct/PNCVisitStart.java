@@ -35,17 +35,19 @@ public class PNCVisitStart extends AppCompatActivity {
     String[] DeliveryOutcome = {"", "Single", "Twins", "Triplets"};
     String[] BabyDelivered = {"", "Live Birth", "Fresh Still Birth", "Macerated Still Birth"};
     String[] BabySex = {"", "Emergency Contraceptive Pills", "Oral Contraceptive Pills", "Injectible","Implant", "Intrauterine Device", "Lactational Amenorhea Method", "Diaphram/Cervical Cap", "Fertility Awareness", "Tubal Ligation","Condoms","Vasectomy(partner)","None"};
-    String[] MothersOutcome = {"", "Alive", "Dead"};
+    String[] MothersOutcome = {"", "Discharged", "Deceased",  "Transfered to CCC",  "Transfered to Another Facility"};
     String[] FP = {"", "Yes", "No"};
     String[] BabyMedication = {"", "AZT", "NVP", "CTX"};
+    String[] Immunization = {"", "Penta", "PSV"};
+
+    String newCC;
+
 
     CheckInternet chkinternet;
     AccessServer acs;
-
-
     String[] Regimen= {"", "TDF+3TC+EFV", "TDF+3TC+DTG", "TDF+3TC+DTG", "AZT+3TC+NVP", " AZT+3TC+EFV", "ABC+3TC+NVP", "ABC+3TC+EFV", " ABC+3TC+DTG", "ABC+3TC+LPV/r", " AZT+3TC+LPV/r+ RTV", "ART5TDF+3TC +ATV/r","ABC+3TC+DTG", "ABC+3TC+DTG", "ABC+3TC+ATV/r", "AZT+3TC+ATV/r", "AZT+3TC+DRV/r"};
-    Spinner  BabySexS, FPS;
-    String VisitType_code,DeliveryMode_code, DeliveryPlace_code, DeliveryOutcome_code,BabyDelivered_code, Baby_Sexcode, MothersOutcome_code,MotherTested_code, BabyMedication_code, Fp_code;
+    Spinner  BabySexS, FPS,ModeDeliveryS, placeDeliveryS, ImmunizationS, DeliveryOutcomeS, MothersOutcomeS, MotherTestedS, BabyDeliveredS, RegimenS, BabyMedicationS;
+    String VisitType_code,DeliveryMode_code, Regimin_code, DeliveryPlace_code,Immunization_code, DeliveryOutcome_code,BabyDelivered_code, Baby_Sexcode, MothersOutcome_code,MotherTested_code, BabyMedication_code, Fp_code;
     private String CLIENT_VISIT_TYPE = "";
     private String MODE_DELIVERY = "";
     private String PLACE_DELIVERY = "";
@@ -58,7 +60,9 @@ public class PNCVisitStart extends AppCompatActivity {
     private String REGIMEN = "";
     private String BABY_MEDICATION = "";
 
-    LinearLayout pnclayout1, yLDlayout1, stillbirthlay;
+    private String IMMUNIZATION = "";
+
+    LinearLayout pnclayout1, yLDlayout1, stillbirthlay,diededits;
     TextInputLayout pncVlay, pncClay;
     Button buttonSave;
 
@@ -67,6 +71,17 @@ public class PNCVisitStart extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pncvisit_start);
+
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                newCC= null;
+            } else {
+                newCC= extras.getString("Client_CCC");
+            }
+        } else {
+            newCC= (String) savedInstanceState.getSerializable("Client_CCC");
+        }
        // pnclayout1 = (LinearLayout) findViewById(R.id.pnclayout11);
 
         buttonSave=(Button) findViewById(R.id.btn_submit_reg1);
@@ -75,10 +90,24 @@ public class PNCVisitStart extends AppCompatActivity {
         PNC_VisitNo =(EditText) findViewById(R.id.PNC_VisitNo);
         PNC_ClinicNo=(EditText) findViewById(R.id.PNC_ClinicNo);
 
+        DateDied=(EditText) findViewById(R.id.Datedied5);
+        DeathCause=(EditText) findViewById(R.id.deathcause5);
+
         BabyDOB =(EditText)findViewById(R.id.BabyDOB);
 
         acs = new AccessServer(PNCVisitStart.this);
         chkinternet = new CheckInternet(PNCVisitStart.this);
+
+        BabySexS=(Spinner) findViewById(R.id.babySex);
+        FPS=(Spinner) findViewById(R.id.FPS);
+        ModeDeliveryS=(Spinner) findViewById(R.id.DeliveryMode1);
+        placeDeliveryS=(Spinner) findViewById(R.id.DeliveryPlace1);
+        RegimenS=(Spinner) findViewById(R.id.RegimenS);
+        ImmunizationS=(Spinner) findViewById(R.id.BabyImmunization1);
+        MothersOutcomeS=(Spinner) findViewById(R.id.mOutcome);
+
+        diededits=(LinearLayout) findViewById(R.id.diededits);
+
 
 
 
@@ -121,8 +150,7 @@ public class PNCVisitStart extends AppCompatActivity {
 
         }
 
-        BabySexS=(Spinner) findViewById(R.id.babySex);
-       FPS=(Spinner) findViewById(R.id.FPS);
+
 
 
        //dateof visit
@@ -170,6 +198,114 @@ public class PNCVisitStart extends AppCompatActivity {
 
             }
         });
+        //Regimen
+        ArrayAdapter<String> RegimenAdapter = new ArrayAdapter<String>(PNCVisitStart.this, android.R.layout.simple_spinner_item, Regimen);
+        RegimenAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        RegimenS.setAdapter(RegimenAdapter);
+
+       RegimenS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                REGIMEN = Regimen[position];
+               Regimin_code =Integer.toString(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        //Immunization
+        ArrayAdapter<String> ImmunizationAdapter = new ArrayAdapter<String>(PNCVisitStart.this, android.R.layout.simple_spinner_item, Immunization);
+        ImmunizationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ImmunizationS.setAdapter(ImmunizationAdapter);
+
+        ImmunizationS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                IMMUNIZATION = Immunization[position];
+                Immunization_code =Integer.toString(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        //Outcome
+        ArrayAdapter<String> OutcomeAdapter = new ArrayAdapter<String>(PNCVisitStart.this, android.R.layout.simple_spinner_item, MothersOutcome);
+        OutcomeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        MothersOutcomeS.setAdapter(OutcomeAdapter);
+
+        MothersOutcomeS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+               MOTHERS_OUTCOME = MothersOutcome[position];
+               MothersOutcome_code =Integer.toString(position);
+
+
+                if (MothersOutcome_code.contentEquals("4")) {
+                   diededits.setVisibility(View.GONE);
+
+                } else if (MothersOutcome_code.contentEquals("3")) {
+                    diededits.setVisibility(View.GONE);
+                } else if (MothersOutcome_code.contentEquals("2")) {
+                  diededits.setVisibility(View.VISIBLE);
+                } else if (MothersOutcome_code.contentEquals("1")) {
+                    diededits.setVisibility(View.GONE);
+                }
+                else if (MothersOutcome_code.contentEquals("0")) {
+                    diededits.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //Mode delivery
+        ArrayAdapter<String> ModedeliveryAdapter = new ArrayAdapter<String>(PNCVisitStart.this, android.R.layout.simple_spinner_item, ModeDelivery);
+        ModedeliveryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ModeDeliveryS.setAdapter(ModedeliveryAdapter);
+
+        ModeDeliveryS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                MODE_DELIVERY = ModeDelivery[position];
+                DeliveryMode_code=Integer.toString(position);
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //placeDelivery
+        ArrayAdapter<String> PlacedeliveryAdapter = new ArrayAdapter<String>(PNCVisitStart.this, android.R.layout.simple_spinner_item, placeDelivery);
+        PlacedeliveryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        placeDeliveryS.setAdapter(PlacedeliveryAdapter);
+
+        placeDeliveryS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                PLACE_DELIVERY = placeDelivery[position];
+                DeliveryPlace_code=Integer.toString(position);
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         //FPCounsel
         ArrayAdapter<String> FPAdapter = new ArrayAdapter<String>(PNCVisitStart.this, android.R.layout.simple_spinner_item, FP);
         BabySexAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -197,7 +333,13 @@ public class PNCVisitStart extends AppCompatActivity {
          String visit = PNC_VisitNo.getText().toString();
         String clinic = PNC_ClinicNo.getText().toString();
 
-        String PNC_data =  "1234500001" + "*" + det + "*" + visit + "*" +  clinic+ "*" + Baby_Sexcode+ "*" + Fp_code;
+        String dieddt = DateDied.getText().toString();
+        String diedcause = DeathCause.getText().toString();
+
+
+
+
+        String PNC_data = newCC + "*" + det + "*" + visit + "*" +  clinic + "*" + DeliveryMode_code + "*" + DeliveryPlace_code + "*" + Regimin_code+ "*" +Immunization_code+ "*" +  Baby_Sexcode+ "*" + Fp_code+ "*" +MothersOutcome+ "*" +dieddt+ "*" +diedcause;
         String enc = Base64Encoder.encryptString(PNC_data);
 
 
