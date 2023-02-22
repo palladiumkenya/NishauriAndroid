@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.content.Context;
 import androidx.appcompat.app.ActionBar;
 
+import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -40,6 +42,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 /**
  * Created by abdullahi on 11/12/2017.
@@ -88,6 +93,7 @@ public class LosttoFollowAdapter extends BaseAdapter implements Filterable {
     public LosttoFollowAdapter(Context cont, List<LosttoFollowModel> mlist){
 
         this.mycont=cont;
+        mylist5=new ArrayList<>();
         this.mylist5=mlist;
         this.filterList=mlist;
 
@@ -95,6 +101,14 @@ public class LosttoFollowAdapter extends BaseAdapter implements Filterable {
     }
     @Override
     public int getCount() {
+        try {
+            if (mylist5!=null)
+
+            return mylist5.size();
+            Log.d("Count", "Null");
+        }catch (Exception e ){
+
+        }
         return mylist5.size();
     }
 
@@ -1568,41 +1582,45 @@ public class LosttoFollowAdapter extends BaseAdapter implements Filterable {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
 
-            FilterResults results=new FilterResults();
-            if(constraint!=null && constraint.length()>0){
 
-                constraint=constraint.toString().toUpperCase();
-                ArrayList<LosttoFollowModel> filters=new ArrayList<LosttoFollowModel>();
+                FilterResults results = new FilterResults();
+                if (constraint != null && constraint.length() > 0) {
 
-                for(int i=0;i<filterList.size();i++){
+                    constraint = constraint.toString().toUpperCase();
+                    ArrayList<LosttoFollowModel> filters = new ArrayList<LosttoFollowModel>();
 
-                    if(filterList.get(i).getThename().toUpperCase().contains(constraint)|| filterList.get(i).ccnumber.toUpperCase().contains(constraint) || filterList.get(i).apptype.toUpperCase().contains(constraint)){
+                    for (int i = 0; i < filterList.size(); i++) {
 
+                        if (filterList.get(i).getThename().toUpperCase().contains(constraint) || filterList.get(i).ccnumber.toUpperCase().contains(constraint) || filterList.get(i).apptype.toUpperCase().contains(constraint)) {
 
-                        LosttoFollowModel am=new LosttoFollowModel(filterList.get(i).getCcnumber(),filterList.get(i).getThename(),filterList.get(i).getPhone(),filterList.get(i).getApptype(),filterList.get(i).getDate(),filterList.get(i).getRead(),filterList.get(i).getPatientid(),filterList.get(i).getFileserial(),filterList.get(i).getInformantnumber(),filterList.get(i).getLastdateread(),filterList.get(i).getReadcount());
-                        filters.add(am);
+                            LosttoFollowModel am = new LosttoFollowModel(filterList.get(i).getCcnumber(), filterList.get(i).getThename(), filterList.get(i).getPhone(), filterList.get(i).getApptype(), filterList.get(i).getDate(), filterList.get(i).getRead(), filterList.get(i).getPatientid(), filterList.get(i).getFileserial(), filterList.get(i).getInformantnumber(), filterList.get(i).getLastdateread(), filterList.get(i).getReadcount());
+                            filters.add(am);
+                        }
                     }
+
+                    results.count = filters.size();
+                    results.values = filters;
+
+                } else {
+
+                    results.count = filterList.size();
+                    results.values = filterList;
+
                 }
+                return results;
 
-                results.count=filters.size();
-                results.values=filters;
-
-            }
-
-            else{
-
-                results.count=filterList.size();
-                results.values=filterList;
-
-            }
-            return results;
         }
-
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
+            try{
 
             mylist5= (List<LosttoFollowModel>) results.values;
-            notifyDataSetChanged();
+
+            notifyDataSetChanged();}catch (Exception e){
+
+            }
+
+           // notifyDataSetChanged();
 
         }
     }

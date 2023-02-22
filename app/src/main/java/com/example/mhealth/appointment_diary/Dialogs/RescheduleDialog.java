@@ -60,6 +60,7 @@ public class RescheduleDialog extends BottomSheetDialogFragment {
     private String phone_no;
 
     RequestQueue queue;
+    String zz;
 
 
     private String APPOINTMENT_DATE = "";
@@ -171,8 +172,21 @@ public class RescheduleDialog extends BottomSheetDialogFragment {
 
 
     private void reschedule() {
-        UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-        String  z=  _url.base_url1;
+       /* UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+        String  z=  _url.base_url1;*/
+
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                   zz=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+
 
         JSONObject payload = new JSONObject();
         try {
@@ -187,7 +201,7 @@ public class RescheduleDialog extends BottomSheetDialogFragment {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PUT,
-                z+Config.RESCHEDULE_APT1+appointment.getAppointment_id(), payload, new Response.Listener<JSONObject>() {
+                zz+Config.RESCHEDULE_APT1+appointment.getAppointment_id(), payload, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

@@ -367,7 +367,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                 }, year, month, day);
 
                 // set maximum date to be selected as today
-                datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
                 datePicker.getDatePicker();
 
                 // show the dialog
@@ -1714,7 +1714,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                     Toast.makeText(LaborAndDeliveryStart.this, "Please Select Mother's Outcome", Toast.LENGTH_SHORT).show();
                 }
                 //baby 1
-                else if (BabyDeliveredS_code.contentEquals("1") && BabysDOB1.getText().toString().isEmpty()){
+               else if (BabyDeliveredS_code.contentEquals("1") && BabysDOB1.getText().toString().isEmpty()){
                     Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Date of Birth ", Toast.LENGTH_SHORT).show();
 
                 }
@@ -1748,7 +1748,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                 //baby 2
                 //(BABY_DELIVERED.contentEquals("Live Birth")
 
-                else if (BabyDeliveredS2_code.contentEquals("1") && BabysDOB2.getText().toString().isEmpty()){
+                /*else if (BabyDeliveredS2_code.contentEquals("1") && BabysDOB2.getText().toString().isEmpty()){
                     Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Date of Birth ", Toast.LENGTH_SHORT).show();
 
                 }
@@ -1776,10 +1776,10 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                 else if (BabyDeliveredS2_code.contentEquals("3")&& deathcause2.getText().toString().isEmpty()){
                     Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Cause of Death", Toast.LENGTH_SHORT).show();
 
-                }
+                }*/
 
                 // baby 3
-                else if (BabyDeliveredS3_code.contentEquals("1") && BabysDOB3.getText().toString().isEmpty()){
+               /* else if (BabyDeliveredS3_code.contentEquals("1") && BabysDOB3.getText().toString().isEmpty()){
                     Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Date of Birth ", Toast.LENGTH_SHORT).show();
 
                 }
@@ -1870,13 +1870,17 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                 else if (BabyDeliveredS5_code.contentEquals("3")&& deathcause5.getText().toString().isEmpty()){
                     Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Cause of Death", Toast.LENGTH_SHORT).show();
 
-                }
+                }*/
 
 
 
 
                 else{
-                submitLD();}
+                    Log.d("Saved", "yes");
+                submitLD();
+                   // Toast.makeText(LaborAndDeliveryStart.this, "Please save", Toast.LENGTH_SHORT).show();
+
+                    }
 
             }
         });

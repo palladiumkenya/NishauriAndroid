@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Parcelable;
 import android.os.SystemClock;
 
@@ -483,18 +484,26 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
     private void loadMessagesOnline() {
 
         if (chkInternet.isInternetAvailable()) {
-            new Thread(new Runnable() {
-                @Override
-                public void run(){
-                    pr.showProgress("Sending message...");
 
+                    /*pr.showProgress("Sending message...");
                     acs.getDefaultersAppointmentMessages(getUserPhoneNumber());
-                    pr.dissmissProgress();
+                    pr.dissmissProgress();*/
+
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    Runnable runnable =new Runnable() {
+                        @Override
+                        public void run() {
+                            pr.showProgress("Sending message...");
+
+                            acs.getDefaultersAppointmentMessages(getUserPhoneNumber());
+                            pr.dissmissProgress();
+
+
+                        }
+                    };
 
                     // accessing data from database or creating network call
                     // Toast.makeText(this, "Task is Completed.", Toast.LENGTH_SHORT).show();
-                }
-            }).start();
 
 
                   //  acs.getDefaultersAppointmentMessages(getUserPhoneNumber());
@@ -506,7 +515,7 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
 
         }
 
-//        populateListView();
+//        popuateListView();
     }
 
 

@@ -1514,7 +1514,7 @@ public class AccessServer {
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
 
-                                            Intent intent = new Intent(ctx, LaborAndDeliveryStart.class);
+                                            Intent intent = new Intent(ctx, LaborAndDelivery.class);
                                             ctx.startActivity(intent);
 
 

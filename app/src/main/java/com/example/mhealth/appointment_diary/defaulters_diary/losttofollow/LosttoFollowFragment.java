@@ -43,7 +43,7 @@ public class LosttoFollowFragment extends Fragment {
     long diffdate;
 
     private LosttoFollowAdapter myadapt;
-    private List<LosttoFollowModel> mymesslist;
+    private List<LosttoFollowModel> mymesslist=new ArrayList<>();
 
     ArrayList<String> smsMessagesList = new ArrayList<>();
     ListView messages5;
@@ -186,13 +186,13 @@ public class LosttoFollowFragment extends Fragment {
 
         }
 
-        Handler handler = new Handler();
-        Runnable runnable =new Runnable() {
-            @Override
-            public void run() {
-                populateListView();
-            }
-        }; handler.post(runnable);
+        try {
+            populateListView();
+        }catch(Exception e){
+
+        }
+
+
         //populateListView();
 
 
