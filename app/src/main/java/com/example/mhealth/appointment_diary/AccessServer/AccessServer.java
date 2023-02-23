@@ -10,14 +10,13 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mhealth.appointment_diary.DCMActivity;
@@ -26,15 +25,12 @@ import com.example.mhealth.appointment_diary.ProcessReceivedMessage.ProcessMessa
 import com.example.mhealth.appointment_diary.Progress.Progress;
 import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.config.Config;
-import com.example.mhealth.appointment_diary.loginmodule.LoginActivity;
 import com.example.mhealth.appointment_diary.models.Appointments;
 import com.example.mhealth.appointment_diary.pmtct.ANCVisit;
 import com.example.mhealth.appointment_diary.pmtct.LaborAndDelivery;
-import com.example.mhealth.appointment_diary.pmtct.LaborAndDeliveryStart;
 import com.example.mhealth.appointment_diary.pmtct.PNCVisit;
 import com.example.mhealth.appointment_diary.tables.Mflcode;
 import com.example.mhealth.appointment_diary.tables.UrlTable;
-import com.orm.SugarRecord;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -1219,10 +1215,22 @@ public class AccessServer {
         pr.showProgress("Sending ANC Details.....");
         final int[] mStatusCode = new int[1];
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, all,
-                new Response.Listener<String>() {
+        JSONObject payload = new JSONObject();
+        try {
+
+            payload.put("msg", msg );
+            payload.put("phone_no", phone);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("payload: ", payload.toString());
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, all, payload,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(JSONObject response) {
 //                        Toast.makeText(ctx, "message "+response, Toast.LENGTH_SHORT).show();
                         pr.dissmissProgress();
 
@@ -1233,7 +1241,7 @@ public class AccessServer {
 
                             androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(ctx);
                             builder1.setIcon(R.drawable.nascoplogonew);
-                            builder1.setTitle(response);
+                            builder1.setTitle("response.getString()");
                             builder1.setMessage( "Server Response");
                             builder1.setCancelable(false);
 
@@ -1259,7 +1267,7 @@ public class AccessServer {
                         }
                         else{
 
-                            dialogs.showErrorDialog(response,"Server response");
+                            dialogs.showErrorDialog("Errresponse","Server response");
                         }
 
                     }
@@ -1296,16 +1304,7 @@ public class AccessServer {
                 }) {
 
 
-            @Override
-            protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                mStatusCode[0] = response.statusCode;
-                return super.parseNetworkResponse(response);
-            }
 
-            @Override
-            protected VolleyError parseNetworkError(VolleyError volleyError) {
-                return super.parseNetworkError(volleyError);
-            }
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
@@ -1319,12 +1318,8 @@ public class AccessServer {
 
         };
 
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                800000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue = Volley.newRequestQueue(ctx);
-        requestQueue.add(stringRequest);
+        requestQueue.add(jsonObjectRequest);
 
 //        RequestQueue requestQueue = Volley.newRequestQueue(ctx);
 //        requestQueue.add(stringRequest);

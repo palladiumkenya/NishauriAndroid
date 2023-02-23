@@ -1,8 +1,12 @@
 package com.example.mhealth.appointment_diary.pmtct;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,17 +21,30 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mhealth.appointment_diary.AccessServer.AccessServer;
 import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
+import com.example.mhealth.appointment_diary.Dialogs.Dialogs;
 import com.example.mhealth.appointment_diary.Mydates.MyDates;
+import com.example.mhealth.appointment_diary.ProcessReceivedMessage.ProcessMessage;
+import com.example.mhealth.appointment_diary.Progress.Progress;
 import com.example.mhealth.appointment_diary.R;
+import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.encryption.Base64Encoder;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
+import com.example.mhealth.appointment_diary.tables.UrlTable;
 import com.example.mhealth.appointment_diary.utilitymodules.Registration;
 
 import org.joda.time.DateTime;
 import org.joda.time.Weeks;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,14 +52,28 @@ import java.time.LocalDate;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class ANCVisitStarted extends AppCompatActivity {
+    String z, all;
     Date datelmp;
     Date date1;
     Date date2;
+    String phne;
+
+    String phone_no;
+
+    Progress pr;
+    ProcessMessage pm;
+    Dialogs dialogs;
+    SweetAlertDialog mdialog;
+    Dialog mydialog;
 
     String[] clientIs = {"", "Breastfeeding", "Not Breastfeeding", "Pregnant", "Pregnant and Breastfeeding"};
     String[] clientTreated = {"", "Yes", "No"};
@@ -82,6 +113,29 @@ public class ANCVisitStarted extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ancvisit_started);
+
+        List<Activelogin> myl=Activelogin.findWithQuery(Activelogin.class,"select * from Activelogin");
+
+        for(int x=0;x<myl.size();x++){
+            String un=myl.get(x).getUname();
+            List<Registrationtable> myl2=Registrationtable.findWithQuery(Registrationtable.class,"select * from Registrationtable where username=? limit 1",un);
+            for(int y=0;y<myl2.size();y++){
+                phone_no=myl2.get(y).getPhone();
+            }
+        }
+
+
+        try {
+
+            pr = new Progress(ANCVisitStarted.this);
+            mydialog = new Dialog(ANCVisitStarted.this);
+            dialogs=new Dialogs(ANCVisitStarted.this);
+            pm=new ProcessMessage();
+
+        } catch (Exception e) {
+
+
+        }
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if (extras == null) {
@@ -685,7 +739,8 @@ public class ANCVisitStarted extends AppCompatActivity {
                 } else if (HepatitisB_code.contentEquals("0")) {
                     Toast.makeText(ANCVisitStarted.this, "Select Hepatitis B Serology", Toast.LENGTH_LONG).show();
                 } else {
-                    submitANC();
+                   // submitANC();
+                    ANCPost();
                 }
 
             }
@@ -758,9 +813,18 @@ public class ANCVisitStarted extends AppCompatActivity {
             List<Registrationtable> myl2 = Registrationtable.findWithQuery(Registrationtable.class, "select * from Registrationtable where username=? limit 1", un);
             for (int y = 0; y < myl2.size(); y++) {
 
-                String phne = myl2.get(y).getPhone();
+                 phne = myl2.get(y).getPhone();
 //                                acs.sendDetailsToDb("Reg*"+sendSms+"/"+phne);
-                acs.ANCPost("anc*" + enc, phne);
+               acs.ANCPost("anc*" + enc, phne);
+
+
+                //send data
+
+
+
+
+
+                //finish sending data
 
 
                 // Toast.makeText(ANCVisitStarted.this, "ANC Details Saved Successful", Toast.LENGTH_SHORT).show();
@@ -836,4 +900,216 @@ public class ANCVisitStarted extends AppCompatActivity {
         //end onfocus
 
     }
-}
+    // Post TO ANC
+    public void ANCPost() {
+        String ANC_no = ANC_Visitno.getText().toString();
+        String ANC_clinic_no = ANC_clinicno.getText().toString();
+
+
+        String parity_1 = parity1.getText().toString();
+        String parity_2 = parity2.getText().toString();
+        String gravida1 = gravida.getText().toString();
+        String LMPdate = LMP_date.getText().toString();
+
+        // String LMPdate =LMP_date.getText().toString();
+        String EDDDATE = EDD_date.getText().toString();
+        String gestation = Gestation.getText().toString();
+
+        String DateTested1 = DateTested.getText().toString();
+        String CCCNo2 = CCCNo22.getText().toString();
+        // String CCCNo2="";
+        String CCCEnrolDate1 = CCCEnrolDate.getText().toString();
+        String ARTStart_date1 = ARTStart_date.getText().toString();
+        String partnerDateTested1 = partnerDateTested.getText().toString();
+        String partnerCCCNo1 = partnerCCCNo.getText().toString();
+        String partnerCCCEnrolDate1 = partnerCCCEnrolDate.getText().toString();
+        String partnerARTStart_date1 = partnerARTStart_date.getText().toString();
+        String VLdate1 = VLdate.getText().toString();
+        String VLResults1 = VLResults.getText().toString();
+
+
+        String ANC_data = newCC + "*" + ANC_no + "*" + ANC_clinic_no + "*" + ClientIS_code + "*" + pa11 + "*" + pa22 + "*" + gra + "*" + LMPdate + "*" + EDDDATE + "*" + gestation + "*" + HIV_Results_Code + "*" + DateTested1 + "*" + CCCNo2 + "*" + CCCEnrolDate1 + "*" + ARTStart_date1 + "*" + partnerHIV_Results_Code + "*" + partnerDateTested1 + "*" + partnerCCCNo1 + "*" + partnerCCCEnrolDate1 + "*" + partnerARTStart_date1 + "*" + VLdate1 + "*" + VLResults1 + "*" + SyphilisSerology_code + "*" + clientTreated_code + "*" + HepatitisB_code;
+
+        String enc = Base64Encoder.encryptString(ANC_data);
+
+
+        List<Activelogin> myl = Activelogin.findWithQuery(Activelogin.class, "select * from Activelogin");
+        for (int x = 0; x < myl.size(); x++) {
+
+            String un = myl.get(x).getUname();
+            List<Registrationtable> myl2 = Registrationtable.findWithQuery(Registrationtable.class, "select * from Registrationtable where username=? limit 1", un);
+            for (int y = 0; y < myl2.size(); y++) {
+
+                phne = myl2.get(y).getPhone();
+                try {
+                    List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+                    if (_url.size() == 1) {
+                        for (int xx = 0; xx < _url.size(); xx++) {
+                            z = _url.get(xx).getBase_url1();
+
+                            all = "https://ushauriapi.kenyahmis.org/pmtct/anc";
+
+                        }
+                    }
+
+                } catch (Exception e) {
+
+                }
+                pr.showProgress("Sending ANC Details.....");
+                final int[] mStatusCode = new int[1];
+
+                JSONObject payload = new JSONObject();
+                try {
+
+                    payload.put("msg", "anc*"+enc);
+                    payload.put("phone_no", phne);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Log.e("payload: ", payload.toString());
+
+
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, z+Config.ANCstart, payload,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+//                        Toast.makeText(ctx, "message "+response, Toast.LENGTH_SHORT).show();
+                                Log.e("Response: ", response.toString());
+                                pr.dissmissProgress();
+
+                                JSONObject jsonObject = null;
+                                JSONObject jsonObject1 = null;
+
+                                String mss =null;
+                                int cd =0;
+                                try {
+                                    int code22 =response.getInt("code");
+                                    mss =response.getString("message");
+                                    /*jsonObject = response.getJSONObject("code");
+                                    jsonObject1=response.getJSONObject("message");
+                                    String message1=jsonObject.getString("message");
+                                    int code1=jsonObject1.getInt("code");*/
+
+                                    if (code22==200){
+                                       // dialogs.showSuccessDialog(mss, "Server Response");
+
+                                        androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(ANCVisitStarted.this);
+                                        builder1.setIcon(R.drawable.nascoplogonew);
+                                        builder1.setTitle(mss);
+                                        builder1.setMessage( "Server Response");
+                                        builder1.setCancelable(false);
+
+                                        builder1.setPositiveButton(
+                                                "OK",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int id) {
+
+                                                        Intent intent = new Intent(ANCVisitStarted.this, ANCVisit.class);
+                                                        startActivity(intent);
+
+
+                                                        //dialog.cancel();
+                                                    }
+                                                });
+
+
+                                        AlertDialog alert11 = builder1.create();
+                                        alert11.show();
+
+
+
+                                    }else{
+                                        dialogs.showErrorDialog(mss, "err");
+
+
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+
+
+                               /* if (mStatusCode[0] == 200) {
+
+                                    //dialogs.showSuccessDialog(response,"Server Response");
+
+                                    androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(ANCVisitStarted.this);
+                                    builder1.setIcon(R.drawable.nascoplogonew);
+                                    builder1.setTitle(mss);
+                                    builder1.setMessage("Server Response");
+                                    builder1.setCancelable(false);
+
+                                    builder1.setPositiveButton(
+                                            "OK",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+
+                                                    Intent intent = new Intent(ANCVisitStarted.this, ANCVisit.class);
+                                                    startActivity(intent);
+
+
+                                                    //dialog.cancel();
+                                                }
+                                            });
+
+
+                                    AlertDialog alert11 = builder1.create();
+                                    alert11.show();
+
+
+                                } else {
+
+                                    dialogs.showErrorDialog("Errresponse", "Server response"+response);
+                                }*/
+
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                pr.dissmissProgress();
+
+                                try {
+
+                                    byte[] htmlBodyBytes = error.networkResponse.data;
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                                    dialogs.showErrorDialog(new String(htmlBodyBytes), "Server Response");
+
+                                    pr.dissmissProgress();
+
+                                } catch (Exception e) {
+
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                                    dialogs.showErrorDialog("error occured, try again", "Server Response");
+
+                                    pr.dissmissProgress();
+
+
+                                }
+
+
+                            }
+                        }) {
+
+
+                    @Override
+                    protected Map<String, String> getParams() {
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        headers.put("Content-Type", "application/json");
+                        headers.put("Accept", "application/json");
+                        return headers;
+                    }
+
+                };
+
+                RequestQueue requestQueue = Volley.newRequestQueue(ANCVisitStarted.this);
+                requestQueue.add(jsonObjectRequest);
+
+//        RequestQueue requestQueue = Volley.newRequestQueue(ctx);
+//        requestQueue.add(stringRequest);
+
+            }
+}}}

@@ -114,6 +114,7 @@ public class Config extends AppCompatActivity {
     public static final String RESCHEDULE_APT1 = "/api/edit_appointment/edit/appointment/date/";
 
     public static final String ANC="/pmtct/pnc";
+    public static final String ANCstart="/pmtct/anc";
 
     /*
     https://ushauriapi.kenyahmis.org/pmtct/pnc
