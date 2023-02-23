@@ -1334,9 +1334,7 @@ public class AccessServer {
                     z=_url.get(x).getBase_url1();
 
                     all ="https://ushauriapi.kenyahmis.org/pmtct/pnc";
-                    //all = "https://ushauriapi.kenyahmis.org/pmtct/lad";
-                    //all="https://ushauriapi.kenyahmis.org/pmtct/anc";
-                    // z+Config.ANC
+
                 }
             }
 

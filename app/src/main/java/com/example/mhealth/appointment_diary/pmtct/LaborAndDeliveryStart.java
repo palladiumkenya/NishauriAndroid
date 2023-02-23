@@ -1,8 +1,12 @@
 package com.example.mhealth.appointment_diary.pmtct;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,20 +19,44 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mhealth.appointment_diary.AccessServer.AccessServer;
 import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
+import com.example.mhealth.appointment_diary.Dialogs.Dialogs;
+import com.example.mhealth.appointment_diary.ProcessReceivedMessage.ProcessMessage;
+import com.example.mhealth.appointment_diary.Progress.Progress;
 import com.example.mhealth.appointment_diary.R;
+import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.encryption.Base64Encoder;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
+import com.example.mhealth.appointment_diary.tables.UrlTable;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.Calendar;
-import java.util.List;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import libs.mjn.fieldset.FieldSetView;
 
 public class LaborAndDeliveryStart extends AppCompatActivity {
+    String phne, z;
+    Progress pr;
+    ProcessMessage pm;
+    Dialogs dialogs;
+    SweetAlertDialog mdialog;
+    Dialog mydialog;
+
     String[] clientVisitType = {"", "Labor and Delivery", "ANC", "PNC"};
     String[] ModeDelivery = {"", "Spontaneous Vaginal Delivery (SVD)", "Cesarean Section (CS)", "Breech Delivery",  "Assisted Vaginal Delivery"};
     String[] placeDelivery = {"", "Home", "Facility", "Born before Arrival"};
@@ -92,6 +120,18 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
         setContentView(R.layout.activity_labor_and_delivery_start);
         acs = new AccessServer(LaborAndDeliveryStart.this);
         chkinternet = new CheckInternet(LaborAndDeliveryStart.this);
+
+        try {
+
+            pr = new Progress(LaborAndDeliveryStart.this);
+            mydialog = new Dialog(LaborAndDeliveryStart.this);
+            dialogs=new Dialogs(LaborAndDeliveryStart.this);
+            pm=new ProcessMessage();
+
+        } catch (Exception e) {
+
+
+        }
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -1877,7 +1917,8 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 else{
                     Log.d("Saved", "yes");
-                submitLD();
+               // submitLD();
+                LDstart();
                    // Toast.makeText(LaborAndDeliveryStart.this, "Please save", Toast.LENGTH_SHORT).show();
 
                     }
@@ -1960,4 +2001,200 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                 }
 
     }
+    public void LDstart(){
+        String ANCVisit_NO1=ANCVisit_NO.getText().toString();
+        String saveLD1=saveLD.getText().toString();
+
+        String  deliveryDate1= deliveryDate.getText().toString();
+
+        String  Datedied11=Datedied1.getText().toString();
+        String deathcause11=deathcause1.getText().toString();
+        String  BabysDOB11=BabysDOB1.getText().toString();
+
+        String Datedied22=Datedied2.getText().toString();
+        String deathcause22=deathcause2.getText().toString();
+        String BabysDOB22=BabysDOB2.getText().toString();
+
+        String Datedied33=Datedied3.getText().toString();
+        String deathcause33=deathcause3.getText().toString();
+        String BabysDOB33=BabysDOB3.getText().toString();
+
+        String Datedied44=Datedied4.getText().toString();
+        String deathcause44=deathcause4.getText().toString();
+        String   BabysDOB44=BabysDOB4.getText().toString();
+
+        String Datedied55=Datedied5.getText().toString();
+        String deathcause55=deathcause5.getText().toString();
+        String  BabysDOB55=BabysDOB5.getText().toString();
+
+        //ProphyDate5+ "*" +BabyMed5
+        String ProphyDate1 =prophed1.getText().toString();
+        String ProphyDate2 =prophed2.getText().toString();
+        String ProphyDate3 =prophed3.getText().toString();
+        String ProphyDate4 =prophed4.getText().toString();
+        String ProphyDate5 =prophed5.getText().toString();
+
+
+
+
+        String LD_data =  newCC + "*" + ANCVisit_NO1 + "*" + MotherTestedS_code+ "*" +hivResultsS_code+ "*" + deliveryDate1 + "*" +ModeDeliveryS_code + "*" + placeDeliveryS_code+ "*" + DeliveryOutcomeS_code + "*" + BabyDeliveredS_code + "*" + Datedied11+ "*" +deathcause11+"*" + BabysDOB11 + "*"+ BabySexS_code + "*" +ProphyDate1+ "*" +prophy1_code+ "*" + BabyDeliveredS2_code + "*" +Datedied22 + "*" + deathcause22 + "*" + BabysDOB22 + "*" +  BabySexS2_code+ "*" +ProphyDate2+ "*" +prophy2_code+ "*" +BabyDeliveredS3_code + "*" + Datedied33+ "*" +  deathcause33 + "*" +BabysDOB33 + "*" + BabySexS3_code + "*" + ProphyDate3+ "*" +prophy3_code+ "*" +BabyDeliveredS4_code + "*" + Datedied44+ "*" +deathcause44+"*" + BabysDOB44 + "*"+ BabySexS4_code+ "*" + ProphyDate4+ "*" +prophy4_code+ "*" +BabyDeliveredS5_code + "*" + Datedied55+ "*" +deathcause55+"*" + BabysDOB55 + "*"+ BabySexS5_code+ "*"+ProphyDate5+ "*" +prophy5_code+ "*" + MothersOutcomeS_code;
+        // String LD_data =  newCC + "*" + ANCVisit_NO1 + "*" + MotherTestedS_code+ "*" +hivResultsS_code+ "*" + deliveryDate1 + "*" +ModeDeliveryS_code + "*" + placeDeliveryS_code+ "*" + DeliveryOutcomeS_code + "*" + BabyDeliveredS_code + "*" + Datedied11+ "*" +deathcause11+"*" + BabysDOB11 + "*"+ BabySexS_code + "*" + BabyDeliveredS2_code + "*" +Datedied22 + "*" + deathcause22 + "*" + BabysDOB22 + "*" +  BabySexS2_code+ "*" +BabyDeliveredS3_code + "*" + Datedied33+ "*" +  deathcause33 + "*" +BabysDOB33 + "*" + BabySexS3_code + "*" + BabyDeliveredS4_code + "*" + Datedied44+ "*" +deathcause44+"*" + BabysDOB44 + "*"+ BabySexS4_code+ "*" + BabyDeliveredS5_code + "*" + Datedied55+ "*" +deathcause55+"*" + BabysDOB55 + "*"+ BabySexS5_code+ "*"+ MothersOutcomeS_code;
+        String enc = Base64Encoder.encryptString(LD_data);
+
+        //String enc2 =Base64Encoder.decryptedString(enc);
+
+
+        List<Activelogin> myl = Activelogin.findWithQuery(Activelogin.class, "select * from Activelogin");
+        for (int x = 0; x < myl.size(); x++) {
+
+            String un = myl.get(x).getUname();
+            List<Registrationtable> myl2 = Registrationtable.findWithQuery(Registrationtable.class, "select * from Registrationtable where username=? limit 1", un);
+            for (int y = 0; y < myl2.size(); y++) {
+
+                 phne = myl2.get(y).getPhone();
+//                                acs.sendDetailsToDb("Reg*"+sendSms+"/"+phne);
+               // acs.LDPost("lad*" + enc, phne);
+                try {
+                    List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+                    if (_url.size() == 1) {
+                        for (int xx = 0; xx < _url.size(); xx++) {
+                            z = _url.get(xx).getBase_url1();
+
+                           //6y all = "https://ushauriapi.kenyahmis.org/pmtct/anc";
+
+                        }
+                    }
+
+                } catch (Exception e) {
+
+                }
+                pr.showProgress("Sending Labor and Delivery Details Details.....");
+                final int[] mStatusCode = new int[1];
+
+                JSONObject payload = new JSONObject();
+                try {
+
+                    payload.put("msg", "anc*"+enc);
+                    payload.put("phone_no", phne);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Log.e("payload: ", payload.toString());
+
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, z+ Config.LDstart, payload,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+//                        Toast.makeText(ctx, "message "+response, Toast.LENGTH_SHORT).show();
+                                Log.e("Response: ", response.toString());
+                                pr.dissmissProgress();
+
+                                JSONObject jsonObject = null;
+                                JSONObject jsonObject1 = null;
+
+                                String mss =null;
+                                int cd =0;
+                                try {
+                                    int code22 =response.getInt("code");
+                                    mss =response.getString("message");
+                                    /*jsonObject = response.getJSONObject("code");
+                                    jsonObject1=response.getJSONObject("message");
+                                    String message1=jsonObject.getString("message");
+                                    int code1=jsonObject1.getInt("code");*/
+
+                                    if (code22==200){
+                                        // dialogs.showSuccessDialog(mss, "Server Response");
+
+                                        androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(LaborAndDeliveryStart.this);
+                                        builder1.setIcon(R.drawable.nascoplogonew);
+                                        builder1.setTitle(mss);
+                                        builder1.setMessage( "Server Response");
+                                        builder1.setCancelable(false);
+
+                                        builder1.setPositiveButton(
+                                                "OK",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int id) {
+
+                                                        Intent intent = new Intent(LaborAndDeliveryStart.this, LaborAndDelivery.class);
+                                                        startActivity(intent);
+
+
+                                                        //dialog.cancel();
+                                                    }
+                                                });
+
+
+                                        AlertDialog alert11 = builder1.create();
+                                        alert11.show();
+
+
+
+                                    }else{
+                                        dialogs.showErrorDialog(mss, "err");
+
+
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+
+
+
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                pr.dissmissProgress();
+
+                                try {
+
+                                    byte[] htmlBodyBytes = error.networkResponse.data;
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                                    dialogs.showErrorDialog(new String(htmlBodyBytes), "Server Response");
+
+                                    pr.dissmissProgress();
+
+                                } catch (Exception e) {
+
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                                    dialogs.showErrorDialog("error occured, try again", "Server Response");
+
+                                    pr.dissmissProgress();
+
+
+                                }
+
+
+                            }
+                        }) {
+
+
+                    @Override
+                    protected Map<String, String> getParams() {
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        headers.put("Content-Type", "application/json");
+                        headers.put("Accept", "application/json");
+                        return headers;
+                    }
+
+                };
+
+                RequestQueue requestQueue = Volley.newRequestQueue(LaborAndDeliveryStart.this);
+                requestQueue.add(jsonObjectRequest);
+
+//        RequestQueue requestQueue = Volley.newRequestQueue(ctx);
+//        requestQueue.add(stringRequest);
+
+            }
+        }
+
+
+            }
+
     }

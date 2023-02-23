@@ -115,6 +115,8 @@ public class Config extends AppCompatActivity {
 
     public static final String ANC="/pmtct/pnc";
     public static final String ANCstart="/pmtct/anc";
+    public static final String LDstart="/pmtct/lad";
+    public static final String PNCstart="/pmtct/pnc";
 
     /*
     https://ushauriapi.kenyahmis.org/pmtct/pnc

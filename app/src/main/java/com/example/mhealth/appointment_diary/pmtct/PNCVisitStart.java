@@ -1,8 +1,12 @@
 package com.example.mhealth.appointment_diary.pmtct;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,18 +18,44 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mhealth.appointment_diary.AccessServer.AccessServer;
 import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
+import com.example.mhealth.appointment_diary.Dialogs.Dialogs;
+import com.example.mhealth.appointment_diary.ProcessReceivedMessage.ProcessMessage;
+import com.example.mhealth.appointment_diary.Progress.Progress;
 import com.example.mhealth.appointment_diary.R;
+import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.encryption.Base64Encoder;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
+import com.example.mhealth.appointment_diary.tables.UrlTable;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class PNCVisitStart extends AppCompatActivity {
+
+    String phne, z;
+    Progress pr;
+    ProcessMessage pm;
+    Dialogs dialogs;
+    SweetAlertDialog mdialog;
+    Dialog mydialog;
+
 
     EditText PNC_VisitNo, PNC_ClinicNo,ANC_VisitNo,DateDied, DeathCause, BabyDOB,DateStarted;
     private int mYear, mMonth, mDay;
@@ -71,6 +101,19 @@ public class PNCVisitStart extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pncvisit_start);
+
+        try {
+
+            pr = new Progress(PNCVisitStart.this);
+            mydialog = new Dialog(PNCVisitStart.this);
+            dialogs=new Dialogs(PNCVisitStart.this);
+            pm=new ProcessMessage();
+
+        } catch (Exception e) {
+
+
+        }
+
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -135,7 +178,9 @@ public class PNCVisitStart extends AppCompatActivity {
                     Toast.makeText(PNCVisitStart.this, "Please PNC Clinic Number Visit", Toast.LENGTH_SHORT).show();
                 }else{
 
-                savePNC();}
+               // savePNC();
+                postPNC();
+                }
             }
         });
 
@@ -362,4 +407,169 @@ public class PNCVisitStart extends AppCompatActivity {
 
 
             }
-    }}}
+
+
+    }}
+
+public void postPNC() {
+
+    String det = BabyDOB.getText().toString();
+    String visit = PNC_VisitNo.getText().toString();
+    String clinic = PNC_ClinicNo.getText().toString();
+
+    String dieddt = DateDied.getText().toString();
+    String diedcause = DeathCause.getText().toString();
+
+
+    String PNC_data = newCC + "*" + det + "*" + visit + "*" + clinic + "*" + DeliveryMode_code + "*" + DeliveryPlace_code + "*" + Regimin_code + "*" + Immunization_code + "*" + Baby_Sexcode + "*" + Fp_code + "*" + MothersOutcome + "*" + dieddt + "*" + diedcause;
+    String enc = Base64Encoder.encryptString(PNC_data);
+
+    List<Activelogin> myl = Activelogin.findWithQuery(Activelogin.class, "select * from Activelogin");
+    for (int x = 0; x < myl.size(); x++) {
+
+        String un = myl.get(x).getUname();
+        List<Registrationtable> myl2 = Registrationtable.findWithQuery(Registrationtable.class, "select * from Registrationtable where username=? limit 1", un);
+        for (int y = 0; y < myl2.size(); y++) {
+
+            phne = myl2.get(y).getPhone();
+            try {
+                List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+                if (_url.size() == 1) {
+                    for (int xx = 0; xx < _url.size(); xx++) {
+                        z = _url.get(xx).getBase_url1();
+
+                        //all = "https://ushauriapi.kenyahmis.org/pmtct/anc";
+
+                    }
+                }
+
+            } catch (Exception e) {
+
+            }
+            pr.showProgress("Sending PNC Details.....");
+            final int[] mStatusCode = new int[1];
+
+            JSONObject payload = new JSONObject();
+            try {
+
+                payload.put("msg", "anc*"+enc);
+                payload.put("phone_no", phne);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            Log.e("payload: ", payload.toString());
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, z+ Config.PNCstart, payload,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+//                        Toast.makeText(ctx, "message "+response, Toast.LENGTH_SHORT).show();
+                            Log.e("Response: ", response.toString());
+                            pr.dissmissProgress();
+
+                            JSONObject jsonObject = null;
+                            JSONObject jsonObject1 = null;
+
+                            String mss =null;
+                            int cd =0;
+                            try {
+                                int code22 =response.getInt("code");
+                                mss =response.getString("message");
+                                    /*jsonObject = response.getJSONObject("code");
+                                    jsonObject1=response.getJSONObject("message");
+                                    String message1=jsonObject.getString("message");
+                                    int code1=jsonObject1.getInt("code");*/
+
+                                if (code22==200){
+                                    // dialogs.showSuccessDialog(mss, "Server Response");
+
+                                    androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(PNCVisitStart.this);
+                                    builder1.setIcon(R.drawable.nascoplogonew);
+                                    builder1.setTitle(mss);
+                                    builder1.setMessage( "Server Response");
+                                    builder1.setCancelable(false);
+
+                                    builder1.setPositiveButton(
+                                            "OK",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+
+                                                    Intent intent = new Intent(PNCVisitStart.this, PNCVisit.class);
+                                                    startActivity(intent);
+
+
+                                                    //dialog.cancel();
+                                                }
+                                            });
+
+
+                                    AlertDialog alert11 = builder1.create();
+                                    alert11.show();
+
+
+
+                                }else{
+                                    dialogs.showErrorDialog(mss, "err");
+
+
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            pr.dissmissProgress();
+
+                            try {
+
+                                byte[] htmlBodyBytes = error.networkResponse.data;
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                                dialogs.showErrorDialog(new String(htmlBodyBytes), "Server Response");
+
+                                pr.dissmissProgress();
+
+                            } catch (Exception e) {
+
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                                dialogs.showErrorDialog("error occured, try again", "Server Response");
+
+                                pr.dissmissProgress();
+
+
+                            }
+
+
+                        }
+                    }) {
+
+
+                @Override
+                protected Map<String, String> getParams() {
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    headers.put("Content-Type", "application/json");
+                    headers.put("Accept", "application/json");
+                    return headers;
+                }
+
+            };
+
+            RequestQueue requestQueue = Volley.newRequestQueue(PNCVisitStart.this);
+            requestQueue.add(jsonObjectRequest);
+
+//        RequestQueue requestQueue = Volley.newRequestQueue(ctx);
+//        requestQueue.add(stringRequest);
+
+
+
+
+        }}}}
