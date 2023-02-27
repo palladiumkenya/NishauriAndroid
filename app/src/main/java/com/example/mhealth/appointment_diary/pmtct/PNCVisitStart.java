@@ -35,6 +35,7 @@ import com.example.mhealth.appointment_diary.encryption.Base64Encoder;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
 import com.example.mhealth.appointment_diary.tables.UrlTable;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
@@ -94,8 +95,9 @@ public class PNCVisitStart extends AppCompatActivity {
 
     private String IMMUNIZATION = "";
 
-    LinearLayout pnclayout1, yLDlayout1, stillbirthlay,diededits;
-    TextInputLayout pncVlay, pncClay,Regimentil ;
+    LinearLayout pnclayout1, yLDlayout1, stillbirthlay,diededits,fpl1;
+    TextInputLayout pncVlay, pncClay,Regimentil;
+    TextInputEditText Regimenedt1;
     Button buttonSave;
 
 
@@ -154,6 +156,9 @@ public class PNCVisitStart extends AppCompatActivity {
         Regimentil=(TextInputLayout) findViewById(R.id.Regimentil);
 
         diededits=(LinearLayout) findViewById(R.id.diededits);
+        fpl1=(LinearLayout) findViewById(R.id.fpl);
+        Regimenedt1=(TextInputEditText) findViewById(R.id.Regimenedt);
+
 
 
 
@@ -375,6 +380,13 @@ public class PNCVisitStart extends AppCompatActivity {
                 F_P = FP[position];
 
                 Fp_code =Integer.toString(position);
+
+                if (Fp_code.contentEquals("1")){
+                    fpl1.setVisibility(View.VISIBLE);
+                }
+                else{
+                    fpl1.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -431,9 +443,10 @@ public void postPNC() {
 
     String dieddt = DateDied.getText().toString();
     String diedcause = DeathCause.getText().toString();
+    String Regspecify =Regimenedt1.getText().toString();
 
 
-    String PNC_data = newCC + "*" + det + "*" + visit + "*" + clinic + "*" + DeliveryMode_code + "*" + DeliveryPlace_code + "*" + Regimin_code + "*" + Immunization_code + "*" + Baby_Sexcode + "*" + Fp_code + "*" + MothersOutcome + "*" + dieddt + "*" + diedcause;
+    String PNC_data = newCC + "*" + det + "*" + visit + "*" + clinic + "*" + DeliveryMode_code + "*" + DeliveryPlace_code + "*" + Regimin_code + "*" +Regspecify+ "*" + Immunization_code + "*" + Baby_Sexcode + "*" + Fp_code + "*" + MothersOutcome + "*" + dieddt + "*" + diedcause;
     String enc = Base64Encoder.encryptString(PNC_data);
 
     List<Activelogin> myl = Activelogin.findWithQuery(Activelogin.class, "select * from Activelogin");
