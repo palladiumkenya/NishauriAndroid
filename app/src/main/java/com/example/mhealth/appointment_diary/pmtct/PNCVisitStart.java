@@ -68,14 +68,16 @@ public class PNCVisitStart extends AppCompatActivity {
     String[] MothersOutcome = {"", "Discharged", "Deceased",  "Transfered to CCC",  "Transfered to Another Facility"};
     String[] FP = {"", "Yes", "No"};
     String[] BabyMedication = {"", "AZT", "NVP", "CTX"};
-    String[] Immunization = {"", "Penta", "PSV"};
+    String[] Immunization = {"", "BCG", "OPV at Birth", "OPV 1", "OPV 2", "OPV 3", "IPV", "DPT/Hep B/Hib 1", "DPT/Hep B/Hib 2", "DPT/Hep B/Hib 3", "PCV 10 (Pneumoccal) 1","PCV 10 (Pneumoccal) 2", "PCV 10 (Pneumoccal) 3", "ROTA 1", "Measles/Rubella 1", "Yellow Fever", "Measles Rubella 2", "Measles at 6 months", "ROTA 2", "Vitamin A at 6 months (100,000 i.u)", "Vitamin A at 1 yr (200,000 i.u)",  "Vitamin A at 1 1/2yr (200,000 i.u)", "Vitamin A at 2yrs (200,000 i.u)", "Vitamin A at >2yrs-5yrs (200,000 i.u)" };
+
 
     String newCC;
 
 
     CheckInternet chkinternet;
     AccessServer acs;
-    String[] Regimen= {"", "TDF+3TC+EFV", "TDF+3TC+DTG", "TDF+3TC+DTG", "AZT+3TC+NVP", " AZT+3TC+EFV", "ABC+3TC+NVP", "ABC+3TC+EFV", " ABC+3TC+DTG", "ABC+3TC+LPV/r", " AZT+3TC+LPV/r+ RTV", "ART5TDF+3TC +ATV/r","ABC+3TC+DTG", "ABC+3TC+DTG", "ABC+3TC+ATV/r", "AZT+3TC+ATV/r", "AZT+3TC+DRV/r"};
+    String[] Regimen= {"", "ABC/3TC/NVP", "AZT/3TC/NVP","ABC/3TC/EFV", "TDF/3TC/AZT","AZT/3TC/DTG","ETR/RAL/DRV/RTV","AZT/3TC/LPV/r","AZT/TDF/3TC/LPV/r", "TDF/ABC/LPV/r", "ABC/TDF/3TC/LPV/r", "ETR/TDF/3TC/LPV/r", "ABC/3TC/LPV/r","D4T/3TC/LPV/r","ABC/DDI/LPV/r","TDF/3TC/NVP","AZT/3TC/EFV","TDF/3TC/ATV/r","AZT/3TC/ATV/r","D4T/3TC/EFV","AZT/3TC/ABC","TDF/3TC/DTG",   "TDF/3TC/LPV/r","ABC/3TC/ATV/r","TDF/3TC/DTG/DRV/r","TDF/3TC/RAL/DRV/r","TDF/3TC/DTG/EFV/DRV/r","ABC/3TC/RAL", "AZT/3TC/RAL/DRV/r", "ABC/3TC/RAL/DRV/r","RAL/3TC/DRV/RTV/AZT","RAL/3TC/DRV/RTV/ABC", "ETV/3TC/DRV/RTV", "RAL/3TC/DRV/RTV/TDF","RAL/3TC/DRV/RTV","Other (Specify)"};
+
     Spinner  BabySexS, FPS,ModeDeliveryS, placeDeliveryS, ImmunizationS, DeliveryOutcomeS, MothersOutcomeS, MotherTestedS, BabyDeliveredS, RegimenS, BabyMedicationS;
     String VisitType_code,DeliveryMode_code, Regimin_code, DeliveryPlace_code,Immunization_code, DeliveryOutcome_code,BabyDelivered_code, Baby_Sexcode, MothersOutcome_code,MotherTested_code, BabyMedication_code, Fp_code;
     private String CLIENT_VISIT_TYPE = "";
@@ -93,7 +95,7 @@ public class PNCVisitStart extends AppCompatActivity {
     private String IMMUNIZATION = "";
 
     LinearLayout pnclayout1, yLDlayout1, stillbirthlay,diededits;
-    TextInputLayout pncVlay, pncClay;
+    TextInputLayout pncVlay, pncClay,Regimentil ;
     Button buttonSave;
 
 
@@ -148,6 +150,8 @@ public class PNCVisitStart extends AppCompatActivity {
         RegimenS=(Spinner) findViewById(R.id.RegimenS);
         ImmunizationS=(Spinner) findViewById(R.id.BabyImmunization1);
         MothersOutcomeS=(Spinner) findViewById(R.id.mOutcome);
+
+        Regimentil=(TextInputLayout) findViewById(R.id.Regimentil);
 
         diededits=(LinearLayout) findViewById(R.id.diededits);
 
@@ -254,6 +258,14 @@ public class PNCVisitStart extends AppCompatActivity {
 
                 REGIMEN = Regimen[position];
                Regimin_code =Integer.toString(position);
+
+               if (Regimin_code.contentEquals("35")){
+                   Regimentil.setVisibility(View.VISIBLE);
+                  // Toast.makeText(PNCVisitStart.this, "Other selected", Toast.LENGTH_SHORT).show();
+               }
+               else{
+                   Regimentil.setVisibility(View.GONE);
+               }
             }
 
             @Override

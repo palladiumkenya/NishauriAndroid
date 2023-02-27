@@ -2,14 +2,18 @@ package com.example.mhealth.appointment_diary.pmtct;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -17,8 +21,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
+import com.example.mhealth.appointment_diary.Dialogs.Dialogs;
+import com.example.mhealth.appointment_diary.Dialogs.ErrorMessage;
+import com.example.mhealth.appointment_diary.ProcessReceivedMessage.ProcessMessage;
+import com.example.mhealth.appointment_diary.Progress.Progress;
 import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.config.Config;
+import com.example.mhealth.appointment_diary.config.VolleyErrors;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
 import com.example.mhealth.appointment_diary.tables.UrlTable;
@@ -27,15 +36,32 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class LaborAndDelivery extends AppCompatActivity {
 
     Button startvisit,searchbtn;
+    String messagez;
     LinearLayout details;
     String z, phone;
     EditText ccno,clinicno,fname,Mname,lname,dobi,reg, upino;
     CheckInternet checkInternet;
+
+   // public String z;
+
+    Context ctx;
+    public String all;
+    Progress pr;
+    ProcessMessage pm;
+    Dialogs dialogs;
+    SweetAlertDialog mdialog;
+    Dialog mydialog;
+    private JSONArray id_result;
+
+    boolean xx;
 
 
     @Override
@@ -43,6 +69,18 @@ public class LaborAndDelivery extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_labor_and_delivery);
         checkInternet= new CheckInternet(LaborAndDelivery.this);
+
+        try {
+            this.ctx = ctx;
+            pr = new Progress(ctx);
+            mydialog = new Dialog(ctx);
+            dialogs=new Dialogs(ctx);
+            pm=new ProcessMessage();
+
+        } catch (Exception e) {
+
+
+        }
 
         try{
             //getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -132,6 +170,8 @@ public class LaborAndDelivery extends AppCompatActivity {
             public void onResponse(JSONArray response) {
                 //Toast.makeText(LaborAndDelivery.this, "SUCCESS", Toast.LENGTH_SHORT).show();
                 details.setVisibility(View.VISIBLE);
+
+
                 for (int i=0; i<response.length(); i++){
                     try {
                         JSONObject jsonObject =response.getJSONObject(i);
@@ -145,14 +185,6 @@ public class LaborAndDelivery extends AppCompatActivity {
                         String upi_no =jsonObject.getString("upi_no");
 
 
-                     /*String upi_no =jsonObject.getString("upi_no");
-                     String f_name =jsonObject.getString("f_name");
-                     String m_name =jsonObject.getString("m_name");
-                     String l_name =jsonObject.getString("l_name");
-                     String dob =jsonObject.getString("dob");
-                     String currentregimen =jsonObject.getString("currentregimen");*/
-
-
                         clinicno.setText(clinicnumber);
                         fname.setText(f_name);
                         Mname.setText(m_name);
@@ -160,6 +192,9 @@ public class LaborAndDelivery extends AppCompatActivity {
                         reg.setText(currentregimen);
                         dobi.setText(dob);
                         upino.setText(upi_no);
+                      //  dialogs.showSuccessDialog(messagez, "server response");
+
+
                      /*clinicno.setText(upi_no);
                      fname.setText(f_name);
                      Mname.setText(m_name);
@@ -179,43 +214,70 @@ public class LaborAndDelivery extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(LaborAndDelivery.this, error.getMessage(), Toast.LENGTH_LONG).show();
                 details.setVisibility(View.GONE);
-                Toast.makeText(LaborAndDelivery.this, error.getMessage(), Toast.LENGTH_SHORT).show();
 
 
-                ////
-
-                // try {
-                // String  body = new String(error.networkResponse.data, "UTF-8");
-                    /*String  body = new String(error.networkResponse.data, "UTF-8");
-
-                    JSONObject json = new JSONObject(body);*/
-                //                            Log.e("error response : ", json.toString());
-
-                     /*JSONObject json1 = new JSONObject(error.getMessage());
-                    String message = json1.has("message") ? json1.getString("message") : "";
-                    String reason = json1.has("reason") ? json1.getString("reason") : "";
-
-                    Toast.makeText(PNCVisit.this, message, Toast.LENGTH_SHORT).show();*/
+                //  Toast.makeText(LaborAndDelivery.this, error.getMessage(), Toast.LENGTH_LONG).show();
+               /* NetworkResponse networkResponse = error.networkResponse;
+                if (networkResponse != null && networkResponse.data != null) {
+                    String jsonError = new String(networkResponse.data);
+                    Log.d(jsonError, "server Error");
+                    Toast.makeText(LaborAndDelivery.this, jsonError, Toast.LENGTH_LONG).show();
+                    // Print Error!
+                }*/
+               /* try {
 
 
-                // }
-              /*catch (JSONException e) {
+                    JSONObject JO = new JSONObject(error.getMessage());
+                    Toast.makeText(LaborAndDelivery.this, JO.toString(), Toast.LENGTH_LONG).show();
+
+                }catch (JSONException e){
+
                     e.printStackTrace();
                 }*/
-            }
 
-            ////
-               /* NetworkResponse response = error.networkResponse;
+                //Toast.makeText(LaborAndDelivery.this, error.getMessage(), Toast.LENGTH_LONG).show();
 
-                if(response != null && response.data != null) {
+
+              //  pr.dissmissProgress();
+
+               /* try{
+
+                    byte[] htmlBodyBytes = error.networkResponse.data;
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                    dialogs.showErrorDialog(new String(htmlBodyBytes),"Server Response");
+
+                  //  pr.dissmissProgress();
+
+                }
+                catch(Exception e){
+
+
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                    dialogs.showErrorDialog("error occured, try again","Server Response");
+
+                    pr.dissmissProgress();
+
+
+                }*/
+
+
+                //dialogs.showErrorDialog(messagez, "server error");
+
+              /* Toast.makeText(LaborAndDelivery.this, error.toString(), Toast.LENGTH_SHORT).show();
+                NetworkResponse response = error.networkResponse;
+                if(response != null && response.data != null){
                     String body;
                     //get status code here
                     String statusCode = String.valueOf(error.networkResponse.statusCode);
                     //get response body and parse with appropriate encoding
-                    if (error.networkResponse.data != null) {
+                    if(error.networkResponse.data!=null) {
                         try {
-                            body = new String(error.networkResponse.data, "UTF-8");
+                            body = new String(error.networkResponse.data,"UTF-8");
 
                             JSONObject json = new JSONObject(body);
                             //                            Log.e("error response : ", json.toString());
@@ -224,18 +286,26 @@ public class LaborAndDelivery extends AppCompatActivity {
                             String message = json.has("message") ? json.getString("message") : "";
                             String reason = json.has("reason") ? json.getString("reason") : "";
 
-                            Toast.makeText(PNCVisit.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                           /* ErrorMessage bottomSheetFragment = ErrorMessage.newInstance(message,reason,context);
+                            bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());*/
 
+                          /*  dialogs.showErrorDialog(message, "server response");
 
                         } catch (UnsupportedEncodingException | JSONException e) {
                             e.printStackTrace();
                         }
                     }
 
+                }else {
+                   // dialogs.showErrorDialog(VolleyErrors.getVolleyErrorMessages(error, LaborAndDelivery.this), "server response");
 
-                }
-
+                    Log.e("VOlley error :", error.getLocalizedMessage()+" message:"+error.getMessage());
+                    Toast.makeText(LaborAndDelivery.this, VolleyErrors.getVolleyErrorMessages(error, LaborAndDelivery.this),Toast.LENGTH_LONG).show();
                 }*/
+
+
+
+            }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(LaborAndDelivery.this);
         requestQueue.add(jsonArrayRequest);

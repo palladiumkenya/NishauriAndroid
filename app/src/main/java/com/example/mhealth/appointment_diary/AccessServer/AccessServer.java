@@ -45,6 +45,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Handler;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -573,6 +574,7 @@ public class AccessServer {
     //start get defaulter messages
 
     public void getDefaultersAppointmentMessages(final String phone){
+
         try{
             List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
             if (_url.size()==1){

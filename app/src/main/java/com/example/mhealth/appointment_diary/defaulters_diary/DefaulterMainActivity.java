@@ -2,7 +2,6 @@ package com.example.mhealth.appointment_diary.defaulters_diary;
 
 import android.app.Activity;
 import android.app.AlarmManager;
-import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -10,12 +9,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Parcelable;
 import android.os.SystemClock;
-
-import com.example.mhealth.appointment_diary.Dialogs.Dialogs;
-import com.example.mhealth.appointment_diary.Progress.Progress;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -85,7 +80,6 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
     private final int RC_HINT = 2;
 
     ProcessMessage pm;
-    Progress pr;
 
     @NotNull
     private final SmsReceiver smsBroadcast = new SmsReceiver();
@@ -111,14 +105,6 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
         Log.d(TAG, "onCreate: Starting.");
 
         //SSLTrust.nuke();
-
-        try {
-            pr = new Progress(DefaulterMainActivity.this);
-
-        } catch (Exception e) {
-
-
-        }
 
         initialise();
         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
@@ -194,7 +180,7 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
                             }
                         }; handler.post(runnable);
 
-                       // missedFrag = (MissedFragment) adapter.getItem(index);
+                        // missedFrag = (MissedFragment) adapter.getItem(index);
 
 
 
@@ -307,15 +293,7 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
         switch (id) {
 
             case R.id.action_search2:
-
-
-                        // accessing data from database or creating network call
-                        //acs.getDefaultersAppointmentMessages(getUserPhoneNumber());
-
-                        handleMenuSearch();
-                       // Toast.makeText(DefaulterMainActivity.this, "Task is Completed.", Toast.LENGTH_SHORT).show();
-
-               // handleMenuSearch();
+                handleMenuSearch();
                 return true;
 
             case R.id.logout:
@@ -368,12 +346,7 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
 //                    Toast.makeText(getApplicationContext(), "searching", Toast.LENGTH_SHORT).show();
-
-                            try {
-                          doSearching(s);}
-                            catch (Exception e){
-                                e.printStackTrace();
-                            }
+                    doSearching(s);
 
                 }
 
@@ -435,18 +408,16 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
             public void onClick(View view) {
 
                 if (chkInternet.isInternetAvailable()) {
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run(){
-                            // accessing data from database or creating network call
-                            pr.showProgress("Sending message...");
-                            loadMessagesOnline();
-                            pr.dissmissProgress();
-                            //Toast.makeText(DefaulterMainActivity.this, "Task is Completed.", Toast.LENGTH_SHORT).show();
-                        }
-                    }).start();
 
-                   // loadMessagesOnline();
+                    Toast.makeText(DefaulterMainActivity.this, "going online", Toast.LENGTH_SHORT).show();
+                    Handler handler = new Handler();
+                    Runnable runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            loadMessagesOnline();
+                        }
+                    }; handler.post(runnable);
+                    // loadMessagesOnline();
 
 //        triggerAppointmentMessages();
 
@@ -485,37 +456,21 @@ public class DefaulterMainActivity extends AppCompatActivity implements SmsRecei
 
         if (chkInternet.isInternetAvailable()) {
 
-                    /*pr.showProgress("Sending message...");
+            Handler handler = new Handler();
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
                     acs.getDefaultersAppointmentMessages(getUserPhoneNumber());
-                    pr.dissmissProgress();*/
+                }
+            }; handler.post(runnable);
 
-                    Handler handler = new Handler(Looper.getMainLooper());
-                    Runnable runnable =new Runnable() {
-                        @Override
-                        public void run() {
-                            pr.showProgress("Sending message...");
-
-                            acs.getDefaultersAppointmentMessages(getUserPhoneNumber());
-                            pr.dissmissProgress();
-
-
-                        }
-                    };
-
-                    // accessing data from database or creating network call
-                    // Toast.makeText(this, "Task is Completed.", Toast.LENGTH_SHORT).show();
-
-
-                  //  acs.getDefaultersAppointmentMessages(getUserPhoneNumber());
-
-
-           // acs.getDefaultersAppointmentMessages(getUserPhoneNumber());
+            // acs.getDefaultersAppointmentMessages(getUserPhoneNumber());
 
         } else {
 
         }
 
-//        popuateListView();
+//        populateListView();
     }
 
 

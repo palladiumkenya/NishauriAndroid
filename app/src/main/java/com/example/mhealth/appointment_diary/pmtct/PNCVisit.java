@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mhealth.appointment_diary.Checkinternet.CheckInternet;
+import com.example.mhealth.appointment_diary.Dialogs.Dialogs;
 import com.example.mhealth.appointment_diary.Dialogs.ErrorMessage;
 import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.config.Config;
@@ -43,12 +44,14 @@ public class PNCVisit extends AppCompatActivity {
     EditText ccno,clinicno,fname,Mname,lname,dobi,reg, upino;
 
     CheckInternet chkinternet;
+    Dialogs dialogs;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pncvisit);
+       dialogs=new Dialogs(PNCVisit.this);
         chkinternet=new CheckInternet(PNCVisit.this);
         try{
             //getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -171,8 +174,22 @@ public class PNCVisit extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 details.setVisibility(View.GONE);
-                Toast.makeText(PNCVisit.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                try {
 
+                    byte[] htmlBodyBytes = error.networkResponse.data;
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                    dialogs.showErrorDialog(new String(htmlBodyBytes), "Server Response");
+
+
+                } catch (Exception e) {
+
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                    dialogs.showErrorDialog("error occured, try again" + error.getMessage(), "Server Response");
+
+
+                }
 
                 ////
 

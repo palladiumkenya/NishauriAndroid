@@ -93,7 +93,7 @@ public class LosttoFollowAdapter extends BaseAdapter implements Filterable {
     public LosttoFollowAdapter(Context cont, List<LosttoFollowModel> mlist){
 
         this.mycont=cont;
-        mylist5=new ArrayList<>();
+        //mylist5=new ArrayList<>();
         this.mylist5=mlist;
         this.filterList=mlist;
 
@@ -101,14 +101,6 @@ public class LosttoFollowAdapter extends BaseAdapter implements Filterable {
     }
     @Override
     public int getCount() {
-        try {
-            if (mylist5!=null)
-
-            return mylist5.size();
-            Log.d("Count", "Null");
-        }catch (Exception e ){
-
-        }
         return mylist5.size();
     }
 
