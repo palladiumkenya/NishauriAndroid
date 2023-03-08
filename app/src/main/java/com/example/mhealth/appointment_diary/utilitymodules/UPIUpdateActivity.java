@@ -94,6 +94,7 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
     String[] smss = {"", "Yes", "No"};
     public String z;
     String county1;
+    public String zz;
 
     ArrayList<String> countriesList;
     ArrayList<Country> countries;
@@ -215,7 +216,7 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
         setSpinnerListeners();
         getcountiesbirth();
         getCountries();
-        //getFacilities();
+        getFacilities();
         //populateGender();
 
         if (savedInstanceState == null) {
@@ -353,8 +354,22 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
     public void getdetails1() {
         //?client_id=MOH1668675613
         //  AndroidNetworking.get("https://ushauriapi.kenyahmis.org/mohupi/search?client_id=MOH1668675613")
+
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    zz=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+
         String urls = "?client_id=" + newUpi;
-        AndroidNetworking.get("https://ushauriapi.kenyahmis.org/mohupi/search" + urls)
+        //zz+Config.UPIERR_DETAILS+ urls
+        AndroidNetworking.get(zz+Config.UPIERR_DETAILS+ urls)
 
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -377,11 +392,10 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                             try {
 
                                 JSONObject jsonObject = response.getJSONObject("message");
-
                                 fname = jsonObject.getString("f_name");
                                 file = jsonObject.getString("file_no");
                                 mname = jsonObject.getString("m_name");
-                                //Toast.makeText(UPIUpdateActivity.this, "sucess"+mname, Toast.LENGTH_SHORT).show();
+
                                 lname = jsonObject.getString("l_name");
                                 dob1 = jsonObject.getString("dob");
                                 Idno = jsonObject.getString("national_id");
@@ -393,17 +407,16 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                                 genderid = jsonObject.getInt("gender");
                                 marital_id = jsonObject.getInt("marital");
                                 sms_id= jsonObject.getString("smsenable");
-                               // county1 =jsonObject.getString("locator_county");
-                               // county_code1 = Integer.parseInt(jsonObject.getString("locator_county"));
                                 county_code1 = Integer.parseInt(jsonObject.getString("locator_county"));
                                 scounty_code1= Integer.parseInt(jsonObject.getString("locator_sub_county"));
                                 ward_code1= Integer.parseInt(jsonObject.getString("locator_ward"));
-
-                              //  Log.d("COUNTY",String.valueOf(countyID));
                                 Log.d("COUNTY",String.valueOf(county_code1));
 
+                                // county1 =jsonObject.getString("locator_county");
+                               // county_code1 = Integer.parseInt(jsonObject.getString("locator_county"));
 
-                            } catch (JSONException e) {
+
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                             f_name.setText(fname);
@@ -417,14 +430,14 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                             phone.setText(Phone);
                             gender_code = genderid;
                             marital_code = marital_id;
-                            sms_code=sms_id;
+                           // sms_code=sms_id;
+                            populateGender();
+                            populateMarital();
+                           // populateSms();
                             /*county_code1=countyID;
                             scounty_code1=scountyID;
                             ward_code1=wardID;*/
-                            populateGender();
-                            populateMarital();
-                            populateSms();
-                           getFacilities();
+                         //  getFacilities();
 
                             Log.d("SMS", sms_code);
                             // Toast.makeText(UPIUpdateActivity.this, gender_code, Toast.LENGTH_SHORT).show();
@@ -438,6 +451,7 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
 
                     @Override
                     public void onError(ANError anError) {
+                        Toast.makeText(UPIUpdateActivity.this, anError.getErrorDetail(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -1253,7 +1267,7 @@ public  void update1(){
 
                 String url ="https://ushauriapi.kenyahmis.org/mohupi/getupdateUPI";
 
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, z+Config.POSTUPI_DETAILS,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
@@ -1265,7 +1279,7 @@ public  void update1(){
 
                                     androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(UPIUpdateActivity.this);
                                     builder1.setIcon(android.R.drawable.ic_dialog_alert);
-                                    builder1.setTitle("Client's updated");
+                                    builder1.setTitle("Client's Detail Updated");
                                     builder1.setMessage( "Server Response");
                                     builder1.setCancelable(false);
 

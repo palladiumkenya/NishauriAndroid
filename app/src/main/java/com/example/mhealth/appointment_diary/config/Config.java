@@ -52,7 +52,10 @@ public class Config extends AppCompatActivity {
     public static final String CALENDER_LIST="/appnt/applist";
     public static final String SEARCHANCPNC="/pmtct/search";
 
-    public static final String UPIERR="/mohupi/geterrorlist";
+    public static final String UPIERRLIST="/mohupi/geterrorlist";
+
+    public static final String UPIERR_DETAILS="/mohupi/search";
+    public static final String POSTUPI_DETAILS="/mohupi/getupdateUPI";
 
 
     //https://ushauriapi.kenyahmis.org

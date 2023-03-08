@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -174,9 +175,12 @@ public class PNCVisit extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 details.setVisibility(View.GONE);
+
                 try {
 
                     byte[] htmlBodyBytes = error.networkResponse.data;
+
+
 
 //                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
                     dialogs.showErrorDialog(new String(htmlBodyBytes), "Server Response");
@@ -186,7 +190,7 @@ public class PNCVisit extends AppCompatActivity {
 
 
 //                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
-                    dialogs.showErrorDialog("error occured, try again" + error.getMessage(), "Server Response");
+                    dialogs.showErrorDialog(" " + error.getMessage(), "Server Response");
 
 
                 }

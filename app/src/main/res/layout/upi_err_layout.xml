@@ -6,14 +6,14 @@
 
    <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="28dp"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:weightSum="3">
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1.40"
+        android:layout_weight="1"
         android:gravity="left"
         android:textStyle="bold"
         android:text="CCC Number"
@@ -24,7 +24,7 @@
         android:id="@+id/ccnumber"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="1.40"
         android:gravity="left"
         android:padding="5dp"
         android:text="CCC number"
@@ -34,14 +34,14 @@
 
 <LinearLayout
 android:layout_width="match_parent"
-android:layout_height="28dp"
+android:layout_height="wrap_content"
 android:orientation="horizontal"
 android:weightSum="3">
 
 <TextView
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_weight="1.39"
+    android:layout_weight="1"
     android:gravity="left"
     android:textStyle="bold"
 
@@ -53,7 +53,7 @@ android:weightSum="3">
     android:id="@+id/upi"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_weight="1"
+    android:layout_weight="1.39"
     android:gravity="left"
     android:padding="5dp"
     android:text="UPI Number"
@@ -63,14 +63,14 @@ android:weightSum="3">
 
 <LinearLayout
 android:layout_width="match_parent"
-android:layout_height="32dp"
+android:layout_height="wrap_content"
 android:orientation="horizontal"
 android:weightSum="3">
 
 <TextView
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_weight="1.39"
+    android:layout_weight="1"
     android:gravity="left"
     android:textStyle="bold"
     android:padding="5dp"
@@ -81,7 +81,7 @@ android:weightSum="3">
     android:id="@+id/Clientname"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_weight="1"
+    android:layout_weight="1.39"
     android:gravity="left"
     android:padding="5dp"
     android:text="Error Description"
@@ -155,18 +155,22 @@ android:weightSum="3">
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
 android:orientation="horizontal"
-android:weightSum="4">
+android:weightSum="3">
 
 
 <Button
     android:id="@+id/confirm"
-    android:layout_width="match_parent"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="60dp"
+
     android:background="@drawable/mybutton"
     android:gravity="center"
+    android:layout_weight="1"
     android:padding="5dp"
     android:text="Update"
+    android:layout_marginBottom="5dp"
+    android:layout_marginStart="5dp"
+
     android:textSize="13sp" />
 
 

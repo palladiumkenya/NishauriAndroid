@@ -43,7 +43,7 @@ public class LosttoFollowFragment extends Fragment {
     long diffdate;
 
     private LosttoFollowAdapter myadapt;
-    private List<LosttoFollowModel> mymesslist=new ArrayList<>();
+    private List<LosttoFollowModel> mymesslist;
 
     ArrayList<String> smsMessagesList = new ArrayList<>();
     ListView messages5;

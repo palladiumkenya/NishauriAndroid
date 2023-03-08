@@ -5,7 +5,7 @@ public class UpiErrModel {
    // String clinic_number, f_name, m_name, l_name,  phone_no, upi_no, file_no;
 
 
-    String clientNumber, errorDescription, nascopCccNumber;
+   public String clientNumber, errorDescription, nascopCccNumber;
 
     public UpiErrModel() {
     }

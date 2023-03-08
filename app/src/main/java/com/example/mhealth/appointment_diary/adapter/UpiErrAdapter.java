@@ -55,9 +55,7 @@ public class UpiErrAdapter extends BaseAdapter implements Filterable {
 
     public UpiErrAdapter(Context mycont, List<UpiErrModel> mylist) {
         this.mycont = mycont;
-
         this.mylist = mylist;
-
         this.filterList=mylist;
       //  mylist=new ArrayList<>();
     }
@@ -66,10 +64,10 @@ public class UpiErrAdapter extends BaseAdapter implements Filterable {
     @Override
     public int getCount() {
 
-        if (mylist==null){
+        /*if (mylist==null){
             return 0;
 
-        }
+        }*/
         return mylist.size();
     }
 
@@ -170,8 +168,8 @@ public class UpiErrAdapter extends BaseAdapter implements Filterable {
 
                 for (int i = 0; i < filterList.size(); i++) {
 
-                    if (filterList.get(i).getClientNumber().toUpperCase().contains(constraint) || filterList.get(i).getNascopCccNumber().toUpperCase().contains(constraint)) {
-                     UpiErrModel am = new UpiErrModel(filterList.get(i).getClientNumber(), filterList.get(i).getNascopCccNumber(), filterList.get(i).getErrorDescription());
+                    if (filterList.get(i).clientNumber.toUpperCase().contains(constraint) || filterList.get(i).nascopCccNumber.toUpperCase().contains(constraint)) {
+                     UpiErrModel am = new UpiErrModel(filterList.get(i).getClientNumber(), filterList.get(i).getErrorDescription(), filterList.get(i).getNascopCccNumber());
                         filters.add(am);
                     }
                 }

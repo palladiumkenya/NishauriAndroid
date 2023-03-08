@@ -93,7 +93,6 @@ public class LosttoFollowAdapter extends BaseAdapter implements Filterable {
     public LosttoFollowAdapter(Context cont, List<LosttoFollowModel> mlist){
 
         this.mycont=cont;
-        //mylist5=new ArrayList<>();
         this.mylist5=mlist;
         this.filterList=mlist;
 
@@ -1574,45 +1573,46 @@ public class LosttoFollowAdapter extends BaseAdapter implements Filterable {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
 
+            FilterResults results=new FilterResults();
+            if(constraint!=null && constraint.length()>0){
 
-                FilterResults results = new FilterResults();
-                if (constraint != null && constraint.length() > 0) {
+                constraint=constraint.toString().toUpperCase();
+                ArrayList<LosttoFollowModel> filters=new ArrayList<LosttoFollowModel>();
 
-                    constraint = constraint.toString().toUpperCase();
-                    ArrayList<LosttoFollowModel> filters = new ArrayList<LosttoFollowModel>();
+                for(int i=0;i<filterList.size();i++){
 
-                    for (int i = 0; i < filterList.size(); i++) {
+                    if( filterList.get(i).ccnumber.toUpperCase().contains(constraint) || filterList.get(i).phone.toUpperCase().contains(constraint) || filterList.get(i).fileserial.toUpperCase().contains(constraint
+                    )){
 
-                        if (filterList.get(i).getThename().toUpperCase().contains(constraint) || filterList.get(i).ccnumber.toUpperCase().contains(constraint) || filterList.get(i).apptype.toUpperCase().contains(constraint)) {
 
-                            LosttoFollowModel am = new LosttoFollowModel(filterList.get(i).getCcnumber(), filterList.get(i).getThename(), filterList.get(i).getPhone(), filterList.get(i).getApptype(), filterList.get(i).getDate(), filterList.get(i).getRead(), filterList.get(i).getPatientid(), filterList.get(i).getFileserial(), filterList.get(i).getInformantnumber(), filterList.get(i).getLastdateread(), filterList.get(i).getReadcount());
-                            filters.add(am);
-                        }
+                        LosttoFollowModel am=new LosttoFollowModel(filterList.get(i).getCcnumber(),filterList.get(i).getThename(),filterList.get(i).getPhone(),filterList.get(i).getApptype(),filterList.get(i).getDate(),filterList.get(i).getRead(),filterList.get(i).getPatientid(),filterList.get(i).getFileserial(),filterList.get(i).getInformantnumber(),filterList.get(i).getLastdateread(),filterList.get(i).getReadcount());
+                        filters.add(am);
                     }
-
-                    results.count = filters.size();
-                    results.values = filters;
-
-                } else {
-
-                    results.count = filterList.size();
-                    results.values = filterList;
-
                 }
-                return results;
 
-        }
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            try{
-
-            mylist5= (List<LosttoFollowModel>) results.values;
-
-            notifyDataSetChanged();}catch (Exception e){
+                results.count=filters.size();
+                results.values=filters;
 
             }
 
-           // notifyDataSetChanged();
+            else{
+
+                results.count=filterList.size();
+                results.values=filterList;
+
+            }
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+
+            mylist5= (List<LosttoFollowModel>) results.values;
+
+            try{
+                notifyDataSetChanged();}catch (Exception e){
+
+            }
 
         }
     }

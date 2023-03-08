@@ -466,13 +466,13 @@ public class MainOptions extends AppCompatActivity {
                 }
 
 
-                if(diffdate == 89)
+                if(diffdate == 29)
                 {
 
                     Alerter.create(this)
                             .setTitle(" DEFAULTER VISIT Final Feedback required")
                             .setIcon(R.mipmap.ic_launcher)
-                            .setText("Day 90 is nearer,  " +
+                            .setText("Day 30 is nearer,  " +
                                     "Kindly give final feedback on each patients in DEFAULTER VISIT SECTION " +
                                     "CLICK HERE.")
                             .setDuration(1000000000)

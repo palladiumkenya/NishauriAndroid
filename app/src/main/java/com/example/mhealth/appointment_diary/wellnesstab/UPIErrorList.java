@@ -452,8 +452,19 @@ public class UPIErrorList extends AppCompatActivity {
         }
 
         jsonArray.put(jsonObject);
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
-        AndroidNetworking.post("https://ushauriapi.kenyahmis.org/mohupi/geterrorlist")
+        } catch(Exception e){
+
+        }
+
+        AndroidNetworking.post(z+Config.UPIERRLIST)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Connection","keep-alive")
                 .addHeaders("Accept", "application/json")
@@ -464,7 +475,14 @@ public class UPIErrorList extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
 
-                Log.d("", response.toString());
+                Log.d("SERVER RESPONSE", response.toString());
+
+                String test =response.toString();
+
+                if (test==null){
+                    Toast.makeText(UPIErrorList.this, "success", Toast.LENGTH_SHORT).show();
+
+                }
 
                 //Toast.makeText(UPIErrorList.this, "success"+response, Toast.LENGTH_SHORT).show();
                 upilist= new ArrayList<>();
@@ -510,7 +528,9 @@ public class UPIErrorList extends AppCompatActivity {
             @Override
             public void onError(ANError anError) {
 
-                Log.d("", anError.getErrorDetail());
+                Toast.makeText(UPIErrorList.this, anError.getMessage(), Toast.LENGTH_LONG).show();
+
+                Log.d("", anError.getMessage());
 
             }
         });
