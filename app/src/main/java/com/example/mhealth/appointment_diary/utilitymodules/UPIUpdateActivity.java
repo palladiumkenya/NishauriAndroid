@@ -66,9 +66,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,6 +97,8 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
     public String z;
     String county1;
     public String zz;
+   String enroldate_format;
+
 
     ArrayList<String> countriesList;
     ArrayList<Country> countries;
@@ -165,6 +169,7 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
         setContentView(R.layout.activity_upiupdate);
         chkinternet=new CheckInternet(UPIUpdateActivity.this);
         dialogs =new Dialogs(UPIUpdateActivity.this);
+        pr = new Progress(UPIUpdateActivity.this);
 
 
         rq = Volley.newRequestQueue(UPIUpdateActivity.this);
@@ -352,6 +357,7 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
     }
 
     public void getdetails1() {
+        pr.showProgress("Getting Clients Details");
         //?client_id=MOH1668675613
         //  AndroidNetworking.get("https://ushauriapi.kenyahmis.org/mohupi/search?client_id=MOH1668675613")
 
@@ -380,6 +386,7 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        pr.dissmissProgress();
                         //Toast.makeText(UPIUpdateActivity.this, "sucess", Toast.LENGTH_SHORT).show();
                         try {
                             a = response.getBoolean("success");
@@ -401,7 +408,13 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                                 Idno = jsonObject.getString("national_id");
                                 Birthno = jsonObject.getString("birth_cert_no");
                                 Enrollment_date = jsonObject.getString("enrollment_date");
+                                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                               // enroldate_format = format.format(Enrollment_date);
+
+
                                 Art_date = jsonObject.getString("art_date");
+
+
                                 Phone = jsonObject.getString("phone_no");
 
                                 genderid = jsonObject.getInt("gender");
@@ -426,6 +439,10 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                             idno.setText(Idno);
                             birthno.setText(Birthno);
                             enrollment_date.setText(Enrollment_date);
+                            //enroldate_format = new SimpleDateFormat("yyyy.MM.dd").format(Enrollment_date);
+                           // SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            //enrollment_date=format.format(Enrollment_date);
+                           // enrollment_date.setText(enroldate_format);
                             art_date.setText(Art_date);
                             phone.setText(Phone);
                             gender_code = genderid;
@@ -437,14 +454,15 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                             /*county_code1=countyID;
                             scounty_code1=scountyID;
                             ward_code1=wardID;*/
-                         //  getFacilities();
+                           //getFacilities();
 
                             Log.d("SMS", sms_code);
                             // Toast.makeText(UPIUpdateActivity.this, gender_code, Toast.LENGTH_SHORT).show();
 
                             o_name.setText(lname);
                         } else {
-                            Toast.makeText(UPIUpdateActivity.this, "No record found", Toast.LENGTH_SHORT).show();
+                            dialogs.showSuccessDialog("", "No record found" );
+                            //Toast.makeText(UPIUpdateActivity.this, "No record found", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -703,7 +721,8 @@ public class UPIUpdateActivity extends AppCompatActivity implements AdapterView.
                     // if (ServiceSpinner != null){
                     ServiceSpinner.setAdapter(aa);
                     //ServiceSpinner.setSelection(countyID);
-                    ServiceSpinner.setSelection(aa.getCount() - 1);
+                    //ServiceSpinner.setSelection(county_code1);
+                   ServiceSpinner.setSelection(aa.getCount() - 1);
                     countyID = countiess.get(aa.getCount() - 1).getId();
 
 
@@ -1583,6 +1602,7 @@ public  void update1(){
 
                     // if (ServiceSpinner != null){
                     countrySpinner.setAdapter(aa);
+                  //  countrySpinner.setSelection(aa.getCount() - 1);
                     countrySpinner.setSelection(aa.getCount() - 1);
 
                     countryID = countries.get(aa.getCount() - 1).getId();
