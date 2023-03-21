@@ -40,6 +40,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Objects;
 
 public class ANCVisit extends AppCompatActivity {
     /*String[] clientIs = {"","Pregnant", "Pregnant and Breastfeeding"};
@@ -50,12 +51,19 @@ public class ANCVisit extends AppCompatActivity {
 
     Button startvisit,searchbtn;
     LinearLayout details;
-    String z, phone;
+    String z, phone,y;
     EditText ccno,clinicno,fname,Mname,lname,dobi,reg, upino;
     Dialogs dialogs;
     boolean x;
 
     CheckInternet chkinternet;
+
+    public void onBackPressed() {
+        //super.onBackPressed();
+
+        Intent intent =new Intent(ANCVisit.this, PMTCT1.class);
+        startActivity(intent);
+    }
 
 
     @Override
@@ -189,6 +197,23 @@ public class ANCVisit extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
+                        for (int j = 0; j < response.length(); j++) {
+                            try {
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                x = jsonObject.getBoolean("success");
+                                y= jsonObject.getString("message");
+
+                                if (!x){
+                                    dialogs.showSuccessDialog(y, "Server Response");
+                                }
+                            }
+
+                            catch (Exception e){
+                                e.printStackTrace();
+                            }}
+                    /*x = jsonObject.getBoolean("success");
+                    if (x==true){*/
+
                         //catch
 
                     }
@@ -198,24 +223,61 @@ public class ANCVisit extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    NetworkResponse response = error.networkResponse;
+                    if(response != null && response.data != null){
+                        String body;
 
+                        String statusCode = String.valueOf(error.networkResponse.statusCode);
 
-                    try {
+                        if(error.networkResponse.data!=null) {
+                            try {
+                                JSONArray jsonArray =new JSONArray(error.networkResponse.data);
+                                body = new String(error.networkResponse.data,"UTF-8");
 
-                        byte[] htmlBodyBytes = error.networkResponse.data;
+                                JSONObject json = new JSONObject(body);
 
-//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
-                        dialogs.showErrorDialog(new String(htmlBodyBytes), "Server Response");
+                                String message = json.has("message") ? json.getString("message") : "";
+                                dialogs.showErrorDialog(message, "Server");
 
+                            } catch (UnsupportedEncodingException | JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
 
-                    } catch (Exception e) {
+                    }else {
 
-
-//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
-                        dialogs.showErrorDialog("error occured, try again" + error.getMessage(), "Server Response");
-
-
+                        Log.e("VOlley error :", error.getLocalizedMessage()+" message:"+error.getMessage());
+                       // dialogs.showErrorDialog(VolleyErrors.getVolleyErrorMessages(error, ANCVisit.this), "Server Response");
+                        dialogs.showErrorDialog("Invalid CCC Number", "Server Response");
+                      //  Toast.makeText(ANCVisit.this, VolleyErrors.getVolleyErrorMessages(error, ANCVisit.this),Toast.LENGTH_LONG).show();
                     }
+
+
+
+                    /*try {
+
+                        /*byte[] htmlBodyBytes = error.networkResponse.data;
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                        dialogs.showErrorDialog(new String(htmlBodyBytes), "Server Response");*/
+                       // dialogs.showErrorDialog( error.toString(), "Server Responseee");
+
+                       /* JSONObject parentObject = new JSONObject(Objects.requireNonNull(error.getMessage()));
+                        //JSONObject userDetails = parentObject.getJSONObject("message");
+                        String name = parentObject.getString("message");
+
+                        Log.d("TRIAL", name);*/
+                       // dialogs.showErrorDialog( name, "Server Responses");
+
+
+                   // } catch (Exception e) {
+
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                      //  dialogs.showErrorDialog( error.getMessage(), "Server Responseeee");
+
+
+                    //}
 
                     details.setVisibility(View.GONE);
                     //Toast.makeText(ANCVisit.this, error.getMessage(), Toast.LENGTH_SHORT).show();

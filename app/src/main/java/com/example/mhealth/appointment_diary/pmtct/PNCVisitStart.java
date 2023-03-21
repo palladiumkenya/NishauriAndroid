@@ -134,12 +134,11 @@ public class PNCVisitStart extends AppCompatActivity {
         buttonSave=(Button) findViewById(R.id.btn_submit_reg1);
         pncVlay =(TextInputLayout) findViewById(R.id.pncVlay);
         pncClay=(TextInputLayout) findViewById(R.id.pncClay);
+
         PNC_VisitNo =(EditText) findViewById(R.id.PNC_VisitNo);
         PNC_ClinicNo=(EditText) findViewById(R.id.PNC_ClinicNo);
-
         DateDied=(EditText) findViewById(R.id.Datedied5);
         DeathCause=(EditText) findViewById(R.id.deathcause5);
-
         BabyDOB =(EditText)findViewById(R.id.BabyDOB);
 
         acs = new AccessServer(PNCVisitStart.this);
@@ -519,6 +518,8 @@ public void postPNC() {
                                             "OK",
                                             new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
+
+
 
                                                     Intent intent = new Intent(PNCVisitStart.this, PNCVisit.class);
                                                     startActivity(intent);

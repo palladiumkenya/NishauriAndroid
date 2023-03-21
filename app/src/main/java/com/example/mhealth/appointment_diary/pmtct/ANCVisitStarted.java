@@ -435,7 +435,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                 }, year, month, day);
 
                 // set maximum date to be selected as today
-                // datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                 datePicker.getDatePicker().setMaxDate(calendar1.getTimeInMillis());
                 datePicker.getDatePicker();
 
                 // show the dialog
@@ -1004,6 +1004,13 @@ public class ANCVisitStarted extends AppCompatActivity {
                                                 "OK",
                                                 new DialogInterface.OnClickListener() {
                                                     public void onClick(DialogInterface dialog, int id) {
+
+                                                        //clear text
+
+
+
+
+
 
                                                         Intent intent = new Intent(ANCVisitStarted.this, ANCVisit.class);
                                                         startActivity(intent);

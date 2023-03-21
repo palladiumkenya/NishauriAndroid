@@ -47,6 +47,13 @@ public class PNCVisit extends AppCompatActivity {
     CheckInternet chkinternet;
     Dialogs dialogs;
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+
+        Intent intent =new Intent(PNCVisit.this, PMTCT1.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,15 +183,42 @@ public class PNCVisit extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 details.setVisibility(View.GONE);
 
-                try {
+
+                NetworkResponse response = error.networkResponse;
+                if(response != null && response.data != null){
+                    String body;
+
+                    String statusCode = String.valueOf(error.networkResponse.statusCode);
+
+                    if(error.networkResponse.data!=null) {
+                        try {
+                            JSONArray jsonArray =new JSONArray(error.networkResponse.data);
+                            body = new String(error.networkResponse.data,"UTF-8");
+
+                            JSONObject json = new JSONObject(body);
+
+                            String message = json.has("message") ? json.getString("message") : "";
+                            dialogs.showErrorDialog(message, "Server");
+
+                        } catch (UnsupportedEncodingException | JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }else {
+
+                    Log.e("VOlley error :", error.getLocalizedMessage()+" message:"+error.getMessage());
+                    // dialogs.showErrorDialog(VolleyErrors.getVolleyErrorMessages(error, ANCVisit.this), "Server Response");
+                    dialogs.showErrorDialog("Invalid CCC Number", "Server Response");
+                    //  Toast.makeText(ANCVisit.this, VolleyErrors.getVolleyErrorMessages(error, ANCVisit.this),Toast.LENGTH_LONG).show();
+                }
+
+
+               /* try {
 
                     byte[] htmlBodyBytes = error.networkResponse.data;
-
-
-
-//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+//              Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
                     dialogs.showErrorDialog(new String(htmlBodyBytes), "Server Response");
-
 
                 } catch (Exception e) {
 
@@ -193,7 +227,7 @@ public class PNCVisit extends AppCompatActivity {
                     dialogs.showErrorDialog(" " + error.getMessage(), "Server Response");
 
 
-                }
+                }*/
 
                 ////
 
