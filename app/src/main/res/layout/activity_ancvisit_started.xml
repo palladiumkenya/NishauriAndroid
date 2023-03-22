@@ -664,6 +664,93 @@
 
             </LinearLayout>
 
+            <Button
+                android:id="@+id/ARTandProphylaxi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="#004d4d"
+                android:fontFamily="serif"
+                android:text="Infant Prophylaxis Given During This Visit?"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <CheckBox
+                    android:id="@+id/azt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="AZT"
+                    android:layout_weight="1"
+                    />
+                <TextView
+                    android:id="@+id/informText"
+                    android:layout_weight="2"
+                    android:text="Informed consent"
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:textColor="#034694"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <CheckBox
+                    android:id="@+id/nvp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="NVP"
+                    android:layout_weight="1"
+                    />
+                <TextView
+                    android:id="@+id/privacyText"
+                    android:layout_weight="2"
+                    android:text="Privacy policy"
+                    android:textColor="#034694"
+                    android:layout_width="0dp"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <CheckBox
+                    android:id="@+id/ctx"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="CTX"
+                    android:layout_weight="1"
+                    />
+                <TextView
+
+                    android:layout_weight="2"
+                    android:text="Privacy policy"
+                    android:textColor="#034694"
+                    android:layout_width="0dp"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+
+                    />
+
+            </LinearLayout>
+
+
+
 
 
 

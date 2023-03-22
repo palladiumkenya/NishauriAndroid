@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -61,6 +62,7 @@ import java.util.concurrent.TimeUnit;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class ANCVisitStarted extends AppCompatActivity {
+    private boolean aztb, nvpb, ctxb;
     String z, all;
     Date datelmp;
     Date date1;
@@ -119,6 +121,8 @@ public class ANCVisitStarted extends AppCompatActivity {
     //SyphilisTreated_code, HepatitisB-code
     int hepatitisID_code, syphilisIDc_code;
 
+    CheckBox azt1, nvp1, ctx1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,6 +137,8 @@ public class ANCVisitStarted extends AppCompatActivity {
                 phone_no=myl2.get(y).getPhone();
             }
         }
+
+
 
 
         try {
@@ -191,6 +197,10 @@ public class ANCVisitStarted extends AppCompatActivity {
         weight1 = (EditText) findViewById(R.id.weight);
         muac1 = (EditText) findViewById(R.id.muac);
         saveANC = (Button) findViewById(R.id.btn_save);
+
+        azt1 = (CheckBox) findViewById(R.id.azt);
+        nvp1 = (CheckBox) findViewById(R.id.nvp);
+        ctx1 = (CheckBox) findViewById(R.id.ctx);;
         //syphilisID= (RadioGroup) findViewById(R.id.syphilisID);
         //hepatitisID= (RadioGroup) findViewById(R.id.hepatitisID);
 
@@ -824,6 +834,29 @@ public class ANCVisitStarted extends AppCompatActivity {
                /* else if (DateTested.getText().toString().isEmpty()){
                     Toast.makeText(ANCVisitStarted.this, "Enter Date Tested", Toast.LENGTH_LONG).show();
                 }*/
+
+                //checkboxes
+
+                //aztb, nvpb, ctxb;
+                //azt1, nvp1, ctx1;
+
+                if(azt1.isChecked())
+                {
+                    aztb= Boolean.parseBoolean(azt1.getText().toString());
+                }
+
+
+                if(nvp1.isChecked())
+                {
+                    //description=checkPrivacy.getText().toString();
+                    nvpb= Boolean.parseBoolean(nvp1.getText().toString());
+
+                }
+
+                if(ctx1.isChecked())
+                {
+                    ctxb = Boolean.parseBoolean(ctx1.getText().toString());
+                }
                 else if (SyphilisSerology_code.contentEquals("0")) {
                     Toast.makeText(ANCVisitStarted.this, "Select Syphilis Serology", Toast.LENGTH_LONG).show();
                 } else if (HepatitisB_code.contentEquals("0")) {
