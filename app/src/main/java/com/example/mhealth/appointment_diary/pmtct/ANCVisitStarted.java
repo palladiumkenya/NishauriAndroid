@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -63,6 +64,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class ANCVisitStarted extends AppCompatActivity {
     private boolean aztb, nvpb, ctxb;
+    private RadioGroup radioGroup;
     String z, all;
     Date datelmp;
     Date date1;
@@ -102,6 +104,7 @@ public class ANCVisitStarted extends AppCompatActivity {
     EditText CCCNo, partnerCCCNo, gravida, EDD_date, LMP_date, DateTested, ANC_Visitno, ANC_clinicno, ANCNumber, partnerDateTested, CCCEnrolDate, ARTStart_date, partnerCCCEnrolDate, partnerARTStart_date, VLdate, parity1, parity2, VLResults, CCCNo22, Gestation, weight1, muac1;
     String ClientIS_code, HIV_Results_Code, partnerHIV_Results_Code, SyphilisSerology_code, clientTreated_code, HepatitisB_code, HIV_ANC_Code, Mother_Tested_code, TB_code;
     RadioGroup syphilisID, hepatitisID;
+    RadioButton radioButtonChecked;
 
     Calendar calendar1;
 
@@ -201,6 +204,11 @@ public class ANCVisitStarted extends AppCompatActivity {
         azt1 = (CheckBox) findViewById(R.id.azt);
         nvp1 = (CheckBox) findViewById(R.id.nvp);
         ctx1 = (CheckBox) findViewById(R.id.ctx);;
+
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
+
+
+
         //syphilisID= (RadioGroup) findViewById(R.id.syphilisID);
         //hepatitisID= (RadioGroup) findViewById(R.id.hepatitisID);
 
@@ -796,6 +804,19 @@ public class ANCVisitStarted extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        // on below line we are adding check change listener for our radio group.
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                // on below line we are getting radio button from our group.
+                radioButtonChecked = findViewById(checkedId);
+
+                // on below line we are displaying a toast message.
+                Toast.makeText(ANCVisitStarted.this, "Selected Radio Button is : " + radioButtonChecked.getText(), Toast.LENGTH_SHORT).show();
             }
         });
 

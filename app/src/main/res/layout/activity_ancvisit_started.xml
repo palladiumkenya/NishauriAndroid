@@ -502,54 +502,7 @@
             </LinearLayout>
         </LinearLayout>
 
-            <!-- Viral Load results -->
-
-            <Button
-                android:id="@+id/btnVL"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:background="#004d4d"
-                android:fontFamily="serif"
-                android:text="Viral Load Results"
-                android:textSize="12sp"
-                android:textColor="#FFFFFF" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/VLLayout"
-            >
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/vldatesample"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Date of Sample Collection*"
-                    android:focusable="false"
-                    android:textColorHint="#000"
-                    android:textSize="12sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/VLResults"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Results"
-                    android:textColorHint="#000"
-                    android:textSize="12sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+          <!-- Viral load results -->
             <!-- Test Results -->
 
             <Button
@@ -746,6 +699,84 @@
                     android:layout_height="wrap_content"
 
                     />
+
+            </LinearLayout>
+
+            <!-- Viral Load results -->
+            <Button
+                android:id="@+id/btnVL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="#004d4d"
+                android:fontFamily="serif"
+                android:text="Viral Load Results"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/VLLayout"
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/vldatesample"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Date of Sample Collection*"
+                        android:focusable="false"
+                        android:textColorHint="#000"
+                        android:textSize="12sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/VLResults"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Results"
+                        android:textColorHint="#000"
+                        android:textSize="12sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <!--displaying a radio group on below line-->
+                <RadioGroup
+                    android:id="@+id/radioGroup1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    >
+
+                    <!--adding a radio button -->
+                    <RadioButton
+                        android:id="@+id/ldl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:padding="4dp"
+                        android:text="LDL"
+                        />
+
+                    <!--adding a radio button -->
+                    <RadioButton
+                        android:id="@+id/cp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:padding="4dp"
+                        android:text="Cp/ML(Numerical)"
+                        />
+
+                </RadioGroup>
 
             </LinearLayout>
 
