@@ -79,16 +79,26 @@ public class ANCVisitStarted extends AppCompatActivity {
     String[] clientTreated = {"", "Yes", "No"};
     String[] hepatitisB = {"", "Positive", "Negative", "Not Done"};
     String[] hivResults = {"", "Unknown", "Negative", "Positive"};
+    String[] hivfirstANCS = {"", "Unknown", "Negative", "Positive"};
+    String[] mothertestedhivS = {"", "Yes", "No"};
+
+    String[] tbS = {"", "No TB Signs", "Presumed TB", "TB Confirmed", "TB Screening Not Done"};
+
+
+
     String[] syphilis = {"", "Negative", "Positive", "Requested", "Not Requested", "Poor Sample Quality"};
-    Spinner clientIsS, hivResultsS, SyphilisS, hivResultsSp, clientTreatp, hepBp;
+    Spinner clientIsS, hivResultsS, SyphilisS, hivResultsSp, clientTreatp, hepBp, hivfirstANC1, mothertestedhiv1, tb1S;
     private String CLIENT_IS = "";
     private String HIV_RESULTS = "";
     private String CLIENT_TREATED = "";
     private String HEPATITIS_B = "";
     private String SYPHILIS = "";
+    private String HIVANC = "";
+    private String MOTHERTESTED = "";
+    private String TB = "";
     LinearLayout pregnant, positiveLayout, partnerLayout, positiveselected, hivdata1c, hivdata2c;
-    EditText CCCNo, partnerCCCNo, gravida, EDD_date, LMP_date, DateTested, ANC_Visitno, ANC_clinicno, ANCNumber, partnerDateTested, CCCEnrolDate, ARTStart_date, partnerCCCEnrolDate, partnerARTStart_date, VLdate, parity1, parity2, VLResults, CCCNo22, Gestation;
-    String ClientIS_code, HIV_Results_Code, partnerHIV_Results_Code, SyphilisSerology_code, clientTreated_code, HepatitisB_code;
+    EditText CCCNo, partnerCCCNo, gravida, EDD_date, LMP_date, DateTested, ANC_Visitno, ANC_clinicno, ANCNumber, partnerDateTested, CCCEnrolDate, ARTStart_date, partnerCCCEnrolDate, partnerARTStart_date, VLdate, parity1, parity2, VLResults, CCCNo22, Gestation, weight1, muac1;
+    String ClientIS_code, HIV_Results_Code, partnerHIV_Results_Code, SyphilisSerology_code, clientTreated_code, HepatitisB_code, HIV_ANC_Code, Mother_Tested_code, TB_code;
     RadioGroup syphilisID, hepatitisID;
 
     Calendar calendar1;
@@ -177,6 +187,9 @@ public class ANCVisitStarted extends AppCompatActivity {
         ARTStart_date = (EditText) findViewById(R.id.ARTstart);
         partnerCCCEnrolDate = (EditText) findViewById(R.id.partccEn);
         partnerARTStart_date = (EditText) findViewById(R.id.partARTstart);
+
+        weight1 = (EditText) findViewById(R.id.weight);
+        muac1 = (EditText) findViewById(R.id.muac);
         saveANC = (Button) findViewById(R.id.btn_save);
         //syphilisID= (RadioGroup) findViewById(R.id.syphilisID);
         //hepatitisID= (RadioGroup) findViewById(R.id.hepatitisID);
@@ -550,6 +563,11 @@ public class ANCVisitStarted extends AppCompatActivity {
 
         clientTreatp = (Spinner) findViewById(R.id.clientTreat);
         hepBp = (Spinner) findViewById(R.id.hepB);
+        hivfirstANC1= (Spinner) findViewById(R.id.hivfirstANC);
+
+        tb1S= (Spinner) findViewById(R.id.TBS);
+
+        mothertestedhiv1= (Spinner) findViewById(R.id.mothertestedhiv);
 
 
         //Client is
@@ -571,6 +589,71 @@ public class ANCVisitStarted extends AppCompatActivity {
 
             }
         });
+
+        //TB screening
+
+       ArrayAdapter<String> tbAdapter = new ArrayAdapter<String>(ANCVisitStarted.this, android.R.layout.simple_spinner_item, tbS);
+        tbAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        tb1S.setAdapter(tbAdapter);
+        tb1S.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                TB = tbS[position];
+                TB_code = Integer.toString(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        //hiv first ANC
+
+        ArrayAdapter<String> hivANCAdapter = new ArrayAdapter<String>(ANCVisitStarted.this, android.R.layout.simple_spinner_item, hivfirstANCS);
+        hivANCAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        hivfirstANC1.setAdapter(hivANCAdapter);
+
+        hivfirstANC1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                HIVANC= hivfirstANCS[position];
+                HIV_ANC_Code = Integer.toString(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        //Mother tested
+
+        ArrayAdapter<String> motherTestedAdapter = new ArrayAdapter<String>(ANCVisitStarted.this, android.R.layout.simple_spinner_item, mothertestedhivS);
+        motherTestedAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mothertestedhiv1.setAdapter(motherTestedAdapter);
+
+        mothertestedhiv1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                MOTHERTESTED= mothertestedhivS[position];
+                Mother_Tested_code = Integer.toString(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
         // hiv results1
         ArrayAdapter<String> resultsAdapter = new ArrayAdapter<String>(ANCVisitStarted.this, android.R.layout.simple_spinner_item, hivResults);
         clientAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -729,6 +812,13 @@ public class ANCVisitStarted extends AppCompatActivity {
                     Toast.makeText(ANCVisitStarted.this, "Enter Gestation", Toast.LENGTH_LONG).show();
                 } else if (HIV_Results_Code.contentEquals("0")) {
                     Toast.makeText(ANCVisitStarted.this, "Enter HIV Results", Toast.LENGTH_LONG).show();
+                }
+
+                else if (weight1.getText().toString().isEmpty()) {
+                    Toast.makeText(ANCVisitStarted.this, "Enter Weight", Toast.LENGTH_LONG).show();
+                }
+                else if (muac1.getText().toString().isEmpty()) {
+                    Toast.makeText(ANCVisitStarted.this, "Enter MUAC", Toast.LENGTH_LONG).show();
                 }
 
                /* else if (DateTested.getText().toString().isEmpty()){
