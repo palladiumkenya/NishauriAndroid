@@ -87,9 +87,6 @@ public class ANCVisitStarted extends AppCompatActivity {
     String[] mothertestedhivS = {"", "Yes", "No"};
 
     String[] tbS = {"", "No TB Signs", "Presumed TB", "TB Confirmed", "TB Screening Not Done"};
-
-
-
     String[] syphilis = {"", "Negative", "Positive", "Requested", "Not Requested", "Poor Sample Quality"};
     Spinner clientIsS, hivResultsS, SyphilisS, hivResultsSp, clientTreatp, hepBp, hivfirstANC1, mothertestedhiv1, tb1S;
     private String CLIENT_IS = "";
@@ -681,7 +678,7 @@ public class ANCVisitStarted extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                HIV_RESULTS = clientIs[position];
+                HIV_RESULTS = hivResults[position];
                 HIV_Results_Code = Integer.toString(position);
 
                 if (HIV_Results_Code.contentEquals("3")) {
@@ -691,7 +688,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                     hivdata1c.setVisibility(View.GONE);
                 } else if (HIV_Results_Code.contentEquals("1")) {
                     hivdata1c.setVisibility(View.GONE);
-                } else if (partnerHIV_Results_Code.contentEquals("0")) {
+                } else if (HIV_Results_Code.contentEquals("0")) {
                     hivdata1c.setVisibility(View.GONE);
                 }
             }

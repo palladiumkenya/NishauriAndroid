@@ -13,8 +13,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,11 +48,14 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import libs.mjn.fieldset.FieldSetView;
 
 public class LaborAndDeliveryStart extends AppCompatActivity {
+    private boolean aztb, nvpb, ctxb;
+    private RadioGroup radioGroup;
     String phne, z;
     Progress pr;
     ProcessMessage pm;
@@ -65,18 +71,32 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
     String[] MotherTested = {"", "Yes", "No"};
     String[] BabyDelivered = {"", "Live Birth", "Fresh Still Birth", "Macerated Still Birth"};
     String[] BabySex = {"", "Male", "Female"};
-    String[] CurrentRe = {"", "TDF+3TC+EFV", "TDF+3TC+DTG", "TDF+3TC+DTG", "AZT+3TC+NVP", " AZT+3TC+EFV", "ABC+3TC+NVP", "ABC+3TC+EFV", " ABC+3TC+DTG", "ABC+3TC+LPV/r", " AZT+3TC+LPV/r+ RTV", "ART5TDF+3TC +ATV/r","ABC+3TC+DTG", "ABC+3TC+DTG", "ABC+3TC+ATV/r", "AZT+3TC+ATV/r", "AZT+3TC+DRV/r"};
+    String[] CurrentRe = {"", "ABC/3TC/NVP", "AZT/3TC/NVP","ABC/3TC/EFV", "TDF/3TC/AZT","AZT/3TC/DTG","ETR/RAL/DRV/RTV","AZT/3TC/LPV/r","AZT/TDF/3TC/LPV/r", "TDF/ABC/LPV/r", "ABC/TDF/3TC/LPV/r", "ETR/TDF/3TC/LPV/r", "ABC/3TC/LPV/r","D4T/3TC/LPV/r","ABC/DDI/LPV/r","TDF/3TC/NVP","AZT/3TC/EFV","TDF/3TC/ATV/r","AZT/3TC/ATV/r","D4T/3TC/EFV","AZT/3TC/ABC","TDF/3TC/DTG",   "TDF/3TC/LPV/r","ABC/3TC/ATV/r","TDF/3TC/DTG/DRV/r","TDF/3TC/RAL/DRV/r","TDF/3TC/DTG/EFV/DRV/r","ABC/3TC/RAL", "AZT/3TC/RAL/DRV/r", "ABC/3TC/RAL/DRV/r","RAL/3TC/DRV/RTV/AZT","RAL/3TC/DRV/RTV/ABC", "ETV/3TC/DRV/RTV", "RAL/3TC/DRV/RTV/TDF","RAL/3TC/DRV/RTV","Other (Specify)"};
     String[] Immunization = {"", "Penta", "PSV"};
-    String[] hivResults = {"", "Unknown", "Negative", "Positive"};
+    String[] hivResults = {"", "Negative", "Positive"};
+
+    String[] syphilis = {"", "Negative", "Positive", "Requested", "Not Requested", "Poor Sample Quality"};
+    String[] tbS = {"", "No TB Signs", "Presumed TB", "TB Confirmed", "TB Screening Not Done"};
+    String[] hepatitisB = {"", "Positive", "Negative", "Not Done"};
+
+    String[] haartdata = {"", "Yes", "No", "N/A"};
+
 
     String[] prophy = {"", "AZT", "NVP", "CTX"};
+    RadioButton radioButtonChecked;
     TextView prophtxt1, prophtxt2, prophtxt3, prophtxt4, prophtxt5;
     Button saveLD, baby1, baby2, baby3, baby4, baby5;
     FieldSetView maceratedfield1,maceratedfield2,maceratedfield3,maceratedfield4,maceratedfield5, livelayfield1,livelayfield2,livelayfield3,livelayfield4,livelayfield5;
 
 
-    Spinner clientVisitTypeS,  ModeDeliveryS, placeDeliveryS, DeliveryOutcomeS, MothersOutcomeS, MotherTestedS, BabyDeliveredS,BabyDeliveredS2,BabyDeliveredS3,BabyDeliveredS4,BabyDeliveredS5,  BabySexS,BabySexS2, BabySexS3, BabySexS4, BabySexS5, currentS, ImmunizationS, hivResultsS, prophyS1, prophyS2, prophyS3, prophyS4, prophyS5;
+    Spinner clientVisitTypeS, haartSp1, wasonhaartSp1, SyphilisS,  hepBp, tb1S,  hivResultsSp, ModeDeliveryS, placeDeliveryS, DeliveryOutcomeS, MothersOutcomeS, MotherTestedS, BabyDeliveredS,BabyDeliveredS2,BabyDeliveredS3,BabyDeliveredS4,BabyDeliveredS5,  BabySexS,BabySexS2, BabySexS3, BabySexS4, BabySexS5, currentS, ImmunizationS, hivResultsS, prophyS1, prophyS2, prophyS3, prophyS4, prophyS5, hivLDS1;
     private String CLIENT_VISIT_TYPE = "";
+
+    private String HEPATITIS_B = "";
+    private String SYPHILIS = "";
+    private String TB = "";
+
+    private String HIV_RESULTS = "";
     private String MODE_DELIVERY = "";
     private String PLACE_DELIVERY = "";
     private String DELIVERY_OUTCOME = "";
@@ -87,6 +107,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
     private String BABY_DELIVERED3 = "";
     private String BABY_DELIVERED4 = "";
     private String BABY_DELIVERED5 = "";
+    private String HIV_LD = "";
 
     private String PROPHY1 = "";
     private String PROPHY2 = "";
@@ -102,17 +123,20 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
     private String CURRENT_R = "";
     private String IMMNUNIZATION = "";
 
+    private String REGIMEN = "";
+    private String HAART = "";
+
     CheckInternet chkinternet;
     AccessServer acs;
     String newCC;
 
     private String HIV = "";
     private String TESTED = "";
-    LinearLayout diedlay, singleLay, twinLay,tripleLay, quadlay, fifthlay,diedlay2,diedlay3,diedlay4, diedlay5,livetextss,livetextss2,livetextss3,livetextss4,livetextss5,hivlay,prophLay1, prophLay2, prophLay3, prophLay4, prophLay5;
+    LinearLayout hivdata1c, wasonHAARTL1, hivdata2c, positiveselected, partnerLayout, hivlay1, diedlay, singleLay, twinLay,tripleLay, quadlay, fifthlay,diedlay2,diedlay3,diedlay4, diedlay5,livetextss,livetextss2,livetextss3,livetextss4,livetextss5,hivlay,prophLay1, prophLay2, prophLay3, prophLay4, prophLay5;
     TextInputLayout livetexts,livetexts2,livetexts3,livetexts4,livetexts5,prophdet1, prophdet2, prophdet3, prophdet4, prophdet5;
-    EditText ANCVisit_NO, deliveryDate, Datedied1, deathcause1,BabysDOB1, Datedied2,deathcause2,BabysDOB2, Datedied3,deathcause3,BabysDOB3, Datedied4,deathcause4,BabysDOB4,  Datedied5,deathcause5,BabysDOB5,prophed1,prophed2, prophed3, prophed4,prophed5;
-    String BabyDeliveredS_code,BabyDeliveredS2_code,BabyDeliveredS3_code,BabyDeliveredS4_code,BabyDeliveredS5_code,ModeDeliveryS_code, placeDeliveryS_code, DeliveryOutcomeS_code, MothersOutcomeS_code, MotherTestedS_code, BabySexS_code,BabySexS2_code,BabySexS3_code,BabySexS4_code,BabySexS5_code, currentS_code, ImmunizationS_code, hivResultsS_code, prophy1_code, prophy2_code, prophy3_code, prophy4_code, prophy5_code;
-
+    EditText ANCVisit_NO, deliveryDate, Datedied1, deathcause1,BabysDOB1, Datedied2,deathcause2,BabysDOB2, Datedied3,deathcause3,BabysDOB3, Datedied4,deathcause4,BabysDOB4,  Datedied5,deathcause5,BabysDOB5,prophed1,prophed2, prophed3, prophed4,prophed5, weight1, muac1, DateTested,CCCEnrolDate, ARTStart_date, partnerCCCNo, partnerDateTested, partnerCCCEnrolDate, partnerARTStart_date;
+    String BabyDeliveredS_code,  haart_code, haart_code2, SyphilisSerology_code,HepatitisB_code, TB_code,HIV_Results_Code, partnerHIV_Results_Code, Regimin_code,BabyDeliveredS2_code,BabyDeliveredS3_code,BabyDeliveredS4_code,BabyDeliveredS5_code,ModeDeliveryS_code, placeDeliveryS_code, DeliveryOutcomeS_code, MothersOutcomeS_code, MotherTestedS_code, BabySexS_code,BabySexS2_code,BabySexS3_code,BabySexS4_code,BabySexS5_code, currentS_code, ImmunizationS_code, hivResultsS_code, prophy1_code, prophy2_code, prophy3_code, prophy4_code, prophy5_code, hivatLDS_code;
+    CheckBox azt1, nvp1, ctx1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +170,8 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
       //  maceratedfield1=(FieldSetView) findViewById(R.id.maceratedfield1);
         //livelayfield1=(FieldSetView) findViewById(R.id.livelayfield1);
+
+                partnerLayout = (LinearLayout) findViewById(R.id.partnerLayout);
                 ANCVisit_NO=(EditText) findViewById(R.id.ANCVisit_NO);
                 saveLD=(Button) findViewById(R.id.btn_submit_reg);
 
@@ -167,6 +193,20 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                 deathcause4=(EditText) findViewById(R.id.deathcause4);
                 BabysDOB4=(EditText) findViewById(R.id.BabysDOB4);
 
+                weight1=(EditText) findViewById(R.id.weight);
+                muac1=(EditText) findViewById(R.id.muac);
+
+               CCCEnrolDate = (EditText) findViewById(R.id.ccEn);
+               ARTStart_date = (EditText) findViewById(R.id.ARTstart);
+               DateTested = (EditText) findViewById(R.id.testedDate);
+
+
+               partnerCCCEnrolDate = (EditText) findViewById(R.id.partccEn);
+               partnerARTStart_date = (EditText) findViewById(R.id.partARTstart);
+               partnerCCCNo = (EditText) findViewById(R.id.partccno);
+               partnerDateTested = (EditText) findViewById(R.id.testedDatep);
+
+
                 Datedied5=(EditText) findViewById(R.id.Datedied5);
                 deathcause5=(EditText) findViewById(R.id.deathcause5);
                 BabysDOB5=(EditText) findViewById(R.id.BabysDOB5);
@@ -175,6 +215,8 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                 baby3 =(Button) findViewById(R.id.baby3);
                 baby4 =(Button) findViewById(R.id.baby4);
                 baby5=(Button) findViewById(R.id.baby5);
+                positiveselected = (LinearLayout) findViewById(R.id.positiveSelected);
+                 wasonHAARTL1= (LinearLayout) findViewById(R.id.wasonHAARTL);
 
         diedlay=(LinearLayout)findViewById(R.id.diededits);
         diedlay2=(LinearLayout)findViewById(R.id.diededits2);
@@ -186,13 +228,18 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
         tripleLay=(LinearLayout)findViewById(R.id.tripLay);
         quadlay=(LinearLayout)findViewById(R.id.quadLay);
         fifthlay=(LinearLayout)findViewById(R.id.fifthLay);
-        hivlay=(LinearLayout)findViewById(R.id.hivlay);
+        //hivlay=(LinearLayout)findViewById(R.id.hivlay);
+        hivlay1=(LinearLayout)findViewById(R.id.hivlay);
 
         prophLay1=(LinearLayout)findViewById(R.id.prophLay1);
         prophLay2=(LinearLayout)findViewById(R.id.prophLay2);
         prophLay3=(LinearLayout)findViewById(R.id.prophLay3);
         prophLay4=(LinearLayout)findViewById(R.id.prophLay4);
         prophLay5=(LinearLayout)findViewById(R.id.prophLay5);
+        hivdata1c = findViewById(R.id.hivdata1);
+
+
+        hivdata2c = findViewById(R.id.hivdata2);
 
         livetexts=(TextInputLayout) findViewById(R.id.livetexts);
         livetexts2=(TextInputLayout) findViewById(R.id.livetexts2);
@@ -249,12 +296,326 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
         currentS = (Spinner) findViewById(R.id. motherCurrentRegimen1);
         hivResultsS = (Spinner) findViewById(R.id.hivResults1);
 
+        hivResultsSp = (Spinner) findViewById(R.id.hivResults1p);
+
 
          BabySexS=(Spinner) findViewById(R.id.BabySex1);
         BabySexS2=(Spinner) findViewById(R.id.BabySex2);
         BabySexS3=(Spinner) findViewById(R.id.BabySex3);
         BabySexS4=(Spinner) findViewById(R.id.BabySex4);
         BabySexS5=(Spinner) findViewById(R.id.BabySex5);
+
+        SyphilisS = (Spinner) findViewById(R.id.SyphilisSpinner);
+        hepBp = (Spinner) findViewById(R.id.hepB);
+        tb1S= (Spinner) findViewById(R.id.TBS);
+
+        hivLDS1=(Spinner) findViewById(R.id.hivatLDS);
+
+        haartSp1=(Spinner) findViewById(R.id.haartSp);
+        wasonhaartSp1=(Spinner) findViewById(R.id.wasonhaartSp);
+
+
+        azt1 = (CheckBox) findViewById(R.id.azt);
+        nvp1 = (CheckBox) findViewById(R.id.nvp);
+        ctx1 = (CheckBox) findViewById(R.id.ctx);;
+
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
+        //ARTstart
+        ARTStart_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(LaborAndDeliveryStart.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        ARTStart_date.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker();
+
+                // show the dialog
+                datePicker.show();
+            }
+        });
+
+        //testedDate
+        DateTested.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                long timeInMilliseconds = calendar.getTimeInMillis() + TimeUnit.DAYS.toMillis(280);
+
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(LaborAndDeliveryStart.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        DateTested.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+
+
+
+                       /* Calendar calendar = Calendar.getInstance();
+                        calendar.set(year,monthOfYear + 1,dayOfMonth);
+
+                        long timeInMilliseconds = calendar.getTimeInMillis()+TimeUnit.DAYS.toMillis(280);
+                        calendar.setTimeInMillis(timeInMilliseconds);
+                        int mYear = calendar.get(Calendar.YEAR);
+                        int mMonth = calendar.get(Calendar.MONTH);
+                        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+                        eText.setText(mDay + "/" + mMonth + "/" + mYear);*/
+
+
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker();
+
+                // show the dialog
+                datePicker.show();
+            }
+        });
+//testedDatep
+        partnerDateTested.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(LaborAndDeliveryStart.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        partnerDateTested.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker();
+
+                // show the dialog
+                datePicker.show();
+            }
+        });
+
+        //partARTstart
+
+        partnerARTStart_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(LaborAndDeliveryStart.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        partnerARTStart_date.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker();
+
+                // show the dialog
+                datePicker.show();
+            }
+        });
+
+
+        //partccEn
+        partnerCCCEnrolDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(LaborAndDeliveryStart.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        partnerCCCEnrolDate.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker();
+
+                // show the dialog
+                datePicker.show();
+            }
+        });
+        //haart at maternity
+
+        ArrayAdapter<String> haartAdapter = new ArrayAdapter<String>(LaborAndDeliveryStart.this, android.R.layout.simple_spinner_item, haartdata);
+        haartAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        haartSp1.setAdapter(haartAdapter);
+        haartSp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                HAART= haartdata[position];
+                haart_code = Integer.toString(position);
+
+                if (haart_code.contentEquals("2")) {
+                    wasonHAARTL1.setVisibility(View.GONE);
+                } else if (haart_code.contentEquals("1")) {
+                    wasonHAARTL1.setVisibility(View.VISIBLE);
+                } else if (haart_code.contentEquals("0")) {
+                    wasonHAARTL1.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        //Was mother on HAART during ANC
+
+        ArrayAdapter<String> haartAdapter2 = new ArrayAdapter<String>(LaborAndDeliveryStart.this, android.R.layout.simple_spinner_item, haartdata);
+        haartAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        wasonhaartSp1.setAdapter(haartAdapter2);
+        wasonhaartSp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                HAART= haartdata[position];
+                haart_code2 = Integer.toString(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //TB screening
+
+        ArrayAdapter<String> tbAdapter = new ArrayAdapter<String>(LaborAndDeliveryStart.this, android.R.layout.simple_spinner_item, tbS);
+        tbAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        tb1S.setAdapter(tbAdapter);
+        tb1S.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                TB = tbS[position];
+                TB_code = Integer.toString(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //hpB
+
+        ArrayAdapter<String> hpbAdapter = new ArrayAdapter<String>(LaborAndDeliveryStart.this, android.R.layout.simple_spinner_item, hepatitisB);
+        hpbAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        hepBp.setAdapter(hpbAdapter);
+
+        hepBp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                HEPATITIS_B = hepatitisB[position];
+
+                HepatitisB_code = Integer.toString(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        //Syphilis
+
+        ArrayAdapter<String> syphilisAdapter = new ArrayAdapter<String>(LaborAndDeliveryStart.this, android.R.layout.simple_spinner_item, syphilis);
+        syphilisAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        SyphilisS.setAdapter(syphilisAdapter);
+
+        SyphilisS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                SYPHILIS = syphilis[position];
+
+                SyphilisSerology_code = Integer.toString(position);
+                // HepatitisB_code="";
+
+                if (SYPHILIS.contentEquals("Positive")) {
+                    positiveselected.setVisibility(View.VISIBLE);
+                } else if (SYPHILIS.contentEquals("Negative")) {
+                    positiveselected.setVisibility(View.GONE);
+                } else if (SYPHILIS.contentEquals("Requested")) {
+                    positiveselected.setVisibility(View.GONE);
+                } else if (SYPHILIS.contentEquals("Not Requested")) {
+                    positiveselected.setVisibility(View.GONE);
+                } else if (SYPHILIS.contentEquals("Poor Sample Quality")) {
+                    positiveselected.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
+
+
+
+        //ccEn
+        CCCEnrolDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(LaborAndDeliveryStart.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        CCCEnrolDate.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker();
+
+                // show the dialog
+                datePicker.show();
+            }
+        });
+
 
         //proph date
         prophed1.setOnClickListener(new View.OnClickListener() {
@@ -796,11 +1157,28 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
             }
         });
+        //hivAtLD
+        ArrayAdapter<String> HIVatAdapter = new ArrayAdapter<String>(LaborAndDeliveryStart.this, android.R.layout.simple_spinner_item, hivResults);
+        HIVatAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        hivLDS1.setAdapter(HIVatAdapter);
 
+        hivLDS1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                HIV_LD = hivResults[position];
+                hivatLDS_code=Integer.toString(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         //hivreluts
         ArrayAdapter<String> HIVAdapter = new ArrayAdapter<String>(LaborAndDeliveryStart.this, android.R.layout.simple_spinner_item, hivResults);
-        ModedeliveryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        HIVAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         hivResultsS.setAdapter(HIVAdapter);
 
         hivResultsS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -809,6 +1187,49 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 HIV = hivResults[position];
                 hivResultsS_code=Integer.toString(position);
+
+               /* if (hivResultsS_code.contentEquals("3")) {
+                    hivdata1c.setVisibility(View.VISIBLE);
+
+                } */
+
+                if (hivResultsS_code.contentEquals("2")) {
+                    hivdata1c.setVisibility(View.VISIBLE);
+                } else if (hivResultsS_code.contentEquals("1")) {
+                    hivdata1c.setVisibility(View.GONE);
+                }
+
+                else if (hivResultsS_code.contentEquals("0")) {
+                    hivdata1c.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        // hiv results2
+        ArrayAdapter<String> resultsAdapter1 = new ArrayAdapter<String>(LaborAndDeliveryStart.this, android.R.layout.simple_spinner_item, hivResults);
+        resultsAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        hivResultsSp.setAdapter(resultsAdapter1);
+
+        hivResultsSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                HIV_RESULTS = hivResults[position];
+                partnerHIV_Results_Code = Integer.toString(position);
+
+
+                 if (partnerHIV_Results_Code.contentEquals("2")) {
+                    hivdata2c.setVisibility(View.VISIBLE);
+                } else if (partnerHIV_Results_Code.contentEquals("1")) {
+                    hivdata2c.setVisibility(View.GONE);
+                } else if (partnerHIV_Results_Code.contentEquals("0")) {
+                    hivdata2c.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -872,10 +1293,10 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 if ( MOTHER_TESTED.contentEquals("Yes")){
                    // Toast.makeText(LaborAndDeliveryStart.this, "yes", Toast.LENGTH_SHORT).show();
-                    hivlay.setVisibility(View.VISIBLE);
+                    hivlay1.setVisibility(View.VISIBLE);
                 }
                else if ( MOTHER_TESTED.contentEquals("No")){
-                    hivlay.setVisibility(View.GONE);
+                    hivlay1.setVisibility(View.GONE);
                 }
 
             }
@@ -1515,6 +1936,8 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 CURRENT_R = CurrentRe[position];
+
+                Regimin_code =Integer.toString(position);
             }
 
             @Override
@@ -1649,6 +2072,28 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                 }
                else if (deliveryDate.getText().toString().isEmpty()) {
                     Toast.makeText(LaborAndDeliveryStart.this, "Please Select Delivery Date", Toast.LENGTH_SHORT).show();
+                }
+                if(azt1.isChecked())
+                {
+                    aztb= Boolean.parseBoolean(azt1.getText().toString());
+                }
+
+
+                if(nvp1.isChecked())
+                {
+                    //description=checkPrivacy.getText().toString();
+                    nvpb= Boolean.parseBoolean(nvp1.getText().toString());
+
+                }
+
+                if(ctx1.isChecked())
+                {
+                    ctxb = Boolean.parseBoolean(ctx1.getText().toString());
+                }
+                else if (SyphilisSerology_code.contentEquals("0")) {
+                    Toast.makeText(LaborAndDeliveryStart.this, "Select Syphilis Serology", Toast.LENGTH_LONG).show();
+                } else if (HepatitisB_code.contentEquals("0")) {
+                    Toast.makeText(LaborAndDeliveryStart.this, "Select Hepatitis B Serology", Toast.LENGTH_LONG).show();
                 }
 
                else if (MotherTestedS_code.contentEquals("0")) {

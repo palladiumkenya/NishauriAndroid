@@ -23,6 +23,38 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <!-- weight -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/weight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:hint="Weight:*"
+
+                        android:maxLength="24"
+                        android:textColorHint="#000" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- MUAC -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/muac"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:hint="MUAC:*"
+
+                        android:maxLength="24"
+                        android:textColorHint="#000" />
+                </com.google.android.material.textfield.TextInputLayout>
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -38,6 +70,30 @@
 
                         android:textColorHint="#000" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <!--hiv status at LD -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="HIV Status at Labour and Delivery " />
+
+                    <Spinner
+                        android:id="@+id/hivatLDS"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -84,6 +140,470 @@
                         android:layout_marginBottom="20sp" />
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/hivdata1"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/testedDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Date Tested*"
+                            android:focusable="false"
+                            android:textColorHint="#000"
+                            android:textSize="12sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/partnerLayout1"
+                        >
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/ccno"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Enter CCC Number*"
+                                android:textColorHint="#000"
+                                android:textSize="12sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/ccEn"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="CCC Enrolment Date*"
+                                android:focusable="false"
+                                android:textColorHint="#000"
+                                android:textSize="12sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/ARTstart"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="ART Start Date*"
+                                android:focusable="false"
+                                android:textColorHint="#000"
+                                android:textSize="12sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Mother's Current Regimen" />
+
+                    <Spinner
+                        android:id="@+id/motherCurrentRegimen1"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+
+
+
+
+
+                <!--partner hiv status -->
+                <Button
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="#004d4d"
+                    android:fontFamily="serif"
+                    android:text="Partner HIV Status"
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF" />
+                <!-- HIV results -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="HIV Results" />
+
+                    <Spinner
+                        android:id="@+id/hivResults1p"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/hivdata2"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/testedDatep"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Date Tested*"
+                            android:focusable="false"
+                            android:textColorHint="#000"
+                            android:textSize="12sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/partnerLayout"
+                        >
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/partccno"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Enter CCC Number*"
+                                android:textColorHint="#000"
+                                android:textSize="12sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/partccEn"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="CCC Enrolment Date*"
+                                android:focusable="false"
+                                android:textColorHint="#000"
+                                android:textSize="12sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/partARTstart"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="ART Start Date*"
+                                android:focusable="false"
+                                android:textColorHint="#000"
+                                android:textSize="12sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <!-- Viral load results -->
+                <!-- Test Results -->
+
+                <Button
+                    android:id="@+id/btnTestResults"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="#004d4d"
+                    android:fontFamily="serif"
+                    android:text="Other Test Results"
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF" />
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Syphilis Serology" />
+
+                    <Spinner
+                        android:id="@+id/SyphilisSpinner"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+                <!-- Has the client been treated -->
+                <!-- positive selected -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:id="@+id/positiveSelected"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Has The Client Been Treated for Syphilis?" />
+
+                    <Spinner
+                        android:id="@+id/clientTreat"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+
+
+
+
+                <!--Hepatitis B -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:id="@+id/hepatisib"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Hepatitis B Serology" />
+
+                    <Spinner
+                        android:id="@+id/hepB"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+
+                <!-- TB Screening Outcome-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:id="@+id/tblay"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="TB Screening Outcome" />
+
+                    <Spinner
+                        android:id="@+id/TBS"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/ARTandProphylaxi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="#004d4d"
+                    android:fontFamily="serif"
+                    android:text="Infant Prophylaxis Given During This Visit?"
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <CheckBox
+                        android:id="@+id/azt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="AZT"
+                        android:layout_weight="1"
+                        />
+                    <TextView
+                        android:id="@+id/informText"
+                        android:layout_weight="2"
+                        android:text="Informed consent"
+                        android:visibility="gone"
+                        android:layout_width="0dp"
+                        android:textColor="#034694"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+                    <CheckBox
+                        android:id="@+id/nvp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="NVP"
+                        android:layout_weight="1"
+                        />
+                    <TextView
+                        android:id="@+id/privacyText"
+                        android:layout_weight="2"
+                        android:text="Privacy policy"
+                        android:textColor="#034694"
+                        android:layout_width="0dp"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+                    <CheckBox
+                        android:id="@+id/ctx"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="CTX"
+                        android:layout_weight="1"
+                        />
+                    <TextView
+
+                        android:layout_weight="2"
+                        android:text="Privacy policy"
+                        android:textColor="#034694"
+                        android:layout_width="0dp"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                </LinearLayout>
+
+                <!-- Mother started on HAART at maternity? -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:id="@+id/HAARTstart"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Mother started on HAART at maternity?" />
+
+                    <Spinner
+                        android:id="@+id/haartSp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+
+                <!--Was mother on HAART during ANC? -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:visibility="gone"
+                    android:id="@+id/wasonHAARTL"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Was mother on HAART during ANC?" />
+
+                    <Spinner
+                        android:id="@+id/wasonhaartSp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20sp" />
+
+                </LinearLayout>
+
+
+
+
+
 
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -172,28 +692,7 @@
 
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:visibility="gone"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Mother's Current Regimen" />
-
-                    <Spinner
-                        android:id="@+id/motherCurrentRegimen1"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20sp" />
-
-                </LinearLayout>
                 <!-- single baby -->
 
                 <Button
