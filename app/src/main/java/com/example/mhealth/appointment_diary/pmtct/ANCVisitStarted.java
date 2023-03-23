@@ -606,8 +606,7 @@ public class ANCVisitStarted extends AppCompatActivity {
         });
 
         //TB screening
-
-       ArrayAdapter<String> tbAdapter = new ArrayAdapter<String>(ANCVisitStarted.this, android.R.layout.simple_spinner_item, tbS);
+        ArrayAdapter<String> tbAdapter = new ArrayAdapter<String>(ANCVisitStarted.this, android.R.layout.simple_spinner_item, tbS);
         tbAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tb1S.setAdapter(tbAdapter);
         tb1S.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
