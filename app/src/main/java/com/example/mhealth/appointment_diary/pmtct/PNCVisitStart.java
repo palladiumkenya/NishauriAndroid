@@ -46,6 +46,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -61,7 +62,7 @@ public class PNCVisitStart extends AppCompatActivity {
     Dialog mydialog;
 
 
-    EditText PNC_VisitNo, PNC_ClinicNo,ANC_VisitNo1,DateDied, DeathCause, BabyDOB,DateStarted, partnerCCCNo, DateTested, partnerDateTested, CCCEnrolDate, ARTStart_date, partnerCCCEnrolDate, partnerARTStart_date;
+    EditText PNC_VisitNo, PNC_ClinicNo,ANC_VisitNo1,DateDied, DeathCause, BabyDOB,Datetestedp, partnerCCCNo, DateTested, partnerDateTested, CCCEnrolDate, ARTStart_date, partnerCCCEnrolDate, partnerARTStart_date;
     private int mYear, mMonth, mDay;
     String[] hivResults = {"", "Unknown", "Negative", "Positive"};
     String[] ClientVisitType = {"", "Labor and Delivery", "PNC"};
@@ -156,6 +157,10 @@ public class PNCVisitStart extends AppCompatActivity {
         DeathCause=(EditText) findViewById(R.id.deathcause5);
         BabyDOB =(EditText)findViewById(R.id.BabyDOB);
 
+        DateTested = (EditText)findViewById(R.id.testedDate);
+
+        //Datetestedp = (EditText)findViewById(R.id.testedDatep);
+
         acs = new AccessServer(PNCVisitStart.this);
         chkinternet = new CheckInternet(PNCVisitStart.this);
 
@@ -211,8 +216,6 @@ public class PNCVisitStart extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
-
-
             {
                 if (Baby_Sexcode.contentEquals("0")) {
                     Toast.makeText(PNCVisitStart.this, "Please Select If Counselled pn Family Planning", Toast.LENGTH_SHORT).show();
@@ -221,32 +224,32 @@ public class PNCVisitStart extends AppCompatActivity {
 
                 }
 
-                else if (BabyDOB.getText().toString().isEmpty()){
+                if (BabyDOB.getText().toString().isEmpty()){
                     Toast.makeText(PNCVisitStart.this, "Please Select Date of Visit", Toast.LENGTH_SHORT).show();
 
                 }
                 else if (PNC_VisitNo.getText().toString().isEmpty()){
                     Toast.makeText(PNCVisitStart.this, "Please PNC Visit Number Visit", Toast.LENGTH_SHORT).show();
                 }
-                if(azt1.isChecked())
+               else if(azt1.isChecked())
                 {
                     aztb= Boolean.parseBoolean(azt1.getText().toString());
                 }
 
 
-                if(nvp1.isChecked())
+               else if(nvp1.isChecked())
                 {
                     //description=checkPrivacy.getText().toString();
                     nvpb= Boolean.parseBoolean(nvp1.getText().toString());
 
                 }
 
-                if(ctx1.isChecked())
+               else if(ctx1.isChecked())
                 {
                     ctxb = Boolean.parseBoolean(ctx1.getText().toString());
                 }
                 else if (PNC_ClinicNo.getText().toString().isEmpty()){
-                    Toast.makeText(PNCVisitStart.this, "Please PNC Clinic Number Visit", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PNCVisitStart.this, "Please Enter PNC Clinic Number Visit", Toast.LENGTH_SHORT).show();
                 }else{
 
                // savePNC();
@@ -265,6 +268,64 @@ public class PNCVisitStart extends AppCompatActivity {
 
 
         }
+
+        //partnerdate tested
+        //testedDate
+        partnerDateTested.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                long timeInMilliseconds = calendar.getTimeInMillis() + TimeUnit.DAYS.toMillis(280);
+
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(PNCVisitStart.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        partnerDateTested.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker();
+
+                // show the dialog
+                datePicker.show();
+            }
+        });
+        //testedDate
+        DateTested.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                long timeInMilliseconds = calendar.getTimeInMillis() + TimeUnit.DAYS.toMillis(280);
+
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(PNCVisitStart.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        DateTested.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+
+
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker();
+
+                // show the dialog
+                datePicker.show();
+            }
+        });
 
         //partARTstart
 
@@ -368,6 +429,33 @@ public class PNCVisitStart extends AppCompatActivity {
                 datePicker.show();
             }
         });
+
+        //Date died
+
+        DateDied.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(PNCVisitStart.this  , new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        DateDied.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                // datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker();
+
+                // show the dialog
+                datePicker.show();
+            }
+        });
+
 
 
 
@@ -733,10 +821,21 @@ public class PNCVisitStart extends AppCompatActivity {
         String dieddt = DateDied.getText().toString();
         String diedcause = DeathCause.getText().toString();
 
+        String DateTested1 = DateTested.getText().toString();
+        String partnerDateTested1 =partnerDateTested.getText().toString();
+        String partnerCCCNo1 = partnerCCCNo.getText().toString();
+        String CCCEnrolDate1 = CCCEnrolDate.getText().toString();
+        String ARTStart_date1 = ARTStart_date.getText().toString();
+        String partnerCCCEnrolDate1 = partnerCCCEnrolDate.getText().toString();
+        String partnerARTStart_date1 = partnerARTStart_date.getText().toString();
+        ANC_VisitNo1= (EditText) findViewById(R.id.ANC_VisitNo);
 
 
 
-        String PNC_data = newCC + "*" + det + "*" + visit + "*" +  clinic + "*" + DeliveryMode_code + "*" + DeliveryPlace_code + "*" + Regimin_code+ "*" +Immunization_code+ "*" +  Baby_Sexcode+ "*" + Fp_code+ "*" +MothersOutcome+ "*" +dieddt+ "*" +diedcause;
+
+
+        String PNC_data = newCC + "*" + det + "*" + visit + "*" +  clinic + "*" +Mother_Tested_code+"*" + HIV_status_Code+ "*" +  HIV_results_Code2+ "*" +DateTested1+ "*" + newCC + "*" + CCCEnrolDate1 + "*" +ARTStart_date1+ "*" + Regimin_code+ "*" +HIV_results_Codep+ "*" +partnerDateTested1+ "*" + partnerCCCNo1+ "*" + partnerCCCEnrolDate1+ "*" +partnerARTStart_date1+ "*" +aztb+ "*" +nvpb+ "*" +ctxb+ "*" +haart_code+"*" + -1+"*" +DeliveryMode_code + "*" + DeliveryPlace_code + "*" +Immunization_code+ "*" +  Baby_Sexcode+ "*" + Fp_code+ "*" +MothersOutcome+ "*" +dieddt+ "*" +diedcause;
+        Log.d("pnc", PNC_data);
         String enc = Base64Encoder.encryptString(PNC_data);
 
 
@@ -744,7 +843,7 @@ public class PNCVisitStart extends AppCompatActivity {
         for (int x = 0; x < myl.size(); x++) {
 
             String un = myl.get(x).getUname();
-            List<Registrationtable> myl2 = Registrationtable.findWithQuery(Registrationtable.class, "select * from Registrationtable where username=? limit 1", un);
+            List<Registrationtable> myl2 = Registrationtable.findWithQuery(Registrationtable.class, "select+ from Registrationtable where username=? limit 1", un);
             for (int y = 0; y < myl2.size(); y++) {
 
                 String phne = myl2.get(y).getPhone();
@@ -765,18 +864,42 @@ public class PNCVisitStart extends AppCompatActivity {
 
 public void postPNC() {
 
-    String det = BabyDOB.getText().toString();
+    /*String det = BabyDOB.getText().toString();
     String visit = PNC_VisitNo.getText().toString();
     String clinic = PNC_ClinicNo.getText().toString();
 
     String anc_visits = ANC_VisitNo1.getText().toString();
 
     String dieddt = DateDied.getText().toString();
-    String diedcause = DeathCause.getText().toString();
+    String diedcause = DeathCause.getText().toString();*/
     String Regspecify =Regimenedt1.getText().toString();
 
 
-    String PNC_data = newCC + "*" + det + "*" + visit + "*" + clinic + "*" +anc_visits+ "*" +Mother_Tested_code + "*" + DeliveryMode_code + "*" + DeliveryPlace_code + "*" + Regimin_code + "*" +Regspecify+ "*" + Immunization_code + "*" + Baby_Sexcode + "*" + Fp_code + "*" + MothersOutcome + "*" + dieddt + "*" + diedcause;
+
+    String det = BabyDOB.getText().toString();
+    String visit = PNC_VisitNo.getText().toString();
+    String clinic = PNC_ClinicNo.getText().toString();
+    String anc_visits = ANC_VisitNo1.getText().toString();
+
+    String dieddt = DateDied.getText().toString();
+    String diedcause = DeathCause.getText().toString();
+
+    String DateTested1 = DateTested.getText().toString();
+    String partnerDateTested1 =partnerDateTested.getText().toString();
+    String partnerCCCNo1 = partnerCCCNo.getText().toString();
+    String CCCEnrolDate1 = CCCEnrolDate.getText().toString();
+    String ARTStart_date1 = ARTStart_date.getText().toString();
+    String partnerCCCEnrolDate1 = partnerCCCEnrolDate.getText().toString();
+    String partnerARTStart_date1 = partnerARTStart_date.getText().toString();
+    ANC_VisitNo1= (EditText) findViewById(R.id.ANC_VisitNo);
+
+
+
+
+    String PNC_data = newCC + "*" + det + "*" + visit + "*" +  clinic + "*" +anc_visits +"*" + Mother_Tested_code+"*" + HIV_status_Code+ "*" +  HIV_results_Code2+ "*" +DateTested1+ "*" + newCC + "*" + CCCEnrolDate1 + "*" +ARTStart_date1+ "*" + Regimin_code+ "*" +HIV_results_Codep+ "*" +partnerDateTested1+ "*" + partnerCCCNo1+ "*" + partnerCCCEnrolDate1+ "*" +partnerARTStart_date1+ "*" +aztb+ "*" +nvpb+ "*" +ctxb+ "*" +haart_code+"*" + "-1" +"*" +DeliveryMode_code + "*" + DeliveryPlace_code + "*" +Immunization_code+ "*" +  Baby_Sexcode+ "*" + Fp_code+ "*" +MothersOutcome_code+ "*" +dieddt+ "*" +diedcause;
+    Log.d("pnc", PNC_data);
+
+   // String PNC_data = newCC + "*" + det + "*" + visit + "*" + clinic + "*" +anc_visits+ "*" +Mother_Tested_code + "*" + DeliveryMode_code + "*" + DeliveryPlace_code + "*" + Regimin_code + "*" +Regspecify+ "*" + Immunization_code + "*" + Baby_Sexcode + "*" + Fp_code + "*" + MothersOutcome + "*" + dieddt + "*" + diedcause;
     String enc = Base64Encoder.encryptString(PNC_data);
 
     List<Activelogin> myl = Activelogin.findWithQuery(Activelogin.class, "select * from Activelogin");
@@ -807,7 +930,7 @@ public void postPNC() {
             JSONObject payload = new JSONObject();
             try {
 
-                payload.put("msg", "anc*"+enc);
+                payload.put("msg", "pnc*"+enc);
                 payload.put("phone_no", phne);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -819,8 +942,8 @@ public void postPNC() {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-//                        Toast.makeText(ctx, "message "+response, Toast.LENGTH_SHORT).show();
-                            Log.e("Response: ", response.toString());
+                       Toast.makeText(PNCVisitStart.this, "message "+response, Toast.LENGTH_SHORT).show();
+                            Log.e("Response: ", "response.toString()");
                             pr.dissmissProgress();
 
                             JSONObject jsonObject = null;
@@ -837,6 +960,8 @@ public void postPNC() {
                                     int code1=jsonObject1.getInt("code");*/
 
                                 if (code22==200){
+
+                                    Log.e("Response: ", "code200");
                                     // dialogs.showSuccessDialog(mss, "Server Response");
 
                                     androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(PNCVisitStart.this);
@@ -883,6 +1008,8 @@ public void postPNC() {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+
+                            Toast.makeText(PNCVisitStart.this, "ERROR", Toast.LENGTH_SHORT).show();
                             pr.dissmissProgress();
 
                             try {
