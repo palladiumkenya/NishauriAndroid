@@ -812,7 +812,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                 radioButtonChecked = findViewById(checkedId);
 
                 // on below line we are displaying a toast message.
-                Toast.makeText(ANCVisitStarted.this, "Selected Radio Button is : " + radioButtonChecked.getText(), Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(ANCVisitStarted.this, "Selected Radio Button is : " + radioButtonChecked.getText(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -857,7 +857,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                 //aztb, nvpb, ctxb;
                 //azt1, nvp1, ctx1;
 
-                if(azt1.isChecked())
+                /*if(azt1.isChecked())
                 {
                     aztb= Boolean.parseBoolean(azt1.getText().toString());
                 }
@@ -873,7 +873,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                 if(ctx1.isChecked())
                 {
                     ctxb = Boolean.parseBoolean(ctx1.getText().toString());
-                }
+                }*/
                 else if (SyphilisSerology_code.contentEquals("0")) {
                     Toast.makeText(ANCVisitStarted.this, "Select Syphilis Serology", Toast.LENGTH_LONG).show();
                 } else if (HepatitisB_code.contentEquals("0")) {
@@ -899,6 +899,9 @@ public class ANCVisitStarted extends AppCompatActivity {
                     gra =pa11+pa22+1;
 
                     // t1.setText(Integer.toStringly(sum));
+
+
+
 
                 }catch (Exception e){
                     e.printStackTrace();
@@ -1066,9 +1069,11 @@ public class ANCVisitStarted extends AppCompatActivity {
         String partnerARTStart_date1 = partnerARTStart_date.getText().toString();
         String VLdate1 = VLdate.getText().toString();
         String VLResults1 = VLResults.getText().toString();
+        String weight11 =weight1.getText().toString();
+        String muac11 =muac1.getText().toString();
 
 
-        String ANC_data = newCC + "*" + ANC_no + "*" + ANC_clinic_no + "*" + ClientIS_code + "*" + pa11 + "*" + pa22 + "*" + gra + "*" + LMPdate + "*" + EDDDATE + "*" + gestation + "*" + HIV_Results_Code + "*" + DateTested1 + "*" + CCCNo2 + "*" + CCCEnrolDate1 + "*" + ARTStart_date1 + "*" + partnerHIV_Results_Code + "*" + partnerDateTested1 + "*" + partnerCCCNo1 + "*" + partnerCCCEnrolDate1 + "*" + partnerARTStart_date1 + "*" + VLdate1 + "*" + VLResults1 + "*" + SyphilisSerology_code + "*" + clientTreated_code + "*" + HepatitisB_code;
+        String ANC_data = newCC + "*" + ANC_no + "*" + ANC_clinic_no + "*" + ClientIS_code + "*" + weight11 + "*" +muac11+ "*" +pa11 + "*" + pa22 + "*" + gra + "*" + LMPdate + "*" + EDDDATE + "*" + gestation + "*" + HIV_ANC_Code+ "*" + Mother_Tested_code+ "*" + HIV_Results_Code + "*" + DateTested1 + "*" + CCCNo2 + "*" + CCCEnrolDate1 + "*" + ARTStart_date1 + "*" + partnerHIV_Results_Code + "*" + partnerDateTested1 + "*" + partnerCCCNo1 + "*" + partnerCCCEnrolDate1 + "*" + partnerARTStart_date1 + "*" +  SyphilisSerology_code + "*" + clientTreated_code + "*" + HepatitisB_code + "*" + TB_code + "*" + aztb+ "*" + nvpb+ "*" + ctxb+ "*" + VLdate1 + "*" + VLResults1 + "*" + radioButtonChecked;
 
         String enc = Base64Encoder.encryptString(ANC_data);
 
@@ -1114,7 +1119,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-//                        Toast.makeText(ctx, "message "+response, Toast.LENGTH_SHORT).show();
+                       Toast.makeText(ANCVisitStarted.this, "message "+response, Toast.LENGTH_SHORT).show();
                                 Log.e("Response: ", response.toString());
                                 pr.dissmissProgress();
 
@@ -1215,6 +1220,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
+                                Log.d("Errors", error.getMessage());
                                 pr.dissmissProgress();
 
                                 try {

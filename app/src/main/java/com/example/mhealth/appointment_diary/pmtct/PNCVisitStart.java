@@ -217,7 +217,7 @@ public class PNCVisitStart extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                if (Baby_Sexcode.contentEquals("0")) {
+                /*if (Baby_Sexcode.contentEquals("0")) {
                     Toast.makeText(PNCVisitStart.this, "Please Select If Counselled pn Family Planning", Toast.LENGTH_SHORT).show();
                 }else if (Fp_code.contentEquals("0")){
                     Toast.makeText(PNCVisitStart.this, "Please Select The Family Planning Method", Toast.LENGTH_SHORT).show();
@@ -247,8 +247,8 @@ public class PNCVisitStart extends AppCompatActivity {
                else if(ctx1.isChecked())
                 {
                     ctxb = Boolean.parseBoolean(ctx1.getText().toString());
-                }
-                else if (PNC_ClinicNo.getText().toString().isEmpty()){
+                }*/
+                 if (PNC_ClinicNo.getText().toString().isEmpty()){
                     Toast.makeText(PNCVisitStart.this, "Please Enter PNC Clinic Number Visit", Toast.LENGTH_SHORT).show();
                 }else{
 
@@ -262,7 +262,6 @@ public class PNCVisitStart extends AppCompatActivity {
             //getSupportActionBar().setDisplayShowHomeEnabled(true);
             // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("PNC Visit Details");
-
         }
         catch(Exception e){
 
