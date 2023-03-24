@@ -80,6 +80,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
     String[] hepatitisB = {"", "Positive", "Negative", "Not Done"};
 
     String[] haartdata = {"", "Yes", "No", "N/A"};
+    String[] SyphilisTreatData = {"", "Yes", "No"};
 
 
     String[] prophy = {"", "AZT", "NVP", "CTX"};
@@ -89,12 +90,13 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
     FieldSetView maceratedfield1,maceratedfield2,maceratedfield3,maceratedfield4,maceratedfield5, livelayfield1,livelayfield2,livelayfield3,livelayfield4,livelayfield5;
 
 
-    Spinner clientVisitTypeS, haartSp1, wasonhaartSp1, SyphilisS,  hepBp, tb1S,  hivResultsSp, ModeDeliveryS, placeDeliveryS, DeliveryOutcomeS, MothersOutcomeS, MotherTestedS, BabyDeliveredS,BabyDeliveredS2,BabyDeliveredS3,BabyDeliveredS4,BabyDeliveredS5,  BabySexS,BabySexS2, BabySexS3, BabySexS4, BabySexS5, currentS, ImmunizationS, hivResultsS, prophyS1, prophyS2, prophyS3, prophyS4, prophyS5, hivLDS1;
+    Spinner clientVisitTypeS, clientTreatS, haartSp1, wasonhaartSp1, SyphilisS,  hepBp, tb1S,  hivResultsSp, ModeDeliveryS, placeDeliveryS, DeliveryOutcomeS, MothersOutcomeS, MotherTestedS, BabyDeliveredS,BabyDeliveredS2,BabyDeliveredS3,BabyDeliveredS4,BabyDeliveredS5,  BabySexS,BabySexS2, BabySexS3, BabySexS4, BabySexS5, currentS, ImmunizationS, hivResultsS, prophyS1, prophyS2, prophyS3, prophyS4, prophyS5, hivLDS1;
     private String CLIENT_VISIT_TYPE = "";
 
     private String HEPATITIS_B = "";
     private String SYPHILIS = "";
     private String TB = "";
+    private String CLIENT_TREAT = "";
 
     private String HIV_RESULTS = "";
     private String MODE_DELIVERY = "";
@@ -132,10 +134,10 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
     private String HIV = "";
     private String TESTED = "";
-    LinearLayout hivdata1c, wasonHAARTL1, hivdata2c, positiveselected, partnerLayout, hivlay1, diedlay, singleLay, twinLay,tripleLay, quadlay, fifthlay,diedlay2,diedlay3,diedlay4, diedlay5,livetextss,livetextss2,livetextss3,livetextss4,livetextss5,hivlay,prophLay1, prophLay2, prophLay3, prophLay4, prophLay5;
+    LinearLayout hivdata1c, positiveSelected1, wasonHAARTL1, hivdata2c, positiveselected, partnerLayout, hivlay1, diedlay, singleLay, twinLay,tripleLay, quadlay, fifthlay,diedlay2,diedlay3,diedlay4, diedlay5,livetextss,livetextss2,livetextss3,livetextss4,livetextss5,hivlay,prophLay1, prophLay2, prophLay3, prophLay4, prophLay5;
     TextInputLayout livetexts,livetexts2,livetexts3,livetexts4,livetexts5,prophdet1, prophdet2, prophdet3, prophdet4, prophdet5;
-    EditText ANCVisit_NO, deliveryDate, Datedied1, deathcause1,BabysDOB1, Datedied2,deathcause2,BabysDOB2, Datedied3,deathcause3,BabysDOB3, Datedied4,deathcause4,BabysDOB4,  Datedied5,deathcause5,BabysDOB5,prophed1,prophed2, prophed3, prophed4,prophed5, weight1, muac1, DateTested,CCCEnrolDate, ARTStart_date, partnerCCCNo, partnerDateTested, partnerCCCEnrolDate, partnerARTStart_date;
-    String BabyDeliveredS_code,  haart_code, haart_code2, SyphilisSerology_code,HepatitisB_code, TB_code,HIV_Results_Code, partnerHIV_Results_Code, Regimin_code,BabyDeliveredS2_code,BabyDeliveredS3_code,BabyDeliveredS4_code,BabyDeliveredS5_code,ModeDeliveryS_code, placeDeliveryS_code, DeliveryOutcomeS_code, MothersOutcomeS_code, MotherTestedS_code, BabySexS_code,BabySexS2_code,BabySexS3_code,BabySexS4_code,BabySexS5_code, currentS_code, ImmunizationS_code, hivResultsS_code, prophy1_code, prophy2_code, prophy3_code, prophy4_code, prophy5_code, hivatLDS_code;
+    EditText ANCVisit_NO, ccno1, deliveryDate, Datedied1, deathcause1,BabysDOB1, Datedied2,deathcause2,BabysDOB2, Datedied3,deathcause3,BabysDOB3, Datedied4,deathcause4,BabysDOB4,  Datedied5,deathcause5,BabysDOB5,prophed1,prophed2, prophed3, prophed4,prophed5, weight1, muac1, DateTested,CCCEnrolDate, ARTStart_date, partnerCCCNo, partnerDateTested, partnerCCCEnrolDate, partnerARTStart_date;
+    String BabyDeliveredS_code,  haart_code, syphTreat_code, haart_code2, SyphilisSerology_code,HepatitisB_code, TB_code,HIV_Results_Code, partnerHIV_Results_Code, Regimin_code,BabyDeliveredS2_code,BabyDeliveredS3_code,BabyDeliveredS4_code,BabyDeliveredS5_code,ModeDeliveryS_code, placeDeliveryS_code, DeliveryOutcomeS_code, MothersOutcomeS_code, MotherTestedS_code, BabySexS_code,BabySexS2_code,BabySexS3_code,BabySexS4_code,BabySexS5_code, currentS_code, ImmunizationS_code, hivResultsS_code, prophy1_code, prophy2_code, prophy3_code, prophy4_code, prophy5_code, hivatLDS_code;
     CheckBox azt1, nvp1, ctx1;
 
     @Override
@@ -172,7 +174,9 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
         //livelayfield1=(FieldSetView) findViewById(R.id.livelayfield1);
 
                 partnerLayout = (LinearLayout) findViewById(R.id.partnerLayout);
+                //positiveSelected1 = (LinearLayout) findViewById(R.id.positiveSelected);
                 ANCVisit_NO=(EditText) findViewById(R.id.ANCVisit_NO);
+                ccno1=(EditText) findViewById(R.id.ccno);
                 saveLD=(Button) findViewById(R.id.btn_submit_reg);
 
                 deliveryDate=(EditText) findViewById(R.id.deliveryDate);
@@ -215,7 +219,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                 baby3 =(Button) findViewById(R.id.baby3);
                 baby4 =(Button) findViewById(R.id.baby4);
                 baby5=(Button) findViewById(R.id.baby5);
-                positiveselected = (LinearLayout) findViewById(R.id.positiveSelected);
+               positiveselected = (LinearLayout) findViewById(R.id.positiveSelected);
                  wasonHAARTL1= (LinearLayout) findViewById(R.id.wasonHAARTL);
 
         diedlay=(LinearLayout)findViewById(R.id.diededits);
@@ -311,6 +315,8 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
         hivLDS1=(Spinner) findViewById(R.id.hivatLDS);
 
+       clientTreatS=(Spinner) findViewById(R.id.clientTreat);
+
         haartSp1=(Spinner) findViewById(R.id.haartSp);
         wasonhaartSp1=(Spinner) findViewById(R.id.wasonhaartSp);
 
@@ -361,19 +367,6 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
                         // adding the selected date in the edittext
                         DateTested.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
-
-
-
-                       /* Calendar calendar = Calendar.getInstance();
-                        calendar.set(year,monthOfYear + 1,dayOfMonth);
-
-                        long timeInMilliseconds = calendar.getTimeInMillis()+TimeUnit.DAYS.toMillis(280);
-                        calendar.setTimeInMillis(timeInMilliseconds);
-                        int mYear = calendar.get(Calendar.YEAR);
-                        int mMonth = calendar.get(Calendar.MONTH);
-                        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
-                        eText.setText(mDay + "/" + mMonth + "/" + mYear);*/
-
 
                     }
                 }, year, month, day);
@@ -489,8 +482,27 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
             }
         });
-        //Was mother on HAART during ANC
 
+        //client
+
+        ArrayAdapter<String> clientAdapte2 = new ArrayAdapter<String>(LaborAndDeliveryStart.this, android.R.layout.simple_spinner_item, SyphilisTreatData);
+        clientAdapte2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        clientTreatS.setAdapter(clientAdapte2);
+        clientTreatS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                CLIENT_TREAT= SyphilisTreatData[position];
+                syphTreat_code = Integer.toString(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        //Was mother on HAART during ANC
         ArrayAdapter<String> haartAdapter2 = new ArrayAdapter<String>(LaborAndDeliveryStart.this, android.R.layout.simple_spinner_item, haartdata);
         haartAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         wasonhaartSp1.setAdapter(haartAdapter2);
@@ -584,11 +596,6 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
 
 
         //ccEn
@@ -2230,6 +2237,24 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 }
 
+                else if(azt1.isChecked())
+                {
+                    aztb= Boolean.parseBoolean(azt1.getText().toString());
+                }
+
+
+                else if(nvp1.isChecked())
+                {
+                    //description=checkPrivacy.getText().toString();
+                    nvpb= Boolean.parseBoolean(nvp1.getText().toString());
+
+                }
+
+                else if(ctx1.isChecked())
+                {
+                    ctxb = Boolean.parseBoolean(ctx1.getText().toString());
+                }
+
                 //baby 2
                 //(BABY_DELIVERED.contentEquals("Live Birth")
 
@@ -2410,6 +2435,9 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
 
 
+
+
+
         String LD_data =  newCC + "*" + ANCVisit_NO1 + "*" + MotherTestedS_code+ "*" +hivResultsS_code+ "*" + deliveryDate1 + "*" +ModeDeliveryS_code + "*" + placeDeliveryS_code+ "*" + DeliveryOutcomeS_code + "*" + BabyDeliveredS_code + "*" + Datedied11+ "*" +deathcause11+"*" + BabysDOB11 + "*"+ BabySexS_code + "*" +ProphyDate1+ "*" +prophy1_code+ "*" + BabyDeliveredS2_code + "*" +Datedied22 + "*" + deathcause22 + "*" + BabysDOB22 + "*" +  BabySexS2_code+ "*" +ProphyDate2+ "*" +prophy2_code+ "*" +BabyDeliveredS3_code + "*" + Datedied33+ "*" +  deathcause33 + "*" +BabysDOB33 + "*" + BabySexS3_code + "*" + ProphyDate3+ "*" +prophy3_code+ "*" +BabyDeliveredS4_code + "*" + Datedied44+ "*" +deathcause44+"*" + BabysDOB44 + "*"+ BabySexS4_code+ "*" + ProphyDate4+ "*" +prophy4_code+ "*" +BabyDeliveredS5_code + "*" + Datedied55+ "*" +deathcause55+"*" + BabysDOB55 + "*"+ BabySexS5_code+ "*"+ProphyDate5+ "*" +prophy5_code+ "*" + MothersOutcomeS_code;
 
 
@@ -2479,12 +2507,26 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
         String ProphyDate4 =prophed4.getText().toString();
         String ProphyDate5 =prophed5.getText().toString();
 
+        String weight =weight1.getText().toString();
+        String muac =muac1.getText().toString();
+
+        String ccno2 =ccno1.getText().toString();
+        String m_enrolment_date =CCCEnrolDate.getText().toString();
+        String  m_art_start_date =ARTStart_date.getText().toString();
+
+        String PartnerDateTested =partnerDateTested.getText().toString();
+        String PartnerCCCNumber =partnerCCCNo.getText().toString();
+        String p_enrolment_date= partnerCCCEnrolDate.getText().toString();
+        String  p_art_start =partnerARTStart_date.getText().toString();
 
 
 
-        String LD_data =  newCC + "*" + ANCVisit_NO1 + "*" + MotherTestedS_code+ "*" +hivResultsS_code+ "*" + deliveryDate1 + "*" +ModeDeliveryS_code + "*" + placeDeliveryS_code+ "*" + DeliveryOutcomeS_code + "*" + BabyDeliveredS_code + "*" + Datedied11+ "*" +deathcause11+"*" + BabysDOB11 + "*"+ BabySexS_code + "*" +ProphyDate1+ "*" +prophy1_code+ "*" + BabyDeliveredS2_code + "*" +Datedied22 + "*" + deathcause22 + "*" + BabysDOB22 + "*" +  BabySexS2_code+ "*" +ProphyDate2+ "*" +prophy2_code+ "*" +BabyDeliveredS3_code + "*" + Datedied33+ "*" +  deathcause33 + "*" +BabysDOB33 + "*" + BabySexS3_code + "*" + ProphyDate3+ "*" +prophy3_code+ "*" +BabyDeliveredS4_code + "*" + Datedied44+ "*" +deathcause44+"*" + BabysDOB44 + "*"+ BabySexS4_code+ "*" + ProphyDate4+ "*" +prophy4_code+ "*" +BabyDeliveredS5_code + "*" + Datedied55+ "*" +deathcause55+"*" + BabysDOB55 + "*"+ BabySexS5_code+ "*"+ProphyDate5+ "*" +prophy5_code+ "*" + MothersOutcomeS_code;
+
+        String LD_data = weight + "*" + muac+ "*" + newCC + "*" + ANCVisit_NO1 + "*" +hivatLDS_code+ "*" + MotherTestedS_code+ "*" + hivResultsS_code+ "*" + MotherTestedS_code+ "*" + DateTested+ "*" + ccno2+ "*" + m_enrolment_date+ "*" +m_art_start_date+ "*" + Regimin_code + "*" + partnerHIV_Results_Code+ "*" + PartnerDateTested+ "*" + PartnerCCCNumber+ "*" + p_enrolment_date + "*" + p_art_start + "*" + SyphilisSerology_code+ "*" + HepatitisB_code+ "*" +TB_code+ "*" +aztb+ "*" + nvpb+ "*" + ctxb+ "*" + haart_code+ "*" + haart_code2+ "*" + hivResultsS_code+ "*" + deliveryDate1 + "*" +ModeDeliveryS_code + "*" + placeDeliveryS_code+ "*" + DeliveryOutcomeS_code + "*" + BabyDeliveredS_code + "*" + Datedied11+ "*" +deathcause11+"*" + BabysDOB11 + "*"+ BabySexS_code + "*" +ProphyDate1+ "*" +prophy1_code+ "*" + BabyDeliveredS2_code + "*" +Datedied22 + "*" + deathcause22 + "*" + BabysDOB22 + "*" +  BabySexS2_code+ "*" +ProphyDate2+ "*" +prophy2_code+ "*" +BabyDeliveredS3_code + "*" + Datedied33+ "*" +  deathcause33 + "*" +BabysDOB33 + "*" + BabySexS3_code + "*" + ProphyDate3+ "*" +prophy3_code+ "*" +BabyDeliveredS4_code + "*" + Datedied44+ "*" +deathcause44+"*" + BabysDOB44 + "*"+ BabySexS4_code+ "*" + ProphyDate4+ "*" +prophy4_code+ "*" +BabyDeliveredS5_code + "*" + Datedied55+ "*" +deathcause55+"*" + BabysDOB55 + "*"+ BabySexS5_code+ "*"+ProphyDate5+ "*" +prophy5_code+ "*" + MothersOutcomeS_code;
         // String LD_data =  newCC + "*" + ANCVisit_NO1 + "*" + MotherTestedS_code+ "*" +hivResultsS_code+ "*" + deliveryDate1 + "*" +ModeDeliveryS_code + "*" + placeDeliveryS_code+ "*" + DeliveryOutcomeS_code + "*" + BabyDeliveredS_code + "*" + Datedied11+ "*" +deathcause11+"*" + BabysDOB11 + "*"+ BabySexS_code + "*" + BabyDeliveredS2_code + "*" +Datedied22 + "*" + deathcause22 + "*" + BabysDOB22 + "*" +  BabySexS2_code+ "*" +BabyDeliveredS3_code + "*" + Datedied33+ "*" +  deathcause33 + "*" +BabysDOB33 + "*" + BabySexS3_code + "*" + BabyDeliveredS4_code + "*" + Datedied44+ "*" +deathcause44+"*" + BabysDOB44 + "*"+ BabySexS4_code+ "*" + BabyDeliveredS5_code + "*" + Datedied55+ "*" +deathcause55+"*" + BabysDOB55 + "*"+ BabySexS5_code+ "*"+ MothersOutcomeS_code;
         String enc = Base64Encoder.encryptString(LD_data);
+
+        Log.d("Payload", LD_data);
 
         //String enc2 =Base64Encoder.decryptedString(enc);
 
@@ -2531,7 +2573,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-//                        Toast.makeText(ctx, "message "+response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LaborAndDeliveryStart.this, "success"+response, Toast.LENGTH_SHORT).show();
                                 Log.e("Response: ", response.toString());
                                 pr.dissmissProgress();
 
@@ -2549,7 +2591,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                                     int code1=jsonObject1.getInt("code");*/
 
                                     if (code22==200){
-                                        // dialogs.showSuccessDialog(mss, "Server Response");
+                                         dialogs.showSuccessDialog(mss, "Server Response");
 
                                         androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(LaborAndDeliveryStart.this);
                                         builder1.setIcon(R.drawable.nascoplogonew);
@@ -2594,6 +2636,8 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
+
+                                Log.d("Error", error.getMessage());
                                 pr.dissmissProgress();
 
                                 try {
