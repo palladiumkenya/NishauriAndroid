@@ -2080,7 +2080,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                else if (deliveryDate.getText().toString().isEmpty()) {
                     Toast.makeText(LaborAndDeliveryStart.this, "Please Select Delivery Date", Toast.LENGTH_SHORT).show();
                 }
-                if(azt1.isChecked())
+                /*if(azt1.isChecked())
                 {
                     aztb= Boolean.parseBoolean(azt1.getText().toString());
                 }
@@ -2096,7 +2096,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                 if(ctx1.isChecked())
                 {
                     ctxb = Boolean.parseBoolean(ctx1.getText().toString());
-                }
+                }*/
                 else if (SyphilisSerology_code.contentEquals("0")) {
                     Toast.makeText(LaborAndDeliveryStart.this, "Select Syphilis Serology", Toast.LENGTH_LONG).show();
                 } else if (HepatitisB_code.contentEquals("0")) {
@@ -2524,7 +2524,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
         String LD_data = weight + "*" + muac+ "*" + newCC + "*" + ANCVisit_NO1 + "*" +hivatLDS_code+ "*" + MotherTestedS_code+ "*" + hivResultsS_code+ "*" + DateTested+ "*" + ccno2+ "*" + m_enrolment_date+ "*" +m_art_start_date+ "*" + Regimin_code + "*" + partnerHIV_Results_Code+ "*" + PartnerDateTested+ "*" + PartnerCCCNumber+ "*" + p_enrolment_date + "*" + p_art_start + "*" + SyphilisSerology_code+ "*" + HepatitisB_code+ "*" +TB_code+ "*" +aztb+ "*" + nvpb+ "*" + ctxb+ "*" + haart_code+ "*" + haart_code2+ "*" + hivResultsS_code+ "*" + deliveryDate1 + "*" +ModeDeliveryS_code + "*" + placeDeliveryS_code+ "*" + DeliveryOutcomeS_code + "*" + BabyDeliveredS_code + "*" + Datedied11+ "*" +deathcause11+"*" + BabysDOB11 + "*"+ BabySexS_code + "*" +ProphyDate1+ "*" +prophy1_code+ "*" + BabyDeliveredS2_code + "*" +Datedied22 + "*" + deathcause22 + "*" + BabysDOB22 + "*" +  BabySexS2_code+ "*" +ProphyDate2+ "*" +prophy2_code+ "*" +BabyDeliveredS3_code + "*" + Datedied33+ "*" +  deathcause33 + "*" +BabysDOB33 + "*" + BabySexS3_code + "*" + ProphyDate3+ "*" +prophy3_code+ "*" +BabyDeliveredS4_code + "*" + Datedied44+ "*" +deathcause44+"*" + BabysDOB44 + "*"+ BabySexS4_code+ "*" + ProphyDate4+ "*" +prophy4_code+ "*" +BabyDeliveredS5_code + "*" + Datedied55+ "*" +deathcause55+"*" + BabysDOB55 + "*"+ BabySexS5_code+ "*"+ProphyDate5+ "*" +prophy5_code+ "*" + MothersOutcomeS_code;
         // String LD_data =  newCC + "*" + ANCVisit_NO1 + "*" + MotherTestedS_code+ "*" +hivResultsS_code+ "*" + deliveryDate1 + "*" +ModeDeliveryS_code + "*" + placeDeliveryS_code+ "*" + DeliveryOutcomeS_code + "*" + BabyDeliveredS_code + "*" + Datedied11+ "*" +deathcause11+"*" + BabysDOB11 + "*"+ BabySexS_code + "*" + BabyDeliveredS2_code + "*" +Datedied22 + "*" + deathcause22 + "*" + BabysDOB22 + "*" +  BabySexS2_code+ "*" +BabyDeliveredS3_code + "*" + Datedied33+ "*" +  deathcause33 + "*" +BabysDOB33 + "*" + BabySexS3_code + "*" + BabyDeliveredS4_code + "*" + Datedied44+ "*" +deathcause44+"*" + BabysDOB44 + "*"+ BabySexS4_code+ "*" + BabyDeliveredS5_code + "*" + Datedied55+ "*" +deathcause55+"*" + BabysDOB55 + "*"+ BabySexS5_code+ "*"+ MothersOutcomeS_code;
-        String enc = Base64Encoder.encryptString(LD_data);
+        String enc1 = Base64Encoder.encryptString(LD_data);
 
         Log.d("Payload", LD_data);
 
@@ -2561,7 +2561,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                 JSONObject payload = new JSONObject();
                 try {
 
-                    payload.put("msg", "lad*"+enc);
+                    payload.put("msg", "lad*"+enc1);
                     payload.put("phone_no", phne);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -2573,7 +2573,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                        Toast.makeText(LaborAndDeliveryStart.this, "success"+response, Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(LaborAndDeliveryStart.this, "success"+response, Toast.LENGTH_SHORT).show();
                                 Log.e("Response: ", response.toString());
                                 pr.dissmissProgress();
 
@@ -2637,7 +2637,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                             @Override
                             public void onErrorResponse(VolleyError error) {
 
-                                Log.d("Error", error.getMessage());
+                              //  Log.d("Error", error.getMessage());
                                 pr.dissmissProgress();
 
                                 try {
