@@ -91,9 +91,7 @@
                     android:id="@+id/weight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:hint="Weight"
-
                     android:maxLength="24"
                     android:textColorHint="#000" />
             </com.google.android.material.textfield.TextInputLayout>

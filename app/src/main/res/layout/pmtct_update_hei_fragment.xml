@@ -119,6 +119,20 @@
                         android:textColorHint="#000" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <!-- UPI Number -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/UPI_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="UPI Number"
+                        android:textColorHint="#000" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -145,6 +159,21 @@
                         android:hint="@string/date_of_birth"
                         android:inputType="date"
                         android:maxLength="24"
+                        android:textColorHint="#000" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                <!-- Recent EID Results -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/RecentEID"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Recent EID Results"
                         android:textColorHint="#000" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -206,11 +235,166 @@
 
             </LinearLayout>
 
+            <!-- Visit details -->
+        <LinearLayout
+            android:id="@+id/hei_visit_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btn_visit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@color/colorPrimary"
+                android:fontFamily="serif"
+                android:text="Visit Details"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+            <!-- prophylaxis-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_height="wrap_content"
+                android:id="@+id/livetextss5">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Prophylaxis*" />
+
+                <Spinner
+                    android:id="@+id/proph"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp" />
+
+            </LinearLayout>
+            <!-- weight -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Weight"
+                    android:maxLength="24"
+                    android:textColorHint="#000" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Height -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/height"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Height"
+                    android:maxLength="24"
+                    android:textColorHint="#000" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Select Height/Length Category:* -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="Select Height/Length Category*" />
+
+                <Spinner
+                    android:id="@+id/height_legth"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp" />
+
+            </LinearLayout>
+            <!-- Enter MUAC -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/muac"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter MUAC"
+                    android:maxLength="24"
+                    android:textColorHint="#000" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <!-- TB Screening Status:* -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="TB Screening Status*" />
+
+                <Spinner
+                    android:id="@+id/tb_screening"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp" />
+
+            </LinearLayout>
+            <!--Infant Feeding Options:* -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="Infant Feeding Options *" />
+
+                <Spinner
+                    android:id="@+id/infant_feeding"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp" />
+
+            </LinearLayout>
+
+
+
         </LinearLayout>
 
 
+
+
+
     </androidx.core.widget.NestedScrollView>
-
-
-
 </LinearLayout>
