@@ -273,7 +273,6 @@ public class ANCVisitStarted extends AppCompatActivity {
 
 
         //partARTstart
-
         partnerARTStart_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

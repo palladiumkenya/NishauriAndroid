@@ -1,7 +1,10 @@
 package com.example.mhealth.appointment_diary.pmtct;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -18,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.NetworkResponse;
@@ -27,10 +31,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mhealth.appointment_diary.Dialogs.Dialogs;
 import com.example.mhealth.appointment_diary.Dialogs.ErrorMessage;
+import com.example.mhealth.appointment_diary.ProcessReceivedMessage.ProcessMessage;
+import com.example.mhealth.appointment_diary.Progress.Progress;
 import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.config.Config;
 import com.example.mhealth.appointment_diary.config.VolleyErrors;
+import com.example.mhealth.appointment_diary.encryption.Base64Encoder;
 import com.example.mhealth.appointment_diary.models.Hei;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
@@ -44,6 +52,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,19 +60,50 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 public class PmtctUpdateHeiFragment extends Fragment {
+
+    String z, all;
+    Date datelmp;
+    Date date1;
+    Date date2;
+    String phne;
+
+    String phone_no;
+
+    Progress pr;
+    ProcessMessage pm;
+    Dialogs dialogs;
+    SweetAlertDialog mdialog;
+    Dialog mydialog;
+
+    String[] prophylaxis_d = {"", "AZT", "NVP", "CTX"};
+    String[] height_weight_d = {"", "Normal", "Stunted", "Severe Stunted"};
+    String[] tb_screening_d= {"", "No Sign", "Suspect", "Confirmed", "Pregnant and Breastfeeding", "INH", "Not Done"};
+    String[] infant_feeding_d = {"","Not Breastfeeding", "Breastfeeding", "Exclusive Replacement Feeding", " Exclusive Breastfeeding", "Mixed Feeding"};
+    String[] PCR_done_for_HEI_d = {"", "Yes", "No"};
+    String[] EID_test_done_d= {"", "DNA_PCR_6_Weeks", "DNA PCR 6 Months", "DNA PCR 12 Months", "Antibody Test 18 Months"};
+    String[] PCR_Results_for_HEI_d= {"", "Positive", "Negative"};
+    String[] Confirmatory_DNA_d= {"", "Yes", "No"};
+
+
+    //Spinner prophyS, heightS, tbS, infantS, pcrdoneS, eidS, pcrresultS, confirmS;
+    //EditText weight1, height1, muac1, Eid_date;
+
+    LinearLayout pregnant, positiveLayout, partnerLayout, positiveselected, hivdata1c, hivdata2c;
+    String prophy_code, height_Code, tb__Code, infant_code, pcrdone_code, eid_code, pcrResults_Code, confirmatory_code;
     private Unbinder unbinder;
     private View root;
     private Context context;
 
-    public String z;
+
 
 
     RequestQueue queue;
 
-    private String phone_no;
+
     private int HEI_PRIM_KEY = 0;
 
 
@@ -77,6 +117,53 @@ public class PmtctUpdateHeiFragment extends Fragment {
     private int MFL_CODE = 0;
     private String CLINIC_ID = "";
     private String HEI_NO = "";
+
+
+
+   @BindView(R.id.weight)
+    EditText weight11;
+
+    @BindView(R.id.submitHEI)
+   Button submit_hei;
+
+
+    @BindView(R.id.EID_date_sample)
+    EditText Eid_date_sample;
+
+
+    @BindView(R.id.height)
+    EditText height_length1;
+
+    @BindView(R.id.muac)
+     EditText mu1;
+
+
+   @BindView(R.id.prophyl)
+    Spinner  prophS;
+
+    @BindView(R.id.height_legth_s)
+    Spinner  heightSS;
+
+    @BindView(R.id.tb_screening_s)
+    Spinner  tbSS;
+
+    @BindView(R.id.infant_feeding_s)
+    Spinner infantS;
+
+    @BindView(R.id.pcrDone_s)
+    Spinner  pcrdoneS;
+    @BindView(R.id.eid_Done_S)
+    Spinner  eidoneS;
+
+    @BindView(R.id.pcrResults_s1)
+    Spinner  pcrResults;
+
+    @BindView(R.id.confirmDNA)
+    Spinner  confS;
+
+
+
+   // Spinner prophyS, heightS, tbS, infantS, pcrdoneS, eidS, pcrresultS, confirmS;
 
 
 
@@ -137,6 +224,10 @@ public class PmtctUpdateHeiFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        Progress pr= new Progress(context);
+        ProcessMessage pm;
+        Dialogs dialogs=new Dialogs(context);
         // Inflate the layout for this fragment
         root =  inflater.inflate(R.layout.pmtct_update_hei_fragment, container, false);
         unbinder = ButterKnife.bind(this, root);
@@ -158,6 +249,193 @@ public class PmtctUpdateHeiFragment extends Fragment {
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         hei_gender_spinner.setAdapter(genderAdapter);
 
+        submit_hei.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HEI_Post();
+            }
+        });
+
+
+
+        //partARTstart
+       Eid_date_sample.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar calendar = Calendar.getInstance();
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                        // adding the selected date in the edittext
+                        Eid_date_sample.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+                // set maximum date to be selected as today
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker();
+
+                // show the dialog
+                datePicker.show();
+            }
+        });
+
+
+
+
+        //prophy
+        ArrayAdapter<String> prophAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, prophylaxis_d);
+        prophAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        prophS.setAdapter(prophAdapter);
+        prophS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+               // TB = tbS[position];
+                prophy_code = Integer.toString(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //height/weight
+        ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, height_weight_d);
+        heightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        heightSS.setAdapter(heightAdapter);
+        heightSS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                // TB = tbS[position];
+                height_Code = Integer.toString(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //tbScreening
+        ArrayAdapter<String> tbAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, tb_screening_d);
+        tbAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        tbSS.setAdapter(tbAdapter);
+        tbSS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                // TB = tbS[position];
+                tb__Code = Integer.toString(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //Infant feeding
+        ArrayAdapter<String> infantAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, infant_feeding_d);
+        infantAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        infantS.setAdapter(prophAdapter);
+        infantS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                // TB = tbS[position];
+                infant_code = Integer.toString(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //PCR Done
+        ArrayAdapter<String> pcrdoneAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, PCR_done_for_HEI_d);
+        pcrdoneAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        pcrdoneS.setAdapter(pcrdoneAdapter);
+        pcrdoneS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                // TB = tbS[position];
+                pcrdone_code = Integer.toString(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+       //eid test
+        ArrayAdapter<String> eidAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, EID_test_done_d);
+        eidAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        eidoneS.setAdapter(eidAdapter);
+        eidoneS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                // TB = tbS[position];
+                eid_code = Integer.toString(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //PCR results
+        ArrayAdapter<String> pcrResultsAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, PCR_Results_for_HEI_d);
+        pcrResultsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        pcrResults.setAdapter(pcrResultsAdapter);
+        pcrResults.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                // TB = tbS[position];
+                pcrResults_Code = Integer.toString(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+//Confirmatory
+        ArrayAdapter<String> confAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, Confirmatory_DNA_d);
+        confAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        confS.setAdapter(pcrdoneAdapter);
+        confS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                // TB = tbS[position];
+                confirmatory_code = Integer.toString(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
 
@@ -614,5 +892,164 @@ public class PmtctUpdateHeiFragment extends Fragment {
 
 
 
+
+    // Post TO HEI
+    public void HEI_Post() {
+        String weights= weight11.getText().toString();
+        String heightss = height_length1.getText().toString();
+        String muacss = mu1.getText().toString();
+
+
+
+        String eiddates = Eid_date_sample.getText().toString();
+
+
+
+        String hei_data = "1234500003" + "*" + "true"+ "*" + "true" + "*" +"true" + "*" + weight11 + "*" +weights+ "*" +heightss + "*" + height_Code + "*" + muacss + "*" + tb__Code + "*" + infant_code + "*" + pcrdone_code + "*" + eiddates+ "*" + eid_code+ "*" + pcrResults_Code + "*" + confirmatory_code;
+
+        String enc = Base64Encoder.encryptString(hei_data);
+
+
+        List<Activelogin> myl = Activelogin.findWithQuery(Activelogin.class, "select * from Activelogin");
+        for (int x = 0; x < myl.size(); x++) {
+
+            String un = myl.get(x).getUname();
+            List<Registrationtable> myl2 = Registrationtable.findWithQuery(Registrationtable.class, "select * from Registrationtable where username=? limit 1", un);
+            for (int y = 0; y < myl2.size(); y++) {
+
+                phne = myl2.get(y).getPhone();
+                try {
+                    List<UrlTable> _url = UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+                    if (_url.size() == 1) {
+                        for (int xx = 0; xx < _url.size(); xx++) {
+                            z = _url.get(xx).getBase_url1();
+
+                            all = "https://ushauriapi.kenyahmis.org/pmtct/anc";
+
+                        }
+                    }
+
+                } catch (Exception e) {
+
+                }
+               // pr.showProgress("Sending hei Details.....");
+                final int[] mStatusCode = new int[1];
+
+                JSONObject payload = new JSONObject();
+                try {
+
+                    payload.put("msg", "hei*"+enc);
+                    payload.put("phone_no", phne);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Log.e("payload: ", payload.toString());
+
+
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, z+Config.HEIpost, payload,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                               // Toast.makeText(context, "message "+response, Toast.LENGTH_SHORT).show();
+                                Log.e("Response: ", response.toString());
+                               // pr.dissmissProgress();
+
+                                String mss =null;
+                                int cd =0;
+                                try {
+                                    int code22 =response.getInt("code");
+                                    mss =response.getString("message");
+
+                                    if (code22==200){
+                                        // dialogs.showSuccessDialog(mss, "Server Response");
+
+                                        androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(context);
+                                        builder1.setIcon(R.drawable.nascoplogonew);
+                                        builder1.setTitle(mss);
+                                        builder1.setMessage( "Server Response");
+                                        builder1.setCancelable(false);
+
+                                        builder1.setPositiveButton(
+                                                "OK",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int id) {
+
+                                                        Intent intent = new Intent(context, ANCVisit.class);
+                                                        startActivity(intent);
+
+                                                        //dialog.cancel();
+                                                    }
+                                                });
+
+
+                                        AlertDialog alert11 = builder1.create();
+                                        alert11.show();
+
+
+
+                                    }else{
+                                       // dialogs.showErrorDialog(mss, "err");
+
+
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+
+
+
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.d("Errors", error.getMessage());
+                                //pr.dissmissProgress();
+
+                                try {
+
+                                    byte[] htmlBodyBytes = error.networkResponse.data;
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                                   // dialogs.showErrorDialog(new String(htmlBodyBytes), "Server Response");
+
+                                   // pr.dissmissProgress();
+
+                                } catch (Exception e) {
+
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                                   // dialogs.showErrorDialog("error occured, try again", "Server Response");
+
+                                   // pr.dissmissProgress();
+
+//
+                                }
+
+
+                            }
+                        }) {
+
+
+                    @Override
+                    protected Map<String, String> getParams() {
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        headers.put("Content-Type", "application/json");
+                        headers.put("Accept", "application/json");
+                        return headers;
+                    }
+
+                };
+
+                RequestQueue requestQueue = Volley.newRequestQueue(context);
+                requestQueue.add(jsonObjectRequest);
+
+//        RequestQueue requestQueue = Volley.newRequestQueue(ctx);
+//        requestQueue.add(stringRequest);
+
+            }
+        }}
 
 }

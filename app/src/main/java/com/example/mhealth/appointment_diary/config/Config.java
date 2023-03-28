@@ -121,6 +121,8 @@ public class Config extends AppCompatActivity {
     public static final String LDstart="/pmtct/lad";
     public static final String PNCstart="/pmtct/pnc";
 
+    public static final String HEIpost= "/pmtct/hei";
+
     /*
     https://ushauriapi.kenyahmis.org/pmtct/pnc
             10:15

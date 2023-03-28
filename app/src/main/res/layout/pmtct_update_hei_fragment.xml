@@ -270,7 +270,7 @@
                     android:text="Prophylaxis*" />
 
                 <Spinner
-                    android:id="@+id/proph"
+                    android:id="@+id/prophyl"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -321,7 +321,7 @@
                     android:text="Select Height/Length Category*" />
 
                 <Spinner
-                    android:id="@+id/height_legth"
+                    android:id="@+id/height_legth_s"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -357,7 +357,7 @@
                     android:text="TB Screening Status*" />
 
                 <Spinner
-                    android:id="@+id/tb_screening"
+                    android:id="@+id/tb_screening_s"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -380,13 +380,142 @@
                     android:text="Infant Feeding Options *" />
 
                 <Spinner
-                    android:id="@+id/infant_feeding"
+                    android:id="@+id/infant_feeding_s"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20sp" />
 
             </LinearLayout>
+
+            <!-- was PCR done for HEI -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="Was PCR done for HEI *" />
+
+                <Spinner
+                    android:id="@+id/pcrDone_s"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp" />
+
+            </LinearLayout>
+
+            <!-- Date EID sample was collected -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/EID_date_sample"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=" Date EID Sample Was Collected "
+                    android:focusable="false"
+                    android:textColorHint="#000"
+                    android:textSize="12sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- EID Testing Done-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="EID Testing done *" />
+
+                <Spinner
+                    android:id="@+id/eid_Done_S"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp" />
+
+            </LinearLayout>
+
+
+
+            <!-- PCR Results for HEI-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="PCR Results for HEI *" />
+
+                <Spinner
+                    android:id="@+id/pcrResults_s1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp" />
+
+            </LinearLayout>
+
+
+            <!-- Confirmatory DNA PCR-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="Confirmatory DNA PCR:*" />
+
+                <Spinner
+                    android:id="@+id/confirmDNA"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20sp" />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/submitHEI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@color/colorPrimary"
+                android:fontFamily="serif"
+                android:text="Submit"
+                android:textColor="#FFFFFF" />
 
 
 
