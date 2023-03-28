@@ -229,17 +229,25 @@
                     android:layout_marginTop="4dp"
                     android:background="@color/colorPrimary"
                     android:fontFamily="serif"
-                    android:text="@string/submit"
+                    android:text="Update HEI Details"
                     android:textSize="12sp"
                     android:textColor="#FFFFFF" />
 
             </LinearLayout>
 
             <!-- Visit details -->
+
+        <LinearLayout
+            android:id="@+id/hei_visit_details1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
         <LinearLayout
             android:id="@+id/hei_visit_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
 
             android:orientation="vertical">
             <Button
@@ -247,9 +255,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:background="@color/colorPrimary"
+                android:background="#004d4d"
                 android:fontFamily="serif"
-                android:text="Visit Details"
+                android:text="Please Fill Visit Details"
                 android:textSize="12sp"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
@@ -287,6 +295,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter Weight"
+                    android:inputType="number"
+
                     android:maxLength="24"
                     android:textColorHint="#000" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -301,6 +311,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter Height"
+                    android:inputType="number"
                     android:maxLength="24"
                     android:textColorHint="#000" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -416,7 +427,9 @@
             <!-- Date EID sample was collected -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
+                android:id="@+id/EID_layout"
                 android:layout_weight="1"
+                android:visibility="gone"
                 android:layout_height="wrap_content">
 
                 <EditText
@@ -432,11 +445,13 @@
             <!-- EID Testing Done-->
 
             <LinearLayout
+                android:id="@+id/EID_test_doneL"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:weightSum="3"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 >
 
                 <TextView
@@ -459,6 +474,8 @@
             <!-- PCR Results for HEI-->
 
             <LinearLayout
+                android:id="@+id/pcrResultsLL"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:weightSum="3"
@@ -484,6 +501,8 @@
 
             <!-- Confirmatory DNA PCR-->
             <LinearLayout
+                android:id="@+id/confirmLL"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:weightSum="3"
@@ -516,6 +535,7 @@
                 android:fontFamily="serif"
                 android:text="Submit"
                 android:textColor="#FFFFFF" />
+        </LinearLayout>
 
 
 

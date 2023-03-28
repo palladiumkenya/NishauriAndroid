@@ -43,6 +43,7 @@ import com.example.mhealth.appointment_diary.models.Hei;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
 import com.example.mhealth.appointment_diary.tables.UrlTable;
+import com.google.android.material.textfield.TextInputLayout;
 import com.orm.SugarRecord;
 
 import org.json.JSONArray;
@@ -92,7 +93,7 @@ public class PmtctUpdateHeiFragment extends Fragment {
     //Spinner prophyS, heightS, tbS, infantS, pcrdoneS, eidS, pcrresultS, confirmS;
     //EditText weight1, height1, muac1, Eid_date;
 
-    LinearLayout pregnant, positiveLayout, partnerLayout, positiveselected, hivdata1c, hivdata2c;
+    LinearLayout pregnant, positiveLayout, partnerLayout, positiveselected, hivdata1c, hivdata2c, hei_visit_details1L;
     String prophy_code, height_Code, tb__Code, infant_code, pcrdone_code, eid_code, pcrResults_Code, confirmatory_code;
     private Unbinder unbinder;
     private View root;
@@ -119,9 +120,21 @@ public class PmtctUpdateHeiFragment extends Fragment {
     private String HEI_NO = "";
 
 
+    @BindView(R.id.hei_visit_details1)
+    LinearLayout heiLayout;
+    @BindView(R.id.confirmLL)
+    LinearLayout confirmLL1;
+
+    @BindView(R.id.pcrResultsLL)
+    LinearLayout pcrResultsLL1;
+
+    @BindView(R.id.EID_test_doneL)
+    LinearLayout EID_test_doneLL;
 
    @BindView(R.id.weight)
     EditText weight11;
+    @BindView(R.id.EID_layout)
+   TextInputLayout EID_layoutL;
 
     @BindView(R.id.submitHEI)
    Button submit_hei;
@@ -373,6 +386,16 @@ public class PmtctUpdateHeiFragment extends Fragment {
                 // TB = tbS[position];
                 pcrdone_code = Integer.toString(position);
 
+                if (pcrdone_code.contentEquals("1")){
+                    EID_layoutL.setVisibility(View.VISIBLE);
+                    EID_test_doneLL.setVisibility(View.VISIBLE);
+                    pcrResultsLL1.setVisibility(View.VISIBLE);
+                }else{
+                    EID_layoutL.setVisibility(View.GONE);
+                    EID_test_doneLL.setVisibility(View.GONE);
+                    pcrResultsLL1.setVisibility(View.GONE);
+                }
+
             }
 
             @Override
@@ -410,6 +433,12 @@ public class PmtctUpdateHeiFragment extends Fragment {
 
                 // TB = tbS[position];
                 pcrResults_Code = Integer.toString(position);
+
+                if (pcrResults_Code.contentEquals("1")){
+                    confirmLL1.setVisibility(View.VISIBLE);
+                }else{
+                    confirmLL1.setVisibility(View.GONE);
+                }
 
             }
 
@@ -617,6 +646,7 @@ public class PmtctUpdateHeiFragment extends Fragment {
 
                     if (success) {
                         hei_details_layout.setVisibility(View.VISIBLE);
+                        heiLayout.setVisibility(View.VISIBLE);
 
                         JSONObject hei_data = response.has("hei_data") ? response.getJSONObject("hei_data") : null;
 
@@ -656,6 +686,7 @@ public class PmtctUpdateHeiFragment extends Fragment {
 
                         }else {
                             hei_details_layout.setVisibility(View.GONE);
+                            heiLayout.setVisibility(View.GONE);
 
                             CLINIC_ID = "";
                             LANGAUAGE_ID = 0;
@@ -681,6 +712,7 @@ public class PmtctUpdateHeiFragment extends Fragment {
                     } else {
 
                         hei_details_layout.setVisibility(View.GONE);
+                        heiLayout.setVisibility(View.GONE);
 
 
                         String message = response.has("message") ? response.getString("message") : "";
@@ -899,13 +931,15 @@ public class PmtctUpdateHeiFragment extends Fragment {
         String heightss = height_length1.getText().toString();
         String muacss = mu1.getText().toString();
 
+        //String heiNo =hei_no_et.getText().toString();
+
 
 
         String eiddates = Eid_date_sample.getText().toString();
 
 
 
-        String hei_data = "1234500003" + "*" + "true"+ "*" + "true" + "*" +"true" + "*" + weight11 + "*" +weights+ "*" +heightss + "*" + height_Code + "*" + muacss + "*" + tb__Code + "*" + infant_code + "*" + pcrdone_code + "*" + eiddates+ "*" + eid_code+ "*" + pcrResults_Code + "*" + confirmatory_code;
+        String hei_data = "1234567890"+ "*" +"true"+ "*" + "true" + "*" +"true" + "*" + weight11 + "*" +weights+ "*" +heightss + "*" + height_Code + "*" + muacss + "*" + tb__Code + "*" + infant_code + "*" + pcrdone_code + "*" + eiddates+ "*" + eid_code+ "*" + pcrResults_Code + "*" + confirmatory_code;
 
         String enc = Base64Encoder.encryptString(hei_data);
 
@@ -975,7 +1009,7 @@ public class PmtctUpdateHeiFragment extends Fragment {
                                                 new DialogInterface.OnClickListener() {
                                                     public void onClick(DialogInterface dialog, int id) {
 
-                                                        Intent intent = new Intent(context, ANCVisit.class);
+                                                        Intent intent = new Intent(context, PMTCT1.class);
                                                         startActivity(intent);
 
                                                         //dialog.cancel();
