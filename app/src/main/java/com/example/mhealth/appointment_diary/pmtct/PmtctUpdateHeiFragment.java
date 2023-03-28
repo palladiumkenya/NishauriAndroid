@@ -931,7 +931,7 @@ public class PmtctUpdateHeiFragment extends Fragment {
         String heightss = height_length1.getText().toString();
         String muacss = mu1.getText().toString();
 
-        //String heiNo =hei_no_et.getText().toString();
+        String heiNo =hei_no_et.getText().toString();
 
 
 
@@ -939,7 +939,7 @@ public class PmtctUpdateHeiFragment extends Fragment {
 
 
 
-        String hei_data = "1234567890"+ "*" +"true"+ "*" + "true" + "*" +"true" + "*" + weight11 + "*" +weights+ "*" +heightss + "*" + height_Code + "*" + muacss + "*" + tb__Code + "*" + infant_code + "*" + pcrdone_code + "*" + eiddates+ "*" + eid_code+ "*" + pcrResults_Code + "*" + confirmatory_code;
+        String hei_data = heiNo+ "*" +prophy_code+ "*" + "true" + "*" +"true" + "*" + weight11 + "*" +weights+ "*" +heightss + "*" + height_Code + "*" + muacss + "*" + tb__Code + "*" + infant_code + "*" + pcrdone_code + "*" + eiddates+ "*" + eid_code+ "*" + pcrResults_Code + "*" + confirmatory_code;
 
         String enc = Base64Encoder.encryptString(hei_data);
 
