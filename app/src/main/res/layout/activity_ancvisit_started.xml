@@ -357,6 +357,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter CCC Number*"
+                    android:inputType="number"
+                    android:maxLength="5"
                     android:textColorHint="#000"
                     android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -442,7 +444,7 @@
                     android:id="@+id/testedDatep"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Date Tested*"
+                    android:hint="Date Tested"
                     android:focusable="false"
                     android:textColorHint="#000"
                     android:textSize="12sp" />
@@ -464,7 +466,9 @@
                         android:id="@+id/partccno"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter CCC Number*"
+                        android:hint="Enter CCC Number"
+                        android:inputType="number"
+                        android:maxLength="5"
                         android:textColorHint="#000"
                         android:textSize="12sp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -478,7 +482,7 @@
                         android:id="@+id/partccEn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="CCC Enrolment Date*"
+                        android:hint="CCC Enrolment Date"
                         android:focusable="false"
                         android:textColorHint="#000"
                         android:textSize="12sp" />
@@ -493,7 +497,7 @@
                         android:id="@+id/partARTstart"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="ART Start Date*"
+                        android:hint="ART Start Date"
                         android:focusable="false"
                         android:textColorHint="#000"
                         android:textSize="12sp" />
