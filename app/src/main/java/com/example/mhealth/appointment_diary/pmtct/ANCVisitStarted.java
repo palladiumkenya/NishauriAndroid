@@ -82,8 +82,8 @@ public class ANCVisitStarted extends AppCompatActivity {
     String[] clientIs = {"", "Breastfeeding", "Not Breastfeeding", "Pregnant", "Pregnant and Breastfeeding"};
     String[] clientTreated = {"", "Yes", "No"};
     String[] hepatitisB = {"", "Positive", "Negative", "Not Done"};
-    String[] hivResults = {"", "Unknown", "Negative", "Positive"};
-    String[] hivfirstANCS = {"", "Unknown", "Negative", "Positive"};
+    String[] hivResults = {"", "Unknown", "Negative", "Known positive"};
+    String[] hivfirstANCS = {"", "Unknown", "Negative", "Known positive"};
     String[] mothertestedhivS = {"", "Yes", "No"};
 
     String[] tbS = {"", "No TB Signs", "Presumed TB", "TB Confirmed", "TB Screening Not Done"};
@@ -810,8 +810,14 @@ public class ANCVisitStarted extends AppCompatActivity {
                 // on below line we are getting radio button from our group.
                 radioButtonChecked = findViewById(checkedId);
 
+                if (radioButtonChecked.getText().equals("LDL")){
+                    VLResults.setEnabled(false);
+                }else{
+                    VLResults.setEnabled(true);
+                }
+
                 // on below line we are displaying a toast message.
-              //  Toast.makeText(ANCVisitStarted.this, "Selected Radio Button is : " + radioButtonChecked.getText(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ANCVisitStarted.this, "Selected Radio Button is : " + radioButtonChecked.getText(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -820,13 +826,24 @@ public class ANCVisitStarted extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (ANC_Visitno.getText().toString().isEmpty()) {
-                    Toast.makeText(ANCVisitStarted.this, "Enter ANC Visit Number", Toast.LENGTH_LONG).show();
-                } else if (ANC_clinicno.getText().toString().isEmpty()) {
+                if (ANC_clinicno.getText().toString().isEmpty()) {
                     Toast.makeText(ANCVisitStarted.this, "Enter ANC Clinic Number", Toast.LENGTH_LONG).show();
-                } else if (ClientIS_code.contentEquals("0")) {
+                }
+                else if (ANC_Visitno.getText().toString().isEmpty()) {
+                    Toast.makeText(ANCVisitStarted.this, "Enter ANC Visit Number", Toast.LENGTH_LONG).show();
+                }
+                else if (ClientIS_code.contentEquals("0")) {
                     Toast.makeText(ANCVisitStarted.this, "Specify If Client Is Breastfeeding", Toast.LENGTH_LONG).show();
-                } else if (parity1.getText().toString().isEmpty()) {
+                }
+
+                else if (weight1.getText().toString().isEmpty()) {
+                    Toast.makeText(ANCVisitStarted.this, "Enter Weight", Toast.LENGTH_LONG).show();
+                }
+                else if (muac1.getText().toString().isEmpty()) {
+                    Toast.makeText(ANCVisitStarted.this, "Enter MUAC", Toast.LENGTH_LONG).show();
+                }
+
+                else if (parity1.getText().toString().isEmpty()) {
                     Toast.makeText(ANCVisitStarted.this, "Enter parity 1", Toast.LENGTH_LONG).show();
                 } else if (parity2.getText().toString().isEmpty()) {
                     Toast.makeText(ANCVisitStarted.this, "Enter parity 2", Toast.LENGTH_LONG).show();
@@ -840,12 +857,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                     Toast.makeText(ANCVisitStarted.this, "Enter HIV Results", Toast.LENGTH_LONG).show();
                 }
 
-                else if (weight1.getText().toString().isEmpty()) {
-                    Toast.makeText(ANCVisitStarted.this, "Enter Weight", Toast.LENGTH_LONG).show();
-                }
-                else if (muac1.getText().toString().isEmpty()) {
-                    Toast.makeText(ANCVisitStarted.this, "Enter MUAC", Toast.LENGTH_LONG).show();
-                }
+
 
                /* else if (DateTested.getText().toString().isEmpty()){
                     Toast.makeText(ANCVisitStarted.this, "Enter Date Tested", Toast.LENGTH_LONG).show();
@@ -862,7 +874,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                 }
 
 
-                if(nvp1.isChecked())
+              else if(nvp1.isChecked())
                 {
                     //description=checkPrivacy.getText().toString();
                     nvpb= Boolean.parseBoolean(nvp1.getText().toString());
@@ -873,11 +885,41 @@ public class ANCVisitStarted extends AppCompatActivity {
                 {
                     ctxb = Boolean.parseBoolean(ctx1.getText().toString());
                 }*/
+
+                else if(!azt1.isChecked() && !nvp1.isChecked() && !ctx1.isChecked()){
+                    Toast.makeText(ANCVisitStarted.this, "Select Prophylaxis Given", Toast.LENGTH_LONG).show();
+                }
                 else if (SyphilisSerology_code.contentEquals("0")) {
                     Toast.makeText(ANCVisitStarted.this, "Select Syphilis Serology", Toast.LENGTH_LONG).show();
                 } else if (HepatitisB_code.contentEquals("0")) {
                     Toast.makeText(ANCVisitStarted.this, "Select Hepatitis B Serology", Toast.LENGTH_LONG).show();
-                } else {
+                }
+                else if (Mother_Tested_code.contentEquals("0")){
+                    Toast.makeText(ANCVisitStarted.this, "Specify If Mother was Tested for HIV", Toast.LENGTH_LONG).show();
+
+                }
+                else if (HIV_ANC_Code.contentEquals("0")){
+                    Toast.makeText(ANCVisitStarted.this, "Specify HIV Status Before first ANC", Toast.LENGTH_LONG).show();
+
+                }
+
+                else if (TB_code.contentEquals("0")){
+                    Toast.makeText(ANCVisitStarted.this, "Specify TB Screening", Toast.LENGTH_LONG).show();
+
+
+                }
+
+                else if (VLdate.getText().toString().isEmpty()){
+                    Toast.makeText(ANCVisitStarted.this, "Specify Date of Sample Collection", Toast.LENGTH_LONG).show();
+
+                }
+                else if(radioButtonChecked.getText().equals("Cp/ML(Numerical)") && VLResults.getText().toString().isEmpty()){
+                    Toast.makeText(ANCVisitStarted.this, "Specify Viral Load Results", Toast.LENGTH_LONG).show();
+                    VLResults.setError("");
+
+                }
+
+                else {
                    // submitANC();
                     ANCPost();
                 }

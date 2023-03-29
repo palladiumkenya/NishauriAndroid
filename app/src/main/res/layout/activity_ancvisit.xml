@@ -73,7 +73,7 @@
                         android:id="@+id/clinicno"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="1234500001"
+                        android:hint="CCC Number"
                         android:inputType="number"
                         android:enabled="false"
                         android:textColorHint="#000" />
@@ -87,7 +87,7 @@
                         android:id="@+id/upino"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="MOH1234567890"
+                        android:hint="UPI Number"
                         android:inputType="number"
                         android:enabled="false"
                         android:textColorHint="#000" />
@@ -166,6 +166,7 @@
                         android:layout_height="wrap_content"
                         android:hint="Current Regimen"
                         android:inputType="text"
+                        android:visibility="gone"
                         android:enabled="false"
                         android:textColorHint="#000"
                         />
