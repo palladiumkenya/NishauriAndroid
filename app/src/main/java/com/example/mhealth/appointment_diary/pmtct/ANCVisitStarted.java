@@ -874,7 +874,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                 }
 
 
-              else if(nvp1.isChecked())
+              else 77if(nvp1.isChecked())
                 {
                     //description=checkPrivacy.getText().toString();
                     nvpb= Boolean.parseBoolean(nvp1.getText().toString());
