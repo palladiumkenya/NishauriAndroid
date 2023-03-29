@@ -1301,9 +1301,11 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                 if ( MOTHER_TESTED.contentEquals("Yes")){
                    // Toast.makeText(LaborAndDeliveryStart.this, "yes", Toast.LENGTH_SHORT).show();
                     hivlay1.setVisibility(View.VISIBLE);
+                    hivdata1c.setVisibility(View.VISIBLE);
                 }
                else if ( MOTHER_TESTED.contentEquals("No")){
                     hivlay1.setVisibility(View.GONE);
+                    hivdata1c.setVisibility(View.GONE);
                 }
 
             }
@@ -2591,7 +2593,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                                     int code1=jsonObject1.getInt("code");*/
 
                                     if (code22==200){
-                                         dialogs.showSuccessDialog(mss, "Server Response");
+                                         //dialogs.showSuccessDialog(mss, "Server Response");
 
                                         androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(LaborAndDeliveryStart.this);
                                         builder1.setIcon(R.drawable.nascoplogonew);
@@ -2607,6 +2609,46 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                                                         Intent intent = new Intent(LaborAndDeliveryStart.this, LaborAndDelivery.class);
                                                         startActivity(intent);
+                                                        dialog.dismiss();
+
+
+
+                                                        ANCVisit_NO.setText("");
+                                                        ccno1.setText("");
+
+
+                                                        deliveryDate.setText("");
+
+                                                        Datedied1.setText("");
+                                                        deathcause1.setText("");
+                                                        BabysDOB1.setText("");
+                                                        Datedied2.setText("");
+                                                        deathcause2.setText("");
+                                                        BabysDOB2.setText("");
+                                                        Datedied3.setText("");
+                                                        deathcause3.setText("");
+                                                        BabysDOB3.setText("");
+
+                                                        Datedied4.setText("");
+                                                        deathcause4.setText("");
+                                                        BabysDOB4.setText("");
+                                                        weight1.setText("");
+                                                        muac1.setText("");
+
+                                                        CCCEnrolDate.setText("");
+                                                        ARTStart_date.setText("");
+                                                        DateTested.setText("");
+
+
+                                                        partnerCCCEnrolDate.setText("");
+                                                        partnerARTStart_date.setText("");
+                                                        partnerCCCNo.setText("");
+                                                        partnerDateTested.setText("");
+
+
+                                                        Datedied5.setText("");
+                                                        deathcause5.setText("");
+                                                        BabysDOB5.setText("");
 
 
                                                         //dialog.cancel();

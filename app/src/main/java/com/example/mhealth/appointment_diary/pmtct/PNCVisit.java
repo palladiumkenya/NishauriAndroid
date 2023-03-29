@@ -47,13 +47,7 @@ public class PNCVisit extends AppCompatActivity {
     CheckInternet chkinternet;
     Dialogs dialogs;
 
-    @Override
-    public void onBackPressed() {
-        //super.onBackPressed();
 
-        Intent intent =new Intent(PNCVisit.this, PMTCT1.class);
-        startActivity(intent);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

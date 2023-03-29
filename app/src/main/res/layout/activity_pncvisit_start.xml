@@ -25,7 +25,7 @@
                     android:id="@+id/BabyDOB"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Date of Visit"
+                    android:hint="Date of Visit:*"
                     android:focusable="false"
                     android:textColorHint="#000"
                     />
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="PNC Clinic Number:*"
-            android:inputType="text"
+            android:inputType="number"
             android:maxLength="24"
             android:textColorHint="#000" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -71,6 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Number of ANC Visits:*"
+                    android:inputType="number"
 
                     android:maxLength="24"
                     android:textColorHint="#000" />
@@ -88,7 +89,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="HIV Status at post natal" />
+                    android:text="HIV Status at post natal*" />
 
                 <Spinner
                     android:id="@+id/hivResults1p"
@@ -250,7 +251,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="HIV Results" />
+                    android:text="HIV Results*" />
 
                 <Spinner
                     android:id="@+id/hivResults2p"
@@ -363,7 +364,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="TB Screening Outcome" />
+                    android:text="TB Screening Outcome*" />
 
                 <Spinner
                     android:id="@+id/TBS"
@@ -473,7 +474,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Was HAART for mother given" />
+                    android:text="Was HAART for mother given*" />
 
                 <Spinner
                     android:id="@+id/haartgiven"
@@ -500,7 +501,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Mode of Delivery" />
+                    android:text="Mode of Delivery*" />
 
                 <Spinner
                     android:id="@+id/DeliveryMode1"
@@ -522,7 +523,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Place of Delivery" />
+                    android:text="Place of Delivery*" />
 
                 <Spinner
                     android:id="@+id/DeliveryPlace1"
@@ -545,7 +546,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Mother's Current Regimen" />
+                    android:text="Mother's Current Regimen*" />
 
                 <Spinner
                     android:id="@+id/RegimenS"
@@ -592,7 +593,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Baby's Immunization" />
+                    android:text="Baby's Immunization*" />
 
                 <Spinner
                     android:id="@+id/BabyImmunization1"
@@ -616,7 +617,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Client Counselled on Postparturm FP?" />
+                    android:text="Client Counselled on Postparturm FP?*" />
 
                 <Spinner
                     android:id="@+id/FPS"
@@ -641,7 +642,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="FP Methods" />
+                    android:text="Family Planning Methods*" />
 
                 <Spinner
                     android:id="@+id/babySex"
@@ -676,7 +677,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Mother's Outcome" />
+                    android:text="Mother's Outcome*" />
 
                 <Spinner
                     android:id="@+id/mOutcome"

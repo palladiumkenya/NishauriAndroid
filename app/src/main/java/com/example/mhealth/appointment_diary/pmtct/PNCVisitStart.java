@@ -157,7 +157,7 @@ public class PNCVisitStart extends AppCompatActivity {
         DeathCause=(EditText) findViewById(R.id.deathcause5);
         BabyDOB =(EditText)findViewById(R.id.BabyDOB);
 
-        DateTested = (EditText)findViewById(R.id.testedDate);
+
 
         //Datetestedp = (EditText)findViewById(R.id.testedDatep);
 
@@ -206,7 +206,7 @@ public class PNCVisitStart extends AppCompatActivity {
         partnerCCCEnrolDate = (EditText) findViewById(R.id.partccEn);
         partnerARTStart_date = (EditText) findViewById(R.id.partARTstart);
         ANC_VisitNo1= (EditText) findViewById(R.id.ANC_VisitNo);
-
+        ANC_VisitNo1= (EditText) findViewById(R.id.ANC_VisitNo);
 
 
 
@@ -219,38 +219,96 @@ public class PNCVisitStart extends AppCompatActivity {
             {
                 /*if (Baby_Sexcode.contentEquals("0")) {
                     Toast.makeText(PNCVisitStart.this, "Please Select If Counselled pn Family Planning", Toast.LENGTH_SHORT).show();
-                }else if (Fp_code.contentEquals("0")){
+                }/*else if (Fp_code.contentEquals("0")){
                     Toast.makeText(PNCVisitStart.this, "Please Select The Family Planning Method", Toast.LENGTH_SHORT).show();
 
-                }
+                }*/
 
-                if (BabyDOB.getText().toString().isEmpty()){
+              if (BabyDOB.getText().toString().isEmpty()){
                     Toast.makeText(PNCVisitStart.this, "Please Select Date of Visit", Toast.LENGTH_SHORT).show();
 
                 }
-                else if (PNC_VisitNo.getText().toString().isEmpty()){
-                    Toast.makeText(PNCVisitStart.this, "Please PNC Visit Number Visit", Toast.LENGTH_SHORT).show();
-                }
-               else if(azt1.isChecked())
-                {
-                    aztb= Boolean.parseBoolean(azt1.getText().toString());
-                }
+
+              else if (HIV_status_Code.contentEquals("0")){
+                  Toast.makeText(PNCVisitStart.this, "Specify HIV Status", Toast.LENGTH_SHORT).show();
+              }
+              else if (Mother_Tested_code.contentEquals("0")){
+                  Toast.makeText(PNCVisitStart.this, "Specify if Mother Tested for HIV", Toast.LENGTH_SHORT).show();
+              }
+
+              else if (TB_code.contentEquals("0")){
+                  Toast.makeText(PNCVisitStart.this, "Specify if TB Screening was Done", Toast.LENGTH_SHORT).show();
+              }
+             /* else if(azt1.isChecked())
+              {
+                  aztb= Boolean.parseBoolean(azt1.getText().toString());
+              }
 
 
-               else if(nvp1.isChecked())
-                {
-                    //description=checkPrivacy.getText().toString();
-                    nvpb= Boolean.parseBoolean(nvp1.getText().toString());
+              else if(nvp1.isChecked())
+              {
 
-                }
+                  nvpb= Boolean.parseBoolean(nvp1.getText().toString());
 
-               else if(ctx1.isChecked())
-                {
-                    ctxb = Boolean.parseBoolean(ctx1.getText().toString());
-                }*/
-                 if (PNC_ClinicNo.getText().toString().isEmpty()){
+              }
+
+              else if(ctx1.isChecked())
+              {
+                  ctxb = Boolean.parseBoolean(ctx1.getText().toString());
+              }*/
+
+              else if (haart_code.contentEquals("0")){
+
+
+                  Toast.makeText(PNCVisitStart.this, "Specify if HAART for mother was given", Toast.LENGTH_SHORT).show();
+              }
+              else if (DeliveryMode_code.contentEquals("0")){
+                  Toast.makeText(PNCVisitStart.this, "Specify Delivery Mode", Toast.LENGTH_SHORT).show();
+              }
+
+              else if (DeliveryPlace_code.contentEquals("0")){
+                  Toast.makeText(PNCVisitStart.this, "Specify Place of Delivery", Toast.LENGTH_SHORT).show();
+              }
+              else if (Regimin_code.contentEquals("0")){
+                  Toast.makeText(PNCVisitStart.this, "Specify the Regimen", Toast.LENGTH_SHORT).show();
+              }
+              else if (Immunization_code.contentEquals("0")){
+                  Toast.makeText(PNCVisitStart.this, "Specify Baby's Immunization", Toast.LENGTH_SHORT).show();
+              }
+              else if (Fp_code.contentEquals("0")){
+                  Toast.makeText(PNCVisitStart.this, "Please Select The Family Planning Method", Toast.LENGTH_SHORT).show();
+
+              }
+              else if (MothersOutcome_code.contentEquals("0")){
+                  Toast.makeText(PNCVisitStart.this, "Specify Mother's Outcome", Toast.LENGTH_SHORT).show();
+              }
+              else if (MothersOutcome_code.contentEquals("2") && DateDied.getText().toString().isEmpty()){
+                  Toast.makeText(PNCVisitStart.this, "Specify Date Died", Toast.LENGTH_SHORT).show();
+                  DateDied.setError("");
+              }
+              else if (MothersOutcome_code.contentEquals("2") && DeathCause.getText().toString().isEmpty()){
+                  Toast.makeText(PNCVisitStart.this, "Specify Cause of Death", Toast.LENGTH_SHORT).show();
+                  DeathCause.setError("");
+              }
+
+
+               else  if (PNC_ClinicNo.getText().toString().isEmpty()){
                     Toast.makeText(PNCVisitStart.this, "Please Enter PNC Clinic Number Visit", Toast.LENGTH_SHORT).show();
-                }else{
+                }
+
+                else  if (PNC_VisitNo.getText().toString().isEmpty()){
+                    Toast.makeText(PNCVisitStart.this, "Please Enter PNC Visit Number", Toast.LENGTH_SHORT).show();
+                }
+
+                else  if (ANC_VisitNo1.getText().toString().isEmpty()){
+                    Toast.makeText(PNCVisitStart.this, "Please Enter Number of ANC VIsits", Toast.LENGTH_SHORT).show();
+                }
+               else if (Fp_code.contentEquals("1") && Baby_Sexcode.contentEquals("0")){
+                    Toast.makeText(PNCVisitStart.this, "Please specify Family Planning Method", Toast.LENGTH_SHORT).show();
+                }
+
+
+                else{
 
                // savePNC();
                 postPNC();
@@ -273,27 +331,6 @@ public class PNCVisitStart extends AppCompatActivity {
         partnerDateTested.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Calendar calendar = Calendar.getInstance();
-                final int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-                long timeInMilliseconds = calendar.getTimeInMillis() + TimeUnit.DAYS.toMillis(280);
-
-                final int year = calendar.get(Calendar.YEAR);
-                final int month = calendar.get(Calendar.MONTH);
-                DatePickerDialog datePicker = new DatePickerDialog(PNCVisitStart.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
-                        // adding the selected date in the edittext
-                        partnerDateTested.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
-                    }
-                }, year, month, day);
-
-                // set maximum date to be selected as today
-                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
-                datePicker.getDatePicker();
-
-                // show the dialog
-                datePicker.show();
             }
         });
         //testedDate
@@ -447,7 +484,7 @@ public class PNCVisitStart extends AppCompatActivity {
                 }, year, month, day);
 
                 // set maximum date to be selected as today
-                // datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                 datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
                 datePicker.getDatePicker();
 
                 // show the dialog
@@ -477,7 +514,7 @@ public class PNCVisitStart extends AppCompatActivity {
                 }, year, month, day);
 
                 // set maximum date to be selected as today
-                // datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+                 datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
                 datePicker.getDatePicker();
 
                 // show the dialog
@@ -487,7 +524,7 @@ public class PNCVisitStart extends AppCompatActivity {
 
 
 
-        //Baby sex
+        //CONTRACEPTIVES
         ArrayAdapter<String> BabySexAdapter = new ArrayAdapter<String>(PNCVisitStart.this, android.R.layout.simple_spinner_item, BabySex);
         BabySexAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         BabySexS.setAdapter(BabySexAdapter);
@@ -662,8 +699,13 @@ public class PNCVisitStart extends AppCompatActivity {
                 if (Mother_Tested_code.contentEquals("1")) {
                     hivResultL1.setVisibility(View.VISIBLE);
                 } else if (Mother_Tested_code.contentEquals("2")) {hivResultL1.setVisibility(View.GONE);
+                    hivdata1c.setVisibility(View.GONE);
                 } else if (Mother_Tested_code.contentEquals("0")) {
                     hivResultL1.setVisibility(View.GONE);
+                    hivdata1c.setVisibility(View.GONE);
+                }
+               else if (Mother_Tested_code.contentEquals("1") && HIV_results_Code2.contentEquals("3")) {
+                    hivResultL1.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -707,8 +749,10 @@ public class PNCVisitStart extends AppCompatActivity {
                 if (MothersOutcome_code.contentEquals("4")) {
                    diededits.setVisibility(View.GONE);
 
+
                 } else if (MothersOutcome_code.contentEquals("3")) {
                     diededits.setVisibility(View.GONE);
+
                 } else if (MothersOutcome_code.contentEquals("2")) {
                   diededits.setVisibility(View.VISIBLE);
                 } else if (MothersOutcome_code.contentEquals("1")) {
@@ -890,7 +934,7 @@ public void postPNC() {
     String ARTStart_date1 = ARTStart_date.getText().toString();
     String partnerCCCEnrolDate1 = partnerCCCEnrolDate.getText().toString();
     String partnerARTStart_date1 = partnerARTStart_date.getText().toString();
-    ANC_VisitNo1= (EditText) findViewById(R.id.ANC_VisitNo);
+    //ANC_VisitNo1= (EditText) findViewById(R.id.ANC_VisitNo);
 
 
 
@@ -978,6 +1022,27 @@ public void postPNC() {
 
                                                     Intent intent = new Intent(PNCVisitStart.this, PNCVisit.class);
                                                     startActivity(intent);
+                                                    dialog.dismiss();
+
+                                                    PNC_VisitNo.setText("");
+                                                    PNC_ClinicNo.setText("");
+                                                    DateDied.setText("");
+                                                    DeathCause.setText("");
+                                                    BabyDOB.setText("");
+
+                                                    DateTested.setText("");
+
+
+                                                    partnerDateTested.setText("");
+                                                    partnerCCCNo.setText("");
+                                                    CCCEnrolDate.setText("");
+                                                    ARTStart_date.setText("");
+                                                    partnerCCCEnrolDate.setText("");
+                                                    partnerARTStart_date.setText("");
+                                                    ANC_VisitNo1.setText("");
+
+
+
 
 
                                                     //dialog.cancel();

@@ -58,12 +58,12 @@ public class ANCVisit extends AppCompatActivity {
 
     CheckInternet chkinternet;
 
-    public void onBackPressed() {
+    /*public void onBackPressed() {
         //super.onBackPressed();
 
         Intent intent =new Intent(ANCVisit.this, PMTCT1.class);
         startActivity(intent);
-    }
+    }*/
 
 
     @Override

@@ -62,12 +62,12 @@ public class LaborAndDelivery extends AppCompatActivity {
     private JSONArray id_result;
 
     boolean xx;
-    public void onBackPressed() {
+   /* public void onBackPressed() {
         //super.onBackPressed();
 
         Intent intent =new Intent(LaborAndDelivery.this, PMTCT1.class);
         startActivity(intent);
-    }
+    }*/
 
 
     @Override

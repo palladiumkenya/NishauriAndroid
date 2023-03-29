@@ -32,6 +32,7 @@
                         android:id="@+id/weight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="number"
 
                         android:hint="Weight:*"
 
@@ -83,7 +84,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="HIV Status at Labour and Delivery " />
+                        android:text="HIV Status at Labour and Delivery* " />
 
                     <Spinner
                         android:id="@+id/hivatLDS"
@@ -213,10 +214,34 @@
                                 android:textColorHint="#000"
                                 android:textSize="12sp" />
                         </com.google.android.material.textfield.TextInputLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="Mother's Current Regimen*" />
+
+                            <Spinner
+                                android:id="@+id/motherCurrentRegimen1"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="20sp" />
+
+                        </LinearLayout>
+
+
                     </LinearLayout>
                 </LinearLayout>
 
-                <LinearLayout
+               <!-- <LinearLayout
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
                     android:weightSum="2"
@@ -228,7 +253,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Mother's Current Regimen" />
+                        android:text="Mother's Current Regimen*" />
 
                     <Spinner
                         android:id="@+id/motherCurrentRegimen1"
@@ -237,7 +262,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20sp" />
 
-                </LinearLayout>
+                </LinearLayout>-->
 
 
 
@@ -382,7 +407,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Syphilis Serology" />
+                        android:text="Syphilis Serology*" />
 
                     <Spinner
                         android:id="@+id/SyphilisSpinner"
@@ -407,7 +432,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Has The Client Been Treated for Syphilis?" />
+                        android:text="Has The Client Been Treated for Syphilis?*" />
 
                     <Spinner
                         android:id="@+id/clientTreat"
@@ -434,7 +459,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="Hepatitis B Serology" />
+                        android:text="Hepatitis B Serology*" />
 
                     <Spinner
                         android:id="@+id/hepB"

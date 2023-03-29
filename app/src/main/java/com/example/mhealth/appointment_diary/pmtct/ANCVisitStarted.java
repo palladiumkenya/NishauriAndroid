@@ -833,6 +833,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                     Toast.makeText(ANCVisitStarted.this, "Enter ANC Visit Number", Toast.LENGTH_LONG).show();
                 }
                 else if (ClientIS_code.contentEquals("0")) {
+
                     Toast.makeText(ANCVisitStarted.this, "Specify If Client Is Breastfeeding", Toast.LENGTH_LONG).show();
                 }
 
@@ -913,9 +914,9 @@ public class ANCVisitStarted extends AppCompatActivity {
                     Toast.makeText(ANCVisitStarted.this, "Specify Date of Sample Collection", Toast.LENGTH_LONG).show();
 
                 }
-                else if(radioButtonChecked.getText().equals("Cp/ML(Numerical)") && VLResults.getText().toString().isEmpty()){
+                else if(VLResults.getText().toString().isEmpty() && radioButtonChecked.getText().equals("LDL")){
                     Toast.makeText(ANCVisitStarted.this, "Specify Viral Load Results", Toast.LENGTH_LONG).show();
-                    VLResults.setError("");
+                    //VLResults.setError("");
 
                 }
 
@@ -1193,13 +1194,30 @@ public class ANCVisitStarted extends AppCompatActivity {
 
                                                         //clear text
 
-
-
-
-
-
                                                         Intent intent = new Intent(ANCVisitStarted.this, ANCVisit.class);
                                                         startActivity(intent);
+                                                        dialog.dismiss();
+                                                        ANC_clinicno.setText("");
+                                                        ANC_Visitno.setText("");
+                                                        ClientIS_code="";
+                                                        weight1.setText("");
+                                                        muac1.setText("");
+                                                        parity1.setText("");
+                                                        parity2.setText("");
+                                                        LMP_date.setText("");
+                                                        EDD_date.setText("");
+                                                        Gestation.setText("");
+                                                        HIV_Results_Code="";
+                                                        DateTested.setText("");
+                                                        SyphilisSerology_code="";
+                                                        HepatitisB_code="";
+                                                        Mother_Tested_code="";
+                                                        HIV_ANC_Code="";
+                                                        TB_code="";
+                                                        VLdate.setText("");
+                                                        VLResults.setText("");
+                                                        gravida.setText("");
+
 
 
                                                         //dialog.cancel();
