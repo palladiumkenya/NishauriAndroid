@@ -71,7 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Number of ANC Visits:*"
-                    android:inputType="text"
+
                     android:maxLength="24"
                     android:textColorHint="#000" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -190,6 +190,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Enter CCC Number*"
+                            android:maxLength="10"
                             android:textColorHint="#000"
                             android:textSize="12sp" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -298,6 +299,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Enter CCC Number*"
+                            android:maxLength="10"
                             android:textColorHint="#000"
                             android:textSize="12sp" />
                     </com.google.android.material.textfield.TextInputLayout>

@@ -265,7 +265,72 @@ public class PmtctUpdateHeiFragment extends Fragment {
         submit_hei.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HEI_Post();
+
+                if (weight11.getText().toString().isEmpty()){
+                    Toast.makeText(context, "Enter Weight", Toast.LENGTH_LONG).show();
+                    weight11.setError("");
+                }
+                if (mu1.getText().toString().isEmpty()){
+                    Toast.makeText(context, "Enter MUAC", Toast.LENGTH_LONG).show();
+                    mu1.setError("");
+                }
+
+                else if(height_length1.getText().toString().isEmpty()){
+
+                    Toast.makeText(context, "Enter Height", Toast.LENGTH_LONG).show();
+                    height_length1.setError("");
+
+                }
+                else if(height_Code.contentEquals("0")){
+
+                    Toast.makeText(context, "Specify Height Category", Toast.LENGTH_LONG).show();
+
+                }
+                else if(prophy_code.contentEquals("0")){
+
+                    Toast.makeText(context, "Select Prophylaxis", Toast.LENGTH_LONG).show();
+
+                }
+                else if(tb__Code.contentEquals("0")){
+
+                    Toast.makeText(context, "Specify TB Screening Status", Toast.LENGTH_LONG).show();
+
+                }
+
+                else if(infant_code.contentEquals("0")){
+
+                    Toast.makeText(context, "Specify Infant Feeding Options", Toast.LENGTH_LONG).show();
+
+                }
+                else if(pcrdone_code.contentEquals("0")){
+
+                    Toast.makeText(context, "Specify if PCR was done for HEI", Toast.LENGTH_LONG).show();
+
+                }
+                else if(pcrdone_code.contentEquals("1") && Eid_date_sample.getText().toString().isEmpty()){
+
+                    Toast.makeText(context, "Enter the Date EID Sample was Collected", Toast.LENGTH_LONG).show();
+
+                }
+                else if(pcrdone_code.contentEquals("1") && eid_code.contentEquals("0")){
+
+                    Toast.makeText(context, "Select option for PCR RESULTS for HEi", Toast.LENGTH_LONG).show();
+
+                }
+
+                else if(pcrdone_code.contentEquals("1") && pcrResults_Code.contentEquals("0")){
+
+                    Toast.makeText(context, "Select option for EID Testing Done", Toast.LENGTH_LONG).show();
+
+                }
+                else if(pcrResults_Code.contentEquals("1") && confirmatory_code.contentEquals("0")){
+
+                    Toast.makeText(context, "Select option for Confirmatory DNA PCR", Toast.LENGTH_LONG).show();
+
+                }
+
+                else{
+                HEI_Post();}
             }
         });
 
