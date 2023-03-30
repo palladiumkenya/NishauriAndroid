@@ -7,12 +7,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.mhealth.appointment_diary.MainOptions;
 import com.example.mhealth.appointment_diary.PmtctActivity;
 import com.example.mhealth.appointment_diary.R;
 
 public class PMTCT1 extends AppCompatActivity {
 
     CardView card_hiv, card_pregnant, card_exit, card_delivery,card_hei;
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+
+        Intent intent = new Intent(PMTCT1.this, MainOptions.class);
+        startActivity(intent);
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

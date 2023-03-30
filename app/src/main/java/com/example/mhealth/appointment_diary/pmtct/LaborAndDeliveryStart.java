@@ -2651,7 +2651,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                                                     public void onClick(DialogInterface dialog, int id) {
 
 
-                                                        Intent intent = new Intent(LaborAndDeliveryStart.this, LaborAndDelivery.class);
+                                                        Intent intent = new Intent(LaborAndDeliveryStart.this, PMTCT1.class);
                                                         startActivity(intent);
                                                         dialog.dismiss();
 

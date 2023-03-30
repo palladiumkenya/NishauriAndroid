@@ -41,6 +41,15 @@ import java.util.concurrent.TimeUnit;
 
 public class MainOptions extends AppCompatActivity {
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+
+        Intent intent = new Intent( MainOptions.this, LoginActivity.class);
+        startActivity(intent);
+
+    }
+
     long  diffdate;
     Button appointmentbtn, defaultersbtn, mlabbtn, webbtn, reportbtn, welnessbtn, pmtct;
     LoadMessages lm;

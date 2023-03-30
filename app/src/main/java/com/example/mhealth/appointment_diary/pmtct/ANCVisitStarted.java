@@ -1216,7 +1216,7 @@ public class ANCVisitStarted extends AppCompatActivity {
 
                                                         //clear text
 
-                                                        Intent intent = new Intent(ANCVisitStarted.this, ANCVisit.class);
+                                                        Intent intent = new Intent(ANCVisitStarted.this, PMTCT1.class);
                                                         startActivity(intent);
                                                         dialog.dismiss();
                                                         ANC_clinicno.setText("");

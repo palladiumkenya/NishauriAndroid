@@ -65,6 +65,7 @@ public class PNCVisitStart extends AppCompatActivity {
     EditText PNC_VisitNo, PNC_ClinicNo,ANC_VisitNo1,DateDied, DeathCause, BabyDOB,Datetestedp, partnerCCCNo, DateTested, partnerDateTested, CCCEnrolDate, ARTStart_date, partnerCCCEnrolDate, partnerARTStart_date;
     private int mYear, mMonth, mDay;
     String[] hivResults = {"", "Unknown", "Negative", "known positive"};
+    String[] hivResults2 = {"",  "Negative", "known positive"};
     String[] ClientVisitType = {"", "Labor and Delivery", "PNC"};
     String[] ModeDelivery = {"", "Spontaneous Vaginal Delivery (SVD)", "Cesarean Section (CS)", "Breech Delivery",  "Assisted Vaginal Delivery"};
     String[] placeDelivery = {"", "Home", "Facility", "Born before Arrival"};
@@ -620,7 +621,7 @@ public class PNCVisitStart extends AppCompatActivity {
 
         //hiv results
 
-        ArrayAdapter<String> resultsAdapter1 = new ArrayAdapter<String>(PNCVisitStart.this, android.R.layout.simple_spinner_item, hivResults);
+        ArrayAdapter<String> resultsAdapter1 = new ArrayAdapter<String>(PNCVisitStart.this, android.R.layout.simple_spinner_item, hivResults2);
         resultsAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         hivResultsS2.setAdapter(resultsAdapter1);
 
@@ -659,7 +660,7 @@ public class PNCVisitStart extends AppCompatActivity {
         });
 
 //hivResults2p1
-        ArrayAdapter<String> resultsAdapter2 = new ArrayAdapter<String>(PNCVisitStart.this, android.R.layout.simple_spinner_item, hivResults);
+        ArrayAdapter<String> resultsAdapter2 = new ArrayAdapter<String>(PNCVisitStart.this, android.R.layout.simple_spinner_item, hivResults2);
         resultsAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         hivResults2p1.setAdapter(resultsAdapter2);
 
@@ -1038,7 +1039,8 @@ public void postPNC() {
 
 
 
-                                                    Intent intent = new Intent(PNCVisitStart.this, PNCVisit.class);
+                                                    Intent intent = new Intent(PNCVisitStart.this, PMTCT1.class);
+
                                                     startActivity(intent);
                                                     dialog.dismiss();
 
