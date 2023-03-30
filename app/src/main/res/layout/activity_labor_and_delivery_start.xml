@@ -51,6 +51,7 @@
                         android:layout_height="wrap_content"
 
                         android:hint="MUAC:*"
+                        android:inputType="number"
 
                         android:maxLength="24"
                         android:textColorHint="#000" />
@@ -63,7 +64,7 @@
                     android:id="@+id/pncVlay">
 
                     <EditText
-                        android:id="@+id/ANCVisit_NO"
+                        android:id="@+id/ANCVisit_NO111"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Number of ANC Visits*"
@@ -179,6 +180,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Enter CCC Number*"
+                                android:visibility="gone"
                                 android:inputType="number"
                                 android:maxLength="10"
                                 android:textColorHint="#000"

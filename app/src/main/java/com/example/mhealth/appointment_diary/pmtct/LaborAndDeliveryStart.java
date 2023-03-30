@@ -175,7 +175,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 partnerLayout = (LinearLayout) findViewById(R.id.partnerLayout);
                 //positiveSelected1 = (LinearLayout) findViewById(R.id.positiveSelected);
-                ANCVisit_NO=(EditText) findViewById(R.id.ANCVisit_NO);
+                ANCVisit_NO=(EditText) findViewById(R.id.ANCVisit_NO111);
                 ccno1=(EditText) findViewById(R.id.ccno);
                 saveLD=(Button) findViewById(R.id.btn_submit_reg);
 
@@ -643,6 +643,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 // set maximum date to be selected as today
                // datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
                 datePicker.getDatePicker();
 
                 // show the dialog
@@ -669,6 +670,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 // set maximum date to be selected as today
                 // datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
                 datePicker.getDatePicker();
 
                 // show the dialog
@@ -696,6 +698,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 // set maximum date to be selected as today
                 // datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
                 datePicker.getDatePicker();
 
                 // show the dialog
@@ -723,6 +726,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 // set maximum date to be selected as today
                 // datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
                 datePicker.getDatePicker();
 
                 // show the dialog
@@ -750,6 +754,7 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 // set maximum date to be selected as today
                 // datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
+                datePicker.getDatePicker().setMaxDate(calendar.getTimeInMillis());
                 datePicker.getDatePicker();
 
                 // show the dialog
@@ -2076,12 +2081,32 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
         saveLD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ANCVisit_NO.getText().toString().isEmpty()) {
+                if (weight1.getText().toString().isEmpty()) {
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Enter Weight", Toast.LENGTH_SHORT).show();
+                }
+
+                if (muac1.getText().toString().isEmpty()) {
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Enter MUAC", Toast.LENGTH_SHORT).show();
+                }
+               else if (ANCVisit_NO.getText().toString().isEmpty()) {
                     Toast.makeText(LaborAndDeliveryStart.this, "Please Select Number of ANC Visits", Toast.LENGTH_SHORT).show();
                 }
-               else if (deliveryDate.getText().toString().isEmpty()) {
-                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Delivery Date", Toast.LENGTH_SHORT).show();
+                else if (hivatLDS_code.contentEquals("0")) {
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Specify HIV Status at Labour and Delivery", Toast.LENGTH_SHORT).show();
                 }
+
+                else if (MotherTestedS_code.contentEquals("0")) {
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Specify If Mother Is Tested", Toast.LENGTH_SHORT).show();
+                }
+
+
+                else if (MotherTestedS_code.contentEquals("1") && hivResultsS_code.contentEquals("0")) {
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Mother's HIV Results", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+
                 /*if(azt1.isChecked())
                 {
                     aztb= Boolean.parseBoolean(azt1.getText().toString());
@@ -2105,12 +2130,24 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                     Toast.makeText(LaborAndDeliveryStart.this, "Select Hepatitis B Serology", Toast.LENGTH_LONG).show();
                 }
 
-               else if (MotherTestedS_code.contentEquals("0")) {
-                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select If Mother is Tested", Toast.LENGTH_SHORT).show();
+                else if (TB_code.contentEquals("0")) {
+                    Toast.makeText(LaborAndDeliveryStart.this, "Select TB Screening option", Toast.LENGTH_LONG).show();
                 }
-                else if (MotherTestedS_code.contentEquals("1") && hivResultsS_code.contentEquals("0")) {
-                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Mother's HIV Results", Toast.LENGTH_SHORT).show();
+
+                else if(!azt1.isChecked() && !nvp1.isChecked() && !ctx1.isChecked()){
+                    Toast.makeText(LaborAndDeliveryStart.this, "Select Prophylaxis Given", Toast.LENGTH_LONG).show();
                 }
+
+                else if (haart_code.contentEquals("0")) {
+                    Toast.makeText(LaborAndDeliveryStart.this, "Specify if Mother started on HAART", Toast.LENGTH_LONG).show();
+                }
+
+                else if (deliveryDate.getText().toString().isEmpty()) {
+                    Toast.makeText(LaborAndDeliveryStart.this, "Please Select Delivery Date", Toast.LENGTH_SHORT).show();
+                }
+
+
+
                else if (ModeDeliveryS_code.contentEquals("0")){
                     Toast.makeText(LaborAndDeliveryStart.this, "Please Select Mode of Delivery", Toast.LENGTH_SHORT).show();
 
@@ -2192,11 +2229,11 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
 
                 }
 
+
                 else if (DeliveryOutcomeS_code.contentEquals("5") && BabyDeliveredS5_code.contentEquals("0")){
                     Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby Delivered Options", Toast.LENGTH_SHORT).show();
 
                 }
-
 
 
 
@@ -2255,12 +2292,12 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
                 else if(ctx1.isChecked())
                 {
                     ctxb = Boolean.parseBoolean(ctx1.getText().toString());
-                }
+                }*/
 
                 //baby 2
                 //(BABY_DELIVERED.contentEquals("Live Birth")
 
-                /*else if (BabyDeliveredS2_code.contentEquals("1") && BabysDOB2.getText().toString().isEmpty()){
+              /* else if (BabyDeliveredS2_code.contentEquals("1") && BabysDOB2.getText().toString().isEmpty()){
                     Toast.makeText(LaborAndDeliveryStart.this, "Please Select Baby's Date of Birth ", Toast.LENGTH_SHORT).show();
 
                 }
@@ -2520,6 +2557,13 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
         String PartnerCCCNumber =partnerCCCNo.getText().toString();
         String p_enrolment_date= partnerCCCEnrolDate.getText().toString();
         String  p_art_start =partnerARTStart_date.getText().toString();
+        aztb= Boolean.parseBoolean(azt1.getText().toString());
+
+        nvpb= Boolean.parseBoolean(nvp1.getText().toString());
+
+        ctxb = Boolean.parseBoolean(ctx1.getText().toString());
+
+
 
 
 

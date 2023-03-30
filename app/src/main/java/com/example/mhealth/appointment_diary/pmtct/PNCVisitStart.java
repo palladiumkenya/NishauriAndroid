@@ -64,7 +64,7 @@ public class PNCVisitStart extends AppCompatActivity {
 
     EditText PNC_VisitNo, PNC_ClinicNo,ANC_VisitNo1,DateDied, DeathCause, BabyDOB,Datetestedp, partnerCCCNo, DateTested, partnerDateTested, CCCEnrolDate, ARTStart_date, partnerCCCEnrolDate, partnerARTStart_date;
     private int mYear, mMonth, mDay;
-    String[] hivResults = {"", "Unknown", "Negative", "Positive"};
+    String[] hivResults = {"", "Unknown", "Negative", "known positive"};
     String[] ClientVisitType = {"", "Labor and Delivery", "PNC"};
     String[] ModeDelivery = {"", "Spontaneous Vaginal Delivery (SVD)", "Cesarean Section (CS)", "Breech Delivery",  "Assisted Vaginal Delivery"};
     String[] placeDelivery = {"", "Home", "Facility", "Born before Arrival"};
@@ -111,7 +111,7 @@ public class PNCVisitStart extends AppCompatActivity {
     private String HAART = "";
     private String IMMUNIZATION = "";
 
-    LinearLayout pnclayout1, yLDlayout1, stillbirthlay,diededits,fpl1, hivResultL1, hivdata1c, hivdata2c, hivdata2L;
+    LinearLayout pnclayout1, yLDlayout1, stillbirthlay,diededits,fpl1, hivResultL1, hivdata1c, hivdata2c, hivdata2L,RegimenLL;
     TextInputLayout pncVlay, pncClay,Regimentil;
     TextInputEditText Regimenedt1;
     Button buttonSave;
@@ -194,6 +194,7 @@ public class PNCVisitStart extends AppCompatActivity {
 
         hivdata1c = (LinearLayout) findViewById(R.id.hivdata1);
         hivdata2c =(LinearLayout) findViewById(R.id.hivdata2);
+        RegimenLL =(LinearLayout) findViewById(R.id. RegimenL);
        // hivdata2L =(LinearLayout) findViewById(R.id.hivdata2);
         fpl1=(LinearLayout) findViewById(R.id.fpl);
         Regimenedt1=(TextInputEditText) findViewById(R.id.Regimenedt);
@@ -228,6 +229,18 @@ public class PNCVisitStart extends AppCompatActivity {
                     Toast.makeText(PNCVisitStart.this, "Please Select Date of Visit", Toast.LENGTH_SHORT).show();
 
                 }
+              else  if (PNC_ClinicNo.getText().toString().isEmpty()){
+                  Toast.makeText(PNCVisitStart.this, "Please Enter PNC Clinic Number Visit", Toast.LENGTH_SHORT).show();
+              }
+
+              else  if (PNC_VisitNo.getText().toString().isEmpty()){
+                  Toast.makeText(PNCVisitStart.this, "Please Enter PNC Visit Number", Toast.LENGTH_SHORT).show();
+              }
+
+              else  if (ANC_VisitNo1.getText().toString().isEmpty()){
+                  Toast.makeText(PNCVisitStart.this, "Please Enter Number of ANC VIsits", Toast.LENGTH_SHORT).show();
+              }
+
 
               else if (HIV_status_Code.contentEquals("0")){
                   Toast.makeText(PNCVisitStart.this, "Specify HIV Status", Toast.LENGTH_SHORT).show();
@@ -239,7 +252,7 @@ public class PNCVisitStart extends AppCompatActivity {
               else if (TB_code.contentEquals("0")){
                   Toast.makeText(PNCVisitStart.this, "Specify if TB Screening was Done", Toast.LENGTH_SHORT).show();
               }
-             /* else if(azt1.isChecked())
+              /*else if(azt1.isChecked())
               {
                   aztb= Boolean.parseBoolean(azt1.getText().toString());
               }
@@ -256,6 +269,9 @@ public class PNCVisitStart extends AppCompatActivity {
               {
                   ctxb = Boolean.parseBoolean(ctx1.getText().toString());
               }*/
+              else if(!azt1.isChecked() && !nvp1.isChecked() && !ctx1.isChecked()){
+                  Toast.makeText(PNCVisitStart.this, "Select Prophylaxis Given", Toast.LENGTH_LONG).show();
+              }
 
               else if (haart_code.contentEquals("0")){
 
@@ -269,9 +285,9 @@ public class PNCVisitStart extends AppCompatActivity {
               else if (DeliveryPlace_code.contentEquals("0")){
                   Toast.makeText(PNCVisitStart.this, "Specify Place of Delivery", Toast.LENGTH_SHORT).show();
               }
-              else if (Regimin_code.contentEquals("0")){
+             /* else if (Regimin_code.contentEquals("0")){
                   Toast.makeText(PNCVisitStart.this, "Specify the Regimen", Toast.LENGTH_SHORT).show();
-              }
+              }*/
               else if (Immunization_code.contentEquals("0")){
                   Toast.makeText(PNCVisitStart.this, "Specify Baby's Immunization", Toast.LENGTH_SHORT).show();
               }
@@ -292,17 +308,7 @@ public class PNCVisitStart extends AppCompatActivity {
               }
 
 
-               else  if (PNC_ClinicNo.getText().toString().isEmpty()){
-                    Toast.makeText(PNCVisitStart.this, "Please Enter PNC Clinic Number Visit", Toast.LENGTH_SHORT).show();
-                }
 
-                else  if (PNC_VisitNo.getText().toString().isEmpty()){
-                    Toast.makeText(PNCVisitStart.this, "Please Enter PNC Visit Number", Toast.LENGTH_SHORT).show();
-                }
-
-                else  if (ANC_VisitNo1.getText().toString().isEmpty()){
-                    Toast.makeText(PNCVisitStart.this, "Please Enter Number of ANC VIsits", Toast.LENGTH_SHORT).show();
-                }
                else if (Fp_code.contentEquals("1") && Baby_Sexcode.contentEquals("0")){
                     Toast.makeText(PNCVisitStart.this, "Please specify Family Planning Method", Toast.LENGTH_SHORT).show();
                 }
@@ -627,13 +633,17 @@ public class PNCVisitStart extends AppCompatActivity {
 
                 if (HIV_results_Code2.contentEquals("3")) {
                     hivdata1c.setVisibility(View.VISIBLE);
+                    RegimenLL.setVisibility(View.VISIBLE);
 
                 } else if (HIV_results_Code2.contentEquals("2")) {
                     hivdata1c.setVisibility(View.GONE);
+                    RegimenLL.setVisibility(View.GONE);
                 } else if (HIV_results_Code2.contentEquals("1")) {
                     hivdata1c.setVisibility(View.GONE);
+                    RegimenLL.setVisibility(View.GONE);
                 } else if (HIV_results_Code2.contentEquals("0")) {
                     hivdata1c.setVisibility(View.GONE);
+                    RegimenLL.setVisibility(View.GONE);
                 }
 
                 //hivdata1c
@@ -916,6 +926,14 @@ public void postPNC() {
     String dieddt = DateDied.getText().toString();
     String diedcause = DeathCause.getText().toString();*/
     String Regspecify =Regimenedt1.getText().toString();
+
+
+        aztb= Boolean.parseBoolean(azt1.getText().toString());
+
+        nvpb= Boolean.parseBoolean(nvp1.getText().toString());
+
+        ctxb = Boolean.parseBoolean(ctx1.getText().toString());
+
 
 
 

@@ -97,7 +97,7 @@ public class ANCVisitStarted extends AppCompatActivity {
     private String HIVANC = "";
     private String MOTHERTESTED = "";
     private String TB = "";
-    LinearLayout pregnant, positiveLayout, partnerLayout, positiveselected, hivdata1c, hivdata2c;
+    LinearLayout pregnant, positiveLayout, partnerLayout, positiveselected, hivdata1c, hivdata2c, hivResultsLL;
     EditText CCCNo, partnerCCCNo, gravida, EDD_date, LMP_date, DateTested, ANC_Visitno, ANC_clinicno, ANCNumber, partnerDateTested, CCCEnrolDate, ARTStart_date, partnerCCCEnrolDate, partnerARTStart_date, VLdate, parity1, parity2, VLResults, CCCNo22, Gestation, weight1, muac1;
     String ClientIS_code, HIV_Results_Code, partnerHIV_Results_Code, SyphilisSerology_code, clientTreated_code, HepatitisB_code, HIV_ANC_Code, Mother_Tested_code, TB_code;
     RadioGroup syphilisID, hepatitisID;
@@ -169,6 +169,8 @@ public class ANCVisitStarted extends AppCompatActivity {
         positiveLayout = (LinearLayout) findViewById(R.id.positiveLayout);
         partnerLayout = (LinearLayout) findViewById(R.id.partnerLayout);
         positiveselected = (LinearLayout) findViewById(R.id.positiveSelected);
+        hivResultsLL = (LinearLayout) findViewById(R.id.hivResultsL);
+
         hivdata1c = findViewById(R.id.hivdata1);
         hivdata2c = findViewById(R.id.hivdata2);
         // hivdata2==  findViewById(R.id.hivdata1);
@@ -183,7 +185,7 @@ public class ANCVisitStarted extends AppCompatActivity {
         gravida = (EditText) findViewById(R.id.gravida);
         ANC_Visitno = (EditText) findViewById(R.id.ANCVisit);
         ANC_clinicno = (EditText) findViewById(R.id.ANCClinic);
-        ANCNumber = (EditText) findViewById(R.id.ANCNumber);
+        ANCNumber = (EditText) findViewById(R.id.ANCVisitNumber);
         partnerCCCNo = (EditText) findViewById(R.id.partccno);
         DateTested = (EditText) findViewById(R.id.testedDate);
         partnerDateTested = (EditText) findViewById(R.id.testedDatep);
@@ -657,6 +659,13 @@ public class ANCVisitStarted extends AppCompatActivity {
                 MOTHERTESTED= mothertestedhivS[position];
                 Mother_Tested_code = Integer.toString(position);
 
+                if (Mother_Tested_code.contentEquals("1")){
+                    hivResultsLL.setVisibility(View.VISIBLE);
+                }else{
+                    hivResultsLL.setVisibility(View.GONE);
+                    hivdata1c.setVisibility(View.GONE);
+                }
+
             }
 
             @Override
@@ -817,7 +826,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                 }
 
                 // on below line we are displaying a toast message.
-                Toast.makeText(ANCVisitStarted.this, "Selected Radio Button is : " + radioButtonChecked.getText(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ANCVisitStarted.this, "Selected Result option is : " + radioButtonChecked.getText(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -854,7 +863,17 @@ public class ANCVisitStarted extends AppCompatActivity {
                     Toast.makeText(ANCVisitStarted.this, "Enter EDD Date", Toast.LENGTH_LONG).show();
                 } else if (Gestation.getText().toString().isEmpty()) {
                     Toast.makeText(ANCVisitStarted.this, "Enter Gestation", Toast.LENGTH_LONG).show();
-                } else if (HIV_Results_Code.contentEquals("0")) {
+                }
+                else if (HIV_ANC_Code.contentEquals("0")){
+                    Toast.makeText(ANCVisitStarted.this, "Specify HIV Status Before first ANC", Toast.LENGTH_LONG).show();
+
+                }
+                else if (Mother_Tested_code.contentEquals("0")){
+                    Toast.makeText(ANCVisitStarted.this, "Specify If Mother was Tested for HIV", Toast.LENGTH_LONG).show();
+
+                }
+
+                else if (HIV_Results_Code.contentEquals("0")) {
                     Toast.makeText(ANCVisitStarted.this, "Enter HIV Results", Toast.LENGTH_LONG).show();
                 }
 
@@ -887,21 +906,13 @@ public class ANCVisitStarted extends AppCompatActivity {
                     ctxb = Boolean.parseBoolean(ctx1.getText().toString());
                 }*/
 
-                else if(!azt1.isChecked() && !nvp1.isChecked() && !ctx1.isChecked()){
-                    Toast.makeText(ANCVisitStarted.this, "Select Prophylaxis Given", Toast.LENGTH_LONG).show();
-                }
+
+
+
                 else if (SyphilisSerology_code.contentEquals("0")) {
                     Toast.makeText(ANCVisitStarted.this, "Select Syphilis Serology", Toast.LENGTH_LONG).show();
                 } else if (HepatitisB_code.contentEquals("0")) {
                     Toast.makeText(ANCVisitStarted.this, "Select Hepatitis B Serology", Toast.LENGTH_LONG).show();
-                }
-                else if (Mother_Tested_code.contentEquals("0")){
-                    Toast.makeText(ANCVisitStarted.this, "Specify If Mother was Tested for HIV", Toast.LENGTH_LONG).show();
-
-                }
-                else if (HIV_ANC_Code.contentEquals("0")){
-                    Toast.makeText(ANCVisitStarted.this, "Specify HIV Status Before first ANC", Toast.LENGTH_LONG).show();
-
                 }
 
                 else if (TB_code.contentEquals("0")){
@@ -909,12 +920,15 @@ public class ANCVisitStarted extends AppCompatActivity {
 
 
                 }
+                else if(!azt1.isChecked() && !nvp1.isChecked() && !ctx1.isChecked()){
+                    Toast.makeText(ANCVisitStarted.this, "Select Prophylaxis Given", Toast.LENGTH_LONG).show();
+                }
 
                 else if (VLdate.getText().toString().isEmpty()){
                     Toast.makeText(ANCVisitStarted.this, "Specify Date of Sample Collection", Toast.LENGTH_LONG).show();
 
                 }
-                else if(VLResults.getText().toString().isEmpty() && radioButtonChecked.getText().equals("LDL")){
+                else if(VLResults.getText().toString().isEmpty() && radioButtonChecked.getText().equals("Cp/ML(Numerical)")){
                     Toast.makeText(ANCVisitStarted.this, "Specify Viral Load Results", Toast.LENGTH_LONG).show();
                     //VLResults.setError("");
 
@@ -1113,6 +1127,14 @@ public class ANCVisitStarted extends AppCompatActivity {
         String VLResults1 = VLResults.getText().toString();
         String weight11 =weight1.getText().toString();
         String muac11 =muac1.getText().toString();
+
+        aztb= Boolean.parseBoolean(azt1.getText().toString());
+
+        nvpb= Boolean.parseBoolean(nvp1.getText().toString());
+
+        ctxb = Boolean.parseBoolean(ctx1.getText().toString());
+
+
 
 
         String ANC_data = newCC + "*" + ANC_no + "*" + ANC_clinic_no + "*" + ClientIS_code + "*" + weight11 + "*" +muac11+ "*" +pa11 + "*" + pa22 + "*" + gra + "*" + LMPdate + "*" + EDDDATE + "*" + gestation + "*" + HIV_ANC_Code+ "*" + Mother_Tested_code+ "*" + HIV_Results_Code + "*" + DateTested1 + "*" + CCCNo2 + "*" + CCCEnrolDate1 + "*" + ARTStart_date1 + "*" + partnerHIV_Results_Code + "*" + partnerDateTested1 + "*" + partnerCCCNo1 + "*" + partnerCCCEnrolDate1 + "*" + partnerARTStart_date1 + "*" +  SyphilisSerology_code + "*" + clientTreated_code + "*" + HepatitisB_code + "*" + TB_code + "*" + aztb+ "*" + nvpb+ "*" + ctxb+ "*" + VLdate1 + "*" + VLResults1 + "*" + radioButtonChecked;

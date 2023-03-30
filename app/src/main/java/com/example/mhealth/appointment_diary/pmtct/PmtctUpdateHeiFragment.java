@@ -1004,7 +1004,7 @@ public class PmtctUpdateHeiFragment extends Fragment {
 
 
 
-        String hei_data = heiNo+ "*" +prophy_code+ "*" + "true" + "*" +"true" + "*" + weight11 + "*" +weights+ "*" +heightss + "*" + height_Code + "*" + muacss + "*" + tb__Code + "*" + infant_code + "*" + pcrdone_code + "*" + eiddates+ "*" + eid_code+ "*" + pcrResults_Code + "*" + confirmatory_code;
+        String hei_data = heiNo+ "*" +prophy_code+ "*" + "False" + "*" +"False" + "*" + weight11 + "*" +weights+ "*" +heightss + "*" + height_Code + "*" + muacss + "*" + tb__Code + "*" + infant_code + "*" + pcrdone_code + "*" + eiddates+ "*" + eid_code+ "*" + pcrResults_Code + "*" + confirmatory_code;
 
         String enc = Base64Encoder.encryptString(hei_data);
 
