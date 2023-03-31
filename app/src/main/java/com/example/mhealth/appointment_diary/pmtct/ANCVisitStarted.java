@@ -82,7 +82,7 @@ public class ANCVisitStarted extends AppCompatActivity {
     String[] clientIs = {"", "Breastfeeding", "Not Breastfeeding", "Pregnant", "Pregnant and Breastfeeding"};
     String[] clientTreated = {"", "Yes", "No"};
     String[] hepatitisB = {"", "Positive", "Negative", "Not Done"};
-    String[] hivResults = {"", "Unknown", "Negative", "Known positive"};
+    String[] hivResults = {"", "Negative", "positive"};
     String[] hivfirstANCS = {"", "Unknown", "Negative", "Known positive"};
     String[] mothertestedhivS = {"", "Yes", "No"};
 
@@ -692,7 +692,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                     hivdata1c.setVisibility(View.VISIBLE);
 
                 } else if (HIV_Results_Code.contentEquals("2")) {
-                    hivdata1c.setVisibility(View.GONE);
+                    hivdata1c.setVisibility(View.VISIBLE);
                 } else if (HIV_Results_Code.contentEquals("1")) {
                     hivdata1c.setVisibility(View.GONE);
                 } else if (HIV_Results_Code.contentEquals("0")) {
@@ -722,7 +722,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                     hivdata2c.setVisibility(View.VISIBLE);
 
                 } else if (partnerHIV_Results_Code.contentEquals("2")) {
-                    hivdata2c.setVisibility(View.GONE);
+                    hivdata2c.setVisibility(View.VISIBLE);
                 } else if (partnerHIV_Results_Code.contentEquals("1")) {
                     hivdata2c.setVisibility(View.GONE);
                 } else if (partnerHIV_Results_Code.contentEquals("0")) {
@@ -821,6 +821,7 @@ public class ANCVisitStarted extends AppCompatActivity {
 
                 if (radioButtonChecked.getText().equals("LDL")){
                     VLResults.setEnabled(false);
+                    VLResults.setText("");
                 }else{
                     VLResults.setEnabled(true);
                 }

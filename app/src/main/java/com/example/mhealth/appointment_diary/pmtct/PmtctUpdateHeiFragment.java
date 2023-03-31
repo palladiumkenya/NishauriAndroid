@@ -424,7 +424,7 @@ public class PmtctUpdateHeiFragment extends Fragment {
         //Infant feeding
         ArrayAdapter<String> infantAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, infant_feeding_d);
         infantAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        infantS.setAdapter(prophAdapter);
+        infantS.setAdapter(infantAdapter);
         infantS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

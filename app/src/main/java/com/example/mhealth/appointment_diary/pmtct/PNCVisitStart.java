@@ -65,7 +65,7 @@ public class PNCVisitStart extends AppCompatActivity {
     EditText PNC_VisitNo, PNC_ClinicNo,ANC_VisitNo1,DateDied, DeathCause, BabyDOB,Datetestedp, partnerCCCNo, DateTested, partnerDateTested, CCCEnrolDate, ARTStart_date, partnerCCCEnrolDate, partnerARTStart_date;
     private int mYear, mMonth, mDay;
     String[] hivResults = {"", "Unknown", "Negative", "known positive"};
-    String[] hivResults2 = {"",  "Negative", "known positive"};
+    String[] hivResults2 = {"",  "Negative", "Positive"};
     String[] ClientVisitType = {"", "Labor and Delivery", "PNC"};
     String[] ModeDelivery = {"", "Spontaneous Vaginal Delivery (SVD)", "Cesarean Section (CS)", "Breech Delivery",  "Assisted Vaginal Delivery"};
     String[] placeDelivery = {"", "Home", "Facility", "Born before Arrival"};
@@ -637,8 +637,8 @@ public class PNCVisitStart extends AppCompatActivity {
                     RegimenLL.setVisibility(View.VISIBLE);
 
                 } else if (HIV_results_Code2.contentEquals("2")) {
-                    hivdata1c.setVisibility(View.GONE);
-                    RegimenLL.setVisibility(View.GONE);
+                    hivdata1c.setVisibility(View.VISIBLE);
+                    RegimenLL.setVisibility(View.VISIBLE);
                 } else if (HIV_results_Code2.contentEquals("1")) {
                     hivdata1c.setVisibility(View.GONE);
                     RegimenLL.setVisibility(View.GONE);
@@ -675,7 +675,7 @@ public class PNCVisitStart extends AppCompatActivity {
                     hivdata2c.setVisibility(View.VISIBLE);
 
                 } else if (HIV_results_Codep.contentEquals("2")) {
-                    hivdata2c.setVisibility(View.GONE);
+                    hivdata2c.setVisibility(View.VISIBLE);
                 } else if (HIV_results_Codep.contentEquals("1")) {
                     hivdata2c.setVisibility(View.GONE);
                 } else if (HIV_results_Codep.contentEquals("0")) {
@@ -709,7 +709,8 @@ public class PNCVisitStart extends AppCompatActivity {
 
                 if (Mother_Tested_code.contentEquals("1")) {
                     hivResultL1.setVisibility(View.VISIBLE);
-                } else if (Mother_Tested_code.contentEquals("2")) {hivResultL1.setVisibility(View.GONE);
+                } else if (Mother_Tested_code.contentEquals("2"))
+                {hivResultL1.setVisibility(View.GONE);
                     hivdata1c.setVisibility(View.GONE);
                 } else if (Mother_Tested_code.contentEquals("0")) {
                     hivResultL1.setVisibility(View.GONE);
