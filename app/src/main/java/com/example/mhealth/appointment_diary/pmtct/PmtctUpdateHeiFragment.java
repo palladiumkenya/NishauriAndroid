@@ -266,11 +266,12 @@ public class PmtctUpdateHeiFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (weight11.getText().toString().isEmpty()){
+
+                 if (weight11.getText().toString().isEmpty()){
                     Toast.makeText(context, "Enter Weight", Toast.LENGTH_LONG).show();
                     weight11.setError("");
                 }
-                if (mu1.getText().toString().isEmpty()){
+               else if (mu1.getText().toString().isEmpty()){
                     Toast.makeText(context, "Enter MUAC", Toast.LENGTH_LONG).show();
                     mu1.setError("");
                 }
@@ -1150,5 +1151,6 @@ public class PmtctUpdateHeiFragment extends Fragment {
 
             }
         }}
+
 
 }

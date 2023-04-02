@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -37,6 +40,7 @@ import com.example.mhealth.appointment_diary.ProcessReceivedMessage.ProcessMessa
 import com.example.mhealth.appointment_diary.Progress.Progress;
 import com.example.mhealth.appointment_diary.R;
 import com.example.mhealth.appointment_diary.config.Config;
+import com.example.mhealth.appointment_diary.config.SelectUrls;
 import com.example.mhealth.appointment_diary.encryption.Base64Encoder;
 import com.example.mhealth.appointment_diary.tables.Activelogin;
 import com.example.mhealth.appointment_diary.tables.Registrationtable;
@@ -835,8 +839,11 @@ public class ANCVisitStarted extends AppCompatActivity {
         saveANC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (!haveNetworkConnection()){
+                    Toast.makeText(ANCVisitStarted.this, "Check your internet", Toast.LENGTH_LONG).show();
+                }
 
-                if (ANC_clinicno.getText().toString().isEmpty()) {
+              else  if (ANC_clinicno.getText().toString().isEmpty()) {
                     Toast.makeText(ANCVisitStarted.this, "Enter ANC Clinic Number", Toast.LENGTH_LONG).show();
                 }
                 else if (ANC_Visitno.getText().toString().isEmpty()) {
@@ -1184,7 +1191,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                       Toast.makeText(ANCVisitStarted.this, "message "+response, Toast.LENGTH_SHORT).show();
+                       //Toast.makeText(ANCVisitStarted.this, "message "+response, Toast.LENGTH_SHORT).show();
                                 Log.e("Response: ", response.toString());
                                 pr.dissmissProgress();
 
@@ -1347,4 +1354,24 @@ public class ANCVisitStarted extends AppCompatActivity {
 //        requestQueue.add(stringRequest);
 
             }
-}}}
+}}
+
+    //test internet
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
+    }
+
+}

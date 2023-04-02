@@ -114,8 +114,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     ArrayList<String> countriesList;
     ArrayList<Country> countries;
 
-    TextView textViewCondition;
-
     private String origin_country = "";
     private int countryID = 0;
 
@@ -175,7 +173,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     // Enable weekly motivation alerts
     String[] msgtime = {"", "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "22:00", "23:00"};
     //Please select preffered messaging time
-    String[] pntstatus = {"", "New client", "Update client", "Transfer Client In (Transfer in of a client from a facility without ushauri system)", "Pregnant and Breastfeeding Mothers"};
+    String[] pntstatus = {"", "New client", "Update client", "Transfer Client In (Transfer in of a client from a facility without ushauri system)"};
     //Enable Sms
     String[] statuss = {"", "Active", "Disabled", "Deceased", "Transfer Out"};
     //Please Select Status*
@@ -246,7 +244,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         populateGender();
         populateLanguage();
 
-       populateNewGrouping();
+        populateNewGrouping();
         populateSms();
 //        populateStatus();
         populateweekly();
@@ -259,7 +257,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         /*getCountries();
         getFacilities();
         getcountiesbirth();*/
-       //getWards(wardID);
+        //getWards(wardID);
 
         if (chkinternet.isInternetAvailable()) {
 
@@ -487,8 +485,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             wklymotivation = (Spinner) findViewById(R.id.weekly_spinner);
             messageTime = (Spinner) findViewById(R.id.time_spinner);
             patientStatus = (Spinner) findViewById(R.id.Patientstatus_spinner);
-
-            textViewCondition = findViewById(R.id.textView12);
 //           GroupingS=(Spinner) findViewById(R.id.grouping_spinner);
 
 
@@ -752,7 +748,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if (hasFocus) {
-                   // Toast.makeText(Registration.this, "has focus", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(Registration.this, "has focus", Toast.LENGTH_SHORT).show();
                 } else {
 
                     progress.showProgress("Getting UPI number");
@@ -800,6 +796,16 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                     String firstname = jsonObject1.getString("firstName");
                                     String lastname = jsonObject1.getString("lastName");
 
+                                    // UPI_number.setText(UPI_number1);
+                                    //UPI_number.setEnabled(false);
+
+                                    //dialogs.showSuccessDialog("Clients UPI number is" + " " + UPI_number1, "Name:" + " " + firstname + " " + lastname);
+
+                                    //Toast.makeText(Registration.this, "Clients UPI number is"+ " " +UPI_number1 +" "+ "Name:"+ " "+ firstname+ " "+ lastname, Toast.LENGTH_SHORT).show();
+
+                                    //Log.d("", UPI_number1);
+
+
                                     AlertDialog.Builder builder1 = new AlertDialog.Builder(Registration.this);
                                     builder1.setIcon(getResources().getDrawable(R.drawable.moh1));
                                     builder1.setTitle("Client UPI Number Is" + " " + UPI_number1);
@@ -811,18 +817,27 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                             new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
                                                     UPI_number.setText(UPI_number1);
+
+                                                    /*Intent intent = new Intent(Registration.this, LoginActivity.class);
+                                                    startActivity(intent);
+                                                    finish();*/
+
+                                                    //dialog.cancel();
                                                 }
                                             });
 
-        builder1.setNegativeButton(
-                "Reject",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                                    builder1.setNegativeButton(
+                                            "Reject",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
 
-                        UPI_number.setText("");
+                                                    UPI_number.setText("");
 
-                    }
-                });
+                       /* Intent intent = new Intent(Config.this, SelectUrls.class);
+                        startActivity(intent);
+                        dialog.cancel();*/
+                                                }
+                                            });
 
                                     AlertDialog alert11 = builder1.create();
                                     alert11.show();
@@ -879,7 +894,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if (hasFocus) {
-                   // Toast.makeText(Registration.this, "has focus", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(Registration.this, "has focus", Toast.LENGTH_SHORT).show();
                 } else {
                     progress.showProgress("Getting UPI number");
 
@@ -928,7 +943,16 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                     String UPI_number1 = jsonObject1.getString("clientNumber");
                                     String firstname = jsonObject1.getString("firstName");
                                     String lastname = jsonObject1.getString("lastName");
+
+                                    //UPI_number.setText(UPI_number1);
+                                    // UPI_number.setEnabled(false);
+                                    // dialogs.showSuccessDialog("Clients UPI number is" + " " + UPI_number1, "Name:" + " " + firstname + " " + lastname);
+                                    //Toast.makeText(Registration.this, "Clients UPI number is"+ " " +UPI_number1 +" "+ "Name"+ " "+ firstname+ " "+ lastname, Toast.LENGTH_SHORT).show();
                                     Log.d("", UPI_number1);
+
+
+
+
 
                                     AlertDialog.Builder builder1 = new AlertDialog.Builder(Registration.this);
                                     builder1.setIcon(getResources().getDrawable(R.drawable.moh1));
@@ -943,6 +967,11 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                                 public void onClick(DialogInterface dialog, int id) {
                                                     UPI_number.setText(UPI_number1);
 
+                                                    /*Intent intent = new Intent(Registration.this, LoginActivity.class);
+                                                    startActivity(intent);
+                                                    finish();*/
+
+                                                    //dialog.cancel();
                                                 }
                                             });
 
@@ -953,12 +982,38 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                                                     UPI_number.setText("");
 
+                       /* Intent intent = new Intent(Config.this, SelectUrls.class);
+                        startActivity(intent);
+                        dialog.cancel();*/
                                                 }
                                             });
 
                                     AlertDialog alert11 = builder1.create();
                                     alert11.show();
 
+
+
+
+                                    //AlertDialog
+                                   /* AlertDialog.Builder builder1 = new AlertDialog.Builder(Registration.this);
+                                    builder1.setIcon(android.R.drawable.ic_dialog_alert);
+                                    builder1.setTitle("Clients UPI number is" + " " + UPI_number1);
+                                    builder1.setMessage("Name" + " " + firstname + " " + lastname);
+                                    builder1.setCancelable(false);
+
+                                    builder1.setPositiveButton(
+                                            "OK",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+
+                                                    UPI_number.setText(UPI_number1);
+
+                                                    //dialog.cancel();
+                                                }
+                                            });*/
+
+
+                                    //AlertDialog
 
                                 } else {
                                     dialogs.showErrorDialog("Client has no UPI number", "Please request UPI number for the client");
@@ -970,6 +1025,9 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+
+
+                            // Toast.makeText(Registration.this, idnoE.getText().toString(), Toast.LENGTH_SHORT).show();
 
                         }
                     }, new Response.ErrorListener() {
@@ -1111,70 +1169,13 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             if (patientStatus_code.contentEquals("1")) {
                 populateStatusNew();
                 cccE.setEnabled(false);
-                upnE.setEnabled(true);
                 populateMflCode();
 
-                cccE.setVisibility(View.VISIBLE);
-                upnE.setVisibility(View.VISIBLE);
-                art_dateE.setVisibility(View.VISIBLE);
-                enrollment_dateE.setVisibility(View.VISIBLE);
-                groupingL.setVisibility(View.VISIBLE);
-                conditionS.setVisibility(View.VISIBLE);
-                textViewCondition.setVisibility(View.VISIBLE);
 
-
-
-            } else if (patientStatus_code.contentEquals("2")){
-                cccE.setEnabled(true);
-                upnE.setEnabled(true);
-                cccE.setText("");
-                populateStatus();
-
-                cccE.setVisibility(View.VISIBLE);
-                upnE.setVisibility(View.VISIBLE);
-                art_dateE.setVisibility(View.VISIBLE);
-                enrollment_dateE.setVisibility(View.VISIBLE);
-                groupingL.setVisibility(View.VISIBLE);
-
-                conditionS.setVisibility(View.VISIBLE);
-                textViewCondition.setVisibility(View.VISIBLE);
-
-            }
-            else if (patientStatus_code.contentEquals("3")){
+            } else {
                 cccE.setEnabled(true);
                 cccE.setText("");
-                upnE.setEnabled(true);
                 populateStatus();
-
-                cccE.setVisibility(View.VISIBLE);
-                upnE.setVisibility(View.VISIBLE);
-                art_dateE.setVisibility(View.VISIBLE);
-                enrollment_dateE.setVisibility(View.VISIBLE);
-
-                groupingL.setVisibility(View.VISIBLE);
-                conditionS.setVisibility(View.VISIBLE);
-                textViewCondition.setVisibility(View.VISIBLE);
-
-            }
-            else if (patientStatus_code.contentEquals("4")){
-                // disable mfl and ccno
-                //disable ccc date and care date
-                // grouping default PMTCT
-
-                cccE.setEnabled(false);
-                upnE.setEnabled(false);
-
-                cccE.setVisibility(View.GONE);
-                upnE.setVisibility(View.GONE);
-
-                art_dateE.setVisibility(View.GONE);
-                enrollment_dateE.setVisibility(View.GONE);
-
-                cccE.setText("");
-                populateStatus();
-                groupingL.setVisibility(View.GONE);
-                conditionS.setVisibility(View.GONE);
-                textViewCondition.setVisibility(View.GONE);
 
             }
 
@@ -1533,11 +1534,48 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
-//Submit registration details
+
     public void submitClicked(View v) {
 
         try {
 
+            /*if(countryID==0){
+
+
+            }else if (countyID==0){
+
+            }else if (scountyID==0){
+
+            }else if (wardID==0){
+
+            }else if (countyIDb==0){
+
+            }*/
+
+
+            //start set locator information variables
+
+//            locatorsubcountyS,locatorlocationS,locatorwardS,locatorvillageS
+
+           /* if (locatorcountyE.getText().toString().trim().isEmpty()) {
+
+                locatorcountyS = "-1";
+
+            } else {
+
+                locatorcountyS = locatorcountyE.getText().toString();
+
+            }
+
+            if (locatorsubcountyE.getText().toString().trim().isEmpty()) {
+
+                locatorsubcountyS = "-1";
+
+            } else {
+
+                locatorsubcountyS = locatorsubcountyE.getText().toString();
+
+            }*/
 
 
             if (locatorlocationE.getText().toString().trim().isEmpty()) {
@@ -1550,6 +1588,15 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
             }
 
+           /* if (locatorwardE.getText().toString().trim().isEmpty()) {
+
+                locatorwardS = "-1";
+
+            } else {
+
+                locatorwardS = locatorwardE.getText().toString();
+
+            }*/
 
             if (locatorvillageE.getText().toString().trim().isEmpty()) {
 
@@ -1670,31 +1717,10 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
             }
 
-            if (patientStatus_code.contentEquals("1") || patientStatus_code.contentEquals("2") || patientStatus_code.contentEquals("3")) {
-                upnE.setEnabled(true);
-                conditionS.setVisibility(View.VISIBLE);
-               // groupingL.setVisibility(View.VISIBLE);
-               // populateNewGrouping();
-
-                if (cccS.trim().isEmpty() || upnS.trim().isEmpty()) {
-
-                     Toast.makeText(this, "MFL Code and CCC No is required", Toast.LENGTH_SHORT).show();
-                }
-                }
-
-
-            if (patientStatus_code.contentEquals("4")){
-                //groupingL.setVisibility(View.GONE);
-
-
-            }
 
 
 
-
-
-
-           /* else if (cccS.trim().isEmpty()) {
+            else if (cccS.trim().isEmpty()) {
 
                 cccE.setError("mfl code is required");
 
@@ -1702,7 +1728,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                 upnE.setError("CCC No. required");
 
-            }*/
+            }
 //           else if(fileserialS.trim().isEmpty() && !patientStatus_code.contentEquals("2")){
 //
 //                fileserialE.setError("file serial number is required");
@@ -1720,40 +1746,13 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 //            else if(idnoL.isShown() && idnoE.getText().toString().trim().isEmpty()){
 //                idnoE.setError("ID Number is required");
 //           }
-
-            if (patientStatus_code.contentEquals("1") || patientStatus_code.contentEquals("3")) {
-                if (enrollmentS.trim().isEmpty()) {
-                    enrollment_dateE.setError("Enrollment date required");
-                }
-            }
-
-
-           /* else if (enrollmentS.trim().isEmpty() && !patientStatus_code.contentEquals("2")) {
+            else if (enrollmentS.trim().isEmpty() && !patientStatus_code.contentEquals("2")) {
                 enrollment_dateE.setError("Enrollment date required");
-            }*/
-
-            if (patientStatus_code.contentEquals("1") || patientStatus_code.contentEquals("3")) {
-                if (art_dateE.isShown() && art_dateS.trim().isEmpty()) {
-                    art_dateE.setError("ART date required");
-                }
-            }
-
-           /* else if (art_dateE.isShown() && art_dateS.trim().isEmpty() && !patientStatus_code.contentEquals("2")) {
+            } else if (art_dateE.isShown() && art_dateS.trim().isEmpty() && !patientStatus_code.contentEquals("2")) {
                 art_dateE.setError("ART date required");
-            } */
-
-            if (patientStatus_code.contentEquals("1") || patientStatus_code.contentEquals("3")) {
-                if (phoneS.trim().isEmpty()) {
-                    phoneE.setError("Phone required");
-                }
-            }
-
-            /*else if (phoneS.trim().isEmpty() && !patientStatus_code.contentEquals("2")) {
+            } else if (phoneS.trim().isEmpty() && !patientStatus_code.contentEquals("2")) {
                 phoneE.setError("Phone required");
-            } */
-
-
-            else if ((!dobS.trim().isEmpty()) && dobYearv > cyear) {
+            } else if ((!dobS.trim().isEmpty()) && dobYearv > cyear) {
 
                 dobE.setError("Date of Birth should be less than today");
                 Toast.makeText(this, "Date of Birth should be less than today", Toast.LENGTH_SHORT).show();
@@ -1855,23 +1854,12 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 Toast.makeText(this, "Please Select Marital Status", Toast.LENGTH_SHORT).show();
 
 
-            }
-
-
-          else if (patientStatus_code.contentEquals("1") || patientStatus_code.contentEquals("3")) {
-                if (condition_code.contentEquals("0")) {
-
-                    Toast.makeText(this, "Please Select Condition", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-
-
-
-            /*else if (condition_code.contentEquals("0") && !patientStatus_code.contentEquals("2")) {
+            } else if (condition_code.contentEquals("0") && !patientStatus_code.contentEquals("2")) {
 
                 Toast.makeText(this, "Please Select Condition", Toast.LENGTH_SHORT).show();
-            }*/
+
+
+            }
 //            else if(grouping_code.contentEquals("0")){
 //                Toast.makeText(this, "Please Select Grouping", Toast.LENGTH_SHORT).show();
 //
@@ -2044,7 +2032,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 String newupns = AppendFunction.AppendUniqueIdentifier(upnS);
                 String myccnumber = cccS + newupns;
 
-              //String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + upi_no + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code + "*" + new_grouping_code + "*" + locatorcountyS + "*" + locatorsubcountyS + "*" + locatorlocationS + "*" + locatorwardS + "*" + locatorvillageS;
+                //String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + upi_no + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code + "*" + new_grouping_code + "*" + locatorcountyS + "*" + locatorsubcountyS + "*" + locatorlocationS + "*" + locatorwardS + "*" + locatorvillageS;
                 // String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" +upi_no+ "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code+"*"+new_grouping_code+"*"+locatorcountyS+"*"+locatorsubcountyS+"*"+locatorlocationS+"*"+locatorwardS+"*"+locatorvillageS;
                 String sendSms = myccnumber + "*" + fileserialS + "*" + f_nameS + "*" + s_nameS + "*" + o_nameS + "*" + dobS + "*" + idnoS + "*" + upi_no + "*" + birth_cert_no + "*" + gender_code + "*" + marital_code + "*" + condition_code + "*" + enrollmentS + "*" + art_dateS + "*" + phoneS + "*" + altphoneNumber + "*" + buddyphoneNumber + "*" + language_code + "*" + sms_code + "*" + wklyMotivation_code + "*" + messageTime_code + "*" + Selectstatus_code + "*" + patientStatus_code + "*" + new_grouping_code + "*" + countryID+"*" +countyIDb+"*"+countyID + "*" + scountyID + "*" + locatorlocationS + "*" + wardID + "*" + locatorvillageS;
 //countyID + "*" + scountyID + "*" + locatorlocationS + "*" + wardID + "*" + locatorvillageS;
@@ -2231,7 +2219,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     public void submitUPIrequest(View v) {
 
         if (UPI_number.getText().toString().isEmpty()){
-           // upibtn.setEnabled(true);
+            // upibtn.setEnabled(true);
         }else if (!UPI_number.getText().toString().isEmpty()){
             //upibtn.setEnabled(false);
             //Toast.makeText(this, "Client has UPI Number", Toast.LENGTH_SHORT).show();
@@ -2820,21 +2808,47 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                     new Response.Listener<String>() {
                                         @Override
                                         public void onResponse(String response) {
+                                            //Toast.makeText(Registration.this, "message "+response, Toast.LENGTH_LONG).show();
+                                            //dialogs.showSuccessDialog("response", response);
+
 
 
                                             try {
+                                               /* for (int i=0; i<response.length(); i++){
+                                                JSONObject jsonObject7 = (JSONObject) response.get(i); }*/
+                                                //JSONObject jsonObject9 =re
                                                 JSONObject jsonObject = new JSONObject(response);
+                                                //JSONObject jsonObject4 =jsonObject.getJSONObject("errors");
+                                                /*if (jsonObject.has("errors")){
+                                                   IDused = jsonObject4.getString("identifications[0]");
+                                                    dialogs.showErrorDialog("",IDused);
+                                                }
+
+                                                 IDused =jsonObject4.getString("identifications[0]");*/
+
                                                 for (int a = 0; a < jsonObject.length(); a++) {
                                                     jsonObject1 = jsonObject.getString("clientNumber");
                                                     jsonObject2 = jsonObject.getString("firstName");
                                                     jsonObject3 = jsonObject.getString("lastName");
 
+
+                                                    // Dialog
+
+                                                    //end dialog
+
+
+                                                    ////dialogs.showSuccessDialog("Clients UPI number is"+ " " +jsonObject1, "Name:" + " "+ jsonObject2 + " "+ jsonObject3);
+                                                    //Toast.makeText(Registration.this, "Clients UPI number is"+ " " +jsonObject1, Toast.LENGTH_LONG).show();
+                                                    //UPI_number.setText(jsonObject1);
                                                 }
                                             } catch (JSONException e) {
-                                               // Toast.makeText(Registration.this, "catch", Toast.LENGTH_SHORT).show();
+                                                // Toast.makeText(Registration.this, "catch", Toast.LENGTH_SHORT).show();
                                                 e.printStackTrace();
                                             }
 
+
+
+                                            // pr.dissmissProgress();
 
 
                                             if (mStatusCode[0] == 200) {
@@ -2864,6 +2878,15 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                                 }
 
 
+                                                //UPI_number.setText(jsonObject1);
+                                                //dialogs.showSuccessDialog("Clients UPI number is" + " " + jsonObject1, "Name:" + " " + jsonObject2 + " " + jsonObject3);
+                                                //dialogs.showSuccessDialog("Server response", response);
+                                                // if (response.)
+                                                //dialogs.showErrorDialog("NOTE:", IDused);
+
+                                                //dialogs.showSuccessDialog(response,"Server Response");
+
+
                                             } else {
 
                                                 dialogs.showErrorDialog("UPI not given", "Server response");
@@ -2878,14 +2901,27 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                                             dialogs.showErrorDialog( error.getMessage(), "Server response");
 
+                                            // Toast.makeText(Registration.this, "error", Toast.LENGTH_SHORT).show();
+                                            //pr.dissmissProgress();
+
                                             try {
 
+                                                //byte[] htmlBodyBytes = error.networkResponse.data;
 
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                                                // dialogs.showErrorDialog(new String(htmlBodyBytes),"Server Response");
                                                 Log.d("", error.getMessage());
+                                                // Toast.makeText(Registration.this, error.getMessage(), Toast.LENGTH_LONG).show();
 
+                                                //pr.dissmissProgress();
 
                                             } catch (Exception e) {
 
+
+//                            Toast.makeText(ctx,  ""+error.networkResponse.statusCode+" error mess "+new String(htmlBodyBytes), Toast.LENGTH_SHORT).show();
+                                                //dialogs.showErrorDialog("error occured, try again","Server Response");
+
+                                                // pr.dissmissProgress();
 
 
                                             }
@@ -2940,7 +2976,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 } else {
 
                     //sm.sendMessageApi("Reg*" + encrypted, mynumber);
-                   // LogindisplayDialog("Client registered successfully, kindly confirm that you have received the client registration successful SMS before booking an appointment");
+                    // LogindisplayDialog("Client registered successfully, kindly confirm that you have received the client registration successful SMS before booking an appointment");
 
 
                 }
@@ -3068,51 +3104,51 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
 
                     ArrayAdapter<String> aa = new ArrayAdapter<String>(Registration.this,
-                                android.R.layout.simple_spinner_dropdown_item,
-                                countiesList) {
-                            @Override
-                            public int getCount() {
-                                return super.getCount(); // you dont display last item. It is used as hint.
-                            }
-                        };
+                            android.R.layout.simple_spinner_dropdown_item,
+                            countiesList) {
+                        @Override
+                        public int getCount() {
+                            return super.getCount(); // you dont display last item. It is used as hint.
+                        }
+                    };
 
-                        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-                        // if (ServiceSpinner != null){
-                        ServiceSpinner.setAdapter(aa);
-                        ServiceSpinner.setSelection(aa.getCount() - 1);
+                    // if (ServiceSpinner != null){
+                    ServiceSpinner.setAdapter(aa);
+                    ServiceSpinner.setSelection(aa.getCount() - 1);
 
-                        countyID = countiess.get(aa.getCount() - 1).getId();
+                    countyID = countiess.get(aa.getCount() - 1).getId();
 
-                        ServiceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                    ServiceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
 
-                                // serviceUnitSpinner.setAdapter(null);
+                            // serviceUnitSpinner.setAdapter(null);
 
-                                countyID = countiess.get(position).getId();
-                                //getDepartments(services.get(position).getService_id());
+                            countyID = countiess.get(position).getId();
+                            //getDepartments(services.get(position).getService_id());
 
 //
                                    /* if (serviceID !=0)
                                         Toast.makeText(Registration.this, "getting units", Toast.LENGTH_LONG).show();*/
-                                try {
-                                    getDepartments(countyID);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-
-                                //getDepartments(serviceID);
-
+                            try {
+                                getDepartments(countyID);
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
 
-                            @Override
-                            public void onNothingSelected(AdapterView<?> adapterView) {
+                            //getDepartments(serviceID);
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
 
 
-                            }
-                        });
+                        }
+                    });
 
 
 
@@ -3360,8 +3396,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                     rankSpinner.setAdapter(aa);
                     rankSpinner.setSelection(aa.getCount() - 1);
 
-                  //wardID = wardss.get(aa.getCount() - 1).getId();
-                   wardID = wardss.get(aa.getCount() -1).getId();
+                    //wardID = wardss.get(aa.getCount() - 1).getId();
+                    wardID = wardss.get(aa.getCount() -1).getId();
                     rankSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         //@Overide
                         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
@@ -3429,6 +3465,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     }
 
     //getcounties of birth
+
     public void getcountiesbirth() {
         String curl = "https://ushauriapi.kenyahmis.org/locator/counties";
 
@@ -3481,53 +3518,53 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
 
 
-                        countiessb.add(new counties(0, "", 0));
-                        countiesListb.add("");
+                    countiessb.add(new counties(0, "", 0));
+                    countiesListb.add("");
 
 
 
-                        ArrayAdapter<String> aa = new ArrayAdapter<String>(Registration.this,
-                                android.R.layout.simple_spinner_dropdown_item,
-                                countiesListb) {
-                            @Override
-                            public int getCount() {
-                                return super.getCount(); // you dont display last item. It is used as hint.
-                            }
-                        };
+                    ArrayAdapter<String> aa = new ArrayAdapter<String>(Registration.this,
+                            android.R.layout.simple_spinner_dropdown_item,
+                            countiesListb) {
+                        @Override
+                        public int getCount() {
+                            return super.getCount(); // you dont display last item. It is used as hint.
+                        }
+                    };
 
-                        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-                        // if (ServiceSpinner != null){
-                        birthSpinner.setAdapter(aa);
-                        birthSpinner.setSelection(aa.getCount() - 1);
+                    // if (ServiceSpinner != null){
+                    birthSpinner.setAdapter(aa);
+                    birthSpinner.setSelection(aa.getCount() - 1);
 
-                        countyIDb = countiessb.get(aa.getCount() - 1).getId();
+                    countyIDb = countiessb.get(aa.getCount() - 1).getId();
 
-                        birthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-
-
-                                // serviceUnitSpinner.setAdapter(null);
-
-                                countyIDb = countiessb.get(position).getId();
+                    birthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
 
-                            }
+                            // serviceUnitSpinner.setAdapter(null);
 
-                            @Override
-                            public void onNothingSelected(AdapterView<?> adapterView) {
-
-
-                            }
-                        });
-
-                    }
+                            countyIDb = countiessb.get(position).getId();
 
 
-                    //}
+                        }
 
-                 catch (JSONException e) {
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+
+                        }
+                    });
+
+                }
+
+
+                //}
+
+                catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(Registration.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
@@ -3595,7 +3632,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             public void onResponse(JSONArray response) {
                 //Toast.makeText(Registration.this, response,  Toast.LENGTH_LONG).show();
                 //dialogs.showSuccessDialog("yes", response.toString());
-               // error.printStackTrace();
+                // error.printStackTrace();
 
 
                 try {
@@ -3623,46 +3660,46 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                         countriesList.add(newCounty.getName());
 
                     }
-                        countries.add(new Country(0, "", ""));
-                        countriesList.add("");
+                    countries.add(new Country(0, "", ""));
+                    countriesList.add("");
 
 
 
 
-                        ArrayAdapter<String> aa = new ArrayAdapter<String>(Registration.this,
-                                android.R.layout.simple_spinner_dropdown_item,
-                                countriesList) {
-                            @Override
-                            public int getCount() {
-                                return super.getCount(); // you dont display last item. It is used as hint.
-                            }
-                        };
+                    ArrayAdapter<String> aa = new ArrayAdapter<String>(Registration.this,
+                            android.R.layout.simple_spinner_dropdown_item,
+                            countriesList) {
+                        @Override
+                        public int getCount() {
+                            return super.getCount(); // you dont display last item. It is used as hint.
+                        }
+                    };
 
-                        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-                        // if (ServiceSpinner != null){
-                        countrySpinner.setAdapter(aa);
-                        countrySpinner.setSelection(aa.getCount() - 1);
+                    // if (ServiceSpinner != null){
+                    countrySpinner.setAdapter(aa);
+                    countrySpinner.setSelection(aa.getCount() - 1);
 
-                        countryID = countries.get(aa.getCount() - 1).getId();
+                    countryID = countries.get(aa.getCount() - 1).getId();
 
-                        countrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-
-
-                                // serviceUnitSpinner.setAdapter(null);
-
-                                countryID = countries.get(position).getId();
-
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> adapterView) {
+                    countrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
 
 
-                            }
-                        });
+                            // serviceUnitSpinner.setAdapter(null);
+
+                            countryID = countries.get(position).getId();
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+
+                        }
+                    });
 
 
 
@@ -3679,7 +3716,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                 Toast.makeText(Registration.this, " cant get country", Toast.LENGTH_LONG).show();
+                Toast.makeText(Registration.this, " cant get country", Toast.LENGTH_LONG).show();
                 error.printStackTrace();
                 getCountries();
             }
@@ -3699,6 +3736,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
         };
 
+
         jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
                 0,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
@@ -3708,9 +3746,5 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
 
     }
-
-
-    //post ANC
-
 
 }

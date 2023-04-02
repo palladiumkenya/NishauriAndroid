@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -46,6 +49,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -225,8 +229,11 @@ public class PNCVisitStart extends AppCompatActivity {
                     Toast.makeText(PNCVisitStart.this, "Please Select The Family Planning Method", Toast.LENGTH_SHORT).show();
 
                 }*/
+                if (!haveNetworkConnection()){
+                    Toast.makeText(PNCVisitStart.this, "Check your internet", Toast.LENGTH_LONG).show();
+                }
 
-              if (BabyDOB.getText().toString().isEmpty()){
+             else if (BabyDOB.getText().toString().isEmpty()){
                     Toast.makeText(PNCVisitStart.this, "Please Select Date of Visit", Toast.LENGTH_SHORT).show();
 
                 }
@@ -313,6 +320,11 @@ public class PNCVisitStart extends AppCompatActivity {
                else if (Fp_code.contentEquals("1") && Baby_Sexcode.contentEquals("0")){
                     Toast.makeText(PNCVisitStart.this, "Please specify Family Planning Method", Toast.LENGTH_SHORT).show();
                 }
+               else if (Regimin_code.contentEquals("35") && Objects.requireNonNull(Regimenedt1.getText()).toString().isEmpty()){
+
+                  Toast.makeText(PNCVisitStart.this, "Please Specify The Regimen", Toast.LENGTH_SHORT).show();
+
+              }
 
 
                 else{
@@ -889,7 +901,10 @@ public class PNCVisitStart extends AppCompatActivity {
 
 
 
-        String PNC_data = newCC + "*" + det + "*" + visit + "*" +  clinic + "*" +Mother_Tested_code+"*" + HIV_status_Code+ "*" +  HIV_results_Code2+ "*" +DateTested1+ "*" + newCC + "*" + CCCEnrolDate1 + "*" +ARTStart_date1+ "*" + Regimin_code+ "*" +HIV_results_Codep+ "*" +partnerDateTested1+ "*" + partnerCCCNo1+ "*" + partnerCCCEnrolDate1+ "*" +partnerARTStart_date1+ "*" +aztb+ "*" +nvpb+ "*" +ctxb+ "*" +haart_code+"*" + -1+"*" +DeliveryMode_code + "*" + DeliveryPlace_code + "*" +Immunization_code+ "*" +  Baby_Sexcode+ "*" + Fp_code+ "*" +MothersOutcome+ "*" +dieddt+ "*" +diedcause;
+        String PNC_data = newCC + "*" + det + "*" + visit + "*" +  clinic + "*" +Mother_Tested_code+"*" +
+
+
+                HIV_status_Code+ "*" +  HIV_results_Code2+ "*" +DateTested1+ "*" + newCC + "*" + CCCEnrolDate1 + "*" +ARTStart_date1+ "*" + Regimin_code+ "*" +HIV_results_Codep+ "*" +partnerDateTested1+ "*" + partnerCCCNo1+ "*" + partnerCCCEnrolDate1+ "*" +partnerARTStart_date1+ "*" +aztb+ "*" +nvpb+ "*" +ctxb+ "*" +haart_code+"*" + -1+"*" +DeliveryMode_code + "*" + DeliveryPlace_code + "*" +Immunization_code+ "*" +  Baby_Sexcode+ "*" + Fp_code+ "*" +MothersOutcome+ "*" +dieddt+ "*" +diedcause;
         Log.d("pnc", PNC_data);
         String enc = Base64Encoder.encryptString(PNC_data);
 
@@ -1141,4 +1156,26 @@ public void postPNC() {
 
 
 
-        }}}}
+        }}}
+
+    //test internet
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
+    }
+
+
+
+}
