@@ -24,8 +24,10 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.textview.MaterialTextView;
 import com.mhealth.nishauri.Activities.MainActivity;
 import com.mhealth.nishauri.Models.User;
+import com.mhealth.nishauri.PasswordReset;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
 
@@ -42,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btn_login;
     private Toolbar toolbar;
     private TextView sign_up;
+    private TextView reset1;
     private EditText phone;
     private EditText password;
 
@@ -69,6 +72,8 @@ public class LoginActivity extends AppCompatActivity {
         til_phone_no = findViewById(R.id.til_phone_no);
         til_password = findViewById(R.id.til_pass);
         animationView = findViewById(R.id.animationView);
+
+        reset1 = (MaterialTextView) findViewById(R.id.txt_reset);
 
 
 
@@ -120,6 +125,16 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent mint = new Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(mint);
+
+            }
+        });
+
+        reset1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent mint = new Intent(getApplicationContext(), PasswordReset.class);
                 startActivity(mint);
 
             }

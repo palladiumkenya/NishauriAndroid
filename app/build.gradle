@@ -81,6 +81,7 @@ dependencies {
 
     //Kommunicate sdk
     //implementation 'io.kommunicate.sdk:kommunicateui:2.4.1'
+    implementation 'com.chaos.view:pinview:1.4.3'
 
 
 }

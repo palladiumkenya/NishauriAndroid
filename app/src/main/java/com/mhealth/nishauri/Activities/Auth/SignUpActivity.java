@@ -71,6 +71,8 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText repassword;
     private MaterialTextView terms;
     private MaterialTextView privacy;
+
+    private MaterialTextView reset1;
     private CheckBox consent;
 
 
@@ -140,6 +142,7 @@ public class SignUpActivity extends AppCompatActivity {
         repassword = (EditText) findViewById(R.id.txt_repassword);
         terms = (MaterialTextView) findViewById(R.id.tv_terms);
         privacy = (MaterialTextView) findViewById(R.id.tv_privacy);
+
         consent = (CheckBox) findViewById(R.id.terms);
 
 //        TextInputLayout for errors

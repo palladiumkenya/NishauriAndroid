@@ -19,6 +19,15 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".NewPassword"
+            android:exported="false" />
+        <activity
+            android:name=".otpcodeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PasswordReset"
+            android:exported="false" />
+        <activity
             android:name=".Activities.Bmi"
             android:exported="false" />
         <activity

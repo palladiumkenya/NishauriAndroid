@@ -55,7 +55,7 @@
     </string-array>
 
     <string-array name="schedule_reason">
-       <!-- <item> Pick a reason here…</item>-->
+        <!-- <item> Pick a reason here…</item>-->
         <item>""</item>
         <item> Re-Fill</item>
         <item> Clinical Review</item>
