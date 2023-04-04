@@ -127,7 +127,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         // populate view step (circle in left)
         step_view_list.add(((RelativeLayout) findViewById(R.id.step_ccc_no)));
-        step_view_list.add(((RelativeLayout) findViewById(R.id.step_security_question)));
+       // step_view_list.add(((RelativeLayout) findViewById(R.id.step_security_question)));
         step_view_list.add(((RelativeLayout) findViewById(R.id.step_password)));
         step_view_list.add(((RelativeLayout) findViewById(R.id.step_confirmation)));
 
@@ -269,9 +269,9 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 }
 
-                collapseAndContinue(0);
+                collapseAndContinue(1);
                 break;
-            case R.id.bt_continue_security_question:
+            /*case R.id.bt_continue_security_question:
                 // validate input user here
                 if (security_question.getSelectedItem().toString().equals("Select your security question.")) {
                     Snackbar.make(parent_view, "Please select a security question.", Snackbar.LENGTH_SHORT).show();
@@ -284,7 +284,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
 
                 collapseAndContinue(1);
-                break;
+                break;*/
             case R.id.bt_continue_password:
                 // validate input user here
                 if (password.getText().toString().trim().equals("")) {
@@ -297,7 +297,7 @@ public class SignUpActivity extends AppCompatActivity {
             case R.id.bt_sign_up:
                 // validate input user here
                 if (consent.isChecked()) {
-                    sendData(ccc_no.getText().toString(), security_question.getSelectedItem().toString(), security_answer.getText().toString(), msisdn.getText().toString(),
+                    sendData(ccc_no.getText().toString(),  msisdn.getText().toString(),
                              password.getText().toString(), repassword.getText().toString());
                     animationView.setVisibility(View.VISIBLE);
 
@@ -313,19 +313,19 @@ public class SignUpActivity extends AppCompatActivity {
         int id = view.getId();
         switch (id) {
             case R.id.txt_ccc:
-                if (success_step >= 0 && current_step != 0) {
-                    current_step = 0;
-                    collapseAll();
-                    ViewAnimation.expand(view_list.get(0));
-                }
-                break;
-            case R.id.txt_security:
                 if (success_step >= 1 && current_step != 1) {
                     current_step = 1;
                     collapseAll();
                     ViewAnimation.expand(view_list.get(1));
                 }
                 break;
+            /*case R.id.txt_security:
+                if (success_step >= 1 && current_step != 1) {
+                    current_step = 1;
+                    collapseAll();
+                    ViewAnimation.expand(view_list.get(1));
+                }
+                break;*/
             case R.id.txt_pass:
                 if (success_step >= 2 && current_step != 2) {
                     current_step = 2;
@@ -427,14 +427,15 @@ public class SignUpActivity extends AppCompatActivity {
         dialog.getWindow();
     }
 
-    private void sendData(String ccc_no, String security_question, String security_answer, String msisdn, String password, String repassword) {
+    private void sendData(String ccc_no, String msisdn, String password, String repassword) {
 
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("CCCNo", ccc_no);
-            jsonObject.put("securityQuestion", security_question);
-            jsonObject.put("securityAnswer", security_answer);
+           // jsonObject.put("CCCNo", ccc_no);
+            jsonObject.put("email", ccc_no);
+            //jsonObject.put("securityQuestion", security_question);
+            //jsonObject.put("securityAnswer", security_answer);
             jsonObject.put("msisdn", msisdn);
             jsonObject.put("password", password);
             jsonObject.put("re_password", repassword);
@@ -444,7 +445,7 @@ public class SignUpActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        AndroidNetworking.post(Constants.ENDPOINT+Constants.REGISTER)
+        AndroidNetworking.post("https://ushauriapi.kenyahmis.org/nishauri/signup")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")
@@ -468,6 +469,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                             boolean  status = response.has("success") && response.getBoolean("success");
                             String  errors = response.has("error") ? response.getString("error") : "" ;
+                            String  errors1 = response.has("msg") ? response.getString("msg") : "" ;
 
 
                             if (status){
@@ -480,7 +482,7 @@ public class SignUpActivity extends AppCompatActivity {
                             }
                             else{
 
-                                Toast.makeText(SignUpActivity.this, errors, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpActivity.this, errors1, Toast.LENGTH_SHORT).show();
 
                             }
 
