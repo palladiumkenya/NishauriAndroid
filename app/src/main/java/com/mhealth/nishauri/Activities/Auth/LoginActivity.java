@@ -29,6 +29,7 @@ import com.mhealth.nishauri.Activities.MainActivity;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.PasswordReset;
 import com.mhealth.nishauri.R;
+import com.mhealth.nishauri.otpcodeActivity;
 import com.mhealth.nishauri.utils.Constants;
 
 import org.json.JSONObject;
@@ -51,6 +52,13 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout til_phone_no;
     private TextInputLayout til_password;
     private LottieAnimationView animationView;
+
+   String errors1  ;
+
+
+   String userID1;
+  int  page;
+
 
 
 
@@ -171,12 +179,12 @@ public class LoginActivity extends AppCompatActivity {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("password", password);
-            jsonObject.put("msisdn", phone);
+            jsonObject.put("user_name", phone);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        AndroidNetworking.post(Constants.ENDPOINT+Constants.LOGIN)
+        AndroidNetworking.post("https://ushauriapi.kenyahmis.org/nishauri/signin")
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
@@ -191,30 +199,38 @@ public class LoginActivity extends AppCompatActivity {
                         // do anything with response
 
 //                        Log.e(TAG, response.toString());
-
                         try {
 
-                            String auth_token = response.has("auth_token") ? response.getString("auth_token") : "";
-                            User newUser = new User(auth_token);
+                            boolean status = response.has("success") && response.getBoolean("success");
+                            String errors = response.has("error") ? response.getString("error") : "";
+                            errors1 = response.has("msg") ? response.getString("msg") : "";
 
-                            Stash.put(Constants.AUTH_TOKEN, newUser);
+                            JSONObject jsonObject1 = response.getJSONObject("data");
+                            userID1 = jsonObject1.getString("user_id");
+                            page = jsonObject1.getInt("page_id");
 
+                            // String encryptedID1 = Base64Encoder.encryptString(userID1);
+
+
+                            if (status) {
+
+
+                                Intent intent1 = new Intent(LoginActivity.this, MainActivity.class);
+                                // intent1.putExtra("user_ID", userID1);
+                                startActivity(intent1);
+
+                            } else {
+
+                                Toast.makeText(LoginActivity.this, errors1, Toast.LENGTH_LONG).show();
+
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        Toast.makeText(LoginActivity.this, errors1, Toast.LENGTH_LONG).show();
 
 
-                        animationView.setVisibility(View.GONE);
-
-                        if (response.has("auth_token")){
-
-                            Intent mint = new Intent(LoginActivity.this, MainActivity.class);
-                            Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                            mint.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(mint);
-
-                        }
 
                     }
 

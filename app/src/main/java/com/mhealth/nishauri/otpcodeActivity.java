@@ -26,6 +26,8 @@ public class otpcodeActivity extends AppCompatActivity {
     int pageID11;
     String userExtra;
 
+    String  errors1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +36,7 @@ public class otpcodeActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
-            userExtra = extras.getString("user_id");
+            userExtra = extras.getString("user_ID");
             // and get whatever type user account id is
         }
 
@@ -62,9 +64,9 @@ public class otpcodeActivity extends AppCompatActivity {
     public void postOtp(String userID, String otp){
         JSONObject jsonObject = new JSONObject();
         try {
-
-            jsonObject.put("user_id", userID);
             jsonObject.put("otp", otp);
+            jsonObject.put("user_id", userID);
+
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -94,18 +96,19 @@ public class otpcodeActivity extends AppCompatActivity {
 
                             boolean  status = response.has("success") && response.getBoolean("success");
                             String  errors = response.has("error") ? response.getString("error") : "" ;
-                            String  errors1 = response.has("msg") ? response.getString("msg") : "" ;
+                            errors1 = response.has("msg") ? response.getString("msg") : "" ;
 
                             JSONObject jsonObject1 =response.getJSONObject("data");
                            userID11 =jsonObject1.getString("user_id");
                             pageID11 = jsonObject1.getInt("page_id");
 
-                            String encryptedID11 = Base64Encoder.encryptString(userID11);
+                           // String encryptedID11 = Base64Encoder.encryptString(userID11);
 
 
                             if (status){
+                                Toast.makeText(otpcodeActivity.this, errors1, Toast.LENGTH_SHORT).show();
                                 Intent intent1 =new Intent(otpcodeActivity.this, NewPassword.class);
-                                intent1.putExtra("", encryptedID11);
+                                intent1.putExtra("ID",  userID11);
                                 startActivity(intent1);
 
                             }
@@ -118,6 +121,7 @@ public class otpcodeActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        Toast.makeText(otpcodeActivity.this, errors1, Toast.LENGTH_SHORT).show();
 
                     }
 

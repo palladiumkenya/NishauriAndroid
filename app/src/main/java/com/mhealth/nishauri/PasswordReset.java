@@ -97,18 +97,15 @@ public class PasswordReset extends AppCompatActivity {
                             userID1 =jsonObject1.getString("user_id");
                             page = jsonObject1.getInt("page_id");
 
-                            String encryptedID1 = Base64Encoder.encryptString(userID1);
+                           // String encryptedID1 = Base64Encoder.encryptString(userID1);
+
 
 
                             if (status){
 
-                               /* Intent mint = new Intent(PasswordReset.this, LoginActivity.class);
-                                Toast.makeText(PasswordReset.this, "User created", Toast.LENGTH_SHORT).show();
-                                mint.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(mint);*/
 
                                 Intent intent1 =new Intent(PasswordReset.this, otpcodeActivity.class);
-                                intent1.putExtra("user_ID", encryptedID1);
+                                intent1.putExtra("user_ID", userID1);
                                 startActivity(intent1);
 
                             }
