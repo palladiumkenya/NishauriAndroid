@@ -43,8 +43,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/actionBarSize"
                 android:layout_marginBottom="@dimen/spacing_middle"
-                android:visibility="gone"
-                android:src="@drawable/folder" />
+
+                android:src="@drawable/nishauri_logo" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
