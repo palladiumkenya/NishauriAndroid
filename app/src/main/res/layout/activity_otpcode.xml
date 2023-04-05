@@ -139,6 +139,18 @@
                             android:maxLength="1"
                             android:textAlignment="center"
                             android:textColor="@color/trueBlack" />
+                        <EditText
+                            android:id="@+id/otp_edit_text5"
+                            android:layout_width="@dimen/et_otp_width"
+                            android:layout_height="@dimen/et_otp_height"
+                            android:layout_marginEnd="@dimen/margin_right_otp"
+                            android:background="@drawable/otp_edittext"
+                            android:imeOptions="actionDone"
+                            android:inputType="number"
+                            android:maxLength="1"
+                            android:textAlignment="center"
+                            android:textColor="@color/trueBlack" />
+
 
 
                     </LinearLayout>
