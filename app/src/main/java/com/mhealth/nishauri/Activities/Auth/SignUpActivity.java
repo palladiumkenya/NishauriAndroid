@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -74,6 +75,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private MaterialTextView reset1;
     private CheckBox consent;
+    private Button bt_sign_up1;
 
 
 
@@ -101,6 +103,18 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        bt_sign_up1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                    sendData(ccc_no.getText().toString(),  msisdn.getText().toString(),
+                            password.getText().toString(), repassword.getText().toString());
+
+
+            }
+        });
+
         privacy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,32 +130,28 @@ public class SignUpActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Sign Up");
+        getSupportActionBar().setTitle("Sign up");
 
     }
 
     private void initComponent() {
         // populate layout field
         view_list.add(findViewById(R.id.lyt_ccc_no));
-        view_list.add(findViewById(R.id.lyt_sequrity_question));
+        //view_list.add(findViewById(R.id.lyt_sequrity_question));
         view_list.add(findViewById(R.id.lyt_password));
         view_list.add(findViewById(R.id.lyt_confirmation));
-
-        // populate view step (circle in left)
-        step_view_list.add(((RelativeLayout) findViewById(R.id.step_ccc_no)));
-       // step_view_list.add(((RelativeLayout) findViewById(R.id.step_security_question)));
-        step_view_list.add(((RelativeLayout) findViewById(R.id.step_password)));
-        step_view_list.add(((RelativeLayout) findViewById(R.id.step_confirmation)));
 
         //components for input
         ccc_no = (EditText) findViewById(R.id.txt_ccc_no);
         msisdn = (EditText) findViewById(R.id.txt_phone_no);
-        security_question = (Spinner) findViewById(R.id.security_question);
-        security_answer = (EditText) findViewById(R.id.txt_security_answer);
+       // security_question = (Spinner) findViewById(R.id.security_question);
+        //security_answer = (EditText) findViewById(R.id.txt_security_answer);
         password = (EditText) findViewById(R.id.txt_password);
         repassword = (EditText) findViewById(R.id.txt_repassword);
         terms = (MaterialTextView) findViewById(R.id.tv_terms);
         privacy = (MaterialTextView) findViewById(R.id.tv_privacy);
+
+        bt_sign_up1 = (Button) findViewById(R.id.bt_sign_up);
 
         consent = (CheckBox) findViewById(R.id.terms);
 
@@ -153,12 +163,6 @@ public class SignUpActivity extends AppCompatActivity {
         animationView = findViewById(R.id.animationView);
 
 
-        for (View v : view_list) {
-            v.setVisibility(View.GONE);
-        }
-
-        view_list.get(0).setVisibility(View.VISIBLE);
-        hideSoftKeyboard();
 
 
     }
@@ -255,96 +259,6 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
-    public void clickAction(View view) {
-        int id = view.getId();
-        switch (id) {
-            case R.id.bt_continue_ccc_no:
-                // validate input user here
-                if (ccc_no.getText().toString().trim().equals("")) {
-                    //Snackbar.make(parent_view, "Please provide your CCC Number.", Snackbar.LENGTH_SHORT).show();
-
-                    return;
-                }
-
-
-                if (msisdn.getText().toString().trim().equals("")) {
-                    Snackbar.make(parent_view, "Please provide your Phone Number.", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-
-                collapseAndContinue(1);
-                break;
-            /*case R.id.bt_continue_security_question:
-                // validate input user here
-                if (security_question.getSelectedItem().toString().equals("Select your security question.")) {
-                    Snackbar.make(parent_view, "Please select a security question.", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (security_answer.getText().toString().trim().equals("")) {
-                    Snackbar.make(parent_view, "Please provide an answer to you question.", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-
-                collapseAndContinue(1);
-                break;*/
-            case R.id.bt_continue_password:
-                // validate input user here
-                if (password.getText().toString().trim().equals("")) {
-                    Snackbar.make(parent_view, "Please provide a password.", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-
-                collapseAndContinue(2);
-                break;
-            case R.id.bt_sign_up:
-                // validate input user here
-                if (consent.isChecked()) {
-                    sendData(ccc_no.getText().toString(),  msisdn.getText().toString(),
-                             password.getText().toString(), repassword.getText().toString());
-                    animationView.setVisibility(View.VISIBLE);
-
-                } else {
-                    Snackbar.make(parent_view, "Please confirm consent to NiShauri.", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-                break;
-        }
-    }
-
-    public void clickLabel(View view) {
-        int id = view.getId();
-        switch (id) {
-            case R.id.txt_ccc:
-                if (success_step >= 1 && current_step != 1) {
-                    current_step = 1;
-                    collapseAll();
-                    ViewAnimation.expand(view_list.get(1));
-                }
-                break;
-            /*case R.id.txt_security:
-                if (success_step >= 1 && current_step != 1) {
-                    current_step = 1;
-                    collapseAll();
-                    ViewAnimation.expand(view_list.get(1));
-                }
-                break;*/
-            case R.id.txt_pass:
-                if (success_step >= 2 && current_step != 2) {
-                    current_step = 2;
-                    collapseAll();
-                    ViewAnimation.expand(view_list.get(2));
-                }
-                break;
-            case R.id.txt_confirmation:
-                if (success_step >= 3 && current_step != 3) {
-                    current_step = 3;
-                    collapseAll();
-                    ViewAnimation.expand(view_list.get(3));
-                }
-                break;
-        }
-    }
 
     private void collapseAndContinue(int index) {
         ViewAnimation.collapse(view_list.get(index));

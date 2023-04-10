@@ -1,6 +1,7 @@
 package com.mhealth.nishauri;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class otpcodeActivity extends AppCompatActivity {
     Button btn_login1;
     EditText editText1, editText2, editText3, editText4, editText5;
+    Toolbar toolbar1;
 
     String userID11;
     int pageID11;
@@ -32,6 +34,10 @@ public class otpcodeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otpcode);
+
+        toolbar1 =findViewById(R.id.toolbarr);
+        toolbar1.setTitle("Nishauri");
+        setSupportActionBar(toolbar1);
 
         Bundle extras = getIntent().getExtras();
 
@@ -49,7 +55,9 @@ public class otpcodeActivity extends AppCompatActivity {
         editText2 = findViewById(R.id.otp_edit_text2);
         editText3= findViewById(R.id.otp_edit_text3);
         editText4 =findViewById(R.id.otp_edit_text4);
-        editText5 =findViewById(R.id.otp_edit_text5);;
+        editText5 =findViewById(R.id.otp_edit_text5);
+
+
 
         btn_login1.setOnClickListener(new View.OnClickListener() {
             @Override

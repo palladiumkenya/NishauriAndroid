@@ -16,60 +16,72 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Activities.Auth.LoginActivity;
 import com.mhealth.nishauri.Activities.Auth.SignUpActivity;
+import com.mhealth.nishauri.Activities.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.concurrent.TimeUnit;
 
-public class PasswordReset extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
-    EditText etxt_email1;
-    Button btn_reset_password1;
+    EditText ccc, upi, first;
+    Button btn_sub;
+    Toolbar toolbar;
 
-  String  userID1;
-   int page;
-    String  errors1;
-
-    Toolbar toolbar1;
-
-
+    String userExtra;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_password_reset);
+        setContentView(R.layout.activity_profile);
+        init();
+        btn_sub = findViewById(R.id.bt_prof);
+        Bundle extras = getIntent().getExtras();
 
-        toolbar1 =findViewById(R.id.toolbarr);
-        toolbar1.setTitle("Reset Password");
-        setSupportActionBar(toolbar1);
+        if (extras != null) {
+            userExtra = extras.getString("user_ID");
+            // and get whatever type user account id is
+        }
 
-        etxt_email1 =findViewById(R.id.etxt_email);
-        btn_reset_password1=findViewById(R.id.btn_reset_password);
-
-
-        btn_reset_password1.setOnClickListener(new View.OnClickListener() {
+        btn_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                postReset(etxt_email1.getText().toString());
+               // Toast.makeText(ProfileActivity.this, "Profile created", Toast.LENGTH_SHORT).show();
+                send(userExtra, ccc.getText().toString(), upi.getText().toString(), first.getText().toString());
 
             }
         });
     }
+    private void init() {
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Complete profile");
 
-    public void postReset(String userID){
+        ccc= findViewById(R.id.ccc_no);
+        upi = findViewById(R.id.upi_no);
+        first = findViewById(R.id.f_name);
+
+
+
+    }
+
+    private void send(String userid, String cc, String up, String fname){
+
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("user_id", userid);
 
-            jsonObject.put("user_name", userID);
-
+            jsonObject.put("ccc_no", cc);
+            jsonObject.put("upi_no", up);
+            jsonObject.put("firstname", fname);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        AndroidNetworking.post("https://ushauriapi.kenyahmis.org/nishauri/resetpassword")
+        AndroidNetworking.post("https://ushauriapi.kenyahmis.org/nishauri/setprogram")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")
@@ -87,40 +99,33 @@ public class PasswordReset extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
 //                        Log.e(TAG, response.toString());
 
-                       // animationView.setVisibility(View.GONE);
+                        //Toast.makeText(ProfileActivity.this, "Profile created", Toast.LENGTH_SHORT).show();
+
 
                         try {
 
                             boolean  status = response.has("success") && response.getBoolean("success");
                             String  errors = response.has("error") ? response.getString("error") : "" ;
-                            errors1 = response.has("msg") ? response.getString("msg") : "" ;
-
-                            JSONObject jsonObject1 =response.getJSONObject("data");
-                            userID1 =jsonObject1.getString("user_id");
-                            page = jsonObject1.getInt("page_id");
-
-                           // String encryptedID1 = Base64Encoder.encryptString(userID1);
-
+                            String  errors1 = response.has("msg") ? response.getString("msg") : "" ;
 
 
                             if (status){
 
-
-                                Intent intent1 =new Intent(PasswordReset.this, otpcodeActivity.class);
-                                intent1.putExtra("user_ID", userID1);
-                                startActivity(intent1);
+                                Intent mint = new Intent(ProfileActivity.this, MainActivity.class);
+                                Toast.makeText(ProfileActivity.this, "Profile created", Toast.LENGTH_SHORT).show();
+                               // mint.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(mint);
 
                             }
-                            else {
+                            else{
 
-                                Toast.makeText(PasswordReset.this, errors1, Toast.LENGTH_LONG).show();
+                                Toast.makeText(ProfileActivity.this, "null", Toast.LENGTH_SHORT).show();
 
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Toast.makeText(PasswordReset.this, errors1, Toast.LENGTH_LONG).show();
 
                     }
 
@@ -128,25 +133,26 @@ public class PasswordReset extends AppCompatActivity {
                     public void onError(ANError error) {
                         // handle error
 //                        Log.e(TAG, error.getErrorBody());
+                        Toast.makeText(ProfileActivity.this, "errors", Toast.LENGTH_SHORT).show();
 
-                        //animationView.setVisibility(View.GONE);
+
 
                         // Snackbar.make(findViewById(R.id.signup_layout), "Error: "+error.getErrorBody(), Snackbar.LENGTH_LONG).show();
 
                         //JSONObject jsonObject = new JSONObject();
                         int  errors = error.getErrorCode();
                         if (errors==400){
-                            Toast.makeText(PasswordReset.this, "Invalid Phone Number", Toast.LENGTH_SHORT).show();
-                            //Snackbar.make(findViewById(R.id.signup_layout), "Invalid OTP Code", Snackbar.LENGTH_LONG).show();
+                            Toast.makeText(ProfileActivity.this, "null", Toast.LENGTH_SHORT).show();
+                           // Snackbar.make(findViewById(R.id.signup_layout1), " Invalid CCC number", Snackbar.LENGTH_LONG).show();
                         }else {
-
-                            Toast.makeText(PasswordReset.this, error.getErrorDetail(), Toast.LENGTH_SHORT).show();
-                            //Snackbar.make(findViewById(R.id.signup_layout), "Error: " + error.getErrorDetail(), Snackbar.LENGTH_LONG).show();
+                            Toast.makeText(ProfileActivity.this, "null2", Toast.LENGTH_SHORT).show();
+                            //Snackbar.make(findViewById(R.id.signup_layout1), "Error: " + error.getErrorDetail(), Snackbar.LENGTH_LONG).show();
                         }
 
 
                     }
                 });
+
 
 
     }

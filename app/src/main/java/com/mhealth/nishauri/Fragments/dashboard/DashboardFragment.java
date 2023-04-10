@@ -90,11 +90,11 @@ public class DashboardFragment extends Fragment {
     @BindView(R.id.txt_total_app)
     TextView txt_total_app;
 
-    @BindView(R.id.tv_notified_appointment)
+    /*@BindView(R.id.tv_notified_appointment)
     TextView tv_notified_appointment;
 
     @BindView(R.id.txt_total_apps)
-    TextView txt_total_apps;
+    TextView txt_total_apps;*/
 
     @BindView(R.id.tv_refill_number)
     TextView tv_refill_number;
@@ -669,12 +669,12 @@ public class DashboardFragment extends Fragment {
                                     tv_booked_appointments.setText(booked);
                                 }
 
-                                if (notified.equals("")){
+                               /* if (notified.equals("")){
                                     tv_notified_appointment.setText("0");
                                 }
                                 else {
                                     tv_notified_appointment.setText(notified);
-                                }
+                                }*/
 
                                 if (kept_appointment.equals("")){
                                     tv_kept_appointments.setText("0");
@@ -691,7 +691,7 @@ public class DashboardFragment extends Fragment {
                                 }
 
 
-                                if (total.equals("")){
+                               /* if (total.equals("")){
                                     txt_total.setText("0");
                                     txt_total_app.setText("0");
                                     txt_total_appointment.setText("0");
@@ -702,7 +702,7 @@ public class DashboardFragment extends Fragment {
                                     txt_total_app.setText(total);
                                     txt_total_appointment.setText(total);
                                     txt_total_apps.setText(total);
-                                }
+                                }*/
 
 
                                 JSONObject missed_appointments = myObject.has("missed per type") ? myObject.getJSONObject("missed per type"): null;

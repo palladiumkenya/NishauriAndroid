@@ -19,7 +19,8 @@ import android.widget.Toast;
 import com.airbnb.lottie.LottieAnimationView;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
-import com.androidnetworking.error.ANError;
+import com.androidnetworking
+        .error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
@@ -28,6 +29,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.mhealth.nishauri.Activities.MainActivity;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.PasswordReset;
+import com.mhealth.nishauri.ProfileActivity;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.otpcodeActivity;
 import com.mhealth.nishauri.utils.Constants;
@@ -212,14 +214,25 @@ public class LoginActivity extends AppCompatActivity {
                             // String encryptedID1 = Base64Encoder.encryptString(userID1);
 
 
-                            if (status) {
+                            if (status && !(page==0)) {
 
 
                                 Intent intent1 = new Intent(LoginActivity.this, MainActivity.class);
-                                // intent1.putExtra("user_ID", userID1);
+                                 intent1.putExtra("user_ID", userID1);
                                 startActivity(intent1);
 
-                            } else {
+                            }else if (status && page==0){
+
+                                Intent intent1 = new Intent(LoginActivity.this, ProfileActivity.class);
+                                intent1.putExtra("user_ID", userID1);
+                                startActivity(intent1);
+
+
+                            }
+
+
+
+                            else {
 
                                 Toast.makeText(LoginActivity.this, errors1, Toast.LENGTH_LONG).show();
 

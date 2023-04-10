@@ -30,23 +30,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:layout_marginTop="@dimen/actionBarSize"
+
             android:paddingLeft="@dimen/spacing_large"
             android:paddingRight="@dimen/spacing_large">
-
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/actionBarSize"
+                android:layout_marginBottom="@dimen/spacing_middle"
+                android:src="@drawable/nishauri_logo" />
             <!--top line-->
 
-            <LinearLayout
-                android:layout_width="@dimen/spacing_xlarge"
-                android:layout_height="@dimen/spacing_mlarge"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
 
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/grey_10" />
-
-            </LinearLayout>
 
             <!--section title-->
 
@@ -55,64 +52,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
 
-                    <RelativeLayout
-                        android:id="@+id/step_ccc_no"
-                        android:layout_width="@dimen/spacing_xlarge"
-                        android:layout_height="@dimen/spacing_xlarge"
-                        android:background="@drawable/shape_round_solid"
-                        android:gravity="center">
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                            android:textColor="@android:color/white" />
 
-                    </RelativeLayout>
-
-                    <View
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/grey_10"
-                        android:minHeight="?attr/actionBarSize" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="@dimen/spacing_large"
-                    android:layout_height="0dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="?attr/actionBarSize"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/txt_ccc"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xlarge"
-                        android:gravity="center_vertical"
-                        android:onClick="clickLabel"
-                        android:paddingLeft="@dimen/spacing_small"
-                        android:paddingRight="@dimen/spacing_small"
-                        android:text="CCC Number Details"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textStyle="bold"
-                        android:textColor="@color/grey_90" />
 
                     <LinearLayout
                         android:id="@+id/lyt_ccc_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_large"
+
                         android:orientation="vertical">
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -153,132 +102,14 @@
 
                         </com.google.android.material.textfield.TextInputLayout>
 
-
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/bt_continue_ccc_no"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:minWidth="0dp"
-                            android:onClick="clickAction"
-                            android:text="CONTINUE"
-                            style="@style/Widget.MaterialComponents.Button.TextButton"/>
-
                     </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+
 
             <!--section description-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:id="@+id/step_security_question"
-                        android:layout_width="@dimen/spacing_xlarge"
-                        android:layout_height="@dimen/spacing_xlarge"
-                        android:background="@drawable/shape_round_solid"
-                        android:gravity="center">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="2"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                            android:textColor="@android:color/white" />
-
-                    </RelativeLayout>
-
-                    <View
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/grey_10" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="@dimen/spacing_large"
-                    android:layout_height="0dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="?attr/actionBarSize"
-                    android:visibility="gone"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txt_security"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xlarge"
-                        android:gravity="center_vertical"
-                        android:onClick="clickLabel"
-                        android:paddingLeft="@dimen/spacing_small"
-                        android:paddingRight="@dimen/spacing_small"
-                        android:text="Security Question Details"
-                        android:textStyle="bold"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/grey_90" />
-
-                    <LinearLayout
-                        android:id="@+id/lyt_sequrity_question"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/spacing_large"
-                        android:orientation="vertical">
-
-                        <androidx.appcompat.widget.AppCompatSpinner
-                            android:id="@+id/security_question"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/spacing_xxlarge"
-                            android:drawSelectorOnTop="true"
-                            android:entries="@array/security_question"/>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/til_security_answer"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:passwordToggleEnabled="true"
-                            app:startIconDrawable="@drawable/ic_password"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/txt_security_answer"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Enter your answer"
-                                android:inputType="textPassword"
-                                android:maxLength="10"/>
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/bt_continue_security_question"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:minWidth="0dp"
-                            android:onClick="clickAction"
-                            android:text="CONTINUE"
-                            style="@style/Widget.MaterialComponents.Button.TextButton"
-                             />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
 
             <!--section time-->
 
@@ -287,57 +118,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
 
-                    <RelativeLayout
-                        android:id="@+id/step_password"
-                        android:layout_width="@dimen/spacing_xlarge"
-                        android:layout_height="@dimen/spacing_xlarge"
-                        android:background="@drawable/shape_round_solid"
-                        android:gravity="center">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="3"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                            android:textColor="@android:color/white" />
-
-                    </RelativeLayout>
-
-                    <View
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/grey_10" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="@dimen/spacing_large"
-                    android:layout_height="0dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="?attr/actionBarSize"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txt_pass"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xlarge"
-                        android:gravity="center_vertical"
-                        android:onClick="clickLabel"
-                        android:paddingLeft="@dimen/spacing_small"
-                        android:paddingRight="@dimen/spacing_small"
-                        android:text="Password Details"
-                        android:textStyle="bold"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/grey_90" />
 
                     <LinearLayout
                         android:id="@+id/lyt_password"
@@ -384,82 +165,30 @@
 
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/bt_continue_password"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:minWidth="0dp"
-                            android:onClick="clickAction"
-                            android:text="CONTINUE"
-                            style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
 
                     </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
 
 
 
             <!--section confirmation-->
 
-            <LinearLayout
+          <!--  <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"> -->
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
 
-                    <RelativeLayout
-                        android:id="@+id/step_confirmation"
-                        android:layout_width="@dimen/spacing_xlarge"
-                        android:layout_height="@dimen/spacing_xlarge"
-                        android:background="@drawable/shape_round_solid"
-                        android:gravity="center">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="4"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                            android:textColor="@android:color/white" />
-
-                    </RelativeLayout>
-
-                    <View
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/grey_10" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="@dimen/spacing_large"
-                    android:layout_height="0dp" />
-
-                <LinearLayout
+              <!--  <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="?attr/actionBarSize"
-                    android:orientation="vertical">
+                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:id="@+id/txt_confirmation"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xlarge"
-                        android:gravity="center_vertical"
-                        android:onClick="clickLabel"
-                        android:paddingLeft="@dimen/spacing_small"
-                        android:paddingRight="@dimen/spacing_small"
-                        android:text="Confirmation"
-                        android:textStyle="bold"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/grey_90" />
+
 
                     <LinearLayout
                         android:id="@+id/lyt_confirmation"
@@ -472,14 +201,21 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/spacing_medium"
-                            android:text="@string/signup_confirmation_text"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"                            />
+                            android:visibility="gone"
+                            android:text="Please confirm you have read the privacy terms and conditions"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:weightSum="3"
+                            android:orientation="horizontal">
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/tv_terms"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/spacing_medium"
+                            android:visibility="gone"
                             android:text="Terms and Conditions"
                             android:clickable="true"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
@@ -487,17 +223,6 @@
                             android:background="?attr/selectableItemBackground"
                             />
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/tv_privacy"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/spacing_medium"
-                            android:text="User privacy information"
-                            android:clickable="true"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/colorAccent"
-                            android:background="?attr/selectableItemBackground"
-                            />
 
 
                         <com.google.android.material.checkbox.MaterialCheckBox
@@ -505,7 +230,24 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:checked="false"
-                            android:text="@string/terms_and_conditions" />
+                            android:textSize="10sp"
+                            android:layout_weight="2"
+                            android:text="Please confirm you have read the" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tv_privacy"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:text="privacy terms and condition"
+                                android:layout_weight="1"
+                                android:clickable="true"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="10sp"
+                                android:background="?attr/selectableItemBackground"
+                                />
+                        </LinearLayout>
 
                         <com.airbnb.lottie.LottieAnimationView
                             android:id="@+id/animationView"
@@ -525,33 +267,31 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:onClick="clickAction"
-                            android:text="SIGN UP" />
+                            android:text="Register" />
 
 
-                    </LinearLayout>
 
-                </LinearLayout>
+                 <!--   </LinearLayout>-->
+
+              <!--  </LinearLayout> -->
 
             </LinearLayout>
+
+
 
             <!--bottom line-->
 
-            <LinearLayout
-                android:layout_width="@dimen/spacing_xlarge"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
 
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/grey_10" />
 
-            </LinearLayout>
+
 
         </LinearLayout>
 
+
+
+
     </androidx.core.widget.NestedScrollView>
+
 
 </LinearLayout>
 
