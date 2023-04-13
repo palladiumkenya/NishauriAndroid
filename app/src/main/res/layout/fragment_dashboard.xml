@@ -35,28 +35,38 @@
                 style="@style/TextAppearance.AppCompat.Title"/>
 
 
-
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_xsmall"
-                android:layout_marginRight="@dimen/spacing_xsmall"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginTop="@dimen/spacing_xsmall"
                 android:visibility="visible"
                 app:cardCornerRadius="10dp"
 
                 app:cardElevation="5dp"
                 >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+
+
+                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingRight="@dimen/spacing_middle">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+
+
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle">
 
                 <!-- Main dashboard -->
+
 
 
                 <LinearLayout
@@ -68,6 +78,7 @@
                     android:layout_marginTop="@dimen/spacing_xsmall"
                     android:layout_weight="1"
                     android:visibility="visible"
+
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp">
 
@@ -75,6 +86,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
+
                         android:padding="@dimen/spacing_large">
 
                         <RelativeLayout
@@ -110,18 +122,18 @@
 
                                 <TextView
                                     android:id="@+id/tv_missed_appointments"
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
+
                                     android:text="0"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                     android:textColor="@color/red_500"
                                     android:textStyle="bold" />
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
+
                                     android:text="/"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                     android:textColor="@color/grey_60"
@@ -130,9 +142,9 @@
 
                                 <TextView
                                     android:id="@+id/txt_total"
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
+
                                     android:text="0"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                     android:textColor="@color/grey_60"
@@ -152,6 +164,11 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
+
+
+
+                <!-- kept appointment -->
 
                 <View
                     android:layout_width="@dimen/spacing_middle"
@@ -207,18 +224,18 @@
 
                                 <TextView
                                     android:id="@+id/tv_kept_appointments"
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
+
                                     android:text="0"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                     android:textColor="@color/green_500"
                                     android:textStyle="bold" />
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
+
                                     android:text="/"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                     android:textColor="@color/grey_60"
@@ -254,12 +271,14 @@
 
 
             <!--3rd cardview -->
-            </androidx.cardview.widget.CardView>
+
+
 
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_middle" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -268,17 +287,14 @@
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle">
 
+
+
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_xsmall"
-                    android:layout_marginLeft="@dimen/spacing_xsmall"
-                    android:layout_marginRight="@dimen/spacing_xsmall"
-                    android:layout_marginTop="@dimen/spacing_xsmall"
-                    android:layout_weight="1"
+
                     android:visibility="visible"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="5dp">
+                   >
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -317,18 +333,18 @@
 
                                 <TextView
                                     android:id="@+id/tv_booked_appointments"
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
+
                                     android:text="0"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                     android:textColor="@color/colorAccent"
                                     android:textStyle="bold" />
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
+
                                     android:text="/"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                     android:textColor="@color/grey_60"
@@ -337,9 +353,9 @@
 
                                 <TextView
                                     android:id="@+id/txt_total_app"
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
+
                                     android:text="0"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                     android:textColor="@color/grey_60"
@@ -365,7 +381,10 @@
 
 
 
+
                 </LinearLayout>
+
+                </LinearLayout></androidx.cardview.widget.CardView>
 
 
 
