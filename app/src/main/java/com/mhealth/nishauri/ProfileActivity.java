@@ -48,6 +48,8 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                // Toast.makeText(ProfileActivity.this, "Profile created", Toast.LENGTH_SHORT).show();
+
+
                 send(userExtra, ccc.getText().toString(), upi.getText().toString(), first.getText().toString());
 
             }

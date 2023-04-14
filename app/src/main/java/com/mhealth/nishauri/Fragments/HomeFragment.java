@@ -137,17 +137,17 @@ public class HomeFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, root);
 
-        loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
+        //loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
         initialise();
 
-        loadCurrentUser();
+        //loadCurrentUser();
 
-        loadDependants();
+        //loadDependants();
 
-        loadUpcomingAppointments();
+        //loadUpcomingAppointments();
 
-        loadCurrentTreatments();
+        //loadCurrentTreatments();
 
        /* bt_expand1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,11 +206,11 @@ public class HomeFragment extends Fragment {
 
     private void loadCurrentUser(){
 
-        String auth_token = loggedInUser.getAuth_token();
+        //String auth_token = loggedInUser.getAuth_token();
 
 
         AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_USER)
-                .addHeaders("Authorization","Token "+ auth_token)
+               // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
@@ -363,11 +363,11 @@ public class HomeFragment extends Fragment {
 
     private void loadUpcomingAppointments() {
 
-        String auth_token = loggedInUser.getAuth_token();
+        //String auth_token = loggedInUser.getAuth_token();
 
 
         AndroidNetworking.get(Constants.ENDPOINT+Constants.UPCOMING_APPOINTMENT)
-                .addHeaders("Authorization","Token "+ auth_token)
+               // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
@@ -489,11 +489,11 @@ public class HomeFragment extends Fragment {
 
     private void loadCurrentTreatments() {
 
-        String auth_token = loggedInUser.getAuth_token();
+      //  String auth_token = loggedInUser.getAuth_token();
 
 
         AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_REGIMEN)
-                .addHeaders("Authorization","Token "+ auth_token)
+                //.addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")

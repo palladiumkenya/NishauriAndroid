@@ -71,13 +71,13 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-        loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
+        //loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
-        String auth_token = loggedInUser.getAuth_token();
+        //String auth_token = loggedInUser.getAuth_token();
 
 
         AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_USER)
-                .addHeaders("Authorization","Token "+ auth_token)
+                //.addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")

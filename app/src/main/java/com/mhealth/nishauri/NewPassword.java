@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +30,7 @@ public class NewPassword extends AppCompatActivity {
     String  errors11;
 
     String  userExtra1;
+    boolean  status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +49,64 @@ public class NewPassword extends AppCompatActivity {
 
         pwd11=findViewById(R.id.pwd1);
         pwd22=findViewById(R.id.pwd2);
+        pwd11.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int b, int b1, int b2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int b, int b1, int b2) {
+                if (pwd11.length() < 8) {
+                    pwd11   .setError("Password should be 8 characters long");
+                } else {
+                    pwd11.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        pwd22.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int c, int c1, int c2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int c, int c1, int c2) {
+                if (pwd22.length() < 8) {
+                   pwd22.setError("Password should be 8 characters long");
+                } else if (!pwd11.getText().toString().equals(pwd22.getText().toString())) {
+                    pwd22.setError(getString(R.string.must_match));
+
+                } else {
+                   pwd22.setError(null);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
 
         btn_login1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (pwd11.getText().toString().isEmpty()){
+                    Toast.makeText(NewPassword.this, "Enter New password", Toast.LENGTH_LONG).show();
 
-                postPwd(pwd11.getText().toString(), pwd22.getText().toString(), userExtra1);
+                }else if (pwd22.getText().toString().isEmpty()){
+                    Toast.makeText(NewPassword.this, "Enter New password", Toast.LENGTH_LONG).show();
+
+                }else{
+
+                postPwd(pwd11.getText().toString(), pwd22.getText().toString(), userExtra1);}
 
             }
         });
@@ -98,7 +153,7 @@ public class NewPassword extends AppCompatActivity {
 
                         try {
 
-                            boolean  status = response.has("success") && response.getBoolean("success");
+                              status = response.has("success") && response.getBoolean("success");
                             String  errors = response.has("error") ? response.getString("error") : "" ;
                             errors11 = response.has("msg") ? response.getString("msg") : "" ;
 
@@ -110,7 +165,7 @@ public class NewPassword extends AppCompatActivity {
 
 
 
-                            if (status){
+                           /* if (status){
 
 
                                 Intent intent1 =new Intent(NewPassword.this, LoginActivity.class);
@@ -122,10 +177,23 @@ public class NewPassword extends AppCompatActivity {
 
                                 Toast.makeText(NewPassword.this, errors11, Toast.LENGTH_LONG).show();
 
-                            }
+                            }*/
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                        }
+                        if (status){
+
+
+                            Intent intent1 =new Intent(NewPassword.this, LoginActivity.class);
+                            //intent1.putExtra("user_ID", userID11);
+                            startActivity(intent1);
+
+                        }
+                        else {
+
+                            Toast.makeText(NewPassword.this, errors11, Toast.LENGTH_LONG).show();
+
                         }
                         Toast.makeText(NewPassword.this, errors11, Toast.LENGTH_LONG).show();
 

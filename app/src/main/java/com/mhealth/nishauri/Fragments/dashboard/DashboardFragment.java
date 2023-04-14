@@ -148,16 +148,16 @@ public class DashboardFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         unbinder = ButterKnife.bind(this, root);
 
-        loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
+       // loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
-        loadDashboardDetails();
+       // loadDashboardDetails();
         pDialog = new ProgressDialog(context);
         pDialog.setTitle("Loading...");
         pDialog.setMessage("Getting Results...");
         pDialog.setCancelable(true);
 
        // viralLoadArrayList = new ArrayList<>();
-        loadViralLoad();
+        //loadViralLoad();
 
         return root;
     }
