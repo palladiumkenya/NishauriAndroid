@@ -121,7 +121,7 @@ public class ProfileActivity extends AppCompatActivity {
                             }
                             else{
 
-                                Toast.makeText(ProfileActivity.this, "null", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProfileActivity.this, errors1, Toast.LENGTH_SHORT).show();
 
                             }
 

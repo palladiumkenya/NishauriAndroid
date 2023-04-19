@@ -213,6 +213,14 @@ public class LoginActivity extends AppCompatActivity {
 
                             // String encryptedID1 = Base64Encoder.encryptString(userID1);
 
+                           /* auth newUser = new auth(access_token);
+                            Stash.put(Constants.AUTH_TOKEN, newUser);*/
+
+                           // String auth_token = response.has("auth_token") ? response.getString("auth_token") : "";
+                            User newUser = new User(userID1);
+                            Stash.put(Constants.AUTH_TOKEN, newUser);
+
+
 
                             if (status && !(page==0)) {
 

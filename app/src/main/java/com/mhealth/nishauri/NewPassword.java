@@ -116,16 +116,11 @@ public class NewPassword extends AppCompatActivity {
     public void postPwd(String pwdA,String pwdB, String userIDA){
         JSONObject jsonObject = new JSONObject();
         try {
-            // jsonObject.put("CCCNo", ccc_no);
+
             jsonObject.put("password", pwdA);
             jsonObject.put("re_password", pwdB);
             jsonObject.put("user_id", userIDA);
-            //jsonObject.put("securityQuestion", security_question);
-            //jsonObject.put("securityAnswer", security_answer);
-            /*jsonObject.put("msisdn", msisdn);
-            jsonObject.put("password", password);
-            jsonObject.put("re_password", repassword);
-            jsonObject.put("termsAccepted", consent.isChecked() ? "true" : "false");*/
+
 
         } catch (JSONException e) {
             e.printStackTrace();

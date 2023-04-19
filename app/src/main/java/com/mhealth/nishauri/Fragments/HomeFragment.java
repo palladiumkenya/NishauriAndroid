@@ -137,11 +137,11 @@ public class HomeFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, root);
 
-        //loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
+        loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
         initialise();
 
-        //loadCurrentUser();
+        loadCurrentUser();
 
         //loadDependants();
 
@@ -206,10 +206,14 @@ public class HomeFragment extends Fragment {
 
     private void loadCurrentUser(){
 
-        //String auth_token = loggedInUser.getAuth_token();
+        String auth_token = loggedInUser.getAuth_token();
+        String urls ="?user_id="+auth_token;
+        Log.e("tokens", auth_token);
+        //https://ushauriapi.kenyahmis.org/nishauri/profile"+urls
+        //Constants.ENDPOINT+Constants.CURRENT_USER
 
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_USER)
+        AndroidNetworking.get("https://ushauriapi.kenyahmis.org/nishauri/profile"+urls)
                // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -221,7 +225,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-//                        Log.e(TAG, response.toString());
+                        Log.e(TAG, response.toString());
 
                         try {
 
@@ -236,15 +240,29 @@ public class HomeFragment extends Fragment {
                                     JSONObject item = (JSONObject) myArray.get(i);
 
 
-                                    String first_name = item.has("first_name") ? item.getString("first_name") : "";
+                                   /* String first_name = item.has("first_name") ? item.getString("first_name") : "";
                                     String last_name = item.has("last_name") ? item.getString("last_name") : "";
                                     String msisdn = item.has("msisdn") ? item.getString("msisdn") : "";
                                     String CCCNo = item.has("CCCNo") ? item.getString("CCCNo") : "";
-                                    String current_facility = item.has("current_facility") ? item.getString("current_facility") : "";
+                                    String current_facility = item.has("current_facility") ? item.getString("current_facility") : "";*/
 
-                                    txt_name.setText(CCCNo);
+
+                                    String phone_no = item.has("phone_no") ? item.getString("phone_no") : "";
+
+
+
+                                    String client_name = item.has("client_name") ? item.getString("client_name") : "";
+                                    String facility_name = item.has("facility_name") ? item.getString("facility_name") : "";
+                                    String clinic_number = item.has("clinic_number") ? item.getString("clinic_number") : "";
+
+                                    txt_msisdn.setText(phone_no);
+                                    txt_facility.setText(facility_name);
+                                    txt_name.setText(clinic_number);
+
+
+                                   /* txt_name.setText(CCCNo);
                                     txt_msisdn.setText(msisdn);
-                                    txt_facility.setText(current_facility);
+                                    txt_facility.setText(current_facility);*/
 
                                 }
 
@@ -260,7 +278,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onError(ANError error) {
                         // handle error
-//                        Log.e(TAG, error.getErrorBody());
+                        Log.e(TAG, error.getErrorBody());
 
                         Snackbar.make(root.findViewById(R.id.frag_home), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
 
