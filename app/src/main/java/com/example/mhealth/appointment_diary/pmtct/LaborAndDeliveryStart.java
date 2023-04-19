@@ -329,6 +329,53 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
         ctx1 = (CheckBox) findViewById(R.id.ctx);;
 
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
+
+        azt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (azt1.isChecked()){
+                    aztb = true;
+
+                    // Toast.makeText(ANCVisitStarted.this, String.valueOf(aztb), Toast.LENGTH_LONG).show();
+
+                }else if (!azt1.isChecked()){
+                    aztb = false;
+
+                }
+
+            }
+        });
+
+        nvp1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (nvp1.isChecked()){
+                    nvpb=true;
+                }
+                else if (!nvp1.isChecked()){
+                    nvpb=false;
+                }
+
+            }
+        });
+
+        ctx1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ctx1.isChecked()){
+                    ctxb=true;
+                }
+
+                else if (!ctx1.isChecked()){
+                    ctxb=false;
+                }
+
+
+            }
+        });
+
+
         //ARTstart
         ARTStart_date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -2563,12 +2610,6 @@ public class LaborAndDeliveryStart extends AppCompatActivity {
         String PartnerCCCNumber =partnerCCCNo.getText().toString();
         String p_enrolment_date= partnerCCCEnrolDate.getText().toString();
         String  p_art_start =partnerARTStart_date.getText().toString();
-        aztb= Boolean.parseBoolean(azt1.getText().toString());
-
-        nvpb= Boolean.parseBoolean(nvp1.getText().toString());
-
-        ctxb = Boolean.parseBoolean(ctx1.getText().toString());
-
 
 
 

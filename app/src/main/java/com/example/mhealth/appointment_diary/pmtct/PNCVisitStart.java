@@ -215,6 +215,53 @@ public class PNCVisitStart extends AppCompatActivity {
         ANC_VisitNo1= (EditText) findViewById(R.id.ANC_VisitNo);
 
 
+        azt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (azt1.isChecked()){
+                    aztb = true;
+
+                   // Toast.makeText(ANCVisitStarted.this, String.valueOf(aztb), Toast.LENGTH_LONG).show();
+
+                }else if (!azt1.isChecked()){
+                    aztb = false;
+
+                }
+
+            }
+        });
+
+        nvp1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (nvp1.isChecked()){
+                    nvpb=true;
+                }
+                else if (!nvp1.isChecked()){
+                    nvpb=false;
+                }
+
+            }
+        });
+
+        ctx1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ctx1.isChecked()){
+                    ctxb=true;
+                }
+
+                else if (!ctx1.isChecked()){
+                    ctxb=false;
+                }
+
+
+            }
+        });
+
+
+
 
 
 

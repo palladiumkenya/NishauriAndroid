@@ -67,7 +67,7 @@ import java.util.concurrent.TimeUnit;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class ANCVisitStarted extends AppCompatActivity {
-    private boolean aztb, nvpb, ctxb;
+    public boolean aztb, nvpb, ctxb;
     private RadioGroup radioGroup;
     String z, all;
     Date datelmp;
@@ -103,7 +103,7 @@ public class ANCVisitStarted extends AppCompatActivity {
     private String TB = "";
     LinearLayout pregnant, positiveLayout, partnerLayout, positiveselected, hivdata1c, hivdata2c, hivResultsLL;
     EditText CCCNo, partnerCCCNo, gravida, EDD_date, LMP_date, DateTested, ANC_Visitno, ANC_clinicno, ANCNumber, partnerDateTested, CCCEnrolDate, ARTStart_date, partnerCCCEnrolDate, partnerARTStart_date, VLdate, parity1, parity2, VLResults, CCCNo22, Gestation, weight1, muac1;
-    String ClientIS_code, HIV_Results_Code, partnerHIV_Results_Code, SyphilisSerology_code, clientTreated_code, HepatitisB_code, HIV_ANC_Code, Mother_Tested_code, TB_code;
+    String ClientIS_code, HIV_Results_Code, partnerHIV_Results_Code, SyphilisSerology_code, clientTreated_code, HepatitisB_code, HIV_ANC_Code, Mother_Tested_code, TB_code, radioVL;
     RadioGroup syphilisID, hepatitisID;
     RadioButton radioButtonChecked;
 
@@ -126,6 +126,7 @@ public class ANCVisitStarted extends AppCompatActivity {
     int hepatitisID_code, syphilisIDc_code;
 
     CheckBox azt1, nvp1, ctx1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -209,6 +210,52 @@ public class ANCVisitStarted extends AppCompatActivity {
         ctx1 = (CheckBox) findViewById(R.id.ctx);;
 
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
+
+        azt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (azt1.isChecked()){
+                    aztb = true;
+
+                   // Toast.makeText(ANCVisitStarted.this, String.valueOf(aztb), Toast.LENGTH_LONG).show();
+
+                }else if (!azt1.isChecked()){
+                    aztb = false;
+
+                }
+
+            }
+        });
+
+         nvp1.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 if (nvp1.isChecked()){
+                     nvpb=true;
+                 }
+                 else if (!nvp1.isChecked()){
+                     nvpb=false;
+                 }
+
+             }
+         });
+
+         ctx1.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 if (ctx1.isChecked()){
+                     ctxb=true;
+                 }
+
+                 else if (!ctx1.isChecked()){
+                     ctxb=false;
+                 }
+
+
+             }
+         });
+
 
 
 
@@ -816,6 +863,7 @@ public class ANCVisitStarted extends AppCompatActivity {
         });
 
         // on below line we are adding check change listener for our radio group.
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -826,8 +874,12 @@ public class ANCVisitStarted extends AppCompatActivity {
                 if (radioButtonChecked.getText().equals("LDL")){
                     VLResults.setEnabled(false);
                     VLResults.setText("");
+                    radioVL ="1";
+                    Toast.makeText(ANCVisitStarted.this, radioVL, Toast.LENGTH_SHORT).show();
                 }else{
                     VLResults.setEnabled(true);
+                    radioVL ="2";
+                    Toast.makeText(ANCVisitStarted.this, radioButtonChecked.getText().toString(), Toast.LENGTH_SHORT).show();
                 }
 
                 // on below line we are displaying a toast message.
@@ -887,32 +939,7 @@ public class ANCVisitStarted extends AppCompatActivity {
 
 
 
-               /* else if (DateTested.getText().toString().isEmpty()){
-                    Toast.makeText(ANCVisitStarted.this, "Enter Date Tested", Toast.LENGTH_LONG).show();
-                }*/
 
-                //checkboxes
-
-                //aztb, nvpb, ctxb;
-                //azt1, nvp1, ctx1;
-
-                /*if(azt1.isChecked())
-                {
-                    aztb= Boolean.parseBoolean(azt1.getText().toString());
-                }
-
-
-              else 77if(nvp1.isChecked())
-                {
-                    //description=checkPrivacy.getText().toString();
-                    nvpb= Boolean.parseBoolean(nvp1.getText().toString());
-
-                }
-
-                if(ctx1.isChecked())
-                {
-                    ctxb = Boolean.parseBoolean(ctx1.getText().toString());
-                }*/
 
 
 
@@ -1136,16 +1163,8 @@ public class ANCVisitStarted extends AppCompatActivity {
         String weight11 =weight1.getText().toString();
         String muac11 =muac1.getText().toString();
 
-        aztb= Boolean.parseBoolean(azt1.getText().toString());
 
-        nvpb= Boolean.parseBoolean(nvp1.getText().toString());
-
-        ctxb = Boolean.parseBoolean(ctx1.getText().toString());
-
-
-
-
-        String ANC_data = newCC + "*" + ANC_no + "*" + ANC_clinic_no + "*" + ClientIS_code + "*" + weight11 + "*" +muac11+ "*" +pa11 + "*" + pa22 + "*" + gra + "*" + LMPdate + "*" + EDDDATE + "*" + gestation + "*" + HIV_ANC_Code+ "*" + Mother_Tested_code+ "*" + HIV_Results_Code + "*" + DateTested1 + "*" + CCCNo2 + "*" + CCCEnrolDate1 + "*" + ARTStart_date1 + "*" + partnerHIV_Results_Code + "*" + partnerDateTested1 + "*" + partnerCCCNo1 + "*" + partnerCCCEnrolDate1 + "*" + partnerARTStart_date1 + "*" +  SyphilisSerology_code + "*" + clientTreated_code + "*" + HepatitisB_code + "*" + TB_code + "*" + aztb+ "*" + nvpb+ "*" + ctxb+ "*" + VLdate1 + "*" + VLResults1 + "*" + radioButtonChecked;
+        String ANC_data = newCC + "*" + ANC_no + "*" + ANC_clinic_no + "*" + ClientIS_code + "*" + weight11 + "*" +muac11+ "*" +pa11 + "*" + pa22 + "*" + gra + "*" + LMPdate + "*" + EDDDATE + "*" + gestation + "*" + HIV_ANC_Code+ "*" + Mother_Tested_code+ "*" + HIV_Results_Code + "*" + DateTested1 + "*" + CCCNo2 + "*" + CCCEnrolDate1 + "*" + ARTStart_date1 + "*" + partnerHIV_Results_Code + "*" + partnerDateTested1 + "*" + partnerCCCNo1 + "*" + partnerCCCEnrolDate1 + "*" + partnerARTStart_date1 + "*" +  SyphilisSerology_code + "*" + clientTreated_code + "*" + HepatitisB_code + "*" + TB_code + "*" + aztb+ "*" + nvpb+ "*" + ctxb+ "*" + VLdate1 + "*" + VLResults1 + "*" + radioButtonChecked.getText().toString();
 
         String enc = Base64Encoder.encryptString(ANC_data);
 
@@ -1193,6 +1212,7 @@ public class ANCVisitStarted extends AppCompatActivity {
                             public void onResponse(JSONObject response) {
                        //Toast.makeText(ANCVisitStarted.this, "message "+response, Toast.LENGTH_SHORT).show();
                                 Log.e("Response: ", response.toString());
+                                Log.e("Encr: ", ANC_data);
                                 pr.dissmissProgress();
 
                                 JSONObject jsonObject = null;
