@@ -145,7 +145,7 @@ public class HomeFragment extends Fragment {
 
         //loadDependants();
 
-        //loadUpcomingAppointments();
+        loadUpcomingAppointments();
 
         //loadCurrentTreatments();
 
@@ -383,8 +383,14 @@ public class HomeFragment extends Fragment {
 
         //String auth_token = loggedInUser.getAuth_token();
 
+        String auth_token = loggedInUser.getAuth_token();
+        String urls ="?user_id="+auth_token;
+        Log.e("tokens", auth_token);
+        //https://ushauriapi.kenyahmis.org/nishauri/profile"+urls
+        //Constants.ENDPOINT+Constants.CURRENT_USER
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.UPCOMING_APPOINTMENT)
+
+        AndroidNetworking.get("https://ushauriapi.kenyahmis.org/nishauri/current_appt"+urls)
                // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -396,7 +402,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-//                        Log.e(TAG, response.toString());
+                       Log.e(TAG, response.toString());
 
                         upcomingAppointmentArrayList.clear();
 
@@ -442,17 +448,19 @@ public class HomeFragment extends Fragment {
 
                                     int id = item.has("id") ? item.getInt("id") : 0;
                                     String aid = item.has("aid") ? item.getString("aid") : "";
-                                    String appntmnt_date = item.has("appntmnt_date") ? item.getString("appntmnt_date") : "";
+                                    //String appntmnt_date = item.has("appntmnt_date") ? item.getString("appntmnt_date") : "";
+                                    String  appointment_date = item.has("appointment_date") ? item.getString("appointment_date") : "";
                                     String app_status = item.has("app_status") ? item.getString("app_status") : "";
                                     String visit_type = item.has("visit_type") ? item.getString("visit_type") : "";
-                                    String app_type = item.has("app_type") ? item.getString("app_type") : "";
+                                   // String app_type = item.has("app_type") ? item.getString("app_type") : "";
+                                    String appointment_type = item.has("appointment_type") ? item.getString("appointment_type") : "";
                                     String owner = item.has("owner") ? item.getString("owner") : "";
                                     String dependant = item.has("dependant") ? item.getString("dependant") : "";
                                     String created_at = item.has("created_at") ? item.getString("created_at") : "";
                                     String updated_at = item.has("updated_at") ? item.getString("updated_at") : "";
                                     String user = item.has("user") ? item.getString("user") : "";
 
-                                    UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(id,aid,appntmnt_date,app_status,visit_type,app_type,owner,dependant,created_at,updated_at,user);
+                                    UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(id,aid, appointment_date,app_status,visit_type,appointment_type,owner,dependant,created_at,updated_at,user);
 
                                     upcomingAppointmentArrayList.add(newUpcomingAppointment);
                                     myAdapter.notifyDataSetChanged();

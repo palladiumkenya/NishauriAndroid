@@ -90,8 +90,8 @@ public class DashboardFragment extends Fragment {
     @BindView(R.id.txt_total_app)
     TextView txt_total_app;
 
-    /*@BindView(R.id.tv_notified_appointment)
-    TextView tv_notified_appointment;
+   /* @BindView(R.id.tv_notified_appointment)
+    public TextView tv_notified_appointment;
 
     @BindView(R.id.txt_total_apps)
     TextView txt_total_apps;*/
@@ -148,9 +148,9 @@ public class DashboardFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         unbinder = ButterKnife.bind(this, root);
 
-       // loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
+        loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
-       // loadDashboardDetails();
+        loadDashboardDetails();
         pDialog = new ProgressDialog(context);
         pDialog.setTitle("Loading...");
         pDialog.setMessage("Getting Results...");
@@ -599,12 +599,14 @@ public class DashboardFragment extends Fragment {
 
     //load dashboard data
     private void loadDashboardDetails(){
-
         String auth_token = loggedInUser.getAuth_token();
+        String urls ="?user_id="+auth_token;
+        Log.e("tokens", auth_token);
+        //Constants.ENDPOINT+Constants.DASHBOARD
 
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.DASHBOARD)
-                .addHeaders("Authorization","Token "+ auth_token)
+        AndroidNetworking.get("https://ushauriapi.kenyahmis.org/nishauri/appointment_trends"+urls)
+               // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
@@ -628,14 +630,65 @@ public class DashboardFragment extends Fragment {
 
                             if (status){
 
-                                JSONObject myObject = response.getJSONObject("data");
+                               // JSONObject myObject = response.getJSONObject("data");
+                                JSONArray jsonArray =response.getJSONArray("data");
 
-                                String days_suppressed = myObject.has("days suppressed") ? myObject.getString("days suppressed") : "";
+                                for (int i =0; i<jsonArray.length(); i++){
+
+                                    JSONObject jsonObject =jsonArray.getJSONObject(i);
+                                   // int url_id = jsonObject.getInt("id");
+                                    String missed_appointment =jsonObject.getString("missed");
+                                    String kept_appointment =jsonObject.getString("kept");
+                                    String booked =jsonObject.getString("booked");
+                                    String total =jsonObject.getString("total");
+
+                                    if (booked.equals("")){
+                                        tv_booked_appointments.setText("0");
+                                    }
+                                    else {
+                                        tv_booked_appointments.setText(booked);
+                                    }
+                                    if (kept_appointment.equals("")){
+                                        tv_kept_appointments.setText("0");
+                                    }
+                                    else {
+                                        tv_kept_appointments.setText(kept_appointment);
+                                    }
+
+                                    if (missed_appointment.equals("")){
+                                        tv_missed_appointments.setText("0");
+                                    }
+                                    else {
+                                        tv_missed_appointments.setText(missed_appointment);
+                                    }
+
+                                    if (total.equals("")){
+                                        txt_total.setText("0");
+                                        txt_total_app.setText("0");
+                                        txt_total_appointment.setText("0");
+                                        //txt_total_apps.setText("0");
+                                    }
+                                    else {
+                                        txt_total.setText(total);
+                                        txt_total_app.setText(total);
+                                        txt_total_appointment.setText(total);
+                                       // txt_total_apps.setText(total);
+                                    }
+
+
+                                    /*url_Model = new urlModel(url_id, url_stage, main_urls);
+                                    names.add(url_Model);
+                                    urlModelArrayList.add(url_Model.getStage());*/
+
+
+                                }
+
+                                /*String days_suppressed = myObject.has("days suppressed") ? myObject.getString("days suppressed") : "";
                                 String days_unsuppressed = myObject.has("days unsuppressed") ? myObject.getString("days unsuppressed") : "";
-                                String current_status = myObject.has("current status") ? myObject.getString("current status") : "";
+                                String current_status = myObject.has("current status") ? myObject.getString("current status") : "";*/
 
 
-                                if (days_suppressed.equals("")){
+                              /*  if (days_suppressed.equals("")){
                                     tv_suppressed_days.setText("0");
                                 }
                                 else {
@@ -652,30 +705,24 @@ public class DashboardFragment extends Fragment {
                                     tv_current_status_text.setText("Not Available");
                                 } else {
                                     tv_current_status_text.setText(current_status);
-                                }
+                                }*/
 
-                                JSONObject all_appointments = myObject.has("all apointments") ? myObject.getJSONObject("all apointments"): null;
+                               // JSONObject all_appointments = myObject.has("all apointments") ? myObject.getJSONObject("all apointments"): null;
 
-                                String booked = all_appointments.has("Booked") ? all_appointments.getString("Booked") : "";
+                                /*String booked = all_appointments.has("Booked") ? all_appointments.getString("Booked") : "";
                                 String notified = all_appointments.has("Notified") ? all_appointments.getString("Notified") : "";
                                 String kept_appointment = all_appointments.has("kept appointment") ? all_appointments.getString("kept appointment") : "";
                                 String missed_appointment = all_appointments.has("missed appointment") ? all_appointments.getString("missed appointment") : "";
-                                String total = all_appointments.has("total") ? all_appointments.getString("total") : "";
+                                String total = all_appointments.has("total") ? all_appointments.getString("total") : "";*/
 
-                                if (booked.equals("")){
+                                //String booked = jsonArray.has("Booked") ? all_appointments.getString("Booked") : "";
+
+                              /*  if (booked.equals("")){
                                     tv_booked_appointments.setText("0");
                                 }
                                 else {
                                     tv_booked_appointments.setText(booked);
                                 }
-
-                               /* if (notified.equals("")){
-                                    tv_notified_appointment.setText("0");
-                                }
-                                else {
-                                    tv_notified_appointment.setText(notified);
-                                }*/
-
                                 if (kept_appointment.equals("")){
                                     tv_kept_appointments.setText("0");
                                 }
@@ -688,7 +735,28 @@ public class DashboardFragment extends Fragment {
                                 }
                                 else {
                                     tv_missed_appointments.setText(missed_appointment);
+                                }*/
+
+                               /* if (notified.equals("")){
+                                    tv_notified_appointment.setText("0");
                                 }
+                                else {
+                                    tv_notified_appointment.setText(notified);
+                                }*/
+
+                               /* if (kept_appointment.equals("")){
+                                    tv_kept_appointments.setText("0");
+                                }
+                                else {
+                                    tv_kept_appointments.setText(kept_appointment);
+                                }
+
+                                if (missed_appointment.equals("")){
+                                    tv_missed_appointments.setText("0");
+                                }
+                                else {
+                                    tv_missed_appointments.setText(missed_appointment);
+                                }*/
 
 
                                /* if (total.equals("")){
@@ -705,7 +773,7 @@ public class DashboardFragment extends Fragment {
                                 }*/
 
 
-                                JSONObject missed_appointments = myObject.has("missed per type") ? myObject.getJSONObject("missed per type"): null;
+                               /* JSONObject missed_appointments = myObject.has("missed per type") ? myObject.getJSONObject("missed per type"): null;
 
                                 String re_fill = missed_appointments.has("Re-Fill") ? missed_appointments.getString("Re-Fill") : "";
                                 String clinical_review = missed_appointments.has("Clinical Review") ? missed_appointments.getString("Clinical Review") : "";
@@ -713,10 +781,10 @@ public class DashboardFragment extends Fragment {
                                 String lab_investigation = missed_appointments.has("Lab Investigation") ? missed_appointments.getString("Lab Investigation") : "";
                                 String viral_load = missed_appointments.has("Viral Load") ? missed_appointments.getString("Viral Load") : "";
                                 String others = missed_appointments.has("Other") ? missed_appointments.getString("Other") : "";
-                                String total_missed = missed_appointments.has("total missed") ? missed_appointments.getString("total missed") : "";
+                                String total_missed = missed_appointments.has("total missed") ? missed_appointments.getString("total missed") : "";*/
 
 
-                                if (re_fill.equals("")){
+                               /* if (re_fill.equals("")){
                                     tv_refill_number.setText("0");
                                 }
                                 else {
@@ -756,7 +824,7 @@ public class DashboardFragment extends Fragment {
                                 }
                                 else {
                                     tv_others_number.setText(others);
-                                }
+                                }*/
 
                             }
                             else {

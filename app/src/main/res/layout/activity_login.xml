@@ -26,7 +26,7 @@
             app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
             app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
             app:titleEnabled="true"
-            app:collapsedTitleGravity="top">
+           >
 
             <FrameLayout
                 android:layout_width="match_parent"
