@@ -151,6 +151,7 @@ public class DashboardFragment extends Fragment {
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
         loadDashboardDetails();
+        MissedByType();
         pDialog = new ProgressDialog(context);
         pDialog.setTitle("Loading...");
         pDialog.setMessage("Getting Results...");
@@ -676,10 +677,6 @@ public class DashboardFragment extends Fragment {
                                     }
 
 
-                                    /*url_Model = new urlModel(url_id, url_stage, main_urls);
-                                    names.add(url_Model);
-                                    urlModelArrayList.add(url_Model.getStage());*/
-
 
                                 }
 
@@ -848,6 +845,181 @@ public class DashboardFragment extends Fragment {
 
                     }
                 });
+
+    }
+
+    //Missed By Type
+    private void MissedByType(){
+
+        String auth_token = loggedInUser.getAuth_token();
+        String urls ="?user_id="+auth_token;
+        Log.e("tokens", auth_token);
+        //Constants.ENDPOINT+Constants.DASHBOARD
+
+
+        AndroidNetworking.get("https://ushauriapi.kenyahmis.org/nishauri/appointment_missed"+urls)
+                // .addHeaders("Authorization","Token "+ auth_token)
+                .addHeaders("Content-Type", "application.json")
+                .addHeaders("Accept", "*/*")
+                .addHeaders("Accept", "gzip, deflate, br")
+                .addHeaders("Connection","keep-alive")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+//                        Log.e(TAG, response.toString());
+
+
+                        try {
+
+                            boolean  status = response.has("success") && response.getBoolean("success");
+                            String  Info = response.has("Info") ? response.getString("Info") : "" ;
+                            String  errors = response.has("errors") ? response.getString("errors") : "" ;
+
+
+
+                            if (status){
+
+                                // JSONObject myObject = response.getJSONObject("data");
+                                JSONArray jsonArray =response.getJSONArray("data");
+
+                                for (int i =0; i<jsonArray.length(); i++){
+
+                                    JSONObject jsonObject =jsonArray.getJSONObject(i);
+                                    // int url_id = jsonObject.getInt("id");
+                                    String clinical_review =jsonObject.getString("clinical_review");
+                                    String drug_refill =jsonObject.getString("drug_refill");
+                                    String enhanced_adherence =jsonObject.getString("enhanced_adherence");
+                                    String viral_load =jsonObject.getString("viral_load");
+
+
+
+                                    if (drug_refill.equals("")){
+                                        tv_refill_number.setText("0");
+                                    }
+                                    else {
+                                        tv_refill_number.setText(drug_refill);
+                                    }
+
+                                    if (clinical_review.equals("")){
+                                        tv_clinical_review_number.setText("0");
+                                    }
+                                    else {
+                                        tv_clinical_review_number.setText(clinical_review);
+                                    }
+
+                                    if (enhanced_adherence.equals("")){
+                                        tv_enhanced_adherence_number.setText("0");
+                                    }
+                                    else {
+                                        tv_enhanced_adherence_number.setText(enhanced_adherence);
+                                    }
+
+                                    /*if (lab_investigation.equals("")){
+                                        tv_lab_investigation_number.setText("0");
+                                    }
+                                    else {
+                                        tv_lab_investigation_number.setText(lab_investigation);
+                                    }*/
+
+                                    if (viral_load.equals("")){
+                                        tv_viral_load_number.setText("0");
+                                    }
+                                    else {
+                                        tv_viral_load_number.setText(viral_load);
+                                    }
+
+                                    /*if (others.equals("")){
+                                        tv_others_number.setText("0");
+                                    }
+                                    else {
+                                        tv_others_number.setText(others);
+                                    }*/
+
+
+
+
+                                }
+
+
+                               /* JSONObject missed_appointments = myObject.has("missed per type") ? myObject.getJSONObject("missed per type"): null;
+
+                                String re_fill = missed_appointments.has("Re-Fill") ? missed_appointments.getString("Re-Fill") : "";
+                                String clinical_review = missed_appointments.has("Clinical Review") ? missed_appointments.getString("Clinical Review") : "";
+                                String enhanced_adherence = missed_appointments.has("Enhanced Adherence") ? missed_appointments.getString("Enhanced Adherence") : "";
+                                String lab_investigation = missed_appointments.has("Lab Investigation") ? missed_appointments.getString("Lab Investigation") : "";
+                                String viral_load = missed_appointments.has("Viral Load") ? missed_appointments.getString("Viral Load") : "";
+                                String others = missed_appointments.has("Other") ? missed_appointments.getString("Other") : "";
+                                String total_missed = missed_appointments.has("total missed") ? missed_appointments.getString("total missed") : "";*/
+
+
+                               /* if (re_fill.equals("")){
+                                    tv_refill_number.setText("0");
+                                }
+                                else {
+                                    tv_refill_number.setText(re_fill);
+                                }
+
+                                if (clinical_review.equals("")){
+                                    tv_clinical_review_number.setText("0");
+                                }
+                                else {
+                                    tv_clinical_review_number.setText(clinical_review);
+                                }
+
+                                if (enhanced_adherence.equals("")){
+                                    tv_enhanced_adherence_number.setText("0");
+                                }
+                                else {
+                                    tv_enhanced_adherence_number.setText(enhanced_adherence);
+                                }
+
+                                if (lab_investigation.equals("")){
+                                    tv_lab_investigation_number.setText("0");
+                                }
+                                else {
+                                    tv_lab_investigation_number.setText(lab_investigation);
+                                }
+
+                                if (viral_load.equals("")){
+                                    tv_viral_load_number.setText("0");
+                                }
+                                else {
+                                    tv_viral_load_number.setText(viral_load);
+                                }
+
+                                if (others.equals("")){
+                                    tv_others_number.setText("0");
+                                }
+                                else {
+                                    tv_others_number.setText(others);
+                                }*/
+
+                            }
+                            else {
+                                Snackbar.make(root.findViewById(R.id.frag_dashboard),Info + errors, Snackbar.LENGTH_LONG).show();
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+
+
+//                        Log.e(TAG, error.getErrorBody());
+
+                        Snackbar.make(root.findViewById(R.id.frag_dashboard),  error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+
+                    }
+                });
+
 
     }
 
