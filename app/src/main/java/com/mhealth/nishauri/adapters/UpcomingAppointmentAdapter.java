@@ -44,6 +44,8 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
 
     public interface OnItemClickListener{
         void onItemClick(int position);
+
+        void onItemClick(UpcomingAppointment upcomingAppointment);
     }
     public void setOnItemClickListener(UpcomingAppointmentAdapter.OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;

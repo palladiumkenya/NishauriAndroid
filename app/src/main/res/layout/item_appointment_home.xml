@@ -12,6 +12,16 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_medium"
         android:orientation="horizontal">
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txt_appointment_type_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:lineSpacingExtra="4dp"
+            android:text="@string/appointment"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/grey_60" />
+
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txt_appointment_date_home"
@@ -23,15 +33,14 @@
             android:textColor="@color/colorAccent"
             android:textStyle="bold" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/txt_appointment_type_home"
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:lineSpacingExtra="4dp"
-            android:text="@string/appointment"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@color/grey_60" />
+            android:id="@+id/edit1"
+
+            android:src="@drawable/edit_appt" />
+
 
     </LinearLayout>
 

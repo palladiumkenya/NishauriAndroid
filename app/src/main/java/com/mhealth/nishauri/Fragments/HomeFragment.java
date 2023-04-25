@@ -1,6 +1,7 @@
 package com.mhealth.nishauri.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -25,6 +26,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
+import com.mhealth.nishauri.Activities.MainActivity;
 import com.mhealth.nishauri.Models.CurrentArt;
 import com.mhealth.nishauri.Models.Dependant;
 import com.mhealth.nishauri.Models.UpcomingAppointment;
@@ -33,6 +35,7 @@ import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.adapters.DependantHomeAdapter;
 import com.mhealth.nishauri.adapters.AppointmentHomeAdapter;
 import com.mhealth.nishauri.adapters.TreatmentHomeAdapter;
+import com.mhealth.nishauri.adapters.UpcomingAppointmentAdapter;
 import com.mhealth.nishauri.utils.Constants;
 
 import org.json.JSONArray;
@@ -93,6 +96,9 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.txt_name)
     TextView txt_name;
 
+    @BindView(R.id.upih)
+    TextView txt_upi;
+
     @BindView(R.id.msisdn)
     TextView txt_msisdn;
 
@@ -116,6 +122,8 @@ public class HomeFragment extends Fragment {
     private ArrayList<CurrentArt> currentArtArrayList;
     private ArrayList<UpcomingAppointment> upcomingAppointmentArrayList;
     private ArrayList<Dependant> dependantArrayList;
+
+    public int id;
 
 
     @Override
@@ -254,10 +262,13 @@ public class HomeFragment extends Fragment {
                                     String client_name = item.has("client_name") ? item.getString("client_name") : "";
                                     String facility_name = item.has("facility_name") ? item.getString("facility_name") : "";
                                     String clinic_number = item.has("clinic_number") ? item.getString("clinic_number") : "";
+                                    String moh_upi = item.has("moh_upi") ? item.getString("moh_upi") : "";
+
 
                                     txt_msisdn.setText(phone_no);
                                     txt_facility.setText(facility_name);
                                     txt_name.setText(clinic_number);
+                                    txt_upi.setText(moh_upi);
 
 
                                    /* txt_name.setText(CCCNo);
@@ -445,10 +456,9 @@ public class HomeFragment extends Fragment {
                                 for (int i = 0; i < myArray.length(); i++) {
 
                                     JSONObject item = (JSONObject) myArray.get(i);
-
-                                    int id = item.has("id") ? item.getInt("id") : 0;
+                                    id = item.has("id") ? item.getInt("id") : 0;
                                     String aid = item.has("aid") ? item.getString("aid") : "";
-                                    //String appntmnt_date = item.has("appntmnt_date") ? item.getString("appntmnt_date") : "";
+                                       //String appntmnt_date = item.has("appntmnt_date") ? item.getString("appntmnt_date") : "";
                                     String  appointment_date = item.has("appointment_date") ? item.getString("appointment_date") : "";
                                     String app_status = item.has("app_status") ? item.getString("app_status") : "";
                                     String visit_type = item.has("visit_type") ? item.getString("visit_type") : "";
@@ -465,6 +475,7 @@ public class HomeFragment extends Fragment {
                                     upcomingAppointmentArrayList.add(newUpcomingAppointment);
                                     myAdapter.notifyDataSetChanged();
 
+
                                 }
 
                             }else {
@@ -475,9 +486,12 @@ public class HomeFragment extends Fragment {
                             }
 
 
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                       // Toast.makeText(context, "My ID"+ id, Toast.LENGTH_LONG).show();
 
                     }
                     @Override
@@ -511,6 +525,8 @@ public class HomeFragment extends Fragment {
 
                     }
                 });
+
+
     }
 
     private void loadCurrentTreatments() {
@@ -607,5 +623,6 @@ public class HomeFragment extends Fragment {
                     }
                 });
     }
+
 
 }
