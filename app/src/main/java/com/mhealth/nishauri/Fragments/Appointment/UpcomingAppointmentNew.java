@@ -4,6 +4,7 @@ import static com.mhealth.nishauri.utils.AppController.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.app.DatePickerDialog;
@@ -86,6 +87,8 @@ public class UpcomingAppointmentNew extends AppCompatActivity {
 
     TextView  txt_reschedule_appointment, txt_scheduled_dateA;
     TextInputEditText specify_reason_edtxtA;
+    Toolbar toolbar1;
+
 
     String dateA;
     int idA;
@@ -94,6 +97,10 @@ public class UpcomingAppointmentNew extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upcoming_appointment_new);
+
+        toolbar1 =findViewById(R.id.toolbarr);
+        toolbar1.setTitle("Reschedule Appointment");
+        setSupportActionBar(toolbar1);
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
         btn1 =(Button) findViewById(R.id.btn_reschedule1);
         txt_reschedule_appointment =(TextView) findViewById(R.id.txt_reschedule_date1);
