@@ -30,6 +30,7 @@ import com.mhealth.nishauri.Activities.MainActivity;
 import com.mhealth.nishauri.Models.CurrentArt;
 import com.mhealth.nishauri.Models.Dependant;
 import com.mhealth.nishauri.Models.UpcomingAppointment;
+import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.adapters.DependantHomeAdapter;
@@ -43,6 +44,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,6 +58,8 @@ public class HomeFragment extends Fragment {
 
     @BindView(R.id.shimmers_my_container)
     ShimmerFrameLayout shimmers_my_container;
+
+    String z;
 
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
@@ -219,9 +223,20 @@ public class HomeFragment extends Fragment {
         Log.e("tokens", auth_token);
         //https://ushauriapi.kenyahmis.org/nishauri/profile"+urls
         //Constants.ENDPOINT+Constants.CURRENT_USER
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
 
 
-        AndroidNetworking.get("https://ushauriapi.kenyahmis.org/nishauri/profile"+urls)
+        AndroidNetworking.get(z+Constants.PROFILE+urls)
                // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -302,8 +317,20 @@ public class HomeFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.DEPENTANTS)
+        } catch(Exception e){
+
+        }
+
+
+        AndroidNetworking.get(z+Constants.DEPENTANTS)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -400,8 +427,20 @@ public class HomeFragment extends Fragment {
         //https://ushauriapi.kenyahmis.org/nishauri/profile"+urls
         //Constants.ENDPOINT+Constants.CURRENT_USER
 
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
-        AndroidNetworking.get("https://ushauriapi.kenyahmis.org/nishauri/current_appt"+urls)
+        } catch(Exception e){
+
+        }
+
+
+        AndroidNetworking.get(z+Constants.CURRENT_APPT+urls)
                // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -533,8 +572,20 @@ public class HomeFragment extends Fragment {
 
       //  String auth_token = loggedInUser.getAuth_token();
 
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_REGIMEN)
+        } catch(Exception e){
+
+        }
+
+
+        AndroidNetworking.get(z+Constants.CURRENT_REGIMEN)
                 //.addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

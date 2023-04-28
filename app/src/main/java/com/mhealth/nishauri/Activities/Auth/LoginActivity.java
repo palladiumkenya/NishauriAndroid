@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -27,16 +28,19 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.mhealth.nishauri.Activities.MainActivity;
+import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.PasswordReset;
 import com.mhealth.nishauri.ProfileActivity;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.otpcodeActivity;
 import com.mhealth.nishauri.utils.Constants;
+import com.mhealth.nishauri.utils.Dialogs;
 
 import org.json.JSONObject;
 import org.json.JSONException;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static com.mhealth.nishauri.utils.AppController.TAG;
@@ -55,11 +59,16 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout til_password;
     private LottieAnimationView animationView;
 
-   String errors1  ;
+   String errors1;
+    Dialogs dialogs;
+
+    String z, zz;
 
 
    String userID1;
   int  page;
+
+  TextView connect;
 
 
 
@@ -74,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         toolbar.setTitle("Nishauri");
         setSupportActionBar(toolbar);
 
-//        initialization of components
+//        initialization of componentsg
         btn_login = findViewById(R.id.btn_login);
         sign_up = (TextView) findViewById(R.id.txt_sign_up);
         phone = findViewById(R.id.phone_number);
@@ -84,6 +93,40 @@ public class LoginActivity extends AppCompatActivity {
         animationView = findViewById(R.id.animationView);
 
         reset1 = (MaterialTextView) findViewById(R.id.txt_reset);
+
+        connect =findViewById(R.id.connected_to);
+
+        try {
+
+            // UrlTable _url = SugarRecord.findById(UrlTable.class, 4);
+            //select *from getLastRecord ORDER BY id DESC LIMIT 1;
+
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                    zz=_url.get(x).getStage_name1();
+                    Toast.makeText(LoginActivity.this, "You are connected to" + " " +zz, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            //UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
+
+            // z= _url.base_url1;
+            // zz =_url.stage_name1;
+            if (zz==null){
+                dialogs.showErrorDialog("System not selected", "Please select the system to connect to");
+
+            }
+            Toast.makeText(LoginActivity.this, "You are connected to" + " " +zz, Toast.LENGTH_LONG).show();
+            connect.setText(zz);
+            connect.setTextColor(Color.parseColor("#F32013"));
+
+        }catch (Exception e){
+            Log.d("No baseURL", e.getMessage());
+        }
+
+
 
 
 
@@ -185,8 +228,20 @@ public class LoginActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
-        AndroidNetworking.post("https://ushauriapi.kenyahmis.org/nishauri/signin")
+        } catch(Exception e){
+
+        }
+
+
+        AndroidNetworking.post(z+Constants.SIGNIN)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")

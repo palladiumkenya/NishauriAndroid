@@ -32,6 +32,8 @@ public class TreatmentsFragment extends Fragment {
     private View root;
     private Context context;
 
+    String z;
+
     @BindView(R.id.tab_layout)
     TabLayout tab_layout;
 

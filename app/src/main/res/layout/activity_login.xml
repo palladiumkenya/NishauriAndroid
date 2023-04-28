@@ -240,10 +240,21 @@
                         android:text="Nishauri v1.0.1 "
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                         android:textColor="@color/blue_grey_300" />
+
+
                 </LinearLayout>
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/connected_to"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:text=""
+                android:textSize="16dip" />
 
         </LinearLayout>
 

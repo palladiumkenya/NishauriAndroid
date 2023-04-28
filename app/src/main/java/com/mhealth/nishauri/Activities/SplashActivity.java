@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.mhealth.nishauri.Activities.Auth.LoginActivity;
 import com.mhealth.nishauri.R;
+import com.mhealth.nishauri.utils.SelectUrls;
 
 /*CREATED BY HUGH*/
 
@@ -24,7 +25,7 @@ SplashActivity extends AppCompatActivity {
                 try {
                     Thread.sleep(1000);
 
-                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                    startActivity(new Intent(SplashActivity.this, SelectUrls.class));
                     finish();
                 }catch (Exception e){
                     e.printStackTrace();

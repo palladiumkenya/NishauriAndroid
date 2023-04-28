@@ -23,6 +23,7 @@ import com.fxn.stash.Stash;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.mhealth.nishauri.Activities.Auth.LoginActivity;
+import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
@@ -30,6 +31,8 @@ import com.mhealth.nishauri.utils.Constants;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private User loggedInUser;
     String  userID11;
     String  userExtra1;
+    String z;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +94,19 @@ public class MainActivity extends AppCompatActivity {
         String urls ="?user_id="+userExtra1;
         //Constants.ENDPOINT+Constants.CURRENT_USER
 
-        AndroidNetworking.get("https://ushauriapi.kenyahmis.org/nishauri/profile"+urls)
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+
+        AndroidNetworking.get(z+Constants.PROFILE+urls)
                 //.addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

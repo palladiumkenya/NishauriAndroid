@@ -22,6 +22,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Models.PreviousArt;
+import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.adapters.PreviousArtAdapter;
@@ -32,6 +33,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,6 +48,8 @@ public class PreviousArtFragment extends Fragment {
     private Unbinder unbinder;
     private View root;
     private Context context;
+
+    String z;
 
     private User loggedInUser;
     private PreviousArtAdapter mAdapter;
@@ -123,8 +127,20 @@ public class PreviousArtFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.PREVIOUS_REGIMEN)
+        } catch(Exception e){
+
+        }
+
+
+        AndroidNetworking.get(z+Constants.PREVIOUS_REGIMEN)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

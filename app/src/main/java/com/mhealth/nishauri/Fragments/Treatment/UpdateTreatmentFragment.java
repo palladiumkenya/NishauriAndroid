@@ -28,6 +28,7 @@ import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mhealth.nishauri.Fragments.Profile.UpdateUserFragment;
+import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
@@ -38,6 +39,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,6 +54,8 @@ public class UpdateTreatmentFragment extends Fragment {
     private Unbinder unbinder;
     private View root;
     private Context context;
+
+    String z;
 
     private User loggedInUser;
 
@@ -188,7 +192,19 @@ public class UpdateTreatmentFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        AndroidNetworking.post(Constants.ENDPOINT+Constants.UPDATE_REGIMEN)
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+
+        AndroidNetworking.post(z+Constants.UPDATE_REGIMEN)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addJSONObjectBody(jsonObject) // posting json
                 .build()

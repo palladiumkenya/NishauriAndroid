@@ -34,6 +34,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 
+import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
 import com.mhealth.nishauri.utils.ViewAnimation;
@@ -58,6 +59,8 @@ public class SignUpActivity extends AppCompatActivity {
     private View parent_view;
     private Toolbar toolbar;
     private LottieAnimationView animationView;
+
+    String z;
 
     private TextInputLayout til_ccc;
     private TextInputLayout til_phone;
@@ -361,6 +364,19 @@ public class SignUpActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+
 
         AndroidNetworking.post("https://ushauriapi.kenyahmis.org/nishauri/signup")
                 .addHeaders("Accept", "*/*")

@@ -26,6 +26,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.mhealth.nishauri.Fragments.Dependants.AddDependantFragment;
+import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
@@ -40,11 +41,15 @@ import butterknife.Unbinder;
 
 import static com.mhealth.nishauri.utils.AppController.TAG;
 
+import java.util.List;
+
 
 public class UpdateUserFragment extends Fragment {
     private Unbinder unbinder;
     private View root;
     private Context context;
+
+    String z;
 
     private User loggedInUser;
 
@@ -202,7 +207,19 @@ public class UpdateUserFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        AndroidNetworking.put(Constants.ENDPOINT+Constants.UPDATE_USER)
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+
+        AndroidNetworking.put(z+Constants.UPDATE_USER)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addJSONObjectBody(jsonObject) // posting json
                 .build()
@@ -238,7 +255,19 @@ public class UpdateUserFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_USER)
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+
+        AndroidNetworking.get(z+Constants.CURRENT_USER)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

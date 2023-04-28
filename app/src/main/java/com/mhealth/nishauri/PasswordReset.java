@@ -16,10 +16,13 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Activities.Auth.LoginActivity;
 import com.mhealth.nishauri.Activities.Auth.SignUpActivity;
+import com.mhealth.nishauri.Models.UrlTable;
+import com.mhealth.nishauri.utils.Constants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class PasswordReset extends AppCompatActivity {
@@ -32,6 +35,8 @@ public class PasswordReset extends AppCompatActivity {
     String  errors1;
 
     Toolbar toolbar1;
+
+    String z;
 
 
 
@@ -69,7 +74,19 @@ public class PasswordReset extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        AndroidNetworking.post("https://ushauriapi.kenyahmis.org/nishauri/resetpassword")
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+
+        AndroidNetworking.post(z+ Constants.RESET_pwd)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")

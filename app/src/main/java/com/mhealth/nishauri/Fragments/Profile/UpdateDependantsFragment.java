@@ -23,6 +23,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.mhealth.nishauri.Models.Dependant;
+import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
@@ -37,6 +38,8 @@ import butterknife.Unbinder;
 
 import static com.mhealth.nishauri.utils.AppController.TAG;
 
+import java.util.List;
+
 
 public class UpdateDependantsFragment extends Fragment {
 
@@ -47,6 +50,8 @@ public class UpdateDependantsFragment extends Fragment {
 
     private User loggedInUser;
     private Dependant clickedDependant;
+
+    String z;
 
 
     @BindView(R.id.card_dependant_name)
@@ -155,7 +160,19 @@ public class UpdateDependantsFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        AndroidNetworking.put(Constants.ENDPOINT+Constants.UPDATE_DEPENDANT)
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+
+        AndroidNetworking.put(z+Constants.UPDATE_DEPENDANT)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addJSONObjectBody(jsonObject) // posting json
                 .build()
@@ -202,7 +219,19 @@ public class UpdateDependantsFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        AndroidNetworking.post(Constants.ENDPOINT+Constants.DEPENTANT)
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+
+        AndroidNetworking.post(z+Constants.DEPENTANT)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addJSONObjectBody(jsonObject) // posting json
                 .build()

@@ -15,10 +15,13 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.mhealth.nishauri.Activities.Auth.LoginActivity;
+import com.mhealth.nishauri.Models.UrlTable;
+import com.mhealth.nishauri.utils.Constants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class NewPassword extends AppCompatActivity {
@@ -31,6 +34,8 @@ public class NewPassword extends AppCompatActivity {
 
     String  userExtra1;
     boolean  status;
+
+    String z;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +131,19 @@ public class NewPassword extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        AndroidNetworking.post("https://ushauriapi.kenyahmis.org/nishauri/updatepassword")
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+
+        AndroidNetworking.post(z+ Constants.UPDATE_Pwd)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")

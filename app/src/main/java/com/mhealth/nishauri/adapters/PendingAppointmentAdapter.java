@@ -21,6 +21,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Models.PendingAppointment;
 import com.mhealth.nishauri.Models.UpcomingAppointment;
+import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
@@ -42,6 +43,7 @@ public class PendingAppointmentAdapter extends RecyclerView.Adapter<RecyclerView
     private User loggedInUser;
     private Context context;
     private View root;
+    String z, zz;
     private PendingAppointmentAdapter.OnItemClickListener onItemClickListener;
 
     public interface OnItemClickListener{
@@ -136,8 +138,20 @@ public class PendingAppointmentAdapter extends RecyclerView.Adapter<RecyclerView
 
                         String auth_token = loggedInUser.getAuth_token();
 
+                        try{
+                            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+                            if (_url.size()==1){
+                                for (int x=0; x<_url.size(); x++){
+                                    z=_url.get(x).getBase_url1();
+                                }
+                            }
 
-                        AndroidNetworking.post(Constants.ENDPOINT+Constants.CONFIRM_APPOINTMENT+obj.getId())
+                        } catch(Exception e){
+
+                        }
+
+
+                        AndroidNetworking.post(z+Constants.CONFIRM_APPOINTMENT+obj.getId())
                                 .addHeaders("Authorization","Token "+ auth_token)
                                 .addHeaders("Content-Type", "application.json")
                                 .addHeaders("Accept", "*/*")

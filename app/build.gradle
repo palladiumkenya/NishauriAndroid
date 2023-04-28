@@ -40,6 +40,12 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation 'com.github.satyan:sugar:1.5'
+
+    implementation 'com.github.d-max:spots-dialog:0.7@aar'
+
+    implementation 'com.github.f0ris.sweetalert:library:1.5.2'
+
     implementation platform('com.google.firebase:firebase-bom:26.1.1')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-crashlytics'

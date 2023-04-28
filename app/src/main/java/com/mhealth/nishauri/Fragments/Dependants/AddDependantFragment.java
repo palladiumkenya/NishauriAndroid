@@ -28,6 +28,7 @@ import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Activities.Auth.LoginActivity;
 import com.mhealth.nishauri.Activities.MainActivity;
+import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
@@ -37,6 +38,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -68,6 +70,8 @@ public class AddDependantFragment extends Fragment {
 
     @BindView(R.id.btn_complete_dependant)
     Button btn_complete;
+
+    String z;
 
 
 
@@ -209,7 +213,20 @@ public class AddDependantFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        AndroidNetworking.post(Constants.ENDPOINT+Constants.ADD_DEPENDANT)
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+
+
+        AndroidNetworking.post(z+Constants.ADD_DEPENDANT)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

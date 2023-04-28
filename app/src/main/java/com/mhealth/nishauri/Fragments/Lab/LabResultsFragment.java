@@ -36,7 +36,7 @@ public class LabResultsFragment extends Fragment {
 
     @BindView(R.id.view_pager)
     ViewPager view_pager;
-
+String z;
 
     @Override
     public void onAttach(Context ctx) {

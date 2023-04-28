@@ -17,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Activities.Auth.LoginActivity;
 import com.mhealth.nishauri.Activities.Auth.SignUpActivity;
 import com.mhealth.nishauri.Activities.MainActivity;
+import com.mhealth.nishauri.utils.Constants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +31,8 @@ public class ProfileActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     String userExtra;
+
+    String z;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +86,9 @@ public class ProfileActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        AndroidNetworking.post("https://ushauriapi.kenyahmis.org/nishauri/setprogram")
+
+
+        AndroidNetworking.post(z+ Constants.SET_program)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")

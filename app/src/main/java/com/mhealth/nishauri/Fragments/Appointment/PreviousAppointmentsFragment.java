@@ -21,6 +21,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Models.PreviousAppointment;
+import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.adapters.PreviousAppointmentAdapter;
@@ -31,6 +32,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,6 +52,7 @@ public class PreviousAppointmentsFragment extends Fragment {
     private PreviousAppointmentAdapter mAdapter;
     private ArrayList<PreviousAppointment> previousAppointmentArrayList;
 
+    String z;
 
 
     @BindView(R.id.shimmer_my_container)
@@ -122,9 +125,21 @@ public class PreviousAppointmentsFragment extends Fragment {
     private void loadPreviousAppointments() {
 
         String auth_token = loggedInUser.getAuth_token();
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
 
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.PASSED_APPOINTMENT)
+
+        AndroidNetworking.get(z+Constants.PASSED_APPOINTMENT)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

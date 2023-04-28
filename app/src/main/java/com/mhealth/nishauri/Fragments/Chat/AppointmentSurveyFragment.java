@@ -30,6 +30,7 @@ import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mhealth.nishauri.Models.Facility;
+import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
@@ -44,6 +45,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -66,6 +68,7 @@ public class AppointmentSurveyFragment extends Fragment {
     private String MissedAppointmentDate = "";
 
     private int facilityID = 0;
+    String z;
 
     ArrayList<String> facilitiesList;
     ArrayList<Facility> facilities;
@@ -261,8 +264,21 @@ public class AppointmentSurveyFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.ALL_FACILITIES)
+        } catch(Exception e){
+
+        }
+
+
+
+        AndroidNetworking.get(z+Constants.ALL_FACILITIES)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

@@ -27,6 +27,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.snackbar.Snackbar;
+import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.Models.ViralLoad;
 import com.mhealth.nishauri.Models.ViralLoads;
@@ -57,6 +58,7 @@ public class DashboardFragment extends Fragment {
 
 
     private ProgressDialog pDialog;
+    String z;
 
 
    /* ArrayList yAxis;
@@ -168,9 +170,21 @@ public class DashboardFragment extends Fragment {
     private void loadViralLoad() {
 
         String auth_token = loggedInUser.getAuth_token();
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
 
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.VIRAL_LOAD)
+
+        AndroidNetworking.get(z+Constants.VIRAL_LOAD)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -375,8 +389,21 @@ public class DashboardFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
-        AndroidNetworking.get(Constants.ENDPOINT+Constants.VIRAL_LOAD)
+        } catch(Exception e){
+
+        }
+
+
+
+        AndroidNetworking.get(z+Constants.VIRAL_LOAD)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -605,8 +632,21 @@ public class DashboardFragment extends Fragment {
         Log.e("tokens", auth_token);
         //Constants.ENDPOINT+Constants.DASHBOARD
 
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
-        AndroidNetworking.get("https://ushauriapi.kenyahmis.org/nishauri/appointment_trends"+urls)
+        } catch(Exception e){
+
+        }
+
+
+
+        AndroidNetworking.get(z+Constants.APPOINTMENT_TRENDS+urls)
                // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -856,8 +896,21 @@ public class DashboardFragment extends Fragment {
         Log.e("tokens", auth_token);
         //Constants.ENDPOINT+Constants.DASHBOARD
 
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
 
-        AndroidNetworking.get("https://ushauriapi.kenyahmis.org/nishauri/appointment_missed"+urls)
+        } catch(Exception e){
+
+        }
+
+
+
+        AndroidNetworking.get(z+Constants.APPOINTMENTS_MISSED+urls)
                 // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
