@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.snackbar.Snackbar;
+import com.mhealth.nishauri.Activities.ART_Activity;
 import com.mhealth.nishauri.Activities.ChatInterface;
 import com.mhealth.nishauri.R;
 
@@ -32,6 +33,9 @@ public class ChatFragment extends Fragment {
 
     @BindView(R.id.faq_card)
     CardView faq_card;
+
+    @BindView(R.id.art_card)
+    CardView art_card;
 
     @BindView(R.id.survey_card)
     CardView survey_card;
@@ -57,6 +61,17 @@ public class ChatFragment extends Fragment {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_chat, container, false);
         unbinder = ButterKnife.bind(this, root);
+
+
+
+
+        art_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(context, ART_Activity.class);
+                context.startActivity(intent);
+            }
+        });
 
         faq_card.setOnClickListener(new View.OnClickListener() {
             @Override
