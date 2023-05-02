@@ -88,10 +88,17 @@ public class ART_Activity extends AppCompatActivity {
                         mylist1.clear();
                         // do anything with response
 
+                        if (response.length()==0){
+                            Toast.makeText(ART_Activity.this, "No Data fot the Search term", Toast.LENGTH_LONG).show();
+                        }
+
                         Log.e("Suceess", response.toString());
                         try {
 
                                 JSONArray jsonArray =response.getJSONArray("msg");
+                            if (jsonArray.length()==0){
+                                Toast.makeText(ART_Activity.this, "No Data for the Search term"+ " "+txt_facility.getText().toString(), Toast.LENGTH_LONG).show();
+                            }
 
                                 for (int a =0; a<jsonArray.length(); a++){
 
@@ -129,6 +136,7 @@ public class ART_Activity extends AppCompatActivity {
                     public void onError(ANError error) {
 
                         Log.e("Errors", error.getErrorDetail());
+                        Toast.makeText(ART_Activity.this, ""+error.getErrorDetail(), Toast.LENGTH_SHORT).show();
 
 
                     }

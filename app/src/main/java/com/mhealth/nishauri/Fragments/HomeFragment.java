@@ -26,7 +26,9 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
+import com.mhealth.nishauri.Activities.ART_Activity;
 import com.mhealth.nishauri.Activities.MainActivity;
+import com.mhealth.nishauri.Models.ArtModel;
 import com.mhealth.nishauri.Models.CurrentArt;
 import com.mhealth.nishauri.Models.Dependant;
 import com.mhealth.nishauri.Models.UpcomingAppointment;
@@ -159,7 +161,7 @@ public class HomeFragment extends Fragment {
 
         loadUpcomingAppointments();
 
-        //loadCurrentTreatments();
+        loadCurrentTreatments();
 
        /* bt_expand1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -572,6 +574,10 @@ public class HomeFragment extends Fragment {
 
       //  String auth_token = loggedInUser.getAuth_token();
 
+        String auth_token = loggedInUser.getAuth_token();
+        String urls2 ="?user_id="+auth_token;
+        Log.e("tokens", auth_token);
+
         try{
             List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
             if (_url.size()==1){
@@ -585,7 +591,7 @@ public class HomeFragment extends Fragment {
         }
 
 
-        AndroidNetworking.get(z+Constants.CURRENT_REGIMEN)
+        AndroidNetworking.get("https://ushauriapi.kenyahmis.org/nishauri/regimen"+urls2)
                 //.addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -609,40 +615,38 @@ public class HomeFragment extends Fragment {
                             shimmerss_my_container.setVisibility(View.GONE);
                         }
 
+
+                        Log.e("Suceess", response.toString());
                         try {
-                            boolean  status = response.has("success") && response.getBoolean("success");
-                            String  message = response.has("data") ? response.getString("data") : "" ;
-                            String  errors = response.has("errors") ? response.getString("errors") : "" ;
 
-                            if (status){
+                            JSONArray jsonArray =response.getJSONArray("msg");
 
+                            for (int a =0; a<jsonArray.length(); a++){
 
-                                JSONObject myObject = response.getJSONObject("current regiment");
+                                JSONObject jsonObject =jsonArray.getJSONObject(a);
 
-                                int id = myObject.has("id") ? myObject.getInt("id"): 0;
-                                String Regiment = myObject.has("Regiment") ? myObject.getString("Regiment") : "";
-                                String date_started = myObject.has("date_started") ? myObject.getString("date_started") : "";
-                                String user = myObject.has("user") ? myObject.getString("user") : "";
+                                String regimen =jsonObject.getString("regimen");
 
 
-                                CurrentArt newArt = new CurrentArt(id,Regiment,date_started,user);
+                                CurrentArt currentArt = new CurrentArt(regimen);
+                                currentArtArrayList.add(currentArt);
+                                //  urlModelArrayList.add(url_Model.getStage());
+                              recycler_Views.setAdapter(mysAdapter);
 
-                                currentArtArrayList.add(newArt);
-                                mysAdapter.notifyDataSetChanged();
-                            }
-                            else if (message.contains("No regiment data")){
-                                no_treatment_lyt.setVisibility(View.VISIBLE);
-                            }
-                            else if (errors.contains("No regiment data")){
-                                errorss_lyt.setVisibility(View.VISIBLE);
                             }
 
 
+                            // existAdapter =new ActiveVAdapter(ActiveNew.this, upilist);
 
 
-                        } catch (JSONException e) {
+
+
+                        } catch (Exception e) {
+
                             e.printStackTrace();
                         }
+
+
 
                     }
                     @Override

@@ -73,7 +73,7 @@ public class TreatmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.View
         if (holder instanceof TreatmentHomeAdapter.OriginalViewHolder) {
             TreatmentHomeAdapter.OriginalViewHolder view = (TreatmentHomeAdapter.OriginalViewHolder) holder;
 
-            view.treatment_type.setText(obj.getRegiment());
+            view.treatment_type.setText(obj.getRegimen());
             view.bt_expand.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

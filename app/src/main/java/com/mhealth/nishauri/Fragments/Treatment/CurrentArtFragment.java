@@ -181,7 +181,7 @@ public class CurrentArtFragment extends Fragment {
                                 String user = myObject.has("user") ? myObject.getString("user") : "";
 
 
-                                CurrentArt newArt = new CurrentArt(id,Regiment,date_started,user);
+                                CurrentArt newArt = new CurrentArt(Regiment);
 
                                 currentArtArrayList.add(newArt);
                                 mAdapter.notifyDataSetChanged();

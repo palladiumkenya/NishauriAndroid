@@ -61,8 +61,8 @@ public class CurrentArtAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         if (holder instanceof CurrentArtAdapter.OriginalViewHolder) {
             CurrentArtAdapter.OriginalViewHolder view = (CurrentArtAdapter.OriginalViewHolder) holder;
 
-            view.treatment_type.setText(obj.getRegiment());
-            view.start_date.setText("Start date: "+obj.getDate_started());
+            view.treatment_type.setText(obj.getRegimen());
+           // view.start_date.setText("Start date: "+obj.getDate_started());
         }
     }
 
