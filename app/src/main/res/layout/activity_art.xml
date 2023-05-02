@@ -7,20 +7,50 @@
     android:orientation="vertical"
     tools:context=".Activities.ART_Activity">
 
-    <androidx.core.widget.NestedScrollView
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp">
+        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <LinearLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/colorPrimary"
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+            app:titleEnabled="true"
+            app:collapsedTitleGravity="top">
 
-            <LinearLayout
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbarr"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+            </FrameLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+
+
+
+    <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:weightSum="2"
+                android:layout_marginTop="20dp"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -29,11 +59,11 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/cc"
+                        android:id="@+id/Fac_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Enter Facility Name"
-                        android:inputType="number"
+
                         android:textColorHint="#000"
                         android:textSize="12sp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -60,7 +90,7 @@
             <!--RecyclerView -->
 
             <ListView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/messages"
 
@@ -72,10 +102,10 @@
 
 
 
-        </LinearLayout>
 
 
-    </androidx.core.widget.NestedScrollView>
+
+
 
 
 </LinearLayout>

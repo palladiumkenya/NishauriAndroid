@@ -120,35 +120,7 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="28dp"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        android:weightSum="3">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.39"
-            android:gravity="left"
-            android:padding="5dp"
-            android:textStyle="bold"
-
-            android:text="File Serial Number"
-            android:textSize="13sp" />
-
-        <TextView
-            android:id="@+id/fileserial"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="left"
-            android:padding="5dp"
-            android:text="File serial number"
-            android:textSize="13sp" />
-
-    </LinearLayout>
 
 
     <LinearLayout
@@ -159,15 +131,15 @@
 
 
         <Button
-            android:id="@+id/confirm"
+            android:id="@+id/call_facility"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            android:background="@drawable/mybutton"
+
             android:gravity="center"
             android:layout_weight="1"
             android:padding="5dp"
-            android:text="Update"
+            android:text="Call"
             android:layout_marginBottom="5dp"
             android:layout_marginStart="5dp"
 

@@ -75,7 +75,7 @@ public class artAdapter extends BaseAdapter implements Filterable {
 //            final TextView patientID = (TextView) v.findViewById(R.id.patientid);
 
 
-            Button callbutton = (Button) v.findViewById(R.id.confirm);
+            Button callbutton = (Button) v.findViewById(R.id.call_facility);
 
 
             String  code1 = mylist.get(position).getCode_art();
@@ -87,7 +87,7 @@ public class artAdapter extends BaseAdapter implements Filterable {
 
             /*chkinternet=new CheckInternet(mycont);
             acs=new AccessServer(mycont);*/
-            mc=new makeCalls(mycont);
+           // mc=new makeCalls(mycont);
 
 
             code.setText( code1);
