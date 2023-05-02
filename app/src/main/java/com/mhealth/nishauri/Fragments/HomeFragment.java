@@ -591,7 +591,7 @@ public class HomeFragment extends Fragment {
         }
 
 
-        AndroidNetworking.get("https://ushauriapi.kenyahmis.org/nishauri/regimen"+urls2)
+        AndroidNetworking.get(z+Constants.CURRENT_REGIMEN+urls2)
                 //.addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

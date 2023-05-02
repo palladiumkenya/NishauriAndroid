@@ -47,6 +47,8 @@ public class Constants extends AppCompatActivity {
     public static String CURRENT_USER = "nishauri/user/auth";
     public static String UPDATE_USER = "nishauri/user/update";
     public static String UPDATE_REGIMEN = "nishauri/user/regiment";
+    public static String CURR_REGIMEN ="nishauri/regimen";
+    public static String ART_dir ="nishauri/artdirectory";
 
 
     //DEPENDANT
