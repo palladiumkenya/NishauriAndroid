@@ -77,7 +77,7 @@ android:scrollbars="vertical">
                     android:id="@+id/ccc_no"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter CCC Number"
+                    android:hint="Enter CCC Number*"
 
                     />
 
@@ -96,7 +96,7 @@ android:scrollbars="vertical">
                     android:id="@+id/upi_no"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter UPI Number"
+                    android:hint="Enter UPI Number (Optional)"
                     android:inputType="text"
                    />
 
@@ -139,7 +139,7 @@ android:scrollbars="vertical">
                     android:id="@+id/f_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter First Name"
+                    android:hint="Enter First Name*"
                     android:inputType="text"
                     android:maxLength="10"/>
 
