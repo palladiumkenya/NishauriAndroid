@@ -160,7 +160,10 @@ public class ViralLoadResultsFragment extends Fragment {
 
     private void loadViralLoad() {
 
+       // String auth_token = loggedInUser.getAuth_token();
+
         String auth_token = loggedInUser.getAuth_token();
+        String urls ="?user_id="+auth_token;
 
         try{
             List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
@@ -174,9 +177,12 @@ public class ViralLoadResultsFragment extends Fragment {
 
         }
 
+        //https://ushauriapi.kenyahmis.org/nishauri/vl_result?user_id=Mg==
+        //z+Constants.VIRAL_LOAD+urls
 
-        AndroidNetworking.get(z+Constants.VIRAL_LOAD)
-                .addHeaders("Authorization","Token "+ auth_token)
+
+        AndroidNetworking.get(z+Constants.VIRAL_LOADNEW+urls)
+               // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
@@ -189,7 +195,7 @@ public class ViralLoadResultsFragment extends Fragment {
                         // do anything with response
                         Log.e(TAG, response.toString());
 
-                        if (pDialog != null && pDialog.isShowing()) {
+                       /* if (pDialog != null && pDialog.isShowing()) {
                             pDialog.hide();
                             pDialog.cancel();
                         }
@@ -204,19 +210,20 @@ public class ViralLoadResultsFragment extends Fragment {
                         if (shimmer_my_container!=null){
                             shimmer_my_container.stopShimmerAnimation();
                             shimmer_my_container.setVisibility(View.GONE);
-                        }
+                        }*/
 
                         try {
 
-                            String  message = response.has("message") ? response.getString("message") : "" ;
+                            //String  message = response.has("message") ? response.getString("message") : "" ;
 
 
-                            if (message.contains("No results for the given CCC Number were found")){
+                            /*if (message.contains("No results for the given CCC Number were found")){
                                 no_result_lyt.setVisibility(View.VISIBLE);
                                 Snackbar.make(root.findViewById(R.id.frag_viral_load),message, Snackbar.LENGTH_LONG).show();
 
-                            }
-                            JSONArray myArray = response.getJSONArray("data");
+                            }*/
+                           // JSONArray myArray = response.getJSONArray("data");
+                            JSONArray myArray = response.getJSONArray("msg");
 
 
                             if (myArray.length() > 0){
@@ -227,16 +234,23 @@ public class ViralLoadResultsFragment extends Fragment {
                                     JSONObject item = (JSONObject) myArray.get(i);
 
 
-                                    int  id = item.has("id") ? item.getInt("id") : 0;
+                                   /* int  id = item.has("id") ? item.getInt("id") : 0;
                                     String r_id = item.has("r_id") ? item.getString("r_id") : "";
                                     String result_type = item.has("result_type") ? item.getString("result_type") : "";
                                     String result_content = item.has("result_content") ? item.getString("result_content") : "";
                                     String date_collected = item.has("date_collected") ? item.getString("date_collected") : "";
                                     String lab_name = item.has("lab_name") ? item.getString("lab_name") : "";
-                                    int  user = item.has("user") ? item.getInt("user") : 0;
+                                    int  user = item.has("user") ? item.getInt("user") : 0;*/
 
 
-                                    ViralLoad newResult = new ViralLoad(id,r_id,result_type,result_content,date_collected,lab_name,user);
+                                    String result = item.has("result") ? item.getString("result") : "";
+                                    String status = item.has("status") ? item.getString("status") : "";
+                                    String date = item.has("date") ? item.getString("date") : "";
+
+
+
+
+                                    ViralLoad newResult = new ViralLoad(result, status, date);
 
                                     viralLoadArrayList.add(newResult);
                                     mAdapter.notifyDataSetChanged();

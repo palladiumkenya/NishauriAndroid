@@ -59,6 +59,7 @@ public class Constants extends AppCompatActivity {
 
     //LAB
     public static String VIRAL_LOAD= "nishauri/lab/vload";
+    public static String VIRAL_LOADNEW= "nishauri/vl_result";
     public static String EID= "nishauri/lab/eid";
 
     //APPOINTMENT

@@ -77,8 +77,8 @@ public class ViralLoadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (holder instanceof ViralLoadAdapter.OriginalViewHolder) {
             ViralLoadAdapter.OriginalViewHolder view = (ViralLoadAdapter.OriginalViewHolder) holder;
 
-            view.result_date.setText(obj.getDate_collected());
-            view.result.setText(obj.getResult_content() + " copies/mL");
+            view.result_date.setText(obj.getDate());
+            view.result.setText(obj.getResult() + " copies/mL");
 
            /* if (obj.getResult_content() instanceof String ){
                 view.result.setTextColor(Color.parseColor("#F32013"));
@@ -90,7 +90,7 @@ public class ViralLoadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             try {
                 //int x= Integer.parseInt(obj.getResult_content());
                 //if (x!= String)
-                String sample = obj.getResult_content();
+                String sample = obj.getResult();
                 char[] chars = sample.toCharArray();
                 StringBuilder sb = new StringBuilder();
                 for(char c : chars){
