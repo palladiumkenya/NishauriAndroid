@@ -65,10 +65,10 @@ public class DependantAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (holder instanceof OriginalViewHolder) {
             OriginalViewHolder view = (OriginalViewHolder) holder;
 
-            view.dependant.setText(obj.getFirst_name()+ " " + obj.getSurname());
-            view.hei_number.setText(obj.getHeiNumber());
-            view.age.setText("Age: " +obj.getDob() + " Months");
-            view.status.setText("Status: "+obj.getApproved());
+            view.dependant.setText(obj.getDependant_name());
+            view.hei_number.setText(obj.getClinic_number());
+            view.age.setText("Age: " +obj.getDependant_age() + " Months");
+           // view.status.setText("Status: "+obj.getApproved());
 
            /* if (obj.getApproved().equals("true")){
                 view.status.setText("Status: Approved");

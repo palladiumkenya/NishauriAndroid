@@ -45,11 +45,11 @@ public class PreviousAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
 
         public OriginalViewHolder(View v) {
             super(v);
-            previous_appointment_date = (TextView) v.findViewById(R.id.appointment_date);
-            appointmet_type = (TextView) v.findViewById(R.id.appointment_nature);
-            appointment_status = (TextView) v.findViewById(R.id.txt_appointment_status);
-            owner = (TextView) v.findViewById(R.id.txt_owner);
-            dependants = (TextView) v.findViewById(R.id.txt_dependants);
+            previous_appointment_date = (TextView) v.findViewById(R.id.appointment_date1);
+            appointmet_type = (TextView) v.findViewById(R.id.appointment_type1);
+           // appointment_status = (TextView) v.findViewById(R.id.txt_appointment_status);
+           // owner = (TextView) v.findViewById(R.id.txt_owner);
+           // dependants = (TextView) v.findViewById(R.id.txt_dependants);
 
         }
     }
@@ -66,14 +66,17 @@ public class PreviousAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         PreviousAppointment obj = items.get(position);
-        if (holder instanceof PreviousAppointmentAdapter.OriginalViewHolder) {
+        //if (holder instanceof PreviousAppointmentAdapter.OriginalViewHolder) {
             PreviousAppointmentAdapter.OriginalViewHolder view = (PreviousAppointmentAdapter.OriginalViewHolder) holder;
 
-            view.previous_appointment_date.setText("Date: "+obj.getAppntmnt_date());
-            view.appointmet_type.setText(obj.getApp_type());
-            view.appointment_status.setText("Status: "+obj.getVisit_type());
+            view.previous_appointment_date.setText(obj.getAppointment_date());
+            view.appointmet_type.setText(obj.getAppointment_type());
+            //view.appointment_status.setText("Status: "+obj.getVisit_type());
+          // view.appointment_status.setText(obj.getAppointment_type());
 
-            if (obj.getOwner().equals("Personal")){
+           // view.owner.setVisibility(View.VISIBLE);
+
+          /*  if (obj.getOwner().equals("Personal")){
                 view.owner.setVisibility(View.VISIBLE);
                 view.owner.setText("Owner: "+obj.getOwner());
             }
@@ -81,9 +84,9 @@ public class PreviousAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
             if (!obj.getDependant().equals("null")){
                 view.dependants.setVisibility(View.VISIBLE);
                 view.dependants.setText("Owner: "+obj.getDependant());
-            }
+            }*/
 
-        }
+       // }
     }
 
 

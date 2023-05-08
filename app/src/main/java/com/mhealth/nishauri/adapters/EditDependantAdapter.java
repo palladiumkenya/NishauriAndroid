@@ -69,8 +69,8 @@ public class EditDependantAdapter extends RecyclerView.Adapter<RecyclerView.View
         if (holder instanceof EditDependantAdapter.OriginalViewHolder) {
             EditDependantAdapter.OriginalViewHolder view = (EditDependantAdapter.OriginalViewHolder) holder;
 
-            view.dependant.setText(obj.getFirst_name());
-            view.status.setText(obj.getApproved());
+            view.dependant.setText(obj.getDependant_name());
+            //view.status.setText(obj.getApproved());
             view.editDependant.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -78,7 +78,7 @@ public class EditDependantAdapter extends RecyclerView.Adapter<RecyclerView.View
                     if (items.get(position) != null){
 
                         Bundle bundle = new Bundle();
-                        bundle.putString("dependant", String.valueOf(obj.getId()));
+                       // bundle.putString("dependant", String.valueOf(obj.getId()));
                         Navigation.findNavController(v).navigate(R.id.nav_update_dependants, bundle);
 
                     }

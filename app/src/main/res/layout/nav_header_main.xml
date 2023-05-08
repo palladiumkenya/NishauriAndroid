@@ -18,7 +18,7 @@
         android:layout_height="50dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@drawable/nishauri_logo" />
+        app:srcCompat="@drawable/ic_patient" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/full_name"
@@ -58,7 +58,7 @@
             android:id="@+id/facility_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Current facility: "/>
+            android:text="Current Facility: "/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/current_facility"

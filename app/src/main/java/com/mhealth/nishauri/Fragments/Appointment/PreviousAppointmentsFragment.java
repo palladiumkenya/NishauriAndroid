@@ -125,6 +125,7 @@ public class PreviousAppointmentsFragment extends Fragment {
     private void loadPreviousAppointments() {
 
         String auth_token = loggedInUser.getAuth_token();
+        String urls ="?user_id="+auth_token;
         try{
             List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
             if (_url.size()==1){
@@ -139,8 +140,8 @@ public class PreviousAppointmentsFragment extends Fragment {
 
 
 
-        AndroidNetworking.get(z+Constants.PASSED_APPOINTMENT)
-                .addHeaders("Authorization","Token "+ auth_token)
+        AndroidNetworking.get("https://ushauriapi.kenyahmis.org/nishauri/appointment_previous?user_id=Mg==")
+                //.addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
@@ -152,9 +153,9 @@ public class PreviousAppointmentsFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         // do anything with response
 
-//                        Log.e(TAG, response.toString());
+                        Log.e(TAG, response.toString());
 
-                        previousAppointmentArrayList.clear();
+                        //previousAppointmentArrayList.clear();
 
                         if (recyclerView!=null)
                             recyclerView.setVisibility(View.VISIBLE);
@@ -175,19 +176,13 @@ public class PreviousAppointmentsFragment extends Fragment {
 
                                     JSONObject item = (JSONObject) myArray.get(i);
 
-                                    int id = item.has("id") ? item.getInt("id") : 0;
-                                    String aid = item.has("aid") ? item.getString("aid") : "";
-                                    String appntmnt_date = item.has("appntmnt_date") ? item.getString("appntmnt_date") : "";
-                                    String app_status = item.has("app_status") ? item.getString("app_status") : "";
-                                    String visit_type = item.has("visit_type") ? item.getString("visit_type") : "";
-                                    String app_type = item.has("app_type") ? item.getString("app_type") : "";
-                                    String owner = item.has("owner") ? item.getString("owner") : "";
-                                    String dependant = item.has("dependant") ? item.getString("dependant") : "";
-                                    String created_at = item.has("created_at") ? item.getString("created_at") : "";
-                                    String updated_at = item.has("updated_at") ? item.getString("updated_at") : "";
-                                    String user = item.has("user") ? item.getString("user") : "";
 
-                                    PreviousAppointment newPreviousAppointment = new PreviousAppointment(id,aid,appntmnt_date,app_status,visit_type,app_type,owner,dependant,created_at,updated_at,user);
+                                    String appointment_date = item.has("appointment_date") ? item.getString("appointment_date") : "";
+                                    String app_status = item.has("app_status") ? item.getString("app_status") : "";
+                                    String  appointment_type = item.has("appointment_type") ? item.getString("appointment_type") : "";
+                                    String  visit_date = item.has("visit_date") ? item.getString("visit_date") : "";
+
+                                    PreviousAppointment newPreviousAppointment = new PreviousAppointment(appointment_type, appointment_date, visit_date, app_status);
 
                                     previousAppointmentArrayList.add(newPreviousAppointment);
                                     mAdapter.notifyDataSetChanged();

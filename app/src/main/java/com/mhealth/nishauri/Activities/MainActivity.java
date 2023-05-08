@@ -87,12 +87,16 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-        //loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
+        loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
         //String auth_token = loggedInUser.getAuth_token();
 
-        String urls ="?user_id="+userExtra1;
+       // String urls ="?user_id="+userExtra1;
         //Constants.ENDPOINT+Constants.CURRENT_USER
+
+        String auth_token = loggedInUser.getAuth_token();
+
+        String urls ="?user_id="+auth_token;
 
         try{
             List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");

@@ -41,6 +41,7 @@
         android:contentDescription="@string/new_appointment"
         android:text="@string/new_appointment"
         app:icon="@drawable/ic_appointment"
+        android:visibility="gone"
         app:layout_anchorGravity="bottom|right|end"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

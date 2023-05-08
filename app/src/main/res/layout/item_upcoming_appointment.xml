@@ -19,147 +19,70 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@android:color/white">
+            android:weightSum="3">
 
             <TextView
-                android:id="@+id/date_of_appointment"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_medium"
-                android:layout_marginHorizontal="@dimen/spacing_large"
                 android:layout_weight="1"
-                android:text="25/04/2020"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/colorAccent"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/txt_owner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_large"
-                android:layout_weight="1"
-                android:text="Personal"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/red_500"
+                android:gravity="left"
                 android:textStyle="bold"
-                android:visibility="gone"/>
+                android:text="Appointment Date"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:padding="5dp"
+                android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/txt_dependants"
-                android:layout_width="wrap_content"
+                android:id="@+id/appointment_date1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_large"
-                android:layout_weight="1"
-                android:text="Dependant 1"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_weight="2"
+                android:gravity="left"
+                android:padding="5dp"
+                android:text="Date"
                 android:textColor="@color/colorAccent"
-                android:textStyle="bold"
-                android:visibility="gone"/>
+
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="13sp" />
 
         </LinearLayout>
+        <!--  second -->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <View
-                android:layout_width="@dimen/spacing_large"
-                android:layout_height="wrap_content" />
-
+            android:orientation="horizontal"
+            android:weightSum="3">
 
             <TextView
-                android:id="@+id/appointment_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="Check up"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/grey_80" />
-
-
-
-            <TextView
-                android:id="@+id/txt_app_status"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Scheduled"
+                android:gravity="left"
+                android:textStyle="bold"
+                android:text="Appointment Type"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/grey_80" />
+                android:padding="5dp"
+                android:textSize="13sp" />
 
-            <ImageButton
-                android:id="@+id/bt_expand"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:tint="@color/grey_60"
-                android:src="@drawable/ic_expand_arrow" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lyt_expand"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/grey_3"
-            android:layout_marginBottom="@dimen/spacing_large"
-            android:orientation="vertical"
-            android:visibility="visible">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/appointment_type1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:background="@android:color/white"
-                android:gravity="center_vertical"
-                android:minHeight="?attr/actionBarSize"
-                android:paddingBottom="@dimen/spacing_large"
-                android:orientation="horizontal">
+                android:gravity="left"
+                android:padding="5dp"
+                android:textColor="@color/colorAccent"
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_reshedule_appointment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/spacing_middle"
-                    android:background="@color/grey_300"
-                    android:text="Reshedule"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_confirm_appointment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/spacing_middle"
-                    android:background="@color/colorAccent"
-                    android:text="Confirm"
-                    android:textColor="@color/white_greyish"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_confirmed_appointment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="@dimen/spacing_middle"
-                    android:background="@color/grey_300"
-                    android:text="Confirmed"
-                    android:clickable="false"
-                    android:textColor="@color/black_darker"
-                    android:visibility="gone"/>
-
-
-
-            </LinearLayout>
-
+                android:text="Date"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="13sp" />
 
         </LinearLayout>
+
+
+
+
 
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

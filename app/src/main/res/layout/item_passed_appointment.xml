@@ -19,94 +19,73 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/actionBarSize"
-            android:layout_marginHorizontal="@dimen/spacing_medium"
-            android:background="@android:color/white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3">
 
             <TextView
-                android:id="@+id/appointment_date"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginStart="@dimen/spacing_medium"
-                android:text="Date: 25/03/2020"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/colorAccent"
-                android:textStyle="bold"/>
-
-
-            <TextView
-                android:id="@+id/txt_owner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_large"
-                android:layout_weight="1"
-                android:text="Personal"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/red_500"
+                android:gravity="left"
                 android:textStyle="bold"
-                android:visibility="gone"/>
+                android:text="Appointment Date"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:padding="5dp"
+                android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/txt_dependants"
-                android:layout_width="wrap_content"
+                android:id="@+id/appointment_date1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_large"
-                android:layout_weight="1"
-                android:text="Dependant 1"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_weight="2"
+                android:gravity="left"
+                android:padding="5dp"
+                android:text="Date"
                 android:textColor="@color/colorAccent"
-                android:textStyle="bold"
-                android:visibility="gone"/>
 
-
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="13sp" />
 
         </LinearLayout>
+<!--  second -->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_medium"
-            android:background="@android:color/white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-            <View
-                android:layout_width="@dimen/spacing_medium"
-                android:layout_height="wrap_content" />
-
+            android:orientation="horizontal"
+            android:weightSum="3">
 
             <TextView
-                android:id="@+id/appointment_nature"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Refill"
+                android:gravity="left"
+                android:textStyle="bold"
+                android:text="Appointment Type"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/grey_80" />
+                android:padding="5dp"
+                android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/txt_appointment_status"
-                android:layout_width="match_parent"
+                android:id="@+id/appointment_type1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:text="Scheduled" />
+                android:layout_weight="2"
+                android:gravity="left"
+                android:padding="5dp"
+                android:textColor="@color/colorAccent"
 
+                android:text="Date"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="13sp" />
 
         </LinearLayout>
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/spacing_large"
-            android:background="@android:color/white"
-            android:layout_marginHorizontal="@dimen/spacing_medium"/>
-
-    </LinearLayout>
 
 
 
+
+</LinearLayout>
 
 </androidx.cardview.widget.CardView>

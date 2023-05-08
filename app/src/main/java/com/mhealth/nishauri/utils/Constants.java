@@ -26,6 +26,8 @@ public class Constants extends AppCompatActivity {
 
     //AUTH
     public static String REGISTER = "nishauri/signup/";
+
+    public static String SIGNUP="nishauri/signup";
     public static String LOGIN = "nishauri/token/login/";
     public static String DASHBOARD = "nishauri/auth/dashboard";
 
@@ -56,6 +58,7 @@ public class Constants extends AppCompatActivity {
     public static String DEPENTANTS= "nishauri/dependants/";
     public static String DEPENTANT= "nishauri/dependant/single";
     public static String UPDATE_DEPENDANT = "nishauri/dependant/update";
+    public static String DEPENTANTS1="nishauri/dependants";
 
     //LAB
     public static String VIRAL_LOAD= "nishauri/lab/vload";
@@ -66,6 +69,8 @@ public class Constants extends AppCompatActivity {
     public static String UPCOMING_APPOINTMENT = "nishauri/appointments/user/upcoming";
     public static String PENDING_APPOINTMENT = "nishauri/appointments/user/book";
     public static String PASSED_APPOINTMENT = "nishauri/appointments/user/past";
+    public static String PASSED_APPOINTMENTNEW = "nishauri/appointment_previous";
+
     public static String SCHEDULE_APPOINTMENT = "nishauri/appointments/user/book";
     public static String RESCHEDULE_APPOINTMENT = "nishauri/appointments/user/reschedule/";
     public static String CONFIRM_APPOINTMENT = "nishauri/appointments/user/accept/";
@@ -77,6 +82,11 @@ public class Constants extends AppCompatActivity {
 
     //FACILITIES
     public static String ALL_FACILITIES = "nishauri/facilities/all ";
+
+    //BMI
+    public static String BMI = "nishauri/bmi_calculator";
+
+
 
 
     /*MODELS*/

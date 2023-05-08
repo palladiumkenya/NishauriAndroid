@@ -22,12 +22,16 @@ import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mhealth.nishauri.Activities.Auth.LoginActivity;
+import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Bmi extends AppCompatActivity {
 
@@ -38,6 +42,8 @@ public class Bmi extends AppCompatActivity {
     private TextInputEditText weightE;
     private TextInputEditText heightE;
     AlertDialog.Builder builder;
+
+    String z;
 
     // private User loggedInUser;
 
@@ -51,7 +57,7 @@ public class Bmi extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Nutrition");
+        getSupportActionBar().setTitle("BMI Calculator");
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,20 +96,34 @@ public class Bmi extends AppCompatActivity {
     public void getBMI(){
        // String auth_token = loggedInUser.getAuth_token();
 
-        /*JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("weight", weightE.getText().toString());
             jsonObject.put("height", heightE.getText().toString());
         } catch (JSONException e) {
             e.printStackTrace();
-        }*/
-        AndroidNetworking.get("https://body-mass-index-bmi-calculator.p.rapidapi.com/metric")
+        }
+
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+        AndroidNetworking.post(z+Constants.BMI)
                 //.addHeaders("Authorization","Token "+ auth_token)
-                .addHeaders("X-RapidAPI-Key", "fd002f2712msh0bb4ddcc00155b2p17c815jsnfc428afbce06")
-                .addHeaders("X-RapidAPI-Host", "body-mass-index-bmi-calculator.p.rapidapi.com")
-                .addQueryParameter("weight", weightE.getText().toString())
-                .addQueryParameter("height", heightE.getText().toString())
-                .setPriority(Priority.LOW)
+                .addHeaders("Content-Type", "application.json")
+                .addHeaders("Accept", "*/*")
+                .addHeaders("Accept", "gzip, deflate, br")
+                .addHeaders("Connection","keep-alive")
+                .setMaxAgeCacheControl(300000, TimeUnit.MILLISECONDS)
+                .addJSONObjectBody(jsonObject) // posting json
+                .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
@@ -111,9 +131,14 @@ public class Bmi extends AppCompatActivity {
                         //Toast.makeText(Bmi.this, "Your BMI is "+response, Toast.LENGTH_SHORT).show();
 
                         try {
-                            int d = response.getInt("bmi");
+                            JSONObject jsonObject1 = response.getJSONObject("msg");
+                          String  bmi1 = jsonObject1.getString("bmi");
+                           String comment = jsonObject1.getString("comment");
 
-                            bmi.setText("Your BMI is"+ " "+d);
+
+                           // int d = response.getInt("bmi");
+
+                            bmi.setText("Your BMI is"+ " "+bmi1 + " " + comment);
                             //Toast.makeText(Bmi.this, "Your BMI is "+ d, Toast.LENGTH_SHORT).show();
 
                             /*builder = new AlertDialog.Builder(bmi.getContext());

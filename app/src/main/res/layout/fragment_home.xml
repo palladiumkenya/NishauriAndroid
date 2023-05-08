@@ -313,7 +313,7 @@
                 <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Treatments "
+                        android:text="Current Regimen"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/grey_90" />
 
@@ -742,6 +742,7 @@
                         android:id="@+id/btn_add_dependant"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:text="Add dependant"
                         android:textAllCaps="true" />
 

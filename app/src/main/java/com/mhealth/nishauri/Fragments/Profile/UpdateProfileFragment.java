@@ -225,16 +225,22 @@ public class UpdateProfileFragment extends Fragment {
                                             JSONObject dependant = (JSONObject) dependants.get(a);
 
 
-                                            int id = dependant.has("id") ? dependant.getInt("id") : 0;
-                                            String firstname = dependant.has("first_name") ? dependant.getString("first_name") : "";
-                                            String surname = dependant.has("surname") ? dependant.getString("surname") : "";
-                                            String heiNumber = dependant.has("heiNumber") ? dependant.getString("heiNumber") : "";
-                                            String dob = dependant.has("dob") ? dependant.getString("dob") : "";
-                                            String approved = dependant.has("approved") ? dependant.getString("approved") : "";
-                                            int user = dependant.has("user") ? dependant.getInt("user") : 0;
+                                            String moh_upi = item.has("moh_upi") ? item.getString("moh_upi") : "";
+                                            String clinic_number = item.has("clinic_number") ? item.getString("clinic_number") : "";
+                                            String dependant_name = item.has("dependant_name") ? item.getString("dependant_name") : "";
+                                            int  dependant_age = item.has("dependant_age") ? item.getInt("dependant_age") : 0;
 
 
-                                            newDependant = new Dependant(id, firstname, surname, heiNumber, dob, approved, user);
+                                   /* int  id = item.has("id") ? item.getInt("id") : 0;
+                                    String first_name = item.has("first_name") ? item.getString("first_name") : "";
+                                    String surname = item.has("surname") ? item.getString("surname") : "";
+                                    String heiNumber = item.has("heiNumber") ? item.getString("heiNumber") : "";
+                                    String dob = item.has("dob") ? item.getString("dob") : "";
+                                    String approved = item.has("approved") ? item.getString("approved") : "";
+                                    int  user = item.has("user") ? item.getInt("user") : 0;*/
+
+
+                                            Dependant newDependant = new Dependant(dependant_age, moh_upi, clinic_number, dependant_name);
 
                                             dependantArrayList.add(newDependant);
                                             mAdapter.notifyDataSetChanged();

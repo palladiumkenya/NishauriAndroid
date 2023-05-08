@@ -224,7 +224,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int b, int b1, int b2) {
                 if (password.length() < 8) {
-                    til_password.setError("Password should be 8 characters long");
+                    til_password.setError("Password should be 8 or more characters long");
                 } else {
                     til_password.setError(null);
                 }
@@ -245,7 +245,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int c, int c1, int c2) {
                 if (repassword.length() < 8) {
-                    til_repass.setError("Password should be 8 characters long");
+                    til_repass.setError("Password should be 8 or more characters long");
                 } else if (!password.getText().toString().equals(repassword.getText().toString())) {
                     til_repass.setError(getString(R.string.must_match));
 
@@ -376,9 +376,9 @@ public class SignUpActivity extends AppCompatActivity {
         } catch(Exception e){
 
         }
+    //"https://ushauriapi.kenyahmis.org/nishauri/signup"
 
-
-        AndroidNetworking.post("https://ushauriapi.kenyahmis.org/nishauri/signup")
+        AndroidNetworking.post(z+Constants.SIGNUP)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")

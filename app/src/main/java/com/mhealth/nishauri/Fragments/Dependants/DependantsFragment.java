@@ -200,16 +200,23 @@ public class DependantsFragment extends Fragment {
                                     JSONObject item = (JSONObject) myArray.get(i);
 
 
-                                    int  id = item.has("id") ? item.getInt("id") : 0;
+                                    String moh_upi = item.has("moh_upi") ? item.getString("moh_upi") : "";
+                                    String clinic_number = item.has("clinic_number") ? item.getString("clinic_number") : "";
+                                    String dependant_name = item.has("dependant_name") ? item.getString("dependant_name") : "";
+                                    int  dependant_age = item.has("dependant_age") ? item.getInt("dependant_age") : 0;
+
+
+                                   /* int  id = item.has("id") ? item.getInt("id") : 0;
                                     String first_name = item.has("first_name") ? item.getString("first_name") : "";
                                     String surname = item.has("surname") ? item.getString("surname") : "";
                                     String heiNumber = item.has("heiNumber") ? item.getString("heiNumber") : "";
                                     String dob = item.has("dob") ? item.getString("dob") : "";
                                     String approved = item.has("approved") ? item.getString("approved") : "";
-                                    int  user = item.has("user") ? item.getInt("user") : 0;
+                                    int  user = item.has("user") ? item.getInt("user") : 0;*/
 
 
-                                    Dependant newDependant = new Dependant(id,first_name,surname,heiNumber,dob,approved,user);
+                                    Dependant newDependant = new Dependant(dependant_age, moh_upi, clinic_number, dependant_name);
+
 
                                     dependantArrayList.add(newDependant);
                                     mAdapter.notifyDataSetChanged();

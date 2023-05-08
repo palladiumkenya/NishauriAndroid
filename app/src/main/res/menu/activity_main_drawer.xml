@@ -19,24 +19,26 @@
             android:icon="@drawable/ic_appointment"
             android:title="@string/appointment" />
 
-        <item
+    <!--    <item
             android:id="@+id/nav_treatment"
             android:icon="@drawable/ic_treatment"
-            android:title="@string/treatments" />
+            android:visibility="gone"
+            android:title="@string/treatments" />-->
 
-        <item
+       <!-- <item
             android:id="@+id/nav_dependant"
             android:icon="@drawable/ic_dependant"
-            android:title="@string/depentant" />
+            android:visibility="gone"
+            android:title="@string/depentant" />-->
 
         <item
             android:id="@+id/nav_chat"
             android:icon="@drawable/ic_chat"
-            android:title="@string/chat" />
+            android:title="Resources" />
         <item
             android:id="@+id/nav_bmi"
             android:icon="@drawable/ic_food"
-            android:title="Nutrition"/>
+            android:title="BMI Calculator"/>
 
         <item
             android:id="@+id/art"
@@ -49,17 +51,18 @@
             android:icon="@drawable/ic_dashboard"
             android:title="@string/dashboard" />
 
-        <item android:title="@string/category_profile">
+       <!-- <item android:title="@string/category_profile">
 
             <menu>
 
                 <item
                     android:id="@+id/nav_update_profile"
                     android:icon="@drawable/ic_profile"
+                    android:visibility="gone"
                     android:title="@string/update_profile" />
             </menu>
 
-        </item>
+        </item>-->
 
         <item android:title="@string/about_app_category">
 
