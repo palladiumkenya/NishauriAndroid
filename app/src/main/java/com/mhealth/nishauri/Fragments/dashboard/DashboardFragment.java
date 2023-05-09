@@ -186,7 +186,7 @@ public class DashboardFragment extends Fragment {
 
 
 
-        AndroidNetworking.get(z+Constants.VIRAL_LOADNEW+urls)
+        AndroidNetworking.get(z+Constants.VIRALS_LOADNEW+urls)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -405,7 +405,7 @@ public class DashboardFragment extends Fragment {
 
 
 
-        AndroidNetworking.get(z+Constants.VIRAL_LOADNEW)
+        AndroidNetworking.get(z+Constants.VIRALS_LOADNEW)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

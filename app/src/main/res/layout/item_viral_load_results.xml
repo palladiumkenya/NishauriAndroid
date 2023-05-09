@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/spacing_middle"
                     android:text="Suppressed"
-                    android:visibility="gone"
+
                     android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
                     android:textColor="@color/colorAccent"/>
                 <com.google.android.material.textview.MaterialTextView

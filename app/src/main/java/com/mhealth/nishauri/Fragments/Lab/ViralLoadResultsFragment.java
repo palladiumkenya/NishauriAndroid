@@ -177,11 +177,11 @@ public class ViralLoadResultsFragment extends Fragment {
 
         }
 
-        //https://ushauriapi.kenyahmis.org/nishauri/vl_result?user_id=Mg==
+        //https://ushauriapi.kenyahmis.org/nishauri/vl_results?user_id=Mg==
         //z+Constants.VIRAL_LOAD+urls
 
 
-        AndroidNetworking.get(z+Constants.VIRAL_LOADNEW+urls)
+        AndroidNetworking.get(z+Constants.VIRALS_LOADNEW+urls)
                // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -195,7 +195,7 @@ public class ViralLoadResultsFragment extends Fragment {
                         // do anything with response
                         Log.e("success", response.toString());
 
-                       /* if (pDialog != null && pDialog.isShowing()) {
+                        if (pDialog != null && pDialog.isShowing()) {
                             pDialog.hide();
                             pDialog.cancel();
                         }
@@ -210,25 +210,9 @@ public class ViralLoadResultsFragment extends Fragment {
                         if (shimmer_my_container!=null){
                             shimmer_my_container.stopShimmerAnimation();
                             shimmer_my_container.setVisibility(View.GONE);
-                        }*/
+                        }
 
                         try {
-
-                            //String  message = response.has("message") ? response.getString("message") : "" ;
-
-
-                            /*if (message.contains("No results for the given CCC Number were found")){
-                                no_result_lyt.setVisibility(View.VISIBLE);
-                                Snackbar.make(root.findViewById(R.id.frag_viral_load),message, Snackbar.LENGTH_LONG).show();
-
-                            }*/
-                           // JSONArray myArray = response.getJSONArray("data");
-                           // JSONObject jsonObject = response.getJSONObject("msg");
-
-                            /*Log.d("jsonObject", jsonObject.toString());
-
-                            String Vlresult = jsonObject.getString("viral_load");
-                            Log.d("VLRESULT", Vlresult);*/
 
 
 
@@ -246,14 +230,6 @@ public class ViralLoadResultsFragment extends Fragment {
                                     JSONObject item = (JSONObject) myArray.get(i);
                                     //JSONObject item = (JSONObject) jsonObject1.get(String.valueOf(i));
 
-
-                                   /* int  id = item.has("id") ? item.getInt("id") : 0;
-                                    String r_id = item.has("r_id") ? item.getString("r_id") : "";
-                                    String result_type = item.has("result_type") ? item.getString("result_type") : "";
-                                    String result_content = item.has("result_content") ? item.getString("result_content") : "";
-                                    String date_collected = item.has("date_collected") ? item.getString("date_collected") : "";
-                                    String lab_name = item.has("lab_name") ? item.getString("lab_name") : "";
-                                    int  user = item.has("user") ? item.getInt("user") : 0;*/
 
 
                                     String result = item.has("result") ? item.getString("result") : "";
