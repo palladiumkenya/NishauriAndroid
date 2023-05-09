@@ -63,7 +63,7 @@ public class NewPassword extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int b, int b1, int b2) {
                 if (pwd11.length() < 8) {
-                    pwd11   .setError("Password should be 8 characters long");
+                    pwd11   .setError("Password should be 8 or more characters long");
                 } else {
                     pwd11.setError(null);
                 }
@@ -84,7 +84,7 @@ public class NewPassword extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int c, int c1, int c2) {
                 if (pwd22.length() < 8) {
-                   pwd22.setError("Password should be 8 characters long");
+                   pwd22.setError("Password should be 8 or more characters long");
                 } else if (!pwd11.getText().toString().equals(pwd22.getText().toString())) {
                     pwd22.setError(getString(R.string.must_match));
 

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -24,6 +25,7 @@ import com.mhealth.nishauri.Models.UpcomingAppointment;
 import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
+import com.mhealth.nishauri.adapters.AppointmentHomeAdapter;
 import com.mhealth.nishauri.adapters.UpcomingAppointmentAdapter;
 import com.mhealth.nishauri.utils.Constants;
 
@@ -52,7 +54,10 @@ public class UpcomingAppointmentsFragment extends Fragment {
     private UpcomingAppointmentAdapter mAdapter;
     private ArrayList<UpcomingAppointment> upcomingAppointmentArrayList;
 
+
     String z;
+
+    public int id;
 
 
 
@@ -68,6 +73,8 @@ public class UpcomingAppointmentsFragment extends Fragment {
 
     @BindView(R.id.error_lyt)
     LinearLayout error_lyt;
+
+    private AppointmentHomeAdapter myAdapter;
 
 
     @Override
@@ -92,19 +99,23 @@ public class UpcomingAppointmentsFragment extends Fragment {
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
 
+
+
+
+        //set data and list adapter
+
+
         upcomingAppointmentArrayList = new ArrayList<>();
-        mAdapter = new UpcomingAppointmentAdapter(context, upcomingAppointmentArrayList);
-
-
+        //  mAdapter = new UpcomingAppointmentAdapter(context, upcomingAppointmentArrayList);
+        myAdapter = new AppointmentHomeAdapter(context, upcomingAppointmentArrayList);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false));
         recyclerView.setHasFixedSize(true);
-
-        //set data and list adapter
-        recyclerView.setAdapter(mAdapter);
+        recyclerView.setAdapter(myAdapter);
 
 
-        loadUpcomingAppointments();
+
+        loadUpcomingAppointments2();
 
         return root;
 
@@ -274,5 +285,164 @@ public class UpcomingAppointmentsFragment extends Fragment {
 
                     }
                 });
+    }
+
+    //loadapp
+    private void loadUpcomingAppointments2() {
+
+        //String auth_token = loggedInUser.getAuth_token();
+
+        String auth_token = loggedInUser.getAuth_token();
+        String urls ="?user_id="+auth_token;
+        Log.e("tokens", auth_token);
+        //https://ushauriapi.kenyahmis.org/nishauri/profile"+urls
+        //Constants.ENDPOINT+Constants.CURRENT_USER
+
+        try{
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                }
+            }
+
+        } catch(Exception e){
+
+        }
+
+
+        AndroidNetworking.get(z+Constants.CURRENT_APPT+urls)
+                // .addHeaders("Authorization","Token "+ auth_token)
+                .addHeaders("Content-Type", "application.json")
+                .addHeaders("Accept", "*/*")
+                .addHeaders("Accept", "gzip, deflate, br")
+                .addHeaders("Connection","keep-alive")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+                        Log.e(TAG, response.toString());
+
+                      //  Toast.makeText(context, "Appointments successful", Toast.LENGTH_LONG).show();
+
+                        upcomingAppointmentArrayList.clear();
+
+                        //upcomingAppointmentArrayList.clear();
+
+                        if (recyclerView!=null)
+                            recyclerView.setVisibility(View.VISIBLE);
+
+                        if (shimmer_my_container!=null){
+                            shimmer_my_container.stopShimmerAnimation();
+                            shimmer_my_container.setVisibility(View.GONE);
+                        }
+
+
+
+                        try {
+
+                            String message = response.has("message") ? response.getString("message"): "";
+
+                            /*if (message.contains("There are no appointments for this client")){
+                                no_appointment_lyt.setVisibility(View.VISIBLE);
+                                Snackbar.make(root.findViewById(R.id.frag_home),message, Snackbar.LENGTH_LONG).show();
+
+                            } else if (message.contains("Client does not exist in the system")){
+                                no_appointment_lyt.setVisibility(View.VISIBLE);
+                                Snackbar.make(root.findViewById(R.id.frag_home),message, Snackbar.LENGTH_LONG).show();
+
+                            } else if (message.contains("No upcoming appointments")){
+                                no_appointment_lyt.setVisibility(View.VISIBLE);
+                                Snackbar.make(root.findViewById(R.id.frag_home),message,Snackbar.LENGTH_LONG).show();
+                            }*/
+
+                            if (!message.isEmpty()){
+                                no_appointment_lyt.setVisibility(View.VISIBLE);
+                                Snackbar.make(root.findViewById(R.id.frag_home),message, Snackbar.LENGTH_LONG).show();
+
+                            }
+
+                            JSONArray myArray = response.getJSONArray("data");
+
+                            if (myArray.length() > 0){
+
+
+                                for (int i = 0; i < myArray.length(); i++) {
+
+                                    JSONObject item = (JSONObject) myArray.get(i);
+                                    id = item.has("id") ? item.getInt("id") : 0;
+                                    String aid = item.has("aid") ? item.getString("aid") : "";
+                                    String appntmnt_date = item.has("appntmnt_date") ? item.getString("appntmnt_date") : "";
+                                    String  appointment_date = item.has("appointment_date") ? item.getString("appointment_date") : "";
+                                    String app_status = item.has("app_status") ? item.getString("app_status") : "";
+                                    String visit_type = item.has("visit_type") ? item.getString("visit_type") : "";
+                                    String app_type = item.has("app_type") ? item.getString("app_type") : "";
+                                    String appointment_type = item.has("appointment_type") ? item.getString("appointment_type") : "";
+                                    String owner = item.has("owner") ? item.getString("owner") : "";
+                                    String dependant = item.has("dependant") ? item.getString("dependant") : "";
+                                    String created_at = item.has("created_at") ? item.getString("created_at") : "";
+                                    String updated_at = item.has("updated_at") ? item.getString("updated_at") : "";
+                                    String user = item.has("user") ? item.getString("user") : "";
+
+                                    UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(id,aid, appointment_date,app_status,visit_type,appointment_type,owner,dependant,created_at,updated_at,user);
+                                    //UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(id, aid, appntmnt_date, appointment_date, appointment_type, app_status, visit_type, app_type, owner, dependant, created_at, updated_at, user);
+
+                                    upcomingAppointmentArrayList.add(newUpcomingAppointment);
+                                    myAdapter.notifyDataSetChanged();
+
+
+                                }
+
+                            }else {
+                                //not data found
+
+                                no_appointment_lyt.setVisibility(View.VISIBLE);
+
+                            }
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        // Toast.makeText(context, "My ID"+ id, Toast.LENGTH_LONG).show();
+
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+
+                       /* if (recycler_view!=null)
+                            recycler_view.setVisibility(View.VISIBLE);
+
+                        if (shimmers_my_container!=null){
+                            shimmers_my_container.stopShimmerAnimation();
+                            shimmers_my_container.setVisibility(View.GONE);
+                        }*/
+
+
+
+//                        Log.e(TAG, error.getErrorDetail());
+
+                        if (error.getErrorCode() == 0){
+                            no_appointment_lyt.setVisibility(View.VISIBLE);
+                        }
+                        else if (error.getErrorCode() == 204){
+                            no_appointment_lyt.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            //errors_lyt.setVisibility(View.VISIBLE);
+                            Snackbar.make(root.findViewById(R.id.frag_home), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+
+                        }
+
+
+                    }
+                });
+
+
     }
 }

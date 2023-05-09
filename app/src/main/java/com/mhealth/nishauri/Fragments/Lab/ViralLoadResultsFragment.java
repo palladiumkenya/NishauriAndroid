@@ -131,7 +131,7 @@ public class ViralLoadResultsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 request_lyt.setVisibility(View.GONE);
-                pDialog.show();
+               // pDialog.show();
                 loadViralLoad();
             }
         });
@@ -193,7 +193,7 @@ public class ViralLoadResultsFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-                        Log.e(TAG, response.toString());
+                        Log.e("success", response.toString());
 
                        /* if (pDialog != null && pDialog.isShowing()) {
                             pDialog.hide();
@@ -223,15 +223,28 @@ public class ViralLoadResultsFragment extends Fragment {
 
                             }*/
                            // JSONArray myArray = response.getJSONArray("data");
+                           // JSONObject jsonObject = response.getJSONObject("msg");
+
+                            /*Log.d("jsonObject", jsonObject.toString());
+
+                            String Vlresult = jsonObject.getString("viral_load");
+                            Log.d("VLRESULT", Vlresult);*/
+
+
+
                             JSONArray myArray = response.getJSONArray("msg");
+                            //JSONObject jsonObject1 = response.getJSONObject("msg");
 
 
                             if (myArray.length() > 0){
+                           // if (jsonObject1.length() > 0){
 
 
-                                for (int i = 0; i < myArray.length(); i++) {
+                               for (int i = 0; i < myArray.length(); i++) {
+                               // for (int i = 0; i < jsonObject1.length(); i++) {
 
                                     JSONObject item = (JSONObject) myArray.get(i);
+                                    //JSONObject item = (JSONObject) jsonObject1.get(String.valueOf(i));
 
 
                                    /* int  id = item.has("id") ? item.getInt("id") : 0;
@@ -259,7 +272,12 @@ public class ViralLoadResultsFragment extends Fragment {
 
                                 }
 
-                            }else if (response.getJSONObject("data").has("message")){
+                            }
+                            else{
+                                Toast.makeText(context, "No VL Results Found", Toast.LENGTH_SHORT).show();
+                            }
+
+                            /*else if (response.getJSONObject("data").has("message")){
                                 //not data found
 
                                 if (pDialog != null && pDialog.isShowing()) {
@@ -270,7 +288,7 @@ public class ViralLoadResultsFragment extends Fragment {
                                 Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
 
 
-                            }
+                            }*/
 
 
                         } catch (JSONException e) {
@@ -284,6 +302,8 @@ public class ViralLoadResultsFragment extends Fragment {
                     }
                     @Override
                     public void onError(ANError error) {
+
+                        Log.d("Errors", error.getErrorDetail());
                         // handle error
 
                         if (pDialog != null && pDialog.isShowing()) {

@@ -161,7 +161,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int b, int b1, int b2) {
                 if (password.length() < 8) {
-                    til_password.setError("Password should be 8 characters long");
+                    til_password.setError("Password should be 8 or more characters long");
                 } else {
                     til_password.setError(null);
                 }

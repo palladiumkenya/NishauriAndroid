@@ -5,9 +5,9 @@
         android:title="@string/dashboard"
         android:icon="@drawable/ic_dashboard"/>
 
-    <item android:id="@+id/nav_lab"
+   <!-- <item android:id="@+id/nav_lab"
         android:title="@string/lab"
-        android:icon="@drawable/ic_lab"/>
+        android:icon="@drawable/ic_lab"/>-->
 
     <item android:id="@+id/nav_home"
         android:title="@string/menu_home"

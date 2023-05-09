@@ -35,8 +35,10 @@ public class PreviousAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
         public TextView previous_appointment_date;
+        public TextView visit_date;
         public TextView appointmet_type;
-        public TextView appointment_status;
+       // public TextView appointmet_status;
+        public TextView appointment_status1;
         public TextView owner;
         public TextView dependants;
 
@@ -47,6 +49,9 @@ public class PreviousAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
             super(v);
             previous_appointment_date = (TextView) v.findViewById(R.id.appointment_date1);
             appointmet_type = (TextView) v.findViewById(R.id.appointment_type1);
+            visit_date = (TextView) v.findViewById(R.id.kept_date1);
+            appointment_status1 = (TextView) v.findViewById(R.id.status1);
+
            // appointment_status = (TextView) v.findViewById(R.id.txt_appointment_status);
            // owner = (TextView) v.findViewById(R.id.txt_owner);
            // dependants = (TextView) v.findViewById(R.id.txt_dependants);
@@ -71,6 +76,8 @@ public class PreviousAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
 
             view.previous_appointment_date.setText(obj.getAppointment_date());
             view.appointmet_type.setText(obj.getAppointment_type());
+        view.visit_date.setText(obj.getVisit_date());
+        view.appointment_status1.setText(obj.getAppt_status());
             //view.appointment_status.setText("Status: "+obj.getVisit_type());
           // view.appointment_status.setText(obj.getAppointment_type());
 

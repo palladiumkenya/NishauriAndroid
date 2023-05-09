@@ -44,7 +44,7 @@
                 android:scrollbars="vertical"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:layout_marginBottom="@dimen/actionBarSize"
-                android:visibility="gone"
+
                 android:scrollingCache="true" />
 
         </FrameLayout>

@@ -7,6 +7,7 @@ public class UpcomingAppointment implements Serializable {
     private int id;
     private String aid;
     private String appntmnt_date;
+
     private String app_status;
     private String visit_type;
     private String app_type;

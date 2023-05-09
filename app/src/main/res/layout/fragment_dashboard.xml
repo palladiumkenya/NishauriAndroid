@@ -344,6 +344,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:visibility="gone"
 
                                     android:text="/"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
@@ -355,6 +356,7 @@
                                     android:id="@+id/txt_total_app"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:visibility="gone"
 
                                     android:text="0"
                                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
@@ -682,6 +684,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_large" />
 
+            <!-- lab results trends -->
+
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
@@ -690,6 +694,7 @@
                 android:text="Lab Results trends"
                 android:textAllCaps="true"
                 android:textAlignment="center"
+                android:visibility="gone"
                 android:textColor="@color/colorAccent"
                 style="@style/TextAppearance.AppCompat.Title"/>
 
@@ -717,13 +722,14 @@
                 <!-- visible-->
 
                 <androidx.cardview.widget.CardView
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/spacing_xsmall"
                     android:layout_marginLeft="@dimen/spacing_xsmall"
                     android:layout_marginRight="@dimen/spacing_xsmall"
                     android:layout_marginTop="@dimen/spacing_xsmall"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp">
 

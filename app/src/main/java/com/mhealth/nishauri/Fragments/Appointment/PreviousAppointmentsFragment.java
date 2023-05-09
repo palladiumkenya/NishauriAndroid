@@ -178,7 +178,7 @@ public class PreviousAppointmentsFragment extends Fragment {
 
 
                                     String appointment_date = item.has("appointment_date") ? item.getString("appointment_date") : "";
-                                    String app_status = item.has("app_status") ? item.getString("app_status") : "";
+                                    String app_status = item.has("appt_status") ? item.getString("appt_status") : "";
                                     String  appointment_type = item.has("appointment_type") ? item.getString("appointment_type") : "";
                                     String  visit_date = item.has("visit_date") ? item.getString("visit_date") : "";
 

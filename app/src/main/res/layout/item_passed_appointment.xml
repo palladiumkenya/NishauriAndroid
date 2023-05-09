@@ -29,6 +29,40 @@
                 android:layout_weight="1"
                 android:gravity="left"
                 android:textStyle="bold"
+                android:text="Appointment Type"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:padding="5dp"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/appointment_type1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="left"
+                android:padding="5dp"
+                android:textColor="@color/colorAccent"
+                android:text="Type"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <!-- Appointment date -->
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:textStyle="bold"
                 android:text="Appointment Date"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:padding="5dp"
@@ -48,7 +82,8 @@
                 android:textSize="13sp" />
 
         </LinearLayout>
-<!--  second -->
+<!--  date kept -->
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,27 +97,58 @@
                 android:layout_weight="1"
                 android:gravity="left"
                 android:textStyle="bold"
-                android:text="Appointment Type"
+                android:text="Visit Date"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:padding="5dp"
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/appointment_type1"
+                android:id="@+id/kept_date1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="left"
                 android:padding="5dp"
+                android:text="Date Kept"
                 android:textColor="@color/colorAccent"
 
-                android:text="Date"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textSize="13sp" />
 
         </LinearLayout>
 
+        <!-- status -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3">
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:textStyle="bold"
+                android:text="Appointment Status"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:padding="5dp"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/status1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="left"
+                android:padding="5dp"
+                android:text="status"
+                android:textColor="@color/colorAccent"
+
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="13sp" />
+
+        </LinearLayout>
 
 
 

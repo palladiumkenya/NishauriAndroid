@@ -511,11 +511,11 @@ public class HomeFragment extends Fragment {
                                     JSONObject item = (JSONObject) myArray.get(i);
                                     id = item.has("id") ? item.getInt("id") : 0;
                                     String aid = item.has("aid") ? item.getString("aid") : "";
-                                       //String appntmnt_date = item.has("appntmnt_date") ? item.getString("appntmnt_date") : "";
+                                       String appntmnt_date = item.has("appntmnt_date") ? item.getString("appntmnt_date") : "";
                                     String  appointment_date = item.has("appointment_date") ? item.getString("appointment_date") : "";
                                     String app_status = item.has("app_status") ? item.getString("app_status") : "";
                                     String visit_type = item.has("visit_type") ? item.getString("visit_type") : "";
-                                   // String app_type = item.has("app_type") ? item.getString("app_type") : "";
+                                    String app_type = item.has("app_type") ? item.getString("app_type") : "";
                                     String appointment_type = item.has("appointment_type") ? item.getString("appointment_type") : "";
                                     String owner = item.has("owner") ? item.getString("owner") : "";
                                     String dependant = item.has("dependant") ? item.getString("dependant") : "";
@@ -524,6 +524,7 @@ public class HomeFragment extends Fragment {
                                     String user = item.has("user") ? item.getString("user") : "";
 
                                     UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(id,aid, appointment_date,app_status,visit_type,appointment_type,owner,dependant,created_at,updated_at,user);
+                                    //UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(id, aid, appntmnt_date, appointment_date, appointment_type, app_status, visit_type, app_type, owner, dependant, created_at, updated_at, user);
 
                                     upcomingAppointmentArrayList.add(newUpcomingAppointment);
                                     myAdapter.notifyDataSetChanged();
