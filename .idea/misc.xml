@@ -51,6 +51,7 @@
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/drawable/ic_art.xml" value="0.1" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/activity_art.xml" value="0.33" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/activity_bmi.xml" value="0.2" />
+        <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/activity_chat_interface.xml" value="0.1859375" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/activity_config.xml" value="0.2" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/activity_constants.xml" value="0.1641025641025641" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/activity_login.xml" value="0.19427083333333334" />
@@ -64,6 +65,8 @@
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/app_bar_main.xml" value="0.19427083333333334" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/app_home_placeholder_item.xml" value="0.2" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/art_layout.xml" value="0.33" />
+        <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/chat_message.xml" value="0.19895833333333332" />
+        <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/chatsl.xml" value="0.25" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/content_main.xml" value="0.2" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/fragment_appointments.xml" value="0.19322916666666667" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/fragment_chat.xml" value="0.11197916666666667" />
@@ -84,6 +87,7 @@
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/item_upcoming_appointment.xml" value="0.18229166666666666" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/item_viral_load_results.xml" value="0.17083333333333334" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/nav_header_main.xml" value="0.19427083333333334" />
+        <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/user_message.xml" value="0.2" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/menu/activity_main_drawer.xml" value="0.2" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/menu/main.xml" value="0.2" />

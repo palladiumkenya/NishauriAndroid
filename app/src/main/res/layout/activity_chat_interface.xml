@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolbarMsg1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -17,41 +18,45 @@
             />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/msgs"
+    <!--List view for displaying chat messages-->
+    <ListView
+        android:id="@+id/listView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/Messagelinear" />
-
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/toolbarMsg1"
+         />
+    <!--To type and send the message-->
     <LinearLayout
-        android:id="@+id/Messagelinear"
+        android:id="@+id/send_message_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:weightSum="5">
+        android:background="#ffdddddd"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-        <!--edit text to enter message-->
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/bot" />
+
         <EditText
-            android:id="@+id/idEdtMessage"
-            android:layout_width="0dp"
+            android:id="@+id/et_message"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:hint="Enter Message" />
+            android:layout_weight="1" />
 
-        <!--button to send message-->
         <ImageButton
-            android:id="@+id/idIBSend"
-            android:layout_width="0dp"
+            android:id="@+id/btn_send"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:background="@color/colorPrimaryDark"
             android:src="@android:drawable/ic_menu_send"
-            app:tint="@android:color/white" />
+            android:text="Send" />
     </LinearLayout>
-
-
 
 
 

@@ -90,5 +90,8 @@ dependencies {
     //implementation 'io.kommunicate.sdk:kommunicateui:2.4.1'
     implementation 'com.chaos.view:pinview:1.4.3'
 
+    implementation 'me.himanshusoni.chatmessageview:chat-message-view:1.0.7'
+
+
 
 }

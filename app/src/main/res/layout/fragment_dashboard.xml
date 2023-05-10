@@ -4,7 +4,6 @@
     android:id="@+id/frag_dashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_10"
     android:fitsSystemWindows="true">
 
     <androidx.core.widget.NestedScrollView
@@ -41,6 +40,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="@dimen/spacing_xsmall"
+                app:cardBackgroundColor="@color/blue_grey_50"
                 android:visibility="visible"
                 app:cardCornerRadius="10dp"
 
@@ -413,6 +413,7 @@
                     android:layout_marginLeft="@dimen/spacing_xsmall"
                     android:layout_marginRight="@dimen/spacing_xsmall"
                     android:layout_marginTop="@dimen/spacing_xsmall"
+                    app:cardBackgroundColor="@color/blue_grey_50"
                     android:visibility="visible"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp">
@@ -726,6 +727,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/spacing_xsmall"
+                    app:cardBackgroundColor="@color/blue_grey_50"
                     android:layout_marginLeft="@dimen/spacing_xsmall"
                     android:layout_marginRight="@dimen/spacing_xsmall"
                     android:layout_marginTop="@dimen/spacing_xsmall"
