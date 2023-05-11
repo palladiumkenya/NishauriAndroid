@@ -91,10 +91,6 @@ public class chatAdapter  extends BaseAdapter {
 
 
 
-
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }

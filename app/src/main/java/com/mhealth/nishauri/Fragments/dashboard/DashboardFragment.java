@@ -63,9 +63,9 @@ public class DashboardFragment extends Fragment {
     //
     ArrayList yAxis;
     ArrayList yValues;
-   public ArrayList xAxis1;
+    ArrayList<String> xAxis1;
     BarEntry values ;
-    BarChart chart;
+   // BarChart chart;
 
     BarData data;
 
@@ -102,11 +102,13 @@ public class DashboardFragment extends Fragment {
     @BindView(R.id.txt_total_app)
     TextView txt_total_app;
 
-   /* @BindView(R.id.tv_notified_appointment)
-    public TextView tv_notified_appointment;
 
-    @BindView(R.id.txt_total_apps)
-    TextView txt_total_apps;*/
+
+   /* @BindView(R.id.tv_notified_appointment)
+    public TextView tv_notified_appointment;*/
+
+    @BindView(R.id.chart1)
+    BarChart chart;
 
     @BindView(R.id.tv_refill_number)
     TextView tv_refill_number;
@@ -135,8 +137,7 @@ public class DashboardFragment extends Fragment {
     @BindView(R.id.tv_unsuppressed_days)
     TextView tv_unsuppressed_days;
 
-    @BindView(R.id.chart1)
-    BarChart chart2;
+
 
    /* @BindView(R.id.chart1)
     BarChart chart3;*/
@@ -157,6 +158,8 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+
         root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         unbinder = ButterKnife.bind(this, root);
 
@@ -258,18 +261,19 @@ public class DashboardFragment extends Fragment {
 
                         }
 
-                        BarDataSet barDataSet1 = new BarDataSet(yValues, "Goals LaLiga 16/17");
+                        BarDataSet barDataSet1 = new BarDataSet(yValues, "Viral Load");
                         barDataSet1.setColor(Color.rgb(0, 82, 159));
 
                         yAxis = new ArrayList();
                         yAxis.add(barDataSet1);
-                        /*String dates[]=  xAxis1.toArray(new String[xAxis1.size()]);
+                        String dates[]=  xAxis1.toArray(new String[xAxis1.size()]);
+
                        // String dates[]= (String[]) xAxis1.toArray(new String[xAxis1.size()]);
                         data = new BarData(dates,yAxis);
                         chart.setData(data);
                         chart.setDescription("");
                         chart.animateXY(2000, 2000);
-                        chart.invalidate();*/
+                        chart.invalidate();
 
 
                     }
