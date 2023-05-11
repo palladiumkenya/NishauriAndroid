@@ -27,9 +27,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_medium"
-                android:text="Appointments trends"
+                android:text="Appointment trends"
                 android:textAllCaps="true"
                 android:textAlignment="center"
+                android:visibility="gone"
                 android:textColor="@color/colorAccent"
                 style="@style/TextAppearance.AppCompat.Title"/>
 
@@ -53,9 +54,17 @@
 
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle">
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/spacing_medium"
+                        android:text="Appointment Trends"
+                        android:textColor="@color/colorPrimary"
+                        style="@style/TextAppearance.AppCompat.Medium"/>
 
 
-            <LinearLayout
+
+                    <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -437,10 +446,9 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Missed appointments by type"
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                                android:textColor="@color/grey_60"
-                                android:textStyle="bold" />
+                                android:text="Missed Appointments By Type"
+                                android:textColor="@color/colorPrimary"
+                                style="@style/TextAppearance.AppCompat.Medium" />
 
                             <ImageButton
                                 android:layout_width="?attr/actionBarSize"
@@ -693,9 +701,9 @@
                 android:padding="@dimen/spacing_medium"
                 android:text="Lab Results trends"
                 android:textAllCaps="true"
+                android:visibility="gone"
                 android:textAlignment="center"
-
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/colorPrimary"
                 style="@style/TextAppearance.AppCompat.Title"/>
 
             <View
@@ -704,12 +712,49 @@
 
 
 
-            <com.github.mikephil.charting.charts.BarChart
+            <!--chart   -->
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_xsmall"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="@dimen/spacing_xsmall"
+            app:cardBackgroundColor="@color/blue_grey_50"
+            android:visibility="visible"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp">
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:paddingLeft="@dimen/spacing_middle"
+            android:paddingRight="@dimen/spacing_middle"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_medium"
+                android:text="Lab Results Trends"
+                android:textColor="@color/colorPrimary"
+                style="@style/TextAppearance.AppCompat.Medium"/>
+
+
+
+
+        <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/chart1"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
 
                 />
+
+        </LinearLayout></androidx.cardview.widget.CardView>
 
 
             <LinearLayout
