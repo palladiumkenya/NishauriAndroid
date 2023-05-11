@@ -17,6 +17,8 @@ import com.mhealth.nishauri.R;
 
 import java.util.ArrayList;
 import java.util.List;
+//import java.util.logging.Handler;
+import android.os.Handler;
 
 public class chatAdapter  extends BaseAdapter {
 
@@ -61,14 +63,33 @@ public class chatAdapter  extends BaseAdapter {
 
 
 
-
+           // String usrmsg = mylist.get(position).getMsg();
             String btsms = mylist.get(position).getQuestion();
-
             String usrmsg = mylist.get(position).getMsg();
+
+
            // String nascopCccNumber = mylist.get(position).getNascopCccNumber();
 
+            //usersms.setText(usrmsg);
+
+          // botsms.setText(btsms);
+            botsms.setText(btsms);
             usersms.setText(usrmsg);
-           botsms.setText(btsms);
+
+          /* Handler handler =new Handler();
+           handler.postDelayed(new Runnable() {
+               @Override
+               public void run() {
+                   String usrmsg = mylist.get(position).getMsg();
+
+                   usersms.setText(usrmsg);
+
+
+               }
+           }, 5000);*/
+
+
+
 
 
 

@@ -4,11 +4,13 @@ public class ViralLoad {
 
 
     String result, status, date;
+    int plot;
 
-    public ViralLoad(String result, String status, String date) {
+    public ViralLoad(String result, String status, String date, int plot) {
         this.result = result;
         this.status = status;
         this.date = date;
+        this.plot = plot;
     }
 
     public String getResult() {
@@ -33,5 +35,13 @@ public class ViralLoad {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public int getPlot() {
+        return plot;
+    }
+
+    public void setPlot(int plot) {
+        this.plot = plot;
     }
 }

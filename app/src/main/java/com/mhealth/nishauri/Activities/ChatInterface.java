@@ -72,8 +72,12 @@ public class ChatInterface extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                if (smstxt.getText().toString().isEmpty()){
+                    Toast.makeText(ChatInterface.this, "Please Enter a Question", Toast.LENGTH_LONG).show();
+                }else{
+
                 sendMessage();
-                smstxt.setText("");
+                smstxt.setText("");}
 
             }
         });

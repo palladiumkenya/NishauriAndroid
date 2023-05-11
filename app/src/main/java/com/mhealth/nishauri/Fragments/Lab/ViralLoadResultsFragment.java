@@ -235,11 +235,12 @@ public class ViralLoadResultsFragment extends Fragment {
                                     String result = item.has("result") ? item.getString("result") : "";
                                     String status = item.has("status") ? item.getString("status") : "";
                                     String date = item.has("date") ? item.getString("date") : "";
+                                    int plot = item.has("plot") ? item.getInt("plot") : 0;
 
 
 
 
-                                    ViralLoad newResult = new ViralLoad(result, status, date);
+                                    ViralLoad newResult = new ViralLoad(result, status, date, plot);
 
                                     viralLoadArrayList.add(newResult);
                                     mAdapter.notifyDataSetChanged();
