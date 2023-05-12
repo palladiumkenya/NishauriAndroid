@@ -232,7 +232,7 @@ public class DashboardFragment extends Fragment {
 
 
                             JSONArray myArray = response.getJSONArray("msg");
-                            if (myArray.length() > 0){
+                            if (myArray.length() > 1){
 
 
                                 for (int i = 0; i < myArray.length(); i++) {
@@ -254,6 +254,11 @@ public class DashboardFragment extends Fragment {
                                 }
 
                             }
+
+                            else{
+                                Toast.makeText(context, "No VL Results Found", Toast.LENGTH_SHORT).show();
+                            }
+
 
 
                         } catch (JSONException e) {

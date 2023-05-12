@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -156,6 +157,7 @@ public class PreviousAppointmentsFragment extends Fragment {
                         Log.e(TAG, response.toString());
 
                         //previousAppointmentArrayList.clear();
+
 
                         if (recyclerView!=null)
                             recyclerView.setVisibility(View.VISIBLE);

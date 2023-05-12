@@ -329,6 +329,7 @@ public class UpcomingAppointmentsFragment extends Fragment {
 
                         upcomingAppointmentArrayList.clear();
 
+
                         //upcomingAppointmentArrayList.clear();
 
                         if (recyclerView!=null)

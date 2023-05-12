@@ -214,13 +214,10 @@ public class ViralLoadResultsFragment extends Fragment {
 
                         try {
 
-
-
                             JSONArray myArray = response.getJSONArray("msg");
-                            //JSONObject jsonObject1 = response.getJSONObject("msg");
+                           // JSONObject jsonObject1 = response.getJSONObject("msg");
 
-
-                            if (myArray.length() > 0){
+                            if (myArray.length() > 1){
                            // if (jsonObject1.length() > 0){
 
 
@@ -254,18 +251,6 @@ public class ViralLoadResultsFragment extends Fragment {
                                 Toast.makeText(context, "No VL Results Found", Toast.LENGTH_SHORT).show();
                             }
 
-                            /*else if (response.getJSONObject("data").has("message")){
-                                //not data found
-
-                                if (pDialog != null && pDialog.isShowing()) {
-                                    pDialog.hide();
-                                    pDialog.cancel();
-                                }
-
-                                Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
-
-
-                            }*/
 
 
                         } catch (JSONException e) {

@@ -47,7 +47,9 @@ import java.util.Locale;
 
 import butterknife.BindView;
 
-public class UpcomingAppointmentNew extends AppCompatActivity {
+public class
+
+UpcomingAppointmentNew extends AppCompatActivity {
 
     private User loggedInUser;
     private UpcomingAppointment upcomingAppointment;
