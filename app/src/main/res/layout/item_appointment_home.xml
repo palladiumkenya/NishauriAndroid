@@ -19,8 +19,9 @@
             android:layout_weight="1"
             android:lineSpacingExtra="4dp"
             android:text="@string/appointment"
+            android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@color/grey_60" />
+            android:textColor="@color/colorPrimaryDark"  />
 
 
         <com.google.android.material.textview.MaterialTextView
@@ -30,8 +31,8 @@
             android:layout_weight="1"
             android:text="Date: 25/04/2020"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@color/colorAccent"
-            android:textStyle="bold" />
+            android:textColor="@color/colorPrimaryDark"
+            />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"

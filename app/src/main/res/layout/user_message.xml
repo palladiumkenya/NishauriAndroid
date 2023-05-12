@@ -5,6 +5,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+        <androidx.core.widget.NestedScrollView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/nested_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginEnd="@dimen/spacing_large"
+            android:layout_marginStart="@dimen/spacing_large"
+            android:scrollbars="none"
+            android:scrollingCache="true">
+
         <me.himanshusoni.chatmessageview.ChatMessageView
 
             android:id="@+id/chatMessageView1"
@@ -14,10 +26,6 @@
             android:layout_marginRight="12dp"
             app:cmv_arrowGravity="end"
             app:cmv_arrowPosition="right"
-
-
-
-
             app:cmv_cornerRadius="3dp"
             app:cmv_showArrow="true">
 
@@ -63,6 +71,6 @@
         <!-- 2 -->
 
 
-
+</androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>

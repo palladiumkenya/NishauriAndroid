@@ -40,7 +40,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/spacing_xsmall"
                         android:src="@drawable/ic_patient"
-                        android:tint="@color/colorAccent"/>
+                        android:tint="@color/colorPrimary"/>
 
                 </androidx.cardview.widget.CardView>
 
@@ -84,7 +84,7 @@
                                 android:layout_height="wrap_content"
                                 android:text=""
 
-                                android:textColor="@color/colorAccent"
+                                android:textColor="@color/colorPrimaryDark"
                                 app:fontFamily="sans-serif-medium" />
 
                             <LinearLayout
@@ -99,7 +99,7 @@
                                     android:layout_height="@dimen/spacing_large"
                                     android:layout_marginEnd="@dimen/spacing_medium"
                                     android:layout_marginRight="@dimen/spacing_medium"
-                                    android:tint="@color/grey_20"
+                                    android:tint="@color/white"
                                     android:src="@drawable/ic_phone" />
 
                                 <com.google.android.material.textview.MaterialTextView
@@ -108,7 +108,7 @@
                                     android:layout_height="wrap_content"
                                     android:text=""
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                                    android:textColor="@color/grey_40" />
+                                    android:textColor="@color/colorPrimaryDark" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -123,7 +123,7 @@
                                     android:layout_height="@dimen/spacing_large"
                                     android:layout_marginEnd="@dimen/spacing_medium"
                                     android:layout_marginRight="@dimen/spacing_medium"
-                                    android:tint="@color/grey_20"
+                                    android:tint="@color/white"
                                     android:src="@drawable/ic_hospital" />
 
                                 <com.google.android.material.textview.MaterialTextView
@@ -132,7 +132,7 @@
                                     android:layout_height="wrap_content"
                                     android:text=""
                                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                                    android:textColor="@color/grey_40" />
+                                    android:textColor="@color/colorPrimaryDark" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -166,8 +166,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_medium"
                         android:text="Upcoming Appointments"
+                        android:textStyle="bold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/grey_90" />
+                        android:textColor="@color/colorPrimaryDark" />
 
                     <androidx.coordinatorlayout.widget.CoordinatorLayout
                         android:id="@+id/appointment_lyt"
@@ -314,8 +315,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Current Regimen"
+                       android:textStyle="bold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/grey_90" />
+                    android:textColor="@color/colorPrimaryDark" />
 
 
                     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -381,7 +383,7 @@
                                 android:layout_marginTop="@dimen/spacing_large"
                                 android:text="No treatments found."
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-                                android:textColor="@color/grey_60" />
+                                android:textColor="@color/colorPrimaryDark" />
 
                             <TextView
                                 android:id="@+id/treatment_brief"
@@ -391,7 +393,7 @@
                                 android:text="Please confirm with your HCW."
                                 android:textAlignment="center"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                android:textColor="@color/grey_40" />
+                                android:textColor="@color/colorPrimaryDark" />
 
                         </LinearLayout>
 
@@ -604,7 +606,8 @@
                         android:layout_marginBottom="@dimen/spacing_middle"
                         android:text="Dependants"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/grey_90" />
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimaryDark" />
 
                     <androidx.coordinatorlayout.widget.CoordinatorLayout
                         android:id="@+id/coordinator_lyt"

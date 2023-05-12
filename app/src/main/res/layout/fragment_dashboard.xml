@@ -59,6 +59,7 @@
                         android:layout_height="wrap_content"
                         android:padding="@dimen/spacing_medium"
                         android:text="Appointment Trends"
+                        android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
                         style="@style/TextAppearance.AppCompat.Medium"/>
 
@@ -164,8 +165,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Missed Appointments"
+
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                android:textColor="@color/grey_40" />
+                                android:textColor="@color/colorPrimaryDark" />
 
                         </LinearLayout>
 
@@ -267,7 +269,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Kept Appointments"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                android:textColor="@color/grey_40" />
+                                android:textColor="@color/colorPrimaryDark" />
 
                         </LinearLayout>
 
@@ -378,7 +380,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Booked Appointments"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                android:textColor="@color/grey_40" />
+                                android:textColor="@color/colorPrimaryDark" />
 
                         </LinearLayout>
 
@@ -448,6 +450,7 @@
                                 android:layout_weight="1"
                                 android:text="Missed Appointments By Type"
                                 android:textColor="@color/colorPrimary"
+                                android:textStyle="bold"
                                 style="@style/TextAppearance.AppCompat.Medium" />
 
                             <ImageButton
@@ -485,7 +488,7 @@
                                 android:layout_weight="1"
                                 android:text="Drug Refill"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
-                                android:textColor="@color/grey_60" />
+                                android:textColor="@color/colorPrimaryDark" />
 
                             <TextView
                                 android:id="@+id/tv_refill_number"
@@ -493,7 +496,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="0"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
-                                android:textColor="@color/grey_40" />
+                                android:textColor="@color/colorPrimaryDark" />
 
                             <View
                                 android:layout_width="@dimen/spacing_large"
@@ -517,7 +520,7 @@
                                 android:layout_weight="1"
                                 android:text="Clinical Review"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
-                                android:textColor="@color/grey_60" />
+                                android:textColor="@color/colorPrimaryDark" />
 
                             <TextView
                                 android:id="@+id/tv_clinical_review_number"
@@ -525,7 +528,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="0"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
-                                android:textColor="@color/grey_40" />
+                                android:textColor="@color/colorPrimaryDark" />
 
                             <View
                                 android:layout_width="@dimen/spacing_large"
@@ -549,7 +552,7 @@
                                 android:layout_weight="1"
                                 android:text="Enhanced Adherence"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
-                                android:textColor="@color/grey_60" />
+                                android:textColor="@color/colorPrimaryDark" />
 
                             <TextView
                                 android:id="@+id/tv_enhanced_adherence_number"
@@ -557,7 +560,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="0"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
-                                android:textColor="@color/grey_40" />
+                                android:textColor="@color/colorPrimaryDark" />
 
                             <View
                                 android:layout_width="@dimen/spacing_large"
@@ -582,7 +585,7 @@
                                 android:layout_weight="1"
                                 android:text="Lab Investigation"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
-                                android:textColor="@color/grey_60" />
+                                android:textColor="@color/colorPrimaryDark" />
 
                             <TextView
                                 android:id="@+id/tv_lab_investigation_number"
@@ -590,7 +593,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="0"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
-                                android:textColor="@color/grey_40" />
+                                android:textColor="@color/colorPrimaryDark"/>
 
                             <View
                                 android:layout_width="@dimen/spacing_large"
@@ -614,7 +617,7 @@
                                 android:layout_weight="1"
                                 android:text="Viral Load"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
-                                android:textColor="@color/grey_60" />
+                                android:textColor="@color/colorPrimaryDark"/>
 
                             <TextView
                                 android:id="@+id/tv_viral_load_number"
@@ -622,7 +625,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="0"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
-                                android:textColor="@color/grey_40" />
+                                android:textColor="@color/colorPrimaryDark" />
 
                             <View
                                 android:layout_width="@dimen/spacing_large"
@@ -688,27 +691,7 @@
 
             <!-- end -->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/spacing_large" />
 
-            <!-- lab results trends -->
-
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/spacing_medium"
-                android:text="Lab Results trends"
-                android:textAllCaps="true"
-                android:visibility="gone"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
-                style="@style/TextAppearance.AppCompat.Title"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/spacing_large" />
 
 
 
@@ -741,6 +724,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_medium"
                 android:text="Lab Results Trends"
+                android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 style="@style/TextAppearance.AppCompat.Medium"/>
 
