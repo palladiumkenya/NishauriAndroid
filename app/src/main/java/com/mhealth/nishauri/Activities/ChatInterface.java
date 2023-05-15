@@ -19,9 +19,11 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.fxn.stash.Stash;
 import com.mhealth.nishauri.Fragments.Chat.ChatFragment;
 import com.mhealth.nishauri.Models.ChatMessage;
 import com.mhealth.nishauri.Models.UrlTable;
+import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.adapters.chatAdapter;
 import com.mhealth.nishauri.utils.Constants;
@@ -41,6 +43,7 @@ public class ChatInterface extends AppCompatActivity {
    ImageButton smssend;
     EditText smstxt;
     String z;
+    private User loggedInUser;
 
 
     private List<ChatMessage> smslist;
@@ -95,6 +98,12 @@ public class ChatInterface extends AppCompatActivity {
     private void sendMessage(){
         // String auth_token = loggedInUser.getAuth_token();
 
+        loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
+        String auth_token = loggedInUser.getAuth_token();
+        String urls ="?user_id="+auth_token;
+
+
+
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("question", smstxt.getText().toString());
@@ -114,7 +123,8 @@ public class ChatInterface extends AppCompatActivity {
         } catch(Exception e){
 
         }
-        AndroidNetworking.post("https://ushauriapi.kenyahmis.org/nishauri/chat")
+
+        AndroidNetworking.post(z+Constants.CHAT+urls)
                 //.addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -129,19 +139,6 @@ public class ChatInterface extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         //Toast.makeText(ChatInterface.this, "Your BMI is "+response, Toast.LENGTH_SHORT).show();
 
-                       /* try {
-
-                            String  sms = response.getString("msg");
-                           // Toast.makeText(ChatInterface.this, ""+sms, Toast.LENGTH_SHORT).show();
-                            Toast.makeText(ChatInterface.this, ""+smstxt.getText().toString(), Toast.LENGTH_SHORT).show();
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }*/
-                        // do anything with response
-                        //smslist= new ArrayList<>();
-
                         try {
 
 
@@ -150,12 +147,6 @@ public class ChatInterface extends AppCompatActivity {
 
                             Log.d("sms", sms );
                             Log.d("query", sms1 );
-
-
-
-
-
-
 
                                 ChatMessage chatMessage = new ChatMessage(sms, sms1);
                                 //upilist=new ArrayList<>();
@@ -166,10 +157,6 @@ public class ChatInterface extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-
-
-
                     }
 
 
@@ -182,5 +169,4 @@ public class ChatInterface extends AppCompatActivity {
                     }
                 });
     }
-
 }

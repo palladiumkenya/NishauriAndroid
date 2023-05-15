@@ -68,12 +68,15 @@
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/chat_message.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/chatsl.xml" value="0.25" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/content_main.xml" value="0.2" />
+        <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/dialog_privacy.xml" value="0.22" />
+        <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/dialog_regimen.xml" value="0.1265625" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/fragment_appointment_survey.xml" value="0.19479166666666667" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/fragment_appointments.xml" value="0.19322916666666667" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/fragment_chat.xml" value="0.11197916666666667" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/fragment_current_art.xml" value="0.16927083333333334" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/fragment_dashboard.xml" value="0.33" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/fragment_dependants.xml" value="0.2" />
+        <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/fragment_faqs.xml" value="0.16979166666666667" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/fragment_home.xml" value="0.2" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/fragment_lab_results.xml" value="0.1671875" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/fragment_previous_art.xml" value="0.2" />
@@ -85,6 +88,7 @@
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/item_dependant.xml" value="0.14764492753623187" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/item_dependant_home.xml" value="0.18" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/item_edit_dependant.xml" value="0.14764492753623187" />
+        <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/item_faq.xml" value="0.16979166666666667" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/item_passed_appointment.xml" value="0.25" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/item_previous_art.xml" value="0.19479166666666667" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/item_treatment_home.xml" value="0.2" />

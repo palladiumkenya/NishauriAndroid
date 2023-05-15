@@ -98,7 +98,7 @@ public class ART_Activity extends AppCompatActivity {
         } catch(Exception e){
 
         }
-        AndroidNetworking.get(z+Constants.ART_dir+urls1)
+        AndroidNetworking.get(z+Constants.ART_dir+urls1+urls2)
                // .addHeaders("Authorization","Bearer" +" "+ auth_token78/=-0)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

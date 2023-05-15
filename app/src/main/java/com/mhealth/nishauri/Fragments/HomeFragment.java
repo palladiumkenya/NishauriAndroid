@@ -640,19 +640,13 @@ public class HomeFragment extends Fragment {
 
                                 String regimen =jsonObject.getString("regimen");
 
-
                                 CurrentArt currentArt = new CurrentArt(regimen);
                                 currentArtArrayList.add(currentArt);
                                 //  urlModelArrayList.add(url_Model.getStage());
-                              recycler_Views.setAdapter(mysAdapter);
-
-                            }
+                              recycler_Views.setAdapter(mysAdapter);}
 
 
                             // existAdapter =new ActiveVAdapter(ActiveNew.this, upilist);
-
-
-
 
                         } catch (Exception e) {
 

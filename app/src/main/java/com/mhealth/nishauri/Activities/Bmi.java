@@ -42,6 +42,7 @@ public class Bmi extends AppCompatActivity {
     private TextInputEditText weightE;
     private TextInputEditText heightE;
     AlertDialog.Builder builder;
+    private User loggedInUser;
 
     String z;
 
@@ -96,6 +97,11 @@ public class Bmi extends AppCompatActivity {
     public void getBMI(){
        // String auth_token = loggedInUser.getAuth_token();
 
+        loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
+        String auth_token = loggedInUser.getAuth_token();
+        String urls ="?user_id="+auth_token;
+
+
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("weight", weightE.getText().toString());
@@ -115,7 +121,7 @@ public class Bmi extends AppCompatActivity {
         } catch(Exception e){
 
         }
-        AndroidNetworking.post(z+Constants.BMI)
+        AndroidNetworking.post(z+Constants.BMI+urls)
                 //.addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -139,45 +145,12 @@ public class Bmi extends AppCompatActivity {
                            // int d = response.getInt("bmi");
 
                             bmi.setText("Your BMI is"+ " "+bmi1 + " " + comment);
-                            //Toast.makeText(Bmi.this, "Your BMI is "+ d, Toast.LENGTH_SHORT).show();
 
-                            /*builder = new AlertDialog.Builder(bmi.getContext());
-                            builder.setMessage(d)
-                                    .setCancelable(false)
-                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            finish();
-                                            Toast.makeText(getApplicationContext(),"you choose yes action for alertbox",
-                                                    Toast.LENGTH_SHORT).show();
-                                        }
-                                    });*/
-                           /* AlertDialog alert = builder.create();
-                            //Setting the title manually
-                            alert.setTitle("Your BMI is");
-                            alert.show();*/
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                         // do anything with response
-
-
-                        /*try {
-                            Toast.makeText(Bmi.this, "Your BMI is "+response.getInt("bmi"), Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }*/
-
-
-                        /*try {
-                            JSONObject myObject = response.getJSONObject();
-                            int bmii = myObject.has("bmi") ? myObject.getInt("bmi"): 0;
-                            Toast.makeText(Bmi.this, "your"+bmii, Toast.LENGTH_SHORT).show();
-
-                        } catch (JSONException e) {
-                           // e.printStackTrace();
-                            Toast.makeText(Bmi.this, "null"+e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }*/
 
 
                     }

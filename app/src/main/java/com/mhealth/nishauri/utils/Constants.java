@@ -53,6 +53,9 @@ public class Constants extends AppCompatActivity {
     public static String ART_dir ="nishauri/artdirectory";
 
 
+    //Chat
+    public static String CHAT="nishauri/chat";
+
     //DEPENDANT
     public static String ADD_DEPENDANT = "nishauri/dependants/";
     public static String DEPENTANTS= "nishauri/dependants/";

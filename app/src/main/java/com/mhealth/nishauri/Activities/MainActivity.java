@@ -88,14 +88,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
-
-        //String auth_token = loggedInUser.getAuth_token();
-
-       // String urls ="?user_id="+userExtra1;
-        //Constants.ENDPOINT+Constants.CURRENT_USER
-
         String auth_token = loggedInUser.getAuth_token();
-
         String urls ="?user_id="+auth_token;
 
         try{
