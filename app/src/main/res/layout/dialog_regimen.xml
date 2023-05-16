@@ -88,9 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_large"
-                android:text="Is a fixed-dose combination antiretroviral medication,
-         the combination consists of dolutegravir, lamivudine, tenofovir and disoproxil,
-            take as advised by your doctor/healthcare provider
+                android:text="Is a fixed-dose combination antiretroviral medication, the combination consists of dolutegravir, lamivudine, tenofovir and disoproxil, take as advised by your doctor/healthcare provider
              " />
 
         </LinearLayout>

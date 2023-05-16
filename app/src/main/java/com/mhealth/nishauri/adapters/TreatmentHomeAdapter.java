@@ -100,36 +100,6 @@ public class TreatmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.View
 
                     dialog.show();
                     dialog.getWindow();
-                   // Toast.makeText(context, "gggg", Toast.LENGTH_SHORT).show();
-                    //Log.d("", "hello");
-                   /* Balloon balloon = new Balloon.Builder(context).
-                            setArrowSize(10)
-                            .setArrowOrientation(ArrowOrientation.TOP)
-                            .setArrowPositionRules(ArrowPositionRules.ALIGN_ANCHOR)
-                            .setArrowPosition(0.5f)
-                            //.setWidth(220) // sets 220dp width size.
-                            .setWidth(BalloonSizeSpec.WRAP)
-
-                            .setHeight(65)
-                            .setTextSize(15f)
-                            .setCornerRadius(4f)
-                            .setAlpha(0.9f)
-                            .setText("Is a fixed-dose combination antiretroviral medication, " +
-                                    "The combination consists of dolutegravir, lamivudine, tenofovir and disoproxil," +
-                                    "Take as advised by your doctor/healthcare provider")
-                            .setTextIsHtml(true)
-                            .setIconDrawable(ContextCompat.getDrawable(context, R.drawable.ic_profile))
-                            .setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary))
-
-                            .setBalloonAnimation(BalloonAnimation.FADE)
-
-                            .setMarginLeft(14) // sets the left margin on the balloon.
-                            .setMarginRight(14)
-
-
-                            .build();
-                     balloon.showAlignBottom(view);
-                       balloon.show(view);*/
 
                 }
             });
