@@ -19,7 +19,7 @@ android {
         targetSdkVersion 33
         versionCode 45
        // versionName "1.1.0 Beta"
-        versionName "v1.0.1"
+        versionName "v2.0"
 
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

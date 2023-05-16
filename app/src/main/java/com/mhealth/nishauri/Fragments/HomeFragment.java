@@ -640,6 +640,10 @@ public class HomeFragment extends Fragment {
 
                                 String regimen =jsonObject.getString("regimen");
 
+                                if (regimen.contentEquals(" ")){
+                                    Toast.makeText(context, "No regimen", Toast.LENGTH_LONG).show();
+                                }
+
                                 CurrentArt currentArt = new CurrentArt(regimen);
                                 currentArtArrayList.add(currentArt);
                                 //  urlModelArrayList.add(url_Model.getStage());

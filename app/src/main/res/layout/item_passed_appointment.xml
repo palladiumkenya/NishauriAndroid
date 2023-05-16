@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/lyt_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
-    android:layout_marginHorizontal="@dimen/spacing_medium"
-    android:layout_marginTop="@dimen/spacing_small"
     android:orientation="vertical"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="5dp"
-    app:cardUseCompatPadding="true">
+   >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,117 +15,31 @@
             android:orientation="horizontal"
             android:weightSum="3">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:textColor="@color/colorPrimaryDark"
-                android:text="Appointment Type"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:padding="5dp"
-
-                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/appointment_type1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="left"
-                android:padding="5dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:text="Type"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="13sp" />
-
-        </LinearLayout>
-
-        <!-- Appointment date -->
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:textColor="@color/colorPrimaryDark"
-                android:text="Appointment Date"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:padding="5dp"
-                android:textSize="13sp" />
+                android:lineSpacingExtra="4dp"
+                android:text="Type"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/colorPrimaryDark" />
 
             <TextView
                 android:id="@+id/appointment_date1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:gravity="left"
                 android:padding="5dp"
                 android:text="Date"
                 android:textColor="@color/colorPrimaryDark"
 
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="13sp" />
-
-        </LinearLayout>
-<!--  date kept -->
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:textColor="@color/colorPrimaryDark"
-                android:text="Visit Date"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:padding="5dp"
-                android:textSize="13sp" />
-
-            <TextView
-                android:id="@+id/kept_date1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="left"
-                android:padding="5dp"
-                android:text="Date Kept"
-                android:textColor="@color/colorPrimaryDark"
-
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="13sp" />
-
-        </LinearLayout>
-
-        <!-- status -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:textColor="@color/colorPrimaryDark"
-                android:text="Appointment Status"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:padding="5dp"
                 android:textSize="13sp" />
 
             <TextView
@@ -144,14 +50,29 @@
                 android:gravity="left"
                 android:padding="5dp"
                 android:text="status"
-                android:textColor="@color/colorPrimaryDark"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="13sp" />
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/colorPrimaryDark" />
+
 
         </LinearLayout>
 
+        <!-- Appointment date -->
 
+
+
+<!--  date kept -->
+
+
+
+
+
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_20" />
 
 </LinearLayout>
-
-</androidx.cardview.widget.CardView>

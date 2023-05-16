@@ -8,7 +8,7 @@
     android:id="@+id/frag_chat"
     android:orientation="vertical"
     tools:context=".Fragments.Chat.ChatFragment"
-    android:background="@color/grey_10">
+    android:background="@color/white">
 
     <androidx.core.widget.NestedScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -45,6 +45,7 @@
                     android:id="@+id/art_card"
                     android:layout_margin="@dimen/spacing_medium"
                     android:layout_weight="1"
+                    app:cardBackgroundColor="@color/blue_grey_50"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp">
 
@@ -59,7 +60,7 @@
                             android:layout_height="80dp"
                             android:paddingTop="@dimen/spacing_large"
                             android:src="@drawable/ic_art"
-                            android:tint="@color/colorPrimary"
+                            app:tint="@color/colorPrimaryDark"
                             android:scaleType="centerInside" />
 
                         <LinearLayout
@@ -82,11 +83,13 @@
                                     android:maxLines="1"
                                     android:singleLine="true"
                                     android:text="ART Directory"
-                                    android:textColor="@color/grey_90" />
+
+                                    android:textColor="@color/colorPrimaryDark" />
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/colorPrimaryDark"
                                     android:text="Facility Details." />
 
                             </LinearLayout>
@@ -112,6 +115,7 @@
                     android:id="@+id/chat_card"
                     android:layout_margin="@dimen/spacing_medium"
                     android:layout_weight="1"
+                    app:cardBackgroundColor="@color/blue_grey_50"
 
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp">
@@ -127,7 +131,7 @@
                             android:layout_height="80dp"
                             android:paddingTop="@dimen/spacing_large"
                             android:src="@drawable/ic_chat"
-                            android:tint="@color/colorPrimary"
+                            app:tint="@color/colorPrimaryDark"
                             android:scaleType="centerInside" />
 
                         <LinearLayout
@@ -149,11 +153,12 @@
                                     android:maxLines="1"
                                     android:singleLine="true"
                                     android:text="Start Chat"
-                                    android:textColor="@color/grey_90" />
+                                    android:textColor="@color/colorPrimaryDark" />
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/colorPrimaryDark"
                                     android:text="Chat with your HCW." />
 
                             </LinearLayout>
@@ -178,6 +183,7 @@
                     android:layout_margin="@dimen/spacing_medium"
                     android:layout_weight="1"
                     android:visibility="gone"
+                    app:cardBackgroundColor="@color/blue_grey_50"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp">
 
@@ -192,7 +198,7 @@
                             android:layout_height="80dp"
                             android:paddingTop="@dimen/spacing_large"
                             android:src="@drawable/ic_survey"
-                            android:tint="@color/colorPrimary"
+                            app:tint="@color/colorPrimaryDark"
                             android:scaleType="centerInside" />
 
                         <LinearLayout
@@ -214,11 +220,13 @@
                                     android:maxLines="1"
                                     android:singleLine="true"
                                     android:text="Client Survey"
-                                    android:textColor="@color/grey_90" />
+                                    android:textColor="@color/colorPrimaryDark"
+                                     />
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/colorPrimaryDark"
                                     android:text="Survey clients status." />
 
                             </LinearLayout>
@@ -242,6 +250,7 @@
                     android:layout_margin="@dimen/spacing_medium"
                     android:layout_weight="1"
                     app:cardCornerRadius="10dp"
+                    app:cardBackgroundColor="@color/blue_grey_50"
                     app:cardElevation="5dp">
 
                     <LinearLayout
@@ -255,7 +264,7 @@
                             android:layout_height="90dp"
                             android:src="@drawable/ic_faq"
                             android:paddingTop="@dimen/spacing_large"
-                            android:tint="@color/colorPrimary"
+                            app:tint="@color/colorPrimaryDark"
                             android:scaleType="centerInside" />
 
                         <LinearLayout
@@ -276,12 +285,14 @@
                                     android:layout_height="wrap_content"
                                     android:maxLines="1"
                                     android:singleLine="true"
+                                    android:textColor="@color/colorPrimaryDark"
                                     android:text="FAQs"
-                                    android:textColor="@color/grey_90" />
+                                   />
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColor="@color/colorPrimaryDark"
                                     android:text="Questions asked frequently by others." />
 
                             </LinearLayout>
