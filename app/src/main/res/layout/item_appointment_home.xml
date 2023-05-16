@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/edit1"
+            android:tint="@color/colorPrimaryDark"
 
             android:src="@drawable/edit_appt" />
 

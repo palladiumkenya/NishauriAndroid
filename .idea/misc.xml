@@ -70,6 +70,8 @@
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/content_main.xml" value="0.2" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/dialog_privacy.xml" value="0.22" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/dialog_regimen.xml" value="0.25" />
+        <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/dialog_suppressed.xml" value="0.19895833333333332" />
+        <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/dialog_unsuppressed.xml" value="0.2" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/fragment_appointment_survey.xml" value="0.19479166666666667" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/fragment_appointments.xml" value="0.19322916666666667" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/fragment_chat.xml" value="0.11197916666666667" />
@@ -94,6 +96,7 @@
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/item_treatment_home.xml" value="0.2" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/item_upcoming_appointment.xml" value="0.22" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/item_viral_load_results.xml" value="0.17083333333333334" />
+        <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/layout_lab_request.xml" value="0.2" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/nav_header_main.xml" value="0.19427083333333334" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/layout/user_message.xml" value="0.2" />
         <entry key="..\:/Users/This/nishEdit/app/src/main/res/menu/activity_main_drawer.xml" value="0.2" />

@@ -1,10 +1,13 @@
 package com.mhealth.nishauri.adapters;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -80,6 +83,75 @@ public class ViralLoadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             view.result_date.setText(obj.getDate());
             view.result.setText(obj.getResult());
             view.sup.setText(obj.getStatus());
+
+            if (obj.getStatus().contentEquals("Viral unsuppressed")){
+                view.result.setTextColor(Color.parseColor("#F32013"));
+                view.sup.setTextColor(Color.parseColor("#F32013"));
+                view.bt_expand.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        final Dialog dialog = new Dialog(context);
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+                        dialog.setContentView(R.layout.dialog_unsuppressed);
+                        dialog.setCancelable(false);
+
+                        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                        lp.copyFrom(dialog.getWindow().getAttributes());
+                        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+
+                        ((ImageButton) dialog.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        dialog.show();
+                        dialog.getWindow();
+
+
+                    }
+                });
+
+            }
+
+            if (obj.getStatus().contentEquals("Viral Suppressed")){
+                view.result.setTextColor(Color.parseColor("#303F9F"));
+                view.sup.setTextColor(Color.parseColor("#303F9F"));
+
+                view.bt_expand.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        final Dialog dialog = new Dialog(context);
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+                        dialog.setContentView(R.layout.dialog_suppressed);
+                        dialog.setCancelable(false);
+
+                        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                        lp.copyFrom(dialog.getWindow().getAttributes());
+                        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+
+                        ((ImageButton) dialog.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        dialog.show();
+                        dialog.getWindow();
+
+
+                    }
+                });
+
+            }
+
+
 
            /* if (obj.getResult_content() instanceof String ){
                 view.result.setTextColor(Color.parseColor("#F32013"));

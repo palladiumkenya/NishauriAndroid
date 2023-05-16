@@ -75,7 +75,7 @@
                                 android:layout_height="wrap_content"
                                 android:text=""
 
-                                android:textColor="@color/colorAccent"
+                                android:textColor="@color/red_500"
                                 app:fontFamily="sans-serif-medium" />
                             <!-- UPI -->
                             <com.google.android.material.textview.MaterialTextView
@@ -99,7 +99,7 @@
                                     android:layout_height="@dimen/spacing_large"
                                     android:layout_marginEnd="@dimen/spacing_medium"
                                     android:layout_marginRight="@dimen/spacing_medium"
-                                    android:tint="@color/white"
+                                    android:tint="@color/colorPrimaryDark"
                                     android:src="@drawable/ic_phone" />
 
                                 <com.google.android.material.textview.MaterialTextView
@@ -123,7 +123,7 @@
                                     android:layout_height="@dimen/spacing_large"
                                     android:layout_marginEnd="@dimen/spacing_medium"
                                     android:layout_marginRight="@dimen/spacing_medium"
-                                    android:tint="@color/white"
+                                    android:tint="@color/colorPrimaryDark"
                                     android:src="@drawable/ic_hospital" />
 
                                 <com.google.android.material.textview.MaterialTextView
