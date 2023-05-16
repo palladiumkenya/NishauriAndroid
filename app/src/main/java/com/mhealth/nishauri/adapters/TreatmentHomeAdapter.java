@@ -1,10 +1,13 @@
 package com.mhealth.nishauri.adapters;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -77,9 +80,29 @@ public class TreatmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.View
             view.bt_expand.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    final Dialog dialog = new Dialog(context);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+                    dialog.setContentView(R.layout.dialog_regimen);
+                    dialog.setCancelable(false);
+
+                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                    lp.copyFrom(dialog.getWindow().getAttributes());
+                    lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                    lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+
+                    ((ImageButton) dialog.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    dialog.show();
+                    dialog.getWindow();
                    // Toast.makeText(context, "gggg", Toast.LENGTH_SHORT).show();
                     //Log.d("", "hello");
-                    Balloon balloon = new Balloon.Builder(context).
+                   /* Balloon balloon = new Balloon.Builder(context).
                             setArrowSize(10)
                             .setArrowOrientation(ArrowOrientation.TOP)
                             .setArrowPositionRules(ArrowPositionRules.ALIGN_ANCHOR)
@@ -106,7 +129,7 @@ public class TreatmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.View
 
                             .build();
                      balloon.showAlignBottom(view);
-                       balloon.show(view);
+                       balloon.show(view);*/
 
                 }
             });
