@@ -120,7 +120,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="HEIGHT (mtrs)"
+                            android:text="HEIGHT (Centimetres)"
                             android:textAlignment="center"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                             android:textColor="@color/grey_40" />
@@ -162,6 +162,19 @@
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                             android:textColor="@color/colorPrimary"
                             android:textStyle="bold" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/comment1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_medium"
+                            android:clickable="true"
+                            android:text=""
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold" />
+
+
 
                         <View
                             android:layout_width="0dp"

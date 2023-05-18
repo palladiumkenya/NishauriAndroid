@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
 public class Bmi extends AppCompatActivity {
 
     private Button btn_BMI;
-    private TextView bmi;
+    private TextView bmi, comment2;
     private Toolbar toolbar;
 
     private TextInputEditText weightE;
@@ -72,6 +72,7 @@ public class Bmi extends AppCompatActivity {
 
         btn_BMI = findViewById(R.id.btn_bmi);
          bmi = (TextView) findViewById(R.id.bmi);
+        comment2 = (TextView) findViewById(R.id.comment1);
 //        forgot_password = findViewById(R.id.tv_forgot_password);
 
         weightE = (TextInputEditText) findViewById(R.id.edtxt_weight);
@@ -144,7 +145,8 @@ public class Bmi extends AppCompatActivity {
 
                            // int d = response.getInt("bmi");
 
-                            bmi.setText("Your BMI is"+ " "+bmi1 + " " + comment);
+                            bmi.setText("Your BMI is"+ " "+bmi1);
+                            comment2.setText(comment);
 
 
                         } catch (JSONException e) {
