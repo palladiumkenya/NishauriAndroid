@@ -361,6 +361,41 @@
 
                         </FrameLayout>
 
+
+
+
+                        <!-- Regimen -->
+
+                        <LinearLayout
+                            android:id="@+id/no_regimen_lyt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:visibility="gone"
+                            android:paddingBottom="80dp"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:id="@+id/regimen_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_large"
+                                android:text="No appointments found."
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                                android:textColor="@color/grey_60" />
+
+
+
+                        </LinearLayout>
+
+
+
+
+                        <!-- End regimen -->
+
                         <LinearLayout
                             android:id="@+id/no_treatment_lyt"
                             android:layout_width="wrap_content"
@@ -376,6 +411,7 @@
                                 android:id="@+id/treatment_img"
                                 android:layout_width="170dp"
                                 android:layout_height="170dp"
+                                android:layout_marginTop="@dimen/spacing_large"
                                 android:src="@drawable/ic_treatment" />
 
                             <TextView
@@ -383,9 +419,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/spacing_large"
-                                android:text="No treatments found."
+                                android:text="No Regimen found."
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-                                android:textColor="@color/colorPrimaryDark" />
+                                android:textColor="@color/grey_60" />
 
                             <TextView
                                 android:id="@+id/treatment_brief"
@@ -395,7 +431,7 @@
                                 android:text="Please confirm with your HCW."
                                 android:textAlignment="center"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                android:textColor="@color/colorPrimaryDark" />
+                                android:textColor="@color/grey_60" />
 
                         </LinearLayout>
 

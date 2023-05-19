@@ -18,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Activities.Auth.LoginActivity;
 import com.mhealth.nishauri.Activities.Auth.SignUpActivity;
 import com.mhealth.nishauri.Activities.MainActivity;
+import com.mhealth.nishauri.Activities.ProfileOTP;
 import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.utils.Constants;
@@ -43,19 +44,30 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
+        String auth_token = loggedInUser.getAuth_token();
+        String urls2 =auth_token;
         init();
         btn_sub = findViewById(R.id.bt_prof);
         Bundle extras = getIntent().getExtras();
 
-        if (extras != null) {
+       /* if (extras != null) {
             userExtra = extras.getString("user_ID");
             // and get whatever type user account id is
-        }
+        }*/
+
+        ccc= findViewById(R.id.ccc_no);
+        upi = findViewById(R.id.upi_no);
+        first = findViewById(R.id.f_name);
+
+
 
         btn_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                // Toast.makeText(ProfileActivity.this, "Profile created", Toast.LENGTH_SHORT).show();
 
                 if (ccc.getText().toString().isEmpty()){
@@ -67,7 +79,7 @@ public class ProfileActivity extends AppCompatActivity {
                 }else{
 
 
-                send(userExtra, ccc.getText().toString(), upi.getText().toString(), first.getText().toString());}
+                send(urls2, ccc.getText().toString(), upi.getText().toString(), first.getText().toString());}
 
             }
         });
@@ -76,19 +88,14 @@ public class ProfileActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Complete profile");
-
-        ccc= findViewById(R.id.ccc_no);
-        upi = findViewById(R.id.upi_no);
-        first = findViewById(R.id.f_name);
+        getSupportActionBar().setTitle("Set Program");
 
 
 
     }
 
     private void send(String userid, String cc, String up, String fname){
-        String auth_token = loggedInUser.getAuth_token();
-        String urls2 ="?user_id="+auth_token;
+
 
         try{
             List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
@@ -117,7 +124,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-        AndroidNetworking.post(z+ Constants.SET_program)
+        AndroidNetworking.post(z+ Constants.VALIDATE_program)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")
@@ -142,20 +149,24 @@ public class ProfileActivity extends AppCompatActivity {
 
                             boolean  status = response.has("success") && response.getBoolean("success");
                             String  errors = response.has("error") ? response.getString("error") : "" ;
-                            String  errors1 = response.has("msg") ? response.getString("msg") : "" ;
+                            String  Message = response.has("msg") ? response.getString("msg") : "" ;
 
 
                             if (status){
 
-                                Intent mint = new Intent(ProfileActivity.this, MainActivity.class);
-                                Toast.makeText(ProfileActivity.this, "Profile created", Toast.LENGTH_SHORT).show();
+                                Intent mint = new Intent(ProfileActivity.this, ProfileOTP.class);
+                                Toast.makeText(ProfileActivity.this, "Profile created"+ " "+Message, Toast.LENGTH_SHORT).show();
                                // mint.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                mint.putExtra("cc1",  ccc.getText().toString());
+                                mint.putExtra("upi1",  upi.getText().toString());
+                                mint.putExtra("first1",  first.getText().toString());
+
                                 startActivity(mint);
 
                             }
-                            else{
+                            else if (!status){
 
-                                Toast.makeText(ProfileActivity.this, errors1, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProfileActivity.this, Message, Toast.LENGTH_SHORT).show();
 
                             }
 
@@ -169,21 +180,21 @@ public class ProfileActivity extends AppCompatActivity {
                     public void onError(ANError error) {
                         // handle error
 //                        Log.e(TAG, error.getErrorBody());
-                        Toast.makeText(ProfileActivity.this, "errors", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProfileActivity.this, error.getErrorBody(), Toast.LENGTH_SHORT).show();
 
 
 
                         // Snackbar.make(findViewById(R.id.signup_layout), "Error: "+error.getErrorBody(), Snackbar.LENGTH_LONG).show();
 
                         //JSONObject jsonObject = new JSONObject();
-                        int  errors = error.getErrorCode();
+                        /*int  errors = error.getErrorCode();
                         if (errors==400){
                             Toast.makeText(ProfileActivity.this, "null", Toast.LENGTH_SHORT).show();
                            // Snackbar.make(findViewById(R.id.signup_layout1), " Invalid CCC number", Snackbar.LENGTH_LONG).show();
                         }else {
                             Toast.makeText(ProfileActivity.this, "null2", Toast.LENGTH_SHORT).show();
                             //Snackbar.make(findViewById(R.id.signup_layout1), "Error: " + error.getErrorDetail(), Snackbar.LENGTH_LONG).show();
-                        }
+                        }*/
 
 
                     }

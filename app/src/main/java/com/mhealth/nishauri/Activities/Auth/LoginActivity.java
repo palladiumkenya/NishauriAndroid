@@ -281,13 +281,13 @@ public class LoginActivity extends AppCompatActivity {
 
 
                                 Intent intent1 = new Intent(LoginActivity.this, MainActivity.class);
-                                 intent1.putExtra("user_ID", userID1);
+                                // intent1.putExtra("user_ID", userID1);
                                 startActivity(intent1);
 
                             }else if (status && page==0){
 
                                 Intent intent1 = new Intent(LoginActivity.this, ProfileActivity.class);
-                                intent1.putExtra("user_ID", userID1);
+                               // intent1.putExtra("user_ID", userID1);
                                 startActivity(intent1);
 
 

@@ -634,6 +634,8 @@ public class HomeFragment extends Fragment {
 
                             JSONArray jsonArray =response.getJSONArray("msg");
 
+                            if (jsonArray.length() > 0){
+
                             for (int a =0; a<jsonArray.length(); a++){
 
                                 JSONObject jsonObject =jsonArray.getJSONObject(a);
@@ -647,7 +649,10 @@ public class HomeFragment extends Fragment {
                                 CurrentArt currentArt = new CurrentArt(regimen);
                                 currentArtArrayList.add(currentArt);
                                 //  urlModelArrayList.add(url_Model.getStage());
-                              recycler_Views.setAdapter(mysAdapter);}
+                              recycler_Views.setAdapter(mysAdapter);}}else{
+
+                                no_treatment_lyt.setVisibility(View.VISIBLE);
+                            }
 
 
                             // existAdapter =new ActiveVAdapter(ActiveNew.this, upilist);

@@ -48,13 +48,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Bundle extras = getIntent().getExtras();
+
+
+       /* Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
             userExtra1 = extras.getString("user_ID");
 
             // and get whatever type user account id is
-        }
+        }*/
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -21,6 +21,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
         <activity
+            android:name=".Activities.ProfileOTP"
+            android:exported="false" />
+        <activity
             android:name=".Activities.ART_Activity"
             android:exported="false" />
         <activity

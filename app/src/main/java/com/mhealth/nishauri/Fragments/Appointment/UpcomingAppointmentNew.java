@@ -251,8 +251,10 @@ btn1.setOnClickListener(new View.OnClickListener() {
                                     Intent intent = new Intent(UpcomingAppointmentNew.this, MainActivity.class);
                                     startActivity(intent);
 
-                                    //Toast.makeText(UpcomingAppointmentNew.this, message, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(UpcomingAppointmentNew.this, message, Toast.LENGTH_SHORT).show();
 
+                                }else if (!status){
+                                    Toast.makeText(UpcomingAppointmentNew.this, message, Toast.LENGTH_SHORT).show();
                                 }
 
 
@@ -262,7 +264,7 @@ btn1.setOnClickListener(new View.OnClickListener() {
                         }
                       //  Toast.makeText(UpcomingAppointmentNew.this, "hhh"+message, Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(UpcomingAppointmentNew.this, message, Toast.LENGTH_LONG).show();
+                       // Toast.makeText(UpcomingAppointmentNew.this, message, Toast.LENGTH_LONG).show();
 
                     }
 
@@ -271,7 +273,17 @@ btn1.setOnClickListener(new View.OnClickListener() {
                         // handle error
                         Log.e("onError", error.getErrorBody());
 
-                        try {
+                        Toast.makeText(UpcomingAppointmentNew.this, error.getErrorBody(), Toast.LENGTH_SHORT).show();
+                       /* NetworkResponse networkResponse = error.networkResponse;
+                        if (networkResponse != null && networkResponse.data != null) {
+                            String jsonError = new String(networkResponse.data);
+                            // Print Error!
+                        }*/
+
+
+
+                       /* try {
+
 
                             JO = new JSONObject(error.toString());
                             Toast.makeText(UpcomingAppointmentNew.this, JO.getString("msg"), Toast.LENGTH_SHORT).show();
@@ -281,11 +293,11 @@ btn1.setOnClickListener(new View.OnClickListener() {
                         }catch (JSONException e){
 
                             e.printStackTrace();
-                        }
+                        }*/
 
 
 
-                         Toast.makeText(UpcomingAppointmentNew.this, error.getErrorBody(), Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(UpcomingAppointmentNew.this, error.getErrorBody(), Toast.LENGTH_SHORT).show();
 
                         //animationView.setVisibility(View.GONE);
 
@@ -320,6 +332,10 @@ btn1.setOnClickListener(new View.OnClickListener() {
 
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
         datePickerDialog.show();
+    }
+
+    private void reschedule2(){
+
     }
 
 

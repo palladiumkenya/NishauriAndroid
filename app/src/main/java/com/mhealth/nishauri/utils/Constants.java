@@ -41,7 +41,9 @@ public class Constants extends AppCompatActivity {
     public static String UPDATE_Pwd="nishauri/updatepassword";
     public static String VERIFY_otp="nishauri/verifyotp";
     public static String RESET_pwd="nishauri/resetpassword";
-    public static String SET_program="nishauri/setprogram";
+    public static String SET_program1="nishauri/setprogram";
+
+    public static String VALIDATE_program="nishauri/validate_program";
 
 
 
