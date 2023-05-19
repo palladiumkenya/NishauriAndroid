@@ -52,7 +52,6 @@ public class UpdateProfileFragment extends Fragment {
     private View root;
     private Context context;
 
-    String z;
 
     private User loggedInUser;
     private EditDependantAdapter mAdapter;
@@ -109,19 +108,6 @@ public class UpdateProfileFragment extends Fragment {
         dependantArrayList = new ArrayList<>();
         mAdapter = new EditDependantAdapter(context, dependantArrayList);
 
-        /*mAdapter.setOnItemClickListener(new EditDependantAdapter.OnItemClickListener() {
-           @Override
-           public void onItemClick(int position) {
-
-               Dependant clickedItem = dependantArrayList.get(position);
-
-               Bundle bundle = new Bundle();
-               bundle.putSerializable("dependant", clickedItem);
-               Navigation.findNavController(root).navigate(R.id.nav_update_dependants);
-
-            }
-        });*/
-
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false));
         recyclerView.setHasFixedSize(true);
@@ -159,20 +145,9 @@ public class UpdateProfileFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
-
-        } catch(Exception e){
-
-        }
 
 
-        AndroidNetworking.get(z+Constants.CURRENT_USER)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_USER)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -230,14 +205,6 @@ public class UpdateProfileFragment extends Fragment {
                                             String dependant_name = item.has("dependant_name") ? item.getString("dependant_name") : "";
                                             int  dependant_age = item.has("dependant_age") ? item.getInt("dependant_age") : 0;
 
-
-                                   /* int  id = item.has("id") ? item.getInt("id") : 0;
-                                    String first_name = item.has("first_name") ? item.getString("first_name") : "";
-                                    String surname = item.has("surname") ? item.getString("surname") : "";
-                                    String heiNumber = item.has("heiNumber") ? item.getString("heiNumber") : "";
-                                    String dob = item.has("dob") ? item.getString("dob") : "";
-                                    String approved = item.has("approved") ? item.getString("approved") : "";
-                                    int  user = item.has("user") ? item.getInt("user") : 0;*/
 
 
                                             Dependant newDependant = new Dependant(dependant_age, moh_upi, clinic_number, dependant_name);

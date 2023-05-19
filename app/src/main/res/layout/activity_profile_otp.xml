@@ -65,6 +65,18 @@
 
                 android:src="@drawable/nishauri_logo" />
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/otpphone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/spacing_xlarge"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:text=""
+
+                android:textColor="@color/black_darker"
+                android:textStyle="bold" />
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,17 +96,7 @@
                     android:orientation="vertical"
                     android:padding="@dimen/spacing_mlarge">
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="@dimen/spacing_xlarge"
-                        android:layout_marginTop="@dimen/spacing_middle"
-                        android:text="The start of awesomeness"
-                        android:visibility="gone"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                        android:textColor="@color/black_darker"
-                        android:textStyle="bold" />
+
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"

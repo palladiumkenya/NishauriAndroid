@@ -43,7 +43,6 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
     private View root;
     private UpcomingAppointmentAdapter.OnItemClickListener onItemClickListener;
 
-    String z;
 
     public interface OnItemClickListener{
         void onItemClick(int position);
@@ -139,21 +138,10 @@ public class UpcomingAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
                         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
                         String auth_token = loggedInUser.getAuth_token();
-                        try{
-                            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-                            if (_url.size()==1){
-                                for (int x=0; x<_url.size(); x++){
-                                    z=_url.get(x).getBase_url1();
-                                }
-                            }
-
-                        } catch(Exception e){
-
-                        }
 
 
 
-                        AndroidNetworking.post(z+Constants.CONFIRM_APPOINTMENT+obj.getId())
+                        AndroidNetworking.post(Constants.ENDPOINT+Constants.CONFIRM_APPOINTMENT+obj.getId())
                                 .addHeaders("Authorization","Token "+ auth_token)
                                 .addHeaders("Content-Type", "application.json")
                                 .addHeaders("Accept", "*/*")

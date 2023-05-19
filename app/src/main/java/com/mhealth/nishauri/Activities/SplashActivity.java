@@ -25,7 +25,7 @@ SplashActivity extends AppCompatActivity {
                 try {
                     Thread.sleep(1000);
 
-                    startActivity(new Intent(SplashActivity.this, SelectUrls.class));
+                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                     finish();
                 }catch (Exception e){
                     e.printStackTrace();

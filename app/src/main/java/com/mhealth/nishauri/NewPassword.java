@@ -35,8 +35,6 @@ public class NewPassword extends AppCompatActivity {
     String  userExtra1;
     boolean  status;
 
-    String z;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,19 +129,7 @@ public class NewPassword extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
-
-        } catch(Exception e){
-
-        }
-
-        AndroidNetworking.post(z+ Constants.UPDATE_Pwd)
+        AndroidNetworking.post(Constants.ENDPOINT+ Constants.UPDATE_Pwd)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")
@@ -173,23 +159,7 @@ public class NewPassword extends AppCompatActivity {
                             userID11 =jsonObject1.getString("user_id");
                             page11 = jsonObject1.getInt("page_id");
 
-                            // String encryptedID1 = Base64Encoder.encryptString(userID1);
 
-
-
-                           /* if (status){
-
-
-                                Intent intent1 =new Intent(NewPassword.this, LoginActivity.class);
-                                //intent1.putExtra("user_ID", userID11);
-                                startActivity(intent1);
-
-                            }
-                            else {
-
-                                Toast.makeText(NewPassword.this, errors11, Toast.LENGTH_LONG).show();
-
-                            }*/
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -213,14 +183,7 @@ public class NewPassword extends AppCompatActivity {
 
                     @Override
                     public void onError(ANError error) {
-                        // handle error
-//                        Log.e(TAG, error.getErrorBody());
 
-                        //animationView.setVisibility(View.GONE);
-
-                        // Snackbar.make(findViewById(R.id.signup_layout), "Error: "+error.getErrorBody(), Snackbar.LENGTH_LONG).show();
-
-                        //JSONObject jsonObject = new JSONObject();
                         int  errors = error.getErrorCode();
                         if (errors==400){
                             Toast.makeText(NewPassword.this, "Invalid Phone Number", Toast.LENGTH_SHORT).show();

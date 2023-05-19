@@ -68,7 +68,6 @@ public class AppointmentSurveyFragment extends Fragment {
     private String MissedAppointmentDate = "";
 
     private int facilityID = 0;
-    String z;
 
     ArrayList<String> facilitiesList;
     ArrayList<Facility> facilities;
@@ -264,21 +263,9 @@ public class AppointmentSurveyFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
-
-        } catch(Exception e){
-
-        }
 
 
-
-        AndroidNetworking.get(z+Constants.ALL_FACILITIES)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.ALL_FACILITIES)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

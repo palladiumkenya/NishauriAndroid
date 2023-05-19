@@ -57,8 +57,6 @@ public class DashboardFragment extends Fragment {
     ArrayList<ViralLoads> viralLoads =new ArrayList<>();
 
     private ProgressDialog pDialog;
-    String z;
-
 
     //
     ArrayList yAxis;
@@ -190,23 +188,13 @@ public class DashboardFragment extends Fragment {
         String auth_token = loggedInUser.getAuth_token();
 
         String urls ="?user_id="+auth_token;
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
-
-        } catch(Exception e){
-
-        }
 
 
 
 
 
-        AndroidNetworking.get(z+Constants.VIRALS_LOADNEW+urls)
+
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.VIRALS_LOADNEW+urls)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -313,21 +301,9 @@ public class DashboardFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
-
-        } catch(Exception e){
-
-        }
 
 
-
-        AndroidNetworking.get(z+Constants.VIRALS_LOADNEW)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.VIRALS_LOADNEW)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -406,27 +382,6 @@ public class DashboardFragment extends Fragment {
                                                BarData barData =new BarData(labelsName1, barDataSet);
                                                 //chart3.setData(barData);
 
-                                               /* XAxis xAxis = chart3.getXAxis();
-                                                xAxis.setValueFormatter(new In);*/
-
-
-                                                /*barEntryArrayList1.add(new BarEntry(date_collected, result_content));
-                                                entries.add(new BarEntry(Float.parseFloat(result_content), 1));
-                                                entries.add(new BarEntry(Float.parseFloat(result_content), 2));*/
-
-                                                //BarDataSet dataset = new BarDataSet(entries, "");
-
-                                             /*   ArrayList<String> labels = new ArrayList<String>();
-                                                labels.add(date_collected);
-                                                labels.add(date_collected);
-                                                labels.add(date_collected);
-
-                                                BarData bardata = new BarData(labels, dataset);
-                                                dataset.setColors(ColorTemplate.JOYFUL_COLORS);
-                                                chart2.setData(bardata);
-                                                chart2.animateY(5000);
-                                                chart2.animateX(3000);*/
-
 
                                             }
 
@@ -438,46 +393,6 @@ public class DashboardFragment extends Fragment {
 
                                     }
 
-
-
-
-
-                                   /* try {
-                                        //int x= Integer.parseInt(obj.getResult_content());
-                                        //if (x!= String)
-                                       // String sample = obj.getResult_content();
-                                        char[] chars = result_content.toCharArray();
-                                        StringBuilder sb = new StringBuilder();
-                                        for(char c : chars){
-                                            if(Character.isDigit(c)){
-
-
-                                                xAxis1.add(date_collected);
-
-                                                values = new BarEntry(Float.parseFloat(result_content), i);
-                                                yValues.add(values);
-                                            }
-
-                                        }
-
-
-                                    }catch (NumberFormatException e){
-                                        e.getStackTrace();
-
-                                    }*/
-
-
-                                    //ViralLoad newResult = new ViralLoad(id,r_id,result_type,result_content,date_collected,lab_name,user);
-
-                                    //  viralLoadArrayList.add(newResult);
-                                    //mAdapter.notifyDataSetChanged();
-
-
-
-                                   /* xAxis1.add(date_collected);
-
-                                    values = new BarEntry(Integer.parseInt(result_content),i);
-                                    yValues.add(values);*/
 
 
 
@@ -505,18 +420,6 @@ public class DashboardFragment extends Fragment {
                             }*/
                         }
 
-                        // BarDataSet barDataSet1 = new BarDataSet(yValues, "Goals LaLiga 16/17");
-                        // barDataSet1.setColor(Color.rgb(0, 82, 159));
-
-                        /*yAxis = new ArrayList();
-                        yAxis.add(barDataSet1);
-                        String names[]= (String[]) xAxis1.toArray(new String[xAxis1.size()]);
-                        data = new BarData(names,yAxis);
-                        chart2.setData(data);
-                        chart2.setDescription("");
-                        chart2.animateXY(2000, 2000);
-                        chart2.invalidate();*/
-                        //pd.hide();
 
                     }
                     @Override
@@ -556,21 +459,8 @@ public class DashboardFragment extends Fragment {
         Log.e("tokens", auth_token);
         //Constants.ENDPOINT+Constants.DASHBOARD
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
 
-        } catch(Exception e){
-
-        }
-
-
-
-        AndroidNetworking.get(z+Constants.APPOINTMENT_TRENDS+urls)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.APPOINTMENT_TRENDS+urls)
                // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -644,148 +534,13 @@ public class DashboardFragment extends Fragment {
 
                                 }
 
-                                /*String days_suppressed = myObject.has("days suppressed") ? myObject.getString("days suppressed") : "";
-                                String days_unsuppressed = myObject.has("days unsuppressed") ? myObject.getString("days unsuppressed") : "";
-                                String current_status = myObject.has("current status") ? myObject.getString("current status") : "";*/
 
 
-                              /*  if (days_suppressed.equals("")){
-                                    tv_suppressed_days.setText("0");
-                                }
-                                else {
-                                    tv_suppressed_days.setText(days_suppressed);
-                                }
-
-                                if (days_unsuppressed.equals("")){
-                                    tv_unsuppressed_days.setText("0");
-                                } else {
-                                    tv_unsuppressed_days.setText(days_unsuppressed);
-                                }
-
-                                if (current_status.equals("")){
-                                    tv_current_status_text.setText("Not Available");
-                                } else {
-                                    tv_current_status_text.setText(current_status);
-                                }*/
-
-                               // JSONObject all_appointments = myObject.has("all apointments") ? myObject.getJSONObject("all apointments"): null;
-
-                                /*String booked = all_appointments.has("Booked") ? all_appointments.getString("Booked") : "";
-                                String notified = all_appointments.has("Notified") ? all_appointments.getString("Notified") : "";
-                                String kept_appointment = all_appointments.has("kept appointment") ? all_appointments.getString("kept appointment") : "";
-                                String missed_appointment = all_appointments.has("missed appointment") ? all_appointments.getString("missed appointment") : "";
-                                String total = all_appointments.has("total") ? all_appointments.getString("total") : "";*/
-
-                                //String booked = jsonArray.has("Booked") ? all_appointments.getString("Booked") : "";
-
-                              /*  if (booked.equals("")){
-                                    tv_booked_appointments.setText("0");
-                                }
-                                else {
-                                    tv_booked_appointments.setText(booked);
-                                }
-                                if (kept_appointment.equals("")){
-                                    tv_kept_appointments.setText("0");
-                                }
-                                else {
-                                    tv_kept_appointments.setText(kept_appointment);
-                                }
-
-                                if (missed_appointment.equals("")){
-                                    tv_missed_appointments.setText("0");
-                                }
-                                else {
-                                    tv_missed_appointments.setText(missed_appointment);
-                                }*/
-
-                               /* if (notified.equals("")){
-                                    tv_notified_appointment.setText("0");
-                                }
-                                else {
-                                    tv_notified_appointment.setText(notified);
-                                }*/
-
-                               /* if (kept_appointment.equals("")){
-                                    tv_kept_appointments.setText("0");
-                                }
-                                else {
-                                    tv_kept_appointments.setText(kept_appointment);
-                                }
-
-                                if (missed_appointment.equals("")){
-                                    tv_missed_appointments.setText("0");
-                                }
-                                else {
-                                    tv_missed_appointments.setText(missed_appointment);
-                                }*/
 
 
-                               /* if (total.equals("")){
-                                    txt_total.setText("0");
-                                    txt_total_app.setText("0");
-                                    txt_total_appointment.setText("0");
-                                    txt_total_apps.setText("0");
-                                }
-                                else {
-                                    txt_total.setText(total);
-                                    txt_total_app.setText(total);
-                                    txt_total_appointment.setText(total);
-                                    txt_total_apps.setText(total);
-                                }*/
 
 
-                               /* JSONObject missed_appointments = myObject.has("missed per type") ? myObject.getJSONObject("missed per type"): null;
 
-                                String re_fill = missed_appointments.has("Re-Fill") ? missed_appointments.getString("Re-Fill") : "";
-                                String clinical_review = missed_appointments.has("Clinical Review") ? missed_appointments.getString("Clinical Review") : "";
-                                String enhanced_adherence = missed_appointments.has("Enhanced Adherence") ? missed_appointments.getString("Enhanced Adherence") : "";
-                                String lab_investigation = missed_appointments.has("Lab Investigation") ? missed_appointments.getString("Lab Investigation") : "";
-                                String viral_load = missed_appointments.has("Viral Load") ? missed_appointments.getString("Viral Load") : "";
-                                String others = missed_appointments.has("Other") ? missed_appointments.getString("Other") : "";
-                                String total_missed = missed_appointments.has("total missed") ? missed_appointments.getString("total missed") : "";*/
-
-
-                               /* if (re_fill.equals("")){
-                                    tv_refill_number.setText("0");
-                                }
-                                else {
-                                    tv_refill_number.setText(re_fill);
-                                }
-
-                                if (clinical_review.equals("")){
-                                    tv_clinical_review_number.setText("0");
-                                }
-                                else {
-                                    tv_clinical_review_number.setText(clinical_review);
-                                }
-
-                                if (enhanced_adherence.equals("")){
-                                    tv_enhanced_adherence_number.setText("0");
-                                }
-                                else {
-                                    tv_enhanced_adherence_number.setText(enhanced_adherence);
-                                }
-
-                                if (lab_investigation.equals("")){
-                                    tv_lab_investigation_number.setText("0");
-                                }
-                                else {
-                                    tv_lab_investigation_number.setText(lab_investigation);
-                                }
-
-                                if (viral_load.equals("")){
-                                    tv_viral_load_number.setText("0");
-                                }
-                                else {
-                                    tv_viral_load_number.setText(viral_load);
-                                }
-
-                                if (others.equals("")){
-                                    tv_others_number.setText("0");
-                                }
-                                else {
-                                    tv_others_number.setText(others);
-                                }*/
 
                             }
                             else {
@@ -820,21 +575,11 @@ public class DashboardFragment extends Fragment {
         Log.e("tokens", auth_token);
         //Constants.ENDPOINT+Constants.DASHBOARD
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
-
-        } catch(Exception e){
-
-        }
 
 
 
-        AndroidNetworking.get(z+Constants.APPOINTMENTS_MISSED+urls)
+
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.APPOINTMENTS_MISSED+urls)
                 // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -920,59 +665,6 @@ public class DashboardFragment extends Fragment {
 
                                 }
 
-
-                               /* JSONObject missed_appointments = myObject.has("missed per type") ? myObject.getJSONObject("missed per type"): null;
-
-                                String re_fill = missed_appointments.has("Re-Fill") ? missed_appointments.getString("Re-Fill") : "";
-                                String clinical_review = missed_appointments.has("Clinical Review") ? missed_appointments.getString("Clinical Review") : "";
-                                String enhanced_adherence = missed_appointments.has("Enhanced Adherence") ? missed_appointments.getString("Enhanced Adherence") : "";
-                                String lab_investigation = missed_appointments.has("Lab Investigation") ? missed_appointments.getString("Lab Investigation") : "";
-                                String viral_load = missed_appointments.has("Viral Load") ? missed_appointments.getString("Viral Load") : "";
-                                String others = missed_appointments.has("Other") ? missed_appointments.getString("Other") : "";
-                                String total_missed = missed_appointments.has("total missed") ? missed_appointments.getString("total missed") : "";*/
-
-
-                               /* if (re_fill.equals("")){
-                                    tv_refill_number.setText("0");
-                                }
-                                else {
-                                    tv_refill_number.setText(re_fill);
-                                }
-
-                                if (clinical_review.equals("")){
-                                    tv_clinical_review_number.setText("0");
-                                }
-                                else {
-                                    tv_clinical_review_number.setText(clinical_review);
-                                }
-
-                                if (enhanced_adherence.equals("")){
-                                    tv_enhanced_adherence_number.setText("0");
-                                }
-                                else {
-                                    tv_enhanced_adherence_number.setText(enhanced_adherence);
-                                }
-
-                                if (lab_investigation.equals("")){
-                                    tv_lab_investigation_number.setText("0");
-                                }
-                                else {
-                                    tv_lab_investigation_number.setText(lab_investigation);
-                                }
-
-                                if (viral_load.equals("")){
-                                    tv_viral_load_number.setText("0");
-                                }
-                                else {
-                                    tv_viral_load_number.setText(viral_load);
-                                }
-
-                                if (others.equals("")){
-                                    tv_others_number.setText("0");
-                                }
-                                else {
-                                    tv_others_number.setText(others);
-                                }*/
 
                             }
                             else {

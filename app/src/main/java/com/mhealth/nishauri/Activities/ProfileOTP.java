@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -34,12 +35,12 @@ import java.util.concurrent.TimeUnit;
 
 public class ProfileOTP extends AppCompatActivity {
 
-   String cccExtra, upiExtra, firstExtra;
+   String cccExtra, upiExtra, firstExtra, phne;
     Button btn_sub;
     Toolbar toolbar;
-    String z;
     private User loggedInUser;
     EditText editText1, editText2, editText3, editText4, editText5;
+    TextView otpphone1;
 
     String  errors1;
 
@@ -52,6 +53,8 @@ public class ProfileOTP extends AppCompatActivity {
         toolbar.setTitle("Complete Profile");
         setSupportActionBar(toolbar);
 
+        otpphone1 =findViewById(R.id.otpphone);
+
 
        // init();
         btn_sub = findViewById(R.id.bt_prof);
@@ -62,13 +65,15 @@ public class ProfileOTP extends AppCompatActivity {
             cccExtra = extras.getString("cc1");
             upiExtra = extras.getString("upi1");
             firstExtra = extras.getString("first1");
+            phne = extras.getString("phoneA");
             // and get whatever type user account id is
         }
+        otpphone1.setText("OTP Sent to"+ " "+phne);
 
         //userID
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
         String auth_token = loggedInUser.getAuth_token();
-        String urls =auth_token;
+       // String urls =auth_token;
 
         btn_sub =findViewById(R.id.btn_logina);
         editText1 =findViewById(R.id.otp_edit_texta);
@@ -153,7 +158,7 @@ public class ProfileOTP extends AppCompatActivity {
         btn_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postOtp(urls, cccExtra, upiExtra, firstExtra,editText1.getText().toString()+editText2.getText().toString()+editText3.getText().toString()+editText4.getText().toString()+editText5.getText().toString());
+                postOtp(auth_token, cccExtra, upiExtra, firstExtra,editText1.getText().toString()+editText2.getText().toString()+editText3.getText().toString()+editText4.getText().toString()+editText5.getText().toString());
 
             }
         });
@@ -167,7 +172,7 @@ public class ProfileOTP extends AppCompatActivity {
             jsonObject.put("firstname", fname);
             jsonObject.put("otp_number", otp);
 
-            Log.d("variables", jsonObject.toString());
+           // Log.d("variables", jsonObject.toString());
 
 
 
@@ -175,19 +180,8 @@ public class ProfileOTP extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
 
-        } catch(Exception e){
-
-        }
-
-        AndroidNetworking.post(z+ Constants.SET_program1)
+        AndroidNetworking.post(Constants.ENDPOINT+ Constants.SET_program1)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")

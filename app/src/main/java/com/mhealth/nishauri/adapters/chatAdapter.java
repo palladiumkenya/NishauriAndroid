@@ -68,25 +68,12 @@ public class chatAdapter  extends BaseAdapter {
             String usrmsg = mylist.get(position).getMsg();
 
 
-           // String nascopCccNumber = mylist.get(position).getNascopCccNumber();
-
-            //usersms.setText(usrmsg);
 
           // botsms.setText(btsms);
             botsms.setText(btsms);
             usersms.setText(usrmsg);
 
-          /* Handler handler =new Handler();
-           handler.postDelayed(new Runnable() {
-               @Override
-               public void run() {
-                   String usrmsg = mylist.get(position).getMsg();
 
-                   usersms.setText(usrmsg);
-
-
-               }
-           }, 5000);*/
 
 
 
@@ -98,43 +85,6 @@ public class chatAdapter  extends BaseAdapter {
         return v;
     }
 
-    /*private static final int MY_MESSAGE = 0, OTHER_MESSAGE = 1;
-            //MY_IMAGE = 2, OTHER_IMAGE = 3;
-    public chatAdapter(Context context, List<ChatMessage> data) {
-        super(context, R.layout.user_message, data);
-    }
-    @Override
-    public int getViewTypeCount() {
-        // my message, other message, my image, other image
-        return 2;
-    }
-    /*@Override
-    public int getItemViewType(int position) {
-        //ChatMessage item = getItem(position);
-        return  ;
-        //if (item.isMine() && !item.isImage()) return MY_MESSAGE;
-        //else if (!item.isMine() && !item.isImage()) return OTHER_MESSAGE;
-        //else if (item.isMine() && item.isImage()) return MY_IMAGE;
-        //else return OTHER_IMAGE;
-    }*/
-   /* @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        int viewType = getItemViewType(position);
-        if (viewType == MY_MESSAGE) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.user_message, parent, false);
-            TextView textView = (TextView) convertView.findViewById(R.id.text);
-            textView.setText(getItem(position).getMsg());
-        } else if (viewType == OTHER_MESSAGE) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.bot_message, parent, false);
-            TextView textView = (TextView) convertView.findViewById(R.id.text);
-            textView.setText(getItem(position).getMsg());
-        }
-        convertView.findViewById(R.id.chatMessageView).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "onClick", Toast.LENGTH_LONG).show();
-            }
-        });
-        return convertView;
-    }*/
+
+
 }

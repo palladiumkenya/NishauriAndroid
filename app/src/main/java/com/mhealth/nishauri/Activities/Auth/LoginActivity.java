@@ -94,37 +94,8 @@ public class LoginActivity extends AppCompatActivity {
 
         reset1 = (MaterialTextView) findViewById(R.id.txt_reset);
 
-        connect =findViewById(R.id.connected_to);
 
-        try {
 
-            // UrlTable _url = SugarRecord.findById(UrlTable.class, 4);
-            //select *from getLastRecord ORDER BY id DESC LIMIT 1;
-
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                    zz=_url.get(x).getStage_name1();
-                    Toast.makeText(LoginActivity.this, "You are connected to" + " " +zz, Toast.LENGTH_LONG).show();
-                }
-            }
-
-            //UrlTable _url = SugarRecord.findById(UrlTable.class, 1);
-
-            // z= _url.base_url1;
-            // zz =_url.stage_name1;
-            if (zz==null){
-                dialogs.showErrorDialog("System not selected", "Please select the system to connect to");
-
-            }
-            Toast.makeText(LoginActivity.this, "You are connected to" + " " +zz, Toast.LENGTH_LONG).show();
-            connect.setText(zz);
-            connect.setTextColor(Color.parseColor("#F32013"));
-
-        }catch (Exception e){
-            Log.d("No baseURL", e.getMessage());
-        }
 
 
 
@@ -241,7 +212,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
-        AndroidNetworking.post(z+Constants.SIGNIN)
+        AndroidNetworking.post(Constants.ENDPOINT+Constants.SIGNIN)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
@@ -266,10 +237,6 @@ public class LoginActivity extends AppCompatActivity {
                             userID1 = jsonObject1.getString("user_id");
                             page = jsonObject1.getInt("page_id");
 
-                            // String encryptedID1 = Base64Encoder.encryptString(userID1);
-
-                           /* auth newUser = new auth(access_token);
-                            Stash.put(Constants.AUTH_TOKEN, newUser);*/
 
                            // String auth_token = response.has("auth_token") ? response.getString("auth_token") : "";
                             User newUser = new User(userID1);

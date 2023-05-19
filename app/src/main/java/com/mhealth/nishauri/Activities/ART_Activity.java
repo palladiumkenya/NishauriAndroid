@@ -43,7 +43,6 @@ public class ART_Activity extends AppCompatActivity {
     artAdapter artAdapter1;
 
     private User loggedInUser;
-    String z;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,18 +86,7 @@ public class ART_Activity extends AppCompatActivity {
         String urls2 ="?user_id="+auth_token;
         Log.e("tokens", auth_token);
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
-
-        } catch(Exception e){
-
-        }
-        AndroidNetworking.get(z+Constants.ART_dir+urls1+urls2)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.ART_dir+urls1+urls2)
                // .addHeaders("Authorization","Bearer" +" "+ auth_token78/=-0)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

@@ -251,6 +251,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:gravity="center"
+                android:visibility="gone"
                 android:text=""
                 android:textSize="16dip" />
 

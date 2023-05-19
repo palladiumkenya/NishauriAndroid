@@ -67,14 +67,6 @@ public class DependantHomeAdapter extends RecyclerView.Adapter<RecyclerView.View
             view.dependant.setText(obj.getDependant_name());
             view.age.setText(obj.getDependant_age() + " Months");
             view.status.setText(obj.getClinic_number());
-           // view.status.setText(obj.getApproved());
-
-            /*if (obj.getApproved().equals("true")){
-                view.status.setText("Approved");
-            }
-            if (obj.getApproved().equals("false")){
-                view.status.setText("Pending");
-            }*/
 
         }
     }

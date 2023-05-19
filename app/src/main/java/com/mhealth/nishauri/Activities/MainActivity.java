@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private User loggedInUser;
     String  userID11;
     String  userExtra1;
-    String z;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +50,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-       /* Bundle extras = getIntent().getExtras();
 
-        if (extras != null) {
-            userExtra1 = extras.getString("user_ID");
-
-            // and get whatever type user account id is
-        }*/
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -93,19 +87,8 @@ public class MainActivity extends AppCompatActivity {
         String auth_token = loggedInUser.getAuth_token();
         String urls ="?user_id="+auth_token;
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
 
-        } catch(Exception e){
-
-        }
-
-        AndroidNetworking.get(z+Constants.PROFILE+urls)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.PROFILE+urls)
                 //.addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -129,24 +112,14 @@ public class MainActivity extends AppCompatActivity {
                                 for (int i = 0; i < myArray.length(); i++) {
 
                                     JSONObject item = (JSONObject) myArray.get(i);
-                                    /*[{"moh_upi":"MOH1223232332",
-                                            "clinic_number":"1234500001",
-                                            "client_name":"Betty Mary Edward",
-                                            "facility_name":"Kiseuni Dispensary",
-                                            "phone_no":"111961473"}]*/
 
 
-                                   /* String first_name = item.has("first_name") ? item.getString("first_name") : "";
-                                    String last_name = item.has("last_name") ? item.getString("last_name") : "";
-                                    String CCCNo = item.has("CCCNo") ? item.getString("CCCNo") : "";
-                                    String current_facility = item.has("current_facility") ? item.getString("current_facility") : "";*/
+
+
                                     String client_name = item.has("client_name") ? item.getString("client_name") : "";
                                     String facility_name = item.has("facility_name") ? item.getString("facility_name") : "";
                                     String clinic_number = item.has("clinic_number") ? item.getString("clinic_number") : "";
 
-                                   /* drawer_facility.setText(current_facility);
-                                    drawer_cccno.setText(CCCNo);
-                                    drawer_name.setText(first_name + " " + last_name);*/
                                     drawer_name.setText(client_name);
                                     drawer_facility.setText(facility_name);
                                     drawer_cccno.setText(clinic_number);

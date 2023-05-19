@@ -44,7 +44,7 @@ public class Bmi extends AppCompatActivity {
     AlertDialog.Builder builder;
     private User loggedInUser;
 
-    String z;
+
 
     // private User loggedInUser;
 
@@ -111,18 +111,8 @@ public class Bmi extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
 
-        } catch(Exception e){
-
-        }
-        AndroidNetworking.post(z+Constants.BMI+urls)
+        AndroidNetworking.post(Constants.ENDPOINT+Constants.BMI+urls)
                 //.addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

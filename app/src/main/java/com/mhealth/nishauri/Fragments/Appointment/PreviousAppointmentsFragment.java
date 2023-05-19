@@ -53,7 +53,6 @@ public class PreviousAppointmentsFragment extends Fragment {
     private PreviousAppointmentAdapter mAdapter;
     private ArrayList<PreviousAppointment> previousAppointmentArrayList;
 
-    String z;
 
 
     @BindView(R.id.shimmer_my_container)
@@ -127,21 +126,13 @@ public class PreviousAppointmentsFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
         String urls ="?user_id="+auth_token;
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
 
-        } catch(Exception e){
 
-        }
+        //https://ushauriapi.kenyahmis.org/nishauri/appointment_previous?user_id=Mg==
 
 
 
-        AndroidNetworking.get("https://ushauriapi.kenyahmis.org/nishauri/appointment_previous?user_id=Mg==")
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.PASSED_APPOINTMENTNEW+urls)
                 //.addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

@@ -36,9 +36,6 @@ public class PasswordReset extends AppCompatActivity {
 
     Toolbar toolbar1;
 
-    String z;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,19 +71,8 @@ public class PasswordReset extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
 
-        } catch(Exception e){
-
-        }
-
-        AndroidNetworking.post(z+ Constants.RESET_pwd)
+        AndroidNetworking.post(Constants.ENDPOINT+ Constants.RESET_pwd)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")

@@ -58,8 +58,6 @@ public class ScheduleAppointmentFragment extends Fragment {
 
     private String SCHEDULE_DATE = "";
 
-    String z;
-
 
     @BindView(R.id.txt_appointment_date)
     TextInputEditText txt_appointment_date;
@@ -225,20 +223,10 @@ public class ScheduleAppointmentFragment extends Fragment {
         }
 
         String auth_token = loggedInUser.getAuth_token();
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
-
-        } catch(Exception e){
-
-        }
 
 
-        AndroidNetworking.post(z+Constants.SCHEDULE_APPOINTMENT)
+
+        AndroidNetworking.post(Constants.ENDPOINT+Constants.SCHEDULE_APPOINTMENT)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

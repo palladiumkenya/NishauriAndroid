@@ -21,6 +21,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
         <activity
+            android:name=".oneActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.ProfileOTP"
             android:exported="false" />
         <activity
@@ -43,9 +46,6 @@
             android:exported="false" />
         <activity
             android:name=".PasswordReset"
-            android:exported="false" />
-        <activity
-            android:name=".utils.Constants"
             android:exported="false" />
         <activity
             android:name=".Activities.Bmi"

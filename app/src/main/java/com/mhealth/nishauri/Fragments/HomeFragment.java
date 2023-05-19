@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.shimmers_my_container)
     ShimmerFrameLayout shimmers_my_container;
 
-    String z;
+
 
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
@@ -225,20 +225,9 @@ public class HomeFragment extends Fragment {
         Log.e("tokens", auth_token);
         //https://ushauriapi.kenyahmis.org/nishauri/profile"+urls
         //Constants.ENDPOINT+Constants.CURRENT_USER
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
-
-        } catch(Exception e){
-
-        }
 
 
-        AndroidNetworking.get(z+Constants.PROFILE+urls)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.PROFILE+urls)
                // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -264,12 +253,6 @@ public class HomeFragment extends Fragment {
 
                                     JSONObject item = (JSONObject) myArray.get(i);
 
-
-                                   /* String first_name = item.has("first_name") ? item.getString("first_name") : "";
-                                    String last_name = item.has("last_name") ? item.getString("last_name") : "";
-                                    String msisdn = item.has("msisdn") ? item.getString("msisdn") : "";
-                                    String CCCNo = item.has("CCCNo") ? item.getString("CCCNo") : "";
-                                    String current_facility = item.has("current_facility") ? item.getString("current_facility") : "";*/
 
 
                                     String phone_no = item.has("phone_no") ? item.getString("phone_no") : "";
@@ -322,22 +305,7 @@ public class HomeFragment extends Fragment {
         String urls2 ="?user_id="+auth_token;
         Log.e("tokens", auth_token);
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
-
-        } catch(Exception e){
-
-        }
-
-
-
-
-        AndroidNetworking.get(z+Constants.DEPENTANTS1+urls2)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.DEPENTANTS1+urls2)
               //  .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -379,14 +347,6 @@ public class HomeFragment extends Fragment {
                                     String dependant_name = item.has("dependant_name") ? item.getString("dependant_name") : "";
                                     int  dependant_age = item.has("dependant_age") ? item.getInt("dependant_age") : 0;
 
-
-                                   /* int  id = item.has("id") ? item.getInt("id") : 0;
-                                    String first_name = item.has("first_name") ? item.getString("first_name") : "";
-                                    String surname = item.has("surname") ? item.getString("surname") : "";
-                                    String heiNumber = item.has("heiNumber") ? item.getString("heiNumber") : "";
-                                    String dob = item.has("dob") ? item.getString("dob") : "";
-                                    String approved = item.has("approved") ? item.getString("approved") : "";
-                                    int  user = item.has("user") ? item.getInt("user") : 0;*/
 
 
                                     Dependant newDependant = new Dependant(dependant_age, moh_upi, clinic_number, dependant_name);
@@ -441,20 +401,7 @@ public class HomeFragment extends Fragment {
         //https://ushauriapi.kenyahmis.org/nishauri/profile"+urls
         //Constants.ENDPOINT+Constants.CURRENT_USER
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
-
-        } catch(Exception e){
-
-        }
-
-
-        AndroidNetworking.get(z+Constants.CURRENT_APPT+urls)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_APPT+urls)
                // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -482,18 +429,7 @@ public class HomeFragment extends Fragment {
 
                             String message = response.has("message") ? response.getString("message"): "";
 
-                            /*if (message.contains("There are no appointments for this client")){
-                                no_appointment_lyt.setVisibility(View.VISIBLE);
-                                Snackbar.make(root.findViewById(R.id.frag_home),message, Snackbar.LENGTH_LONG).show();
 
-                            } else if (message.contains("Client does not exist in the system")){
-                                no_appointment_lyt.setVisibility(View.VISIBLE);
-                                Snackbar.make(root.findViewById(R.id.frag_home),message, Snackbar.LENGTH_LONG).show();
-
-                            } else if (message.contains("No upcoming appointments")){
-                                no_appointment_lyt.setVisibility(View.VISIBLE);
-                                Snackbar.make(root.findViewById(R.id.frag_home),message,Snackbar.LENGTH_LONG).show();
-                            }*/
 
                             if (!message.isEmpty()){
                                 no_appointment_lyt.setVisibility(View.VISIBLE);
@@ -591,20 +527,9 @@ public class HomeFragment extends Fragment {
         String urls2 ="?user_id="+auth_token;
         Log.e("tokens", auth_token);
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
-
-        } catch(Exception e){
-
-        }
 
 
-        AndroidNetworking.get(z+Constants.CURR_REGIMEN+urls2)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURR_REGIMEN+urls2)
                 //.addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

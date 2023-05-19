@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,9 +37,8 @@ public class ProfileActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     String userExtra;
-
-    String z;
     private User loggedInUser;
+    String phonenoA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
         String auth_token = loggedInUser.getAuth_token();
-        String urls2 =auth_token;
+       // String urls2 =auth_token;
         init();
         btn_sub = findViewById(R.id.bt_prof);
         Bundle extras = getIntent().getExtras();
@@ -60,6 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
         ccc= findViewById(R.id.ccc_no);
         upi = findViewById(R.id.upi_no);
         first = findViewById(R.id.f_name);
+
 
 
 
@@ -76,10 +77,12 @@ public class ProfileActivity extends AppCompatActivity {
                 }else if(first.getText().toString().isEmpty()){
                     Toast.makeText(ProfileActivity.this, "Enter First Name", Toast.LENGTH_SHORT).show();
 
-                }else{
+                }
+
+                else{
 
 
-                send(urls2, ccc.getText().toString(), upi.getText().toString(), first.getText().toString());}
+                send(auth_token, ccc.getText().toString(), upi.getText().toString(), first.getText().toString());}
 
             }
         });
@@ -97,26 +100,14 @@ public class ProfileActivity extends AppCompatActivity {
     private void send(String userid, String cc, String up, String fname){
 
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
-
-        } catch(Exception e){
-
-        }
-
-
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("user_id", userid);
-
             jsonObject.put("ccc_no", cc);
             jsonObject.put("upi_no", up);
             jsonObject.put("firstname", fname);
+
+            Log.d("profile", jsonObject.toString());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -124,7 +115,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-        AndroidNetworking.post(z+ Constants.VALIDATE_program)
+        AndroidNetworking.post(Constants.ENDPOINT+Constants.VALIDATE_program)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")
@@ -147,21 +138,25 @@ public class ProfileActivity extends AppCompatActivity {
 
                         try {
 
+
+
                             boolean  status = response.has("success") && response.getBoolean("success");
                             String  errors = response.has("error") ? response.getString("error") : "" ;
                             String  Message = response.has("msg") ? response.getString("msg") : "" ;
 
 
                             if (status){
+                             JSONObject jsonObject1 = response.getJSONObject("data");
+                             phonenoA = jsonObject1.getString("phoneno");
 
                                 Intent mint = new Intent(ProfileActivity.this, ProfileOTP.class);
-                                Toast.makeText(ProfileActivity.this, "Profile created"+ " "+Message, Toast.LENGTH_SHORT).show();
+
                                // mint.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 mint.putExtra("cc1",  ccc.getText().toString());
                                 mint.putExtra("upi1",  upi.getText().toString());
                                 mint.putExtra("first1",  first.getText().toString());
-
-                                startActivity(mint);
+                            mint.putExtra("phoneA",  phonenoA);
+                                startActivity(mint); Toast.makeText(ProfileActivity.this, "Profile created"+ " "+Message, Toast.LENGTH_SHORT).show();
 
                             }
                             else if (!status){
@@ -182,19 +177,6 @@ public class ProfileActivity extends AppCompatActivity {
 //                        Log.e(TAG, error.getErrorBody());
                         Toast.makeText(ProfileActivity.this, error.getErrorBody(), Toast.LENGTH_SHORT).show();
 
-
-
-                        // Snackbar.make(findViewById(R.id.signup_layout), "Error: "+error.getErrorBody(), Snackbar.LENGTH_LONG).show();
-
-                        //JSONObject jsonObject = new JSONObject();
-                        /*int  errors = error.getErrorCode();
-                        if (errors==400){
-                            Toast.makeText(ProfileActivity.this, "null", Toast.LENGTH_SHORT).show();
-                           // Snackbar.make(findViewById(R.id.signup_layout1), " Invalid CCC number", Snackbar.LENGTH_LONG).show();
-                        }else {
-                            Toast.makeText(ProfileActivity.this, "null2", Toast.LENGTH_SHORT).show();
-                            //Snackbar.make(findViewById(R.id.signup_layout1), "Error: " + error.getErrorDetail(), Snackbar.LENGTH_LONG).show();
-                        }*/
 
 
                     }

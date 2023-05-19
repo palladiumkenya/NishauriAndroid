@@ -60,7 +60,7 @@ public class RescheduleAppointmentFragment extends Fragment {
     private User loggedInUser;
     private UpcomingAppointment upcomingAppointment;
 
-    String z;
+
 
     private String RESCHEDULED_DATE = "";
 
@@ -216,21 +216,10 @@ public class RescheduleAppointmentFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
-
-        } catch(Exception e){
-
-        }
 
 
 
-        AndroidNetworking.post(z+Constants.RESCHEDULE_APPOINTMENT+appointmentId)
+        AndroidNetworking.post(Constants.ENDPOINT+Constants.RESCHEDULE_APPOINTMENT+appointmentId)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

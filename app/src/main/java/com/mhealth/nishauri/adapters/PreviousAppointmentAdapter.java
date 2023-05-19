@@ -52,9 +52,8 @@ public class PreviousAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
            // visit_date = (TextView) v.findViewById(R.id.kept_date1);
             appointment_status1 = (TextView) v.findViewById(R.id.status1);
 
-           // appointment_status = (TextView) v.findViewById(R.id.txt_appointment_status);
-           // owner = (TextView) v.findViewById(R.id.txt_owner);
-           // dependants = (TextView) v.findViewById(R.id.txt_dependants);
+
+
 
         }
     }
@@ -78,22 +77,7 @@ public class PreviousAppointmentAdapter extends RecyclerView.Adapter<RecyclerVie
             view.appointmet_type.setText(obj.getAppointment_type());
        // view.visit_date.setText(obj.getVisit_date());
         view.appointment_status1.setText(obj.getAppt_status());
-            //view.appointment_status.setText("Status: "+obj.getVisit_type());
-          // view.appointment_status.setText(obj.getAppointment_type());
 
-           // view.owner.setVisibility(View.VISIBLE);
-
-          /*  if (obj.getOwner().equals("Personal")){
-                view.owner.setVisibility(View.VISIBLE);
-                view.owner.setText("Owner: "+obj.getOwner());
-            }
-
-            if (!obj.getDependant().equals("null")){
-                view.dependants.setVisibility(View.VISIBLE);
-                view.dependants.setText("Owner: "+obj.getDependant());
-            }*/
-
-       // }
     }
 
 

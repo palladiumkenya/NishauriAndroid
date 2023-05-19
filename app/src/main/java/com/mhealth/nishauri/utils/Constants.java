@@ -18,11 +18,16 @@ import com.mhealth.nishauri.R;
 
 import java.util.List;
 
-public class Constants extends AppCompatActivity {
+public class Constants{
     /*ENDPOINT*/
-    //public static String ENDPOINT = "https://nishauri-api.mhealthkenya.co.ke/api/";
 
-   // https://nishauri-api.mhealthkenya.co.ke/api/lab/vload
+    //test
+    //public static String ENDPOINT = "https://ushauriapi.kenyahmis.org/";
+
+    //live
+   public static String ENDPOINT ="https://ushauriapi.nascop.org/";
+
+
 
     //AUTH
     public static String REGISTER = "nishauri/signup/";
@@ -75,6 +80,7 @@ public class Constants extends AppCompatActivity {
     public static String PENDING_APPOINTMENT = "nishauri/appointments/user/book";
     public static String PASSED_APPOINTMENT = "nishauri/appointments/user/past";
     public static String PASSED_APPOINTMENTNEW = "nishauri/appointment_previous";
+   // nishauri/appointment_previous
 
     public static String SCHEDULE_APPOINTMENT = "nishauri/appointments/user/book";
     public static String RESCHEDULE_APPOINTMENT = "nishauri/appointments/user/reschedule/";
@@ -97,71 +103,12 @@ public class Constants extends AppCompatActivity {
     /*MODELS*/
     public static String AUTH_TOKEN = "";
     public String z, zz;
-    public void onBackPressed() {
-        finishAffinity();
-    }
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_constants);
-
-        TextView x =findViewById(R.id.show);
-        //Button xx =findViewById(R.id.show1);
-
-        getAlert();
-    }
-    private void getAlert(){
-
-        try {
-
-
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                    zz=_url.get(x).getStage_name1();
-                    //Toast.makeText(LoginActivity.this, "You are connected to" + " " +zz, Toast.LENGTH_LONG).show();
-                }
-            }
-        }catch (Exception e){
-            Log.d("No baseURL", e.getMessage());
-        }
 
 
 
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(Constants.this);
-        builder1.setIcon(android.R.drawable.ic_dialog_alert);
-        builder1.setTitle("You are connected to");
-        builder1.setMessage( zz);
-        builder1.setCancelable(false);
 
-        builder1.setPositiveButton(
-                "Proceed",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
 
-                        Intent intent = new Intent(Constants.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish();
 
-                        //dialog.cancel();
-                    }
-                });
 
-        /*builder1.setNegativeButton(
-                "Cancel",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
 
-                        Intent intent = new Intent(Config.this, SelectUrls.class);
-                        startActivity(intent);
-                        dialog.cancel();
-                    }
-                });*/
-
-        AlertDialog alert11 = builder1.create();
-        alert11.show();
-
-    }
 }

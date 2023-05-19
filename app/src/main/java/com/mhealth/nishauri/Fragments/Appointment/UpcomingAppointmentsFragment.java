@@ -54,9 +54,6 @@ public class UpcomingAppointmentsFragment extends Fragment {
     private UpcomingAppointmentAdapter mAdapter;
     private ArrayList<UpcomingAppointment> upcomingAppointmentArrayList;
 
-
-    String z;
-
     public int id;
 
 
@@ -143,21 +140,8 @@ public class UpcomingAppointmentsFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
 
-        } catch(Exception e){
-
-        }
-
-
-
-        AndroidNetworking.get(z+Constants.UPCOMING_APPOINTMENT)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.UPCOMING_APPOINTMENT)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -295,23 +279,9 @@ public class UpcomingAppointmentsFragment extends Fragment {
         String auth_token = loggedInUser.getAuth_token();
         String urls ="?user_id="+auth_token;
         Log.e("tokens", auth_token);
-        //https://ushauriapi.kenyahmis.org/nishauri/profile"+urls
-        //Constants.ENDPOINT+Constants.CURRENT_USER
-
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
-
-        } catch(Exception e){
-
-        }
 
 
-        AndroidNetworking.get(z+Constants.CURRENT_APPT+urls)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_APPT+urls)
                 // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -346,18 +316,7 @@ public class UpcomingAppointmentsFragment extends Fragment {
 
                             String message = response.has("message") ? response.getString("message"): "";
 
-                            /*if (message.contains("There are no appointments for this client")){
-                                no_appointment_lyt.setVisibility(View.VISIBLE);
-                                Snackbar.make(root.findViewById(R.id.frag_home),message, Snackbar.LENGTH_LONG).show();
 
-                            } else if (message.contains("Client does not exist in the system")){
-                                no_appointment_lyt.setVisibility(View.VISIBLE);
-                                Snackbar.make(root.findViewById(R.id.frag_home),message, Snackbar.LENGTH_LONG).show();
-
-                            } else if (message.contains("No upcoming appointments")){
-                                no_appointment_lyt.setVisibility(View.VISIBLE);
-                                Snackbar.make(root.findViewById(R.id.frag_home),message,Snackbar.LENGTH_LONG).show();
-                            }*/
 
                             if (!message.isEmpty()){
                                 no_appointment_lyt.setVisibility(View.VISIBLE);
@@ -414,15 +373,7 @@ public class UpcomingAppointmentsFragment extends Fragment {
                     }
                     @Override
                     public void onError(ANError error) {
-                        // handle error
 
-                       /* if (recycler_view!=null)
-                            recycler_view.setVisibility(View.VISIBLE);
-
-                        if (shimmers_my_container!=null){
-                            shimmers_my_container.stopShimmerAnimation();
-                            shimmers_my_container.setVisibility(View.GONE);
-                        }*/
 
 
 

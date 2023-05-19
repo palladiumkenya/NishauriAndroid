@@ -55,8 +55,6 @@ public class UpdateTreatmentFragment extends Fragment {
     private View root;
     private Context context;
 
-    String z;
-
     private User loggedInUser;
 
     private boolean same_art_date ;
@@ -192,19 +190,8 @@ public class UpdateTreatmentFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
 
-        } catch(Exception e){
-
-        }
-
-        AndroidNetworking.post(z+Constants.UPDATE_REGIMEN)
+        AndroidNetworking.post(Constants.ENDPOINT+Constants.UPDATE_REGIMEN)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addJSONObjectBody(jsonObject) // posting json
                 .build()

@@ -86,12 +86,7 @@ public class EditDependantAdapter extends RecyclerView.Adapter<RecyclerView.View
                 }
             });
 
-            /*if (obj.getApproved().equals("true")){
-                view.status.setText("Approved");
-            }
-            if (obj.getApproved().equals("false")){
-                view.status.setText("Pending");
-            }*/
+
 
         }
     }

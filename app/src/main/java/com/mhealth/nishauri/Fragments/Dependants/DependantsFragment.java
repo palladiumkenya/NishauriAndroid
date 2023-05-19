@@ -54,8 +54,6 @@ public class DependantsFragment extends Fragment {
     private DependantAdapter mAdapter;
     private ArrayList<Dependant> dependantArrayList;
 
-    String z;
-
 
 
     @BindView(R.id.shimmer_my_container)
@@ -151,20 +149,8 @@ public class DependantsFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
 
-        } catch(Exception e){
-
-        }
-
-
-        AndroidNetworking.get(z+Constants.DEPENTANTS)
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.DEPENTANTS)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -206,13 +192,6 @@ public class DependantsFragment extends Fragment {
                                     int  dependant_age = item.has("dependant_age") ? item.getInt("dependant_age") : 0;
 
 
-                                   /* int  id = item.has("id") ? item.getInt("id") : 0;
-                                    String first_name = item.has("first_name") ? item.getString("first_name") : "";
-                                    String surname = item.has("surname") ? item.getString("surname") : "";
-                                    String heiNumber = item.has("heiNumber") ? item.getString("heiNumber") : "";
-                                    String dob = item.has("dob") ? item.getString("dob") : "";
-                                    String approved = item.has("approved") ? item.getString("approved") : "";
-                                    int  user = item.has("user") ? item.getInt("user") : 0;*/
 
 
                                     Dependant newDependant = new Dependant(dependant_age, moh_upi, clinic_number, dependant_name);

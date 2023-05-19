@@ -36,8 +36,6 @@ public class otpcodeActivity extends AppCompatActivity {
     int pageID11;
     String userExtra;
 
-    String z;
-
     String  errors1;
 
     @Override
@@ -152,7 +150,7 @@ public class otpcodeActivity extends AppCompatActivity {
         btn_login1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postOtp(urls, editText1.getText().toString()+editText2.getText().toString()+editText3.getText().toString()+editText4.getText().toString()+editText5.getText().toString());
+                postOtp(auth_token, editText1.getText().toString()+editText2.getText().toString()+editText3.getText().toString()+editText4.getText().toString()+editText5.getText().toString());
                 /*Intent intent1 =new Intent(otpcodeActivity.this, NewPassword.class);
                 startActivity(intent1);*/
             }
@@ -170,19 +168,8 @@ public class otpcodeActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
 
-        } catch(Exception e){
-
-        }
-
-        AndroidNetworking.post(z+ Constants.VERIFY_otp)
+        AndroidNetworking.post(Constants.ENDPOINT+ Constants.VERIFY_otp)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")

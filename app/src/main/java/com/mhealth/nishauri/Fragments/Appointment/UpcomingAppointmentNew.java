@@ -61,8 +61,6 @@ UpcomingAppointmentNew extends AppCompatActivity {
 
     JSONObject JO;
 
-    String z;
-
 
     @BindView(R.id.til_reschedule_date)
     TextInputLayout til_reschedule_date;
@@ -202,21 +200,7 @@ btn1.setOnClickListener(new View.OnClickListener() {
 
         //String auth_token = loggedInUser.getAuth_token();
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
-
-        } catch(Exception e){
-
-        }
-
-
-
-        AndroidNetworking.post(z+Constants.RESCHEDULE)
+        AndroidNetworking.post(Constants.ENDPOINT+Constants.RESCHEDULE)
                // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -274,35 +258,9 @@ btn1.setOnClickListener(new View.OnClickListener() {
                         Log.e("onError", error.getErrorBody());
 
                         Toast.makeText(UpcomingAppointmentNew.this, error.getErrorBody(), Toast.LENGTH_SHORT).show();
-                       /* NetworkResponse networkResponse = error.networkResponse;
-                        if (networkResponse != null && networkResponse.data != null) {
-                            String jsonError = new String(networkResponse.data);
-                            // Print Error!
-                        }*/
 
 
 
-                       /* try {
-
-
-                            JO = new JSONObject(error.toString());
-                            Toast.makeText(UpcomingAppointmentNew.this, JO.getString("msg"), Toast.LENGTH_SHORT).show();
-                            Log.e("onError",  JO.getString("msg"));
-
-
-                        }catch (JSONException e){
-
-                            e.printStackTrace();
-                        }*/
-
-
-
-                        // Toast.makeText(UpcomingAppointmentNew.this, error.getErrorBody(), Toast.LENGTH_SHORT).show();
-
-                        //animationView.setVisibility(View.GONE);
-
-
-                       // Snackbar.make(root.findViewById(R.id.frag_reschedule_appointment), "An Error occurred. Please try again later." + error.getErrorDetail(), Snackbar.LENGTH_LONG).show();
                     }
                 });
 

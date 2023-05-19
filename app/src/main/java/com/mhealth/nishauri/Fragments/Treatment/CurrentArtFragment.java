@@ -52,8 +52,6 @@ public class CurrentArtFragment extends Fragment {
     private CurrentArtAdapter mAdapter;
     private ArrayList<CurrentArt> currentArtArrayList;
 
-    String z;
-
 
 
     @BindView(R.id.shimmer_my_container)
@@ -128,20 +126,10 @@ public class CurrentArtFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
-
-        } catch(Exception e){
-
-        }
 
 
-        AndroidNetworking.get(z+Constants.CURRENT_REGIMEN)
+
+        AndroidNetworking.get(Constants.ENDPOINT+Constants.CURRENT_REGIMEN)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")

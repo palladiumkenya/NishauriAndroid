@@ -376,9 +376,9 @@ public class SignUpActivity extends AppCompatActivity {
         } catch(Exception e){
 
         }
-    //"https://ushauriapi.kenyahmis.org/nishauri/signup"
 
-        AndroidNetworking.post(z+Constants.SIGNUP)
+
+        AndroidNetworking.post(Constants.ENDPOINT+Constants.SIGNUP)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")

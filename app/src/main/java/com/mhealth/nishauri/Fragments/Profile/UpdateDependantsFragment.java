@@ -51,8 +51,6 @@ public class UpdateDependantsFragment extends Fragment {
     private User loggedInUser;
     private Dependant clickedDependant;
 
-    String z;
-
 
     @BindView(R.id.card_dependant_name)
     MaterialTextView card_dependant_name;
@@ -99,9 +97,7 @@ public class UpdateDependantsFragment extends Fragment {
         loadDependant(dependant);
 
 
-        /*card_dependant_name.setText(clickedDependant.getFirst_name() + clickedDependant.getSurname());
-        etxt_dependant_firstname.setText(clickedDependant.getFirst_name());
-        etxt_dependant_surname.setText(clickedDependant.getSurname());*/
+
 
 
         btn_update_dependant_details.setOnClickListener(new View.OnClickListener() {
@@ -160,19 +156,8 @@ public class UpdateDependantsFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
 
-        } catch(Exception e){
-
-        }
-
-        AndroidNetworking.put(z+Constants.UPDATE_DEPENDANT)
+        AndroidNetworking.put(Constants.ENDPOINT+Constants.UPDATE_DEPENDANT)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addJSONObjectBody(jsonObject) // posting json
                 .build()
@@ -219,19 +204,8 @@ public class UpdateDependantsFragment extends Fragment {
 
         String auth_token = loggedInUser.getAuth_token();
 
-        try{
-            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
-            if (_url.size()==1){
-                for (int x=0; x<_url.size(); x++){
-                    z=_url.get(x).getBase_url1();
-                }
-            }
 
-        } catch(Exception e){
-
-        }
-
-        AndroidNetworking.post(z+Constants.DEPENTANT)
+        AndroidNetworking.post(Constants.ENDPOINT+Constants.DEPENTANT)
                 .addHeaders("Authorization","Token "+ auth_token)
                 .addJSONObjectBody(jsonObject) // posting json
                 .build()
