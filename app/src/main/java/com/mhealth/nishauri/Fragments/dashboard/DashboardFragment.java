@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -110,18 +111,34 @@ public class DashboardFragment extends Fragment {
 
     @BindView(R.id.tv_refill_number)
     TextView tv_refill_number;
+    @BindView(R.id.refill1)
+    TextView  tv_refill_number1;
+
+
 
     @BindView(R.id.tv_clinical_review_number)
     TextView tv_clinical_review_number;
+    @BindView(R.id.clinical1)
+    TextView tv_clinical_review_number1;
+
 
     @BindView(R.id.tv_enhanced_adherence_number)
     TextView tv_enhanced_adherence_number;
 
-    @BindView(R.id.tv_lab_investigation_number)
-    TextView tv_lab_investigation_number;
+    @BindView(R.id.enhance1)
+    TextView tv_enhanced_adherence_number1;
+
 
     @BindView(R.id.tv_viral_load_number)
     TextView tv_viral_load_number;
+
+    @BindView(R.id.vl11)
+    TextView tv_viral_load_number11;
+
+
+
+    @BindView(R.id.tv_lab_investigation_number)
+    TextView tv_lab_investigation_number;
 
     @BindView(R.id.tv_others_number)
     TextView tv_others_number;
@@ -134,6 +151,18 @@ public class DashboardFragment extends Fragment {
 
     @BindView(R.id.tv_unsuppressed_days)
     TextView tv_unsuppressed_days;
+
+    @BindView(R.id.refilllayout)
+    LinearLayout refilllayout1;
+
+    @BindView(R.id.clinicallayout)
+    LinearLayout clinicallayout1;
+
+    @BindView(R.id.enhancelayout)
+    LinearLayout enhancellayout1;
+
+    @BindView(R.id.vllayout)
+    LinearLayout vllayout1;
 
 
 
@@ -576,9 +605,6 @@ public class DashboardFragment extends Fragment {
         //Constants.ENDPOINT+Constants.DASHBOARD
 
 
-
-
-
         AndroidNetworking.get(Constants.ENDPOINT+Constants.APPOINTMENTS_MISSED+urls)
                 // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
@@ -617,27 +643,59 @@ public class DashboardFragment extends Fragment {
                                     String viral_load =jsonObject.getString("viral_load");
 
 
+                                    Log.d("REFILLLLLLLLLLLLLLL", drug_refill);
 
-                                    if (drug_refill.equals("")){
-                                        tv_refill_number.setText("0");
-                                    }
-                                    else {
+                                    Log.d("Clinical_Review", clinical_review);
+                                    Log.d("Enhanced_Adherence", enhanced_adherence);
+                                    Log.d("Viral Load", viral_load);
+
+
+
+
+                                    if (!drug_refill.equals("0")){
+                                        // tv_refill_number.setText("0");
+                                        refilllayout1.setVisibility(View.VISIBLE);
                                         tv_refill_number.setText(drug_refill);
+
                                     }
 
-                                    if (clinical_review.equals("")){
-                                        tv_clinical_review_number.setText("0");
-                                    }
-                                    else {
-                                        tv_clinical_review_number.setText(clinical_review);
+                                   if (!clinical_review.equals("0")){
+
+                                       // tv_clinical_review_number.setText("0");
+                                        clinicallayout1.setVisibility(View.VISIBLE);
+                                       tv_clinical_review_number.setText(clinical_review);
                                     }
 
-                                    if (enhanced_adherence.equals("")){
-                                        tv_enhanced_adherence_number.setText("0");
+                                    if (!viral_load.equals("0")){
+                                        //tv_viral_load_number.setText("0");
+                                        vllayout1.setVisibility(View.VISIBLE);
+                                        tv_viral_load_number.setText(viral_load);
+
                                     }
-                                    else {
+
+                                    if (!enhanced_adherence.equals("0")){
+                                        // tv_enhanced_adherence_number.setText("0");
                                         tv_enhanced_adherence_number.setText(enhanced_adherence);
+                                        enhancellayout1.setVisibility(View.VISIBLE);
                                     }
+                                   /* else if (!clinical_review.equals("0")){
+                                        tv_clinical_review_number.setVisibility(View.VISIBLE);
+                                        tv_clinical_review_number1.setVisibility(View.VISIBLE);
+                                        tv_clinical_review_number.setText(clinical_review);
+
+                                    }*/
+
+                                   /* else if(!drug_refill.equals("0")) {
+                                        tv_refill_number.setVisibility(View.VISIBLE);
+                                        tv_refill_number1.setVisibility(View.VISIBLE);
+                                        tv_refill_number.setText(drug_refill);
+                                    }*/
+
+                                   /* else if (!enhanced_adherence.equals("")){
+                                        tv_enhanced_adherence_number.setVisibility(View.VISIBLE);
+                                        tv_enhanced_adherence_number1.setVisibility(View.VISIBLE);
+                                        tv_enhanced_adherence_number.setText(enhanced_adherence);
+                                    }*/
 
                                     /*if (lab_investigation.equals("")){
                                         tv_lab_investigation_number.setText("0");
@@ -646,12 +704,12 @@ public class DashboardFragment extends Fragment {
                                         tv_lab_investigation_number.setText(lab_investigation);
                                     }*/
 
-                                    if (viral_load.equals("")){
-                                        tv_viral_load_number.setText("0");
-                                    }
-                                    else {
+
+                                   /* else if (!enhanced_adherence.equals("")){
+                                        tv_viral_load_number.setVisibility(View.VISIBLE);
+                                        tv_viral_load_number11.setVisibility(View.VISIBLE);
                                         tv_viral_load_number.setText(viral_load);
-                                    }
+                                    }*/
 
                                     /*if (others.equals("")){
                                         tv_others_number.setText("0");

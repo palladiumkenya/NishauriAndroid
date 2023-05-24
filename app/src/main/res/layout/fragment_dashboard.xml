@@ -473,6 +473,8 @@
                             android:layout_height="@dimen/spacing_middle" />
 
                         <LinearLayout
+                            android:visibility="gone"
+                            android:id="@+id/refilllayout"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/spacing_xmlarge"
                             android:gravity="center_vertical"
@@ -483,6 +485,7 @@
                                 android:layout_height="0dp" />
 
                             <TextView
+                                android:id="@+id/refill1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -505,6 +508,8 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:visibility="gone"
+                            android:id="@+id/clinicallayout"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/spacing_xmlarge"
                             android:gravity="center_vertical"
@@ -515,6 +520,7 @@
                                 android:layout_height="0dp" />
 
                             <TextView
+                                android:id="@+id/clinical1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -537,6 +543,8 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:visibility="gone"
+                            android:id="@+id/enhancelayout"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/spacing_xmlarge"
                             android:gravity="center_vertical"
@@ -547,6 +555,7 @@
                                 android:layout_height="0dp" />
 
                             <TextView
+                                android:id="@+id/enhance1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -580,6 +589,7 @@
                                 android:layout_height="0dp" />
 
                             <TextView
+                                android:id="@+id/vl1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -602,6 +612,8 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:visibility="gone"
+                            android:id="@+id/vllayout"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/spacing_xmlarge"
                             android:gravity="center_vertical"
@@ -612,6 +624,8 @@
                                 android:layout_height="0dp" />
 
                             <TextView
+
+                                android:id="@+id/vl11"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -620,6 +634,7 @@
                                 android:textColor="@color/colorPrimaryDark"/>
 
                             <TextView
+
                                 android:id="@+id/tv_viral_load_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
