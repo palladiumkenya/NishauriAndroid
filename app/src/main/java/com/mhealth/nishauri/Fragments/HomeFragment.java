@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,7 +26,10 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.fxn.stash.Stash;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.mhealth.nishauri.Activities.ART_Activity;
 import com.mhealth.nishauri.Activities.MainActivity;
 import com.mhealth.nishauri.Models.ArtModel;
@@ -41,11 +45,18 @@ import com.mhealth.nishauri.adapters.TreatmentHomeAdapter;
 import com.mhealth.nishauri.adapters.UpcomingAppointmentAdapter;
 import com.mhealth.nishauri.utils.Constants;
 
+import org.joda.time.DateMidnight;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -56,6 +67,11 @@ import static com.mhealth.nishauri.utils.AppController.TAG;
 
 
 public class HomeFragment extends Fragment {
+    Date date11;
+
+    Date Appointmentdate;
+
+
 
 
     @BindView(R.id.shimmers_my_container)
@@ -130,6 +146,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<Dependant> dependantArrayList;
 
     public int id;
+    String  appointment_date;
 
 
     @Override
@@ -162,6 +179,22 @@ public class HomeFragment extends Fragment {
         loadUpcomingAppointments();
 
         loadCurrentTreatments();
+
+
+               // Log.d("DATEEEEEEEEEEE", appointment_date);
+
+
+      /*  FirebaseMessaging.getInstance().subscribeToTopic("Reminder")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "Done";
+                        if (!task.isSuccessful()){
+                            msg ="failed";
+                        }
+
+                    }
+                });*/
 
        /* bt_expand1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -447,8 +480,8 @@ public class HomeFragment extends Fragment {
                                     JSONObject item = (JSONObject) myArray.get(i);
                                     id = item.has("id") ? item.getInt("id") : 0;
                                     String aid = item.has("aid") ? item.getString("aid") : "";
-                                       String appntmnt_date = item.has("appntmnt_date") ? item.getString("appntmnt_date") : "";
-                                    String  appointment_date = item.has("appointment_date") ? item.getString("appointment_date") : "";
+                                    String appntmnt_date = item.has("appntmnt_date") ? item.getString("appntmnt_date") : "";
+                                    appointment_date = item.has("appointment_date") ? item.getString("appointment_date") : "";
                                     String app_status = item.has("app_status") ? item.getString("app_status") : "";
                                     String visit_type = item.has("visit_type") ? item.getString("visit_type") : "";
                                     String app_type = item.has("app_type") ? item.getString("app_type") : "";
@@ -459,12 +492,97 @@ public class HomeFragment extends Fragment {
                                     String updated_at = item.has("updated_at") ? item.getString("updated_at") : "";
                                     String user = item.has("user") ? item.getString("user") : "";
 
+                                  String appointment = item.has("appointment") ? item.getString("appointment") : "";
+
+                                  Log.d("Appointment", appointment);
+                                  Log.d("Status", app_status);
+
+                                    //app_status
+
                                     UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(id,aid, appointment_date,app_status,visit_type,appointment_type,owner,dependant,created_at,updated_at,user);
                                     //UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(id, aid, appntmnt_date, appointment_date, appointment_type, app_status, visit_type, app_type, owner, dependant, created_at, updated_at, user);
 
                                     upcomingAppointmentArrayList.add(newUpcomingAppointment);
                                     myAdapter.notifyDataSetChanged();
 
+
+                                    //Client appointment date
+                                    String date1 = appointment;
+                                    Log.d("DATESS", date1);
+
+                                    Calendar c = Calendar.getInstance();
+
+
+                                    //client date
+
+                                    String lm = appointment;
+
+                                    SimpleDateFormat sdf3 = new SimpleDateFormat("dd-MM-yyyy");
+
+                                   // String date11b =sdf3.format(c.getTime());
+
+                                    try {
+                                        Appointmentdate = sdf3.parse(lm);
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
+
+
+                                    //Current Date
+                                    SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MM-yyyy");
+
+                                    String date11a =sdf2.format(c.getTime());
+                                    try {
+                                         date11 =sdf2.parse(date11a);
+                                    }catch (Exception exception){
+                                        exception.printStackTrace();
+                                    }
+                                    Log.d("current Date", date11a);
+
+                                   DateTime dateTimeA = new DateTime(Appointmentdate);
+                                    DateTime dateTimeB = new DateTime(date11);
+                                    int days = Days.daysBetween(dateTimeB,  dateTimeA).getDays();
+
+                                    Log.d("DAYS BTWN", String.valueOf(days));
+
+                                    if (days==22){
+                                        getPushNotification();
+
+                                    }
+                                    //
+
+
+
+                                  //  DateTime dateTime2 = new DateTime(date22);
+
+
+
+
+//
+                                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                                  //  Date date = sdf.parse(dateStr);*/
+
+                                    //current date
+                                    SimpleDateFormat sdf22 = new SimpleDateFormat("dd/MM/yyyy");
+                                    String date22 = sdf22.format(c.getTime());
+
+                                  //  Log.d("CURRENT DATE", date11);
+
+
+
+
+                                   // int days = Days.daysBetween(dateTime1, dateTime2).getDays();
+
+                                   //Log.d("DAYS BTWN", String.valueOf(days));
+                                    //
+
+
+                                   /* SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                                    Date date = sdf.parse(dateStr);*/
+
+                                   /* long diff = endDateValue.getTime() - startDateValue.getTime();
+                                    System.out.println ("Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));*/
+                                   // Log.d("DATEEEEEEEEEEE", String.valueOf(date));
 
                                 }
 
@@ -477,7 +595,7 @@ public class HomeFragment extends Fragment {
 
 
 
-                        } catch (JSONException e) {
+                        } catch (JSONException  e) {
                             e.printStackTrace();
                         }
 
@@ -620,5 +738,21 @@ public class HomeFragment extends Fragment {
                 });
     }
 
+    public void getPushNotification(){
+        FirebaseMessaging.getInstance().subscribeToTopic("Reminder")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "Done";
+                        if (!task.isSuccessful()){
+                            msg ="failed";
+                        }
+
+                    }
+                });
+
+    }
+
 
 }
+

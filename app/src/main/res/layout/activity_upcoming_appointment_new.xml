@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/grey_11"
     tools:context=".Fragments.Appointment.UpcomingAppointmentNew">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:background="@color/colorPrimary"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -128,13 +130,12 @@
                         android:textColor="@color/grey_80"
                         android:textSize="@dimen/spacing_mlarge" />
 
-                    <com.google.android.material.textfield.TextInputLayout
+                  <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_reschedule_date"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/spacing_middle"
-                        android:layout_marginVertical="@dimen/spacing_middle">
+                        >
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/txt_reschedule_date1"
@@ -145,6 +146,7 @@
                             android:focusableInTouchMode="false"
                             android:hint="New date"
                             android:inputType="text" />
+
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -229,18 +231,41 @@
                         app:lottie_loop="true"
                         app:lottie_url="https://assets9.lottiefiles.com/packages/lf20_Stt1R6.json" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_reschedule1"
-                        style="@style/Widget.MaterialComponents.Button"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_middle"
-                        android:layout_marginBottom="@dimen/spacing_middle"
+                        android:weightSum="2"
+                        android:orientation="horizontal">
+
+
+                    <Button
+                        android:id="@+id/cancel"
+
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Cancel"
+                        android:padding="5dp"
+                        android:lineSpacingExtra="4dp"
+
+                         />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_reschedule1"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:lineSpacingExtra="4dp"
+                        android:layout_marginStart="15dp"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+
                         android:text="Continue"
                         android:textAlignment="center"
 
                         android:textColor="@android:color/white"
-                        android:textSize="20sp" />
+                         />
+                    </LinearLayout>
 
 
                     <View

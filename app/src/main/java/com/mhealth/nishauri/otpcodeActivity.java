@@ -30,7 +30,9 @@ public class otpcodeActivity extends AppCompatActivity {
     Button btn_login1;
     EditText editText1, editText2, editText3, editText4, editText5;
     Toolbar toolbar1;
-    private User loggedInUser;
+   // User loggedInUser;
+    User loggedInUser;
+
 
     String userID11;
     int pageID11;
@@ -42,6 +44,9 @@ public class otpcodeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otpcode);
+
+       //loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
+        //String auth_token = loggedInUser.getAuth_token();
 
         toolbar1 =findViewById(R.id.toolbarr);
         toolbar1.setTitle("Nishauri");
@@ -55,9 +60,10 @@ public class otpcodeActivity extends AppCompatActivity {
         }
 
         //userID
-        loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
-        String auth_token = loggedInUser.getAuth_token();
-        String urls ="?user_id="+auth_token;
+        //loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
+
+       // String auth_token = loggedInUser.getAuth_token();
+      //  String urls ="?user_id="+auth_token;
 
 
 
@@ -150,7 +156,7 @@ public class otpcodeActivity extends AppCompatActivity {
         btn_login1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postOtp(auth_token, editText1.getText().toString()+editText2.getText().toString()+editText3.getText().toString()+editText4.getText().toString()+editText5.getText().toString());
+                postOtp(userExtra, editText1.getText().toString()+editText2.getText().toString()+editText3.getText().toString()+editText4.getText().toString()+editText5.getText().toString());
                 /*Intent intent1 =new Intent(otpcodeActivity.this, NewPassword.class);
                 startActivity(intent1);*/
             }

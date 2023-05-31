@@ -2,6 +2,7 @@ package com.mhealth.nishauri.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.mhealth.nishauri.Models.ArtModel;
@@ -96,13 +98,38 @@ public class artAdapter extends BaseAdapter implements Filterable {
             type.setText(type1);
 
             mc=new makeCalls(mycont);
-            callbutton.setOnClickListener(new View.OnClickListener() {
+
+            if (phne.isEmpty()){
+                //callbutton.setVisibility(View.GONE);
+                callbutton.setBackgroundColor(Color.parseColor("#999999"));
+                callbutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //if (phne.isEmpty())
+                        Toast.makeText(mycont, "No phone number for this facility", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }else{
+                callbutton.setVisibility(View.VISIBLE);
+                callbutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //if (phne.isEmpty())
+                        mc.initiateCall(phne);
+
+                    }
+                });
+
+            }
+           /* callbutton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //if (phne.isEmpty())
                     mc.initiateCall(phne);
 
                 }
-            });
+            });*/
 
 
         } catch (Exception e) {

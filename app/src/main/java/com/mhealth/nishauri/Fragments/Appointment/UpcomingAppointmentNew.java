@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,12 +87,14 @@ UpcomingAppointmentNew extends AppCompatActivity {
     /*@BindView(R.id.btn_report11)
     Button btn_continues;*/
 
-    Button btn1;
+    Button btn1, btn2;
     String X;
 
-    TextView  txt_reschedule_appointment, txt_scheduled_dateA;
+    TextView  txt_reschedule_appointment, txt_scheduled_dateA, adate1;
     TextInputEditText specify_reason_edtxtA;
     Toolbar toolbar1;
+
+    EditText det;
 
 
     String dateA;
@@ -107,12 +110,15 @@ UpcomingAppointmentNew extends AppCompatActivity {
         setSupportActionBar(toolbar1);
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
         btn1 =(Button) findViewById(R.id.btn_reschedule1);
+        btn2 =(Button) findViewById(R.id. cancel);
         txt_reschedule_appointment =(TextView) findViewById(R.id.txt_reschedule_date1);
+       // adate1 =(TextView) findViewById(R.id. adate);
+
+       // det = (EditText) findViewById(R.id.txt_reschedule_date11);
         txt_scheduled_dateA =(TextView) findViewById(R.id.txt_scheduled_date);
         specify_reason_edtxtA =findViewById(R.id.specify_reason_edtxt11);
 
        // getRescheduledDate();
-
         txt_reschedule_appointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -178,6 +184,14 @@ btn1.setOnClickListener(new View.OnClickListener() {
 
         rescheduleAppointment1();}
 
+    }
+});
+
+btn2.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent =new Intent(UpcomingAppointmentNew.this, MainActivity.class);
+        startActivity(intent);
     }
 });
 
@@ -266,35 +280,7 @@ btn1.setOnClickListener(new View.OnClickListener() {
 
 
     }
-    private void getRescheduledDate(){
-        Calendar cur_calender = Calendar.getInstance();
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(UpcomingAppointmentNew.this,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.set(Calendar.YEAR, year);
-                        calendar.set(Calendar.MONTH, month);
-                        calendar.set(Calendar.DAY_OF_MONTH, day);
-                        long date_ship_millis = calendar.getTimeInMillis();
-                        SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
-
-                        RESCHEDULED_DATE = newFormat.format(new Date(date_ship_millis));
-
-                        txt_reschedule_appointment.setText(RESCHEDULED_DATE);
-                    }
-                }, cur_calender.get(Calendar.YEAR),
-                cur_calender.get(Calendar.MONTH),
-                cur_calender.get(Calendar.DAY_OF_MONTH));
-
-        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
-        datePickerDialog.show();
-    }
-
-    private void reschedule2(){
-
-    }
 
 
 }
