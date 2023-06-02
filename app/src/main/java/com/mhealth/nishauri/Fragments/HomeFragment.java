@@ -296,6 +296,10 @@ public class HomeFragment extends Fragment {
                                     String facility_name = item.has("facility_name") ? item.getString("facility_name") : "";
                                     String clinic_number = item.has("clinic_number") ? item.getString("clinic_number") : "";
                                     String moh_upi = item.has("moh_upi") ? item.getString("moh_upi") : "";
+                                    String  gender = item.has(" gender") ? item.getString(" gender") : "";
+                                    int  client_age = item.has("client_age") ? item.getInt("client_age") : 0;
+
+
 
 
                                     txt_msisdn.setText(phone_no);
@@ -482,7 +486,7 @@ public class HomeFragment extends Fragment {
                                     String aid = item.has("aid") ? item.getString("aid") : "";
                                     String appntmnt_date = item.has("appntmnt_date") ? item.getString("appntmnt_date") : "";
                                     appointment_date = item.has("appointment_date") ? item.getString("appointment_date") : "";
-                                    String app_status = item.has("app_status") ? item.getString("app_status") : "";
+                                    String app_status = item.has("appt_status") ? item.getString("appt_status") : "";
                                     String visit_type = item.has("visit_type") ? item.getString("visit_type") : "";
                                     String app_type = item.has("app_type") ? item.getString("app_type") : "";
                                     String appointment_type = item.has("appointment_type") ? item.getString("appointment_type") : "";

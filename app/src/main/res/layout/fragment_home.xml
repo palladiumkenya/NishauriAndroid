@@ -317,9 +317,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Current Regimen"
-                       android:textStyle="bold"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:textStyle="bold"
+
+                    android:textColor="@color/colorPrimaryDark"
+                   
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    />
 
 
                     <androidx.coordinatorlayout.widget.CoordinatorLayout

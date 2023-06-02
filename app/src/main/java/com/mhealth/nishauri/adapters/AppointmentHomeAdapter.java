@@ -83,6 +83,8 @@ public class AppointmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.Vi
            stat1 = (TextView) v.findViewById(R.id.stats);
 
            editAppt = (ImageView) v.findViewById(R.id.edit1);
+
+
         }
     }
 
@@ -92,6 +94,8 @@ public class AppointmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_appointment_home, parent, false);
         vh = new OriginalViewHolder(v);
         return vh;
+
+
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -104,6 +108,14 @@ public class AppointmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             view.appointment_date.setText("Date: "+obj.getAppntmnt_date());
             view.appointmet_type.setText(obj.getApp_type());
             view.stat1.setText(obj.getApp_status());
+
+            if (obj.getApp_status().isEmpty()){
+                view.editAppt.setVisibility(View.VISIBLE);
+
+            }else{
+                view.editAppt.setVisibility(View.GONE);
+
+            }
 
 
             ((OriginalViewHolder) holder).editAppt.setOnClickListener(new View.OnClickListener() {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -9,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/spacing_medium"
+        android:layout_margin="@dimen/spacing_medium"
         android:orientation="horizontal">
         <View
             android:layout_width="@dimen/spacing_large"
@@ -20,16 +22,20 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Current Regimen:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
-            android:textColor="@color/colorPrimary" />
+            android:layout_margin="@dimen/spacing_medium"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            app:fontFamily="sans-serif-medium" />
 
         <TextView
             android:id="@+id/txt_treatment_nature"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+
+            android:textColor="@color/colorPrimaryDark"
             android:text="ART"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+             />
 
    <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/bt_expand1"

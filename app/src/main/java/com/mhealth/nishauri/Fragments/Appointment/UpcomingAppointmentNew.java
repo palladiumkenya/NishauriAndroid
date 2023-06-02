@@ -196,7 +196,6 @@ btn2.setOnClickListener(new View.OnClickListener() {
 });
 
 
-
     }
     public void rescheduleAppointment1(){
 

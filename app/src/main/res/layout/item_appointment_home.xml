@@ -40,6 +40,7 @@
             android:layout_weight="1"
             android:id="@+id/edit1"
             android:tint="@color/colorPrimaryDark"
+            android:visibility="gone"
 
             android:src="@drawable/edit_appt" />
         <com.google.android.material.textview.MaterialTextView
