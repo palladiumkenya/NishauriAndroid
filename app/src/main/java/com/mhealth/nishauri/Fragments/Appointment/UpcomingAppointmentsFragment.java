@@ -336,7 +336,7 @@ public class UpcomingAppointmentsFragment extends Fragment {
                                     String aid = item.has("aid") ? item.getString("aid") : "";
                                     String appntmnt_date = item.has("appntmnt_date") ? item.getString("appntmnt_date") : "";
                                     String  appointment_date = item.has("appointment_date") ? item.getString("appointment_date") : "";
-                                    String app_status = item.has("app_status") ? item.getString("app_status") : "";
+                                    String app_status = item.has("appt_status") ? item.getString("appt_status") : "";
                                     String visit_type = item.has("visit_type") ? item.getString("visit_type") : "";
                                     String app_type = item.has("app_type") ? item.getString("app_type") : "";
                                     String appointment_type = item.has("appointment_type") ? item.getString("appointment_type") : "";
