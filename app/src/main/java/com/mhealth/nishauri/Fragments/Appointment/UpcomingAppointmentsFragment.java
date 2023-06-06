@@ -217,9 +217,10 @@ public class UpcomingAppointmentsFragment extends Fragment {
                                         String created_at = item.has("created_at") ? item.getString("created_at") : "";
                                         String updated_at = item.has("updated_at") ? item.getString("updated_at") : "";
                                         String user = item.has("user") ? item.getString("user") : "";
+                                        String r_status = item.has("r_status") ? item.getString("r_status") : "";
 
 
-                                        UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(id, aid, appntmnt_date, app_status, visit_type, app_type, owner, dependant, created_at, updated_at, user);
+                                        UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(id, aid, appntmnt_date, app_status, visit_type, app_type, owner, dependant, created_at, updated_at, user, r_status);
 
                                         upcomingAppointmentArrayList.add(newUpcomingAppointment);
                                         mAdapter.notifyDataSetChanged();
@@ -345,8 +346,9 @@ public class UpcomingAppointmentsFragment extends Fragment {
                                     String created_at = item.has("created_at") ? item.getString("created_at") : "";
                                     String updated_at = item.has("updated_at") ? item.getString("updated_at") : "";
                                     String user = item.has("user") ? item.getString("user") : "";
+                                    String r_status = item.has("r_status") ? item.getString("r_status") : "";
 
-                                    UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(id,aid, appointment_date,app_status,visit_type,appointment_type,owner,dependant,created_at,updated_at,user);
+                                    UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(id,aid, appointment_date,app_status,visit_type,appointment_type,owner,dependant,created_at,updated_at,user, r_status);
                                     //UpcomingAppointment newUpcomingAppointment = new UpcomingAppointment(id, aid, appntmnt_date, appointment_date, appointment_type, app_status, visit_type, app_type, owner, dependant, created_at, updated_at, user);
 
                                     upcomingAppointmentArrayList.add(newUpcomingAppointment);

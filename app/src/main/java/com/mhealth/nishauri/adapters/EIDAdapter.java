@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mhealth.nishauri.Models.EID;
 import com.mhealth.nishauri.R;
-import com.skydoves.balloon.ArrowOrientation;
+/*import com.skydoves.balloon.ArrowOrientation;
 import com.skydoves.balloon.ArrowPositionRules;
 import com.skydoves.balloon.Balloon;
 import com.skydoves.balloon.BalloonAnimation;
-import com.skydoves.balloon.BalloonSizeSpec;
+import com.skydoves.balloon.BalloonSizeSpec;*/
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +87,7 @@ public class EIDAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 view.bt_expand.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Balloon balloon = new Balloon.Builder(context).
+                      /*  Balloon balloon = new Balloon.Builder(context).
                                 setArrowSize(10)
                                 .setArrowOrientation(ArrowOrientation.TOP)
                                 .setArrowPositionRules(ArrowPositionRules.ALIGN_ANCHOR)
@@ -112,7 +112,7 @@ public class EIDAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                                 .build();
                         balloon.showAlignBottom(view);
-                        balloon.show(view);
+                        balloon.show(view);*/
 
                     }
                 });

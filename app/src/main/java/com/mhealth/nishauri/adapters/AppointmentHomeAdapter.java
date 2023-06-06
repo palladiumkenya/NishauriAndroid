@@ -112,7 +112,13 @@ public class AppointmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             if (obj.getApp_status().isEmpty()){
                 view.editAppt.setVisibility(View.VISIBLE);
 
-            }else{
+            }
+           /* else if (obj.getR_status().contentEquals("2")){
+                view.editAppt.setVisibility(View.VISIBLE);
+
+
+            }*/
+            else{
                 view.editAppt.setVisibility(View.GONE);
 
             }

@@ -17,11 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mhealth.nishauri.Models.CurrentArt;
 import com.mhealth.nishauri.R;
-import com.skydoves.balloon.ArrowOrientation;
+/*import com.skydoves.balloon.ArrowOrientation;
 import com.skydoves.balloon.ArrowPositionRules;
 import com.skydoves.balloon.Balloon;
 import com.skydoves.balloon.BalloonAnimation;
-import com.skydoves.balloon.BalloonSizeSpec;
+import com.skydoves.balloon.BalloonSizeSpec;*/
 //import com.tomergoldst.tooltips.ToolTip;
 
 import java.util.ArrayList;

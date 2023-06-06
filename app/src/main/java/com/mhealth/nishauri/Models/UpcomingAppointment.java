@@ -16,10 +16,11 @@ public class UpcomingAppointment implements Serializable {
     private String created_at;
     private String updated_at;
     private String user;
+    private String r_status;
     public boolean expanded = false;
     public boolean parent = false;
 
-    public UpcomingAppointment(int id, String aid, String appntmnt_date, String app_status, String visit_type, String app_type, String owner, String dependant, String created_at, String updated_at, String user) {
+    public UpcomingAppointment(int id, String aid, String appntmnt_date, String app_status, String visit_type, String app_type, String owner, String dependant, String created_at, String updated_at, String user, String r_status) {
 
         this.id = id;
         this.aid = aid;
@@ -32,6 +33,7 @@ public class UpcomingAppointment implements Serializable {
         this.created_at = created_at;
         this.updated_at = updated_at;
         this.user = user;
+        this.r_status = r_status;
 
     }
 
@@ -123,4 +125,11 @@ public class UpcomingAppointment implements Serializable {
         this.user = user;
     }
 
+    public String getR_status() {
+        return r_status;
+    }
+
+    public void setR_status(String r_status) {
+        this.r_status = r_status;
+    }
 }
