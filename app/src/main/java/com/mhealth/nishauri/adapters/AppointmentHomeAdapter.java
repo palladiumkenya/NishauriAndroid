@@ -43,7 +43,6 @@ public class AppointmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     private List<UpcomingAppointment> items = new ArrayList<>();
     private Context context;
-
     private AppointmentHomeAdapter.OnItemClickListener onItemClickListener;
     TextView txt_reschedule_appointment;
     TextView  txt_scheduled_dateA;
@@ -111,11 +110,9 @@ public class AppointmentHomeAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
             if (obj.getApp_status().isEmpty()){
                 view.editAppt.setVisibility(View.VISIBLE);
-
             }
            /* else if (obj.getR_status().contentEquals("2")){
                 view.editAppt.setVisibility(View.VISIBLE);
-
 
             }*/
             else{

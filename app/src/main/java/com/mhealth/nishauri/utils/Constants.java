@@ -22,12 +22,12 @@ public class Constants{
     /*ENDPOINT*/
 
     //test
-   // public static String ENDPOINT = "https://ushauriapi.kenyahmis.org/";
+    public static String ENDPOINT = "https://ushauriapi.kenyahmis.org/";
 
    // https://ushauriapi.kenyahmis.org/ nishauri/regimen
 
     //live
-   public static String ENDPOINT ="https://ushauriapi.nascop.org/";
+   //public static String ENDPOINT ="https://ushauriapi.nascop.org/";
 
 
 
