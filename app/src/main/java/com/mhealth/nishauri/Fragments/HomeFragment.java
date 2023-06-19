@@ -550,10 +550,10 @@ public class HomeFragment extends Fragment {
 
                                     Log.d("DAYS BTWN", String.valueOf(days));
 
-                                    if (days==22){
+                                   /* if (days==22){
                                         getPushNotification();
 
-                                    }
+                                    }*/
                                     //
 
 

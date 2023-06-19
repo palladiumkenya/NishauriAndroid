@@ -24,7 +24,7 @@ public class Constants{
     //test
     public static String ENDPOINT = "https://ushauriapi.kenyahmis.org/";
 
-   // https://ushauriapi.kenyahmis.org/ nishauri/regimen
+   // https://ushauriapi.kenyahmis.org/nishauri/current_appt
 
     //live
    //public static String ENDPOINT ="https://ushauriapi.nascop.org/";
