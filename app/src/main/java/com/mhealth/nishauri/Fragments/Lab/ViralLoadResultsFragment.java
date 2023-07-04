@@ -164,6 +164,13 @@ public class ViralLoadResultsFragment extends Fragment {
         String auth_token = loggedInUser.getAuth_token();
         String urls ="?user_id="+auth_token;
 
+        Log.d("ID", auth_token);
+
+        //https://ushauriapi.nascop.org/nishauri/vl_results?user_id=MTAwMg==
+      //  https://ushauriapi.nascop.org/nishauri/vl_results?user_id=Mg==
+        //Constants.ENDPOINT+Constants.VIRALS_LOADNEW+urls
+
+
         AndroidNetworking.get(Constants.ENDPOINT+Constants.VIRALS_LOADNEW+urls)
                // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
@@ -200,7 +207,7 @@ public class ViralLoadResultsFragment extends Fragment {
                             JSONArray myArray = response.getJSONArray("msg");
                            // JSONObject jsonObject1 = response.getJSONObject("msg");
 
-                            if (myArray.length() > 1){
+                            if (myArray.length() > 0){
                            // if (jsonObject1.length() > 0){
 
 

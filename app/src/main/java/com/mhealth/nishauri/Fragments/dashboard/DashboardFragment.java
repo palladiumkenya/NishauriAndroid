@@ -249,7 +249,7 @@ public class DashboardFragment extends Fragment {
 
 
                             JSONArray myArray = response.getJSONArray("msg");
-                            if (myArray.length() > 1){
+                            if (myArray.length() > 0){
 
 
                                 for (int i = 0; i < myArray.length(); i++) {

@@ -34,6 +34,7 @@ import com.mhealth.nishauri.Activities.ART_Activity;
 import com.mhealth.nishauri.Activities.MainActivity;
 import com.mhealth.nishauri.Models.ArtModel;
 import com.mhealth.nishauri.Models.CurrentArt;
+import com.mhealth.nishauri.Models.DateTable;
 import com.mhealth.nishauri.Models.Dependant;
 import com.mhealth.nishauri.Models.UpcomingAppointment;
 import com.mhealth.nishauri.Models.UrlTable;
@@ -44,6 +45,7 @@ import com.mhealth.nishauri.adapters.AppointmentHomeAdapter;
 import com.mhealth.nishauri.adapters.TreatmentHomeAdapter;
 import com.mhealth.nishauri.adapters.UpcomingAppointmentAdapter;
 import com.mhealth.nishauri.utils.Constants;
+import com.mhealth.nishauri.utils.SelectUrls;
 
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
@@ -70,6 +72,9 @@ public class HomeFragment extends Fragment {
     Date date11;
 
     Date Appointmentdate;
+
+   int getz;
+    String REM;
 
 
 
@@ -495,12 +500,12 @@ public class HomeFragment extends Fragment {
                                     String created_at = item.has("created_at") ? item.getString("created_at") : "";
                                     String updated_at = item.has("updated_at") ? item.getString("updated_at") : "";
                                     String user = item.has("user") ? item.getString("user") : "";
-                                    String  r_status = item.has(" r_status") ? item.getString(" r_status") : "";
+                                    String  r_status = item.has("r_status") ? item.getString("r_status") : "";
 
                                   String appointment = item.has("appointment") ? item.getString("appointment") : "";
 
                                   Log.d("Appointment", appointment);
-                                  Log.d("Status",r_status);
+                                  Log.d("Status1",r_status);
 
                                     //app_status
 
@@ -546,11 +551,45 @@ public class HomeFragment extends Fragment {
 
                                    DateTime dateTimeA = new DateTime(Appointmentdate);
                                     DateTime dateTimeB = new DateTime(date11);
+
+
                                     int days = Days.daysBetween(dateTimeB,  dateTimeA).getDays();
 
-                                    Log.d("DAYS BTWN", String.valueOf(days));
+                                    //get days to appointment date
+                                    try {
+                                        DateTable.deleteAll(DateTable.class);
+                                        DateTable dateTable =new DateTable(days);
+                                        dateTable.save();
 
-                                   /* if (days==22){
+                                       // progressDialog.dismiss();
+
+                                        //Intent intent = new Intent(SelectUrls.this, Constants.class);
+                                        //startActivity(intent);
+                                        // finish();
+
+
+                                    } catch (Exception e) {
+                                        Log.d("error saving data", "error on server saving");
+                                    }
+
+                                    //select
+                                    try{
+                                        List<DateTable> dateTable =DateTable.findWithQuery(DateTable.class, "SELECT *from DATE_TABLE ORDER BY id DESC LIMIT 1");
+                                        if (dateTable.size()==1){
+                                            for (int x=0; x<dateTable.size(); x++){
+                                                getz=dateTable.get(x).getAppointmentDate();
+                                            }
+                                        }
+
+                                    } catch(Exception e){
+
+                                    }
+
+                                    //select
+                                    Log.d("DAYS BTWN", String.valueOf(days));
+                                    Log.d("DAYS BTWNDATABSE", String.valueOf(getz));
+
+                                    /*if (getz==61){
                                         getPushNotification();
 
                                     }*/
@@ -744,19 +783,28 @@ public class HomeFragment extends Fragment {
     }
 
     public void getPushNotification(){
-        FirebaseMessaging.getInstance().subscribeToTopic("Reminder")
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        String msg = "Done";
-                        if (!task.isSuccessful()){
-                            msg ="failed";
 
-                            Log.d("Firebase", "failed");
+
+        // REM ="Reminder";
+
+        Log.d("REMINDER",String.valueOf(getz));
+
+
+            FirebaseMessaging.getInstance().subscribeToTopic(String.valueOf(getz))
+                    // FirebaseMessaging.getInstance().subscribeToTopic(String.valueOf(getz))
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            String msg = "Done";
+                            if (!task.isSuccessful()) {
+                                msg = "failed";
+
+                                Log.d("Firebase", "failed");
+                            }
+
                         }
+                    });
 
-                    }
-                });
 
     }
 

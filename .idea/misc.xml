@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ThisD/nishEdit/app/src/main/res/layout/item_appointment_home.xml" value="0.13385416666666666" />
+        <entry key="..\:/ThisD/nishEdit/app/src/main/res/layout/item_upcoming_appointment.xml" value="0.153125" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/drawable/ic_chat.xml" value="0.1535" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout-v21/activity_chat_interface.xml" value="0.1625" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/layout/activity_bmi.xml" value="0.17572463768115942" />

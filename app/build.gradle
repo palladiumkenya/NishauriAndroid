@@ -17,9 +17,9 @@ android {
         applicationId "com.mhealth.nishauri"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 48
+        versionCode 49
        // versionName "1.1.0 Beta"
-        versionName "v2.1"
+        versionName "v2.2"
 
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -54,7 +54,7 @@ dependencies {
 
     implementation 'com.github.f0ris.sweetalert:library:1.5.2'
 
-    implementation platform('com.google.firebase:firebase-bom:26.1.1')
+  implementation platform('com.google.firebase:firebase-bom:26.1.1')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-crashlytics'
 
@@ -104,6 +104,8 @@ dependencies {
 
     //TIME
     implementation 'net.danlew:android.joda:2.12.1.1'
+
+    implementation 'com.github.satyan:sugar:1.5'
 
 
 

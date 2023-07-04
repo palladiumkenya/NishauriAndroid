@@ -1,26 +1,36 @@
 {
   "project_info": {
-    "project_number": "99609735819",
-    "project_id": "nishauri-87678",
-    "storage_bucket": "nishauri-87678.appspot.com"
+    "project_number": "266828776832",
+    "project_id": "nishauri-164c4",
+    "storage_bucket": "nishauri-164c4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:99609735819:android:c4e2c9390ec3e5e04a9a8e",
+        "mobilesdk_app_id": "1:266828776832:android:cc3f88904ad3ee168e6d65",
         "android_client_info": {
           "package_name": "com.mhealth.nishauri"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "266828776832-hl0fh10inbjk3r9mqpll34a8rkhvltue.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDore_Y9q8UkcWU2x6QZQIIMqpqu1OBebQ"
+          "current_key": "AIzaSyBHXy40KGPvk6SalJI_qnPVTGXTtIdualU"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "266828776832-hl0fh10inbjk3r9mqpll34a8rkhvltue.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

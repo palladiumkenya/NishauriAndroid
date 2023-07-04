@@ -155,7 +155,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 mint.putExtra("cc1",  ccc.getText().toString());
                                 mint.putExtra("upi1",  upi.getText().toString());
                                 mint.putExtra("first1",  first.getText().toString());
-                            mint.putExtra("phoneA",  phonenoA);
+                                mint.putExtra("phoneA",  phonenoA);
                                 startActivity(mint); Toast.makeText(ProfileActivity.this, "Profile created"+ " "+Message, Toast.LENGTH_SHORT).show();
 
                             }

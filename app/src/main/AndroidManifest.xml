@@ -74,14 +74,14 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
 
-       <!-- <service
+       <service
             android:name=".MyFirebaseMessagingService"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
 
             </intent-filter>
-        </service>-->
+        </service>
 
     </application>
 
