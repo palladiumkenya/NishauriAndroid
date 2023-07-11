@@ -158,9 +158,7 @@ public class RescheduleAppointmentFragment extends Fragment {
                         calendar.set(Calendar.DAY_OF_MONTH, day);
                         long date_ship_millis = calendar.getTimeInMillis();
                         SimpleDateFormat newFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
-
                         RESCHEDULED_DATE = newFormat.format(new Date(date_ship_millis));
-
                         txt_reschedule_appointment.setText(RESCHEDULED_DATE);
                     }
                 }, cur_calender.get(Calendar.YEAR),

@@ -110,9 +110,24 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                if (ccc_no.getText().toString().isEmpty()){
+                    til_ccc.setError("Please provide a CCC No");
 
-                    sendData(ccc_no.getText().toString(),  msisdn.getText().toString(),
+                }else if (msisdn.getText().toString().isEmpty()){
+                    til_phone.setError("Please provide your phone number");
+
+                }else if (password.getText().toString().isEmpty()){
+                    til_password.setError("Please Provide a Password");
+
+                }else if (repassword.getText().toString().isEmpty()){
+                    til_repass.setError("Please Provide a Password ");
+
+                }else {
+
+
+                    sendData(ccc_no.getText().toString(), msisdn.getText().toString(),
                             password.getText().toString(), repassword.getText().toString());
+                }
 
 
             }
