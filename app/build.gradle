@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId "com.mhealth.nishauri"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 33
         versionCode 50
        // versionName "1.1.0 Beta"

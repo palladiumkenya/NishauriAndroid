@@ -88,10 +88,10 @@ public class HomeFragment extends Fragment {
     RecyclerView recycler_view;
 
     @BindView(R.id.no_appointment_lyt)
-    LinearLayout no_appointment_lyt;
+    LinearLayout no_appointment_lyt1;
 
     @BindView(R.id.errors_lyt)
-    LinearLayout errors_lyt;
+    LinearLayout errors_lyt1;
 
     @BindView(R.id.shimmerss_my_container)
     ShimmerFrameLayout shimmerss_my_container;
@@ -100,10 +100,10 @@ public class HomeFragment extends Fragment {
     RecyclerView recycler_Views;
 
     @BindView(R.id.no_treatment_lyt)
-    LinearLayout no_treatment_lyt;
+    LinearLayout no_treatment_lyt1;
 
     @BindView(R.id.errorss_lyt)
-    LinearLayout errorss_lyt;
+    LinearLayout errorss_lyt1;
 
     @BindView(R.id.shimmer_my_container)
     ShimmerFrameLayout shimmer_my_container;
@@ -112,10 +112,10 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
 
     @BindView(R.id.no_dependant_lyt)
-    LinearLayout no_dependant_lyt;
+    LinearLayout no_dependant_lyt1;
 
     @BindView(R.id.error_lyt)
-    LinearLayout error_lyt;
+    LinearLayout error_lyt1;
 
     @BindView(R.id.btn_add_dependant)
     Button btn_add_dependant;
@@ -170,6 +170,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         root = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, root);
 
@@ -401,7 +402,7 @@ public class HomeFragment extends Fragment {
                             }else {
                                 //not data found
 
-                                no_dependant_lyt.setVisibility(View.VISIBLE);
+                                no_dependant_lyt1.setVisibility(View.VISIBLE);
 
                             }
 
@@ -423,7 +424,7 @@ public class HomeFragment extends Fragment {
                             shimmer_my_container.setVisibility(View.GONE);
                         }
 
-                        error_lyt.setVisibility(View.VISIBLE);
+                        error_lyt1.setVisibility(View.VISIBLE);
 
 //                        Log.e(TAG, error.getErrorBody());
 
@@ -474,7 +475,7 @@ public class HomeFragment extends Fragment {
 
 
                             if (!message.isEmpty()){
-                                no_appointment_lyt.setVisibility(View.VISIBLE);
+                                no_appointment_lyt1.setVisibility(View.VISIBLE);
                                 Snackbar.make(root.findViewById(R.id.frag_home),message, Snackbar.LENGTH_LONG).show();
 
                             }
@@ -633,7 +634,7 @@ public class HomeFragment extends Fragment {
                             }else {
                                 //not data found
 
-                                no_appointment_lyt.setVisibility(View.VISIBLE);
+                                no_appointment_lyt1.setVisibility(View.VISIBLE);
 
                             }
 
@@ -663,13 +664,13 @@ public class HomeFragment extends Fragment {
 //                        Log.e(TAG, error.getErrorDetail());
 
                         if (error.getErrorCode() == 0){
-                            no_appointment_lyt.setVisibility(View.VISIBLE);
+                            no_appointment_lyt1.setVisibility(View.VISIBLE);
                         }
                         else if (error.getErrorCode() == 204){
-                            no_appointment_lyt.setVisibility(View.VISIBLE);
+                            no_appointment_lyt1.setVisibility(View.VISIBLE);
                         }
                         else {
-                            errors_lyt.setVisibility(View.VISIBLE);
+                            errors_lyt1.setVisibility(View.VISIBLE);
                             Snackbar.make(root.findViewById(R.id.frag_home), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
 
                         }
@@ -738,7 +739,7 @@ public class HomeFragment extends Fragment {
                                 //  urlModelArrayList.add(url_Model.getStage());
                               recycler_Views.setAdapter(mysAdapter);}}else{
 
-                                no_treatment_lyt.setVisibility(View.VISIBLE);
+                                no_treatment_lyt1.setVisibility(View.VISIBLE);
                             }
 
 
@@ -768,11 +769,11 @@ public class HomeFragment extends Fragment {
 
                             if (error.getErrorBody().contains("No regiment data")){
 
-                                no_treatment_lyt.setVisibility(View.VISIBLE);
+                                no_treatment_lyt1.setVisibility(View.VISIBLE);
                             }
                             else {
 
-                                errorss_lyt.setVisibility(View.VISIBLE);
+                                errorss_lyt1.setVisibility(View.VISIBLE);
                                 Snackbar.make(root.findViewById(R.id.frag_home), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
 
                             }

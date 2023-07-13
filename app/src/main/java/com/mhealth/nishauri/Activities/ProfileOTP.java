@@ -38,7 +38,7 @@ public class ProfileOTP extends AppCompatActivity {
    String cccExtra, upiExtra, firstExtra, phne;
     Button btn_sub;
     Toolbar toolbar;
-    private User loggedInUser;
+    public User loggedInUser;
     EditText editText1, editText2, editText3, editText4, editText5;
     TextView otpphone1;
 

@@ -52,7 +52,7 @@ public class
 
 UpcomingAppointmentNew extends AppCompatActivity {
 
-    private User loggedInUser;
+  public User loggedInUser;
     private UpcomingAppointment upcomingAppointment;
 
     private String RESCHEDULED_DATE = "";

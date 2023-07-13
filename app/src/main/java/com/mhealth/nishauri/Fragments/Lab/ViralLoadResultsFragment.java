@@ -55,6 +55,8 @@ public class ViralLoadResultsFragment extends Fragment {
     private Unbinder unbinder;
     private View root;
     private Context context;
+    boolean x;
+    JSONArray myArray;
 
 
     private User loggedInUser;
@@ -202,54 +204,56 @@ public class ViralLoadResultsFragment extends Fragment {
                             shimmer_my_container.setVisibility(View.GONE);
                         }
 
-                        try {
-
-                            JSONArray myArray = response.getJSONArray("msg");
-                           // JSONObject jsonObject1 = response.getJSONObject("msg");
-
-                            if (myArray.length() > 0){
-                           // if (jsonObject1.length() > 0){
+                        //myArray = response.getJSONArray("msg");
 
 
-                               for (int i = 0; i < myArray.length(); i++) {
-                               // for (int i = 0; i < jsonObject1.length(); i++) {
-
-                                    JSONObject item = (JSONObject) myArray.get(i);
-                                    //JSONObject item = (JSONObject) jsonObject1.get(String.valueOf(i));
+                            try {
+                                 x = response.getBoolean("success");
+                                 if (x) {
 
 
+                                     myArray = response.getJSONArray("msg");
+                                     if (myArray.length() > 0) {
+                                         // JSONObject jsonObject1 = response.getJSONObject("msg");
 
-                                    String result = item.has("result") ? item.getString("result") : "";
-                                    String status = item.has("status") ? item.getString("status") : "";
-                                    String date = item.has("date") ? item.getString("date") : "";
-                                    int plot = item.has("plot") ? item.getInt("plot") : 0;
-
-
-
-
-                                    ViralLoad newResult = new ViralLoad(result, status, date, plot);
-
-                                    viralLoadArrayList.add(newResult);
-                                    mAdapter.notifyDataSetChanged();
+                                         // if (myArray.length() > 0){
+                                         // if (jsonObject1.length() > 0){
 
 
+                                         for (int i = 0; i < myArray.length(); i++) {
+                                             // for (int i = 0; i < jsonObject1.length(); i++) {
 
-                                }
-
-                            }
-                            else{
-                                Toast.makeText(context, "No VL Results Found", Toast.LENGTH_SHORT).show();
-                            }
-
+                                             //  JSONObject item = (JSONObject) myArray.get(i);
+                                             JSONObject item = myArray.getJSONObject(i);
+                                             //JSONObject item = (JSONObject) jsonObject1.get(String.valueOf(i));
 
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            if (pDialog != null && pDialog.isShowing()) {
-                                pDialog.hide();
-                                pDialog.cancel();
-                            }
-                        }
+                                             String result = item.has("result") ? item.getString("result") : "";
+                                             String status = item.has("status") ? item.getString("status") : "";
+                                             String date = item.has("date") ? item.getString("date") : "";
+                                             int plot = item.has("plot") ? item.getInt("plot") : 0;
+
+
+                                             ViralLoad newResult = new ViralLoad(result, status, date, plot);
+
+                                             viralLoadArrayList.add(newResult);
+                                             mAdapter.notifyDataSetChanged();
+
+                                         }
+                                         //}
+
+
+                                     } else {
+                                         Toast.makeText(context, "No VL Results Found", Toast.LENGTH_SHORT).show();
+                                     }
+                                 }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                if (pDialog != null && pDialog.isShowing()) {
+                                    pDialog.hide();
+                                    pDialog.cancel();
+                                }}
 
                     }
                     @Override

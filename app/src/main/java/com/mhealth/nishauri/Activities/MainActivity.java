@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
 
 
-    private User loggedInUser;
+    public User loggedInUser;
     String  userID11;
     String  userExtra1;
 

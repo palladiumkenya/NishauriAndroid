@@ -97,21 +97,34 @@ public class FaqsFragment extends Fragment {
 
     private void loadFAQs() {
 
-        faqArrayList.add(new FAQ("What should I do If I get side effects from the medicine given?","Call the facility and report to your care provider. "));
+        faqArrayList.add(new FAQ("What should I do If I get side effects from the medicine given?","Please visit your clinic for review by your doctor. "));
 
-        faqArrayList.add(new FAQ("What's the name of the treatment regimen am taking?","Go to your treatment profile on the application to see this information. Or ask your treatment provider at the facility to educate you more on this. "));
+        faqArrayList.add(new FAQ("What's the name of the treatment regimen I am taking?","To know your regimen, click on the home page and you will see the name of your current regimen."));
 
-        faqArrayList.add(new FAQ("Who is a stable client when it comes to treatment? ","A stable client is a person living with HIV on ART and is adherent and does not require frequent clinical consultation."));
+        faqArrayList.add(new FAQ("Who is an established client when it comes to treatment?","An established client is one who is on their current ART regimen for a period greater than 6 months, had no active OI or in the previous 6 months, has adhered to scheduled clinic visits for the previous 6 months and Viral load results has been less than 200 copies/ml within the last 6 months."));
 
-        faqArrayList.add(new FAQ("How often should I visit the facility if I am a stable client? ","Clients who are stable are usually put under differentiated care model, where they attend clinical consultations after every other 6months."));
+        faqArrayList.add(new FAQ("How often should I visit the facility if I am an established client? ","As often as recommended by your doctor while ensuring that you keep all the appointments given"));
 
-        faqArrayList.add(new FAQ("What's a High viral load and LDL viral load?","A High viral load is any results for VL with over 836 cp/ml while a LDL VL - Low Detectable Viral Load is any results for VL with a number of less than 800cp/ml"));
+        faqArrayList.add(new FAQ("What is a high viral load?","A high viral load is any results greater than 200 cp/m"));
 
-        faqArrayList.add(new FAQ("What's the difference between Suppressed viral load and Undetectable viral load? ","Suppressed Viral Load is same as LDL which means you are under the 800mark while Undetectable VL means that they can not tell how much HIV is in your blood because it's very low for any cp/ml. "));
+        faqArrayList.add(new FAQ("What is a low detectable viral load ","Any results for VL with below 50 cp/ml"));
 
-        faqArrayList.add(new FAQ("If my baby's/dependant's EID results is positive should I visit the health facility?","Yes you should so that they can be immediately get started on Art treatment."));
+        faqArrayList.add(new FAQ("How to interpret Viral Load results","•\tLow detectable level (LDL) → below 50 cp/mL\n" +
+                "•\tLow level viremia → 50 -199 cp/ml\n" +
+                "•\tHigh level viremia → 199 - 999cp/mL\n" +
+                "•\tSuspected Treatment failure → greater than 1000 cp/ml\n"));
 
-        faqArrayList.add(new FAQ("How often should I go for my VL sample to be taken? ","For a stable client it should be as often as after every 3 months while for unstable clients, the treatment provider shall advise depending on how well you are adhering to taking your medication."));
+       // faqArrayList.add(new FAQ("What's the difference between Suppressed viral load and Undetectable viral load? ","Suppressed Viral Load is same as LDL which means you are under the 800mark while Undetectable VL means that they can not tell how much HIV is in your blood because it's very low for any cp/ml. "));
+
+        faqArrayList.add(new FAQ("If my baby's/dependant's EID results is positive should I visit the health facility?","Yes, you should visit the facility so that they can immediately get started on Art treatment"));
+        faqArrayList.add(new FAQ("How often should I go for my VL sample to be taken?","If you are newly initiated on ART, the first viral load sample should be taken after 3 months of taking ART\n" +
+                "If your previous result was \n" +
+                "•\tBelow 50 to 199 cp/ml - Viral Load sample should be taken after every 12 months\n" +
+                "•\tAbove 200cp/ml - Viral load sample should be taken after three months\n"));
+        faqArrayList.add(new FAQ("Who is a suppressed and non-suppressed client?","A Suppressed client is the one who has a valid viral load results which are 199 cp/ml and below.\n" +
+                "A non-suppressed client is the one who has a valid viral load results being 200 cp/ml and above.\t\n"));
+
+        //faqArrayList.add(new FAQ("How often should I go for my VL sample to be taken? ","For a stable client it should be as often as after every 3 months while for unstable clients, the treatment provider shall advise depending on how well you are adhering to taking your medication."));
 
         mAdapter.notifyDataSetChanged();
 

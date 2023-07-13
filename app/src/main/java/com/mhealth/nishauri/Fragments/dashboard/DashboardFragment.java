@@ -58,6 +58,8 @@ public class DashboardFragment extends Fragment {
     ArrayList<ViralLoads> viralLoads =new ArrayList<>();
 
     private ProgressDialog pDialog;
+    boolean x;
+    JSONObject item;
 
     //
     ArrayList yAxis;
@@ -246,15 +248,18 @@ public class DashboardFragment extends Fragment {
 
 
                         try {
+                            boolean x = response.getBoolean("success");
+                            if (x) {
 
 
-                            JSONArray myArray = response.getJSONArray("msg");
-                            if (myArray.length() > 0){
+                                JSONArray myArray = response.getJSONArray("msg");
+                                //if (myArray.length() > 0){
 
 
                                 for (int i = 0; i < myArray.length(); i++) {
 
-                                    JSONObject item = (JSONObject) myArray.get(i);
+                                    // JSONObject item = (JSONObject) myArray.get(i);
+                                   item = myArray.getJSONObject(i);
 
 
                                     String result = item.has("result") ? item.getString("result") : "";
@@ -264,17 +269,16 @@ public class DashboardFragment extends Fragment {
 
                                     xAxis1.add(date);
 
-                                    values = new BarEntry((float) plot,i);
+                                    values = new BarEntry((float) plot, i);
                                     yValues.add(values);
 
-
                                 }
+                            }else {
 
+                                    Toast.makeText(context, "No VL Results Found", Toast.LENGTH_SHORT).show();
                             }
 
-                            else{
-                                Toast.makeText(context, "No VL Results Found", Toast.LENGTH_SHORT).show();
-                            }
+
 
 
 
@@ -282,6 +286,7 @@ public class DashboardFragment extends Fragment {
                             e.printStackTrace();
 
                         }
+
 
                         BarDataSet barDataSet1 = new BarDataSet(yValues, "Viral Load");
                         barDataSet1.setColor(Color.rgb(0, 82, 159));

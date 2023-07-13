@@ -42,7 +42,7 @@ public class Bmi extends AppCompatActivity {
     private TextInputEditText weightE;
     private TextInputEditText heightE;
     AlertDialog.Builder builder;
-    private User loggedInUser;
+    public User loggedInUser;
 
 
 

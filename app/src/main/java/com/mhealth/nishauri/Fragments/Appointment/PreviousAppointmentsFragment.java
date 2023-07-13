@@ -211,12 +211,13 @@ public class PreviousAppointmentsFragment extends Fragment {
 
                         if (error.getErrorCode() == 0){
 
-                            no_appointment_lyt.setVisibility(View.VISIBLE);
+                           // no_appointment_lyt.setVisibility(View.VISIBLE);
+                            Snackbar.make(root.findViewById(R.id.frag_previous_appointment), "No Appointments Found" + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
                         }
                         else {
 
                             error_lyt.setVisibility(View.VISIBLE);
-                            Snackbar.make(root.findViewById(R.id.frag_previous_appointment), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+                           // Snackbar.make(root.findViewById(R.id.frag_previous_appointment), "No Appointments Found", Snackbar.LENGTH_LONG).show();
 
                         }
 

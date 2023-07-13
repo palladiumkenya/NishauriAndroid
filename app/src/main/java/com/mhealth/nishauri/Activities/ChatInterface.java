@@ -43,7 +43,7 @@ public class ChatInterface extends AppCompatActivity {
    ImageButton smssend;
     EditText smstxt;
 
-    private User loggedInUser;
+    public User loggedInUser;
 
 
     private List<ChatMessage> smslist;

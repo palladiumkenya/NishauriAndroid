@@ -360,7 +360,8 @@ public class UpcomingAppointmentsFragment extends Fragment {
                             }else {
                                 //not data found
 
-                                no_appointment_lyt.setVisibility(View.VISIBLE);
+                               // no_appointment_lyt.setVisibility(View.VISIBLE);
+                                Toast.makeText(context, "No Upcoming Appointments Found", Toast.LENGTH_LONG).show();
 
                             }
 
@@ -382,10 +383,12 @@ public class UpcomingAppointmentsFragment extends Fragment {
 //                        Log.e(TAG, error.getErrorDetail());
 
                         if (error.getErrorCode() == 0){
-                            no_appointment_lyt.setVisibility(View.VISIBLE);
+                            //no_appointment_lyt.setVisibility(View.VISIBLE);
+                            Toast.makeText(context, "No Upcoming Appointments Found", Toast.LENGTH_LONG).show();
                         }
                         else if (error.getErrorCode() == 204){
-                            no_appointment_lyt.setVisibility(View.VISIBLE);
+                           // no_appointment_lyt.setVisibility(View.VISIBLE);
+                            Toast.makeText(context, "No Upcoming Appointments Found", Toast.LENGTH_LONG).show();
                         }
                         else {
                             //errors_lyt.setVisibility(View.VISIBLE);
