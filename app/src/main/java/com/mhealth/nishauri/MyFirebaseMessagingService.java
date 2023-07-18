@@ -32,11 +32,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
 
 
-        /*if(z==61){
+        if(z==7 || z==1){
         getFirebaseMessage(message.getNotification().getTitle(), message.getNotification().getBody());}
-    }*/
+    }
 
-    /*public void getFirebaseMessage(String title, String msg){
+    public void getFirebaseMessage(String title, String msg){
         Notification.Builder builder = new Notification.Builder(this, "myFirebaseChannel")
                 .setSmallIcon(R.drawable.ic__notifications_24)
                 .setContentTitle(title)
@@ -48,5 +48,5 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
 
-    }*/
-}}
+    }
+}

@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment {
     Date Appointmentdate;
 
    int getz;
-    String REM;
+    String REM="";
 
 
 
@@ -590,10 +590,11 @@ public class HomeFragment extends Fragment {
                                     Log.d("DAYS BTWN", String.valueOf(days));
                                     Log.d("DAYS BTWNDATABSE", String.valueOf(getz));
 
-                                    /*if (getz==61){
+
+                                    if (getz==17){
                                         getPushNotification();
 
-                                    }*/
+                                    }
                                     //
 
 
@@ -788,10 +789,19 @@ public class HomeFragment extends Fragment {
 
         // REM ="Reminder";
 
+        if (getz==7 || getz==1){
+            REM="AppointmentReminder";
+        }
+        else{
+            REM = "";
+        }
+
         Log.d("REMINDER",String.valueOf(getz));
+        Log.d("REMINDER",REM);
 
 
-            FirebaseMessaging.getInstance().subscribeToTopic(String.valueOf(getz))
+            FirebaseMessaging.getInstance().subscribeToTopic(REM
+                    )
                     // FirebaseMessaging.getInstance().subscribeToTopic(String.valueOf(getz))
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
