@@ -105,6 +105,7 @@ public class Constants{
 
     /*MODELS*/
     public static String AUTH_TOKEN = "";
+    public static String AUTH_TOKEN2 = "";
     public String z, zz;
 
 

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Activities.ART_Activity;
+import com.mhealth.nishauri.Activities.Auth.LoginPsurvey;
 import com.mhealth.nishauri.Activities.ChatInterface;
 import com.mhealth.nishauri.R;
 
@@ -37,7 +38,7 @@ public class ChatFragment extends Fragment {
     @BindView(R.id.art_card)
     CardView art_card;
 
-    @BindView(R.id.survey_card)
+    @BindView(R.id.survey_card1)
     CardView survey_card;
 
     @BindView(R.id.chat_card)
@@ -86,7 +87,12 @@ public class ChatFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                NavHostFragment.findNavController(ChatFragment.this).navigate(R.id.nav_client_survey);
+               // NavHostFragment.findNavController(ChatFragment.this).navigate(R.id.nav_client_survey);
+
+                Intent intent = new Intent(context, LoginPsurvey.class);
+                context.startActivity(intent);
+
+
             }
         });
 

@@ -174,7 +174,6 @@ public class PreviousAppointmentsFragment extends Fragment {
                                     String app_status = item.has("appt_status") ? item.getString("appt_status") : "";
                                     String  appointment_type = item.has("appointment_type") ? item.getString("appointment_type") : "";
                                     String  visit_date = item.has("visit_date") ? item.getString("visit_date") : "";
-
                                     PreviousAppointment newPreviousAppointment = new PreviousAppointment(appointment_type, appointment_date, visit_date, app_status);
 
                                     previousAppointmentArrayList.add(newPreviousAppointment);

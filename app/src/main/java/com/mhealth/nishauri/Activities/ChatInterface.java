@@ -46,6 +46,7 @@ public class ChatInterface extends AppCompatActivity {
     public User loggedInUser;
 
 
+
     private List<ChatMessage> smslist;
     chatAdapter chatAdapter1;
     ListView listView;

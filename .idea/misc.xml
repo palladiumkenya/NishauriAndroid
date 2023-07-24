@@ -39,10 +39,33 @@
         <entry key="..\:/Users/This/Nishauri_1.1.1/app/src/main/res/layout/fragment_viral_load_results.xml" value="0.2" />
         <entry key="..\:/Users/This/Nishauri_1.1.1/app/src/main/res/layout/item_eid_results.xml" value="0.153125" />
         <entry key="..\:/Users/This/Nishauri_1.1.1/app/src/main/res/layout/item_viral_load_results.xml" value="0.2" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/drawable-v21/ic_all_survey.xml" value="0.1045" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/drawable-v21/ic_completed_surveys.xml" value="0.1045" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/drawable-v21/ic_email.xml" value="0.1045" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/drawable-v21/ic_user_home.xml" value="0.1045" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/drawable/ic_no_survey.xml" value="0.1045" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/drawable/ic_questionnaire.xml" value="0.1" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/drawable/ic_start_survey.xml" value="0.1" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/drawable/ic_telephone.xml" value="0.1" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/layout/activity_chat_interface.xml" value="0.215625" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/layout/activity_complete_survey.xml" value="0.2" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/layout/activity_informed.xml" value="0.15833333333333333" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/layout/activity_last_consent.xml" value="0.146875" />
         <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/layout/activity_login_psurvey.xml" value="0.215625" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/layout/activity_privacy.xml" value="0.15833333333333333" />
         <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/layout/activity_profile.xml" value="0.1" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/layout/activity_questions.xml" value="0.2" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/layout/activity_select_survey.xml" value="0.134375" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/layout/bottom_navigation.xml" value="0.14739583333333334" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/layout/fragment_chat.xml" value="0.215625" />
         <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/layout/fragment_faqs.xml" value="0.18020833333333333" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/layout/fragment_home_survey.xml" value="0.14270833333333333" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/layout/item_active_survey.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/layout/item_faq.xml" value="0.18020833333333333" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/layout/placeholder_item.xml" value="0.14166666666666666" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1484375" />
+        <entry key="..\:/Users/This/Nishauri_1.1.3July/app/src/main/res/menu/bottom_nav_menu_survey.xml" value="0.14739583333333334" />
         <entry key="..\:/Users/This/mainNish/app/src/main/res/drawable/otp_edittext.xml" value="0.1" />
         <entry key="..\:/Users/This/mainNish/app/src/main/res/layout/activity_login.xml" value="0.13958333333333334" />
         <entry key="..\:/Users/This/mainNish/app/src/main/res/layout/activity_main.xml" value="0.2" />

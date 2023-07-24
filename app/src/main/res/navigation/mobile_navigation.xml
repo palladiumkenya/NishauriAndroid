@@ -145,6 +145,11 @@
         android:name="com.mhealth.nishauri.Activities.Bmi"
         android:label="activity_bmi"
         tools:layout="@layout/activity_bmi" />
+    <fragment
+        android:id="@+id/homeFragmentSurvey"
+        android:name="com.mhealth.nishauri.HomeFragmentSurvey"
+        android:label="fragment_home_survey"
+        tools:layout="@layout/fragment_home_survey" />
 
 
 </navigation>
