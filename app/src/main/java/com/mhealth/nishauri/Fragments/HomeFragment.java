@@ -186,8 +186,21 @@ public class HomeFragment extends Fragment {
 
         loadCurrentTreatments();
 
+        if (getz==1 || getz==7){
+            REM="AppointmentReminder";
+        }
+        else{
+            REM = "";
+        }
 
-               // Log.d("DATEEEEEEEEEEE", appointment_date);
+        Log.d("REMINDER",String.valueOf(getz));
+        Log.d("REMINDER",REM);
+
+        FirebaseMessaging.getInstance().subscribeToTopic(REM);
+
+
+
+        // Log.d("DATEEEEEEEEEEE", appointment_date);
 
 
       /*  FirebaseMessaging.getInstance().subscribeToTopic("Reminder")

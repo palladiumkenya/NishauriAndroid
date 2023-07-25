@@ -59,204 +59,230 @@ public class QuestionsActivity extends AppCompatActivity {
    int sessionID;
     int repeat_count;
 
-    private CheckBox checkBox;
+     CheckBox checkBox;
 
-    private auth loggedInUser;
-    private Question questions;
+     auth loggedInUser;
+    Question questions;
       repeat_count repeat_count1;
-    private com.mhealth.nishauri.Models.repeat_count _repeat_count;
-    private Answer answers;
-    private ArrayList<Answer> answerList = new ArrayList<>();
-    private List<Integer> multiAnswerList = new ArrayList<>();
+    com.mhealth.nishauri.Models.repeat_count _repeat_count;
+    Answer answers;
+     ArrayList<Answer> answerList = new ArrayList<>();
+     List<Integer> multiAnswerList = new ArrayList<>();
 
-    private int mYear, mMonth, mDay;
+   int mYear, mMonth, mDay;
 
 
 
-    @BindView(R.id.tv_survey_question)
+
     MaterialTextView surveyQuestion;
     //openText1
-    @BindView(R.id.til_open_text)
     TextInputLayout openTextTil;
-    @BindView(R.id.etxt_open_text)
     TextInputEditText openTextEtxt;
 
     //openText2
-    @BindView(R.id.til_open_text2)
     TextInputLayout openTextTil2;
-    @BindView(R.id.etxt_open_text2)
     TextInputEditText openTextEtxt2;
 
     //openText3
-    @BindView(R.id.til_open_text3)
     TextInputLayout openTextTil3;
-    @BindView(R.id.etxt_open_text3)
     TextInputEditText openTextEtxt3;
 
     //openText4
-    @BindView(R.id.til_open_text4)
     TextInputLayout openTextTil4;
-    @BindView(R.id.etxt_open_text4)
     TextInputEditText openTextEtxt4;
 
     //openText5
-    @BindView(R.id.til_open_text5)
     TextInputLayout openTextTil5;
-    @BindView(R.id.etxt_open_text5)
     TextInputEditText openTextEtxt5;
 
     //openText6
-    @BindView(R.id.til_open_text6)
     TextInputLayout openTextTil6;
-    @BindView(R.id.etxt_open_text6)
     TextInputEditText openTextEtxt6;
 
     //dateNone1
-    @BindView(R.id.dateLayout)
     TextInputLayout dateTextTil;
-    @BindView(R.id.dob)
     TextInputEditText dobEditText;
     //dateNone2
-    @BindView(R.id.dateLayout2)
     TextInputLayout dateTextTil2;
-    @BindView(R.id.dob2)
     TextInputEditText dobEditText2;
     //dateNone3
-    @BindView(R.id.dateLayout3)
     TextInputLayout dateTextTil3;
-    @BindView(R.id.dob3)
     TextInputEditText dobEditText3;
     //dateNone4
-    @BindView(R.id.dateLayout4)
     TextInputLayout dateTextTil4;
-    @BindView(R.id.dob4)
     TextInputEditText dobEditText4;
     //dateNone5
-    @BindView(R.id.dateLayout5)
     TextInputLayout dateTextTil5;
-    @BindView(R.id.dob5)
     TextInputEditText dobEditText5;
     //dateNone6
-    @BindView(R.id.dateLayout6)
     TextInputLayout dateTextTil6;
-    @BindView(R.id.dob6)
     TextInputEditText dobEditText6;
 
     //datefuture1
-    @BindView(R.id.dateLayoutfuture)
     TextInputLayout dateTextTilfuture;
-    @BindView(R.id.dobfuture)
     TextInputEditText dobEditTextfuture;
-
-
     //datefuture2
-    @BindView(R.id.dateLayoutfuture2)
     TextInputLayout dateTextTilfuture2;
-    @BindView(R.id.dobfuture2)
     TextInputEditText dobEditTextfuture2;
 
     //datefuture3
-    @BindView(R.id.dateLayoutfuture3)
     TextInputLayout dateTextTilfuture3;
-    @BindView(R.id.dobfuture3)
     TextInputEditText dobEditTextfuture3;
 
     //datefuture4
-    @BindView(R.id.dateLayoutfuture4)
     TextInputLayout dateTextTilfuture4;
-    @BindView(R.id.dobfuture4)
     TextInputEditText dobEditTextfuture4;
 
     //datefuture5
-    @BindView(R.id.dateLayoutfuture5)
     TextInputLayout dateTextTilfuture5;
-    @BindView(R.id.dobfuture5)
     TextInputEditText dobEditTextfuture5;
 
     //datefuture6
-    @BindView(R.id.dateLayoutfuture6)
     TextInputLayout dateTextTilfuture6;
-    @BindView(R.id.dobfuture6)
     TextInputEditText dobEditTextfuture6;
 
 
     //datepast1
-    @BindView(R.id.dateLayoutpast)
     TextInputLayout dateTextTilpast;
-    @BindView(R.id.dobpast)
     TextInputEditText dobEditTextpast;
 
     //datepast2
-    @BindView(R.id.dateLayoutpast2)
     TextInputLayout dateTextTilpast2;
-    @BindView(R.id.dobpast2)
     TextInputEditText dobEditTextpast2;
 
     //datepast3
-    @BindView(R.id.dateLayoutpast3)
     TextInputLayout dateTextTilpast3;
-    @BindView(R.id.dobpast3)
     TextInputEditText dobEditTextpast3;
 
     //datepast4
-    @BindView(R.id.dateLayoutpast4)
     TextInputLayout dateTextTilpast4;
-    @BindView(R.id.dobpast4)
     TextInputEditText dobEditTextpast4;
 
     //datepast5
-    @BindView(R.id.dateLayoutpast5)
     TextInputLayout dateTextTilpast5;
-    @BindView(R.id.dobpast5)
     TextInputEditText dobEditTextpast5;
 
     //datepast6
-    @BindView(R.id.dateLayoutpast6)
     TextInputLayout dateTextTilpast6;
-    @BindView(R.id.dobpast6)
     TextInputEditText dobEditTextpast6;
-
-
-
-
-    @BindView(R.id.til_numeric_layout)
     TextInputLayout numericText;
-
-    @BindView(R.id.etxt_numeric_text)
     TextInputEditText numericEditText;
-
-
-
-
-
-    @BindView(R.id.radio_group)
     RadioGroup singleChoiceRadioGroup;
-
-    @BindView(R.id.multiselect_lyt)
     LinearLayout multipleChoiceAns;
-
-    @BindView(R.id.coordinator_lyt)
     CoordinatorLayout coordinatorLyt;
-
-    @BindView(R.id.shimmer_my_container)
     ShimmerFrameLayout shimmer_my_container;
-
-    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    @BindView(R.id.no_active_survey_lyt)
     LinearLayout no_active_survey_lyt;
-
-    @BindView(R.id.error_lyt)
     LinearLayout error_lyt;
-
-    @BindView(R.id.btn_next)
     Button btn_next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
+
+         surveyQuestion =findViewById(R.id.tv_survey_question);
+        //openText1
+         openTextTil=findViewById(R.id.til_open_text);
+         openTextEtxt=findViewById(R.id.etxt_open_text);
+        //openText2
+         openTextTil2=findViewById(R.id.til_open_text2);
+        openTextEtxt2=findViewById(R.id.etxt_open_text2);
+        //openText3
+         openTextTil3=findViewById(R.id.til_open_text3);
+         openTextEtxt3=findViewById(R.id.etxt_open_text3);
+         //openText4
+        openTextTil4 =findViewById(R.id.til_open_text4);
+        openTextEtxt4=findViewById(R.id.etxt_open_text4);
+        //openText5
+        openTextTil5=findViewById(R.id.til_open_text5);
+        openTextEtxt5 =findViewById(R.id.etxt_open_text5);
+        //openText6
+         openTextTil6 =findViewById(R.id.til_open_text6);
+         openTextEtxt6=findViewById(R.id.etxt_open_text6);
+
+        //dateNone1
+        dateTextTil=findViewById(R.id.dateLayout);
+        dobEditText=findViewById(R.id.dob);
+        //dateNone2
+        dateTextTil2=findViewById(R.id.dateLayout2);
+        dobEditText2=findViewById(R.id.dob2);
+        //dateNone3
+        dateTextTil3=findViewById(R.id.dateLayout3);
+        dobEditText3 =findViewById(R.id.dob3);
+        //dateNone4
+         dateTextTil4=findViewById(R.id.dateLayout4);
+         dobEditText4=findViewById(R.id.dob4);
+        //dateNone5
+         dateTextTil5=findViewById(R.id.dateLayout5);
+         dobEditText5=findViewById(R.id.dob5);
+        //dateNone6
+         dateTextTil6 =findViewById(R.id.dateLayout6);
+         dobEditText6 =findViewById(R.id.dob6);
+
+        //datepast1
+
+         dateTextTilpast=findViewById(R.id.dateLayoutpast);
+         dobEditTextpast=findViewById(R.id.dobpast);
+         dateTextTilpast2=findViewById(R.id.dateLayoutpast2);
+        dobEditTextpast2=findViewById(R.id.dobpast2);
+
+        //datepast3
+         dateTextTilpast3=findViewById(R.id.dateLayoutpast3);
+        dobEditTextpast3=findViewById(R.id.dobpast3);
+
+        //datepast4
+         dateTextTilpast4=findViewById(R.id.dateLayoutpast4);
+        TextInputEditText dobEditTextpast4=findViewById(R.id.dobpast4);
+
+        //datepast5
+        dateTextTilpast5=findViewById(R.id.dateLayoutpast5);
+         dobEditTextpast5=findViewById(R.id.dobpast5);
+
+        //datepast6
+         dateTextTilpast6=findViewById(R.id.dateLayoutpast6);
+        dobEditTextpast6=findViewById(R.id.dobpast6);
+
+        //datefuture1
+         dateTextTilfuture=findViewById(R.id.dateLayoutfuture);
+        dobEditTextfuture=findViewById(R.id.dobfuture);
+        //datefuture2
+         dateTextTilfuture2=findViewById(R.id.dateLayoutfuture2);
+         dobEditTextfuture2=findViewById(R.id.dobfuture2);
+
+        //datefuture3
+         dateTextTilfuture3=findViewById(R.id.dateLayoutfuture3);
+         dobEditTextfuture3=findViewById(R.id.dobfuture3);
+
+        //datefuture4
+        dateTextTilfuture4=findViewById(R.id.dateLayoutfuture4);
+        dobEditTextfuture4=findViewById(R.id.dobfuture4);
+
+        //datefuture5
+         dateTextTilfuture5=findViewById(R.id.dateLayoutfuture5);
+         dobEditTextfuture5=findViewById(R.id.dobfuture5);
+
+        //datefuture6
+        dateTextTilfuture6=findViewById(R.id.dateLayoutfuture6);
+        dobEditTextfuture6=findViewById(R.id.dobfuture6);
+
+
+        numericText=findViewById(R.id.til_numeric_layout);
+        numericEditText=findViewById(R.id.etxt_numeric_text);
+
+         singleChoiceRadioGroup=findViewById(R.id.radio_group);
+         multipleChoiceAns=findViewById(R.id.multiselect_lyt);
+         coordinatorLyt=findViewById(R.id.coordinator_lyt);
+
+        shimmer_my_container =findViewById(R.id.shimmer_my_container);
+        recyclerView =findViewById(R.id.recyclerView);
+        no_active_survey_lyt =findViewById(R.id.no_active_survey_lyt);
+        error_lyt=findViewById(R.id.error_lyt);
+         btn_next =findViewById(R.id.btn_next);
+
+
+
 
         loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN2, auth.class);
 
@@ -277,7 +303,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
         loadQuestion();
         //set EditText type4 to accept numeric only
-        numericEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
+       // numericEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
 
         //DatePickerNone1
         dobEditText.setOnClickListener(new View.OnClickListener() {
@@ -1173,6 +1199,7 @@ public class QuestionsActivity extends AppCompatActivity {
                                // NavHostFragment.findNavController(QuestionsFragment.this).navigate(R.id.nav_complete_survey);
                                 Intent intent =new Intent(QuestionsActivity.this, CompleteSurveyActivity.class);
                                 startActivity(intent);
+
 
                                 Toast.makeText(QuestionsActivity.this, message, Toast.LENGTH_SHORT).show();
                             }

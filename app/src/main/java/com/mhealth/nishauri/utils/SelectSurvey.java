@@ -44,10 +44,10 @@ import butterknife.Unbinder;
 public class SelectSurvey extends AppCompatActivity {
 
 
-    private auth loggedInUser;
-    private activeSurveyAdapter mAdapter;
-    private ActiveSurveys activeSurveys;
-    private ArrayList<ActiveSurveys> activeSurveysArrayList;
+    public auth loggedInUser;
+    public activeSurveyAdapter mAdapter;
+    public ActiveSurveys activeSurveys;
+    public ArrayList<ActiveSurveys> activeSurveysArrayList;
 
     ShimmerFrameLayout shimmer_my_container;
 
@@ -94,9 +94,22 @@ public class SelectSurvey extends AppCompatActivity {
 
                 ActiveSurveys clickedItem = activeSurveysArrayList.get(position);
 
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("questionnaire", clickedItem);
                 Intent intent = new Intent(SelectSurvey.this, LastConsent.class);
-                intent.putExtra("questionnaire", clickedItem);
+                intent.putExtras(bundle);
                 startActivity(intent);
+
+
+
+
+
+
+                // creating a bundle object
+               /* Bundle bundle = new Bundle();
+                bundle.putSerializable("questionnaire", String.valueOf(clickedItem));*/
+
                 Toast.makeText(SelectSurvey.this, "selected", Toast.LENGTH_SHORT).show();
 
                /* Bundle bundle = new Bundle();

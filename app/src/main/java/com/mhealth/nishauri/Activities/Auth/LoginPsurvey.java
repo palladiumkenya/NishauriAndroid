@@ -81,7 +81,7 @@ public class LoginPsurvey extends AppCompatActivity {
                         try {
 
                             if(phoneNumber.getText().toString().equals("")){
-                                Snackbar.make(findViewById(R.id.login_lyt), "Please enter phone number", Snackbar.LENGTH_LONG).show();
+
                             }else if(password.getText().toString().equals("")){
                                 Snackbar.make(findViewById(R.id.login_lyt), "Please enter password", Snackbar.LENGTH_LONG).show();
                             }
@@ -133,10 +133,10 @@ public class LoginPsurvey extends AppCompatActivity {
 
         JSONObject jsonObject = new JSONObject();
         try {
-           // jsonObject.put("msisdn", phoneNumber.getText().toString());
-            jsonObject.put("msisdn", "0700000000");
-           // jsonObject.put("password", password.getText().toString());
-            jsonObject.put("password", "0987654321");
+            jsonObject.put("msisdn", phoneNumber.getText().toString());
+           // jsonObject.put("msisdn", "0700000000");
+            jsonObject.put("password", password.getText().toString());
+            //jsonObject.put("password", "0987654321");
 
         } catch (JSONException e) {
             e.printStackTrace();

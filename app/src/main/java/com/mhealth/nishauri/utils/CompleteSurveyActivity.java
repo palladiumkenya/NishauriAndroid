@@ -13,17 +13,15 @@ import com.mhealth.nishauri.R;
 import butterknife.BindView;
 
 public class CompleteSurveyActivity extends AppCompatActivity {
-    @BindView(R.id.btn_new_survey)
-    Button btn_new_survey;
-
-    @BindView(R.id.btn_done)
-    Button btn_done;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete_survey);
+        Button btn_new_survey = findViewById(R.id.btn_new_survey);
+        Button btn_done=findViewById(R.id.btn_done);
+
 
         btn_new_survey.setOnClickListener(new View.OnClickListener() {
             @Override

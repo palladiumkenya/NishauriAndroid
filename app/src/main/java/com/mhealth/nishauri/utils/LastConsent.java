@@ -43,9 +43,9 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class LastConsent extends AppCompatActivity {
-    private auth loggedInUser;
-    private ActiveSurveys activeSurveys;
-    private boolean informb, privacyb, stateb;
+    public auth loggedInUser;
+     ActiveSurveys activeSurveys;
+    public boolean informb, privacyb, stateb;
     int dataID=0;
 
 
@@ -58,34 +58,23 @@ public class LastConsent extends AppCompatActivity {
     MaterialTextView tv_survey_id;
 
 
-    MaterialTextView informText1;
-    MaterialTextView privacyText1;
+    TextView informText1;
+    TextView privacyText1;
 
 
-    @BindView(R.id.checkInform)
     CheckBox checkInform;
-
-    @BindView(R.id.checkPrivacy)
     CheckBox checkPrivacy;
-
-    @BindView(R.id.checkStnt)
     CheckBox checkStnt;
 
     //start survey
 
-    @BindView(R.id.til_ccc_no)
+
     TextInputLayout til_ccc_no;
-
-    @BindView(R.id.etxt_ccc_no)
     TextInputEditText etxt_ccc_no;
-
-    @BindView(R.id.til_f_name)
     TextInputLayout til_first_name;
-
-    @BindView(R.id.etxt_first_name)
     TextInputEditText etxt_first_name;
 
-    String activeSurveys2;
+    //String activeSurveys2;
 
 
 
@@ -103,13 +92,32 @@ public class LastConsent extends AppCompatActivity {
         patient_id= findViewById(R.id.patient_id);
         tv_survey_id= findViewById(R.id.tv_survey_id);
 
-        informText1= (TextView) findViewById(R.id.informText);
+        informText1= findViewById(R.id.informText);
         privacyText1= findViewById(R.id.privacyText);
+
+        checkInform = findViewById(R.id.checkInform);
+        checkPrivacy = findViewById(R.id.checkPrivacy);
+        checkStnt= findViewById(R.id.checkStnt);
+
+        til_ccc_no =findViewById(R.id.til_ccc_no);
+        etxt_ccc_no=findViewById(R.id.etxt_ccc_no);
+        til_first_name=findViewById(R.id.til_f_name);
+        etxt_first_name=findViewById(R.id.etxt_first_name);
 
         loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN2, auth.class);
 
-        Intent intent = getIntent();
-        activeSurveys2 =intent.getStringExtra("questionnaire");
+       /* Intent intent = getIntent();
+        activeSurveys2 =intent.getStringExtra("questionnaire");*/
+
+        // getting the bundle back from the android
+        Bundle bundle = getIntent().getExtras();
+// getting the string back
+        //activeSurveys2 = bundle.getString("questionnaire", "Default");
+
+        //activeSurveys = (ActiveSurveys) bundle.getSerializable("questionnaire");
+        activeSurveys = (ActiveSurveys) bundle.getSerializable("questionnaire");
+
+        //Log.d("Active Surveys", String.valueOf(activeSurveys));
         //activeSurveys2=intent.getStringExtra("questionnaire");
 
 
@@ -127,7 +135,7 @@ public class LastConsent extends AppCompatActivity {
             }
         });
 
-        privacyText.setOnClickListener(new View.OnClickListener() {
+        privacyText1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LastConsent.this, PrivacyActivity.class);
@@ -157,9 +165,10 @@ public class LastConsent extends AppCompatActivity {
         }
         //end checkboxes
 
-        if (activeSurveys2 == null){
+        if (activeSurveys == null){
             Toast.makeText(LastConsent.this, "No Surveys found", Toast.LENGTH_LONG).show();
         }else {
+            //Toast.makeText(LastConsent.this, "Surveys found", Toast.LENGTH_LONG).show();
             tv_chosen_survey_title.setText(activeSurveys.getName());
             tv_chosen_survey_introduction.setText(activeSurveys.getDescription());
         }
@@ -175,7 +184,7 @@ public class LastConsent extends AppCompatActivity {
                 }else {
 
 
-                    confirmConsent(activeSurveys.getId(),etxt_ccc_no.getText().toString(), etxt_first_name.getText().toString(), dataID);}
+                    confirmConsent(activeSurveys.getId(),etxt_ccc_no.getText().toString(), etxt_first_name.getText().toString(), 2);}
             }
         });
     }

@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public class ActiveSurveys implements Serializable {
 
-    private int id;
-    private String name;
-    private String description;
-    private String is_active;
-    private String created_at;
-    private String active_till;
-    private int created_by;
+    public int id;
+    public String name;
+    public String description;
+    public String is_active;
+    public String created_at;
+    public String active_till;
+    public int created_by;
     public boolean expanded = false;
     public boolean parent = false;
 

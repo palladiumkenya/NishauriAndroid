@@ -104,7 +104,7 @@ public class HomeActivitySurvey extends AppCompatActivity {
 
                     Intent intent =new Intent(HomeActivitySurvey.this, SelectSurvey.class);
                     startActivity(intent);
-                    Toast.makeText(HomeActivitySurvey.this, "survey", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(HomeActivitySurvey.this, "survey", Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
