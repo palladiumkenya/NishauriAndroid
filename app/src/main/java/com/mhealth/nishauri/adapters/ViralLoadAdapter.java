@@ -151,9 +151,6 @@ public class ViralLoadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             }
 
-
-
-
         }
 
 

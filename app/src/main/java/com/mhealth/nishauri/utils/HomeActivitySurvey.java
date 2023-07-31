@@ -34,6 +34,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Activities.Auth.LoginPsurvey;
+import com.mhealth.nishauri.Fragments.Chat.ChatFragment;
 import com.mhealth.nishauri.HomeFragmentSurvey;
 import com.mhealth.nishauri.Models.ActiveSurveys;
 import com.mhealth.nishauri.Models.auth;
@@ -45,6 +46,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -80,6 +82,13 @@ public class HomeActivitySurvey extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+       // Intent intent = new Intent(HomeActivitySurvey.this, ChatFragment.class);
+        //startActivity(intent);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -110,6 +119,12 @@ public class HomeActivitySurvey extends AppCompatActivity {
                     Intent intent =new Intent(HomeActivitySurvey.this, SelectSurvey.class);
                     startActivity(intent);
                    // Toast.makeText(HomeActivitySurvey.this, "survey", Toast.LENGTH_SHORT).show();
+                }
+                else if (item.getItemId()==R.id.nav_home){
+                    logout();
+
+                    Intent intent =new Intent(HomeActivitySurvey.this, ChatFragment.class);
+                    startActivity(intent);
                 }
                 return true;
             }
@@ -470,6 +485,93 @@ public class HomeActivitySurvey extends AppCompatActivity {
         else{
             return false;
         }
+
+    }
+
+    public void logout(){
+
+        String auth_token = loggedInUser.getAuth_token();
+
+        AndroidNetworking.post("https://psurveyapitest.kenyahmis.org/auth/token/logout/")
+                .addHeaders("Authorization","Token "+ auth_token)
+                .addHeaders("Content-Type", "application.json")
+                .addHeaders("Accept", "*/*")
+                .addHeaders("Accept", "gzip, deflate, br")
+                .addHeaders("Connection","keep-alive")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+
+                        Log.e("Error", response.toString());
+
+
+
+                        try {
+                            boolean  status = response.has("success") && response.getBoolean("success");
+                            String error = response.has("error") ? response.getString("error") : "";
+                            String message = response.has("message") ? response.getString("message") : "";
+
+                            if (status){
+
+                                String endPoint = Stash.getString(Constants.AUTH_TOKEN);
+                                Stash.clearAll();
+                                Stash.put(Constants.AUTH_TOKEN, endPoint);
+
+                                Intent intent = new Intent(HomeActivitySurvey.this, ChatFragment.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                                finish();
+
+
+                            }else if (!status){
+
+                                Snackbar.make(findViewById(R.id.drawer_layout), message, Snackbar.LENGTH_LONG).show();
+
+                            }
+                            else{
+
+                                Snackbar.make(findViewById(R.id.drawer_layout), error, Snackbar.LENGTH_LONG).show();
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+                        Log.e("Logout Error", String.valueOf(error.getErrorCode()));
+
+
+                        if (error.getErrorCode() == 0){
+
+                            String endPoint = Stash.getString(Constants.AUTH_TOKEN);
+                            Stash.clearAll();
+                            Stash.put(Constants.AUTH_TOKEN, endPoint);
+
+                            Intent intent = new Intent(HomeActivitySurvey.this, ChatFragment.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            finish();
+
+                        }
+                        else{
+
+                            Toast.makeText(HomeActivitySurvey.this, ""+error.getErrorBody(), Toast.LENGTH_SHORT).show();
+
+
+                        }
+
+                    }
+                });
+
 
     }
 

@@ -110,7 +110,7 @@ public class SelectSurvey extends AppCompatActivity {
                /* Bundle bundle = new Bundle();
                 bundle.putSerializable("questionnaire", String.valueOf(clickedItem));*/
 
-                Toast.makeText(SelectSurvey.this, "selected", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(SelectSurvey.this, "selected", Toast.LENGTH_SHORT).show();
 
                /* Bundle bundle = new Bundle();
                 bundle.putSerializable("questionnaire", clickedItem);
