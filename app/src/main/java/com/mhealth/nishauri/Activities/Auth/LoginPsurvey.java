@@ -133,18 +133,14 @@ public class LoginPsurvey extends AppCompatActivity {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("msisdn", phoneNumber.getText().toString());
-           // jsonObject.put("msisdn", "0700000000");
-            jsonObject.put("password", password.getText().toString());
-            //jsonObject.put("password", "0987654321");
+           // jsonObject.put("msisdn", phoneNumber.getText().toString());
+            jsonObject.put("msisdn", "0700000000");
+           // jsonObject.put("password", password.getText().toString());
+            jsonObject.put("password", "0987654321");
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-
-
         // AndroidNetworking.initialize(getApplicationContext(), myUnsafeHttpClient());
         AndroidNetworking.post("https://psurveyapitest.kenyahmis.org/auth/token/login")
                 .addHeaders("Content-Type", "application.json")
