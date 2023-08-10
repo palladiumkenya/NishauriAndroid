@@ -27,6 +27,7 @@ import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textview.MaterialTextView;
 import com.mhealth.nishauri.Models.ActiveSurveys;
+import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.Models.auth;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.adapters.activeSurveyAdapter;
@@ -44,7 +45,8 @@ import butterknife.Unbinder;
 public class SelectSurvey extends AppCompatActivity {
 
 
-    public auth loggedInUser;
+   // public auth loggedInUser;
+    public User loggedInUser;
     public activeSurveyAdapter mAdapter;
     public ActiveSurveys activeSurveys;
     public ArrayList<ActiveSurveys> activeSurveysArrayList;
@@ -73,7 +75,8 @@ public class SelectSurvey extends AppCompatActivity {
          btn_back= findViewById(R.id.btn_back);
          btn_select_survey= findViewById(R.id.btn_select_survey);
 
-        loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN2, auth.class);
+       // loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN, auth.class);
+        loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
         activeSurveysArrayList = new ArrayList<>();
         mAdapter = new activeSurveyAdapter(SelectSurvey.this, activeSurveysArrayList);
@@ -146,10 +149,12 @@ public class SelectSurvey extends AppCompatActivity {
     private void loadActiveSurveys() {
 
         String auth_token = loggedInUser.getAuth_token();
+        String urls ="?user_id="+auth_token;
 
 
-        AndroidNetworking.get("https://psurveyapitest.kenyahmis.org/api/questionnaire/active")
-                .addHeaders("Authorization","Token "+ auth_token)
+       // AndroidNetworking.get("https://psurveyapitest.kenyahmis.org/api/questionnaire/active")
+        AndroidNetworking.post("https://ushauriapi.kenyahmis.org/nishauri/getactive_q"+urls)
+               // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")

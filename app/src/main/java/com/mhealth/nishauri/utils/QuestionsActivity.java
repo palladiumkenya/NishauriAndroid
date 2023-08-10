@@ -32,6 +32,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
+import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.Models.auth;
 import com.mhealth.nishauri.Models.repeat_count;
 import com.mhealth.nishauri.R;
@@ -54,14 +55,16 @@ public class QuestionsActivity extends AppCompatActivity {
     public String z;
 
 
-    private String openText = "";
-    private String questionLink;
+  public String openText = "";
+   // private String questionLink;
+    int  questionLink;
    int sessionID;
     int repeat_count;
 
      CheckBox checkBox;
 
-     auth loggedInUser;
+   //  auth loggedInUser;
+    public User loggedInUser;
     Question questions;
       repeat_count repeat_count1;
     com.mhealth.nishauri.Models.repeat_count _repeat_count;
@@ -284,10 +287,11 @@ public class QuestionsActivity extends AppCompatActivity {
 
 
 
-        loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN2, auth.class);
+        //loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN2, auth.class);
+        loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
         Intent intent = getIntent();
-        questionLink = intent.getStringExtra("questionLink");
+        questionLink = intent.getIntExtra("questionLink",  -1);
         sessionID = intent.getIntExtra("sessionID", -1);
 
 
@@ -1154,12 +1158,16 @@ public class QuestionsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+       // String auth_token = loggedInUser.getAuth_token();
+
         String auth_token = loggedInUser.getAuth_token();
+        String urls ="?user_id="+auth_token;
 
 
-
-        AndroidNetworking.post("https://psurveyapitest.kenyahmis.org/api/questions/answer/")
-                .addHeaders("Authorization","Token "+ auth_token)
+        // https://ushauriapi.kenyahmis.org/nishauri/q_answer
+        //https://psurveyapitest.kenyahmis.org/api/questions/answer/
+        AndroidNetworking.post("https://ushauriapi.kenyahmis.org/nishauri/q_answer")
+               // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")
@@ -1177,8 +1185,8 @@ public class QuestionsActivity extends AppCompatActivity {
 
                             if (response.has("link")){
 
-                                String link = response.has("link") ? response.getString("link") : "";
-                                int sessionId = response.has("session_id") ? response.getInt("session_id") : 0;
+                                int link = response.has("link") ? response.getInt("link") : 0;
+                                int sessionId = response.has("session") ? response.getInt("session") : 0;
 
 
                                /* Bundle bundle = new Bundle();
@@ -1226,15 +1234,29 @@ public class QuestionsActivity extends AppCompatActivity {
 
     private void loadQuestion() {
 
+//        //int session2 = sessionID;
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("next_q", questionLink);
+            jsonObject.put("session", sessionID);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
         String auth_token = loggedInUser.getAuth_token();
-        //int session2 = sessionID;
-        AndroidNetworking.get(questionLink+ "/"+sessionID)
-                .addHeaders("Authorization","Token "+ auth_token)
-                .addHeaders("Content-Type", "application.json")
+        String urls ="?user_id="+auth_token;
+        //https://ushauriapi.kenyahmis.org/nishauri/next_q
+        AndroidNetworking.post("https://ushauriapi.kenyahmis.org/nishauri/next_q")
+               // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")
-                .setPriority(Priority.LOW)
+                .setContentType("application.json")
+                .addJSONObjectBody(jsonObject) // posting json
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override

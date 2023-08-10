@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.mhealth.nishauri.Fragments.HomeFragment;
 import com.mhealth.nishauri.R;
 
 import butterknife.BindView;
@@ -43,7 +44,7 @@ public class CompleteSurveyActivity extends AppCompatActivity {
 
               //  NavHostFragment.findNavController(CompleteSurveyFragment.this).navigate(R.id.nav_home);
 
-                Intent integer = new Intent(CompleteSurveyActivity.this, HomeActivitySurvey.class);
+                Intent integer = new Intent(CompleteSurveyActivity.this, HomeFragment.class);
                 startActivity(integer);
 
 

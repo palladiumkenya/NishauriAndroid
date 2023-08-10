@@ -13,7 +13,7 @@ import com.mhealth.nishauri.Models.DateTable;
 import java.util.List;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
-    int z;
+   // int z;
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage message) {

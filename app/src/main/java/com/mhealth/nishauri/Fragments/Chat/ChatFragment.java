@@ -31,6 +31,7 @@ import com.mhealth.nishauri.Models.auth;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
 import com.mhealth.nishauri.utils.HomeActivitySurvey;
+import com.mhealth.nishauri.utils.SelectSurvey;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -103,10 +104,10 @@ public class ChatFragment extends Fragment {
             public void onClick(View v) {
 
                // NavHostFragment.findNavController(ChatFragment.this).navigate(R.id.nav_client_survey);
-                loginRequest();
+               // loginRequest();
 
-             /*   Intent intent = new Intent(context, HomeActivitySurvey.class);
-                context.startActivity(intent);*/
+               Intent intent = new Intent(context, SelectSurvey.class);
+                context.startActivity(intent);
 
 
             }

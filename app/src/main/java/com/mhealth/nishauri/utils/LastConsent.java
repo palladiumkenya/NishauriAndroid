@@ -28,6 +28,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.mhealth.nishauri.Models.ActiveSurveys;
+import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.Models.auth;
 import com.mhealth.nishauri.R;
 
@@ -37,13 +38,15 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class LastConsent extends AppCompatActivity {
-    public auth loggedInUser;
+    //public auth loggedInUser;
+    public User loggedInUser;
      ActiveSurveys activeSurveys;
     public boolean informb, privacyb, stateb;
     int dataID=0;
@@ -104,7 +107,8 @@ public class LastConsent extends AppCompatActivity {
         til_first_name=findViewById(R.id.til_f_name);
         etxt_first_name=findViewById(R.id.etxt_first_name);
 
-        loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN2, auth.class);
+       // loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN, auth.class);
+        loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
        /* Intent intent = getIntent();
         activeSurveys2 =intent.getStringExtra("questionnaire");*/
@@ -116,6 +120,8 @@ public class LastConsent extends AppCompatActivity {
 
         //activeSurveys = (ActiveSurveys) bundle.getSerializable("questionnaire");
         activeSurveys = (ActiveSurveys) bundle.getSerializable("questionnaire");
+        //Toast.makeText(LastConsent.this, String.valueOf(activeSurveys.getId()), Toast.LENGTH_LONG).show();
+        Log.d("activeID", String.valueOf(activeSurveys.getId()));
 
         //Log.d("Active Surveys", String.valueOf(activeSurveys));
         //activeSurveys2=intent.getStringExtra("questionnaire");
@@ -184,11 +190,19 @@ public class LastConsent extends AppCompatActivity {
                 }else {
 
 
-                    confirmConsent(activeSurveys.getId(),etxt_ccc_no.getText().toString(), etxt_first_name.getText().toString(), 2);}
+                    confirmConsent(activeSurveys.getId(), "1234500001", "Test", 1, "True", "True", "True");
+                   // confirmConsent(104, "1234500001", "Test", 1, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
+
+                    //test
+
+                    //test
+
+                }
+
             }
         });
     }
-    private void confirmConsent(int questionnaireId, String ccc_no, String firstName, int dataID) {
+    public void confirmConsent(int questionnaireId, String ccc_no, String firstName, int dataID, String x, String y, String z) {
 
 
         JSONObject jsonObject = new JSONObject();
@@ -196,11 +210,10 @@ public class LastConsent extends AppCompatActivity {
             jsonObject.put("questionnaire_id", questionnaireId );
             jsonObject.put("ccc_number", ccc_no);
             jsonObject.put("first_name", firstName);
-
             jsonObject.put("questionnaire_participant_id", dataID);
-            jsonObject.put("interviewer_statement", stateb);
-            jsonObject.put("informed_consent", informb);
-            jsonObject.put("privacy_policy", privacyb);
+            jsonObject.put("interviewer_statement", x);
+            jsonObject.put("informed_consent", y);
+            jsonObject.put("privacy_policy", z);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -208,9 +221,19 @@ public class LastConsent extends AppCompatActivity {
 
 
 
+
         String auth_token = loggedInUser.getAuth_token();
-        AndroidNetworking.post("https://psurveyapitest.kenyahmis.org/api/questionnaire/start/")
-                .addHeaders("Authorization","Token "+ auth_token)
+        String urls ="?user_id="+auth_token;
+
+       // Log.d("tokennnn", auth_token);
+        //Mg==
+
+
+        //AndroidNetworking.post("https://psurveyapitest.kenyahmis.org/api/questionnaire/start/")
+       // https://ushauriapi.kenyahmis.org/nishauri/start_q?user_id=Mg==
+        //"https://ushauriapi.kenyahmis.org/nishauri/start_q"+urls
+        AndroidNetworking.post("https://ushauriapi.kenyahmis.org/nishauri/start_q"+urls)
+               // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")
@@ -231,8 +254,14 @@ public class LastConsent extends AppCompatActivity {
 
                             if (response.has("link")){
 
-                                String link = response.has("link") ? response.getString("link") : "";
+                               // String link = response.has("link") ? response.getString("link") : "";
+                               int link = response.has("link") ? response.getInt("link") : 0;
                                 int sessionId = response.has("session") ? response.getInt("session") : 0;
+
+
+                                Log.d("Link", String.valueOf(link));
+
+
 
                                /* Bundle bundle = new Bundle();
                                 bundle.putString("questionLink",link);
@@ -240,6 +269,7 @@ public class LastConsent extends AppCompatActivity {
 
                                 // bundle.putInt("questionnaire_id", questionnaireId);
                                 //Navigation.findNavController(root).navigate(R.id.nav_questions, bundle);
+                               // Toast.makeText(LastConsent.this, "Successsdfghjk", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LastConsent.this, QuestionsActivity.class);
                                 intent.putExtra("questionLink",link);
                                 intent.putExtra("sessionID",sessionId);
@@ -261,11 +291,11 @@ public class LastConsent extends AppCompatActivity {
                             }
                             else{
 
-                                // Snackbar.make(root.findViewById(R.id.lastConsent2), errors, Snackbar.LENGTH_LONG).show();
+                               //  Snackbar.make(root.findViewById(R.id.lastConsent2), errors, Snackbar.LENGTH_LONG).show();
 
                             }
 
-                        } catch (JSONException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 
@@ -273,8 +303,11 @@ public class LastConsent extends AppCompatActivity {
 
                     @Override
                     public void onError(ANError error) {
+                       // Log.e("Success", error.toString());
+                        Toast.makeText(LastConsent.this, "onErrors!", Toast.LENGTH_SHORT).show();
 
-                        Log.e("Error", error.getErrorDetail());
+                        //Log.e("Error", error.getErrorDetail());
+                       // Log.e("ErrorBody", error.toString());
 
 
                         if (error.getErrorBody().contains("No questions")){
