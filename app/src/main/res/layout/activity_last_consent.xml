@@ -247,7 +247,7 @@
                         android:id="@+id/checkStnt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Informed Statement"/>
+                        android:text="I have read and understood the purpose of the survey"/>
 
 
                 </LinearLayout>
@@ -286,9 +286,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_medium"
-                        android:text="Please ensure you read out the purpose of the survey to the patient. Ensure you get consent to start the survey."
+                        android:text="Ensure you consent to start the survey."
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="@color/grey_90" />
+                        android:textColor="@color/colorPrimary"/>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_patient_name"

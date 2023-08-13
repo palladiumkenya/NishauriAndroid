@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -73,6 +74,9 @@ public class SelectSurvey extends AppCompatActivity {
 
     Button btn_select_survey;
    // BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+
+    TextView tv_active_surveys;
+    TextView tv_completed_surveys;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +108,8 @@ public class SelectSurvey extends AppCompatActivity {
         error_lyt = findViewById(R.id.error_lyt);
          btn_back= findViewById(R.id.btn_back);
          btn_select_survey= findViewById(R.id.btn_select_survey);
+         tv_active_surveys = findViewById(R.id.tv_active_surveys);
+         tv_completed_surveys= findViewById(R.id.tv_completed_surveys);
 
        // loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN, auth.class);
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
@@ -119,6 +125,7 @@ public class SelectSurvey extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
 
         loadActiveSurveys();
+        loadCurrentUser();
 
 
         mAdapter.setOnItemClickListener(new activeSurveyAdapter.OnItemClickListener() {
@@ -298,4 +305,76 @@ public class SelectSurvey extends AppCompatActivity {
                     }
                 });
     }
+
+    private void loadCurrentUser(){
+
+        String auth_token = loggedInUser.getAuth_token();
+
+
+        AndroidNetworking.post("https://ushauriapi.kenyahmis.org/nishauri/getactive_q_list")
+               // .addHeaders("Authorization","Token "+ auth_token)
+                .addHeaders("Content-Type", "application.json")
+                .addHeaders("Accept", "*/*")
+                .addHeaders("Accept", "gzip, deflate, br")
+                .addHeaders("Connection","keep-alive")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // do anything with response
+//                        Log.e(TAG, response.toString());
+
+                        try {
+
+                            JSONObject user = response.getJSONObject("user");
+
+                           /* int id = user.has("id") ? user.getInt("id"): 0;
+                            String msisdn = user.has("msisdn") ? user.getString("msisdn") : "";
+                            String email = user.has("email") ? user.getString("email") : "";
+                            String firstName = user.has("f_name") ? user.getString("f_name") : "";
+                            String lastName = user.has("l_name") ? user.getString("l_name") : "";
+                            JSONObject designation = user.getJSONObject("designation");
+
+                            int designationId = designation.has("id") ? designation.getInt("id"): 0;
+                            String designationName = designation.has("name") ? designation.getString("name") : "";
+
+                            JSONObject facility = user.getJSONObject("facility");
+
+                            int facilityId = facility.has("id") ? facility.getInt("id"): 0;
+                            int mflCode = facility.has("mfl_code") ? facility.getInt("mfl_code"): 0;
+                            String facilityName = facility.has("name") ? facility.getString("name") : "";
+                            String county = facility.has("county") ? facility.getString("county") : "";
+                            String subCounty = facility.has("sub_county") ? facility.getString("sub_county") : "";*/
+
+                            String activeQuestionnaires = response.has("Active_questionnaires") ? response.getString("Active_questionnaires") : "";
+                            String completedSurveys = response.has("Completed_surveys") ? response.getString("Completed_surveys") : "";
+
+
+                            /*txt_name.setText(firstName + " " + lastName);
+                            txt_email.setText(email);
+                            tv_facility.setText(facilityName);*/
+                            tv_active_surveys.setText(activeQuestionnaires);
+                            tv_completed_surveys.setText(completedSurveys);
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                        // handle error
+//                        Log.e(TAG, error.getErrorBody());
+                        Toast.makeText(SelectSurvey.this, "Error: " + error.getErrorBody(), Toast.LENGTH_SHORT).show();
+
+                      //  Snackbar.make(root.findViewById(R.id.frag_home), "Error: " + error.getErrorBody(), Snackbar.LENGTH_LONG).show();
+
+                    }
+                });
+
+    }
+
 }
