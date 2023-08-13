@@ -37,6 +37,7 @@ import com.mhealth.nishauri.Activities.Auth.LoginPsurvey;
 import com.mhealth.nishauri.Fragments.Chat.ChatFragment;
 import com.mhealth.nishauri.HomeFragmentSurvey;
 import com.mhealth.nishauri.Models.ActiveSurveys;
+import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.Models.auth;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.adapters.activeSurveyAdapter;
@@ -52,9 +53,9 @@ import butterknife.BindView;
 
 
 public class HomeActivitySurvey extends AppCompatActivity {
-    private auth loggedInUser;
-    private activeSurveyAdapter mAdapter;
-    private ArrayList<ActiveSurveys> activeSurveysArrayList;
+     User loggedInUser;
+   activeSurveyAdapter mAdapter;
+    ArrayList<ActiveSurveys> activeSurveysArrayList;
 
     TextView txt_name;
 
@@ -107,7 +108,7 @@ public class HomeActivitySurvey extends AppCompatActivity {
         tv_active_surveys = findViewById(R.id.tv_active_surveys);
         tv_completed_surveys = findViewById(R.id.tv_completed_surveys);;
 
-        loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN2, auth.class);
+        loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
         activeSurveysArrayList = new ArrayList<>();
         mAdapter = new activeSurveyAdapter(HomeActivitySurvey.this, activeSurveysArrayList);
 
@@ -362,7 +363,7 @@ public class HomeActivitySurvey extends AppCompatActivity {
                             String auth_token = response.has("auth_token") ? response.getString("auth_token") : "";
                             auth newUser = new auth(auth_token);
 
-                            Stash.put(Constants.AUTH_TOKEN2, newUser);
+                            Stash.put(Constants.AUTH_TOKEN, newUser);
 
 
                         } catch (JSONException e) {

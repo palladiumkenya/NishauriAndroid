@@ -27,6 +27,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Activities.ART_Activity;
 import com.mhealth.nishauri.Activities.Auth.LoginPsurvey;
 import com.mhealth.nishauri.Activities.ChatInterface;
+import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.Models.auth;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
@@ -171,9 +172,9 @@ public class ChatFragment extends Fragment {
 
                         try {
                             String auth_token = response.has("auth_token") ? response.getString("auth_token") : "";
-                            auth newUser = new auth(auth_token);
+                            User newUser = new User(auth_token);
 
-                            Stash.put(Constants.AUTH_TOKEN2, newUser);
+                            Stash.put(Constants.AUTH_TOKEN, newUser);
 
 
                         } catch (JSONException e) {

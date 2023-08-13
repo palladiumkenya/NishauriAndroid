@@ -2,8 +2,12 @@ package com.mhealth.nishauri.utils;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,8 +28,13 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.fxn.stash.Stash;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textview.MaterialTextView;
+import com.mhealth.nishauri.Activities.Auth.LoginActivity;
+import com.mhealth.nishauri.Activities.MainActivity;
 import com.mhealth.nishauri.Models.ActiveSurveys;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.Models.auth;
@@ -43,6 +52,7 @@ import butterknife.BindView;
 import butterknife.Unbinder;
 
 public class SelectSurvey extends AppCompatActivity {
+    AppBarConfiguration mAppBarConfiguration;
 
 
    // public auth loggedInUser;
@@ -62,11 +72,31 @@ public class SelectSurvey extends AppCompatActivity {
     Button btn_back;
 
     Button btn_select_survey;
-
+   // BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_survey);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+       /* bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return false;
+            }
+        });*/
+
+
+        /*NavigationView navigationView = findViewById(R.id.nav_view);
+
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView, navController);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);*/
 
         shimmer_my_container = findViewById(R.id.shimmer_my_container);
         recyclerView = findViewById(R.id.recyclerView);
@@ -142,6 +172,35 @@ public class SelectSurvey extends AppCompatActivity {
         });
 
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                logout();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+    public void logout(){
+
+        String endPoint = Stash.getString(Constants.AUTH_TOKEN);
+        Stash.clearAll();
+
+        Stash.put(Constants.AUTH_TOKEN, endPoint);
+
+        Intent intent = new Intent(SelectSurvey.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 
 

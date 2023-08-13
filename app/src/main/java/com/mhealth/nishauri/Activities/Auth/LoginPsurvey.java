@@ -29,6 +29,7 @@ import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.mhealth.nishauri.HomeFragmentSurvey;
+import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.Models.auth;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
@@ -164,9 +165,9 @@ public class LoginPsurvey extends AppCompatActivity {
 
                         try {
                             String auth_token = response.has("auth_token") ? response.getString("auth_token") : "";
-                            auth newUser = new auth(auth_token);
+                            User newUser = new User(auth_token);
 
-                            Stash.put(Constants.AUTH_TOKEN2, newUser);
+                            Stash.put(Constants.AUTH_TOKEN, newUser);
 
 
                         } catch (JSONException e) {

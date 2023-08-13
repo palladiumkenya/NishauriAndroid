@@ -23,6 +23,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
 import com.mhealth.nishauri.Models.ActiveSurveys;
+import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.Models.auth;
 import com.mhealth.nishauri.adapters.activeSurveyAdapter;
 import com.mhealth.nishauri.utils.Constants;
@@ -102,7 +103,7 @@ public class HomeFragmentSurvey extends Fragment {
         root= inflater.inflate(R.layout.fragment_home_survey, container, false);
 
         unbinder = ButterKnife.bind(this, root);
-        loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN2, auth.class);
+        //loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
         activeSurveysArrayList = new ArrayList<>();
         mAdapter = new activeSurveyAdapter(context, activeSurveysArrayList);
 
@@ -112,8 +113,8 @@ public class HomeFragmentSurvey extends Fragment {
         //set data and list adapter
         recyclerView.setAdapter(mAdapter);
 
-        loadCurrentUser();
-        loadActiveSurveys();
+       // loadCurrentUser();
+       // loadActiveSurveys();
 
         btn_questionnaire.setOnClickListener(new View.OnClickListener() {
             @Override
