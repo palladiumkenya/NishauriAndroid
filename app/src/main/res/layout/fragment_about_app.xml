@@ -40,7 +40,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="@dimen/spacing_large"
-                android:src="@drawable/folder" />
+                android:src="@drawable/nishauri_logo" />
 
             <View
                 android:layout_width="0dp"
@@ -132,7 +132,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="October 2020"
+                    android:text="2023"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/grey_90" />
 

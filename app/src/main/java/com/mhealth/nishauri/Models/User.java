@@ -1,7 +1,7 @@
 package com.mhealth.nishauri.Models;
 
 public class User {
-    private String auth_token;
+     String auth_token;
 
 
 

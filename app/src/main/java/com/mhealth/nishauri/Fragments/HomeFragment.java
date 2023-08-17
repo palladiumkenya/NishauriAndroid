@@ -1,7 +1,7 @@
 package com.mhealth.nishauri.Fragments;
 
 import android.content.Context;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,24 +29,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.mhealth.nishauri.Activities.ART_Activity;
-import com.mhealth.nishauri.Activities.MainActivity;
-import com.mhealth.nishauri.Models.ArtModel;
+import com.mhealth.nishauri.Models.CaceTable;
 import com.mhealth.nishauri.Models.CurrentArt;
 import com.mhealth.nishauri.Models.DateTable;
 import com.mhealth.nishauri.Models.Dependant;
 import com.mhealth.nishauri.Models.UpcomingAppointment;
-import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.adapters.DependantHomeAdapter;
 import com.mhealth.nishauri.adapters.AppointmentHomeAdapter;
 import com.mhealth.nishauri.adapters.TreatmentHomeAdapter;
-import com.mhealth.nishauri.adapters.UpcomingAppointmentAdapter;
 import com.mhealth.nishauri.utils.Constants;
-import com.mhealth.nishauri.utils.SelectUrls;
 
-import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.json.JSONArray;
@@ -76,14 +69,12 @@ public class HomeFragment extends Fragment {
    int getz;
     String REM;
 
+    String getccc;
 
-
+    String ccc1;
 
     @BindView(R.id.shimmers_my_container)
     ShimmerFrameLayout shimmers_my_container;
-
-
-
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
 
@@ -177,6 +168,9 @@ public class HomeFragment extends Fragment {
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
         initialise();
+        try {
+
+
 
         loadCurrentUser();
 
@@ -184,7 +178,9 @@ public class HomeFragment extends Fragment {
 
         loadUpcomingAppointments();
 
-        loadCurrentTreatments();
+        loadCurrentTreatments();}catch (Exception e){
+            e.printStackTrace();
+        }
 
         if (getz==1 || getz==7){
             REM="AppointmentReminder";
@@ -318,14 +314,31 @@ public class HomeFragment extends Fragment {
                                     String  gender = item.has(" gender") ? item.getString(" gender") : "";
                                     int  client_age = item.has("client_age") ? item.getInt("client_age") : 0;
 
+                                    //Log.d("clinic", String.valueOf(clinic_number));
 
 
+                                    // Creating a shared pref object with a file name "MySharedPref" in private mode
+                                    try {
+
+                                    SharedPreferences sharedPreferences = context.getSharedPreferences("MySharedPref", context.MODE_PRIVATE);
+                                    SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+                                    // write all the data entered by the user in SharedPreference and apply
+                                    myEdit.putString("cccnumber", clinic_number);
+                                    myEdit.apply();}catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+
+                                    // Fetching the stored data from the SharedPreference
+                                   /* SharedPreferences sh = context.getSharedPreferences("MySharedPref", context.MODE_PRIVATE);
+                                    String s1 = sh.getString("cccnumber", "");*/
+
+                                   // Log.d("s1", s1);
 
                                     txt_msisdn.setText(phone_no);
                                     txt_facility.setText(facility_name);
                                     txt_name.setText(clinic_number);
                                     txt_upi.setText(moh_upi);
-
 
                                    /* txt_name.setText(CCCNo);
                                     txt_msisdn.setText(msisdn);
@@ -574,13 +587,6 @@ public class HomeFragment extends Fragment {
                                         DateTable.deleteAll(DateTable.class);
                                         DateTable dateTable =new DateTable(days);
                                         dateTable.save();
-
-                                       // progressDialog.dismiss();
-
-                                        //Intent intent = new Intent(SelectUrls.this, Constants.class);
-                                        //startActivity(intent);
-                                        // finish();
-
 
                                     } catch (Exception e) {
                                         Log.d("error saving data", "error on server saving");

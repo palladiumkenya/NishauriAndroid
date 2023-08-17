@@ -123,9 +123,11 @@ public class SelectSurvey extends AppCompatActivity {
 
         //set data and list adapter
         recyclerView.setAdapter(mAdapter);
-
+        try{
         loadActiveSurveys();
-        loadCurrentUser();
+        loadCurrentUser();}catch(Exception e){
+            e.printStackTrace();
+        }
 
 
         mAdapter.setOnItemClickListener(new activeSurveyAdapter.OnItemClickListener() {

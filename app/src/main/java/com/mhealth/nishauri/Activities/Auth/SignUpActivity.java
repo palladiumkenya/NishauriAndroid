@@ -97,14 +97,14 @@ public class SignUpActivity extends AppCompatActivity {
         initComponent();
         checkNulls();
 
-        terms.setOnClickListener(new View.OnClickListener() {
+       /* terms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 showTermServicesDialog();
 
             }
-        });
+        });*/
 
         bt_sign_up1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,7 +166,7 @@ public class SignUpActivity extends AppCompatActivity {
         //security_answer = (EditText) findViewById(R.id.txt_security_answer);
         password = (EditText) findViewById(R.id.txt_password);
         repassword = (EditText) findViewById(R.id.txt_repassword);
-        terms = (MaterialTextView) findViewById(R.id.tv_terms);
+      //  terms = (MaterialTextView) findViewById(R.id.tv_terms);
         privacy = (MaterialTextView) findViewById(R.id.tv_privacy);
 
         bt_sign_up1 = (Button) findViewById(R.id.bt_sign_up);

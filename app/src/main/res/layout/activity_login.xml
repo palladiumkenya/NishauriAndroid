@@ -174,9 +174,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:fadingEdge="horizontal"
-                        android:text="login"
+                        android:text="Sign In"
                         android:textSize="@dimen/spacing_mlarge"
-                        android:textAllCaps="true"
+                        android:textAllCaps="false"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
                         android:onClick="gotoHome" />
@@ -189,8 +189,8 @@
                         android:layout_marginTop="@dimen/spacing_medium"
                         android:clickable="true"
                         android:text="Forgot Password ?"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:textStyle="bold" />
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                         />
 
 
 
@@ -206,9 +206,9 @@
                             <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="New user? "
+                                android:text="New User? "
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                                android:textColor="@color/blue_grey_300" />
+                                 />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/txt_sign_up"
@@ -230,6 +230,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/spacing_medium"
                     android:layout_marginTop="@dimen/spacing_large"
+                    android:visibility="gone"
                     android:gravity="center"
                     >
                     <com.google.android.material.textview.MaterialTextView

@@ -96,6 +96,7 @@
                                 android:id="@+id/txt_phone_no"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:maxLength="10"
                                 android:hint="Enter Phone Number"
                                 android:inputType="phone"
                                />
@@ -210,41 +211,28 @@
                             android:weightSum="3"
                             android:orientation="horizontal">
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/tv_terms"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/spacing_medium"
-                            android:visibility="gone"
-                            android:text="Terms and Conditions"
-                            android:clickable="true"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/colorAccent"
-                            android:background="?attr/selectableItemBackground"
-                            />
 
 
 
                         <com.google.android.material.checkbox.MaterialCheckBox
                             android:id="@+id/terms"
-                            android:layout_width="match_parent"
+                            android:layout_width="30dp"
                             android:layout_height="wrap_content"
                             android:checked="false"
-                            android:textSize="10sp"
-                            android:layout_weight="2"
-                            android:text="Please confirm you have read the" />
+                            android:layout_weight="0.5"
+                            />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/tv_privacy"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
 
-                                android:text="privacy terms and condition"
-                                android:layout_weight="1"
+                                android:text="Privacy Terms and Condition"
+                                android:layout_weight="2.5"
                                 android:clickable="true"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="10sp"
+                                android:textColor="@color/colorPrimary"
+
                                 android:background="?attr/selectableItemBackground"
                                 />
                         </LinearLayout>

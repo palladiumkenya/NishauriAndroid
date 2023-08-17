@@ -1,52 +1,41 @@
 package com.mhealth.nishauri.utils;
 
-import static android.R.layout.simple_spinner_dropdown_item;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.Navigation;
 
-import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.fxn.stash.Stash;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.mhealth.nishauri.Models.ActiveSurveys;
+import com.mhealth.nishauri.Models.CaceTable;
 import com.mhealth.nishauri.Models.User;
-import com.mhealth.nishauri.Models.auth;
 import com.mhealth.nishauri.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public class LastConsent extends AppCompatActivity {
     //public auth loggedInUser;
     public User loggedInUser;
+
+    String  getccc;
+
+
      ActiveSurveys activeSurveys;
     public boolean informb, privacyb, stateb;
     int dataID=0;
@@ -79,12 +68,19 @@ public class LastConsent extends AppCompatActivity {
 
     //String activeSurveys2;
 
+    String s1;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_last_consent);
+
+        SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        s1 = sh.getString("cccnumber", "");
+
+        Log.d("ccc", String.valueOf(s1));
 
          tv_chosen_survey_title= findViewById(R.id.tv_chosen_survey_title);
          tv_chosen_survey_introduction = findViewById(R.id.tv_chosen_survey_introduction);
@@ -122,6 +118,8 @@ public class LastConsent extends AppCompatActivity {
         activeSurveys = (ActiveSurveys) bundle.getSerializable("questionnaire");
         //Toast.makeText(LastConsent.this, String.valueOf(activeSurveys.getId()), Toast.LENGTH_LONG).show();
         Log.d("activeID", String.valueOf(activeSurveys.getId()));
+
+
 
         //Log.d("Active Surveys", String.valueOf(activeSurveys));
         //activeSurveys2=intent.getStringExtra("questionnaire");
@@ -190,7 +188,7 @@ public class LastConsent extends AppCompatActivity {
                 }else {
 
 
-                    confirmConsent(activeSurveys.getId(), "1234500001", "Test", 1, "True", "True", "True");
+                    confirmConsent(activeSurveys.getId(), s1, "Test", 1, "True", "True", "True");
                    // confirmConsent(104, "1234500001", "Test", 1, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
 
                     //test

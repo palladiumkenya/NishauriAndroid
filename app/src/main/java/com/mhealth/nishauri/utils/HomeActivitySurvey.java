@@ -137,7 +137,7 @@ public class HomeActivitySurvey extends AppCompatActivity {
         //set data and list adapter
         recyclerView.setAdapter(mAdapter);*/
 
-        loadCurrentUser();
+        //loadCurrentUser();
        // loadActiveSurveys();
 
       /*  btn_questionnaire.setOnClickListener(new View.OnClickListener() {

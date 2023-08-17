@@ -30,16 +30,16 @@
                 android:layout_height="match_parent"
                 android:text="Privacy information"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 app:fontFamily="serif" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="last updated on July 16, 2020"
+                android:text="last updated in 2023"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/colorPrimary"
                 android:textStyle="italic"
                 app:fontFamily="serif" />
 

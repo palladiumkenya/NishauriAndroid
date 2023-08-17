@@ -304,8 +304,10 @@ public class QuestionsActivity extends AppCompatActivity {
         assert getArguments() != null;
         sessionID=  getArguments().getInt("sessionID");*/
 
-
-        loadQuestion();
+        try{
+        loadQuestion();}catch(Exception e){
+            e.printStackTrace();
+        }
         //set EditText type4 to accept numeric only
        // numericEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
 

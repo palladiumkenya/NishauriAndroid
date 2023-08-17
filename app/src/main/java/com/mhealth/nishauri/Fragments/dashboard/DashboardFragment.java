@@ -193,9 +193,11 @@ public class DashboardFragment extends Fragment {
         unbinder = ButterKnife.bind(this, root);
 
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
-
+        /*try {
         loadDashboardDetails();
-        MissedByType();
+        MissedByType();}catch (Exception e){
+            e.printStackTrace();
+        }*/
         pDialog = new ProgressDialog(context);
         pDialog.setTitle("Loading...");
         pDialog.setMessage("Getting Results...");
@@ -207,7 +209,13 @@ public class DashboardFragment extends Fragment {
 
 
         // viralLoadArrayList = new ArrayList<>();
+        try {
+            loadDashboardDetails();
+            MissedByType();
         loadViralLoad();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
         return root;
     }
@@ -272,6 +280,22 @@ public class DashboardFragment extends Fragment {
                                     values = new BarEntry((float) plot, i);
                                     yValues.add(values);
 
+
+                                    //plot chat
+                                    BarDataSet barDataSet1 = new BarDataSet(yValues, "Viral Load");
+                                    barDataSet1.setColor(Color.rgb(0, 82, 159));
+
+                                    yAxis = new ArrayList();
+                                    yAxis.add(barDataSet1);
+                                    String dates[]=  xAxis1.toArray(new String[xAxis1.size()]);
+
+                                    // String dates[]= (String[]) xAxis1.toArray(new String[xAxis1.size()]);
+                                    data = new BarData(dates,yAxis);
+                                    chart.setData(data);
+                                    chart.setDescription("");
+                                    chart.animateXY(2000, 2000);
+                                    chart.invalidate();
+
                                 }
                             }else {
 
@@ -288,7 +312,7 @@ public class DashboardFragment extends Fragment {
                         }
 
 
-                        BarDataSet barDataSet1 = new BarDataSet(yValues, "Viral Load");
+                       /* BarDataSet barDataSet1 = new BarDataSet(yValues, "Viral Load");
                         barDataSet1.setColor(Color.rgb(0, 82, 159));
 
                         yAxis = new ArrayList();
@@ -300,7 +324,7 @@ public class DashboardFragment extends Fragment {
                         chart.setData(data);
                         chart.setDescription("");
                         chart.animateXY(2000, 2000);
-                        chart.invalidate();
+                        chart.invalidate();*/
 
 
                     }
