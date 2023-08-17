@@ -1,17 +1,23 @@
 package com.mhealth.nishauri.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -29,6 +35,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.mhealth.nishauri.Activities.Auth.LoginActivity;
 import com.mhealth.nishauri.Models.CaceTable;
 import com.mhealth.nishauri.Models.CurrentArt;
 import com.mhealth.nishauri.Models.DateTable;
@@ -40,6 +47,7 @@ import com.mhealth.nishauri.adapters.DependantHomeAdapter;
 import com.mhealth.nishauri.adapters.AppointmentHomeAdapter;
 import com.mhealth.nishauri.adapters.TreatmentHomeAdapter;
 import com.mhealth.nishauri.utils.Constants;
+import com.mhealth.nishauri.utils.SelectSurvey;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
@@ -66,7 +74,7 @@ public class HomeFragment extends Fragment {
 
     Date Appointmentdate;
 
-   int getz;
+    int getz;
     String REM;
 
     String getccc;
@@ -77,6 +85,9 @@ public class HomeFragment extends Fragment {
     ShimmerFrameLayout shimmers_my_container;
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
+
+    @BindView(R.id.frag_home)
+    CoordinatorLayout frag_home1;
 
     @BindView(R.id.no_appointment_lyt)
     LinearLayout no_appointment_lyt1;
@@ -127,8 +138,6 @@ public class HomeFragment extends Fragment {
     //ImageButton  bt_expand1;
 
 
-
-
     private Unbinder unbinder;
     private View root;
     private Context context;
@@ -142,7 +151,12 @@ public class HomeFragment extends Fragment {
     private ArrayList<Dependant> dependantArrayList;
 
     public int id;
-    String  appointment_date;
+    String appointment_date;
+
+    // Declaring handler, runnable and time in milli seconds
+    private Handler mHandler;
+    private Runnable mRunnable;
+    private long mTime = 20000;
 
 
     @Override
@@ -158,8 +172,9 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
         root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -168,35 +183,82 @@ public class HomeFragment extends Fragment {
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
         initialise();
-        try {
+
+        //View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        // Initializing the handler and the runnable
+        mHandler = new Handler(Looper.getMainLooper());
+        mRunnable = new Runnable() {
+            @Override
+            public void run() {
+
+                Toast.makeText(requireContext(), "User inactive for " + mTime / 1000 + " secs!", Toast.LENGTH_SHORT).show();
+                logout();
+            }
+        };
+
+        // Start the handler
+        startHandler();
+
+        // Set onTouchListener for the fragment's view
+        root.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Removes the handler callbacks (if any)
+                stopHandler();
+
+                // Runs the handler (for the specified time)
+                // If any touch or motion is detected before
+                // the specified time, this onTouch function is again called
+                startHandler();
+
+                return false; // Returning false to allow event propagation
+            }
+        });
+
+       // return view;
+   // }
 
 
 
+
+        try
+
+    {
         loadCurrentUser();
 
         loadDependants();
 
         loadUpcomingAppointments();
 
-        loadCurrentTreatments();}catch (Exception e){
-            e.printStackTrace();
-        }
+        loadCurrentTreatments();
+    }catch(
+    Exception e)
 
-        if (getz==1 || getz==7){
-            REM="AppointmentReminder";
-        }
-        else{
-            REM = "";
-        }
+    {
+        e.printStackTrace();
+    }
+
+        if(getz==1||getz==7)
+
+    {
+        REM = "AppointmentReminder";
+    }
+        else
+
+    {
+        REM = "";
+    }
 
         Log.d("REMINDER",String.valueOf(getz));
         Log.d("REMINDER",REM);
 
-        FirebaseMessaging.getInstance().subscribeToTopic(REM);
+        FirebaseMessaging.getInstance().
+
+    subscribeToTopic(REM);
 
 
-
-        // Log.d("DATEEEEEEEEEEE", appointment_date);
+    // Log.d("DATEEEEEEEEEEE", appointment_date);
 
 
       /*  FirebaseMessaging.getInstance().subscribeToTopic("Reminder")
@@ -826,6 +888,28 @@ public class HomeFragment extends Fragment {
                     });
 
 
+    }
+    // start handler function
+    private void startHandler() {
+        mHandler.postDelayed(mRunnable, mTime);
+    }
+
+    // stop handler function
+    private void stopHandler() {
+        mHandler.removeCallbacks(mRunnable);
+    }
+
+    public void logout(){
+
+        String endPoint = Stash.getString(Constants.AUTH_TOKEN);
+        Stash.clearAll();
+
+        Stash.put(Constants.AUTH_TOKEN, endPoint);
+
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        context.startActivity(intent);
+        //context.fini;
     }
 
 }

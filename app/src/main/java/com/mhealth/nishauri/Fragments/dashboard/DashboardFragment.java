@@ -212,7 +212,7 @@ public class DashboardFragment extends Fragment {
         try {
             loadDashboardDetails();
             MissedByType();
-        loadViralLoad();
+            loadViralLoad();
         }catch(Exception e){
             e.printStackTrace();
         }
