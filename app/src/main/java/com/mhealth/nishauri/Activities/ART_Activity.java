@@ -1,10 +1,15 @@
 package com.mhealth.nishauri.Activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +22,7 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.fxn.stash.Stash;
+import com.mhealth.nishauri.Activities.Auth.LoginActivity;
 import com.mhealth.nishauri.Models.ArtModel;
 import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.Models.User;
@@ -33,6 +39,35 @@ import java.util.List;
 
 public class ART_Activity extends AppCompatActivity {
 
+    private static final long INACTIVITY_THRESHOLD = 120000; // 2 minutes
+    private static final long CHECK_INTERVAL = 120000; // 2 minutes
+    //10000 10seconds
+
+    private long lastInteractionTime = 0;
+    private Handler inactivityHandler = new Handler();
+
+    private Runnable inactivityRunnable = new Runnable() {
+        @Override
+        public void run() {
+
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - lastInteractionTime >= INACTIVITY_THRESHOLD) {
+                // Perform logout actions here
+                //logoutUser();
+                alertlogout();
+            } else {
+                // Schedule the next check
+                inactivityHandler.postDelayed(this, CHECK_INTERVAL);
+            }
+            //performLogout();
+            //alertlogout();
+
+
+        }
+    };
+
+
+
     EditText txt_facility;
     Button btn_search;
     ListView listView;
@@ -48,6 +83,16 @@ public class ART_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_art);
+
+        View view = findViewById(R.id.art_id);
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                lastInteractionTime = System.currentTimeMillis();
+                return false;
+            }
+        });
+
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
         toolbar1 =findViewById(R.id.toolbarr);
@@ -156,5 +201,61 @@ public class ART_Activity extends AppCompatActivity {
 
 
 
+    }
+    public void logout(){
+
+        String endPoint = Stash.getString(Constants.AUTH_TOKEN);
+        Stash.clearAll();
+
+        Stash.put(Constants.AUTH_TOKEN, endPoint);
+
+        Intent intent = new Intent(ART_Activity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        //context.fini;
+    }
+
+    public void alertlogout(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(ART_Activity.this);
+        builder1.setIcon(R.drawable.nishauri_logo);
+        builder1.setTitle("Your Session Has Expired");
+        // builder1.setMessage( zz);
+        builder1.setCancelable(false);
+
+        builder1.setPositiveButton(
+                "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        logout();
+
+                        //dialog.cancel();
+                    }
+                });
+
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+
+    }
+
+   /* @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        lastInteractionTime = System.currentTimeMillis();
+    }*/
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Remove any pending callbacks when the fragment is paused
+        inactivityHandler.removeCallbacks(inactivityRunnable);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Resume checking for inactivity when the fragment is resumed
+        inactivityHandler.postDelayed(inactivityRunnable, CHECK_INTERVAL);
     }
 }

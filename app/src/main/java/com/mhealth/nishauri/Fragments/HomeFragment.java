@@ -225,18 +225,12 @@ public class HomeFragment extends Fragment {
        root2.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                //resetInactivityTimer();
-              //  checkForInactivity();
-               // Toast.makeText(context, "User inactive for secs!", Toast.LENGTH_SHORT).show();
-                //lastTouchEventTime = System.currentTimeMillis();
+
                 lastInteractionTime = System.currentTimeMillis();
                 return false;
                 //return true;
             }
         });
-
-
-
 
         try
 
