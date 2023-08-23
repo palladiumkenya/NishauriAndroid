@@ -107,6 +107,8 @@ dependencies {
 
     implementation 'com.github.satyan:sugar:1.5'
 
+    implementation 'com.hanks:passcodeview:0.1.2'
+
 
 
 }

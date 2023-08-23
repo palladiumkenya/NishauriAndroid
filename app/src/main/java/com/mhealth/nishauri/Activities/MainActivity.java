@@ -61,16 +61,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Initializing the handler and the runnable
-        mHandler = new Handler(Looper.getMainLooper());
+       /* mHandler = new Handler(Looper.getMainLooper());
         mRunnable = new Runnable() {
             @Override
             public void run() {
                 Toast.makeText(getApplicationContext(), "User inactive for " + mTime/1000 + " secs!", Toast.LENGTH_SHORT).show();
             }
-        };
+        };*/
 
         // Start the handler
-        startHandler();
+       // startHandler();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -209,9 +209,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
+  /*  @Override
     public void onStop() {
-        super.onStop();
+        stopHandler();
+         super.onStop();
 
     }
 
@@ -220,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onTouchEvent(MotionEvent event) {
 
         // Removes the handler callbacks (if any)
-        stopHandler();
+       // stopHandler();
 
         // Runs the handler (for the specified time)
         // If any touch or motion is detected before
@@ -238,5 +239,7 @@ public class MainActivity extends AppCompatActivity {
     // stop handler function
     private void stopHandler() {
         mHandler.removeCallbacks(mRunnable);
-    }
+    }*/
+
+
 }

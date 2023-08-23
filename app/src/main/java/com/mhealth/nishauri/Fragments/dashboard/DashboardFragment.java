@@ -51,6 +51,11 @@ import java.util.List;
 
 public class DashboardFragment extends Fragment {
 
+    private static final long INACTIVITY_THRESHOLD = 300000; // 5 minutes
+    private static final long CHECK_INTERVAL = 60000; // 1 minute
+    private long lastInteractionTime = 0;
+
+
     private ArrayList<ViralLoads> viralLoadArrayList = new ArrayList<>();
 
     ArrayList<BarEntry> barEntryArrayList1;
@@ -784,5 +789,7 @@ public class DashboardFragment extends Fragment {
         super.onDestroyView();
         unbinder.unbind();
     }
+
+
 
 }

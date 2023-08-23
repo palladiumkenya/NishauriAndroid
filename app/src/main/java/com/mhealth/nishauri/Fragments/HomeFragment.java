@@ -1,12 +1,14 @@
 package com.mhealth.nishauri.Fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -36,6 +38,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.mhealth.nishauri.Activities.Auth.LoginActivity;
+import com.mhealth.nishauri.Activities.PassCodeActivity;
 import com.mhealth.nishauri.Models.CaceTable;
 import com.mhealth.nishauri.Models.CurrentArt;
 import com.mhealth.nishauri.Models.DateTable;
@@ -47,6 +50,7 @@ import com.mhealth.nishauri.adapters.DependantHomeAdapter;
 import com.mhealth.nishauri.adapters.AppointmentHomeAdapter;
 import com.mhealth.nishauri.adapters.TreatmentHomeAdapter;
 import com.mhealth.nishauri.utils.Constants;
+import com.mhealth.nishauri.utils.MonitorOtherAppsService;
 import com.mhealth.nishauri.utils.SelectSurvey;
 
 import org.joda.time.DateTime;
@@ -70,6 +74,33 @@ import static com.mhealth.nishauri.utils.AppController.TAG;
 
 
 public class HomeFragment extends Fragment {
+    private static final long INACTIVITY_THRESHOLD = 120000; // 2 minutes
+    private static final long CHECK_INTERVAL = 120000; // 2 minutes
+    //10000 10seconds
+
+    private long lastInteractionTime = 0;
+    private Handler inactivityHandler = new Handler();
+
+    private Runnable inactivityRunnable = new Runnable() {
+        @Override
+        public void run() {
+
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - lastInteractionTime >= INACTIVITY_THRESHOLD) {
+                // Perform logout actions here
+                //logoutUser();
+                alertlogout();
+            } else {
+                // Schedule the next check
+                inactivityHandler.postDelayed(this, CHECK_INTERVAL);
+            }
+            //performLogout();
+            //alertlogout();
+
+
+        }
+    };
+
     Date date11;
 
     Date Appointmentdate;
@@ -94,6 +125,9 @@ public class HomeFragment extends Fragment {
 
     @BindView(R.id.errors_lyt)
     LinearLayout errors_lyt1;
+
+    @BindView(R.id.lin_home)
+    LinearLayout lin_home;
 
     @BindView(R.id.shimmerss_my_container)
     ShimmerFrameLayout shimmerss_my_container;
@@ -140,6 +174,7 @@ public class HomeFragment extends Fragment {
 
     private Unbinder unbinder;
     private View root;
+    private View root2;
     private Context context;
 
     private User loggedInUser;
@@ -153,12 +188,6 @@ public class HomeFragment extends Fragment {
     public int id;
     String appointment_date;
 
-    // Declaring handler, runnable and time in milli seconds
-    private Handler mHandler;
-    private Runnable mRunnable;
-    private long mTime = 20000;
-
-
     @Override
     public void onAttach(Context ctx) {
         super.onAttach(ctx);
@@ -169,55 +198,42 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
+        // Start checking for inactivity
+        inactivityHandler.postDelayed(inactivityRunnable, CHECK_INTERVAL);
         // Inflate the layout for this fragment
 
         root = inflater.inflate(R.layout.fragment_home, container, false);
+        root2 = root.findViewById(R.id.lin_home);
         unbinder = ButterKnife.bind(this, root);
 
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
 
         initialise();
-
-        //View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        // Initializing the handler and the runnable
-        mHandler = new Handler(Looper.getMainLooper());
-        mRunnable = new Runnable() {
-            @Override
-            public void run() {
-
-                Toast.makeText(requireContext(), "User inactive for " + mTime / 1000 + " secs!", Toast.LENGTH_SHORT).show();
-                logout();
-            }
-        };
-
-        // Start the handler
-        startHandler();
-
+        // Start the background service
+        context.startService(new Intent(getActivity(), MonitorOtherAppsService.class));
+          //  checkForInactivity();
         // Set onTouchListener for the fragment's view
-        root.setOnTouchListener(new View.OnTouchListener() {
+       root2.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                // Removes the handler callbacks (if any)
-                stopHandler();
-
-                // Runs the handler (for the specified time)
-                // If any touch or motion is detected before
-                // the specified time, this onTouch function is again called
-                startHandler();
-
-                return false; // Returning false to allow event propagation
+                //resetInactivityTimer();
+              //  checkForInactivity();
+               // Toast.makeText(context, "User inactive for secs!", Toast.LENGTH_SHORT).show();
+                //lastTouchEventTime = System.currentTimeMillis();
+                lastInteractionTime = System.currentTimeMillis();
+                return false;
+                //return true;
             }
         });
-
-       // return view;
-   // }
 
 
 
@@ -289,6 +305,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
+       // resetInactivityTimer(); // Start the timer when the fragment is created
 
         return root;
     }
@@ -887,16 +904,6 @@ public class HomeFragment extends Fragment {
                         }
                     });
 
-
-    }
-    // start handler function
-    private void startHandler() {
-        mHandler.postDelayed(mRunnable, mTime);
-    }
-
-    // stop handler function
-    private void stopHandler() {
-        mHandler.removeCallbacks(mRunnable);
     }
 
     public void logout(){
@@ -911,6 +918,100 @@ public class HomeFragment extends Fragment {
         context.startActivity(intent);
         //context.fini;
     }
+    /*@Override
+    public void onResume() {
+        super.onResume();
+        resetInactivityTimer();
+    }*/
+
+   /* @Override
+    public void onPause() {
+        super.onPause();
+        cancelInactivityTimer();
+    }
+   @Override
+   public void onDestroyView() {
+       super.onDestroyView();
+       cancelInactivityTimer(); // Cancel the timer when the fragment is destroyed
+   }*/
+
+
+    private void resetInactivityTimer() {
+     //   cancelInactivityTimer();
+       // inactivityHandler.postDelayed(inactivityRunnable, INACTIVITY_TIMEOUT);
+    }
+    private void cancelInactivityTimer() {
+      //  inactivityHandler.removeCallbacks(inactivityRunnable);
+    }
+
+    private void performLogout() {
+        // Add your logout logic here
+        // For example, you can start a new activity to log the user out
+       /* Intent intent = new Intent(getActivity(), LoginActivity.class);
+        startActivity(intent);
+        getActivity().finish();*/
+        //logout();
+        Intent intent_passcode = new Intent(context, PassCodeActivity.class);
+        startActivity(intent_passcode);
+    }
+
+    public void alertlogout(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+        builder1.setIcon(R.drawable.nishauri_logo);
+        builder1.setTitle("Your Session Has Expired");
+       // builder1.setMessage( zz);
+        builder1.setCancelable(false);
+
+        builder1.setPositiveButton(
+                "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                       logout();
+
+                        //dialog.cancel();
+                    }
+                });
+
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+
+    }
+
+   /* @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        lastInteractionTime = System.currentTimeMillis();
+    }*/
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Remove any pending callbacks when the fragment is paused
+        inactivityHandler.removeCallbacks(inactivityRunnable);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Resume checking for inactivity when the fragment is resumed
+        inactivityHandler.postDelayed(inactivityRunnable, CHECK_INTERVAL);
+    }
+
+
 
 }
+
+//}
+
+
+
+
+
+
+
+
+
+
 
