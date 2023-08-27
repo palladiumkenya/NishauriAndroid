@@ -51,5 +51,15 @@
         android:name="com.mhealthkenya.psurvey.LastConsent"
         android:label="Consent"
         tools:layout="@layout/fragment_last_consent" />
+    <fragment
+        android:id="@+id/uploadedActivity"
+        android:name="com.mhealthkenya.psurvey.activities.UploadedActivity"
+        android:label="Clients CCC Numbers"
+        tools:layout="@layout/activity_uploaded" />
+    <fragment
+        android:id="@+id/testid"
+        android:name="com.mhealthkenya.psurvey.fragments.Test"
+        android:label="fragment_test"
+        tools:layout="@layout/fragment_test" />
 
 </navigation>

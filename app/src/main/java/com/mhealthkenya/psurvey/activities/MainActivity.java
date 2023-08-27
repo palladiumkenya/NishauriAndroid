@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         // do anything with response
-//                        Log.e(TAG, response.toString());
+                        Log.e(TAG, response.toString());
 
                         try {
 
@@ -162,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_about_app:
+
                 aboutAppDialog();
                break;
 

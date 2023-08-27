@@ -53,9 +53,13 @@ public class Constants extends AppCompatActivity {
   public static String INITIAL_CONFIRMATION = "/api/initial/consent/";
   public static String GET_PARTICIPANTS = "/api/questionnaire/participants/";
 
+  public static String UPLOADEDDATA ="/api/questionnaire/data/";
+
 
   /*MODELS*/
   public static String AUTH_TOKEN = "";
+
+  public static int MFL_CODE = 0;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {

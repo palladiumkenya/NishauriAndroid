@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="@dimen/actionBarSize"
     android:background="@color/grey_5"
+    android:id="@+id/frag1"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:shimmer="http://schemas.android.com/tools"
 

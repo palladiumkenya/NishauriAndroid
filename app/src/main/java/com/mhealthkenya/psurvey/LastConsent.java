@@ -2,15 +2,16 @@ package com.mhealthkenya.psurvey;
 
 import static android.R.layout.simple_spinner_dropdown_item;
 import static com.mhealthkenya.psurvey.depedancies.AppController.TAG;
+import static com.mhealthkenya.psurvey.depedancies.AppController.getAppContext;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,9 +53,21 @@ import butterknife.Unbinder;
 
 public class LastConsent extends Fragment {
 
+   /*public static LastConsent newInstance(String data) {
+       LastConsent fragment = new LastConsent();
+
+        Bundle args = new Bundle();
+        args.putString("data", data);
+        fragment.setArguments(args);
+
+        return fragment;
+    }*/
+
     private Unbinder unbinder;
     private View root;
     private Context context;
+    CoordinatorLayout frag;
+    String CCC;
     //String privacytext, informtext;
 
     public String z;
@@ -155,8 +168,30 @@ public class LastConsent extends Fragment {
         unbinder = ButterKnife.bind(this, root);
 
         loggedInUser = (auth) Stash.getObject(Constants.AUTH_TOKEN, auth.class);
+
+
+        // Gets the data from the passed bundle
+      //  Bundle bundle = getArguments();
+       // assert bundle != null;
+       // String CCC = bundle.getString("CCCNUMBER");
+       // String message1 = bundle.getString("QUESTIONAIRE");
+       // Log.d("Eror", CCC.toString());
+
+
+
         assert getArguments() != null;
+         CCC = getArguments().getString("CCCNUMBER");
+
         activeSurveys = (ActiveSurveys) getArguments().getSerializable("questionnaire");
+        /*if (activeSurveys==null){
+            int x = (int) getArguments().getSerializable("questionnaire1");
+            activeSurveys==x;
+        }*/
+       // int x = (int) getArguments().getSerializable("questionnaire1");
+        //Log.d("CCCC", String.valueOf(x));
+       /* if (activeSurveys==null){
+            activeSurveys==message;
+        }*/
         // String ccc_no= (String) getArguments().getSerializable("ccc_no");
         //String f_name= (String) getArguments().getSerializable("f_name");
         // questionnaire_participant_id =(int) getArguments().getSerializable("questionnaire_participant_id_");
@@ -264,7 +299,7 @@ public class LastConsent extends Fragment {
                 }else {
 
 
-                    confirmConsent(activeSurveys.getId(),etxt_ccc_no.getText().toString(), etxt_first_name.getText().toString(), dataID);}
+                    confirmConsent(activeSurveys.getId(),CCC, etxt_first_name.getText().toString(), dataID);}
             }
         });
 

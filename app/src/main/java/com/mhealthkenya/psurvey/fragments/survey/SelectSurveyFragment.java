@@ -1,6 +1,7 @@
 package com.mhealthkenya.psurvey.fragments.survey;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -26,6 +27,7 @@ import com.fxn.stash.Stash;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textview.MaterialTextView;
 import com.mhealthkenya.psurvey.R;
+import com.mhealthkenya.psurvey.activities.UploadedActivity;
 import com.mhealthkenya.psurvey.adapters.activeSurveyAdapter;
 import com.mhealthkenya.psurvey.depedancies.Constants;
 import com.mhealthkenya.psurvey.models.ActiveSurveys;
@@ -53,6 +55,7 @@ public class SelectSurveyFragment extends Fragment {
     private View root;
     private Context context;
     public String z;
+    boolean has_uploaded_data;
 
     private auth loggedInUser;
     private activeSurveyAdapter mAdapter;
@@ -150,7 +153,27 @@ public class SelectSurveyFragment extends Fragment {
                // bundle.putSerializable("questionnaire_participant_id", questionnaire_participant_id);
 
                // Navigation.findNavController(root).navigate(R.id.nav_patient_consent, bundle);
-                Navigation.findNavController(root).navigate(R.id.lastConsent2, bundle);
+                if (clickedItem.has_uploaded_data){
+
+                   /* Toast.makeText(context, "has data", Toast.LENGTH_SHORT).show();
+                    Intent intent =new Intent(context, UploadedActivity.class);
+                    intent.putExtra("questionnaire", clickedItem);
+                    context.startActivity(intent);*/
+
+                  /*  Bundle bundle1 = new Bundle();
+                   // bundle1.putString("key1","someValue");
+                    bundle1.putSerializable("questionnaire", clickedItem);
+
+                    Intent intent1=new Intent(context,UploadedActivity.class);
+                   // intent1.putExtra("questionnaire", clickedItem);
+                    intent1.putExtras(bundle1);
+                    context.startActivity(intent1);*/
+                     Navigation.findNavController(root).navigate(R.id.uploadedActivity, bundle);
+
+                }else{
+                    Navigation.findNavController(root).navigate(R.id.lastConsent2, bundle);
+                }
+               // Navigation.findNavController(root).navigate(R.id.lastConsent2, bundle);
                 //NavHostFragment.findNavController(SelectSurveyFragment.this).navigate(R.id.nav_patient_consent);
             }
         });
@@ -234,12 +257,16 @@ public class SelectSurveyFragment extends Fragment {
                                     String created_at = item.has("created_at") ? item.getString("created_at") : "";
                                     String active_till = item.has("active_till") ? item.getString("active_till") : "";
                                     int  created_by = item.has("created_by") ? item.getInt("created_by") : 0;
+                                    boolean has_uploaded_data1 = item.getBoolean("has_uploaded_data");
+                                    ////"has_uploaded_data":false,
 
 
-                                    ActiveSurveys newActiveSurvey = new ActiveSurveys(id,survey_title,survey_description,status,created_at,active_till,created_by);
+                                    ActiveSurveys newActiveSurvey = new ActiveSurveys(id,survey_title,survey_description,status,created_at,active_till,created_by, has_uploaded_data1);
 
                                     activeSurveysArrayList.add(newActiveSurvey);
                                     mAdapter.notifyDataSetChanged();
+
+
 
                                 }
 
@@ -255,6 +282,11 @@ public class SelectSurveyFragment extends Fragment {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                       /* if(has_uploaded_data){
+                            Toast.makeText(context, "has data", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(context, "has No data", Toast.LENGTH_SHORT).show();
+                        }*/
 
                     }
                     @Override

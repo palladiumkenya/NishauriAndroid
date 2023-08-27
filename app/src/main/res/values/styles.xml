@@ -8,6 +8,8 @@
         <item name="colorOnSecondary">@color/white_greyish</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="textAppearanceButton">@style/AppTextAppearance.Button</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

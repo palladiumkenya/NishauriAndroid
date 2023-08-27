@@ -12,11 +12,12 @@ public class ActiveSurveys implements Serializable {
     private String active_till;
     private int created_by;
     public boolean expanded = false;
+    public boolean has_uploaded_data = false;
     public boolean parent = false;
 
 
 
-    public ActiveSurveys(int id, String name,String description,String is_active,String created_at, String active_till, int created_by) {
+    public ActiveSurveys(int id, String name,String description,String is_active,String created_at, String active_till, int created_by, boolean has_uploaded_data) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -24,6 +25,7 @@ public class ActiveSurveys implements Serializable {
         this.created_at = created_at;
         this.active_till = active_till;
         this.created_by = created_by;
+        this.has_uploaded_data=has_uploaded_data;
 
 
     }
@@ -84,6 +86,12 @@ public class ActiveSurveys implements Serializable {
         this.created_by = created_by;
     }
 
+    public boolean isHas_uploaded_data() {
+        return has_uploaded_data;
+    }
 
+    public void setHas_uploaded_data(boolean has_uploaded_data) {
+        this.has_uploaded_data = has_uploaded_data;
+    }
 }
 

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -44,6 +45,8 @@ import butterknife.Unbinder;
 import static com.mhealthkenya.psurvey.depedancies.AppController.TAG;
 
 public class HomeFragment extends Fragment {
+
+
 
     public String z;
 
@@ -109,6 +112,7 @@ public class HomeFragment extends Fragment {
 
         activeSurveysArrayList = new ArrayList<>();
         mAdapter = new activeSurveyAdapter(context, activeSurveysArrayList);
+
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL, false));
@@ -194,6 +198,8 @@ public class HomeFragment extends Fragment {
                             tv_facility.setText(facilityName);
                             tv_active_surveys.setText(activeQuestionnaires);
                             tv_completed_surveys.setText(completedSurveys);
+
+                            Stash.put(String.valueOf(Constants.MFL_CODE), mflCode);
 
 
 
@@ -292,9 +298,10 @@ public class HomeFragment extends Fragment {
                                     String created_at = item.has("created_at") ? item.getString("created_at") : "";
                                     String active_till = item.has("active_till") ? item.getString("active_till") : "";
                                     int  created_by = item.has("created_by") ? item.getInt("created_by") : 0;
+                                    boolean   has_uploaded_data1 =  item.getBoolean("has_uploaded_data");
 
 
-                                    ActiveSurveys newActiveSurvey = new ActiveSurveys(id,survey_title,survey_description,status,created_at,active_till,created_by);
+                                    ActiveSurveys newActiveSurvey = new ActiveSurveys(id,survey_title,survey_description,status,created_at,active_till,created_by, has_uploaded_data1);
 
                                     activeSurveysArrayList.add(newActiveSurvey);
                                     mAdapter.notifyDataSetChanged();
