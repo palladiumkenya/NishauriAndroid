@@ -1,6 +1,7 @@
 package com.mhealth.nishauri.utils;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
@@ -12,11 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -34,6 +38,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textview.MaterialTextView;
+import com.mhealth.nishauri.Activities.ART_Activity;
 import com.mhealth.nishauri.Activities.Auth.LoginActivity;
 import com.mhealth.nishauri.Activities.MainActivity;
 import com.mhealth.nishauri.Models.ActiveSurveys;
@@ -53,6 +58,34 @@ import butterknife.BindView;
 import butterknife.Unbinder;
 
 public class SelectSurvey extends AppCompatActivity {
+    private static final long INACTIVITY_THRESHOLD = 360000; // 2 minutes
+    private static final long CHECK_INTERVAL = 360000; // 2 minutes
+    //10000 10seconds
+    JSONObject jsonObject1;
+
+    private long lastInteractionTime = 0;
+    private Handler inactivityHandler = new Handler();
+
+    private Runnable inactivityRunnable = new Runnable() {
+        @Override
+        public void run() {
+
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - lastInteractionTime >= INACTIVITY_THRESHOLD) {
+                // Perform logout actions here
+                //logoutUser();
+                alertlogout();
+            } else {
+                // Schedule the next check
+                inactivityHandler.postDelayed(this, CHECK_INTERVAL);
+            }
+            //performLogout();
+            //alertlogout();
+
+
+        }
+    };
+
     AppBarConfiguration mAppBarConfiguration;
 
 
@@ -82,8 +115,18 @@ public class SelectSurvey extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_survey);
 
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        View view = findViewById(R.id.frag_select_survey);
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                lastInteractionTime = System.currentTimeMillis();
+                return false;
+            }
+        });
+
 
        /* bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -217,16 +260,24 @@ public class SelectSurvey extends AppCompatActivity {
     private void loadActiveSurveys() {
 
         String auth_token = loggedInUser.getAuth_token();
-        String urls ="?user_id="+auth_token;
+       // String urls ="?user_id="+auth_token;
+
+        try{
+            jsonObject1 = new JSONObject();
+            jsonObject1.put("user_id", auth_token);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
-       // AndroidNetworking.get("https://psurveyapitest.kenyahmis.org/api/questionnaire/active")
-        AndroidNetworking.post("https://ushauriapi.kenyahmis.org/nishauri/getactive_q"+urls)
+        // AndroidNetworking.get("https://psurveyapitest.kenyahmis.org/api/questionnaire/active")
+        AndroidNetworking.post("https://ushauriapi.kenyahmis.org/nishauri/getactive_q")
                // .addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")
+                .addJSONObjectBody(jsonObject1)
                 .setPriority(Priority.LOW)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -312,6 +363,15 @@ public class SelectSurvey extends AppCompatActivity {
 
         String auth_token = loggedInUser.getAuth_token();
 
+        try{
+            jsonObject1 = new JSONObject();
+            jsonObject1.put("user_id", auth_token);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
 
         AndroidNetworking.post("https://ushauriapi.kenyahmis.org/nishauri/getactive_q_list")
                // .addHeaders("Authorization","Token "+ auth_token)
@@ -319,6 +379,7 @@ public class SelectSurvey extends AppCompatActivity {
                 .addHeaders("Accept", "*/*")
                 .addHeaders("Accept", "gzip, deflate, br")
                 .addHeaders("Connection","keep-alive")
+                .addJSONObjectBody(jsonObject1)
                 .setPriority(Priority.LOW)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -378,5 +439,47 @@ public class SelectSurvey extends AppCompatActivity {
                 });
 
     }
+
+
+    public void alertlogout(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(SelectSurvey.this);
+        builder1.setIcon(R.drawable.nishauri_logo);
+        builder1.setTitle("Your Session Has Expired");
+        // builder1.setMessage( zz);
+        builder1.setCancelable(false);
+
+        builder1.setPositiveButton(
+                "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        logout();
+
+                        //dialog.cancel();
+                    }
+                });
+
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Remove any pending callbacks when the fragment is paused
+        inactivityHandler.removeCallbacks(inactivityRunnable);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Resume checking for inactivity when the fragment is resumed
+        inactivityHandler.postDelayed(inactivityRunnable, CHECK_INTERVAL);
+    }
+
+
+
 
 }

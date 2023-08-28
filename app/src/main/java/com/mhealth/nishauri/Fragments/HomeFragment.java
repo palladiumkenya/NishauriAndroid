@@ -74,8 +74,10 @@ import static com.mhealth.nishauri.utils.AppController.TAG;
 
 
 public class HomeFragment extends Fragment {
-    private static final long INACTIVITY_THRESHOLD = 120000; // 2 minutes
-    private static final long CHECK_INTERVAL = 120000; // 2 minutes
+    private static final long INACTIVITY_THRESHOLD =360000; // 5 minutes
+    //1,800,000  30minutes
+    //
+    private static final long CHECK_INTERVAL = 360000; // 2 minutes//60seconds
     //10000 10seconds
 
     private long lastInteractionTime = 0;
@@ -212,7 +214,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
 
         root = inflater.inflate(R.layout.fragment_home, container, false);
-        root2 = root.findViewById(R.id.lin_home);
+        root2 = root.findViewById(R.id.frag_home);
         unbinder = ButterKnife.bind(this, root);
 
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);

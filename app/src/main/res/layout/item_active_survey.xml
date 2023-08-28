@@ -25,10 +25,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_gravity="center"
+
                 android:text="Survey 1"
-                android:textSize="22sp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                android:textStyle="bold"
+                android:lineSpacingExtra="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/colorPrimaryDark" />
 
             <ImageButton
                 android:id="@+id/bt_expand"
@@ -67,8 +69,10 @@
                     android:layout_weight="2"
                     android:text="This is the description text for the survey."
                     android:textStyle="bold"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/grey_700" />
+
+                    android:lineSpacingExtra="4dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/colorPrimaryDark" />
 
             </LinearLayout>
 

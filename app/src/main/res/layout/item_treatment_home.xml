@@ -23,8 +23,9 @@
             android:text="Current Regimen:"
             android:layout_margin="@dimen/spacing_medium"
             android:textStyle="bold"
-            android:textColor="@color/colorPrimaryDark"
-            app:fontFamily="sans-serif-medium" />
+            android:lineSpacingExtra="4dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/txt_treatment_nature"
@@ -32,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
 
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/colorPrimaryDark"
             android:text="ART"
              />

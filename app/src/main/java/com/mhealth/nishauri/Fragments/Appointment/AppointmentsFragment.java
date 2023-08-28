@@ -35,8 +35,8 @@ import butterknife.Unbinder;
 
 public class AppointmentsFragment extends Fragment {
 
-    private static final long INACTIVITY_THRESHOLD = 120000; // 2 minutes
-    private static final long CHECK_INTERVAL = 120000; // 2 minutes
+    private static final long INACTIVITY_THRESHOLD = 360000; // 2 minutes
+    private static final long CHECK_INTERVAL =360000; // 2 minutes
     //10000 10seconds
 
     private long lastInteractionTime = 0;

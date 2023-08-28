@@ -317,11 +317,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Current Regimen"
-                    android:textStyle="bold"
+                        android:textStyle="bold"
 
-                    android:textColor="@color/colorPrimaryDark"
+                         android:textColor="@color/colorPrimaryDark"
                    
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     />
 
 

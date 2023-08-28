@@ -34,6 +34,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 
+import com.mhealth.nishauri.Activities.EmailValidator;
 import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
@@ -50,6 +51,7 @@ import static com.mhealth.nishauri.utils.AppController.TAG;
 
 
 public class SignUpActivity extends AppCompatActivity {
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
 
     private List<View> view_list = new ArrayList<>();
@@ -111,7 +113,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (ccc_no.getText().toString().isEmpty()){
-                    til_ccc.setError("Please provide a CCC No");
+                    til_ccc.setError("Please provide an Email Address No");
 
                 }else if (msisdn.getText().toString().isEmpty()){
                     til_phone.setError("Please provide your phone number");
@@ -148,7 +150,7 @@ public class SignUpActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Sign up");
+        getSupportActionBar().setTitle("Sign Up");
 
     }
 
@@ -187,7 +189,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void checkNulls() {
 
-        ccc_no.addTextChangedListener(new TextWatcher() {
+       /* ccc_no.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -195,8 +197,8 @@ public class SignUpActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (ccc_no.length() < 10) {
-                    til_ccc.setError("Please provide a complete CCC No");
+                if (!ccc_no.getText().toString().matches(emailPattern) &&  ccc_no.length()<4) {
+                    til_ccc.setError("Please provide a valid Email Address");
                 } else {
                     til_ccc.setError(null);
                 }
@@ -206,7 +208,11 @@ public class SignUpActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
 
             }
-        });
+        });*/
+        //EditText emailEditText = findViewById(R.id.emailEditText);
+        EmailValidator emailValidator = new EmailValidator(ccc_no);
+        ccc_no.addTextChangedListener(emailValidator);
+
 
         msisdn.addTextChangedListener(new TextWatcher() {
             @Override

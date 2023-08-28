@@ -28,20 +28,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Privacy information"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                app:fontFamily="serif" />
+                android:text="Privacy Information"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/grey_90"
+                app:fontFamily="sans-serif-medium"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="last updated in 2023"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="italic"
-                app:fontFamily="serif" />
+                android:text="Last Updated In 2023"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/grey_90"
+                app:fontFamily="sans-serif-medium" />
 
         </LinearLayout>
 
@@ -76,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="User privacy information"
+                android:text="User Privacy Information"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/grey_90"
                 app:fontFamily="sans-serif-medium" />
@@ -87,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:text="@string/privacy_information"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/grey_60"
                 app:fontFamily="sans-serif-light" />
 

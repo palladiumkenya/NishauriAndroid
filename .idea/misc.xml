@@ -35,6 +35,7 @@
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/menu/activity_main_drawer.xml" value="0.14375" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/menu/bottom_nav_menu.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/This/AndroidStudioProjects/NishauriAndroid/app/src/main/res/menu/main.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/drawable/otp_edittext.xml" value="0.1" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/activity_art.xml" value="0.2" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/activity_chat_interface.xml" value="0.2" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/activity_complete_survey.xml" value="0.2" />
@@ -42,12 +43,14 @@
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/activity_last_consent.xml" value="0.2" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/activity_otpcode.xml" value="0.33" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/activity_pass_code.xml" value="0.25" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/activity_select_survey.xml" value="0.25" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/activity_sign_up.xml" value="0.33" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/app_bar_main.xml" value="0.2" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/content_main.xml" value="0.2" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/dialog_privacy.xml" value="0.13333333333333333" />
+        <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/dialog_regimen.xml" value="0.15572916666666667" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/fragment_about_app.xml" value="0.2" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/fragment_appointments.xml" value="0.2" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/fragment_chat.xml" value="0.215625" />
@@ -57,12 +60,14 @@
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/fragment_settings.xml" value="0.21" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/fragment_terms.xml" value="0.2" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/fragment_viral_load_results.xml" value="0.2" />
-        <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/item_appointment_home.xml" value="0.2" />
+        <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/item_active_survey.xml" value="0.2" />
+        <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/item_appointment_home.xml" value="0.25" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/item_current_art.xml" value="0.2" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/item_treatment_home.xml" value="0.2" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/item_upcoming_appointment.xml" value="0.2" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/layout/nav_header_main.xml" value="0.2" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/menu/activity_main_drawer.xml" value="0.33" />
+        <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/menu/bottom_nav_menu_survey.xml" value="0.15572916666666667" />
         <entry key="..\:/Users/This/Nish1.1.4Push/app/src/main/res/menu/main.xml" value="0.2" />
         <entry key="..\:/Users/This/Nishauri_1.1.1/app/src/main/res/layout/fragment_dashboard.xml" value="0.33" />
         <entry key="..\:/Users/This/Nishauri_1.1.1/app/src/main/res/layout/fragment_viral_load_results.xml" value="0.2" />

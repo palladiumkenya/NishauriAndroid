@@ -35,7 +35,7 @@
     <string name="about_app_category">About App</string>
 
     <!--    error messages-->
-    <string name="must_match">Both passwords must match</string>
+    <string name="must_match">Both Passwords Must Match</string>
 
     <!--    spinner choices-->
     <string-array name="security_question">

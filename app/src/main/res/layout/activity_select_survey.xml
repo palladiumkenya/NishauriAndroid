@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="40dp"
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginHorizontal="@dimen/spacing_medium"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="30dp"
                     android:background="@android:color/white"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
@@ -100,16 +100,20 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:text="0"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                                android:textColor="@color/grey_90" />
+                                android:textStyle="bold"
+                                android:lineSpacingExtra="4dp"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/colorPrimaryDark" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:text="Available Surveys"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                                android:textColor="@color/grey_500" />
+
+                                android:lineSpacingExtra="4dp"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/colorPrimaryDark" />
 
 
                         </LinearLayout>
@@ -166,16 +170,20 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:text="0"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                                android:textColor="@color/grey_90" />
+                                android:textStyle="bold"
+                                android:lineSpacingExtra="4dp"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/colorPrimaryDark" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:text="Completed Questionnaires"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                                android:textColor="@color/grey_500" />
+
+                                android:lineSpacingExtra="4dp"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/colorPrimaryDark" />
 
 
                         </LinearLayout>
@@ -212,8 +220,10 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="@dimen/spacing_medium"
                         android:text="Select Survey"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        android:textColor="@color/grey_90"
+                        android:textStyle="bold"
+                        android:lineSpacingExtra="4dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="gone"/>
 
                     <com.google.android.material.textview.MaterialTextView

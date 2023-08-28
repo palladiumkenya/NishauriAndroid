@@ -178,8 +178,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_medium"
                         android:text="Consent"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        android:textColor="@color/colorPrimary" />
+                        android:textStyle="bold"
+                        android:lineSpacingExtra="4dp"
+
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/colorPrimaryDark" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
@@ -187,7 +190,10 @@
                         android:layout_marginBottom="@dimen/spacing_medium"
                         android:visibility="gone"
                         android:text="Please follow the steps until you complete the survey. "
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                        android:textStyle="bold"
+                        android:lineSpacingExtra="4dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/colorPrimaryDark" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -201,13 +207,18 @@
                             android:layout_height="wrap_content"
                             android:text="Accept"
                             android:layout_weight="1"
+                            android:lineSpacingExtra="4dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/colorPrimaryDark"
                             />
                         <TextView
                             android:id="@+id/informText"
                             android:layout_weight="2"
-                            android:text="Informed consent"
+                            android:text="Informed Consent"
                             android:layout_width="0dp"
-                            android:textColor="#034694"
+                            android:lineSpacingExtra="4dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/colorPrimaryDark"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
@@ -223,13 +234,21 @@
                             android:layout_height="wrap_content"
                             android:text="Accept"
                             android:layout_weight="1"
+
+                            android:lineSpacingExtra="4dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/colorPrimaryDark"
                             />
                         <TextView
                             android:id="@+id/privacyText"
                             android:layout_weight="2"
-                            android:text="Privacy policy"
-                            android:textColor="#034694"
+                            android:text="Privacy Policy"
+
                             android:layout_width="0dp"
+
+                            android:lineSpacingExtra="4dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/colorPrimaryDark"
 
                             android:layout_height="wrap_content"
 
@@ -247,6 +266,9 @@
                         android:id="@+id/checkStnt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:lineSpacingExtra="4dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/colorPrimaryDark"
                         android:text="I have read and understood the purpose of the survey"/>
 
 
@@ -278,8 +300,9 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="@dimen/spacing_medium"
                         android:text="Patient consent"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        android:textColor="@color/grey_90"
+                        android:lineSpacingExtra="4dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="gone"/>
 
                     <com.google.android.material.textview.MaterialTextView
@@ -287,8 +310,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_medium"
                         android:text="Ensure you consent to start the survey."
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="@color/colorPrimary"/>
+                        android:lineSpacingExtra="4dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/colorPrimaryDark"/>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_patient_name"
@@ -296,8 +320,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_medium"
                         android:text="Name: "
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="@color/grey_90"
+                        android:lineSpacingExtra="4dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="gone"/>
 
                     <com.google.android.material.textview.MaterialTextView
@@ -306,8 +331,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_medium"
                         android:text="CCC Number: "
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="@color/grey_90"
+                        android:lineSpacingExtra="4dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="gone"/>
 
                     <!-- id  -->
@@ -317,8 +343,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_medium"
                         android:text="patient id: "
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="@color/grey_90"
+                        android:lineSpacingExtra="4dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="gone"/>
 
                     <!--  -->
@@ -329,8 +356,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_medium"
                         android:text="Questionnaire ID: "
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="@color/grey_90"
+
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="gone"/>
 
                     <View
@@ -344,8 +372,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_medium"
                         android:text=""
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
-                        android:textColor="@color/grey_90"
+                        android:lineSpacingExtra="4dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/colorPrimaryDark"
                         android:visibility="gone"/>
 
                     <View
@@ -358,8 +387,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_medium"
                         android:text=""
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
-                        android:textColor="@color/grey_90" />
+                        android:lineSpacingExtra="4dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/colorPrimaryDark" />
 
                     <View
                         android:layout_width="match_parent"

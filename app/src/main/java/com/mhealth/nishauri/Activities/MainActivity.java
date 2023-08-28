@@ -183,6 +183,8 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_logout:
                 logout();
+
+
                 return true;
             default:
                 return super.onContextItemSelected(item);
