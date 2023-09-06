@@ -24,7 +24,8 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_small"
                 android:text="25/04/2020"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorPrimaryDark" />
 
         </LinearLayout>
 
@@ -51,7 +52,7 @@
                     android:layout_weight="1"
                     android:padding="@dimen/spacing_middle"
                     android:text=" 900 copies/mL"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/bt_expand2"
@@ -75,7 +76,7 @@
                     android:padding="@dimen/spacing_middle"
                     android:text="Suppressed"
 
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/colorAccent"/>
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txt_viral_load1"
@@ -84,7 +85,7 @@
                     android:padding="@dimen/spacing_middle"
                     android:text="Unsupressed:"
                     android:visibility="gone"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/colorAccent"/>
 
                 <com.google.android.material.textview.MaterialTextView
@@ -95,7 +96,7 @@
                     android:layout_weight="1"
                     android:padding="@dimen/spacing_middle"
                     android:text=" 900 copies/mL"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
 
                 <com.google.android.material.textview.MaterialTextView
@@ -106,7 +107,7 @@
                     android:padding="@dimen/spacing_middle"
                     android:visibility="gone"
                     android:text="Unsupressed"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
 
             </LinearLayout>
