@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -33,6 +34,7 @@ public class PasswordReset extends AppCompatActivity {
   String  userID1;
    int page;
     String  errors1;
+    TextView tv_signin1;
 
     Toolbar toolbar1;
 
@@ -48,6 +50,15 @@ public class PasswordReset extends AppCompatActivity {
 
         etxt_email1 =findViewById(R.id.etxt_email);
         btn_reset_password1=findViewById(R.id.btn_reset_password);
+
+        tv_signin1=findViewById(R.id.tv_signin);
+        tv_signin1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(PasswordReset.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         btn_reset_password1.setOnClickListener(new View.OnClickListener() {
