@@ -44,7 +44,7 @@ import java.util.concurrent.TimeUnit;
 public class ChatInterface extends AppCompatActivity {
 
     //private static final long INACTIVITY_THRESHOLD = 10000; // 2 minutes
-   // private static final long CHECK_INTERVAL = 10000; // 2 minutes
+   //git  private static final long CHECK_INTERVAL = 10000; // 2 minutes
     private static final long INACTIVITY_THRESHOLD =27000000; // 30 minutes
     private static final long CHECK_INTERVAL=27000000; // 30 minutes
     //10000 10seconds
