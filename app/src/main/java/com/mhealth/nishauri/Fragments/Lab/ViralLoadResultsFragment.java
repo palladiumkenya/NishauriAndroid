@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -38,6 +39,7 @@ import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.adapters.DependantAdapter;
 import com.mhealth.nishauri.adapters.ViralLoadAdapter;
 import com.mhealth.nishauri.utils.Constants;
+import com.mhealth.nishauri.utils.ScreenLockReceiver;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,12 +57,15 @@ import static com.mhealth.nishauri.utils.AppController.TAG;
 
 
 public class ViralLoadResultsFragment extends Fragment {
-    private static final long INACTIVITY_THRESHOLD = 360000; // 2 minutes
-    private static final long CHECK_INTERVAL =360000; // 2 minutes
+    private static final long INACTIVITY_THRESHOLD =27000000; // 30 minutes
+    private static final long CHECK_INTERVAL=27000000; // 30 minutes
+    //private static final long INACTIVITY_THRESHOLD = 360000; // 2 minutes
+    //private static final long CHECK_INTERVAL =360000; // 2 minutes
     //10000 10seconds
 
     private long lastInteractionTime = 0;
     private Handler inactivityHandler = new Handler();
+    private  ScreenLockReceiver screenLockReceiver;
 
     private Runnable inactivityRunnable = new Runnable() {
         @Override
@@ -116,10 +121,24 @@ public class ViralLoadResultsFragment extends Fragment {
     @BindView(R.id.fab_request_viral)
     ExtendedFloatingActionButton fab_request_viral_results;
 
-    @Override
     public void onAttach(Context ctx) {
         super.onAttach(ctx);
         this.context = ctx;
+        // Initialize the BroadcastReceiver
+        screenLockReceiver = new ScreenLockReceiver();
+
+        // Register the BroadcastReceiver to listen for screen off events
+        IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
+        context.registerReceiver(screenLockReceiver, filter);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        // Unregister the BroadcastReceiver when the fragment is detached
+        if (screenLockReceiver != null) {
+            requireContext().unregisterReceiver(screenLockReceiver);
+        }
     }
 
     @Override

@@ -729,6 +729,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/lchart"
 
             android:paddingLeft="@dimen/spacing_middle"
             android:paddingRight="@dimen/spacing_middle"

@@ -4,9 +4,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
@@ -40,6 +42,7 @@ import com.mhealth.nishauri.Models.ViralLoad;
 import com.mhealth.nishauri.Models.ViralLoads;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
+import com.mhealth.nishauri.utils.ScreenLockReceiver;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,10 +59,13 @@ import java.util.List;
 
 
 public class DashboardFragment extends Fragment {
-    private static final long INACTIVITY_THRESHOLD =360000; // 2 minutes
-    private static final long CHECK_INTERVAL=360000; // 2 minutes
-    //10000 10seconds
+   // private static final long INACTIVITY_THRESHOLD =360000; // 2 minutes
+    private static final long INACTIVITY_THRESHOLD =27000000; // 30 minutes
+    private static final long CHECK_INTERVAL=27000000; // 30 minutes
+   // private static final long CHECK_INTERVAL=360000; // 2 minutes
 
+    //10000 10seconds
+    private ScreenLockReceiver screenLockReceiver;
     private long lastInteractionTime = 0;
     private Handler inactivityHandler = new Handler();
 
@@ -101,7 +107,7 @@ public class DashboardFragment extends Fragment {
     BarEntry values ;
    // BarChart chart;
 
-    BarData data;
+    //BarData data;
 
 
     //
@@ -119,22 +125,15 @@ public class DashboardFragment extends Fragment {
 
     private User loggedInUser;
 
-    @BindView(R.id.tv_missed_appointments)
+
     TextView tv_missed_appointments;
-
-    @BindView(R.id.txt_total)
     TextView txt_total;
-
-    @BindView(R.id.tv_kept_appointments)
     TextView tv_kept_appointments;
-
-    @BindView(R.id.txt_total_appointment)
     TextView txt_total_appointment;
 
-    @BindView(R.id.tv_booked_appointments)
-    TextView tv_booked_appointments;
-
-    @BindView(R.id.txt_total_app)
+   /* @BindView(R.id.tv_booked_appointments)
+    TextView tv_booked_appointments;*/
+   TextView tv_booked_appointments;
     TextView txt_total_app;
 
 
@@ -142,63 +141,44 @@ public class DashboardFragment extends Fragment {
    /* @BindView(R.id.tv_notified_appointment)
     public TextView tv_notified_appointment;*/
 
-    @BindView(R.id.chart1)
-    BarChart chart;
+   /* @BindView(R.id.chart1)
+    BarChart chart;*/
+   //BarChart chart;
+   BarChart chart;
 
-    @BindView(R.id.tv_refill_number)
+
     TextView tv_refill_number;
-    @BindView(R.id.refill1)
     TextView  tv_refill_number1;
-
-
-
-    @BindView(R.id.tv_clinical_review_number)
     TextView tv_clinical_review_number;
-    @BindView(R.id.clinical1)
     TextView tv_clinical_review_number1;
-
-
-    @BindView(R.id.tv_enhanced_adherence_number)
     TextView tv_enhanced_adherence_number;
-
-    @BindView(R.id.enhance1)
     TextView tv_enhanced_adherence_number1;
-
-
-    @BindView(R.id.tv_viral_load_number)
     TextView tv_viral_load_number;
-
-    @BindView(R.id.vl11)
     TextView tv_viral_load_number11;
 
 
 
-    @BindView(R.id.tv_lab_investigation_number)
+
     TextView tv_lab_investigation_number;
-
-    @BindView(R.id.tv_others_number)
     TextView tv_others_number;
-
-    @BindView(R.id.tv_current_status_text)
     TextView tv_current_status_text;
-
-    @BindView(R.id.tv_suppressed_days)
     TextView tv_suppressed_days;
-
-    @BindView(R.id.tv_unsuppressed_days)
     TextView tv_unsuppressed_days;
-
-    @BindView(R.id.refilllayout)
     LinearLayout refilllayout1;
 
-    @BindView(R.id.clinicallayout)
+   // @BindView(R.id.clinicallayout)
     LinearLayout clinicallayout1;
 
-    @BindView(R.id.enhancelayout)
+    //@BindView(R.id.enhancelayout)
     LinearLayout enhancellayout1;
 
-    @BindView(R.id.vllayout)
     LinearLayout vllayout1;
+    LinearLayout chart11;
+
+    String missed_appointment="0";
+    String kept_appointment="0";
+    String booked="0";
+    String total="0";
 
 
 
@@ -206,9 +186,25 @@ public class DashboardFragment extends Fragment {
     BarChart chart3;*/
 
 
+
     public void onAttach(Context ctx) {
         super.onAttach(ctx);
         this.context = ctx;
+        // Initialize the BroadcastReceiver
+        screenLockReceiver = new ScreenLockReceiver();
+
+        // Register the BroadcastReceiver to listen for screen off events
+        IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
+        context.registerReceiver(screenLockReceiver, filter);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        // Unregister the BroadcastReceiver when the fragment is detached
+        if (screenLockReceiver != null) {
+            requireContext().unregisterReceiver(screenLockReceiver);
+        }
     }
 
     @Override
@@ -218,12 +214,58 @@ public class DashboardFragment extends Fragment {
     }
 
     @Override
+    public void onAttachFragment(@NonNull Fragment childFragment) {
+        super.onAttachFragment(childFragment);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
 
         root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        chart11 =(LinearLayout) root.findViewById(R.id.lchart);
+
+        tv_booked_appointments =(TextView) root.findViewById(R.id.tv_booked_appointments);
+
+       enhancellayout1=(LinearLayout) root.findViewById(R.id.enhancelayout);
+        clinicallayout1=(LinearLayout) root.findViewById(R.id.clinicallayout);
+        chart =(BarChart) root.findViewById(R.id.chart1);
+        //BarChart chart =new BarChart(context);
+
+        tv_missed_appointments=(TextView) root.findViewById(R.id.tv_missed_appointments);
+        txt_total=(TextView) root.findViewById(R.id.txt_total);
+        tv_kept_appointments=(TextView) root.findViewById(R.id.tv_kept_appointments);
+        txt_total_appointment=(TextView) root.findViewById(R.id.txt_total_appointment);
+        txt_total_app=(TextView) root.findViewById(R.id.txt_total_app);
+
+
+        tv_refill_number=(TextView) root.findViewById(R.id.tv_refill_number);
+        tv_refill_number1=(TextView) root.findViewById(R.id.refill1);
+        tv_clinical_review_number=(TextView) root.findViewById(R.id.tv_clinical_review_number);
+        tv_clinical_review_number1=(TextView) root.findViewById(R.id.clinical1);
+         tv_enhanced_adherence_number=(TextView) root.findViewById(R.id.tv_enhanced_adherence_number);
+         tv_enhanced_adherence_number1=(TextView) root.findViewById(R.id.enhance1);
+        tv_viral_load_number =(TextView) root.findViewById(R.id.tv_viral_load_number);
+        tv_viral_load_number11=(TextView) root.findViewById(R.id.vl11);
+
+         tv_lab_investigation_number=(TextView) root.findViewById(R.id.tv_lab_investigation_number);
+         tv_others_number=(TextView) root.findViewById(R.id.tv_others_number);
+         tv_current_status_text=(TextView) root.findViewById(R.id.tv_current_status_text);
+         tv_suppressed_days=(TextView) root.findViewById(R.id.tv_suppressed_days);
+         tv_unsuppressed_days=(TextView) root.findViewById(R.id.tv_unsuppressed_days);
+         refilllayout1=(LinearLayout) root.findViewById(R.id.refilllayout);
+         vllayout1=(LinearLayout) root.findViewById(R.id.vllayout);
+
+
+
+
+
+
+
+
+
         unbinder = ButterKnife.bind(this, root);
 
         root2 = root.findViewById(R.id.frag_dashboard);
@@ -252,6 +294,8 @@ public class DashboardFragment extends Fragment {
         xAxis1 = new ArrayList();
         yAxis = null;
         yValues = new ArrayList();
+
+        //chart =new BarChart(context);
 
 
         // viralLoadArrayList = new ArrayList<>();
@@ -336,16 +380,22 @@ public class DashboardFragment extends Fragment {
                                     String dates[]=  xAxis1.toArray(new String[xAxis1.size()]);
 
                                     // String dates[]= (String[]) xAxis1.toArray(new String[xAxis1.size()]);
-                                    data = new BarData(dates,yAxis);
+                                    BarData data= new BarData(dates,yAxis);
+                                  //  chart =new BarChart(context);
+                                    if (chart==null){
+                                        Snackbar.make(root.findViewById(R.id.lchart),"No VL Results Found", Snackbar.LENGTH_LONG).show();
+                                       // Toast.makeText(context, "VL Trends Loading", Toast.LENGTH_SHORT).show();
+                                    }else{
                                     chart.setData(data);
                                     chart.setDescription("");
                                     chart.animateXY(2000, 2000);
-                                    chart.invalidate();
+                                    chart.invalidate();}
 
                                 }
                             }else {
 
-                                    Toast.makeText(context, "No VL Results Found", Toast.LENGTH_SHORT).show();
+                                   // Toast.makeText(context, "No VL Results Found", Toast.LENGTH_SHORT).show();
+                                Snackbar.make(root.findViewById(R.id.frag_dashboard),"No VL Results Found", Snackbar.LENGTH_LONG).show();
                             }
 
 
@@ -596,10 +646,10 @@ public class DashboardFragment extends Fragment {
 
                                     JSONObject jsonObject =jsonArray.getJSONObject(i);
                                    // int url_id = jsonObject.getInt("id");
-                                    String missed_appointment =jsonObject.getString("missed");
-                                    String kept_appointment =jsonObject.getString("kept");
-                                    String booked =jsonObject.getString("booked");
-                                    String total =jsonObject.getString("total");
+                                     missed_appointment =jsonObject.getString("missed");
+                                     kept_appointment =jsonObject.getString("kept");
+                                    booked =jsonObject.getString("booked");
+                                     total =jsonObject.getString("total");
 
                                     if (booked.equals("")){
                                         tv_booked_appointments.setText("0");

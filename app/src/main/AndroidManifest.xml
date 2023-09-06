@@ -10,6 +10,7 @@
         android:name="com.google.android.gms.permission.AD_ID"
         tools:node="remove" />
 
+
     <application
         android:name="com.orm.SugarApp"
         android:allowBackup="true"
@@ -20,6 +21,16 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
+
+        <receiver android:name=".utils.ScreenLockReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.SCREEN_OFF" />
+            </intent-filter>
+        </receiver>
+
+
+
         <activity
             android:name=".Activities.PassCodeActivity"
             android:exported="false" />

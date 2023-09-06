@@ -3,6 +3,7 @@ package com.mhealth.nishauri.Fragments.Chat;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ import com.mhealth.nishauri.Models.auth;
 import com.mhealth.nishauri.R;
 import com.mhealth.nishauri.utils.Constants;
 import com.mhealth.nishauri.utils.HomeActivitySurvey;
+import com.mhealth.nishauri.utils.ScreenLockReceiver;
 import com.mhealth.nishauri.utils.SelectSurvey;
 
 import org.json.JSONException;
@@ -48,8 +50,14 @@ import butterknife.Unbinder;
 
 
 public class ChatFragment extends Fragment {
-    private static final long INACTIVITY_THRESHOLD = 360000; // 2 minutes
-    private static final long CHECK_INTERVAL = 360000; // 2 minutes
+
+    //private static final long INACTIVITY_THRESHOLD = 360000; // 2 minutes
+    //private static final long CHECK_INTERVAL = 360000; // 2 minutes
+
+    private static final long INACTIVITY_THRESHOLD =27000000; // 30 minutes
+    private static final long CHECK_INTERVAL=27000000; // 30 minutes
+
+    private ScreenLockReceiver screenLockReceiver;
     //10000 10seconds
 
     private long lastInteractionTime = 0;
@@ -91,10 +99,24 @@ public class ChatFragment extends Fragment {
     @BindView(R.id.chat_card)
     CardView chat_card;
 
-    @Override
     public void onAttach(Context ctx) {
         super.onAttach(ctx);
         this.context = ctx;
+        // Initialize the BroadcastReceiver
+        screenLockReceiver = new ScreenLockReceiver();
+
+        // Register the BroadcastReceiver to listen for screen off events
+        IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
+        context.registerReceiver(screenLockReceiver, filter);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        // Unregister the BroadcastReceiver when the fragment is detached
+        if (screenLockReceiver != null) {
+            requireContext().unregisterReceiver(screenLockReceiver);
+        }
     }
 
     @Override
