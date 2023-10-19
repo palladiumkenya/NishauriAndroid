@@ -1,50 +1,27 @@
 package com.mhealthkenya.psurvey.adapters;
 
-import static com.mhealthkenya.psurvey.depedancies.AppController.TAG;
-
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.fxn.stash.Stash;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 import com.mhealthkenya.psurvey.R;
-import com.mhealthkenya.psurvey.depedancies.Constants;
-import com.mhealthkenya.psurvey.models.Answer;
-import com.mhealthkenya.psurvey.models.Answers;
+import com.mhealthkenya.psurvey.models.AnswerEntity;
 import com.mhealthkenya.psurvey.models.Question;
 import com.mhealthkenya.psurvey.models.Questions;
-import com.mhealthkenya.psurvey.models.QuestionsList;
-import com.mhealthkenya.psurvey.models.auth;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import kotlin.reflect.KVisibility;
-import okhttp3.OkHttpClient;
 
 public class questionsAdapter extends RecyclerView.Adapter<questionsAdapter.QuestionsViewHolder> {
 
@@ -53,8 +30,8 @@ public class questionsAdapter extends RecyclerView.Adapter<questionsAdapter.Ques
     //private List<Integer> multiAnswerList = new ArrayList<>();
 
 
-    private Answers answers2;
-    private ArrayList<Answers> answersList2 = new ArrayList<>();
+    private AnswerEntity answerOptions2;
+    private ArrayList<AnswerEntity> answerOptionsList2 = new ArrayList<>();
     private List<Integer> multiAnswerList2 = new ArrayList<>();
 
     List<Questions> all = new ArrayList<>();

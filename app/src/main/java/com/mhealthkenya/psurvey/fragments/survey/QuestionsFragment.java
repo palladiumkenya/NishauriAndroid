@@ -6,16 +6,10 @@ import android.os.Bundle;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,20 +33,10 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
-import com.mhealthkenya.psurvey.AQ_Repository;
-import com.mhealthkenya.psurvey.AllQViewModel;
 import com.mhealthkenya.psurvey.R;
-import com.mhealthkenya.psurvey.adapters.questionnairesAdapter;
-import com.mhealthkenya.psurvey.adapters.questionsAdapter;
 import com.mhealthkenya.psurvey.depedancies.Constants;
-import com.mhealthkenya.psurvey.interfaces.APIClient;
-import com.mhealthkenya.psurvey.interfaces.APIInterface;
-import com.mhealthkenya.psurvey.models.Answers;
-import com.mhealthkenya.psurvey.models.Questionnaires;
-import com.mhealthkenya.psurvey.models.Questions;
 import com.mhealthkenya.psurvey.models.Answer;
 import com.mhealthkenya.psurvey.models.Question;
-import com.mhealthkenya.psurvey.models.QuestionsList;
 import com.mhealthkenya.psurvey.models.UrlTable;
 import com.mhealthkenya.psurvey.models.auth;
 import com.mhealthkenya.psurvey.models.repeat_count;
@@ -61,23 +45,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static com.mhealthkenya.psurvey.depedancies.AppController.TAG;
 

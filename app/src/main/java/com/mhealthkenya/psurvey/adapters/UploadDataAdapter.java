@@ -32,7 +32,7 @@ import com.mhealthkenya.psurvey.R;
 import com.mhealthkenya.psurvey.activities.UploadedActivity;
 import com.mhealthkenya.psurvey.depedancies.Constants;
 import com.mhealthkenya.psurvey.fragments.HomeFragment;
-import com.mhealthkenya.psurvey.fragments.HomeFragment_ViewBinding;
+//import com.mhealthkenya.psurvey.fragments.HomeFragment_ViewBinding;
 import com.mhealthkenya.psurvey.models.UploadModel;
 
 import java.text.SimpleDateFormat;

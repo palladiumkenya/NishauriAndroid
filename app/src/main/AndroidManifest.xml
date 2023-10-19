@@ -19,19 +19,21 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activities.QuestionsOffline"
+            android:exported="false" />
+        <activity
             android:name=".activities.LastConsentData"
             android:exported="false" />
-        <!--<activity
+        <!--
+<activity
             android:name=".activities.UploadedActivity"
-            android:exported="false" />-->
+            android:exported="false" />
+        -->
         <activity
             android:name=".activities.SelectUrls"
             android:exported="false" />
         <activity
             android:name=".depedancies.Constants"
-            android:exported="false" />
-        <activity
-            android:name=".SingleQuestions"
             android:exported="false" />
         <activity
             android:name=".activities.PrivacyActivity"

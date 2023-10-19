@@ -22,7 +22,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                     Thread.sleep(1000);
 
                     //startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
-                    startActivity(new Intent(SplashScreenActivity.this, SelectUrls.class));
+                    startActivity(new Intent(SplashScreenActivity.this, QuestionsOffline.class));
                     finish();
                 }catch (Exception e){
                     e.printStackTrace();
