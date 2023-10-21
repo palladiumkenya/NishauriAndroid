@@ -15,7 +15,7 @@ import java.util.List;
 public interface AnswerDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(AnswerEntity answer);
+    long insert(AnswerEntity answer);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(List<AnswerEntity> answers);

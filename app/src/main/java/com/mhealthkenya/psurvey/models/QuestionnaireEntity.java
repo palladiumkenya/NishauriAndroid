@@ -24,9 +24,10 @@ public class QuestionnaireEntity {
 
     public QuestionnaireEntity() {
     }
+    //public QuestionnaireEntity(int id, String createdAt, String name, String description, boolean isActive, int numberOfQuestions, String activeTill, String targetApp, String responsesTableName, Integer isPublished, int createdBy)
 
-    public QuestionnaireEntity(String createdAt, String name, String description, boolean isActive, int numberOfQuestions, String activeTill, String targetApp, String responsesTableName, Integer isPublished, int createdBy) {
-       // this.id = id;
+    public QuestionnaireEntity(int id, String createdAt, String name, String description, int numberOfQuestions, String activeTill, String targetApp) {
+        this.id = id;
         this.createdAt = createdAt;
         this.name = name;
         this.description = description;

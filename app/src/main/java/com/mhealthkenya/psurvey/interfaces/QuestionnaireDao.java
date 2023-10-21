@@ -32,6 +32,9 @@ public interface QuestionnaireDao {
     @Query("SELECT * FROM QuestionnaireEntity WHERE isPublished = 1")
     List<QuestionnaireEntity> getPublishedQuestionnaires();
 
+    @Query("SELECT * FROM QuestionnaireEntity")
+    QuestionnaireEntity geAllQuestionnaires();
+
     // Add other queries as needed for your use case.
 
 

@@ -13,14 +13,14 @@ public class AnswerEntity {
 
     private  String option;
     private String createdAt;
-    private int questionId;
+    private long questionId;
     private int createdBy;
 
 
     public AnswerEntity() {
     }
 
-    public AnswerEntity( String option, String createdAt, int questionId, int createdBy) {
+    public AnswerEntity( String option, String createdAt, long questionId, int createdBy) {
         //this.id = id;
         this.option = option;
         this.createdAt = createdAt;
@@ -52,11 +52,11 @@ public class AnswerEntity {
         this.createdAt = createdAt;
     }
 
-    public int getQuestionId() {
+    public long getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(int questionId) {
+    public void setQuestionId(long questionId) {
         this.questionId = questionId;
     }
 
