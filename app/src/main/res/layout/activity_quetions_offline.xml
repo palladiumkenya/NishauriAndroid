@@ -1,0 +1,818 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    xmlns:shimmer="http://schemas.android.com/tools"
+    tools:context=".activities.QuetionsOffline">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- logo -->
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:background="@android:color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_large">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:srcCompat="@drawable/logo" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_medium"
+                        android:text="Survey"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/colorPrimary" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_medium"
+                        android:text="Please ensure you complete the survey to the end. "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>  <!-- end logo -->
+
+            <!-- begin question -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_survey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:background="@android:color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_large">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_survey_question"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_medium"
+                        android:text=""
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                        android:textColor="@color/grey_90" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView1"
+                        android:layout_width="wrap_content"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="vertical"
+                        android:layout_marginTop="@dimen/spacing_large"
+                        tools:listitem="@layout/all_questions"
+                        android:scrollingCache="true" />
+
+                    <RadioGroup
+                        android:id="@+id/radio_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
+
+                    <LinearLayout
+                        android:id="@+id/multiselect_lyt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                    </LinearLayout>
+                    <!-- openText 1-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_open_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etxt_open_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/grey_5"
+                            android:gravity="top"
+                            android:hint="@string/details"
+                            android:lines="5"
+                            android:padding="@dimen/spacing_middle"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <!-- openText 2-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_open_text2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etxt_open_text2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/grey_5"
+                            android:gravity="top"
+                            android:hint="@string/details"
+                            android:lines="5"
+                            android:padding="@dimen/spacing_middle"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <!-- openText 2-->
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_open_text3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etxt_open_text3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/grey_5"
+                            android:gravity="top"
+                            android:hint="@string/details"
+                            android:lines="5"
+                            android:padding="@dimen/spacing_middle"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <!-- openText 3-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_open_text3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etxt_open_text3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/grey_5"
+                            android:gravity="top"
+                            android:hint="@string/details"
+                            android:lines="5"
+                            android:padding="@dimen/spacing_middle"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <!-- openText 4-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_open_text4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etxt_open_text4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/grey_5"
+                            android:gravity="top"
+                            android:hint="@string/details"
+                            android:lines="5"
+                            android:padding="@dimen/spacing_middle"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <!-- openText 5-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_open_text5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etxt_open_text5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/grey_5"
+                            android:gravity="top"
+                            android:hint="@string/details"
+                            android:lines="5"
+                            android:padding="@dimen/spacing_middle"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <!-- openText 6-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_open_text6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etxt_open_text6"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/grey_5"
+                            android:gravity="top"
+                            android:hint="@string/details"
+                            android:lines="5"
+                            android:padding="@dimen/spacing_middle"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <!-- date Edittext none1 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayout"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dob"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- date Edittext none2 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayout2"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dob2"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- date Edittext none3 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayout3"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dob3"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <!-- date Edittext none4 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayout4"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dob4"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- date Edittext none5-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayout5"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dob5"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- date Edittext none6 -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayout6"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dob6"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <!-- date Edittext restrict future1-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayoutfuture"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dobfuture"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <!-- date Edittext restrict future2-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayoutfuture2"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dobfuture2"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- date Edittext restrict future3-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayoutfuture3"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dobfuture3"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- date Edittext restrict future4-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayoutfuture4"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dobfuture4"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- date Edittext restrict future5-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayoutfuture5"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dobfuture5"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <!-- date Edittext restrict future6-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayoutfuture6"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dobfuture6"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <!-- date Edittext restrict past1-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayoutpast"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dobpast"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <!-- date Edittext restrict past2-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayoutpast2"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dobpast2"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- date Edittext restrict past3-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayoutpast3"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dobpast3"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- date Edittext restrict past4-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayoutpast4"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dobpast4"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- date Edittext restrict past5-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayoutpast5"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dobpast5"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <!-- date Edittext restrict past6-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateLayoutpast6"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dobpast6"
+                            android:focusable="false"
+                            android:inputType="text"
+                            android:textStyle="bold"
+                            android:hint="Enter date"
+                            android:textColorHint="#000"
+                            android:maxLength="24"
+                            android:textSize="12dp"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                    <!-- Numeric Edittext -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_numeric_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etxt_numeric_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/grey_5"
+                            android:gravity="top"
+                            android:hint="@string/details"
+                            android:lines="5"
+                            android:padding="@dimen/spacing_middle"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <androidx.core.widget.NestedScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbars="vertical"
+                        android:scrollingCache="true">
+
+                        <androidx.coordinatorlayout.widget.CoordinatorLayout
+                            android:id="@+id/coordinator_lyt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone">
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <com.facebook.shimmer.ShimmerFrameLayout
+                                    android:id="@+id/shimmer_my_container"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    shimmer:duration="800">
+
+                                    <LinearLayout
+                                        android:id="@+id/shimmerInnerLayout"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+                                        <include layout="@layout/placeholder_item" />
+                                    </LinearLayout>
+
+                                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/recyclerView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scrollbars="vertical"
+                                    android:layout_marginTop="@dimen/spacing_large"
+                                    android:visibility="gone"
+                                    android:scrollingCache="true" />
+
+                            </FrameLayout>
+
+                            <LinearLayout
+                                android:id="@+id/no_active_survey_lyt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:visibility="gone"
+                                android:paddingBottom="80dp"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/lab_image"
+                                    android:layout_width="170dp"
+                                    android:layout_height="170dp"
+                                    android:layout_marginTop="@dimen/spacing_large"
+                                    android:src="@drawable/ic_no_survey" />
+
+                                <TextView
+                                    android:id="@+id/no_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_large"
+                                    android:text="No active surveys found."
+                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                                    android:textColor="@color/grey_60" />
+
+                                <TextView
+                                    android:id="@+id/no_brief"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:text="Please consult your facility admin."
+                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                    android:textColor="@color/grey_40"
+                                    />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/error_lyt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:visibility="gone"
+                                android:paddingBottom="80dp"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/lab_img"
+                                    android:layout_width="170dp"
+                                    android:layout_height="170dp"
+                                    android:src="@drawable/ic_error_message" />
+
+                                <TextView
+                                    android:id="@+id/error_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_large"
+                                    android:text="An error occurred. "
+                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                                    android:textColor="@color/grey_60" />
+
+                                <TextView
+                                    android:id="@+id/error_brief"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:text="Please try again later."
+                                    android:textAlignment="center"
+                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                    android:textColor="@color/grey_40" />
+
+                            </LinearLayout>
+
+
+                        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+                    </androidx.core.widget.NestedScrollView>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/spacing_xlarge" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_next"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/next"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,12 +19,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.mhealthkenya.psurvey.R;
+import com.mhealthkenya.psurvey.activities.auth.LoginActivity;
 import com.mhealthkenya.psurvey.adapters.QuestionnairesAdapterOffline;
 import com.mhealthkenya.psurvey.adapters.activeSurveyAdapter;
 import com.mhealthkenya.psurvey.models.ActiveSurveys;
 import com.mhealthkenya.psurvey.models.AnswerEntity;
+import com.mhealthkenya.psurvey.models.QueryID;
+import com.mhealthkenya.psurvey.models.QuerynareID;
 import com.mhealthkenya.psurvey.models.QuestionEntity;
 import com.mhealthkenya.psurvey.models.QuestionnaireEntity;
+import com.mhealthkenya.psurvey.models.UrlTable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,25 +39,32 @@ import java.util.List;
 
 public class QuestionnairesOffline extends AppCompatActivity {
     JSONObject jsonObject;
+    Handler mHandler;
 
     private RequestQueue requestQueue;
     Button button;
     AllQuestionDatabase allQuestionDatabase;
     long questionnaireIdInserted;
+    long questionnaireIdInserted1;
+    long questionIdInserted;
+    int questionnaireId;
 
     //adapter
-    private QuestionnairesAdapterOffline questionnairesAdapterOffline;
-    private QuestionnaireEntity questionnaireEntity;
-    private ArrayList<QuestionnaireEntity> questionnaireEntities;
+    public QuestionnairesAdapterOffline questionnairesAdapterOffline;
+    public QuestionnaireEntity questionnaireEntity;
+    public ArrayList<QuestionnaireEntity> questionnaireEntities;
 
     RecyclerView recyclerView;
     QuestionnaireEntity questionnaireEntity2;
+    QuestionEntity questionEntity;
+    AnswerEntity answerEntity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionnaires_offline);
         allQuestionDatabase = AllQuestionDatabase.getInstance(this);
+        mHandler=new Handler();
 
         requestQueue = Volley.newRequestQueue(this);
         button =    findViewById(R.id.get_all);
@@ -62,10 +75,26 @@ public class QuestionnairesOffline extends AppCompatActivity {
         questionnaireEntities = new ArrayList<>();
         questionnairesAdapterOffline = new QuestionnairesAdapterOffline(this, questionnaireEntities);
 
+        questionnairesAdapterOffline.setOnItemClickListener(new QuestionnairesAdapterOffline.OnItemClickListener() {
+            @Override
+            public void onItemClick(QuestionnaireEntity questionnaireEntity) {
+
+                Intent ii=new Intent(QuestionnairesOffline.this, QuetionsOffline.class);
+                ii.putExtra("ID",  questionnaireEntity.getId());
+
+                startActivity(ii);
+
+               // Toast.makeText(QuestionnairesOffline.this, String.valueOf( questionnaireEntity.getId()), Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setHasFixedSize(true);
         //set data and list adapter
         recyclerView.setAdapter(questionnairesAdapterOffline);
+
 
         //getAll();
         button.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +107,7 @@ public class QuestionnairesOffline extends AppCompatActivity {
             }
         });
         RetrieveQuestionnaire();
+
 
     }
 
@@ -108,7 +138,7 @@ public class QuestionnairesOffline extends AppCompatActivity {
 
                         // Parse the JSON data
 
-                        int questionnaireId = jsonObject.getInt("id");
+                         questionnaireId = jsonObject.getInt("id");
                         String questionnaireName = jsonObject.getString("name");
                         String questionnaireDescription = jsonObject.getString("description");
                         boolean questionnaireIsActive = jsonObject.getBoolean("is_active");
@@ -134,8 +164,17 @@ public class QuestionnairesOffline extends AppCompatActivity {
 
                         // Insert the QuestionnaireEntity into the Room database
                         questionnaireIdInserted = allQuestionDatabase.questionnaireDao().insert(questionnaireEntity2);
-                     // allQuestionDatabase.questionnaireDao().insert(questionnaireEntity2);
-                      RetrieveQuestionnaire();
+
+                        QuerynareID.deleteAll(QuerynareID.class);
+                        QuerynareID querynareID =new QuerynareID(questionnaireIdInserted);
+                        QuerynareID.save(querynareID);
+
+
+
+
+
+                      //allQuestionDatabase.questionnaireDao().insert(questionnaireEntity2);
+                     // RetrieveQuestionnaire();
 
 
                         /*QuestionnaireEntity retrievedQuestionnaire = allQuestionDatabase.questionnaireDao().getQuestionnaireById((int) questionnaireIdInserted);
@@ -150,6 +189,7 @@ public class QuestionnairesOffline extends AppCompatActivity {
                         } else {
                             // No matching questionnaire found
                         }*/
+                        RetrieveQuestionnaire();
 
 
                     } catch (JSONException e) {
@@ -180,9 +220,9 @@ public class QuestionnairesOffline extends AppCompatActivity {
                         Log.d("QUESTIOOOOOOOOOON",questionText );
 
                         // Create and insert the QuestionEntity
-                        QuestionEntity questionEntity = new QuestionEntity();
+                        questionEntity = new QuestionEntity();
                         questionEntity.setId(questionId);
-                        questionEntity.setQuestionnaireId(questionnaireIdInserted);
+                        questionEntity.setQuestionnaireId(questionnaireId);
                         questionEntity.setQuestion(questionText);
                         questionEntity.setQuestionType(questionType);
                         questionEntity.setQuestionOrder(questionOrder);
@@ -194,7 +234,13 @@ public class QuestionnairesOffline extends AppCompatActivity {
                         questionEntity.setCreatedBy(questionObject.getInt("created_by"));
 
                         // Insert the QuestionEntity into the Room database
-                        long questionIdInserted = allQuestionDatabase.questionDao().insert(questionEntity);
+                        questionIdInserted = allQuestionDatabase.questionDao().insert(questionEntity);
+                        QueryID.deleteAll(QueryID.class);
+                        QueryID queryID =new QueryID(questionIdInserted);
+                        QuerynareID.save(queryID);
+
+                       questionIdInserted=allQuestionDatabase.questionDao().insert(questionEntity);
+
 
                         // Parse and insert answers
                        JSONArray answersArray = questionObject.getJSONArray("answers");
@@ -206,7 +252,7 @@ public class QuestionnairesOffline extends AppCompatActivity {
                             Log.d("ANSWERRRRRRRRR", answerOption);
 
                             // Create and insert the AnswerEntity
-                            AnswerEntity answerEntity = new AnswerEntity();
+                             answerEntity = new AnswerEntity();
                             answerEntity.setId(answerId);
                             answerEntity.setQuestionId(questionIdInserted);
                             answerEntity.setOption(answerOption);
@@ -214,7 +260,7 @@ public class QuestionnairesOffline extends AppCompatActivity {
                             answerEntity.setCreatedBy(answerObject.getInt("created_by"));
 
                             // Insert the AnswerEntity into the Room database
-                            allQuestionDatabase.answerDao().insert(answerEntity);
+                          //  allQuestionDatabase.answerDao().insert(answerEntity);
                         }
                     }
                 } catch (JSONException e) {
@@ -237,10 +283,37 @@ public class QuestionnairesOffline extends AppCompatActivity {
     }
 
     public void RetrieveQuestionnaire(){
+
+        try {
+            List<QuerynareID> _url =QuerynareID.findWithQuery(QuerynareID.class, "SELECT *from QUERYNARE_ID ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    questionnaireIdInserted1=_url.get(x).getQuestinareID();
+                    //zz=_url.get(x).getStage_name1();
+                  //  Toast.makeText(QuestionnairesOffline.this, "You are connected to" + " " +zz, Toast.LENGTH_LONG).show();
+
+
+                }
+            }
+
+        }catch (Exception e){
+
+        }
+
+     //   questionnaireIdInserted = allQuestionDatabase.questionnaireDao().insert(questionnaireEntity2);
+      //  questionIdInserted = allQuestionDatabase.questionDao().insert(questionEntity);
+        /* (questionnaireIdInserted==0){
+            Toast
+        }*/
+
         //questionnaireIdInserted = allQuestionDatabase.questionnaireDao().insert(questionnaireEntity2);
         //allQuestionDatabase.questionDao().getQuestionById(1);
-        QuestionnaireEntity retrievedQuestionnaire = allQuestionDatabase.questionnaireDao().getQuestionnaireById((int) questionnaireIdInserted);
-      //QuestionnaireEntity retrievedQuestionnaire = allQuestionDatabase.questionnaireDao().geAllQuestionnaires();
+      QuestionnaireEntity retrievedQuestionnaire = allQuestionDatabase.questionnaireDao().getQuestionnaireById((int) questionnaireIdInserted1);
+
+
+    //QuestionnaireEntity retrievedQuestionnaire = allQuestionDatabase.questionnaireDao().geAllQuestionnaires();
+    //List<QuestionnaireEntity>  retrievedQuestionnaire = allQuestionDatabase.questionnaireDao().getAllQuestionnaires();
+
 
         if (retrievedQuestionnaire != null) {
             // You have the retrieved questionnaire entity
@@ -264,6 +337,7 @@ public class QuestionnairesOffline extends AppCompatActivity {
             questionnaireEntities.add(questionnaireEntity);
             //recyclerView.setAdapter(questionnairesAdapterOffline);
            questionnairesAdapterOffline.notifyDataSetChanged();
+          // notifyAll();
 
 
 

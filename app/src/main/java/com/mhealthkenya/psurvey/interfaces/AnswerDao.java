@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.mhealthkenya.psurvey.models.AnswerEntity;
+import com.mhealthkenya.psurvey.models.QuestionEntity;
 
 import java.util.List;
 
@@ -29,8 +30,12 @@ public interface AnswerDao {
     @Query("SELECT * FROM AnswerEntity WHERE id = :answerId")
     AnswerEntity getAnswerById(int answerId);
 
-    @Query("SELECT * FROM AnswerEntity WHERE questionId = :questionId")
-    List<AnswerEntity> getAnswersForQuestion(int questionId);
+    //@Query("SELECT * FROM AnswerEntity WHERE questionId = :questionId")
+    //List<AnswerEntity> getAnswersForQuestion(int questionId);
 
     // Add other queries as needed for your use case.
+
+    @Query("SELECT * FROM AnswerEntity WHERE questionId = :questionId")
+    AnswerEntity getAnswersOrderedByAnswerId(int  questionId);
+
 }

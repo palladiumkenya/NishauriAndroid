@@ -20,8 +20,8 @@ public class AnswerEntity {
     public AnswerEntity() {
     }
 
-    public AnswerEntity( String option, String createdAt, long questionId, int createdBy) {
-        //this.id = id;
+    public AnswerEntity(int id, String option, String createdAt, long questionId, int createdBy) {
+        this.id = id;
         this.option = option;
         this.createdAt = createdAt;
         this.questionId = questionId;

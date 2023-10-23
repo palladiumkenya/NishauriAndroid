@@ -17,7 +17,7 @@ import androidx.room.PrimaryKey;
 public class QuestionEntity {
     @PrimaryKey
     private int id;
-    private long questionnaireId;
+    private int questionnaireId;
     private String question;
     @ColumnInfo(name = "questionType")
     private int questionType;
@@ -38,7 +38,7 @@ public class QuestionEntity {
     public QuestionEntity() {
     }
 
-    public QuestionEntity(long questionnaireId, String question, int questionType, int questionOrder, boolean isRequired, String dateValidation, boolean isRepeatable, String responseColName, String createdAt, int createdBy) {
+    public QuestionEntity(int questionnaireId, String question, int questionType, int questionOrder, boolean isRequired, String dateValidation, boolean isRepeatable, String responseColName, String createdAt, int createdBy) {
 
       //  this.id = id;
         this.questionnaireId = questionnaireId;
@@ -61,11 +61,11 @@ public class QuestionEntity {
         this.id = id;
     }
 
-    public long getQuestionnaireId() {
+    public int getQuestionnaireId() {
         return questionnaireId;
     }
 
-    public void setQuestionnaireId(long questionnaireId) {
+    public void setQuestionnaireId(int questionnaireId) {
         this.questionnaireId = questionnaireId;
     }
 

@@ -15,11 +15,11 @@ import java.util.List;
 @Dao
 public interface QuestionDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insert(QuestionEntity question);
+ @Insert(onConflict = OnConflictStrategy.REPLACE)
+ long insert(QuestionEntity question);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(List<QuestionEntity> questions);
+    //@Insert(onConflict = OnConflictStrategy.REPLACE)
+  // void insert(List<QuestionEntity> questions);
 
     @Update
     void update(QuestionEntity question);
@@ -34,5 +34,11 @@ public interface QuestionDao {
     List<QuestionEntity> getQuestionsByQuestionnaireId(int questionnaireId);
 
     // Add other queries as needed for your use case.
+
+ /*@Query("SELECT * FROM QuestionEntity WHERE questionnaireId = :questionnaireId ORDER BY id")
+ List<QuestionEntity> getQuestionsOrderedByQuestionId(int questionnaireId);*/
+
+ @Query("SELECT * FROM QuestionEntity WHERE questionnaireId = :questionnaireId")
+ QuestionEntity getQuestionsOrderedByQuestionId(int questionnaireId);
 
 }

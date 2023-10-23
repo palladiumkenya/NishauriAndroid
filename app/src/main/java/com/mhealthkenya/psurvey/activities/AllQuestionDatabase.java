@@ -14,7 +14,7 @@ import com.mhealthkenya.psurvey.models.QuestionEntity;
 import com.mhealthkenya.psurvey.models.QuestionnaireEntity;
 
 
-@Database(entities = {QuestionnaireEntity.class,QuestionEntity.class, AnswerEntity.class}, version =1)
+@Database(entities = {QuestionnaireEntity.class,QuestionEntity.class, AnswerEntity.class}, version =2)
 public abstract class AllQuestionDatabase extends RoomDatabase {
 
     public abstract QuestionnaireDao questionnaireDao();
