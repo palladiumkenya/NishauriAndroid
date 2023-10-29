@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.List;
+
 @Entity(tableName = "QuestionnaireEntity")
 public class QuestionnaireEntity {
     @PrimaryKey
@@ -12,6 +14,7 @@ public class QuestionnaireEntity {
     private String createdAt;
     private String name;
     private String description;
+
     private boolean isActive;
     private int numberOfQuestions;
     private String activeTill;

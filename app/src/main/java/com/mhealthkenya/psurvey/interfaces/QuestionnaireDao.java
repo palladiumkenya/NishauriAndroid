@@ -30,6 +30,9 @@ public interface QuestionnaireDao {
     @Query("SELECT * FROM QuestionnaireEntity WHERE id = :questionnaireId")
     QuestionnaireEntity getQuestionnaireById(int questionnaireId);
 
+    @Query("SELECT * FROM QuestionnaireEntity")
+    List<QuestionnaireEntity> getAllQuestionnaires();
+
     //get questionnaire by id
    /* @Query("SELECT * FROM QuestionnaireEntity WHERE id = :questionnaireId ORDER BY id")
     List<QuestionEntity> getQuestionsOrderedByQuestionId(int questionnaireId);
@@ -45,10 +48,5 @@ public interface QuestionnaireDao {
     QuestionnaireEntity geAllQuestionnaires();
 
     // Add other queries as needed for your use case.
-
-
-
-
-
 
         }

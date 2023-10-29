@@ -21,7 +21,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                     Thread.sleep(1000);
 
                     //startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
-                    startActivity(new Intent(SplashScreenActivity.this, QuestionnairesOffline.class));
+                    startActivity(new Intent(SplashScreenActivity.this, Query2.class));
                     finish();
                 }catch (Exception e){
                     e.printStackTrace();

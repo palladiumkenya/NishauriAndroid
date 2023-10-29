@@ -19,6 +19,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activities.Query2"
+            android:exported="false" />
+        <activity
             android:name=".activities.QuetionsOffline"
             android:exported="false" />
         <activity

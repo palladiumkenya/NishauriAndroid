@@ -27,7 +27,7 @@ public class QuestionnairesAdapterOffline extends RecyclerView.Adapter<RecyclerV
     public OnItemClickListener onItemClickListener;
 
     public  interface OnItemClickListener{
-        void onItemClick(QuestionnaireEntity questionnaireEntity);
+        void onItemClick(int position);
 
     }
 
@@ -36,11 +36,18 @@ public class QuestionnairesAdapterOffline extends RecyclerView.Adapter<RecyclerV
 
     }
 
-    public  QuestionnairesAdapterOffline (Context context, List<QuestionnaireEntity> questionnaireEntities){
-        this. questionnaireEntities =  questionnaireEntities;
-        this.context = context;
-        notifyDataSetChanged();
+    public  QuestionnairesAdapterOffline (Context context){
 
+        this.context = context;
+
+
+    }
+
+    public void setUser(List<QuestionnaireEntity> questionnaireEntities){
+        this. questionnaireEntities =  questionnaireEntities;
+        //notifyDataSetChanged();
+        //notifyAll();
+        notifyDataSetChanged();
     }
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
@@ -65,7 +72,8 @@ public class QuestionnairesAdapterOffline extends RecyclerView.Adapter<RecyclerV
                 public void onClick(View v) {
                     int position =getAdapterPosition();
                     if (onItemClickListener !=null && position != RecyclerView.NO_POSITION);
-                    onItemClickListener.onItemClick(questionnaireEntities.get(position));
+                   // onItemClickListener.onItemClick(questionnaireEntities.get(position));
+                    onItemClickListener.onItemClick(position);
                 }
             });
 
@@ -96,9 +104,10 @@ public class QuestionnairesAdapterOffline extends RecyclerView.Adapter<RecyclerV
             view.lyt_parent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    //This  is onclick implementation
                     if (onItemClickListener != null) {
                         //Toast.makeText(context,items.get(position).getLogo(), Toast.LENGTH_LONG).show();
-                        onItemClickListener.onItemClick(questionnaireEntities.get(position));
+                        onItemClickListener.onItemClick(position);
                     }
                 }
             });
