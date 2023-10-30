@@ -159,7 +159,6 @@ public class QuestionsFragment extends Fragment {
     @BindView(R.id.dobfuture)
     TextInputEditText dobEditTextfuture;
 
-
     //datefuture2
     @BindView(R.id.dateLayoutfuture2)
     TextInputLayout dateTextTilfuture2;
@@ -235,10 +234,6 @@ public class QuestionsFragment extends Fragment {
 
     @BindView(R.id.etxt_numeric_text)
     TextInputEditText numericEditText;
-
-
-
-
 
     @BindView(R.id.radio_group)
     RadioGroup singleChoiceRadioGroup;
