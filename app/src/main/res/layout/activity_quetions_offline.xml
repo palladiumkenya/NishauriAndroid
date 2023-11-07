@@ -4,9 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     xmlns:shimmer="http://schemas.android.com/tools"
+    android:background="@color/grey_5"
     tools:context=".activities.QuetionsOffline">
+
+
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

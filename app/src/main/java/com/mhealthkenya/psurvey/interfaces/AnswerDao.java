@@ -18,8 +18,8 @@ public interface AnswerDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(AnswerEntity answer);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(List<AnswerEntity> answers);
+   // @Insert(onConflict = OnConflictStrategy.REPLACE)
+    //void insert(List<AnswerEntity> answers);
 
     @Update
     void update(AnswerEntity answer);
@@ -30,8 +30,20 @@ public interface AnswerDao {
     @Query("SELECT * FROM AnswerEntity WHERE id = :answerId")
     AnswerEntity getAnswerById(int answerId);
 
-    //@Query("SELECT * FROM AnswerEntity WHERE questionId = :questionId")
-    //List<AnswerEntity> getAnswersForQuestion(int questionId);
+    @Query("SELECT * FROM AnswerEntity WHERE questionId = :questionId")
+    List<AnswerEntity> getAnswersForQuestion(int questionId);
+
+    @Query("SELECT * FROM AnswerEntity " +
+            "WHERE questionId = :questionId " +
+            "AND questionnaireId = :questionnaireId")
+    List<AnswerEntity> getAnswersForQuestion2(int questionnaireId, int questionId);
+
+
+    //for questn-type 2 and 3
+    @Query("SELECT id FROM AnswerEntity WHERE questionId = :questionId")
+    List<Integer> getAnswerIdsForQuestion(int questionId);
+
+    
 
     // Add other queries as needed for your use case.
 

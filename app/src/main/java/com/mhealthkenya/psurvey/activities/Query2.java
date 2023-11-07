@@ -28,6 +28,7 @@ import com.mhealthkenya.psurvey.interfaces.QuestionnaireDao;
 import com.mhealthkenya.psurvey.models.AnswerEntity;
 import com.mhealthkenya.psurvey.models.QuestionEntity;
 import com.mhealthkenya.psurvey.models.QuestionnaireEntity;
+import com.mhealthkenya.psurvey.models.SurveyID;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,8 +47,9 @@ public class Query2 extends AppCompatActivity {
     AllQuestionDatabase allQuestionDatabase;
     long questionnaireIdInserted;
     long questionnaireIdInserted1;
-    long questionIdInserted;
+    int questionIdInserted;
     int questionnaireId;
+    int questionId;
 
     //adapter
     public QuestionnairesAdapterOffline questionnairesAdapterOffline;
@@ -85,11 +87,18 @@ public class Query2 extends AppCompatActivity {
             public void onItemClick(int position) {
 
                 QuestionnaireEntity questionnaireEntity =questionnaireEntities.get(position);
+                try {
+                    SurveyID.deleteAll(SurveyID.class);
+                    SurveyID surveyID = new SurveyID( questionnaireEntity.getId());
+                    surveyID.save();
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
 
                 Intent ii=new Intent(Query2.this, QuetionsOffline.class);
-                ii.putExtra("ID",  questionnaireEntity.getId());
-
+             //   ii.putExtra("ID",  questionnaireEntity.getId());
                 startActivity(ii);
                // QuestionEntity questions = allQuestionDatabase.questionDao().getQuestionsOrderedByQuestionId(questionnaireEntity.getId());
 
@@ -203,19 +212,25 @@ public class Query2 extends AppCompatActivity {
 
                             // Parse and insert answers
                             JSONArray answersArray = questionObject.getJSONArray("answers");
+                           // JSONArray answersArray = jsonObject.getJSONArray("answers");
                             for (int k=0; k<answersArray.length(); k++) {
-                                JSONObject answerObject = answersArray.getJSONObject(j);
+                                JSONObject answerObject = answersArray.getJSONObject(k);
 
                                 int answerId = answerObject.getInt("id");
                                 String answerOption = answerObject.getString("option");
 
+                                Log.d("ANSWER OPTION", answerOption);
+
                                 // Create and insert the AnswerEntity
                                 answerEntity = new AnswerEntity();
                                 answerEntity.setId(answerId);
-                                answerEntity.setQuestionId(questionIdInserted);
+                                answerEntity.setQuestionId(questionId);
+                                answerEntity.setQuestionnaireId(questionnaireId);
                                 answerEntity.setOption(answerOption);
                                 answerEntity.setCreatedAt(answerObject.getString("created_at"));
                                 answerEntity.setCreatedBy(answerObject.getInt("created_by"));
+
+
 
 
                                 allQuestionDatabase.answerDao().insert(answerEntity);

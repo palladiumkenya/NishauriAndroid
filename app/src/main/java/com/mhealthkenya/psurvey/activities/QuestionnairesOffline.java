@@ -44,9 +44,9 @@ public class QuestionnairesOffline extends AppCompatActivity {
     private RequestQueue requestQueue;
     Button button;
     AllQuestionDatabase allQuestionDatabase;
-    long questionnaireIdInserted;
-    long questionnaireIdInserted1;
-    long questionIdInserted;
+    int questionnaireIdInserted;
+    int questionnaireIdInserted1;
+    int questionIdInserted;
     int questionnaireId;
 
     //adapter
@@ -218,7 +218,7 @@ public class QuestionnairesOffline extends AppCompatActivity {
                                 // Create and insert the AnswerEntity
                                 answerEntity = new AnswerEntity();
                                 answerEntity.setId(answerId);
-                                answerEntity.setQuestionId(questionIdInserted);
+                               // answerEntity.setQuestionId(questionIdInserted);
                                 answerEntity.setOption(answerOption);
                                 answerEntity.setCreatedAt(answerObject.getString("created_at"));
                                 answerEntity.setCreatedBy(answerObject.getInt("created_by"));
@@ -412,7 +412,7 @@ public class MyAsyncTask extends AsyncTask<Void, Void, Void> {
                                     // Create and insert the AnswerEntity
                                     answerEntity = new AnswerEntity();
                                     answerEntity.setId(answerId);
-                                    answerEntity.setQuestionId(questionIdInserted);
+                                    //answerEntity.setQuestionId(questionIdInserted);
                                     answerEntity.setOption(answerOption);
                                     answerEntity.setCreatedAt(answerObject.getString("created_at"));
                                     answerEntity.setCreatedBy(answerObject.getInt("created_by"));

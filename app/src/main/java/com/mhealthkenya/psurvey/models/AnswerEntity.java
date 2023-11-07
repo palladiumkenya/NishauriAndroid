@@ -5,26 +5,28 @@ import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity
+
+@Entity(tableName ="AnswerEntity")
 public class AnswerEntity {
 
     @PrimaryKey
     private int id;
-
     private  String option;
     private String createdAt;
-    private long questionId;
+    private int questionId;
+    private int questionnaireId;
     private int createdBy;
 
 
     public AnswerEntity() {
     }
 
-    public AnswerEntity(int id, String option, String createdAt, long questionId, int createdBy) {
+    public AnswerEntity(int id, String option, String createdAt, int questionId, int questionnaireId, int createdBy) {
         this.id = id;
         this.option = option;
         this.createdAt = createdAt;
         this.questionId = questionId;
+        this.questionnaireId = questionnaireId;
         this.createdBy = createdBy;
     }
 
@@ -52,12 +54,20 @@ public class AnswerEntity {
         this.createdAt = createdAt;
     }
 
-    public long getQuestionId() {
+    public int getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(long questionId) {
+    public void setQuestionId(int questionId) {
         this.questionId = questionId;
+    }
+
+    public int getQuestionnaireId() {
+        return questionnaireId;
+    }
+
+    public void setQuestionnaireId(int questionnaireId) {
+        this.questionnaireId = questionnaireId;
     }
 
     public int getCreatedBy() {

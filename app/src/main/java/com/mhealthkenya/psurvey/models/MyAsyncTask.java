@@ -39,7 +39,7 @@ public class MyAsyncTask extends AsyncTask<Void, Void, Void> {
     AllQuestionDatabase allQuestionDatabase;
     long questionnaireIdInserted;
     long questionnaireIdInserted1;
-    long questionIdInserted;
+    int questionIdInserted;
     int questionnaireId;
 
     public MyAsyncTask(Context context, String url, QuestionnaireDao questionnaireDao, QuestionDao questionDao, AnswerDao answerDao) {
