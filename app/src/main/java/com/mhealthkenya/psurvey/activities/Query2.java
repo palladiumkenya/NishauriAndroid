@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -12,6 +13,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -38,6 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Query2 extends AppCompatActivity {
+    ProgressBar progressBar;
 
     JSONObject jsonObject;
     Handler mHandler;
@@ -50,6 +53,7 @@ public class Query2 extends AppCompatActivity {
     int questionIdInserted;
     int questionnaireId;
     int questionId;
+    ProgressDialog pDialog;
 
     //adapter
     public QuestionnairesAdapterOffline questionnairesAdapterOffline;
@@ -66,6 +70,8 @@ public class Query2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_query2);
+        pDialog = new ProgressDialog(Query2.this);
+        progressBar = findViewById(R.id.progressBar);
 
         allQuestionDatabase = AllQuestionDatabase.getInstance(this);
         mHandler=new Handler();
@@ -124,7 +130,9 @@ public class Query2 extends AppCompatActivity {
                 //  BackgroundTask task1111 = new BackgroundTask();
                 //task1111.execute();
 
-                getAll();
+              //  getAll();
+                fetchDataFromServer();
+
             }
         });
 
@@ -132,6 +140,8 @@ public class Query2 extends AppCompatActivity {
         //myAsyncTask1.execute();
 
     }
+
+
 
 
     public void getAll(){
@@ -284,5 +294,31 @@ public class Query2 extends AppCompatActivity {
         }
 
     }
+    //background call
+    private void fetchDataFromServer() {
+        // Show the progress bar
+        progressBar.setVisibility(View.VISIBLE);
+
+        // Use AsyncTask to perform network request in the background
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                getAll();
+                // Perform your network request here
+                // This runs in a background thread
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                // Hide the progress bar when data fetching is complete
+                progressBar.setVisibility(View.GONE);
+
+                // Update your UI with the fetched data
+            }
+        }.execute();
+    }
+
+
 
 }

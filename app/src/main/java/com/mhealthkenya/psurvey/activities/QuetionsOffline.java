@@ -392,7 +392,7 @@ public class QuetionsOffline extends AppCompatActivity {
 
 
                 // QuestionEntity questionEntity = new QuestionEntity();
-                currentQuestionIndex++;
+    /*            currentQuestionIndex++;
                 Log.d("Debug", "currentQuestionIndex incremented to " + currentQuestionIndex); // Add this log message
                 Log.d("SURVEYIDS", String.valueOf(savedquestionnaireId));
 
@@ -407,7 +407,7 @@ public class QuetionsOffline extends AppCompatActivity {
                 else {
                     btnNext.setEnabled(false);
                     Toast.makeText(QuetionsOffline.this, "End of quetion", Toast.LENGTH_LONG).show();
-                }
+                }                                                                                               */
                     //QuestionEntity question = questions.get(currentQuestionIndex);
                     /*if(question.getQuestionType()==1 && question.isRequired()) {
 
@@ -430,8 +430,10 @@ public class QuetionsOffline extends AppCompatActivity {
 
                     //if (currentQuestionIndex < questions.size()){
 
+                   QuestionEntity question = questions.get(currentQuestionIndex);
 
-         /*           if (question.getQuestionType() == 1 && question.isRequired()) {
+
+                    if (question.getQuestionType() == 1 && question.isRequired()) {
 
                         if (openTextEtxt.getText().toString().equals("")) {
                             Toast.makeText(QuetionsOffline.this, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
@@ -802,9 +804,9 @@ public class QuetionsOffline extends AppCompatActivity {
 //                    Toast.makeText(context, String.valueOf(multiAnswerList), Toast.LENGTH_SHORT).show();
 
                     }
-                   /* else {
+                    else {
                         btnNext.setEnabled(false);
-                    }/
+                    }
 
 
                     // }
@@ -918,8 +920,8 @@ public class QuetionsOffline extends AppCompatActivity {
                     int questionnaireI = answers2.getQuestionnaireId();
                     int createdBy = answers2.getCreatedBy();
 
-                    // answerEntity = new AnswerEntity(id, optionR, createdAt, questionI, questionnaireI, createdBy);
-                    //answerList.add(answerEntity);
+                     answerEntity = new AnswerEntity(id, optionR, createdAt, questionI, questionnaireI, createdBy);
+                    answerList.add(answerEntity);
 
                     RadioButton rbn = new RadioButton(QuetionsOffline.this);
                     rbn.setId(View.generateViewId());
@@ -1221,7 +1223,17 @@ else
 
         allQuestionDatabase.userResponseDao().insertResponse(userResponseEntity);
 
-        startActivity(new Intent(QuetionsOffline.this, QuetionsOffline.class));
+        currentQuestionIndex++;
+        Log.d("Debug", "currentQuestionIndex incremented to " + currentQuestionIndex); // Add this log message
+        Log.d("SURVEYIDS", String.valueOf(savedquestionnaireId));
+
+        //currentQuestionIndex++; // Increment the question index
+        if (currentQuestionIndex < questions.size()) {
+            Intent intent = new Intent(QuetionsOffline.this, QuetionsOffline.class);
+            intent.putExtra("questionIndex", currentQuestionIndex); // Pass the index
+            startActivity(intent);
+            // displayQuestion(currentQuestionIndex);
+        }
 
 
         /*if (!questions.isEmpty()) {

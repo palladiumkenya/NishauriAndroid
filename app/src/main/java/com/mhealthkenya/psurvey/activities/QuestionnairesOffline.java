@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.mhealthkenya.psurvey.R;
+import com.mhealthkenya.psurvey.activities.auth.LoginActivity;
 import com.mhealthkenya.psurvey.adapters.QuestionnairesAdapterOffline;
 import com.mhealthkenya.psurvey.interfaces.AnswerDao;
 import com.mhealthkenya.psurvey.interfaces.QuestionDao;
@@ -49,6 +51,8 @@ public class QuestionnairesOffline extends AppCompatActivity {
     int questionIdInserted;
     int questionnaireId;
 
+     ProgressDialog pDialog;
+
     //adapter
     public QuestionnairesAdapterOffline questionnairesAdapterOffline;
     public QuestionnaireEntity questionnaireEntity;
@@ -65,6 +69,7 @@ public class QuestionnairesOffline extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionnaires_offline);
         allQuestionDatabase = AllQuestionDatabase.getInstance(this);
+        pDialog = new ProgressDialog(QuestionnairesOffline.this);
         mHandler=new Handler();
 
         requestQueue = Volley.newRequestQueue(this);
@@ -78,6 +83,7 @@ public class QuestionnairesOffline extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         questionnairesAdapterOffline = new QuestionnairesAdapterOffline(this);
         recyclerView.setAdapter(questionnairesAdapterOffline);
+
 
         //  questionnairesAdapterOffline.setUser(questionnaireEntities);
         MyAsyncTask myAsyncTask = new MyAsyncTask(this, "https://psurveyapitest.kenyahmis.org/api/questions/dep/all", allQuestionDatabase.questionnaireDao(), allQuestionDatabase.questionDao(), allQuestionDatabase.answerDao());
@@ -137,6 +143,11 @@ public class QuestionnairesOffline extends AppCompatActivity {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
+
+                pDialog.setTitle("Signing In...");
+                pDialog.setMessage("Please wait...");
+                pDialog.setCancelable(false);
+                pDialog.show();
 
                 Log.d("ALl", "SUCCESS");
                 Log.d("ALl", response.toString());
@@ -238,6 +249,7 @@ public class QuestionnairesOffline extends AppCompatActivity {
                     }
                 }
                // RetrieveQuestionnaire();
+                pDialog.dismiss();
 
         }
         }, new Response.ErrorListener() {
