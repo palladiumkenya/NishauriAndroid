@@ -108,7 +108,7 @@ public class Query2 extends AppCompatActivity {
                 startActivity(ii);
                // QuestionEntity questions = allQuestionDatabase.questionDao().getQuestionsOrderedByQuestionId(questionnaireEntity.getId());
 
-                Toast.makeText(Query2.this, String.valueOf( questionnaireEntity.getId()), Toast.LENGTH_LONG).show();
+              //  Toast.makeText(Query2.this, String.valueOf( questionnaireEntity.getId()), Toast.LENGTH_LONG).show();
 
             }
         });

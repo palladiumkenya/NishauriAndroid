@@ -29,7 +29,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:text="Survey 1"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
             <ImageButton
@@ -37,9 +37,9 @@
                 android:layout_width="?attr/actionBarSize"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:tint="@color/grey_60"
-                android:visibility="gone"
-                android:src="@drawable/ic_expand_arrow" />
+
+                android:src="@drawable/eye_view"
+                app:tint="@color/colorPrimary" />
 
         </LinearLayout>
 

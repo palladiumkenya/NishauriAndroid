@@ -21,10 +21,10 @@ public class UserResponseEntity extends SugarRecord {
     public UserResponseEntity() {
     }
 
-    public UserResponseEntity(int questionnaireId, int questionId, int answerId, String option) {
+    public UserResponseEntity(int questionnaireId, int questionId,  String option) {
         this.questionnaireId = questionnaireId;
         this.questionId = questionId;
-        this.answerId = answerId;
+
         this.option = option;
     }
 

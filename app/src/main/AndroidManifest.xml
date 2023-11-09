@@ -19,6 +19,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activities.CompleteSurvey"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ResponseData"
+            android:exported="false" />
+        <activity
             android:name=".activities.Query2"
             android:exported="false" />
         <activity

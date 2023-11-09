@@ -1,16 +1,19 @@
 package com.mhealthkenya.psurvey.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mhealthkenya.psurvey.R;
+import com.mhealthkenya.psurvey.activities.ResponseData;
 import com.mhealthkenya.psurvey.depedancies.Tools;
 import com.mhealthkenya.psurvey.depedancies.ViewAnimation;
 import com.mhealthkenya.psurvey.models.ActiveSurveys;
@@ -67,7 +70,7 @@ public class QuestionnairesAdapterOffline extends RecyclerView.Adapter<RecyclerV
             lyt_expand = (View) v.findViewById(R.id.lyt_expand);
             lyt_parent = (View) v.findViewById(R.id.lyt_parent);
 
-            v.setOnClickListener(new View.OnClickListener() {
+            surveyDescription.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position =getAdapterPosition();
@@ -76,6 +79,7 @@ public class QuestionnairesAdapterOffline extends RecyclerView.Adapter<RecyclerV
                     onItemClickListener.onItemClick(position);
                 }
             });
+
 
         }
     }
@@ -113,16 +117,20 @@ public class QuestionnairesAdapterOffline extends RecyclerView.Adapter<RecyclerV
             });
 
 
-           /* view.bt_expand.setOnClickListener(new View.OnClickListener() {
+            view.bt_expand.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    boolean show = toggleLayoutExpand(!obj.expanded, v, view.lyt_expand);
-                    questionnaireEntities.get(position).expanded = show;
+                   /* boolean show = toggleLayoutExpand(!obj.expanded, v, view.lyt_expand);
+                    questionnaireEntities.get(position).expanded = show;*/
+                    Intent intent = new Intent(context, ResponseData.class);
+                    intent.putExtra("Quetionnaire_ID", obj.getId());
+                    context.startActivity(intent);
+                    Toast.makeText(context, "ID is"+obj.getId(), Toast.LENGTH_LONG).show();
                 }
             });
 
 
-            if(obj.expanded){
+           /* if(obj.expanded){
                 view.lyt_expand.setVisibility(View.VISIBLE);
             } else {
                 view.lyt_expand.setVisibility(View.GONE);
