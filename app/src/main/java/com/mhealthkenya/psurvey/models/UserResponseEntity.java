@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 
 import com.orm.SugarRecord;
 
-@Entity(tableName = "user_responses")
+@Entity(tableName ="user_responses")
 public class UserResponseEntity extends SugarRecord {
 
     @PrimaryKey(autoGenerate = true)

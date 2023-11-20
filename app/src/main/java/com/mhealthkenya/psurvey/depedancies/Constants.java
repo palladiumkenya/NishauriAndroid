@@ -21,6 +21,8 @@ import java.util.List;
 public class Constants extends AppCompatActivity {
   public String z, zz;
 
+  public static int counter =0;
+
 
   //public static int dataID;
 

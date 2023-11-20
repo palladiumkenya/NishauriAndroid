@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -24,6 +25,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.mhealthkenya.psurvey.R;
 import com.mhealthkenya.psurvey.adapters.QuestionnairesAdapterOffline;
+import com.mhealthkenya.psurvey.depedancies.Constants;
 import com.mhealthkenya.psurvey.interfaces.AnswerDao;
 import com.mhealthkenya.psurvey.interfaces.QuestionDao;
 import com.mhealthkenya.psurvey.interfaces.QuestionnaireDao;
@@ -31,6 +33,7 @@ import com.mhealthkenya.psurvey.models.AnswerEntity;
 import com.mhealthkenya.psurvey.models.QuestionEntity;
 import com.mhealthkenya.psurvey.models.QuestionnaireEntity;
 import com.mhealthkenya.psurvey.models.SurveyID;
+import com.orm.SugarContext;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +44,7 @@ import java.util.List;
 
 public class Query2 extends AppCompatActivity {
     ProgressBar progressBar;
+    int currentProgress=0;
 
     JSONObject jsonObject;
     Handler mHandler;
@@ -64,14 +68,19 @@ public class Query2 extends AppCompatActivity {
     QuestionnaireEntity questionnaireEntity2;
     QuestionEntity questionEntity;
     AnswerEntity answerEntity;
+    TextView total1;
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_query2);
+        //SugarContext.init(this);
         pDialog = new ProgressDialog(Query2.this);
-        progressBar = findViewById(R.id.progressBar);
+        total1 =findViewById(R.id.total);
+
 
         allQuestionDatabase = AllQuestionDatabase.getInstance(this);
         mHandler=new Handler();
@@ -81,7 +90,6 @@ public class Query2 extends AppCompatActivity {
 
         //adapter
         recyclerView=findViewById(R.id.recyclerViewOffline);
-
         questionnaireEntities = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false));
         recyclerView.setHasFixedSize(true);
@@ -114,6 +122,8 @@ public class Query2 extends AppCompatActivity {
         });
 
 
+       fetchDataFromServer();
+
 
 
 
@@ -137,6 +147,7 @@ public class Query2 extends AppCompatActivity {
         });
 
         RetrieveQuestionnaire();
+        total1.setText("Completed Surveys"+" "+Constants.counter);
         //myAsyncTask1.execute();
 
     }
@@ -145,6 +156,12 @@ public class Query2 extends AppCompatActivity {
 
 
     public void getAll(){
+        /*ProgressBar progressBar = findViewById(R.id.progress);
+        progressBar.setVisibility(View.VISIBLE);
+        currentProgress =currentProgress + 10;
+        progressBar.setProgress(currentProgress);
+        progressBar.setMax(100);*/
+
         String url = "https://psurveyapitest.kenyahmis.org/api/questions/dep/all";
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -258,6 +275,8 @@ public class Query2 extends AppCompatActivity {
                     }
                 }
                  RetrieveQuestionnaire();
+             //   progressBar.setVisibility(View.GONE);
+
 
             }
         }, new Response.ErrorListener() {
@@ -297,7 +316,12 @@ public class Query2 extends AppCompatActivity {
     //background call
     private void fetchDataFromServer() {
         // Show the progress bar
+        ProgressBar progressBar = findViewById(R.id.progress);
         progressBar.setVisibility(View.VISIBLE);
+        currentProgress =currentProgress + 10;
+        progressBar.setProgress(currentProgress);
+        progressBar.setMax(100);
+
 
         // Use AsyncTask to perform network request in the background
         new AsyncTask<Void, Void, Void>() {
@@ -313,6 +337,7 @@ public class Query2 extends AppCompatActivity {
             protected void onPostExecute(Void aVoid) {
                 // Hide the progress bar when data fetching is complete
                 progressBar.setVisibility(View.GONE);
+
 
                 // Update your UI with the fetched data
             }

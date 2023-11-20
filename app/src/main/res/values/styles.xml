@@ -10,7 +10,21 @@
         <item name="textAppearanceButton">@style/AppTextAppearance.Button</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="progressBarStyle">@style/CustomProgressBar</item>
+        <!--<item name="custom_progress_bar">@drawable/custom_progress_bar</item>-->
     </style>
+
+    <!-- Custom style for ProgressBar -->
+    <style name="CustomProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <!-- Customize the ProgressBar appearance here -->
+        <item name="android:indeterminateDrawable">@drawable/custom_progress_bar</item>
+        <item name="android:minHeight">20dp</item>
+        <item name="android:maxHeight">20dp</item>
+
+    </style>
+
+    <!-- Drawable resource for the indeterminate ProgressBar -->
+
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
