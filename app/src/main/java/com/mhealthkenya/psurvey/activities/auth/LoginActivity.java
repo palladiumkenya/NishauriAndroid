@@ -37,6 +37,7 @@ import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.play.core.tasks.Task;
 import com.mhealthkenya.psurvey.R;
 import com.mhealthkenya.psurvey.activities.MainActivity;
+import com.mhealthkenya.psurvey.activities.Query2;
 import com.mhealthkenya.psurvey.activities.SelectUrls;
 import com.mhealthkenya.psurvey.depedancies.Constants;
 
@@ -297,7 +298,11 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (response.has("auth_token")){
 
-                            Intent mint = new Intent(LoginActivity.this, MainActivity.class);
+                           /* Intent mint = new Intent(LoginActivity.this, MainActivity.class);
+                            mint.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(mint);*/
+
+                            Intent mint = new Intent(LoginActivity.this, Query2.class);
                             mint.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(mint);
 

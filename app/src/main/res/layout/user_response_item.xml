@@ -3,31 +3,103 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:textStyle="bold"
+            android:text="QuetionnaireID"
+            android:padding="5dp"
+            android:textSize="13sp" />
     <TextView
         android:id="@+id/tv_survey_id"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="1.40"
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:text="Get SurveyID"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         />
-    <TextView
-        android:id="@+id/tv_query_id"
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:textStyle="bold"
+
+            android:padding="5dp"
+            android:text="Quetion ID:"
+            android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/tv_query_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:textStyle="bold"
         android:text="QueryID"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         />
 
-    <TextView
-        android:id="@+id/tv_open_id"
+    </LinearLayout>
+
+
+
+
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:text="Answer"
+            android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/tv_open_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:textStyle="bold"
+        android:layout_weight="1"
         android:text="OpenID"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         />
+
+    </LinearLayout>
 
 
     <Button
@@ -36,6 +108,7 @@
         android:layout_height="wrap_content"
         android:text="submit"
         android:textStyle="bold"
+        android:visibility="gone"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         />
 

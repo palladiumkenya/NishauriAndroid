@@ -1,6 +1,7 @@
 package com.mhealthkenya.psurvey.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -63,9 +64,20 @@ public class ResponseData extends AppCompatActivity {
       //  Toast.makeText(ResponseData.this, "ID Is"+IDvalue, Toast.LENGTH_SHORT).show();
         recyclerView1 = findViewById(R.id.recyclerViewResponse);
         userResponseEntities= new ArrayList<>();
-        recyclerView1.setLayoutManager(new LinearLayoutManager(this));
+
+
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView1.setLayoutManager(layoutManager);
+        // recyclerView1.setLayoutManager(new LinearLayoutManager(this));
         recyclerView1.setHasFixedSize(true);
         adapter = new UserResponseAdapter(this);
+       // recyclerView1.addItemDecoration(new DividerItemDecoration(recyclerView1.getContext()));
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView1.getContext(), layoutManager.getOrientation());
+               // layoutManager.getOrientation());
+        recyclerView1.addItemDecoration(dividerItemDecoration);
+
         recyclerView1.setAdapter(adapter);
 
         getResponses1();

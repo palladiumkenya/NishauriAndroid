@@ -365,24 +365,10 @@ public class QuetionsOffline extends AppCompatActivity {
         // Retrieve questions for the specified questionnaire
 
         questions = allQuestionDatabase.questionDao().getQuestionsByQuestionnaireId(savedquestionnaireId);
-        // displayQuestion(currentQuestionIndex);
-
-
-       /* if (!questions.isEmpty()) {
-            displayQuestion(currentQuestionIndex);}
-        else {
-            surveyQuestion.setText("No questions found for this questionnaire.");
-            btnNext.setEnabled(false);
-        }*/
-
 
         // Retrieve the question index from the intent
         Intent intent1 = getIntent();
         currentQuestionIndex = intent1.getIntExtra("questionIndex", 0); // Default to 0
-
-        // Initialize your UI components, such as TextView for displaying the question
-        // ...
-       // Toast.makeText(QuetionsOffline.this, "index is" + currentQuestionIndex, Toast.LENGTH_LONG).show();
 
         // Display the question based on the index
         displayQuestion(currentQuestionIndex);
@@ -390,41 +376,6 @@ public class QuetionsOffline extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                // QuestionEntity questionEntity = new QuestionEntity();
-    /*            currentQuestionIndex++;
-                Log.d("Debug", "currentQuestionIndex incremented to " + currentQuestionIndex); // Add this log message
-                Log.d("SURVEYIDS", String.valueOf(savedquestionnaireId));
-
-                //currentQuestionIndex++; // Increment the question index
-                if (currentQuestionIndex < questions.size()) {
-                    Intent intent = new Intent(QuetionsOffline.this, QuetionsOffline.class);
-                    intent.putExtra("questionIndex", currentQuestionIndex); // Pass the index
-                    startActivity(intent);
-                    // displayQuestion(currentQuestionIndex);
-                     }
-
-                else {
-                    btnNext.setEnabled(false);
-                    Toast.makeText(QuetionsOffline.this, "End of quetion", Toast.LENGTH_LONG).show();
-                }                                                                                               */
-                    //QuestionEntity question = questions.get(currentQuestionIndex);
-                    /*if(question.getQuestionType()==1 && question.isRequired()) {
-
-                        if (openTextEtxt.getText().toString().equals("")) {
-                            Toast.makeText(QuetionsOffline.this, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
-                        }
-                        if (currentQuestionIndex < questions.size()) {
-                            displayQuestion(currentQuestionIndex);
-
-                            SaveAnswers(questionnaireId, currentQuestionIndex, 1, openTextEtxt.getText().toString());
-
-                        } else {
-                            // Handle the end of questions
-                            btnNext.setEnabled(false);
-                        }
-                    }*/
 
 
                     //Agreed

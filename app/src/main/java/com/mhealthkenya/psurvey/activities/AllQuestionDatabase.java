@@ -16,7 +16,7 @@ import com.mhealthkenya.psurvey.models.QuestionnaireEntity;
 import com.mhealthkenya.psurvey.models.UserResponseEntity;
 
 
-@Database(entities = {QuestionnaireEntity.class,QuestionEntity.class, AnswerEntity.class, UserResponseEntity.class}, version =5)
+@Database(entities = {QuestionnaireEntity.class,QuestionEntity.class, AnswerEntity.class, UserResponseEntity.class}, version =6)
 public abstract class AllQuestionDatabase extends RoomDatabase {
 
     public abstract QuestionnaireDao questionnaireDao();
@@ -32,7 +32,9 @@ public abstract class AllQuestionDatabase extends RoomDatabase {
 
         if (INSTANCE==null){
             INSTANCE= Room.databaseBuilder(context, AllQuestionDatabase.class, DATABASENAME).
-                    fallbackToDestructiveMigration().allowMainThreadQueries().build();
+                  //  .fallbackToDestructiveMigration()
+                  //  .build();
+            fallbackToDestructiveMigration().allowMainThreadQueries().build();
         }
 
         return INSTANCE;
