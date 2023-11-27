@@ -1,6 +1,7 @@
 package com.mhealthkenya.psurvey.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -190,6 +191,9 @@ public class QuetionsOffline extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quetions_offline);
+       /* Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Quetions");*/
         initialize();
 
         //set EditText type4 to accept numeric only
@@ -350,7 +354,7 @@ public class QuetionsOffline extends AppCompatActivity {
             if (savedID.size()==1){
                 for (int x=0; x<savedID.size(); x++) {
                     savedquestionnaireId = savedID.get(x).getQuetionereID();
-                    Toast.makeText(QuetionsOffline.this, "surveyID" + " " +savedquestionnaireId, Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(QuetionsOffline.this, "surveyID" + " " +savedquestionnaireId, Toast.LENGTH_LONG).show();
                     Log.d("SURVEYIDS", String.valueOf(savedquestionnaireId));
 
                 }

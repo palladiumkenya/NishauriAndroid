@@ -1,10 +1,13 @@
 package com.mhealthkenya.psurvey.activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -50,6 +53,11 @@ public class ResponseData extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_response_data);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Responses");
         // Initialize your RecyclerView
 
 
@@ -116,12 +124,11 @@ public class ResponseData extends AppCompatActivity {
             // UserResponseEntity userResponseEntity1 = new UserResponseEntity(userResponseEntity.getQuestionnaireId(), userResponseEntity.getQuestionId(), userResponseEntity.getOption());
             userResponseEntities.add(userResponseEntity1);
 
-            // adapter.setUser(userResponseEntities);
-            // adapter.setUser(userResponseEntities);
             adapter.setUser2(userResponseEntities);
         }
         if (userResponseEntities.isEmpty()){
-            Toast.makeText(ResponseData.this, "No Responses for this Quetionnaire", Toast.LENGTH_SHORT).show();
+            getAlert();
+           // Toast.makeText(ResponseData.this, "No Responses for this Quetionnaire", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -228,6 +235,63 @@ public class ResponseData extends AppCompatActivity {
                 // Update your UI with the fetched data
             }
         }.execute();
+    }
+
+
+
+    //Alert
+    private void getAlert(){
+
+       /* try {
+
+
+            List<UrlTable> _url =UrlTable.findWithQuery(UrlTable.class, "SELECT *from URL_TABLE ORDER BY id DESC LIMIT 1");
+            if (_url.size()==1){
+                for (int x=0; x<_url.size(); x++){
+                    z=_url.get(x).getBase_url1();
+                    zz=_url.get(x).getStage_name1();
+                    //Toast.makeText(LoginActivity.this, "You are connected to" + " " +zz, Toast.LENGTH_LONG).show();
+                }
+            }
+        }catch (Exception e){
+            Log.d("No baseURL", e.getMessage());
+        }*/
+
+
+
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(ResponseData.this);
+        builder1.setIcon(R.drawable.logo);
+        builder1.setTitle("No Responses for This Questionnaire");
+       // builder1.setMessage( zz);
+        builder1.setCancelable(false);
+
+        builder1.setPositiveButton(
+                "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        Intent intent = new Intent(ResponseData.this, QuestionnairesOffline.class);
+                        startActivity(intent);
+                        finish();
+
+                        //dialog.cancel();
+                    }
+                });
+
+        /*builder1.setNegativeButton(
+                "Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        Intent intent = new Intent(Config.this, SelectUrls.class);
+                        startActivity(intent);
+                        dialog.cancel();
+                    }
+                });*/
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+
     }
 
 
