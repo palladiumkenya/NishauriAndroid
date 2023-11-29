@@ -20,7 +20,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
     <Button
-        android:id="@+id/get_all"
+        android:id="@+id/submit_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 

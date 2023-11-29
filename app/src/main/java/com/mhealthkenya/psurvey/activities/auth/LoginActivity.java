@@ -39,6 +39,7 @@ import com.mhealthkenya.psurvey.R;
 import com.mhealthkenya.psurvey.activities.MainActivity;
 import com.mhealthkenya.psurvey.activities.Query2;
 import com.mhealthkenya.psurvey.activities.SelectUrls;
+import com.mhealthkenya.psurvey.activities.offlineHome;
 import com.mhealthkenya.psurvey.depedancies.Constants;
 
 import com.mhealthkenya.psurvey.models.UrlTable;
@@ -302,7 +303,7 @@ public class LoginActivity extends AppCompatActivity {
                             mint.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(mint);*/
 
-                            Intent mint = new Intent(LoginActivity.this, Query2.class);
+                            Intent mint = new Intent(LoginActivity.this, offlineHome.class);
                             mint.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(mint);
 

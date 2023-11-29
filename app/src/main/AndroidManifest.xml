@@ -21,12 +21,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activities.offlineHome"
+            android:exported="false" />
+
         <meta-data
             android:name="DATABASE"
             android:value="userAuth.db" />
         <meta-data
             android:name="VERSION"
             android:value="8" />
+
         <activity
             android:name=".activities.Query3"
             android:exported="false" />

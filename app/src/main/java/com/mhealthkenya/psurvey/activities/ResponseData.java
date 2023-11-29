@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ import com.mhealthkenya.psurvey.models.QuestionEntity;
 import com.mhealthkenya.psurvey.models.QuestionnaireEntity;
 import com.mhealthkenya.psurvey.models.UserResponseEntity;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,6 +37,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResponseData extends AppCompatActivity {
+
+    Button btnsubmit;
     int IDvalue;
     AllQuestionDatabase allQuestionDatabase;
 
@@ -53,6 +57,7 @@ public class ResponseData extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_response_data);
+        btnsubmit = (Button) findViewById(R.id.submit_all);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
 
@@ -103,6 +108,12 @@ public class ResponseData extends AppCompatActivity {
 
 
         //
+        btnsubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callSubmit();
+            }
+        });
 
     }
 
@@ -270,7 +281,7 @@ public class ResponseData extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        Intent intent = new Intent(ResponseData.this, QuestionnairesOffline.class);
+                        Intent intent = new Intent(ResponseData.this, Query2.class);
                         startActivity(intent);
                         finish();
 
@@ -292,6 +303,94 @@ public class ResponseData extends AppCompatActivity {
         AlertDialog alert11 = builder1.create();
         alert11.show();
 
+    }
+    public void callSubmit(){
+
+        // Assume userResponses is a List<UserResponseEntity> containing your responses
+
+// Create the main JSON object
+        JSONObject mainJsonObject = new JSONObject();
+        try {
+            mainJsonObject.put("questionnaire_id", 55);
+
+            // Create the responses array
+            JSONArray responsesArray = new JSONArray();
+
+            // Iterate through userResponses and create JSON objects for each response
+            for (UserResponseEntity userResponse : userResponses) {
+                JSONObject responseObj = new JSONObject();
+
+                // Set values for responseObj (adjust these according to your data model)
+                responseObj.put("ccc_number", "12345678");
+                responseObj.put("first_name", "");
+                responseObj.put("questionnaire_participant_id", 1);
+                responseObj.put("informed_consent", true);
+                responseObj.put("privacy_policy", true);
+                responseObj.put("interviewer_statement", true);
+
+                // Create the question_answers array
+                JSONArray questionAnswersArray = new JSONArray();
+
+                // Add question-answer pairs to the question_answers array
+                // Adjust these according to your data model
+          //      questionAnswersArray.put(createQuestionAnswer("430", String.valueOf(userResponse.getQuestionId()), ""));
+
+                questionAnswersArray.put(createQuestionAnswer("430", String.valueOf(userResponse.getQuestionId()), userResponse.getOption()));
+
+                // Add question_answers array to the responseObj
+                responseObj.put("question_answers", questionAnswersArray);
+
+                // Add responseObj to the responses array
+                responsesArray.put(responseObj);
+            }
+
+            // Add responses array to the main JSON object
+            mainJsonObject.put("responses", responsesArray);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+// Create a JsonObjectRequest
+        String url = "https://psurveyapitest.kenyahmis.org/api/questions/answers/all/"; // Replace with your server endpoint
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                mainJsonObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Handle the response from the server
+                        // You may want to update UI or perform other actions here
+                        Log.d("success", response.toString());
+
+                        Toast.makeText(ResponseData.this, "Success", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Errror", "OnError");
+                        // Handle errors
+                    }
+                }
+        );
+
+// Add the request to the Volley request queue
+       // requestQueue.add(jsonObjectRequest);
+        Volley.newRequestQueue(this).add(jsonObjectRequest);
+
+
+
+    }
+
+
+    // Helper method to create a question answer JSONObject
+    private JSONObject createQuestionAnswer(String question, String answer, String openText) throws JSONException {
+        JSONObject questionAnswerObject = new JSONObject();
+        questionAnswerObject.put("question", question);
+        questionAnswerObject.put("answer", answer);
+        questionAnswerObject.put("open_text", openText);
+        return questionAnswerObject;
     }
 
 
