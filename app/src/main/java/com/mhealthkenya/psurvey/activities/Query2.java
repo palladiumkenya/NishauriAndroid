@@ -63,7 +63,7 @@ public class Query2 extends AppCompatActivity {
     int questionnaireId;
     int questionId;
     ProgressDialog pDialog;
-
+     ProgressDialog progressDialog;
     //adapter
     public QuestionnairesAdapterOffline questionnairesAdapterOffline;
     public QuestionnaireEntity questionnaireEntity;
@@ -73,7 +73,7 @@ public class Query2 extends AppCompatActivity {
     QuestionnaireEntity questionnaireEntity2;
     QuestionEntity questionEntity;
     AnswerEntity answerEntity;
-    TextView total1;
+    //TextView total1;
 
 
 
@@ -89,9 +89,13 @@ public class Query2 extends AppCompatActivity {
         getSupportActionBar().setTitle("Facility's Survey");
         //SugarContext.init(this);
 
+        progressDialog = new ProgressDialog(this);
+
+
         progressBar = findViewById(R.id.progress);
         pDialog = new ProgressDialog(Query2.this);
-        total1 =findViewById(R.id.total);
+       // total1 =findViewById(R.id.total);
+
 
 
         allQuestionDatabase = AllQuestionDatabase.getInstance(this);
@@ -136,7 +140,7 @@ public class Query2 extends AppCompatActivity {
 
        //fetchDataFromServer();
 
-       callback();
+//       callback();
 
 
 
@@ -147,6 +151,14 @@ public class Query2 extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.setMessage("Loading Surveys...");
+                progressDialog.setCancelable(false); // Set to true if you want the dialog to be cancelable
+                progressDialog.setIndeterminate(true); // Set to false if you want a progress bar instead of an indeterminate spinner
+
+                progressDialog.show();
+
+                callback();
+
 
                // myAsyncTask.execute();
 
@@ -165,7 +177,7 @@ public class Query2 extends AppCompatActivity {
        // RetrieveQuestionnaire();
         new RetrieveQuestionnaireTask(allQuestionDatabase, questionnaireEntities, questionnairesAdapterOffline).execute();
 
-        total1.setText("Completed Surveys"+" "+Constants.counter);
+       // total1.setText("Completed Surveys"+" "+Constants.counter);
         //myAsyncTask1.execute();
 
     }
@@ -181,7 +193,9 @@ public class Query2 extends AppCompatActivity {
         progressBar.setMax(100);*/
         //int totalItems = 100;
 
-            String url = "https://psurveyapitest.kenyahmis.org/api/questions/dep/all";
+
+
+        String url = "https://psurveyapitest.kenyahmis.org/api/questions/dep/all";
 
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
                 @Override
@@ -295,6 +309,7 @@ public class Query2 extends AppCompatActivity {
                         }
                     }
                     RetrieveQuestionnaire();
+                    progressDialog.dismiss();
                     //   progressBar.setVisibility(View.GONE);
 
 
@@ -381,38 +396,14 @@ public class Query2 extends AppCompatActivity {
             questionnaireEntities.add(questionnaireEntity);
             questionnairesAdapterOffline.setUser(questionnaireEntities);
 
+            Log.d("Number of Quetionnaires", String.valueOf(questionnaireEntities.size()));
+          //  Toast.makeText(Query2.this, "SUrveys"+""+String.valueOf(questionnaireEntities.size()), Toast.LENGTH_LONG).show();
+
+
+
         }
+  //      Toast.makeText(Query2.this, "SUrveys"+""+String.valueOf(questionnaireEntities.size()), Toast.LENGTH_LONG).show();
 
-    }
-    //background call
-    private void fetchDataFromServer() {
-        // Show the progress bar
-
-        progressBar.setVisibility(View.VISIBLE);
-        currentProgress =currentProgress + 10;
-        progressBar.setProgress(currentProgress);
-        progressBar.setMax(100);
-
-
-        // Use AsyncTask to perform network request in the background
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                getAll();
-                // Perform your network request here
-                // This runs in a background thread
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                // Hide the progress bar when data fetching is complete
-                progressBar.setVisibility(View.GONE);
-
-
-                // Update your UI with the fetched data
-            }
-        }.execute();
     }
 
 
@@ -422,7 +413,15 @@ public class Query2 extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressBar.setVisibility(View.VISIBLE);
+         //   progressBar.setVisibility(View.VISIBLE);
+
+            //2nd dialog
+
+            progressDialog.setMessage("Loading Surveys...");
+            progressDialog.setCancelable(false); // Set to true if you want the dialog to be cancelable
+            progressDialog.setIndeterminate(true); // Set to false if you want a progress bar instead of an indeterminate spinner
+
+            progressDialog.show();
         }
 
         @Override
@@ -435,7 +434,8 @@ public class Query2 extends AppCompatActivity {
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
 
-            progressBar.setVisibility(View.GONE);
+         //   progressBar.setVisibility(View.GONE);
+            progressDialog.dismiss();
 
         }
 

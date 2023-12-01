@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +32,7 @@ import com.mhealthkenya.psurvey.activities.auth.LoginActivity;
 import com.mhealthkenya.psurvey.depedancies.Constants;
 import com.mhealthkenya.psurvey.models.Answer;
 import com.mhealthkenya.psurvey.models.AnswerEntity;
+import com.mhealthkenya.psurvey.models.Completed;
 import com.mhealthkenya.psurvey.models.QuestionEntity;
 import com.mhealthkenya.psurvey.models.SurveyID;
 import com.mhealthkenya.psurvey.models.UserResponseEntity;
@@ -44,6 +47,7 @@ import butterknife.BindView;
 
 
 public class QuetionsOffline extends AppCompatActivity {
+  // public  int index =0;
     String optionR;
     String answerR;
     int IDvalue;
@@ -369,6 +373,20 @@ public class QuetionsOffline extends AppCompatActivity {
         // Retrieve questions for the specified questionnaire
 
         questions = allQuestionDatabase.questionDao().getQuestionsByQuestionnaireId(savedquestionnaireId);
+
+        //thread
+       /* Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                // update the ui from here
+                questions = allQuestionDatabase.questionDao().getQuestionsByQuestionnaireId(savedquestionnaireId);
+            }
+        });*/
+
+
+
+        //end thread
 
         // Retrieve the question index from the intent
         Intent intent1 = getIntent();
@@ -1195,7 +1213,16 @@ else
            // Toast.makeText(QuetionsOffline.this, "index is" + currentQuestionIndex, Toast.LENGTH_LONG).show();
             //btnNext.setEnabled(false);
 
-            Constants.counter++;
+          //  Constants.counter++;
+
+           // Completed.deleteAll(Completed.class);
+           /* index++;
+            Completed completed =new Completed(index);
+            completed.save();*/
+
+
+
+
 
             Intent intent = new Intent(QuetionsOffline.this, CompleteSurvey.class);
             startActivity(intent);

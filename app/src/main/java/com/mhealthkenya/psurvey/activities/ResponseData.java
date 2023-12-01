@@ -111,7 +111,10 @@ public class ResponseData extends AppCompatActivity {
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callSubmit();
+                Toast.makeText(ResponseData.this, "Coming Soon", Toast.LENGTH_SHORT).show();
+
+
+               // callSubmit();
             }
         });
 
