@@ -198,6 +198,24 @@ public class QuetionsOffline extends AppCompatActivity {
        /* Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Quetions");*/
+
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Quetions");
+
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        // Set the toolbar navigation icon click listener
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed(); // Handle the back arrow click to navigate to the previous activity
+            }
+        });
         initialize();
 
         //set EditText type4 to accept numeric only
