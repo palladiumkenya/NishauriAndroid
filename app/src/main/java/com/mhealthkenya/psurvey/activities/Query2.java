@@ -86,8 +86,8 @@ public class Query2 extends AppCompatActivity {
     int questionIdInserted;
     int questionnaireId;
     int questionId;
-    ProgressDialog pDialog;
-     ProgressDialog progressDialog;
+    //ProgressDialog pDialog;
+   //  ProgressDialog progressDialog;
     //adapter
     public QuestionnairesAdapterOffline questionnairesAdapterOffline;
     public QuestionnaireEntity questionnaireEntity;
@@ -128,11 +128,11 @@ public class Query2 extends AppCompatActivity {
 
         //SugarContext.init(this);
 
-        progressDialog = new ProgressDialog(this);
+       // progressDialog = new ProgressDialog(this);
 
 
         progressBar = findViewById(R.id.progress);
-        pDialog = new ProgressDialog(Query2.this);
+       // pDialog = new ProgressDialog(Query2.this);
        // total1 =findViewById(R.id.total);
 
 
@@ -190,10 +190,10 @@ public class Query2 extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog.setMessage("Loading Surveys...");
+               /* progressDialog.setMessage("Loading Surveys...");
                 progressDialog.setCancelable(false); // Set to true if you want the dialog to be cancelable
                 progressDialog.setIndeterminate(true); // Set to false if you want a progress bar instead of an indeterminate spinner
-                progressDialog.show();
+                progressDialog.show();*/
 
                 callback();
 
@@ -347,7 +347,7 @@ public class Query2 extends AppCompatActivity {
                         }
                     }
                     RetrieveQuestionnaire();
-                    progressDialog.dismiss();
+                 //   progressDialog.dismiss();
                     //   progressBar.setVisibility(View.GONE);
 
 
@@ -393,15 +393,20 @@ public class Query2 extends AppCompatActivity {
                 Log.d("ALl", retrievedQuestionnaire.getDescription());
 
                 int questionnaireId = retrievedQuestionnaire.getId();
-                String questionnaireName = retrievedQuestionnaire.getName();
-                String questionnaireDescription = retrievedQuestionnaire.getDescription();
-                boolean questionnaireIsActive = retrievedQuestionnaire.isActive();
                 String questionnaireCreatedAt = retrievedQuestionnaire.getCreatedAt();
+                String questionnaireDescription = retrievedQuestionnaire.getDescription();
                 int questionnaireNumberOfQuestions = retrievedQuestionnaire.getNumberOfQuestions();
                 String questionnaireActiveTill = retrievedQuestionnaire.getActiveTill();
                 String questionnaireTargetApp = retrievedQuestionnaire.getTargetApp();
 
-                QuestionnaireEntity questionnaireEntity = new QuestionnaireEntity(questionnaireId, questionnaireName, questionnaireDescription, questionnaireCreatedAt, questionnaireNumberOfQuestions, questionnaireActiveTill, questionnaireTargetApp);
+                String questionnaireName = retrievedQuestionnaire.getName();
+
+                boolean questionnaireIsActive = retrievedQuestionnaire.isActive();
+
+
+                QuestionnaireEntity questionnaireEntity = new QuestionnaireEntity(questionnaireId, questionnaireCreatedAt, questionnaireName, questionnaireDescription,  questionnaireNumberOfQuestions, questionnaireActiveTill, questionnaireTargetApp);
+               // QuestionnaireEntity questionnaireEntity = new QuestionnaireEntity(questionnaireId, questionnaireCreatedAt,  questionnaireDescription,  questionnaireNumberOfQuestions, questionnaireActiveTill, questionnaireTargetApp);
+                                                              //QuestionnaireEntity(int id, String createdAt, String name, String description, int numberOfQuestions, String activeTill, String targetApp)
 
                 questionnaireEntities.add(questionnaireEntity);
                 questionnairesAdapterOffline.setUser(questionnaireEntities);
@@ -429,7 +434,8 @@ public class Query2 extends AppCompatActivity {
             String questionnaireActiveTill = retrievedQuestionnaire.getActiveTill();
             String questionnaireTargetApp =  retrievedQuestionnaire.getTargetApp();
 
-            QuestionnaireEntity questionnaireEntity = new QuestionnaireEntity(questionnaireId,questionnaireName, questionnaireDescription, questionnaireCreatedAt, questionnaireNumberOfQuestions, questionnaireActiveTill, questionnaireTargetApp);
+            QuestionnaireEntity questionnaireEntity = new QuestionnaireEntity(questionnaireId, questionnaireCreatedAt, questionnaireName, questionnaireDescription,  questionnaireNumberOfQuestions, questionnaireActiveTill, questionnaireTargetApp);
+            //QuestionnaireEntity(int id, String createdAt, String name, String description, int numberOfQuestions, String activeTill, String targetApp)
 
             questionnaireEntities.add(questionnaireEntity);
             questionnairesAdapterOffline.setUser(questionnaireEntities);
@@ -445,7 +451,18 @@ public class Query2 extends AppCompatActivity {
     }
 
 
-    private class  FetchDataAsyncTask extends AsyncTask<Void, Integer, Void>{
+    public class  FetchDataAsyncTask extends AsyncTask<Void, Void, Void>{
+
+
+        private Context context;
+        private ProgressDialog progressDialog1;
+
+        public FetchDataAsyncTask(Context context) {
+            this.context = context;
+        }
+
+
+
 
         @Override
         protected void onPreExecute() {
@@ -453,13 +470,12 @@ public class Query2 extends AppCompatActivity {
 
          //   progressBar.setVisibility(View.VISIBLE);
 
-            //2nd dialog
-
-            progressDialog.setMessage("Loading Surveys...");
-            progressDialog.setCancelable(false); // Set to true if you want the dialog to be cancelable
-            progressDialog.setIndeterminate(true); // Set to false if you want a progress bar instead of an indeterminate spinner
-
-            progressDialog.show();
+            //2nd dialo
+            progressDialog1 = new ProgressDialog(context);
+            progressDialog1.setMessage("Loading Surveys...");
+            progressDialog1.setCancelable(false); // Set to true if you want the dialog to be cancelable
+            progressDialog1.setIndeterminate(true); // Set to false if you want a progress bar instead of an indeterminate spinner
+            progressDialog1.show();
         }
 
         @Override
@@ -471,22 +487,24 @@ public class Query2 extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
+          //  progressDialog.dismiss();
+
+
+            // Dismiss the ProgressDialog when the task is complete
+      /*      if (progressDialog1 != null && progressDialog1.isShowing()) {
+                progressDialog1.dismiss();
+            }*/
 
          //   progressBar.setVisibility(View.GONE);
-            progressDialog.dismiss();
+           progressDialog1.dismiss();
 
         }
 
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
 
-            progressBar.setProgress(values[0]);
-        }
     }
 
     private void callback(){
-        new FetchDataAsyncTask().execute();
+        new FetchDataAsyncTask(this).execute();
 
     }
 
@@ -652,8 +670,4 @@ public class Query2 extends AppCompatActivity {
         dialog.getWindow().setAttributes(lp);
 
     }
-
-
-
-
 }

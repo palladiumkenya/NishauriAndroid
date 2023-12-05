@@ -14,7 +14,6 @@ public class QuestionnaireEntity {
     private String createdAt;
     private String name;
     private String description;
-
     private boolean isActive;
     private int numberOfQuestions;
     private String activeTill;
@@ -23,6 +22,9 @@ public class QuestionnaireEntity {
     @ColumnInfo(name = "isPublished")
     private Integer isPublished;
     private int createdBy;
+
+    public boolean expanded1 = false;
+    public boolean parent1 = false;
 
 
     public QuestionnaireEntity() {

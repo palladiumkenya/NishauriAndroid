@@ -57,6 +57,7 @@ public class QuestionnairesAdapterOffline extends RecyclerView.Adapter<RecyclerV
         public TextView surveyTitle;
         public TextView surveyDescription;
         public ImageButton bt_expand;
+        public ImageButton bt_expand2;
         public View lyt_expand;
         public View lyt_parent;
 
@@ -67,6 +68,7 @@ public class QuestionnairesAdapterOffline extends RecyclerView.Adapter<RecyclerV
             surveyTitle = (TextView) v.findViewById(R.id.tv_survey_title);
             surveyDescription = (TextView) v.findViewById(R.id.tv_survey_description);
             bt_expand = (ImageButton) v.findViewById(R.id.bt_expand);
+            bt_expand2 = (ImageButton) v.findViewById(R.id.bt_expand0);
             lyt_expand = (View) v.findViewById(R.id.lyt_expand);
             lyt_parent = (View) v.findViewById(R.id.lyt_parent);
 
@@ -103,6 +105,7 @@ public class QuestionnairesAdapterOffline extends RecyclerView.Adapter<RecyclerV
             QuestionnairesAdapterOffline.OriginalViewHolder view = (QuestionnairesAdapterOffline.OriginalViewHolder) holder;
 
             view.surveyTitle.setText(obj.getName());
+           // view.surveyDescription.setText(obj.getDescription());
             view.surveyDescription.setText(obj.getDescription());
 
             view.lyt_parent.setOnClickListener(new View.OnClickListener() {
@@ -125,23 +128,31 @@ public class QuestionnairesAdapterOffline extends RecyclerView.Adapter<RecyclerV
                     Intent intent = new Intent(context, ResponseData.class);
                     intent.putExtra("Quetionnaire_ID", obj.getId());
                     context.startActivity(intent);
-                    Toast.makeText(context, "ID is"+obj.getId(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "ID is" + obj.getId(), Toast.LENGTH_LONG).show();
+                }
+            });
+            view.bt_expand2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean show = toggleLayoutExpand(!obj.expanded1, v, view.lyt_expand);
+                    questionnaireEntities.get(position).expanded1 = show;
                 }
             });
 
 
-           /* if(obj.expanded){
+            if (obj.expanded1) {
                 view.lyt_expand.setVisibility(View.VISIBLE);
             } else {
                 view.lyt_expand.setVisibility(View.GONE);
             }
-            Tools.toggleArrow(obj.expanded, view.bt_expand, false);
+            Tools.toggleArrow(obj.expanded1, view.bt_expand, false);
 
 
-        }*/
-            // }
+        }
+    }
 
-    /*private boolean toggleLayoutExpand(boolean show, View view, View lyt_expand) {
+
+    private boolean toggleLayoutExpand(boolean show, View view, View lyt_expand) {
         Tools.toggleArrow(show, view);
         if (show) {
             ViewAnimation.expand(lyt_expand);
@@ -150,8 +161,9 @@ public class QuestionnairesAdapterOffline extends RecyclerView.Adapter<RecyclerV
         }
         return show;
 
-    }*/
-        }}
+    }
+  //      }
+//}
 
     @Override
     public int getItemCount() {

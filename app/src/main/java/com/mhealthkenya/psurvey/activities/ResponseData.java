@@ -607,7 +607,4 @@ public class ResponseData extends AppCompatActivity {
         dialog.getWindow().setAttributes(lp);
 
     }
-
-
-
 }

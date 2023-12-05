@@ -133,6 +133,22 @@ public class offlineHome extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(item -> {
+            // Handle navigation item clicks here
+            switch (item.getItemId()) {
+                case R.id.nav_edit_profile:
+                    // Handle item 1 click
+                    break;
+                case R.id.nav_home:
+                    // Handle item 2 click
+                    break;
+                // Add more cases as needed
+            }
+
+            drawerLayout.closeDrawers();
+            return true;
+        });
 
 
         progressDialog = new ProgressDialog(this);
