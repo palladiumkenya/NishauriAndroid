@@ -105,8 +105,9 @@ public class UserResponseAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (holder instanceof UserResponseAdapter.OriginalViewHolder) {
             UserResponseAdapter.OriginalViewHolder view = (UserResponseAdapter.OriginalViewHolder) holder;
 
-            view.surveyID.setText( String.valueOf(obj.getQuestionnaireId()));
-            view.queryID.setText(String.valueOf(obj.getQuestionId()));
+           // view.surveyID.setText( String.valueOf(obj.getQuestionnaireId()));
+            view.surveyID.setText(obj.getQuetion_A());
+          //  view.queryID.setText(String.valueOf(obj.getQuestionId()));
             view.btnOpen.setText(obj.getOption());
 
           /*  view.lyt_parent.setOnClickListener(new View.OnClickListener() {

@@ -177,9 +177,10 @@ public class ResponseData extends AppCompatActivity {
             int questionnaireId = userResponseEntity.getQuestionnaireId();
             int questionId =  userResponseEntity.getQuestionId();
             String answer = userResponseEntity.getOption();
+            String quetion = userResponseEntity.getQuetion_A();
 
             // QuestionnaireEntity questionnaireEntity = new QuestionnaireEntity(questionnaireId,questionnaireName, questionnaireDescription, questionnaireCreatedAt, questionnaireNumberOfQuestions, questionnaireActiveTill, questionnaireTargetApp);
-            UserResponseEntity userResponseEntity1 = new UserResponseEntity(questionnaireId, questionId, answer);
+            UserResponseEntity userResponseEntity1 = new UserResponseEntity(questionnaireId, questionId, answer,quetion);
             // UserResponseEntity userResponseEntity1 = new UserResponseEntity(userResponseEntity.getQuestionnaireId(), userResponseEntity.getQuestionId(), userResponseEntity.getOption());
             userResponseEntities.add(userResponseEntity1);
 
@@ -267,9 +268,10 @@ public class ResponseData extends AppCompatActivity {
                     int questionnaireId = userResponseEntity.getQuestionnaireId();
                     int questionId =  userResponseEntity.getQuestionId();
                     String answer = userResponseEntity.getOption();
+                    String quetion = userResponseEntity.getQuetion_A();
 
                     // QuestionnaireEntity questionnaireEntity = new QuestionnaireEntity(questionnaireId,questionnaireName, questionnaireDescription, questionnaireCreatedAt, questionnaireNumberOfQuestions, questionnaireActiveTill, questionnaireTargetApp);
-                    UserResponseEntity userResponseEntity1 = new UserResponseEntity(questionnaireId, questionId, answer);
+                    UserResponseEntity userResponseEntity1 = new UserResponseEntity(questionnaireId, questionId, answer, quetion);
                     // UserResponseEntity userResponseEntity1 = new UserResponseEntity(userResponseEntity.getQuestionnaireId(), userResponseEntity.getQuestionId(), userResponseEntity.getOption());
                     userResponseEntities.add(userResponseEntity1);
 

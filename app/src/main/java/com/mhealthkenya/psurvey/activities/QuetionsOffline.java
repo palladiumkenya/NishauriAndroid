@@ -430,22 +430,22 @@ public class QuetionsOffline extends AppCompatActivity {
                         if (openTextEtxt.getText().toString().equals("")) {
                             Toast.makeText(QuetionsOffline.this, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
                         } else {
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex,  openTextEtxt.getText().toString());
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex,  openTextEtxt.getText().toString(), question.getQuestion());
 
                         }
                     } else if (question.getQuestionType() == 1) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, openTextEtxt.getText().toString());
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, openTextEtxt.getText().toString(), question.getQuestion());
 
                     } else if (question.getQuestionType() == 4 && question.isRequired()) {
                         if (numericEditText.getText().toString().equals("")) {
                             Toast.makeText(QuetionsOffline.this, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
                             // }else{
                         } else {
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, numericEditText.getText().toString());
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, numericEditText.getText().toString(),question.getQuestion());
                         }
                     } else if (question.getQuestionType() == 4) {
 
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, numericEditText.getText().toString());
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, numericEditText.getText().toString(),question.getQuestion());
                     }
                     //datepicker none & not repeatable
                     else if (question.getQuestionType() == 5 && question.isRequired() && question.getDateValidation().equals("none") && !question.isRepeatable()) {
@@ -454,11 +454,11 @@ public class QuetionsOffline extends AppCompatActivity {
                             //&& questions.getDate_validation().contentEquals("none")
                         }
                         {
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString());
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString(), question.getQuestion());
                         }
 
                     } else if (question.getQuestionType() == 5 && question.getDateValidation().equals("none") && !question.isRepeatable()) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString());
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString(), question.getQuestion());
 
                     }
 
@@ -469,11 +469,11 @@ public class QuetionsOffline extends AppCompatActivity {
                             //&& questions.getDate_validation().contentEquals("none")
                         }
                         {
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString());
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString(), question.getQuestion());
                         }
 
                     } else if (question.getQuestionType() == 5 && question.getDateValidation().equals("none") && question.isRepeatable() && repeat_count == 1) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString());
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString(), question.getQuestion());
 
                     }
                     //datepicker none & repeatable count2
@@ -483,11 +483,11 @@ public class QuetionsOffline extends AppCompatActivity {
                             //&& questions.getDate_validation().contentEquals("none")
                         }
                         {
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString());
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString(), question.getQuestion());
                         }
 
                     } else if (question.getQuestionType() == 5 && question.getDateValidation().equals("none") && question.isRepeatable() && repeat_count == 2) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString());
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString(), question.getQuestion());
 
                     }
 
@@ -498,12 +498,12 @@ public class QuetionsOffline extends AppCompatActivity {
                             //&& questions.getDate_validation().contentEquals("none")
                         }
                         {
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString() + " ," + dobEditText3.getText().toString());
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString() + " ," + dobEditText3.getText().toString(), question.getQuestion());
 
                         }
 
                     } else if (question.getQuestionType() == 5 && question.getDateValidation().equals("none") && question.isRepeatable() && repeat_count == 3) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString() + " ," + dobEditText3.getText().toString());
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString() + " ," + dobEditText3.getText().toString(), question.getQuestion());
 
                     }
                     // datepicker none & repeatable count4
@@ -513,12 +513,12 @@ public class QuetionsOffline extends AppCompatActivity {
                             //&& questions.getDate_validation().contentEquals("none")
                         }
                         {
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString().equals("") + " ," + dobEditText3.getText().toString().equals("") + " ," + dobEditText4.getText().toString().equals(""));
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString().equals("") + " ," + dobEditText3.getText().toString().equals("") + " ," + dobEditText4.getText().toString().equals(""), question.getQuestion());
 
                         }
 
                     } else if (question.getQuestionType() == 5 && question.getDateValidation().equals("none") && question.isRepeatable() && repeat_count1.getRepeat_count() == 4) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString().equals("") + " ," + dobEditText3.getText().toString().equals("") + " ," + dobEditText4.getText().toString().equals(""));
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString().equals("") + " ," + dobEditText3.getText().toString().equals("") + " ," + dobEditText4.getText().toString().equals(""), question.getQuestion());
 
                     }
                     // datepicker none & repeatable count5
@@ -528,11 +528,11 @@ public class QuetionsOffline extends AppCompatActivity {
                             //&& questions.getDate_validation().contentEquals("none")
                         }
                         {
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString().equals("") + " ," + dobEditText3.getText().toString().equals("") + " ," + dobEditText4.getText().toString().equals("") + " ," + dobEditText5.getText().toString().equals(""));
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString().equals("") + " ," + dobEditText3.getText().toString().equals("") + " ," + dobEditText4.getText().toString().equals("") + " ," + dobEditText5.getText().toString().equals(""), question.getQuestion());
                         }
 
                     } else if (question.getQuestionType() == 5 && question.getDateValidation().equals("none") && question.isRepeatable() && repeat_count == 5) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString().equals("") + " ," + dobEditText3.getText().toString().equals("") + " ," + dobEditText4.getText().toString().equals("") + " ," + dobEditText5.getText().toString().equals(""));
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString().equals("") + " ," + dobEditText3.getText().toString().equals("") + " ," + dobEditText4.getText().toString().equals("") + " ," + dobEditText5.getText().toString().equals(""), question.getQuestion());
 
 
                     }
@@ -544,11 +544,11 @@ public class QuetionsOffline extends AppCompatActivity {
                             //&& questions.getDate_validation().contentEquals("none")
                         }
                         {
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString().equals("") + " ," + dobEditText3.getText().toString().equals("") + " ," + dobEditText4.getText().toString().equals("") + " ," + dobEditText5.getText().toString().equals("") + " ," + dobEditText6.getText().toString().equals(""));
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString().equals("") + " ," + dobEditText3.getText().toString().equals("") + " ," + dobEditText4.getText().toString().equals("") + " ," + dobEditText5.getText().toString().equals("") + " ," + dobEditText6.getText().toString().equals(""), question.getQuestion());
                         }
 
                     } else if (question.getQuestionType() == 5 && question.getDateValidation().equals("none") && question.isRepeatable() && repeat_count == 6) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString().equals("") + " ," + dobEditText3.getText().toString().equals("") + " ," + dobEditText4.getText().toString().equals("") + " ," + dobEditText5.getText().toString().equals("") + " ," + dobEditText6.getText().toString().equals(""));
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditText.getText().toString() + " ," + dobEditText2.getText().toString().equals("") + " ," + dobEditText3.getText().toString().equals("") + " ," + dobEditText4.getText().toString().equals("") + " ," + dobEditText5.getText().toString().equals("") + " ," + dobEditText6.getText().toString().equals(""), question.getQuestion());
 
                     }
 
@@ -558,11 +558,11 @@ public class QuetionsOffline extends AppCompatActivity {
                         if (dobEditTextfuture.getText().toString().equals("")) {
                             Toast.makeText(QuetionsOffline.this, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
                         } else {
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString());
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString(), question.getQuestion());
                         }
 
                     } else if (question.getQuestionType() == 5 && !question.isRequired() && question.getDateValidation().equals("restrict_future") && !question.isRepeatable()) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString());
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString(), question.getQuestion());
 
                     }
 
@@ -572,11 +572,11 @@ public class QuetionsOffline extends AppCompatActivity {
                         if (dobEditTextfuture.getText().toString().equals("")) {
                             Toast.makeText(QuetionsOffline.this, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
                         } else {
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString());
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString(), question.getQuestion());
                         }
 
                     } else if (question.getQuestionType() == 5 && !question.isRequired() && question.getDateValidation().equals("restrict_future") && question.isRepeatable() && repeat_count == 1) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString());
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString(), question.getQuestion());
 
                     }
 
@@ -585,11 +585,11 @@ public class QuetionsOffline extends AppCompatActivity {
                         if (dobEditTextfuture.getText().toString().equals("") || dobEditTextfuture2.getText().toString().equals("")) {
                             Toast.makeText(QuetionsOffline.this, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
                         } else {
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString());
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString(), question.getQuestion());
                         }
 
                     } else if (question.getQuestionType() == 5 && !question.isRequired() && question.getDateValidation().equals("restrict_future") && question.isRepeatable() && repeat_count == 2) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString());
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString(), question.getQuestion());
 
                     }
                     //datepicker restrict future repeat count 3
@@ -597,11 +597,11 @@ public class QuetionsOffline extends AppCompatActivity {
                         if (dobEditTextfuture.getText().toString().equals("") || dobEditTextfuture2.getText().toString().equals("") || dobEditTextfuture3.getText().toString().equals("")) {
                             Toast.makeText(QuetionsOffline.this, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
                         } else {
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString() + " ," + dobEditTextfuture3.getText().toString());
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString() + " ," + dobEditTextfuture3.getText().toString(), question.getQuestion());
                         }
 
                     } else if (question.getQuestionType() == 5 && !question.isRequired() && question.getDateValidation().equals("restrict_future") && question.isRepeatable() && repeat_count == 3) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString() + " ," + dobEditTextfuture3.getText().toString());
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString() + " ," + dobEditTextfuture3.getText().toString(),question.getQuestion());
 
                     }
 
@@ -611,11 +611,11 @@ public class QuetionsOffline extends AppCompatActivity {
                         if (dobEditTextfuture.getText().toString().equals("") || dobEditTextfuture2.getText().toString().equals("") || dobEditTextfuture3.getText().toString().equals("") || dobEditTextfuture4.getText().toString().equals("")) {
                             Toast.makeText(QuetionsOffline.this, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
                         } else {
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString() + " ," + dobEditTextfuture3.getText().toString() + " ," + dobEditTextfuture4.getText().toString());
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString() + " ," + dobEditTextfuture3.getText().toString() + " ," + dobEditTextfuture4.getText().toString(), question.getQuestion());
                         }
 
                     } else if (question.getQuestionType() == 5 && !question.isRequired() && question.getDateValidation().equals("restrict_future") && question.isRepeatable() && repeat_count == 4) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString() + " ," + dobEditTextfuture3.getText().toString() + " ," + dobEditTextfuture4.getText().toString());
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString() + " ," + dobEditTextfuture3.getText().toString() + " ," + dobEditTextfuture4.getText().toString(), question.getQuestion());
 
                     }
 
@@ -624,11 +624,11 @@ public class QuetionsOffline extends AppCompatActivity {
                         if (dobEditTextfuture.getText().toString().equals("") || dobEditTextfuture2.getText().toString().equals("") || dobEditTextfuture3.getText().toString().equals("") || dobEditTextfuture4.getText().toString().equals("") || dobEditTextfuture5.getText().toString().equals("")) {
                             Toast.makeText(QuetionsOffline.this, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
                         } else {
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString() + " ," + dobEditTextfuture3.getText().toString() + " ," + dobEditTextfuture4.getText().toString() + " ," + dobEditTextfuture5.getText().toString());
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString() + " ," + dobEditTextfuture3.getText().toString() + " ," + dobEditTextfuture4.getText().toString() + " ," + dobEditTextfuture5.getText().toString(), question.getQuestion());
                         }
 
                     } else if (question.getQuestionType() == 5 && !question.isRequired() && question.getDateValidation().equals("restrict_future") && question.isRepeatable() && repeat_count == 5) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString() + " ," + dobEditTextfuture3.getText().toString() + " ," + dobEditTextfuture4.getText().toString() + " ," + dobEditTextfuture5.getText().toString());
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString() + " ," + dobEditTextfuture3.getText().toString() + " ," + dobEditTextfuture4.getText().toString() + " ," + dobEditTextfuture5.getText().toString(), question.getQuestion());
 
 
                     }
@@ -638,12 +638,12 @@ public class QuetionsOffline extends AppCompatActivity {
                         if (dobEditTextfuture.getText().toString().equals("") || dobEditTextfuture2.getText().toString().equals("") || dobEditTextfuture3.getText().toString().equals("") || dobEditTextfuture4.getText().toString().equals("") || dobEditTextfuture5.getText().toString().equals("") || dobEditTextfuture6.getText().toString().equals("")) {
                             Toast.makeText(QuetionsOffline.this, "Please ensure you pick an answer", Toast.LENGTH_SHORT).show();
                         } else {
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString() + " ," + dobEditTextfuture3.getText().toString() + " ," + dobEditTextfuture4.getText().toString() + " ," + dobEditTextfuture5.getText().toString() + " ," + dobEditTextfuture6.getText().toString());
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString() + " ," + dobEditTextfuture3.getText().toString() + " ," + dobEditTextfuture4.getText().toString() + " ," + dobEditTextfuture5.getText().toString() + " ," + dobEditTextfuture6.getText().toString(), question.getQuestion());
 
                         }
 
                     } else if (question.getQuestionType() == 5 && !question.isRequired() && question.getDateValidation().equals("restrict_future") && question.isRepeatable() && repeat_count == 6) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString() + " ," + dobEditTextfuture3.getText().toString() + " ," + dobEditTextfuture4.getText().toString() + " ," + dobEditTextfuture5.getText().toString() + " ," + dobEditTextfuture6.getText().toString());
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextfuture.getText().toString() + " ," + dobEditTextfuture2.getText().toString() + " ," + dobEditTextfuture3.getText().toString() + " ," + dobEditTextfuture4.getText().toString() + " ," + dobEditTextfuture5.getText().toString() + " ," + dobEditTextfuture6.getText().toString(), question.getQuestion());
 
 
                     }
@@ -658,12 +658,12 @@ public class QuetionsOffline extends AppCompatActivity {
 
                         {
 
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString());
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString(), question.getQuestion());
 
                         }
 
                     } else if (question.getQuestionType() == 5 && question.getDateValidation().equals("restrict_past") && !question.isRepeatable()) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString());
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString(), question.getQuestion());
 
 
                     }
@@ -676,12 +676,12 @@ public class QuetionsOffline extends AppCompatActivity {
 
                         {
 
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString());
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString(), question.getQuestion());
 
                         }
 
                     } else if (question.getQuestionType() == 5 && question.getDateValidation().equals("restrict_past") && question.isRepeatable() && repeat_count == 2) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString());
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString(), question.getQuestion());
 
 
                     }
@@ -695,12 +695,12 @@ public class QuetionsOffline extends AppCompatActivity {
 
                         {
 
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString() + " ," + dobEditTextpast3.getText().toString());
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString() + " ," + dobEditTextpast3.getText().toString(), question.getQuestion());
 
                         }
 
                     } else if (question.getQuestionType() == 5 && question.getDateValidation().equals("restrict_past") && question.isRepeatable() && repeat_count == 3) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex,dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString() + " ," + dobEditTextpast3.getText().toString());
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex,dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString() + " ," + dobEditTextpast3.getText().toString(), question.getQuestion());
 
 
                     }
@@ -713,11 +713,11 @@ public class QuetionsOffline extends AppCompatActivity {
 
                         {
 
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString() + " ," + dobEditTextpast3.getText().toString() + " ," + dobEditTextpast4.getText().toString());
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString() + " ," + dobEditTextpast3.getText().toString() + " ," + dobEditTextpast4.getText().toString(), question.getQuestion());
                         }
 
                     } else if (question.getQuestionType() == 5 && question.getDateValidation().equals("restrict_past") && question.isRepeatable() && repeat_count1.getRepeat_count() == 4) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString() + " ," + dobEditTextpast3.getText().toString() + " ," + dobEditTextpast4.getText().toString());
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString() + " ," + dobEditTextpast3.getText().toString() + " ," + dobEditTextpast4.getText().toString(), question.getQuestion());
 
                     }
                     //restrict past date  repeat count 5
@@ -729,12 +729,12 @@ public class QuetionsOffline extends AppCompatActivity {
 
                         {
 
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString() + " ," + dobEditTextpast3.getText().toString() + " ," + dobEditTextpast4.getText().toString() + " ," + dobEditTextpast5.getText().toString());
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString() + " ," + dobEditTextpast3.getText().toString() + " ," + dobEditTextpast4.getText().toString() + " ," + dobEditTextpast5.getText().toString(), question.getQuestion());
 
                         }
 
                     } else if (question.getQuestionType() == 5 && question.getDateValidation().equals("restrict_past") && question.isRepeatable() && repeat_count1.getRepeat_count() == 5) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString() + " ," + dobEditTextpast3.getText().toString() + " ," + dobEditTextpast4.getText().toString() + " ," + dobEditTextpast5.getText().toString());
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString() + " ," + dobEditTextpast3.getText().toString() + " ," + dobEditTextpast4.getText().toString() + " ," + dobEditTextpast5.getText().toString(), question.getQuestion());
 
 
                     }
@@ -748,11 +748,11 @@ public class QuetionsOffline extends AppCompatActivity {
 
                         {
 
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString() + " ," + dobEditTextpast3.getText().toString() + " ," + dobEditTextpast4.getText().toString() + " ," + dobEditTextpast5.getText().toString() + " ," + dobEditTextpast6.getText().toString());
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString() + " ," + dobEditTextpast3.getText().toString() + " ," + dobEditTextpast4.getText().toString() + " ," + dobEditTextpast5.getText().toString() + " ," + dobEditTextpast6.getText().toString(), question.getQuestion());
 
                         }
                     } else if (question.getQuestionType() == 5 && question.getDateValidation().equals("restrict_past") && question.isRepeatable() && repeat_count == 6) {
-                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString() + " ," + dobEditTextpast3.getText().toString() + " ," + dobEditTextpast4.getText().toString() + " ," + dobEditTextpast5.getText().toString() + " ," + dobEditTextpast6.getText().toString());
+                        SaveAnswers(savedquestionnaireId, currentQuestionIndex, dobEditTextpast.getText().toString() + " ," + dobEditTextpast2.getText().toString() + " ," + dobEditTextpast3.getText().toString() + " ," + dobEditTextpast4.getText().toString() + " ," + dobEditTextpast5.getText().toString() + " ," + dobEditTextpast6.getText().toString(), question.getQuestion());
 
 
                     } else if (question.getQuestionType() == 2) {
@@ -770,7 +770,7 @@ public class QuetionsOffline extends AppCompatActivity {
 
 
                          //   SaveAnswers(savedquestionnaireId, currentQuestionIndex, openText);
-                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, String.valueOf(answerList.get(idx).getId()));
+                            SaveAnswers(savedquestionnaireId, currentQuestionIndex, String.valueOf(answerList.get(idx).getId()), question.getQuestion());
 
                         }
 
@@ -792,7 +792,7 @@ public class QuetionsOffline extends AppCompatActivity {
                         //aNSER TYPE 3
 
                         //SaveAnswers( questionnaireId, currentQuestionIndex, Integer.parseInt(String.valueOf(multiAnswerList)), openText);
-                        SaveAnswers( questionnaireId, currentQuestionIndex, openText);
+                        SaveAnswers( questionnaireId, currentQuestionIndex, openText, question.getQuestion());
                         //startActivity(new Intent(QuetionsOffline.this, QuetionsOffline.class));
 
 //                    Toast.makeText(context, String.valueOf(multiAnswerList), Toast.LENGTH_SHORT).show();
@@ -1205,7 +1205,7 @@ else
 
     }
 
-    public void SaveAnswers(int questionnaireId1, int questionId1, String option1){
+    public void SaveAnswers(int questionnaireId1, int questionId1, String option1, String quetion1){
 
        // List<AnswerEntity> answers = allQuestionDatabase.answerDao().getAnswersForQuestion(surveyQuestion.getId());
 
@@ -1214,6 +1214,7 @@ else
         userResponseEntity.setQuestionId(questionId1);
        // userResponseEntity.setAnswerId(answeid1);
         userResponseEntity.setOption(option1);
+        userResponseEntity.setQuetion_A(quetion1);
 
         allQuestionDatabase.userResponseDao().insertResponse(userResponseEntity);
 

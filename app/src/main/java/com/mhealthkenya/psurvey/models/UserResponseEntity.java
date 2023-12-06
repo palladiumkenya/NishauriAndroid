@@ -16,16 +16,19 @@ public class UserResponseEntity extends SugarRecord {
     private int questionId;
     private int answerId;
     private  String option;
+    private  String Quetion_A;
 
 
     public UserResponseEntity() {
     }
 
-    public UserResponseEntity(int questionnaireId, int questionId,  String option) {
+    public UserResponseEntity(int questionnaireId, int questionId,  String option, String Quetion_A) {
+
         this.questionnaireId = questionnaireId;
         this.questionId = questionId;
 
         this.option = option;
+        this.Quetion_A= Quetion_A;
     }
 
     public int getQuestionnaireId() {
@@ -67,5 +70,13 @@ public class UserResponseEntity extends SugarRecord {
 
     public void setOption(String option) {
         this.option = option;
+    }
+
+    public String getQuetion_A() {
+        return Quetion_A;
+    }
+
+    public void setQuetion_A(String quetion_A) {
+        Quetion_A = quetion_A;
     }
 }
