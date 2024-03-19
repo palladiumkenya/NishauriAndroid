@@ -40,6 +40,7 @@ android:scrollbars="vertical">
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/actionBarSize"
         android:layout_marginBottom="@dimen/spacing_middle"
+        android:visibility="gone"
         android:src="@drawable/nishauri_logo" />
     <!--top line-->
 
@@ -154,12 +155,117 @@ android:scrollbars="vertical">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:background="@drawable/background_round_corner_button"
                 android:onClick="clickAction"
-                android:text="Continue" />
+                android:text="Request OTP" />
+
+            <!-- Display Counter -->
+            <TextView
+                android:id="@+id/countdownTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:visibility="gone"
+
+                android:text="Time left: 45s"
+               />
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:visibility="gone"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                >
+
+                <EditText
+                    android:id="@+id/otp_edit_texta"
+                    android:layout_width="@dimen/et_otp_width"
+                    android:layout_height="@dimen/et_otp_height"
+                    android:layout_marginEnd="@dimen/margin_right_otp"
+                    android:background="@drawable/otp_edittext"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:textAlignment="center"
+                    android:textColor="@color/trueBlack" />
+
+                <EditText
+                    android:id="@+id/otp_edit_textb"
+                    android:layout_width="@dimen/et_otp_width"
+                    android:layout_height="@dimen/et_otp_height"
+                    android:layout_marginEnd="@dimen/margin_right_otp"
+                    android:background="@drawable/otp_edittext"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:textAlignment="center"
+                    android:textColor="@color/trueBlack" />
+
+                <EditText
+                    android:id="@+id/otp_edit_textc"
+                    android:layout_width="@dimen/et_otp_width"
+                    android:layout_height="@dimen/et_otp_height"
+                    android:layout_marginEnd="@dimen/margin_right_otp"
+                    android:background="@drawable/otp_edittext"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:textAlignment="center"
+                    android:textColor="@color/trueBlack" />
+
+                <EditText
+                    android:id="@+id/otp_edit_textd"
+                    android:layout_width="@dimen/et_otp_width"
+                    android:layout_height="@dimen/et_otp_height"
+                    android:layout_marginEnd="@dimen/margin_right_otp"
+                    android:background="@drawable/otp_edittext"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:textAlignment="center"
+                    android:textColor="@color/trueBlack" />
+                <EditText
+                    android:id="@+id/otp_edit_texte"
+                    android:layout_width="@dimen/et_otp_width"
+                    android:layout_height="@dimen/et_otp_height"
+                    android:layout_marginEnd="@dimen/margin_right_otp"
+                    android:background="@drawable/otp_edittext"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:textAlignment="center"
+                    android:textColor="@color/trueBlack" />
 
 
 
-    </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!-- submit otp -->
+            <Button
+
+                android:id="@+id/submit_otp"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:background="@drawable/background_round_corner_button"
+                android:text="Submit OTP"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="10dp"
+                android:textAllCaps="true"/>
+
+
+
+
+
+
+
+
+        </LinearLayout>
 
 
 
