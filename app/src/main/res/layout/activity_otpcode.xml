@@ -111,8 +111,47 @@
                         android:textColor="@color/black_darker"
                         />
 
+
+
+
+
+
+
+
+
+                    <!-- Display Counter -->
+                    <TextView
+                        android:id="@+id/countdownTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Time left: 45s"
+
+                        android:visibility="gone"/>
+
+
+                    <TextView
+                        android:id="@+id/Resend"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Resend OTP"
+
+                        android:visibility="gone"/>
+
+
+
+
+
+
+
+
+
+
                     <LinearLayout
                         android:id="@+id/linearLayout3"
+                        android:layout_marginTop="7dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"

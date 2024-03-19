@@ -122,6 +122,7 @@ public class PasswordReset extends AppCompatActivity {
 
                                 Intent intent1 =new Intent(PasswordReset.this, otpcodeActivity.class);
                                 intent1.putExtra("user_ID", userID1);
+                                intent1.putExtra("phone_no", etxt_email1.getText().toString());
                                 startActivity(intent1);
 
                             }
