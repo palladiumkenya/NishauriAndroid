@@ -3,6 +3,7 @@
     android:id="@+id/chat_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -33,18 +34,38 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
 
-        android:layout_marginBottom="60dp"
 
-        /></LinearLayout>
+        android:layout_marginBottom="30dp"
+
+        />
+
+        <TextView
+            android:id="@+id/typing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:visibility="gone"
+            android:text="Nishauri Bot Is Typing....."
+
+            android:layout_alignParentStart="true"
+
+            android:textColor="@style/TextAppearance.AppCompat.Body1" />
+
+
+
+
+
+    </LinearLayout>
     <!--To type and send the message-->
+
+
     <LinearLayout
         android:id="@+id/send_message_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="#ffdddddd"
-        android:gravity="center_vertical"
-        android:layout_marginTop="30dp"
+
         android:orientation="horizontal">
 
         <ImageView
@@ -52,6 +73,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/bot" />
+
 
         <EditText
             android:id="@+id/et_message"

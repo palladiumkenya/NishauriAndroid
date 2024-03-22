@@ -13,10 +13,15 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -27,6 +32,7 @@ import com.fxn.stash.Stash;
 import com.mhealth.nishauri.Activities.Auth.LoginActivity;
 import com.mhealth.nishauri.Fragments.Chat.ChatFragment;
 import com.mhealth.nishauri.Models.ChatMessage;
+import com.mhealth.nishauri.Models.Message;
 import com.mhealth.nishauri.Models.UrlTable;
 import com.mhealth.nishauri.Models.User;
 import com.mhealth.nishauri.R;
@@ -82,14 +88,20 @@ public class ChatInterface extends AppCompatActivity {
 
 
 
-    private List<ChatMessage> smslist;
+    private List<Message> smslist;
     chatAdapter chatAdapter1;
     ListView listView;
+
+
+    TextView typing;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_interface);
+        typing =findViewById(R.id.typing);
 
         toolbar = findViewById(R.id.toolbarMsg);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
@@ -113,6 +125,24 @@ public class ChatInterface extends AppCompatActivity {
         smslist =new ArrayList<>();
 
         chatAdapter1=new chatAdapter(ChatInterface.this, smslist);
+        listView.setAdapter(chatAdapter1);
+
+        // Create TranslateAnimation for typing effect
+        Animation typingAnimation = new TranslateAnimation(-100, 0, 0, 0);
+        typingAnimation.setDuration(10000); // Set animation duration for typing
+
+        // Create AlphaAnimation for scribbling effect
+        Animation scribblingAnimation = new AlphaAnimation(0, 1);
+        scribblingAnimation.setDuration(10000); // Set animation duration for scribbling
+
+        // Create AnimationSet to combine both animations
+        AnimationSet animationSet = new AnimationSet(true);
+        animationSet.addAnimation(typingAnimation);
+        animationSet.addAnimation(scribblingAnimation);
+        animationSet.setRepeatCount(Animation.INFINITE); // Set repeat count to infinite for continuous animation
+
+// Apply animation to the TextView
+
 
 
         smssend.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +152,28 @@ public class ChatInterface extends AppCompatActivity {
                 if (smstxt.getText().toString().isEmpty()){
                     Toast.makeText(ChatInterface.this, "Please Enter a Question", Toast.LENGTH_LONG).show();
                 }else{
+
+                    smslist.add(new Message(smstxt.getText().toString(), true));//true
+                   // listView.setAdapter(smslist);
+                    chatAdapter1.notifyDataSetChanged();
+
+
+                    typing.setVisibility(View.VISIBLE);
+                    typing.startAnimation(animationSet);
+
+
+
+
+
+
+
+
+
+
+
+
+                    smstxt.setVisibility(View.INVISIBLE);
+                    smssend.setVisibility(View.INVISIBLE);
 
                 sendMessage();
                 //smstxt.setText("");
@@ -175,7 +227,7 @@ public class ChatInterface extends AppCompatActivity {
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        //Toast.makeText(ChatInterface.this, "Your BMI is "+response, Toast.LENGTH_SHORT).show();
+                 //       Toast.makeText(ChatInterface.this, response.toString(), Toast.LENGTH_SHORT).show();
 
                         try {
                             String sms = response.getString("msg");
@@ -184,9 +236,52 @@ public class ChatInterface extends AppCompatActivity {
                             Log.d("sms", sms );
                             Log.d("query", sms1 );
 
-                            ChatMessage chatMessage = new ChatMessage(sms1, sms);
-                            smslist.add(chatMessage);
-                            listView.setAdapter(chatAdapter1);
+                            // Add user message to the list
+            //                smslist.add(new Message(sms1, true));//true
+                           // chatAdapter.notifyDataSetChanged();
+
+
+
+                            // Add bot response to the list
+                           // smslist.add(new Message(sms, false  ));
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    smslist.add(new Message(sms, false  ));
+                                    chatAdapter1.notifyDataSetChanged();
+
+
+
+                                    smstxt.setText("");
+
+
+                                    typing.clearAnimation();
+
+                                    // Hide the typingText
+                                    typing.setVisibility(View.GONE);
+
+
+
+                                   // typing.setVisibility(View.INVISIBLE);
+                                    smstxt.setVisibility(View.VISIBLE);
+                                    smssend.setVisibility(View.VISIBLE);
+
+                                }
+                            }, 10000);
+
+
+
+
+
+
+
+                          //  listView.setAdapter(chatAdapter1);
+
+
+
+//                            Message chatMessage = new Message(sms1, sms);
+//                            smslist.add(chatMessage);
+//                            listView.setAdapter(chatAdapter1);
 
                     /*        // Delay the display of "msg" by 10 seconds
                             new Handler().postDelayed(new Runnable() {

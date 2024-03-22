@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.mhealth.nishauri.Models.ChatMessage;
+import com.mhealth.nishauri.Models.Message;
 import com.mhealth.nishauri.R;
 
 import java.util.ArrayList;
@@ -22,28 +23,23 @@ import android.os.Handler;
 
 public class chatAdapter  extends BaseAdapter {
 
-    private RequestQueue rq;
-    private Context mycont;
-    private List<ChatMessage> mylist;
 
+    private Context mContext;
+    private List<Message> mMessages;
 
-
-
-    public chatAdapter(Context mycont, List<ChatMessage> mylist) {
-        this.mycont = mycont;
-        this.mylist = mylist;
-
+    public chatAdapter(Context context, List<Message> messages) {
+        mContext = context;
+        mMessages = messages;
     }
-
 
     @Override
     public int getCount() {
-        return mylist.size();
+        return mMessages.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mylist.get(position);
+        return mMessages.get(position);
     }
 
     @Override
@@ -52,56 +48,22 @@ public class chatAdapter  extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
-        View v = View.inflate(mycont, R.layout.user_message, null);
-       // View v = View.inflate(mycont, R.layout.bot_message, null);
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View view;
+        Message message = mMessages.get(position);
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-
-        try {
-            TextView usersms = (TextView) v.findViewById(R.id.text1);
-            TextView botsms = (TextView) v.findViewById(R.id.text2);
-
-            ChatMessage chatMessage = mylist.get(position);
-            usersms.setText(mylist.get(position).getQuestion());
-
-
-            if (position < mylist.size() - 1) {
-                ChatMessage nextMessage = mylist.get(position + 1);
-               // if (!chatMessage.isFromUser() && nextMessage.isFromUser()) {
-                    String botMessage = chatMessage.getMsg();
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                          //  botTextView.setText(botMessage);
-                            botsms.setText(mylist.get(position).getMsg());
-                        }
-                    }, 10000); // 10 seconds delay
-               // }
-            }
-
-
-          /*  // String usrmsg = mylist.get(position).getMsg();
-            String btsms = mylist.get(position).getQuestion();
-            String usrmsg = mylist.get(position).getMsg();
-
-
-
-          // botsms.setText(btsms);
-            botsms.setText(btsms);
-            usersms.setText(usrmsg);*/
-
-
-
-
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (message.isSender()) {
+            view = inflater.inflate(R.layout.user_message_sender, null);
+            TextView textViewSenderMessage = view.findViewById(R.id.text2);
+            textViewSenderMessage.setText(message.getMessage());
+        } else {
+            view = inflater.inflate(R.layout.user_message, null);
+            TextView textViewBotMessage = view.findViewById(R.id.text1);
+            textViewBotMessage.setText(message.getMessage());
         }
 
-        return v;
+        return view;
     }
-
-
 
 }

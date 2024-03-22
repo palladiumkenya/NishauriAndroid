@@ -73,14 +73,6 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
     </me.himanshusoni.chatmessageview.ChatMessageView>
 
-
-
-
-
-
-
-
-
     <LinearLayout
         android:id="@+id/send_message_layout"
         android:layout_width="match_parent"
@@ -124,9 +116,6 @@
             android:src="@android:drawable/ic_menu_send"
             android:text="Send" />
     </LinearLayout>
-
-
-
     <!-- 2 -->
 
 </RelativeLayout>
