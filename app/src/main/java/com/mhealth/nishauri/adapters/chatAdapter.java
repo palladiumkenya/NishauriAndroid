@@ -61,9 +61,26 @@ public class chatAdapter  extends BaseAdapter {
             TextView usersms = (TextView) v.findViewById(R.id.text1);
             TextView botsms = (TextView) v.findViewById(R.id.text2);
 
+            ChatMessage chatMessage = mylist.get(position);
+            usersms.setText(mylist.get(position).getQuestion());
 
 
-           // String usrmsg = mylist.get(position).getMsg();
+            if (position < mylist.size() - 1) {
+                ChatMessage nextMessage = mylist.get(position + 1);
+               // if (!chatMessage.isFromUser() && nextMessage.isFromUser()) {
+                    String botMessage = chatMessage.getMsg();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                          //  botTextView.setText(botMessage);
+                            botsms.setText(mylist.get(position).getMsg());
+                        }
+                    }, 10000); // 10 seconds delay
+               // }
+            }
+
+
+          /*  // String usrmsg = mylist.get(position).getMsg();
             String btsms = mylist.get(position).getQuestion();
             String usrmsg = mylist.get(position).getMsg();
 
@@ -71,7 +88,7 @@ public class chatAdapter  extends BaseAdapter {
 
           // botsms.setText(btsms);
             botsms.setText(btsms);
-            usersms.setText(usrmsg);
+            usersms.setText(usrmsg);*/
 
 
 

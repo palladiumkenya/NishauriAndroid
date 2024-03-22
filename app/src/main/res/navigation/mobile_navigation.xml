@@ -150,6 +150,10 @@
         android:name="com.mhealth.nishauri.HomeFragmentSurvey"
         android:label="fragment_home_survey"
         tools:layout="@layout/fragment_home_survey" />
+    <activity
+        android:id="@+id/chatInterface2"
+        android:name="com.mhealth.nishauri.Activities.ChatInterface2"
+        android:label="ChatInterface2" />
 
 
 </navigation>

@@ -5,11 +5,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission
         android:name="com.google.android.gms.permission.AD_ID"
         tools:node="remove" />
-
 
     <application
         android:name="com.orm.SugarApp"
@@ -21,15 +19,17 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
+        <activity
+            android:name=".Activities.ChatInterface2"
+            android:exported="false" />
 
-        <receiver android:name=".utils.ScreenLockReceiver"
+        <receiver
+            android:name=".utils.ScreenLockReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.SCREEN_OFF" />
             </intent-filter>
         </receiver>
-
-
 
         <activity
             android:name=".Activities.PassCodeActivity"
@@ -43,10 +43,11 @@
         <activity
             android:name=".utils.PrivacyActivity"
             android:exported="false" />
-       <!-- <service
+        <!--
+ <service
             android:name=".utils.MonitorOtherAppsService"
-            android:exported="false" />-->
-
+            android:exported="false" />
+        -->
         <activity
             android:name=".utils.InformedActivity"
             android:exported="false" />

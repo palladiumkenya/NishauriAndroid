@@ -124,7 +124,8 @@ public class ChatInterface extends AppCompatActivity {
                 }else{
 
                 sendMessage();
-                smstxt.setText("");}
+                //smstxt.setText("");
+                    }
 
             }
         });
@@ -140,11 +141,14 @@ public class ChatInterface extends AppCompatActivity {
     }
 
     private void sendMessage(){
+
         // String auth_token = loggedInUser.getAuth_token();
 
         loggedInUser = (User) Stash.getObject(Constants.AUTH_TOKEN, User.class);
         String auth_token = loggedInUser.getAuth_token();
         String urls ="?user_id="+auth_token;
+
+        String urlMain ="https://ushauriapi.kenyahmis.org/nishauri/chat";
 
 
 
@@ -156,9 +160,9 @@ public class ChatInterface extends AppCompatActivity {
             e.printStackTrace();
         }
 
+     //  smstxt.setVisibility(View.VISIBLE);
 
-
-        AndroidNetworking.post(Constants.ENDPOINT+Constants.CHAT+urls)
+        AndroidNetworking.post(urlMain)
                 //.addHeaders("Authorization","Token "+ auth_token)
                 .addHeaders("Content-Type", "application.json")
                 .addHeaders("Accept", "*/*")
@@ -174,20 +178,27 @@ public class ChatInterface extends AppCompatActivity {
                         //Toast.makeText(ChatInterface.this, "Your BMI is "+response, Toast.LENGTH_SHORT).show();
 
                         try {
-
-
-                            String  sms = response.getString("msg");
-                            String  sms1 = response.getString("question");
+                            String sms = response.getString("msg");
+                            String sms1 = response.getString("question");
 
                             Log.d("sms", sms );
                             Log.d("query", sms1 );
 
-                                ChatMessage chatMessage = new ChatMessage(sms, sms1);
-                                //upilist=new ArrayList<>();
-                                smslist.add(chatMessage);
+                            ChatMessage chatMessage = new ChatMessage(sms1, sms);
+                            smslist.add(chatMessage);
+                            listView.setAdapter(chatAdapter1);
 
-                                listView.setAdapter(chatAdapter1);
+                    /*        // Delay the display of "msg" by 10 seconds
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ChatMessage delayedChatMessage = new ChatMessage(sms1, sms);
+                                    smslist.add(delayedChatMessage);
+                                    chatAdapter1.notifyDataSetChanged();
 
+                                    smstxt.setVisibility(View.INVISIBLE);
+                                }
+                            }, 10000); // 10 seconds delay*/
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
