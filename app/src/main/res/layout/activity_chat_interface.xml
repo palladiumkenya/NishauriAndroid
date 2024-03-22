@@ -31,6 +31,8 @@
         android:layout_height="match_parent"
         android:layout_below="@id/toolbarMsg1"
 
+        android:transcriptMode="alwaysScroll"
+
         android:layout_marginBottom="60dp"
 
         />

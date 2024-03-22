@@ -185,6 +185,7 @@ public class ChatInterface extends AppCompatActivity {
                     smssend.setVisibility(View.INVISIBLE);
 
                 sendMessage();
+                    listView.smoothScrollToPosition(chatAdapter1.getCount() - 1);
                 //smstxt.setText("");
                     }
 
