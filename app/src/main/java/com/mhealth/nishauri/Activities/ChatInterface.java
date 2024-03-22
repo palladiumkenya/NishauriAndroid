@@ -119,7 +119,7 @@ public class ChatInterface extends AppCompatActivity {
 
         listView =findViewById(R.id.listView1);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Chatbot");
+        getSupportActionBar().setTitle("Nishauri chatbot");
         setSupportActionBar(toolbar);
 
         smslist =new ArrayList<>();
@@ -128,16 +128,25 @@ public class ChatInterface extends AppCompatActivity {
         listView.setAdapter(chatAdapter1);
 
         // Create TranslateAnimation for typing effect
-        Animation typingAnimation = new TranslateAnimation(-100, 0, 0, 0);
-        typingAnimation.setDuration(10000); // Set animation duration for typing
+        Animation typingAnimation = new TranslateAnimation(10, 0, 0, 0);
+        typingAnimation.setDuration(5000); // Set animation duration for typing
 
         // Create AlphaAnimation for scribbling effect
         Animation scribblingAnimation = new AlphaAnimation(0, 1);
-        scribblingAnimation.setDuration(10000); // Set animation duration for scribbling
+        scribblingAnimation.setDuration(5000); // Set animation duration for scribbling
+
+
+        // Create AlphaAnimation for blinking effect
+        Animation blinkingAnimation = new AlphaAnimation(0, 1);
+        blinkingAnimation.setDuration(1000); // Set animation duration for blinking
+        blinkingAnimation.setRepeatCount(Animation.INFINITE); // Set repeat count to infinite for continuous blinking
+
 
         // Create AnimationSet to combine both animations
         AnimationSet animationSet = new AnimationSet(true);
-        animationSet.addAnimation(typingAnimation);
+        //animationSet.addAnimation(typingAnimation);
+
+        animationSet.addAnimation(blinkingAnimation);
         animationSet.addAnimation(scribblingAnimation);
         animationSet.setRepeatCount(Animation.INFINITE); // Set repeat count to infinite for continuous animation
 
@@ -267,7 +276,7 @@ public class ChatInterface extends AppCompatActivity {
                                     smssend.setVisibility(View.VISIBLE);
 
                                 }
-                            }, 10000);
+                            }, 5000);
 
 
 

@@ -22,41 +22,34 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <!--List view for displaying chat messages-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:orientation="vertical">
+
 
 
     <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbarMsg1"
 
         android:layout_marginBottom="60dp"
 
         />
 
-        <TextView
-            android:id="@+id/typing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:visibility="gone"
-            android:text="Nishauri Bot Is Typing....."
-
-            android:layout_alignParentStart="true"
-
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 
 
-
-
-    </LinearLayout>
     <!--To type and send the message-->
+
+    <TextView
+        android:id="@+id/typing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/send_message_layout"
+        android:visibility="gone"
+
+        android:text="Nishauri Bot Is Typing....."
+        android:layout_alignParentStart="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 
     <LinearLayout
@@ -79,6 +72,7 @@
         <EditText
             android:id="@+id/et_message"
             android:layout_width="wrap_content"
+            android:hint="Type your message here"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
             android:layout_height="wrap_content"
@@ -91,7 +85,6 @@
             android:src="@android:drawable/ic_menu_send"
             android:text="Send" />
     </LinearLayout>
-
 
 
 
