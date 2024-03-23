@@ -155,5 +155,10 @@
         android:name="com.mhealth.nishauri.Activities.ChatInterface2"
         android:label="ChatInterface2" />
 
+    <activity
+        android:id="@+id/nishauriChatBotActivity"
+        android:name="com.mhealth.nishauri.Activities.NishauriChatBotActivity"
+        android:label="NishauriChatBotActivity" />
+
 
 </navigation>

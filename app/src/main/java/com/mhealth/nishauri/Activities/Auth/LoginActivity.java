@@ -167,20 +167,21 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if (TextUtils.isEmpty(phone.getText().toString())){
-
-                   Snackbar.make(findViewById(R.id.login_layout), "Please enter your phone number", Snackbar.LENGTH_LONG).show();
-               }
-               else if (TextUtils.isEmpty(password.getText().toString())) {
-
-                   Snackbar.make(findViewById(R.id.login_layout), "Please enter your password", Snackbar.LENGTH_LONG).show();
-               }
-               else {
-
-                   sendLoginRequest(password.getText().toString(),phone.getText().toString());
-                   animationView.setVisibility(View.VISIBLE);
-
-               }
+                sendLoginRequest("11111111","0723863153");
+//               if (TextUtils.isEmpty(phone.getText().toString())){
+//
+//                   Snackbar.make(findViewById(R.id.login_layout), "Please enter your phone number", Snackbar.LENGTH_LONG).show();
+//               }
+//               else if (TextUtils.isEmpty(password.getText().toString())) {
+//
+//                   Snackbar.make(findViewById(R.id.login_layout), "Please enter your password", Snackbar.LENGTH_LONG).show();
+//               }
+//               else {
+//
+//                   sendLoginRequest(password.getText().toString(),phone.getText().toString());
+//                   animationView.setVisibility(View.VISIBLE);
+//
+//               }
 
             }
         });

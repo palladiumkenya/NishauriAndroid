@@ -20,6 +20,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
         <activity
+            android:name=".Activities.NishauriChatBotActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.ChatInterface2"
             android:exported="false" />
 
@@ -96,6 +99,7 @@
         <activity
             android:name=".Activities.ChatInterface"
             android:exported="false" />
+        <activity android:name=".Activities.NishauriChatActivity" />
         <activity android:name=".Activities.Auth.SignUpActivity" />
         <activity
             android:name=".Activities.Auth.LoginActivity"
